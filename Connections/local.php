@@ -22,6 +22,6 @@ if ($foundConnection == false) {
   }
 }
 
-$local = mysql_pconnect($hostname_local, $username_local, $password_local) or trigger_error(mysql_error(),E_USER_ERROR); 
+$local = mysqli_connect($hostname_local, $username_local, $password_local) or trigger_error(mysql_error(),E_USER_ERROR); 
 
 ?>
