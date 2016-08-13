@@ -18,9 +18,9 @@ if ($foundConnection == false) {
 	  $username_local = "bcadmin";
 	  $password_local = "Xdxn9\zX5s";
       $foundConnection = true;
-    } 
-  } 
-} 
+    }
+  }
+}
 
 $local = mysql_pconnect($hostname_local, $username_local, $password_local) or trigger_error(mysql_error(),E_USER_ERROR); 
 
