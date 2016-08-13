@@ -38,6 +38,7 @@
     "ng-sanitize": "0.0.2",
     "pg": "^6.0.3",
     "pg-hstore": "^2.3.2",
+    "sequelize": "^3.24.0",
     "vision": "^4.1.0"
   },
   "devDependencies": {
@@ -47,5 +48,5 @@
     "forever": "^0.15.2",
     "sequelize-cli": "^1.0.3",
     "stringify": "^5.1.0"
-    }
+  }
 }
