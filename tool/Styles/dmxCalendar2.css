@@ -1,0 +1,10 @@
+/* Change this is you need smaller calendar */
+.ui-datepicker.ui-widget { font-size:12px!important; } 
+
+.dmxSpecialDate a, .dmxSpecialDate span{ 
+	background: none !important;
+	border: 1px solid #fff !important;
+	font-weight: normal !important;
+}
+
+#ui-datepicker-div {z-index:9999 !important;}

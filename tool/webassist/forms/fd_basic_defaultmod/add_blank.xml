@@ -1,0 +1,5 @@
+<wa_form name="Preview" id="Preview" submit_text="Submit">
+	<wa_form_fieldset label="Fieldset" id="Fieldset"  >
+		<wa_fieldset_description>To add contents to your form, choose a form type or select the edit option to add content manually.</wa_fieldset_description>
+	</wa_form_fieldset>
+</wa_form>

@@ -1,0 +1,381 @@
+<wa_form name="Default" id="Default" submit_text="Insert" send_mail="false" use_upload="true">
+	<wa_form_fieldset label="Basic Info" id="c752131d-5f26-790a-9110-c6ad250f7c43">
+		<wa_fieldset_description>Required *</wa_fieldset_description>
+		<wa_form_line>
+			<wa_form_group_reference label="" continueLine="false">
+				<wa_field_group name="">
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Tournament Name" undefinedundefinedcontinueLine="false" elementName="tournament_name" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value', step: '', min: '', max: '' }">
+							<wa_field_definition name="Text" size="X-Large">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_XLarge"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Start Date" undefinedundefinedcontinueLine="false" elementName="tournament_startDate" validation="{ html5type: 'date', title: 'Please%20enter%20a%20value', step: '', min: '', max: '' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Start Time" undefinedundefinedcontinueLine="false" elementName="tournament_startTime" validation="{ html5type: 'time', title: 'Please%20enter%20a%20value', step: '', min: '', max: '' }">
+							<wa_field_definition name="Text" size="Small">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Small"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="End Date" undefinedundefinedcontinueLine="false" elementName="Tournament_endDate" validation="{ html5type: 'date', title: 'Please%20enter%20a%20value', step: '', min: '', max: '' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="End Time" undefinedundefinedcontinueLine="false" elementName="Tournament_endTime" validation="{ html5type: 'time', title: 'Please%20enter%20a%20value', step: '', min: '', max: '' }">
+							<wa_field_definition name="Text" size="Small">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Small"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Upload Logo/Icon" undefinedundefinedcontinueLine="false" elementName="tournament_logo_icon" validation="{ html5type: 'file', title: 'Please%20enter%20a%20value' }">
+								<wa_upload_settings overwriteoption="2" renameto="%5BExistingFileName%5D_%5BIncrement%5D" imagesonlyoption="true" imagesonlysettings="">
+								  <wa_upload_file folder="../uploads/tournament/" filename="%5BFileName%5D" defaultfilename="" resizetype="0" resizewidth="0" resizeheight="0" resizefill="" />
+								  <wa_upload_file folder="../uploads/tournament/thumbs/" filename="%5BFileName%5D" defaultfilename="" resizetype="2" resizewidth="120" resizeheight="120" resizefill="#FFFFFF" />
+								</wa_upload_settings>
+							<wa_field_definition name="File" size="Small">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input name="{Field.Name}" type="file" id="{Field.Name}" size="{elm_file_large.width}"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition></wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+				</wa_field_group>
+			</wa_form_group_reference>
+		</wa_form_line>
+	</wa_form_fieldset>
+	<wa_form_fieldset label="Location" id="b9a9c86f-b26c-324a-36a1-f8f829fc2db0">
+		<wa_fieldset_description>Required *</wa_fieldset_description>
+		<wa_form_line>
+			<wa_form_group_reference label="" continueLine="false">
+				<wa_field_group name="">
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Location Name" undefinedundefinedcontinueLine="false" elementName="tournament_location _name" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Large">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Large"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Address" undefinedundefinedcontinueLine="false" elementName="tournament_address" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Large">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Large"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="City" undefinedundefinedcontinueLine="false" elementName="tournament_city" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please select a value</wa_field_set_validation>
+							<wa_field_reference label="State" undefinedundefinedcontinueLine="false" elementName="tournament_state" validation="{ html5type: 'menu', title: 'Please%20select%20a%20value' }">
+								<wa_field_options>
+									<wa_field_option value="">Choose State:</wa_field_option>
+								</wa_field_options>
+							<wa_field_definition name="Menu" size="Small">
+<wa_field_html spryObject="ValidationSelect">
+<![CDATA[
+      <select class="formMenufield_Small" name="{Field.Name}" id="{Field.Name}" rel="{Field.CurrentFieldValue}"{Field.TabIndex}>
+        {Option.HTML}
+      </select>
+]]>
+</wa_field_html>
+<wa_field_option_html>
+  <option value="{Option.Value}"{MainUI.ValidatedFieldSelect}>{Option.Label}</option>
+</wa_field_option_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Zip" undefinedundefinedcontinueLine="false" elementName="tournament_zip" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+				</wa_field_group>
+			</wa_form_group_reference>
+		</wa_form_line>
+	</wa_form_fieldset>
+	<wa_form_fieldset label="Contact in Additional Info" id="a92db111-0976-8d6e-61f0-c55a90576ab9">
+		<wa_fieldset_description>Required *</wa_fieldset_description>
+		<wa_form_line>
+			<wa_form_group_reference label="" continueLine="false">
+				<wa_field_group name="">
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Phone" undefinedundefinedcontinueLine="false" elementName="tournament_phone" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Main Contact Email" undefinedundefinedcontinueLine="false" elementName="tournament_email" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Large">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Large"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Tournament Website" undefinedundefinedcontinueLine="false" elementName="tournament_URL" validation="{ html5type: 'url', title: 'Please%20enter%20a%20complete%20URL%20(http://www.example.com)', step: '', min: '', max: '', pattern: '(?:https?|ftp)%5C:%5C/%5C/(?:(?:%5Ba-z0-9%5C-%5C._%7E%5C!%5C$%5C&%5C%27%5C(%5C)%5C*%5C+%5C,%5C;%5C=:%5D|%25%5B0-9a-f%5D%7B2,2%7D)*%5C@)?(?:((?:(?:%5Ba-z0-9%5D%5Ba-z0-9%5C-%5D*%5Ba-z0-9%5D|%5Ba-z0-9%5D)%5C.)*(?:%5Ba-z%5D%5Ba-z0-9%5C-%5D*%5Ba-z0-9%5D|%5Ba-z%5D)|(?:%5C%5B%5B%5E%5C%5D%5D*%5C%5D))(?:%5C:%5B0-9%5D*)?)(?:%5C/(?:%5Ba-z0-9%5C-%5C._%7E%5C!%5C$%5C&%5C%27%5C(%5C)%5C*%5C+%5C,%5C;%5C=%5C:%5C@%5D|%25%5B0-9a-f%5D%7B2,2%7D)*)*(?:%5C?(?:%5Ba-z0-9%5C-%5C._%7E%5C!%5C$%5C&%5C%27%5C(%5C)%5C*%5C+%5C,%5C;%5C=%5C:%5C@%5C/%5C?%5D|%25%5B0-9a-f%5D%7B2,2%7D)*)?(?:%5C#(?:%5Ba-z0-9%5C-%5C._%7E%5C!%5C$%5C&%5C%27%5C(%5C)%5C*%5C+%5C,%5C;%5C=%5C:%5C@%5C/%5C?%5D|%25%5B0-9a-f%5D%7B2,2%7D)*)?', placeholder: 'http://www.example.com' }">
+							<wa_field_definition name="Text" size="Large">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Large"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="" serverValidation="" undefinedundefinedcontinueLine="false" validation="{ html5type: 'html%20editor', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="HTML Editor" size="Medium">
+<wa_field_php_includes>
+  <wa_field_php_include weight="5"><![CDATA[<?php {MainUI.IncludeRequire}("{MainUI.RelPath}webassist/html_editor/waricheditorphp.php"); ?>]]></wa_field_php_include>
+</wa_field_php_includes>
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+<?php
+// WebAssist iRite: Rich Text Editor for Dreamweaver
+$WARichTextEditor_{Field.HTMLEditorIndex} = CreateRichTextEditor ("{Field.Name}", "{Field.HTMLEditorBasePath}", "{Field.HTMLEditorMediumWidth}", "{Field.HTMLEditorMediumHeight}", "{Field.HTMLEditorMediumToolbarSet}", "{Field.HTMLEditorMediumCustomConfig}", "{Field.HTMLEditorMediumValue}");
+?>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+				</wa_field_group>
+			</wa_form_group_reference>
+		</wa_form_line>
+	</wa_form_fieldset>
+	<wa_form_fieldset label="Rules" id="9f2376cb-a8b6-61e2-58cc-513a2355fde9">
+		<wa_fieldset_description>Required *</wa_fieldset_description>
+		<wa_form_line>
+			<wa_form_group_reference label="" continueLine="false">
+				<wa_field_group name="">
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="# of Rounds" undefinedundefinedcontinueLine="false" elementName="tournament_rounds" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Small">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Small"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Factions Cap" undefinedundefinedcontinueLine="false" elementName="factions_cap" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Small">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Small"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Number of Games (per Round)" undefinedundefinedcontinueLine="false" elementName="No_of_Games" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Small">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Small"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please select a value</wa_field_set_validation>
+							<wa_field_reference label="Game System" undefinedundefinedcontinueLine="false" elementName="game_id" validation="{ html5type: 'menu', title: 'Please%20select%20a%20value' }">
+								<wa_field_options>
+									<wa_field_option value="">Choose Game...</wa_field_option>
+								</wa_field_options>
+							<wa_field_definition name="Menu" size="Medium">
+<wa_field_html spryObject="ValidationSelect">
+<![CDATA[
+      <select class="formMenufield_Medium" name="{Field.Name}" id="{Field.Name}" rel="{Field.CurrentFieldValue}"{Field.TabIndex}>
+        {Option.HTML}
+      </select>
+]]>
+</wa_field_html>
+<wa_field_option_html>
+  <option value="{Option.Value}"{MainUI.ValidatedFieldSelect}>{Option.Label}</option>
+</wa_field_option_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Win Point Value" undefinedundefinedcontinueLine="false" elementName="WinPointValue" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Draw Point Value" undefinedundefinedcontinueLine="false" elementName="DrawPointValue" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+					<wa_field_line>
+						<wa_field_column>
+							<wa_field_set_validation>Please enter a value</wa_field_set_validation>
+							<wa_field_reference label="Loss Point Value" undefinedundefinedcontinueLine="false" elementName="LossPointValue" validation="{ html5type: 'text', title: 'Please%20enter%20a%20value' }">
+							<wa_field_definition name="Text" size="Medium">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="{Field.HTML5Type}" value="{Field.CurrentFieldValue}" class="formTextfield_Medium"{Field.TabIndex}{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference>
+						</wa_field_column>
+					</wa_field_line>
+				</wa_field_group>
+			</wa_form_group_reference>
+		</wa_form_line>
+	</wa_form_fieldset>
+</wa_form>
+<wa_hidden_fields><hidden_fieldset></hidden_fieldset><hidden_fieldset></hidden_fieldset><hidden_fieldset></hidden_fieldset><hidden_fieldset><wa_field_reference label="tournamentOwner" serverValidation="" undefinedundefinedcontinueLine="false" elementName="tournamentOwner" validation="{ html5type: 'hidden' }">
+							<wa_field_definition name="Hidden" size="Standard">
+<wa_field_html spryObject="ValidationTextField">
+<![CDATA[
+  <input id="{Field.Name}" name="{Field.Name}" type="hidden" value="{Field.CurrentFieldValue}"{MainUI.SingleFieldEnd}>
+]]>
+</wa_field_html>
+</wa_field_definition>
+</wa_field_reference></hidden_fieldset></wa_hidden_fields>

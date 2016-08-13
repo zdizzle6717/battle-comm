@@ -1,0 +1,3 @@
+<div class="sociallinks" style="text-align:center;">
+<a href="{{PlayerProfile.data[0].user_facebook}}" target="_blank" ><span class="symbol face" style="font-size: 38px;">&#xe427;</span></a><a href="{{PlayerProfile.data[0].user_twitter}}" target="_blank" ><span class="symbol twit" style="font-size: 38px;">&#xe286;</span></a><a href="{{PlayerProfile.data[0].user_instagram}}" target="_blank" ><span class="symbol insta" style="font-size: 38px;">&#xe500;</span></a>
+</div>

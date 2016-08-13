@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="AssignPlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="DeleteMatchedTiebreaker.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="InsertRounds.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="ManualaddPlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="PlayerAssign.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="UpdateRegisteredUsers.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="addAdminPlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="addPlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="deleteRound.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="insertTiebreaker.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="insertTournament.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="manualPlayerTournamentRegistration.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="newTournament.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="players.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="registerApprovePlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="registerPlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="updatedTournamentPlayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="updateplayer.php" server="dreamingsideways.com" local="130817556000000000" remote="130817556000000000" Dst="1" />
+<file name="DeleteAssignedPlayer.php" server="dreamingsideways.com" local="130821012000000000" remote="130821012000000000" Dst="1" />
+<file name="TrounamentPlayerInsert.php" server="dreamingsideways.com" local="130821012000000000" remote="130821012000000000" Dst="1" />
+<file name="updateTournamentPlayerAssignment.php" server="dreamingsideways.com" local="130821012000000000" remote="130821012000000000" Dst="1" />
+</dwsync>

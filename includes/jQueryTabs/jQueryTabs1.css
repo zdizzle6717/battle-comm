@@ -1,0 +1,239 @@
+.skin7 .jQueryTabs_nav
+{
+	width : 100%;
+}
+.skin7 .jQueryTabs_navUL
+{
+	list-style : none;
+	width : 100%;
+	margin : 0 auto;
+	padding : 0;
+	display : inline-block;
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr=#FFFFFFFF, endColorstr=#FFFFFFFF,GradientType=0 );
+	background-color : rgba(255,255,255,1);
+	border-top-left-radius : 5px;
+	-moz-border-radius-topleft : 5px;
+	-webkit-border-top-left-radius : 5px;
+	border-top-right-radius : 5px;
+	-moz-border-radius-topright : 5px;
+	-webkit-border-top-right-radius : 5px;
+}
+.skin7 .jQueryTabs_navLink
+{
+	display : block;
+	text-decoration : none;
+	border : 1px solid #cccccc;
+	margin : 0px;
+	-webkit-touch-callout : none;
+	-webkit-user-select : none;
+	-khtml-user-select : none;
+	-moz-user-select : none;
+	-ms-user-select : none;
+	user-select : none;
+	background-color : none;
+	line-height : 40px;
+	height : 40px;
+	text-align : center;
+	box-sizing : initial;
+	border-top-style : none;
+	border-top-color : transparent;
+	border-top-width : 0px;
+	border-right-color : transparent;
+	border-bottom-color : transparent;
+	border-left-color : transparent;
+	border-right-width : 0px;
+	border-bottom-width : 0px;
+	border-left-width : 0px;
+	border-right-style : none;
+	border-bottom-style : none;
+	border-left-style : none;
+	font-family : Arial, Helvetica, sans-serif;
+	font-weight : 700;
+}
+.skin7 .jQueryTabs_navLink.hover
+{
+	text-decoration : none;
+	background-image : -webkit-gradient(linear, left top, left bottom,color-stop(0%, #bdc4d3),color-stop(100%, #747c94));
+	background-image : -webkit-linear-gradient( top,#bdc4d3 0%, #747c94 100%);
+	background-image : -moz-linear-gradient( top,#bdc4d3 0%, #747c94 100%);
+	background-image : -o-linear-gradient( top,#bdc4d3 0%, #747c94 100%);
+	background-image : -ms-linear-gradient( top,#bdc4d3 0%, #747c94 100%);
+	background-image : linear-gradient( to bottom,#bdc4d3 0%, #747c94 100%);
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr= #bdc4d3, endColorstr= #747c94,GradientType=0 );
+}
+.skin7 .jQueryTabs_navLink.hover .jQueryTabs_navSpan
+{
+	color : #FFFFFF;
+	color : rgba(255, 255, 255, 1.00);
+	*color : #FFFFFF;
+}
+.skin7 .jQueryTabs_navLink.hover .jQueryTabs_navImg
+{
+	color : #FFFFFF;
+	color : rgba(255, 255, 255, 1.00);
+	*color : #FFFFFF;
+}
+.skin7 .jQueryTabs_navLI
+{
+	display : block;
+	width : 20%;
+	float : left;
+	box-sizing : border-box;
+}
+.skin7 .jQueryTabs_navLink .jQueryTabs_navImg
+{
+	vertical-align : middle;
+	margin-right : 7px;
+	font-size : 16px;
+	color : #444444;
+}
+.skin7 .jQueryTabs_navLink .jQueryTabs_navSpan
+{
+	font-size : 13px;
+	color : #444444;
+}
+.skin7 .jQueryTabs_content
+{
+	transition : height 0.25s ease;
+	padding : 25px;
+	margin-top : 0px;
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr=#FFF5F6F9, endColorstr=#FFF5F6F9,GradientType=0 );
+	background-color : rgba(245, 246, 249, 1.00);
+	border-bottom-right-radius : 5px;
+	-moz-border-radius-bottomright : 5px;
+	-webkit-border-bottom-right-radius : 5px;
+	border-bottom-left-radius : 5px;
+	-moz-border-radius-bottomleft : 5px;
+	-webkit-border-bottom-left-radius : 5px;
+	border : 1px solid #664C73;
+	overflow : auto;
+}
+.skin7 .jQueryTabs_contentDivs
+{
+	width : 100%;
+	margin-left : auto;
+	margin-right : auto;
+	box-sizing : border-box;
+	display : block;
+	transition : opacity 0.25s ease;
+	opacity : 1;
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 14px;
+}
+.skin7 .jQueryTabs_contentDivs.hidden
+{
+	display : none;
+}
+.skin7 .jQueryTabs_contentDivs .skin_p
+{
+	margin : 0;
+}
+.skin7 .jQueryTabs_navLink.selected .jQueryTabs_navImg
+{
+	color : #FFFFFF;
+	color : rgba(255, 255, 255, 1.00);
+	*color : #FFFFFF;
+}
+.skin7 .jQueryTabs_navLink.selected .jQueryTabs_navSpan
+{
+	color : #FFFFFF;
+	color : rgba(255, 255, 255, 1.00);
+	*color : #FFFFFF;
+}
+.skin7 .jQueryTabs_contentDivs.fade-out
+{
+	opacity : 0;
+	width : auto;
+}
+.skin7 .jQueryTabs_contentDivs.fade-in
+{
+	opacity : 1;
+}
+body
+{
+	margin : 0;
+}
+.skin7 .jQueryTabs_navLink.selected
+{
+	background-image : -webkit-gradient(linear, left top, left bottom,color-stop(0%, #bea1d2),color-stop(100%, #664c73));
+	background-image : -webkit-linear-gradient( top,#bea1d2 0%, #664c73 100%);
+	background-image : -moz-linear-gradient( top,#bea1d2 0%, #664c73 100%);
+	background-image : -o-linear-gradient( top,#bea1d2 0%, #664c73 100%);
+	background-image : -ms-linear-gradient( top,#bea1d2 0%, #664c73 100%);
+	background-image : linear-gradient( to bottom,#bea1d2 0%, #664c73 100%);
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr= #bea1d2, endColorstr= #664c73,GradientType=0 );
+}
+.jQueryTabs_navUL
+{
+	vertical-align : top;
+}
+.jQueryTabs_navSpan,
+.jQueryTabs_navImg,
+a.jQueryTabs_navLink
+{
+	-webkit-transition : all .4s ease;
+	-moz-transition : all .4s ease;
+	-ms-transition : all .4s ease;
+	-o-transition : all .4s ease;
+	transition : all .4s ease;
+}
+.skin7 .jQueryTabs_navLI:last-of-type .jQueryTabs_navLink, .skin7 .jQueryTabs_navLI.last-item .jQueryTabs_navLink
+{
+	border-top-right-radius : 5px;
+	-moz-border-radius-topright : 5px;
+	-webkit-border-top-right-radius : 5px;
+}
+.skin7 .jQueryTabs_navLI:first-of-type .jQueryTabs_navLink, .skin7 .jQueryTabs_navLI.first-item .jQueryTabs_navLink
+{
+	border-top-left-radius : 5px;
+	-moz-border-radius-topleft : 5px;
+	-webkit-border-top-left-radius : 5px;
+}
+a.jQueryTabs_navLink
+{
+	color : transparent;
+	outline : none;
+}
+
+/*end of skin css*/
+
+#jQueryTabs1 .jQueryTabs_navLI
+{
+	width : 20%;
+}
+#jQueryTabs1 .jQueryTabs_contentDivs
+{
+	transition : opacity 0.17s ease;
+	font-family : Verdana, Geneva, sans-serif;
+}
+#jQueryTabs1 .jQueryTabs_content
+{
+	transition : height 0.17s ease;
+}
+#jQueryTabs1 .jQueryTabs_navLink.selected
+{
+	background-image : -webkit-gradient(linear, left top, left bottom,color-stop(0%, #0022fc),color-stop(100%, #bcdef5));
+	background-image : -webkit-linear-gradient( top,#0022fc 0%, #bcdef5 100%);
+	background-image : -moz-linear-gradient( top,#0022fc 0%, #bcdef5 100%);
+	background-image : -o-linear-gradient( top,#0022fc 0%, #bcdef5 100%);
+	background-image : -ms-linear-gradient( top,#0022fc 0%, #bcdef5 100%);
+	background-image : linear-gradient( to bottom,#0022fc 0%, #bcdef5 100%);
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr= #0022fc, endColorstr= #bcdef5,GradientType=0 );
+}
+@media (max-width:640px)
+{
+	#jQueryTabs1 .jQueryTabs_navUL
+	{
+		width : 200%;
+		position : relative;
+		left : 0px;
+	}
+	#jQueryTabs1 .jQueryTabs_navLI
+	{
+		width : 20.00%;
+	}
+	#jQueryTabs1 .jQueryTabs_nav
+	{
+		overflow : hidden;
+	}
+}

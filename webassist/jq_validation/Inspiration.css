@@ -1,0 +1,78 @@
+/*right triangle*/
+.serverInvalidState {
+  display:none;	
+}
+
+.validation-close {
+	font-size: 12px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+	cursor: pointer;
+	color: #FFFFFF;
+	border: 0px solid #FFFFFF;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	padding: 0px;
+	font-family: monospace;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.Inspiration {
+	position:absolute;
+	padding:10px 15px 10px 15px ;
+	color:#FFFFFF;
+	background:#157a93; /* default background for browsers without gradient support */
+	
+	background-image:        -webkit-gradient(linear, 0 0, 0 100%, from(#157a93), to(#157a93));
+    background-image: -webkit-linear-gradient(top, #157a93, #157a93); /* For Chrome and Safari */
+    background-image:    -moz-linear-gradient(top, #157a93, #157a93); /* For old Fx (3.6 to 15) */
+    background-image:     -ms-linear-gradient(top, #157a93, #157a93); /* For pre-releases of IE 10*/
+    background-image:      -o-linear-gradient(top, #157a93, #157a93); /* For old Opera (11.1 to 12.0) */ 
+    background-image:         linear-gradient(to bottom, #157a93, #157a93); /* Standard syntax; must be last */
+	
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	border: 1px solid #b8c5ab;
+	
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: undefined;
+	font-style: inherit;
+	max-width: 350em;
+	white-space: nowrap;
+}
+
+/* THE POINTER
+------------------------------------------------------------------------------------------------------------------------------- */
+
+.Inspiration-wrapper {
+	opacity:0.8;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.Inspiration-before {
+	position:absolute;
+	border-style:solid;
+    display:block; 
+    width:0;
+	border-width:11.414213562373096px 11.414213562373096px 0; /* vary these values to change the angle of the vertex */
+	border-style:solid;
+	border-color:#b8c5ab transparent; 
+}
+
+.Inspiration-after {
+	position:absolute;
+	content:"";
+	border:0;
+	border-width:10px 10px 0;
+	border-style:solid;
+	border-color:#157a93 transparent;
+    display:block;
+    width:0;
+}

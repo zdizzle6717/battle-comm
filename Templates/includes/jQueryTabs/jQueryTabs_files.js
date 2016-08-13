@@ -1,0 +1,1 @@
+{"jQueryTabs1":{"urls":["players/editProfile.php"]},"jQueryTabs2":{"urls":["players/profileEdit.php"]}}

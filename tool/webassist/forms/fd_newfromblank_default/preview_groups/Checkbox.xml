@@ -1,0 +1,9 @@
+<wa_field_group name="Checkbox">
+	<wa_field_line>
+		<wa_field_column>
+			<wa_field_set_validation>Please check this box</wa_field_set_validation>
+			<wa_field_reference src="Checkbox_Standard.xml" label="Checkbox" validation="{ required: true }" serverValidation="required" spryValidation="required" continueLine="false" >
+		</wa_field_reference>
+		</wa_field_column>
+	</wa_field_line>
+</wa_field_group>

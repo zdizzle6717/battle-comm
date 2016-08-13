@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><wa_form name="Details" id="Details" submit_text="" send_mail="true" use_upload="true">	<wa_form_fieldset label="Details" id="Details">		@@FieldsRequired@@		@@FieldsContent@@		</wa_form_fieldset>	<wa_email_settings>
+		<com_settings charset="undefined" com_index="undefined" com_name="undefined">
+		</com_settings>
+		<to_settings send_index="undefined" send_setting="undefined" burst_size="undefined" burst_time="undefined" wait_time="undefined">
+		</to_settings>
+		<from_settings reply_to="undefined" return_path="undefined" from_name="" from_email="" />
+		<cc_settings>
+		</cc_settings>
+		<bcc_settings>
+		</bcc_settings>
+		<att_settings>
+		</att_settings>
+		<log_settings>
+			<onany_ui_values response="0" connection="" table="" column=""></onany_ui_values>
+			<onsuccess_ui_values response="0" connection="" table="" column=""></onsuccess_ui_values>
+			<onfailure_ui_values response="0" connection="" table="" column=""></onfailure_ui_values>
+		</log_settings>
+		<other_settings subject="" allow_multi="undefined" use_template="true" template_path="" has_html="undefined" has_text="undefined" body_format="0" importance_option="undefined" importance_value="3" importance_enteredvalue="undefined"></other_settings>
+	</wa_email_settings>
+</wa_form>

@@ -1,0 +1,1 @@
+{"jQueryTabs":{"ignoreFiles":["font-awesome"],"readonlyFiles":[],"className":"jQueryTabs"}}

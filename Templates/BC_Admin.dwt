@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html>
+ <head>
+  <link href="../stylesheets/reset.css" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <!-- TemplateBeginEditable name="doctitle" -->
+  <title>Untitled Document</title>
+  <!-- TemplateEndEditable -->
+  <script type="text/javascript" src="../Scripts/browser-compatibility.js"></script>
+  <link href="../stylesheets/layout-css-1.css" rel="stylesheet" type="text/css" />
+  <!-- TemplateBeginEditable name="head" -->
+  <!-- TemplateEndEditable -->
+ </head>
+ <body>
+  <div class="main_wrapper">
+   <div class="top_header_wrapper">
+    <div class="top_header">
+     <div class="logo logo_align">
+      <img src="../assets/img/BC_Web_Logo.png" alt="" width="346" height="80" />
+     </div>
+     <div class="search">
+      <!-- TemplateBeginEditable name="header_right" -->
+      <!-- TemplateEndEditable -->
+     </div>
+    </div>
+   </div>
+   <div class="content_wrapper">
+    <div class="content">
+     <!-- TemplateBeginEditable name="main_Body" -->
+     <!-- TemplateEndEditable -->
+    </div>
+   </div>
+   <div class="footer_wrapper">
+    <div class="footer_container">
+     <!-- TemplateBeginEditable name="footer" -->
+     <!-- TemplateEndEditable -->
+    </div>
+   </div>
+   <div class="copyright_wrapper">
+    <div class="copyright_contaiter">
+     <p class="">© 2012 <span class="company">Company</span>. All Rights Reserved. <a class="privacy_policy">Privacy Policy.</a> 
+     </p>
+    </div>
+   </div>
+  </div>
+ </body>
+
+</html>

@@ -1,0 +1,85 @@
+[20-Jul-2015 20:01:52 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:01:52 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:01:52 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:02:19 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:02:19 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:02:19 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:02:19 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:02:19 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:02:19 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:03:07 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:03:07 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:03:07 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:03:07 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:03:07 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:03:07 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:03:58 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:03:58 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:03:58 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:03:58 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:03:58 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:03:58 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:07:03 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:07:03 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:07:03 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:07:04 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:07:04 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:07:04 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:07:49 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:07:49 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:07:49 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:07:49 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:07:49 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:07:49 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:25:27 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:25:27 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:25:27 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:25:27 America/Chicago] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[20-Jul-2015 20:25:27 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 7
+[20-Jul-2015 20:25:27 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 10
+[20-Jul-2015 20:49:36 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:49:36 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:49:36 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:50:31 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:50:31 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:50:31 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:51:04 America/Chicago] PHP Warning:  mysqli::mysqli(): (42000/1044): Access denied for user 'hyberion_dbadmin'@'localhost' to database 'hyberion_battlecom' in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 5
+[20-Jul-2015 20:51:04 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:51:04 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:51:04 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 9
+[20-Jul-2015 20:51:04 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:51:28 America/Chicago] PHP Warning:  mysqli::mysqli(): (42000/1044): Access denied for user 'hyberion_dbadmin'@'localhost' to database 'hyberion_battlecom' in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 5
+[20-Jul-2015 20:51:28 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:51:28 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:51:28 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 9
+[20-Jul-2015 20:51:28 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:52:00 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:52:00 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:52:00 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:52:08 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:52:08 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:52:08 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:52:18 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:52:18 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:52:18 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:53:06 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:06 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:06 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:53:11 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:11 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:11 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:53:39 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:39 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:39 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[20-Jul-2015 20:53:42 America/Chicago] PHP Warning:  mysql_real_escape_string(): Access denied for user 'root'@'localhost' (using password: NO) in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:42 America/Chicago] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 7
+[20-Jul-2015 20:53:42 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[14-Oct-2015 15:35:19 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[14-Oct-2015 15:38:22 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[14-Oct-2015 15:39:16 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[14-Oct-2015 15:39:35 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[15-Oct-2015 17:26:15 America/Chicago] PHP Parse error:  syntax error, unexpected '"' in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[15-Oct-2015 17:26:30 America/Chicago] PHP Parse error:  syntax error, unexpected '"' in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 12
+[15-Oct-2015 17:34:08 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home4/hyberion/public_html/testBC/News/Angular/news_route.php on line 13
+[19-Oct-2015 12:14:49 America/Chicago] PHP Fatal error:  Call to undefined function GetAllDataFromServer() in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5
+[19-Oct-2015 12:15:16 America/Chicago] PHP Fatal error:  Call to undefined function GetAllDataFromServer() in /home4/hyberion/public_html/testBC/News/Angular/news_connect.php on line 5

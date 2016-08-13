@@ -1,0 +1,23 @@
+form.Basic_Default input.formButton.Dark {
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+	font-size: 16px;
+
+
+
+
+
+
+
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#262626', EndColorStr='#3E3E3E', GradientType=0);
+	-ms-filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#262626', EndColorStr='#3E3E3E', GradientType=0);
+	color: #CCCCCC;
+	border-style: none;
+	padding-top: 5px;
+	padding-right: 15px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+form.Basic_Default input.formButton.Dark:hover {
+	background-color: #262626;
+}

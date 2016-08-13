@@ -1,0 +1,1 @@
+{"Factions":{"urls":["players/mytournaments.php"]}}

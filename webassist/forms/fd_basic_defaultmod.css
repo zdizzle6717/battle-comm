@@ -1,0 +1,643 @@
+@charset "utf-8";
+/* Spry formats */
+form.Basic_Defaultmod .textfieldRequiredState .textfieldRequiredMsg, 
+form.Basic_Defaultmod .textfieldInvalidFormatState .textfieldInvalidFormatMsg, 
+form.Basic_Defaultmod .textfieldMinValueState .textfieldMinValueMsg,
+form.Basic_Defaultmod .textfieldMaxValueState .textfieldMaxValueMsg,
+form.Basic_Defaultmod .textfieldMinCharsState .textfieldMinCharsMsg,
+form.Basic_Defaultmod .textfieldMaxCharsState .textfieldMaxCharsMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+form.Basic_Defaultmod .checkboxRequiredState .checkboxRequiredMsg,
+form.Basic_Defaultmod .checkboxMinSelectionsState .checkboxMinSelectionsMsg,
+form.Basic_Defaultmod .checkboxMaxSelectionsState .checkboxMaxSelectionsMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+form.Basic_Defaultmod .selectRequiredState .selectRequiredMsg,
+form.Basic_Defaultmod .selectInvalidState .selectInvalidMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+form.Basic_Defaultmod .textareaRequiredState .textareaRequiredMsg,
+form.Basic_Defaultmod .textareaMinCharsState .textareaMinCharsMsg,
+form.Basic_Defaultmod .textareaMaxCharsState .textareaMaxCharsMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+form.Basic_Defaultmod .radioRequiredState .radioRequiredMsg,
+form.Basic_Defaultmod .radioInvalidState .radioInvalidMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+form.Basic_Defaultmod .passwordRequiredState .passwordRequiredMsg,
+form.Basic_Defaultmod .passwordMinCharsState .passwordMinCharsMsg,
+form.Basic_Defaultmod .passwordMaxCharsState .passwordMaxCharsMsg,
+form.Basic_Defaultmod .passwordInvalidStrengthState .passwordInvalidStrengthMsg,
+form.Basic_Defaultmod .passwordCustomState .passwordCustomMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+form.Basic_Defaultmod .confirmRequiredState .confirmRequiredMsg,
+form.Basic_Defaultmod .confirmInvalidState .confirmInvalidMsg {
+	color:#b40000;
+	white-space:nowrap;
+}
+
+form.Basic_Defaultmod span.additionalErrorZone {
+	white-space:nowrap;
+}
+form.Basic_Defaultmod div.errorGroup {
+	margin-left:155px;
+}
+form.Basic_Defaultmod span.serverInvalidState {
+	color:#b40000;
+	white-space:nowrap;
+}
+
+/* form general definition */
+form.Basic_Defaultmod {
+	background-color:#FFFFFF;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	width:790px;
+	margin-right:auto;
+	margin-left:auto;
+}
+
+form.Basic_Defaultmod a {
+    color:#000;	
+}
+form.Basic_Defaultmod ul.Basic_Defaultmod {
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+}
+form.Basic_Defaultmod ul.formList {
+	padding:0 0 0 0;
+	margin:0 0 0 0;
+  list-style-type:none;
+}
+form.Basic_Defaultmod li.formItem {
+	clear:both;
+}
+form.Basic_Defaultmod fieldset.Basic_Defaultmod {
+}
+
+/* legend */
+form.Basic_Defaultmod legend.groupHeader {
+	font-weight:bold;
+	font-size:18px;
+	white-space:nowrap;
+}
+
+/* labels */
+form.Basic_Defaultmod label.groupHeader {
+	text-align:right;
+	display:block;
+	float:left;
+	position:relative;
+}
+form.Basic_Defaultmod label.sublabel, form.Basic_Defaultmod td.DetailsPage, form.Basic_Defaultmod td.DetailsSublabel {
+	font-weight:normal;
+	font-size:15px;
+	text-align:right;
+	width:150px;
+	float:left;
+	display:block;
+	margin-top:5px;
+	padding-right:5px;
+}
+
+form.Basic_Defaultmod td.DetailsPage {
+	width:auto;
+	text-align:left;
+	display:table-cell;
+}
+form.Basic_Defaultmod td.DetailsSublabel {
+	text-align:right;
+	float:none;
+	display:table-cell;
+}
+form.Basic_Defaultmod label.secondSublabel {
+	width:auto;
+}
+form.Basic_Defaultmod label.sublabelPlaceholder {
+}
+form.Basic_Defaultmod span.requiredIndicator {
+	color:#b40000;
+}
+form.Basic_Defaultmod span.fieldsetDescription {
+	color:#b40000;
+}
+
+/* span wrappers for form */
+form.Basic_Defaultmod div.lineGroup {
+	clear:left;
+	display:block;
+}
+form.Basic_Defaultmod div.fullColumnGroup {
+	width:NaNpx;
+	padding-bottom:0;
+	padding-top:10px;
+	display:inline;
+	float:left;
+}
+form.Basic_Defaultmod div.SameAsCheck_Row {
+}
+
+form.Basic_Defaultmod span.precedingText {
+	text-align:right;
+	font-weight: bold;
+}
+form.Basic_Defaultmod div.trailingText {
+  white-space:nowrap;
+}
+form.Basic_Defaultmod div.trailingText a {
+}
+form.Basic_Defaultmod div.trailingText div {
+  background-color:#8c8c8c;
+}
+
+/* wide groups for items on a single line */
+form.Basic_Defaultmod span.wideFieldGroup {
+	width:100%;
+	float:left;
+}
+
+/* button form elements */
+form.Basic_Defaultmod span.buttonFieldGroup {
+	float:left;
+	text-align:right;
+	clear: both;
+}
+form.Basic_Defaultmod input.formButton {
+	text-decoration: none;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+form.Basic_Defaultmod input.formButton:hover {
+}
+
+/* text form elements */
+form.Basic_Defaultmod input.formTextfield_XSmall {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:50px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formTextfield_Small {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:80px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formTextfield_Medium {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:120px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formTextfield_Large {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:200px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formTextfield_XLarge {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:582px;
+	margin:0;
+	margin-left:2px;
+}
+
+form.Basic_Defaultmod .textfieldValidState input, form.Basic_Defaultmod input.textfieldValidState {
+	background-color:#B8F5B1;
+}
+
+form.Basic_Defaultmod input.textfieldRequiredState, form.Basic_Defaultmod .textfieldRequiredState input, 
+form.Basic_Defaultmod input.textfieldInvalidFormatState, form.Basic_Defaultmod .textfieldInvalidFormatState input, 
+form.Basic_Defaultmod input.textfieldMinValueState, form.Basic_Defaultmod .textfieldMinValueState input, 
+form.Basic_Defaultmod input.textfieldMaxValueState, form.Basic_Defaultmod .textfieldMaxValueState input, 
+form.Basic_Defaultmod input.textfieldMinCharsState, form.Basic_Defaultmod .textfieldMinCharsState input, 
+form.Basic_Defaultmod input.textfieldMaxCharsState, form.Basic_Defaultmod .textfieldMaxCharsState input {
+	background-color:#FF9F9F;
+}
+
+form.Basic_Defaultmod .textfieldFocusState input, form.Basic_Defaultmod input.textfieldFocusState {
+	background-color:#FFFFCC;
+}
+
+form.Basic_Defaultmod .textfieldFlashText input, form.Basic_Defaultmod input.textfieldFlashText {
+	color: red !important;
+}
+
+form.Basic_Defaultmod .textfieldHintState input, form.Basic_Defaultmod input.textfieldHintState {
+	/*color: red !important;*/
+}
+
+
+/* textarea form elements */
+form.Basic_Defaultmod textarea.formTextarea_Small {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:252px;
+	height:100px;
+	white-space:pre;
+	overflow:auto;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod textarea.formTextarea_Medium {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:382px;
+	height:150px;
+	white-space:pre;
+	overflow:auto;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod textarea.formTextarea_Large {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:514px;
+	height:200px;
+	white-space:pre;
+	overflow:auto;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod .textareaValidState textarea, form.Basic_Defaultmod textarea.textareaValidState {
+	background-color:#B8F5B1;
+}
+
+form.Basic_Defaultmod textarea.textareaRequiredState, form.Basic_Defaultmod .textareaRequiredState textarea, 
+form.Basic_Defaultmod textarea.textareaMinCharsState, form.Basic_Defaultmod .textareaMinCharsState textarea, 
+form.Basic_Defaultmod textarea.textareaMaxCharsState, form.Basic_Defaultmod .textareaMaxCharsState textarea {
+	background-color:#FF9F9F;
+}
+
+form.Basic_Defaultmod .textareaFocusState textarea, form.Basic_Defaultmod textarea.textareaFocusState {
+	background-color:#FFFFCC;
+}
+
+form.Basic_Defaultmod .textareaFlashState textarea, form.Basic_Defaultmod textarea.textareaFlashState{
+	color:red !important;
+}
+
+form.Basic_Defaultmod textarea.textareaHintState, form.Basic_Defaultmod .textareaHintState textarea{
+	/* color: red !important;*/
+}
+
+
+/* select form elements */
+form.Basic_Defaultmod select.formMenufield_XSmall {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:50px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formMenufield_Small {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:80px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formMenufield_Medium {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:120px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formMenufield_Large {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:252px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formMenufield_XLarge {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:382px;
+	margin:0;
+	margin-left:2px;
+}
+
+form.Basic_Defaultmod select.formListfield_XSmall {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:50px;
+	height:100px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formListfield_Small {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:80px;
+	height:100px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formListfield_Medium {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:120px;
+	height:100px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formListfield_Large {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:252px;
+	height:100px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod select.formListfield_XLarge {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:382px;
+	height:150px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod .selectValidState select, form.Basic_Defaultmod select.selectValidState {
+	background-color:#B8F5B1;
+}
+
+form.Basic_Defaultmod select.selectRequiredState, form.Basic_Defaultmod .selectRequiredState select,
+form.Basic_Defaultmod select.selectInvalidState, form.Basic_Defaultmod .selectInvalidState select {
+	background-color:#FF9F9F;
+}
+
+.selectFocusState select, form.Basic_Defaultmod select.selectFocusState {
+	background-color:#FFFFCC;
+}
+
+/* radio button form elements */
+form.Basic_Defaultmod input.formRadioField_Standard {
+	background-color:#FFF;
+	padding:2px 2px 2px 2px;
+	margin-left:2px;
+}
+form.Basic_Defaultmod .radioValidState input, form.Basic_Defaultmod input.radioValidState {
+	background-color:#B8F5B1;
+}
+form.Basic_Defaultmod input.radioRequiredState, form.Basic_Defaultmod .radioRequiredState input,
+form.Basic_Defaultmod input.radioInvalidState, form.Basic_Defaultmod .radioInvalidState input {
+	background-color:#FF9F9F;
+}
+form.Basic_Defaultmod .radioFocusState input, form.Basic_Defaultmod input.radioFocusState {
+	background-color:#FFF;
+}
+
+form.Basic_Defaultmod span.radioFieldGroup_Narrow {
+	
+}
+form.Basic_Defaultmod span.radioFieldGroup_Wide {
+	display:block;
+}
+form.Basic_Defaultmod span.radioFieldGroup_OneColumn {
+	display:block;
+}
+form.Basic_Defaultmod span.radioGroup_Narrow {
+	
+}
+form.Basic_Defaultmod span.radioGroup_Wide {
+	display:block;
+}
+form.Basic_Defaultmod span.radioGroup_OneColumn {
+	display:block;
+}
+form.Basic_Defaultmod label.radioSublabel_Narrow {
+	padding:2px 2px 2px 2px;
+	font-weight:normal;
+	font-size:15px;
+	width:60px;
+	float:left;
+	display:block;
+	text-align:left;
+}
+form.Basic_Defaultmod label.radioSublabel_Wide {
+	padding:2px 2px 2px 2px;
+	font-weight:normal;
+	font-size:15px;
+	width:135px;
+	float:left;
+	display:block;
+	text-align:left;
+}
+form.Basic_Defaultmod label.radioSublabel_OneColumn {
+	padding:2px 2px 2px 2px;
+	font-weight:normal;
+	font-size:15px;
+	display:block;
+	text-align:left;
+}
+
+
+/* checkbox form elements */
+form.Basic_Defaultmod input.SameAsCheck {
+	background-color:#FFF;
+	padding:2px 2px 2px 2px;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formCheckboxField_Standard {
+	background-color:#FFF;
+	padding:2px 2px 2px 2px;
+	margin-left:2px;
+}
+form.Basic_Defaultmod .checkboxValidState input, form.Basic_Defaultmod input.checkboxValidState {
+	background-color:#B8F5B1;
+}
+form.Basic_Defaultmod input.checkboxRequiredState, form.Basic_Defaultmod .checkboxRequiredState input,
+form.Basic_Defaultmod input.checkboxMinSelectionsState, form.Basic_Defaultmod .checkboxMinSelectionsState input,
+form.Basic_Defaultmod input.checkboxMaxSelectionsState, form.Basic_Defaultmod .checkboxMaxSelectionsState input {
+	background-color:#FF9F9F;
+}
+form.Basic_Defaultmod .checkboxFocusState input, form.Basic_Defaultmod input.checkboxFocusState {
+	background-color:#FFF;
+}
+
+form.Basic_Defaultmod span.checkFieldGroup_Narrow {
+	display:block;
+}
+form.Basic_Defaultmod span.checkFieldGroup_Wide {
+	
+}
+form.Basic_Defaultmod span.checkFieldGroup_OneColumn {
+	display:block;
+}
+form.Basic_Defaultmod span.checkGroup_Narrow {
+	display:block;
+}
+form.Basic_Defaultmod span.checkGroup_Wide {
+	
+}
+form.Basic_Defaultmod span.checkGroup_OneColumn {
+	display:block;
+}
+form.Basic_Defaultmod label.checkSublabel_Narrow {
+	font-weight:normal;
+	font-size:15px;
+	width:60px;
+	float:left;
+	display:block;
+	text-align:left;
+	margin-top:5px;
+}
+form.Basic_Defaultmod label.checkSublabel_Wide {
+	font-weight:normal;
+	font-size:15px;
+	width:135px;
+	float:left;
+	display:block;
+	text-align:left;
+	margin-top:5px;
+}
+form.Basic_Defaultmod label.checkSublabel_OneColumn {
+	font-weight:normal;
+	font-size:15px;
+	display:block;
+	text-align:left;
+}
+
+/* confirm and password states (same as text) */
+form.Basic_Defaultmod input.formPasswordfield_XSmall {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:50px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formPasswordfield_Small {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:80px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formPasswordfield_Medium {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:120px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formPasswordfield_Large {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:200px;
+	margin:0;
+	margin-left:2px;
+}
+form.Basic_Defaultmod input.formPasswordfield_XLarge {
+	background-color:#FFF;
+	padding:5px 5px 5px 5px;
+	width:582px;
+	margin:0;
+	margin-left:2px;
+}
+
+form.Basic_Defaultmod .confirmValidState input, form.Basic_Defaultmod input.confirmValidState {
+	background-color:#B8F5B1;
+}
+
+form.Basic_Defaultmod input.confirmRequiredState, form.Basic_Defaultmod .confirmRequiredState input, 
+form.Basic_Defaultmod input.confirmInvalidState, form.Basic_Defaultmod .confirmInvalidState input {
+	background-color:#FF9F9F;
+}
+
+form.Basic_Defaultmod .confirmFocusState input, form.Basic_Defaultmod input.confirmFocusState {
+	background-color:#FFFFCC;
+}
+form.Basic_Defaultmod .passwordValidState input, form.Basic_Defaultmod input.passwordValidState {
+	background-color:#B8F5B1;
+}
+
+form.Basic_Defaultmod input.passwordRequiredState, form.Basic_Defaultmod .passwordRequiredState input, 
+form.Basic_Defaultmod input.passwordInvalidStrengthState, form.Basic_Defaultmod .passwordInvalidStrengthState input, 
+form.Basic_Defaultmod input.passwordMinCharsState, form.Basic_Defaultmod .passwordMinCharsState input, 
+form.Basic_Defaultmod input.passwordCustomState, form.Basic_Defaultmod .passwordCustomState input, 
+form.Basic_Defaultmod input.passwordMaxCharsState, form.Basic_Defaultmod .passwordMaxCharsState input {
+	background-color:#FF9F9F;
+}
+
+form.Basic_Defaultmod .passwordFocusState input, form.Basic_Defaultmod input.passwordFocusState {
+	background-color:#FFFFCC;
+}
+
+/*Captcha form element*/
+form.Basic_Defaultmod img.Captcha {
+	margin:0 0 -7px 2px;
+}
+
+/*Datepicker form element*/
+.ui-datepicker {
+}
+.ui-datepicker a {
+}
+.ui-datepicker .ui-widget-header {
+}
+.ui-datepicker thead th {
+}
+
+.ui-datepicker tbody td a:link,
+.ui-datepicker tbody td a:visited,
+.ui-datepicker tbody td a.ui-state-default {
+}
+.ui-datepicker tbody td a:active,
+.ui-datepicker tbody td a.ui-state-active {
+}
+.ui-datepicker tbody td a:hover,
+.ui-datepicker tbody td a.ui-state-hover {
+}
+.ui-datepicker tbody td a.ui-state-error:link,
+.ui-datepicker tbody td a.ui-state-error:visited,
+.ui-datepicker tbody td a.ui-state-error {
+}
+.ui-datepicker tbody .ui-state-error-text {
+}
+
+.ui-datepicker tbody td.ui-datepicker-week-end a:link,
+.ui-datepicker tbody td.ui-datepicker-week-end a:visited,
+.ui-datepicker tbody td.ui-datepicker-week-end a {
+}
+.ui-datepicker tbody td.ui-datepicker-today a:link,
+.ui-datepicker tbody td.ui-datepicker-today a:visited,
+.ui-datepicker tbody td.ui-datepicker-today a:hover,
+.ui-datepicker tbody td.ui-datepicker-today a {
+}
+
+.ui-datepicker tbody td.ui-datepicker-week-end a:hover,
+.ui-datepicker tbody td.ui-datepicker-week-end a.ui-state-hover {
+}
+.ui-datepicker tbody td.ui-datepicker-week-end a:active,
+.ui-datepicker tbody td.ui-datepicker-week-end a:focus,
+.ui-datepicker tbody td.ui-datepicker-week-end a.ui-state-active {
+}
+
+.ui-datepicker-trigger {
+  border: 0;
+  margin: 0 0 0 1px;
+  padding: 0;
+  background: none;
+}
+
+form.Basic_Defaultmod .TextOnly {
+  padding-top: NaNpx;
+  display: table-cell;
+}

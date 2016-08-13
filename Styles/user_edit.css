@@ -1,0 +1,20 @@
+/* Stylesheet for all user edit buttons and functionality */
+
+.editable, .editable2, .editable3 {
+	padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(212, 212, 212, 0.27);
+    width: calc(98% - 10px);
+    margin: 1%;
+}
+
+.edit-user-bio, .edit-user-contact, .edit-user-social, .exit, .exit2, .exit3 {
+	display: none;
+}
+.active .user-bio, .active .user-contact, .active .user-social, .active .edit, .active .edit2, .active .edit3 {
+	display: none;	
+}
+.active .edit-user-bio, .active .edit-user-contact, .active .edit-user-social, .active .exit, .active .exit2, .active .exit3 {
+	display: block;	
+}

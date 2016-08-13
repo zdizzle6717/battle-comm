@@ -1,0 +1,48 @@
+<wa_form name="BattleComm:TestRegistration" id="BattleCommTestRegistration" submit_text="Submit" send_mail="false" use_upload="true">
+	<wa_form_fieldset label="" id=""  >
+		<wa_fieldset_description></wa_fieldset_description>
+		<wa_form_line>
+			<wa_form_group_reference label="" continueLine="false" ><wa_field_group name="BattleComm:simpleRegister">
+	<wa_field_line>
+		<wa_field_column>
+			<wa_field_set_validation>Please enter your email address.</wa_field_set_validation>
+			<wa_field_reference label="Username" validation="{ required: false, notInvalidValue: false, step: '', min: '', max: '', html5type: 'menu', title: 'Please%20enter%20your%20email%20address.' }" continueLine="false" elementName="Player_handle">
+		<wa_field_definition name="Menu" size="Medium">
+<wa_field_html spryObject="ValidationSelect">
+<![CDATA[
+      <select class="formMenufield_Medium" name="{Field.Name}" id="{Field.Name}" rel="{Field.CurrentFieldValue}"{Field.TabIndex}>
+        {Option.HTML}
+      </select>
+]]>
+</wa_field_html>
+<wa_field_option_html>
+  <option value="{Option.Value}"{MainUI.ValidatedFieldSelect}>{Option.Label}</option>
+</wa_field_option_html>
+</wa_field_definition>
+</wa_field_reference>
+		</wa_field_column>
+	</wa_field_line>
+	<wa_field_line>
+		<wa_field_column>
+			<wa_field_set_validation></wa_field_set_validation>
+			<wa_field_reference label="Tournament" validation="{ required: false, notInvalidValue: false, step: '', min: '', max: '', html5type: 'menu', title: 'Please%20enter%20a%20value' }" continueLine="false" elementName="tournament">
+		<wa_field_definition name="Menu" size="Medium">
+<wa_field_html spryObject="ValidationSelect">
+<![CDATA[
+      <select class="formMenufield_Medium" name="{Field.Name}" id="{Field.Name}" rel="{Field.CurrentFieldValue}"{Field.TabIndex}>
+        {Option.HTML}
+      </select>
+]]>
+</wa_field_html>
+<wa_field_option_html>
+  <option value="{Option.Value}"{MainUI.ValidatedFieldSelect}>{Option.Label}</option>
+</wa_field_option_html>
+</wa_field_definition>
+</wa_field_reference>
+		</wa_field_column>
+	</wa_field_line>
+</wa_field_group></wa_form_group_reference>
+		</wa_form_line>
+	</wa_form_fieldset>
+</wa_form>
+<wa_hidden_fields><hidden_fieldset></hidden_fieldset></wa_hidden_fields>
