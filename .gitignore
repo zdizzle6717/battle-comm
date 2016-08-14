@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 # Database Connections and Credentials
-*Connections
+RPStore/Connections*
 Connections
 dmxConnections
 server/config*
