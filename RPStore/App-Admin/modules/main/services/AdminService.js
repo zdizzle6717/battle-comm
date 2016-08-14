@@ -1,8 +1,9 @@
 'use strict';
 
-AdminService.$inject = ['$http', '$stateParams'];
-function AdminService($http, $stateParams) {
+AdminService.$inject = ['$http', '$stateParams', 'apiRoutes'];
+function AdminService($http, $stateParams, apiRoutes) {
     let service = {};
+    let routes = apiRoutes;
 
     service.getOrder = getOrder;
     service.getAllOrders = getAllOrders;
@@ -67,7 +68,7 @@ function AdminService($http, $stateParams) {
     function getProduct(id) {
         let args = {
             method: 'GET',
-            url: 'http://www.battle-comm.net:8080/api/products/' + id
+            url: routes.products.get + id
         };
 
         return $http(args)
@@ -80,7 +81,7 @@ function AdminService($http, $stateParams) {
     function getAllProducts() {
         let args = {
             method: 'GET',
-            url: 'http://www.battle-comm.net:8080/api/products'
+            url: routes.products.getall
         };
 
         return $http(args)
@@ -93,7 +94,7 @@ function AdminService($http, $stateParams) {
     function createProduct(data) {
         let args = {
             method: 'POST',
-            url: 'http://www.battle-comm.net:8080/api/products',
+            url: routes.products.create,
             data: cleanData(data)
         };
 
@@ -107,7 +108,7 @@ function AdminService($http, $stateParams) {
     function updateProduct(id, data) {
         let args = {
             method: 'PUT',
-            url: 'http://www.battle-comm.net:8080/api/products/' + id,
+            url: routes.products.update + id,
             data: cleanData(data)
         };
 
@@ -121,7 +122,7 @@ function AdminService($http, $stateParams) {
     function removeProduct(id, data) {
         let args = {
             method: 'DELETE',
-            url: 'http://www.battle-comm.net:8080/api/products/' + id,
+            url: routes.products.remove + id,
             data: data
         };
 

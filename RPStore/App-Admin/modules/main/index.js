@@ -20,8 +20,11 @@ mod.run(require('./run'));
 // Config
 mod.config(require('./config'));
 
+// Routes
+mod.constant('manufacturers', require('./constants/manufacturers'));
+
 // Constants
-mod.constant('manufacturers', require('./constants/manufacturers'))
+mod.constant('manufacturers', require('./constants/manufacturers'));
 
 
 // Controllers
