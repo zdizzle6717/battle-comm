@@ -81,7 +81,7 @@ function AdminService($http, $stateParams, apiRoutes) {
     function getAllProducts() {
         let args = {
             method: 'GET',
-            url: routes.products.getall
+            url: routes.products.getAll
         };
 
         return $http(args)
