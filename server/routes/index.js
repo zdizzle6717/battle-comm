@@ -22,8 +22,8 @@ module.exports = [
     {
         config: {
             tags: ['api'],
-            description: 'Get one director by id',
-            notes: 'Get one director by id',
+            description: 'Get one product by id',
+            notes: 'Get one product by id',
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -34,32 +34,55 @@ module.exports = [
             }
         },
         method: 'GET',
-        path: '/api/directors/{id}',
-        handler: api.directors.get
+        path: '/api/products/{id}',
+        handler: api.products.get
     },
     {
         config: {
             tags: ['api'],
-            description: 'Get all directors',
-            notes: 'Get all directors',
+            description: 'Get all products',
+            notes: 'Get all products',
             cors: {
                 origin: ['*']
             }
         },
         method: 'GET',
-        path: '/api/directors',
-        handler: api.directors.getAll
+        path: '/api/products',
+        handler: api.products.getAll
     },
     {
         config: {
             tags: ['api'],
-            description: 'Add a new director',
-            notes: 'Add a new director',
+            description: 'Add a new product',
+            notes: 'Add a new product',
             validate: {
                 payload: {
                     firstName: Joi.string().required(),
-                    lastName: Joi.string().required(),
-                    bio: Joi.string().required()
+                    SKU: Joi.string().required(),
+                    name: Joi.string().required(),
+                    price: Joi.string().required(),
+                    description: Joi.string().required(),
+                    manufacturerId: Joi.string().required(),
+                    gameSystem: Joi.string().required(),
+                    color: Joi.string(),
+                    tags: Joi.string(),
+                    category: Joi.string(),
+                    stockQty: Joi.number().required(),
+                    inStock: Joi.boolean().required(),
+                    filterVal: Joi.string().required(),
+                    displayStatus: Joi.boolean().required(),
+                    featured: Joi.boolean().required(),
+                    new: Joi.boolean().required(),
+                    onSale: Joi.boolean().required(),
+                    imgAlt: Joi.string().required(),
+                    imgOneFront: Joi.string().required(),
+                    imgOneBack: Joi.string().required(),
+                    imgTwoFront: Joi.string(),
+                    imgTwoBack: Joi.string(),
+                    imgThreeFront: Joi.string(),
+                    imgThreeBack: Joi.string(),
+                    imgFourFront: Joi.string(),
+                    imgFourBack: Joi.string()
                 }
             },
             cors: {
@@ -67,22 +90,45 @@ module.exports = [
             }
         },
         method: 'POST',
-        path: '/api/directors',
-        handler: api.directors.create
+        path: '/api/products',
+        handler: api.products.create
     },
     {
         config: {
             tags: ['api'],
-            description: 'Update a director by id',
-            notes: 'Update a director by id',
+            description: 'Update a product by id',
+            notes: 'Update a product by id',
             validate: {
                 params: {
                     id: Joi.number().required()
                 },
                 payload: {
                     firstName: Joi.string().required(),
-                    lastName: Joi.string().required(),
-                    bio: Joi.string().required()
+                    SKU: Joi.string().required(),
+                    name: Joi.string().required(),
+                    price: Joi.string().required(),
+                    description: Joi.string().required(),
+                    manufacturerId: Joi.string().required(),
+                    gameSystem: Joi.string().required(),
+                    color: Joi.string(),
+                    tags: Joi.string(),
+                    category: Joi.string(),
+                    stockQty: Joi.number().required(),
+                    inStock: Joi.boolean().required(),
+                    filterVal: Joi.string().required(),
+                    displayStatus: Joi.boolean().required(),
+                    featured: Joi.boolean().required(),
+                    new: Joi.boolean().required(),
+                    onSale: Joi.boolean().required(),
+                    imgAlt: Joi.string().required(),
+                    imgOneFront: Joi.string().required(),
+                    imgOneBack: Joi.string().required(),
+                    imgTwoFront: Joi.string(),
+                    imgTwoBack: Joi.string(),
+                    imgThreeFront: Joi.string(),
+                    imgThreeBack: Joi.string(),
+                    imgFourFront: Joi.string(),
+                    imgFourBack: Joi.string()
                 }
             },
             cors: {
@@ -90,14 +136,14 @@ module.exports = [
             }
         },
         method: 'PUT',
-        path: '/api/directors/{id}',
-        handler: api.directors.update
+        path: '/api/products/{id}',
+        handler: api.products.update
     },
     {
         config: {
             tags: ['api'],
-            description: 'Delete a director by id',
-            notes: 'Delete a director by id',
+            description: 'Delete a product by id',
+            notes: 'Delete a product by id',
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -108,8 +154,8 @@ module.exports = [
             }
         },
         method: 'DELETE',
-        path: '/api/directors/{id}',
-        handler: api.directors.delete
+        path: '/api/products/{id}',
+        handler: api.products.delete
     }
 
 ];
