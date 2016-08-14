@@ -21,12 +21,13 @@ mod.run(require('./run'));
 mod.config(require('./config'));
 
 // Constants
-mod.constant('manufacturersSchema', require('./schema/manufacturers'))
+mod.constant('manufacturers', require('./constants/manufacturers'))
 
 
 // Controllers
 mod.controller('OrderListController', require('./controllers/OrderListController'));
 mod.controller('OrderController', require('./controllers/OrderController'));
+mod.controller('ProductListController', require('./controllers/ProductListController'));
 mod.controller('ProductController', require('./controllers/ProductController'));
 
 

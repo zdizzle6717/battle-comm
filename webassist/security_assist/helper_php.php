@@ -22,7 +22,7 @@ if (file_exists("wa_sha1encryption.php")) require_once("wa_sha1encryption.php");
 chdir($securityassist_helper_Include_Start_Dir);
 ?>
 <?php
-$WA_Auth_Separator = "|¤|";
+$WA_Auth_Separator = "|ï¿½|";
 $_SESSION["WAENCRYPTEDRETURNUSED"] = false;
 $_SESSION["WAENCRYPTEDRETURNSUCCESS"] = false;
 function WA_AuthenticateUser($WA_Auth_Parameter){
@@ -391,7 +391,7 @@ function WA_Auth_BuildRedirectURL($redirectURL, $keepCurrentQueryString, $addDen
 	if ($keepCurrentQueryString && $redirectURL != "" && isset($_SERVER["QUERY_STRING"]) && $_SERVER["QUERY_STRING"] !== "") {
 		$redirectURL .= ((strpos($redirectURL, '?') === false)?"?":"&").$_SERVER["QUERY_STRING"];
 	}
-	
+
 	if($addDeniedURL){
 		$WA_Auth_Referrer = $_SERVER['PHP_SELF'];
 		$redirectURL = $redirectURL.((strpos($redirectURL, "?"))?"&":"?")."accesscheck=".urlencode($WA_Auth_Referrer.((isset($_SERVER["QUERY_STRING"]))?"?".$_SERVER["QUERY_STRING"]:""));
@@ -400,7 +400,7 @@ function WA_Auth_BuildRedirectURL($redirectURL, $keepCurrentQueryString, $addDen
     if(strpos($redirectURL, '/') === 0){
 		$redirectURL = 'http'.((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]!="off")?"s":"").'://'.$_SERVER['HTTP_HOST'].$redirectURL;
 	}
-	
+
 	return $redirectURL;
 }
 
@@ -414,7 +414,7 @@ function WA_Auth_RuleObject_EvaluateRules($ruleName){
 	$rulePasses = FALSE;
 	$comparisons = WA_Auth_GetComparisonsForRule($ruleName);
 	$compareLen = count($comparisons);
-	
+
 	for($idx=0;$idx<$compareLen;$idx++){
 		$comparison = $comparisons[$idx];
 		$compareSucceeds = !$comparison[0];
@@ -427,27 +427,27 @@ function WA_Auth_RuleObject_EvaluateRules($ruleName){
 			case 1:
 				$compareSucceeds = ($comparison[1]==$comparison[3]);
 				break;
-				
+
 			case 2:
 				$compareSucceeds = ($comparison[1]!=$comparison[3]);
 				break;
-				
+
 			case 3:
 				$compareSucceeds = ($comparison[1]<$comparison[3]);
 				break;
-				
+
 			case 4:
 				$compareSucceeds = ($comparison[1]<=$comparison[3]);
 				break;
-				
+
 			case 5:
 				$compareSucceeds = ($comparison[1]>$comparison[3]);
 				break;
-				
+
 			case 6:
 				$compareSucceeds = ($comparison[1]>=$comparison[3]);
 				break;
-				
+
 			case 20:
 				$compareSucceeds = WA_Auth_GroupContainsValue($comparison[3], $comparison[1]);
 				break;
@@ -506,7 +506,7 @@ function WA_Auth_RuleObject_DebugComparison($comparison){
 ?>
 <?php
 if (!function_exists("WA_GetSQLValueString")) {
-function WA_GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function WA_GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
 
@@ -515,7 +515,7 @@ function WA_GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNo
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";

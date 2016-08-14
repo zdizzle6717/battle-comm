@@ -98,14 +98,14 @@
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
-                        <a ui-sref="product({ productId: product.id })"><img ng-src="{{product.imageOne.imgFrontUrl}}" alt="{{product.imageOne.imgAlt}}" class="img-responsive"></a>
+                        <a ui-sref="product({ productId: product.id })"><img ng-src="images/uploads/{{product.imageOne.imgFrontUrl}}" alt="{{product.imageOne.imgAlt}}" class="img-responsive"></a>
                     </div>
                     <div class="back">
-                        <a ui-sref="product({ productId: product.id })"><img ng-src="{{product.imageOne.imgBackUrl}}" alt="{{product.imageOne.imgAlt}}" class="img-responsive"></a>
+                        <a ui-sref="product({ productId: product.id })"><img ng-src="images/uploads/{{product.imageOne.imgBackUrl}}" alt="{{product.imageOne.imgAlt}}" class="img-responsive"></a>
                     </div>
                 </div>
             </div>
-            <a ui-sref="product({ productId: product.id })" class="invisible"><img ng-src="{{product.imageOne.imgFrontUrl}}" alt="{{product.imageOne.imgAlt}}" class="img-responsive"></a>
+            <a ui-sref="product({ productId: product.id })" class="invisible"><img ng-src="images/uploads/{{product.imageOne.imgFrontUrl}}" alt="{{product.imageOne.imgAlt}}" class="img-responsive"></a>
             <div class="text text-center">
                 <h3><a ui-sref="product({ productId: product.id })" >{{product.name}}</a></h3>
                 <p class="price">

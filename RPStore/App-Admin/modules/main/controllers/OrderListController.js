@@ -1,14 +1,11 @@
 'use strict';
 
-OrderListController.$inject = ['$state', '$rootScope', 'AdminService', '$scope', 'manufacturersSchema'];
-function OrderListController($state, $rootScope, AdminService, $scope, manufacturersSchema) {
+OrderListController.$inject = ['$state', '$rootScope', 'AdminService', '$scope'];
+function OrderListController($state, $rootScope, AdminService, $scope) {
     let controller = this;
 
     controller.pageSize = '20';
     controller.selectedSort = '-created';
-    controller.priceFilter = 'showit';
-    controller.manufacturers = manufacturersSchema;
-    controller.manufacturer = manufacturersSchema[0];
 
     ///////////////////////////////
 
@@ -26,11 +23,7 @@ function OrderListController($state, $rootScope, AdminService, $scope, manufactu
                 controller.orders = orders;
                 controller.order = (orders[0] ? orders[0] : {});
             });
-
-    controller.setMNU = function(manufacturer) {
-        controller.currentMNU = manufacturer;
-    };
-
+            
     controller.viewOrder = function(id) {
         AdminService.getOrder(id)
             .then(function() {

@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("battle-comm-db-main.c2tm0zmnvkz6.us-west-2.rds.amazonaws.com", "bcadmin", "Xdxn9\zX5s", "hyberion_battlecomm");
+$conn = new mysqli("battle-comm-db-main.c2tm0zmnvkz6.us-west-2.rds.amazonaws.com", "bcadmin", "Xdxn9zX5s", "hyberion_battlecomm");
 
 $page_id = $_GET['news_id'];
 
@@ -21,8 +21,8 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	$outp .= '"Posted":"'   . $rs["news_date_submitted"]        . '",';
 	$outp .= '"GameSystem":"'   . $rs["game_system"]        . '",';
 	$outp .= '"Category":"'   . $rs["parent"]        . '",';
-    $outp .= '"Published":"'. $rs["publish"]     . '",'; 
-	$outp .= '"Tags":"'. $rs["tags"]     . '"}'; 
+    $outp .= '"Published":"'. $rs["publish"]     . '",';
+	$outp .= '"Tags":"'. $rs["tags"]     . '"}';
 }
 
 $outp ='{"records":['.$outp.']}';

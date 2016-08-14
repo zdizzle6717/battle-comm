@@ -12,15 +12,20 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
           controller: 'OrderListController as Order'
         })
         .state('order', {
-          url: "/order/:orderId",
+          url: "/order/:id",
           template: require('./views/order.php'),
           controller: 'OrderController as Order'
         })
-        .state('addProduct', {
-          url: "/add-product/:productId",
-          template: require('./views/addProduct.php'),
+        .state('productList', {
+          url: "/productList",
+          template: require('./views/productList.php'),
+          controller: 'ProductListController as Product'
+        })
+        .state('product', {
+          url: "/product/:id",
+          template: require('./views/product.php'),
           controller: 'ProductController as Product'
-        });
+      });
 
     $urlRouterProvider.otherwise("/orderList");
 }

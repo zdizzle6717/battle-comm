@@ -13,10 +13,8 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <title>BattleComm: Store</title>
     <link rel="stylesheet" type="text/css" media="screen, print" href="../../Styles/global.css">
     <link rel="stylesheet" type="text/css" media="screen, print" href="../../Styles/magnificent-popup/magnificent-popup.css">
-    <link rel="stylesheet" type="text/css" media="screen, print" href="../node_modules/angularjs-slider/dist/rzslider.min.css">
 	<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/app.css">
     <script src="../../ScriptLibrary/AngularJS/jquery/dist/jquery.js"></script>
-    <!-- <script src="Scripts/prefix.min.js" type="text/javascript"></script> -->
     <script type="text/javascript" src="../../Scripts/jquery.magnificant-popup.js"></script>
     <script type="text/javascript" src="../../ScriptLibrary/dmxDataBindings.js"></script>
     <script type="text/javascript" src="../../ScriptLibrary/dmxDataSet.js"></script>
@@ -41,9 +39,18 @@ include ($pathToFile. "/Templates/parts/header.php"); ?>
 				<a ui-sref="orderList"><img src="../images/BC_RPStore_Logo.png" alt="Reward Point Store" class="store-logo"/></a>
 			</div>
 			<div class="product-col-3">
-				<a ui-sref="cart" style="padding: 5px 0 0 0; width:150px">
-					<h2>Admin</h2>
-				</a>
+				<h2>Admin</h2>
+			</div>
+		</div>
+		<div class="full_width">
+			<div class="product-col-4">
+				<button class="btn" ui-sref="orderList"><span class="glyphicon glyphicon-credit-card"></span> View All Orders</button>
+			</div>
+			<div class="product-col-4">
+				<button class="btn" ui-sref="productList"><span class="glyphicon glyphicon-list"></span> View All Products</button>
+			</div>
+			<div class="product-col-4">
+				<button class="btn" ui-sref="product({id: undefined})"><span class="glyphicon glyphicon-plus"></span> Add New Products</button>
 			</div>
 		</div>
 		<div class="full_width view-container">

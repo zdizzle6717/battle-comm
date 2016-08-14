@@ -1,6 +1,6 @@
 <?php
 ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 'On');  //On or Off
+ini_set('display_errors', 'Off');  //On or Off
 @session_start();
 ?>
 <?php require_once("webassist/security_assist/wa_md5encryption.php"); ?>

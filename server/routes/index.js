@@ -9,8 +9,11 @@ module.exports = [
 
     // Base Route
     {
+        config: {
+            tags: ['api'],
+        },
         method: 'GET',
-        path: '/api',
+        path: '/api/test',
         handler: function(req, res) {
             res({
                 'api': 'Hello world!'
@@ -18,7 +21,7 @@ module.exports = [
         }
     },
 
-    // Directors
+    // Products
     {
         config: {
             tags: ['api'],
@@ -57,10 +60,9 @@ module.exports = [
             notes: 'Add a new product',
             validate: {
                 payload: {
-                    firstName: Joi.string().required(),
                     SKU: Joi.string().required(),
                     name: Joi.string().required(),
-                    price: Joi.string().required(),
+                    price: Joi.number().required(),
                     description: Joi.string().required(),
                     manufacturerId: Joi.string().required(),
                     gameSystem: Joi.string().required(),
@@ -77,12 +79,12 @@ module.exports = [
                     imgAlt: Joi.string().required(),
                     imgOneFront: Joi.string().required(),
                     imgOneBack: Joi.string().required(),
-                    imgTwoFront: Joi.string(),
-                    imgTwoBack: Joi.string(),
-                    imgThreeFront: Joi.string(),
-                    imgThreeBack: Joi.string(),
-                    imgFourFront: Joi.string(),
-                    imgFourBack: Joi.string()
+                    imgTwoFront: Joi.optional(),
+                    imgTwoBack: Joi.optional(),
+                    imgThreeFront: Joi.optional(),
+                    imgThreeBack: Joi.optional(),
+                    imgFourFront: Joi.optional(),
+                    imgFourBack: Joi.optional()
                 }
             },
             cors: {
@@ -103,10 +105,9 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
-                    firstName: Joi.string().required(),
                     SKU: Joi.string().required(),
                     name: Joi.string().required(),
-                    price: Joi.string().required(),
+                    price: Joi.number().required(),
                     description: Joi.string().required(),
                     manufacturerId: Joi.string().required(),
                     gameSystem: Joi.string().required(),
@@ -123,12 +124,12 @@ module.exports = [
                     imgAlt: Joi.string().required(),
                     imgOneFront: Joi.string().required(),
                     imgOneBack: Joi.string().required(),
-                    imgTwoFront: Joi.string(),
-                    imgTwoBack: Joi.string(),
-                    imgThreeFront: Joi.string(),
-                    imgThreeBack: Joi.string(),
-                    imgFourFront: Joi.string(),
-                    imgFourBack: Joi.string()
+                    imgTwoFront: Joi.optional(),
+                    imgTwoBack: Joi.optional(),
+                    imgThreeFront: Joi.optional(),
+                    imgThreeBack: Joi.optional(),
+                    imgFourFront: Joi.optional(),
+                    imgFourBack: Joi.optional()
                 }
             },
             cors: {

@@ -15,16 +15,16 @@
             <h3 class="panel-title">Sort By</h3>
         </div>
         <div class="panel-body">
-            <label>Order results by:</label>
-                <select name="selectedSort" id="selectedSort" ng-model="Order.selectedSort">
-                    <option value="id">Order ID (ascending)</option>
-                    <option value="-id">Order ID (descending)</option>
+            <label>Product results by:</label>
+                <select name="selectedSort" id="selectedSort" ng-model="Product.selectedSort">
+                    <option value="id">Product ID (ascending)</option>
+                    <option value="-id">Product ID (descending)</option>
                     <option value="-created">Created (most recent)</option>
                     <option value="created">Created (ascending)</option>
                     <option value="-updated">Updated (descending)</option>
                     <option value="updated">Updated (ascending)</option>
-                    <option value="orderTotal">Order Total (low to high)</option>
-                    <option value="-orderTotal">Order Total (high to low)</option>
+                    <option value="productTotal">Product Total (low to high)</option>
+                    <option value="-productTotal">Product Total (high to low)</option>
                     <option value="-status">Status</option>
                 </select>
             </select>
@@ -36,7 +36,7 @@
         </div>
         <div class="panel-body">
             <label>Now Showing:</label>
-                <select name="pageSize" id="pageSize" ng-model="Order.pageSize">
+                <select name="pageSize" id="pageSize" ng-model="Product.pageSize">
                     <option value="5">5</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
@@ -61,23 +61,25 @@
           <table border="1" class="mobile-table">
             <thead class="cf">
               <tr>
-                <th><strong>Order ID</strong></th>
-                <th><strong>Customer</strong></th>
-                <th><strong>Order Details</strong></th>
-                <th><strong>Order Total</strong></th>
+                <th><strong>Product ID</strong></th>
+                <th><strong>Name</strong></th>
+                <th><strong>Price</strong></th>
+                <th><strong>Stock Qty</strong></th>
+                <th><strong>Featured?</strong></th>
                 <th><strong>Last Updated</strong></th>
-                <th><strong>Status</strong></th>
+                <th><strong>View/Edit</strong></th>
               </tr>
             </thead>
           <tbody>
             <!--START REPEAT-->
-            <tr dir-paginate="order in Order.orders | filter: query | orderBy: Order.selectedSort | itemsPerPage: Order.pageSize" >
-              <td data-title="Order ID"><a ui-sref="order({ orderId: order.id })">{{order.id}}</a></td>
-              <td data-title="Customer">{{order.customerFullName}}</td>
-              <td data-title="Order Details">{{order.orderDetails}}</td>
-              <td data-title="Order Total">{{order.orderTotal | number}} RP</td>
-              <td data-title="Last Updated">{{order.updated | jsonDate | date: 'medium'}}</td>
-              <td data-title="Status" ng-class="{'green': order.status === 'processing', 'blue': order.status === 'completed' , 'red': order.status === 'canceled'}"><a ui-sref="order({ orderId: order.id })">{{order.status}}</a></td>
+            <tr dir-paginate="product in Product.products | filter: query | orderBy: Product.selectedSort | itemsPerPage: Product.pageSize" >
+              <td data-title="Product ID"><a ui-sref="product({ id: product.id })">{{product.id}}</a></td>
+              <td data-title="Name">{{product.name}}</td>
+              <td data-title="Price">{{product.price}}</td>
+              <td data-title="Quantity">{{product.stockQty}}</td>
+              <td data-title="Featured?">{{product.featured}}</td>
+              <td data-title="Last Updated">{{product.updatedAt | jsonDate | date: 'medium'}}</td>
+              <td data-title="View/Edit"><a ui-sref="product({ id: product.id })"><span class="glyphicon glyphicon-edit"></span></a></td>
             </tr>
             <!--END REPEAT-->
           </tbody>

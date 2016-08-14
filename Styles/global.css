@@ -1604,7 +1604,7 @@ tr td:hover {
 	color: #0078e7;
 	cursor: pointer;
 }
-input[type=text], input[type=email], input[type=password], textarea {
+input[type=text], input[type=email], input[type=password], input[type=number], textarea {
 	width: 100%;
 	padding: .5em .6em;
 	display: inline-block;
@@ -1694,7 +1694,7 @@ input[type=submit]:active {
 }
 select {
 	display: inline-block;
-	height: 36px;
+	height: 30px;
 	margin: 0;
 	background: #fff;
 	border: 1px solid #d9d9d9;

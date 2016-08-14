@@ -11,7 +11,7 @@
     </div>
     <div class="product-col-12">
         <form class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="orderForm" novalidate>
-            <h2>Customer Info</h2>
+            <h2>View/Edit</h2>
             <div class="lineGroup three_column_1">
                 <label for="customerFullName" class="sublabel"> *Full Name:</label>
                 <input id="customerFullName" name="customerFullName" ng-model="Order.currentOrder.customerFullName" type="text" value="" class="formTextfield_Large" title="Please enter your full name..." ng-disabled="Order.readOnly" required>
@@ -79,4 +79,3 @@
         </div>
     </div>
 </div>
-<script src="Scripts/magnify.js" type="text/javascript"></script>

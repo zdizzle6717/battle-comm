@@ -6,7 +6,7 @@ var browserify = require("browserify");
 var stringify = require("stringify");
 
 /* Build Main Store App*/
-browserify("App/app.js")
+browserify("App-Store/app.js")
 .transform(stringify, {
       appliesTo: { includeExtensions: ['.html', '.php'] }
     })

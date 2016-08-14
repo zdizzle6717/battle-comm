@@ -3,9 +3,9 @@
     <div class="product-col-6">
         <div class="magnify">
         	<!-- This is the magnifying glass which will contain the original/large version -->
-        	<div class="large" style="background: url('{{Product.product.imageOne.imgFrontUrl}}') no-repeat;"></div>
+        	<div class="large" style="background: url('images/uploads/{{Product.product.imageOne.imgFrontUrl}}') no-repeat;"></div>
         	<!-- This is the small image -->
-        	<img ng-src="{{Product.product.imageOne.imgFrontUrl}}" alt="Table Top Product" class="img-responsive product-img small">
+        	<img ng-src="images/uploads/{{Product.product.imageOne.imgFrontUrl}}" alt="Table Top Product" class="img-responsive product-img small">
         </div>
     </div>
     <div class="product-col-6">
