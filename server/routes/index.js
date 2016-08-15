@@ -33,7 +33,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['http://www.battle-comm.net/']
+                origin: ['http://www.beta.battle-comm.net/']
             }
         },
         method: 'GET',
@@ -46,7 +46,7 @@ module.exports = [
             description: 'Get all products',
             notes: 'Get all products',
             cors: {
-                origin: ['http://www.battle-comm.net/']
+                origin: ['http://www.beta.battle-comm.net/']
             }
         },
         method: 'GET',
@@ -88,7 +88,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['http://www.battle-comm.net/']
+                origin: ['http://www.beta.battle-comm.net/']
             }
         },
         method: 'POST',
@@ -133,7 +133,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['http://www.battle-comm.net/']
+                origin: ['http://www.beta.battle-comm.net/']
             }
         },
         method: 'PUT',
@@ -151,7 +151,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['http://www.battle-comm.net/']
+                origin: ['http://www.beta.battle-comm.net/']
             }
         },
         method: 'DELETE',
