@@ -46,7 +46,7 @@
 
             <div class="lineGroup full_width">
                 <label for="tags" class="sublabel"> Tags:</label>
-                <input id="tags" name="tags" ng-model="Product.currentProduct.tags" type="text" class="formTextfield_Large" placeholder="Comma separated tags...">
+                <input id="tags" name="tags" ng-model="Product.currentProduct.tags" type="text" class="formTextfield_Large" placeholder="Comma separated tags..." required>
             </div>
             <div class="lineGroup full_width">
                 <label for="description" class="sublabel"> *Description:</label>
