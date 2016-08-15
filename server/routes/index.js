@@ -33,7 +33,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['*']
+                origin: ['http://www.battle-comm.net/']
             }
         },
         method: 'GET',
@@ -46,7 +46,7 @@ module.exports = [
             description: 'Get all products',
             notes: 'Get all products',
             cors: {
-                origin: ['*']
+                origin: ['http://www.battle-comm.net/']
             }
         },
         method: 'GET',
@@ -66,7 +66,7 @@ module.exports = [
                     description: Joi.string().required(),
                     manufacturerId: Joi.string().required(),
                     gameSystem: Joi.string().required(),
-                    color: Joi.string(),
+                    color: Joi.optional(),
                     tags: Joi.string(),
                     category: Joi.string(),
                     stockQty: Joi.number().required(),
@@ -88,7 +88,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['*']
+                origin: ['http://www.battle-comm.net/']
             }
         },
         method: 'POST',
@@ -111,7 +111,7 @@ module.exports = [
                     description: Joi.string().required(),
                     manufacturerId: Joi.string().required(),
                     gameSystem: Joi.string().required(),
-                    color: Joi.string(),
+                    color: Joi.optional(),
                     tags: Joi.string(),
                     category: Joi.string(),
                     stockQty: Joi.number().required(),
@@ -133,7 +133,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['*']
+                origin: ['http://www.battle-comm.net/']
             }
         },
         method: 'PUT',
@@ -151,7 +151,7 @@ module.exports = [
                 }
             },
             cors: {
-                origin: ['*']
+                origin: ['http://www.battle-comm.net/']
             }
         },
         method: 'DELETE',
