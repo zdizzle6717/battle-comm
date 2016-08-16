@@ -43,7 +43,6 @@ RPStore/App-Admin/modules/main/constants/apiRoutes.js
 Connections
 dmxConnections
 server/config*
-server/index.js
 
 
 # SCSS
