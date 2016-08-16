@@ -64,6 +64,10 @@ function ProductController($rootScope, $state, $stateParams, AdminService, manuf
             AdminService.updateProduct($stateParams.id, data)
             .then(function(response) {
                 controller.currentProduct = response;
+                controller.currentProduct.displayStatus = response.displayStatus === true ? 'true' : 'false';
+                controller.currentProduct.new = response.new === true ? 'true' : 'false';
+                controller.currentProduct.featured = response.featured === true ? 'true' : 'false';
+                controller.currentProduct.onSale = response.onSale === true ? 'true' : 'false';
             });
         }
         else {

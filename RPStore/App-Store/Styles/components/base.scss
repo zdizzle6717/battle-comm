@@ -163,7 +163,8 @@
 
 /*----------------------------------------------------------------------------*/
 .add-cart-box {
-    display: block;
+    width: 100%;
+    display: table;
     position: relative;
 }
 .cart-mark {
@@ -282,6 +283,9 @@
 }
 .product .invisible {
     visibility: hidden
+}
+.rz-bubble.rz-limit {
+    display: none;
 }
 
 /*----------------------------------------------------------------------------*/

@@ -133,7 +133,8 @@
 /* 2. PRODUCT LIST */
 /*----------------------------------------------------------------------------*/
 .add-cart-box {
-  display: block;
+  width: 100%;
+  display: table;
   position: relative; }
 
 .cart-mark {
@@ -252,6 +253,9 @@
 
 .product .invisible {
   visibility: hidden; }
+
+.rz-bubble.rz-limit {
+  display: none; }
 
 /*----------------------------------------------------------------------------*/
 /* 3. PRODUCT LIST COLUMNS */
