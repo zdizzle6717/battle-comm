@@ -119,7 +119,4 @@ let products = {
 };
 
 
-
-module.exports = {
-    products
-};
+module.exports = products;

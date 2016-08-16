@@ -1,11 +1,11 @@
 'use strict';
 
-let api = require('./api');
+let products = require('./products');
+let productOrders = require('./productOrders');
 let Joi = require('joi');
 let models = require('../models');
 
 module.exports = [
-
 
     // Base Route
     {
@@ -39,7 +39,7 @@ module.exports = [
         },
         method: 'GET',
         path: '/api/products/{id}',
-        handler: api.products.get
+        handler: products.get
     },
     {
         config: {
@@ -53,7 +53,7 @@ module.exports = [
         },
         method: 'GET',
         path: '/api/products',
-        handler: api.products.getAll
+        handler: products.getAll
     },
     {
         config: {
@@ -96,7 +96,7 @@ module.exports = [
         },
         method: 'POST',
         path: '/api/products',
-        handler: api.products.create
+        handler: products.create
     },
     {
         config: {
@@ -142,7 +142,7 @@ module.exports = [
         },
         method: 'PUT',
         path: '/api/products/{id}',
-        handler: api.products.update
+        handler: products.update
     },
     {
         config: {
@@ -161,7 +161,127 @@ module.exports = [
         },
         method: 'DELETE',
         path: '/api/products/{id}',
-        handler: api.products.delete
+        handler: products.delete
+    },
+
+
+    // Product Orders
+    {
+        config: {
+            tags: ['api'],
+            description: 'Get one productOrder by id',
+            notes: 'Get one productOrder by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                }
+            },
+            cors: {
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with']
+            }
+        },
+        method: 'GET',
+        path: '/api/productOrders/{id}',
+        handler: productOrders.get
+    },
+    {
+        config: {
+            tags: ['api'],
+            description: 'Get all productOrders',
+            notes: 'Get all productOrders',
+            cors: {
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with']
+            }
+        },
+        method: 'GET',
+        path: '/api/productOrders',
+        handler: productOrders.getAll
+    },
+    {
+        config: {
+            tags: ['api'],
+            description: 'Add a new productOrder',
+            notes: 'Add a new productOrder',
+            validate: {
+                payload: {
+                    status: Joi.string().required(),
+                    orderDetails: Joi.string().required(),
+                    orderTotal: Joi.number().required(),
+                    CustomerId: Joi.number().required(),
+                    customerFullName: Joi.string().required(),
+                    customerEmail: Joi.string().email().required(),
+                    phone: Joi.optional(),
+                    shippingStreet: Joi.string().required(),
+                    shippingAppartment: Joi.string().required(),
+                    shippingCity: Joi.string().required(),
+                    shippingState: Joi.string().required(),
+                    shippingZip: Joi.string().required(),
+                    shippingCountry: Joi.string().required()
+                }
+            },
+            cors: {
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with']
+            }
+        },
+        method: 'POST',
+        path: '/api/productOrders',
+        handler: productOrders.create
+    },
+    {
+        config: {
+            tags: ['api'],
+            description: 'Update a productOrder by id',
+            notes: 'Update a productOrder by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+                    status: Joi.string().required(),
+                    orderDetails: Joi.string().required(),
+                    orderTotal: Joi.number().required(),
+                    CustomerId: Joi.number().required(),
+                    customerFullName: Joi.string().required(),
+                    customerEmail: Joi.string().email().required(),
+                    phone: Joi.optional(),
+                    shippingStreet: Joi.string().required(),
+                    shippingAppartment: Joi.string().required(),
+                    shippingCity: Joi.string().required(),
+                    shippingState: Joi.string().required(),
+                    shippingZip: Joi.string().required(),
+                    shippingCountry: Joi.string().required()
+                }
+            },
+            cors: {
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with']
+            }
+        },
+        method: 'PUT',
+        path: '/api/productOrders/{id}',
+        handler: productOrders.update
+    },
+    {
+        config: {
+            tags: ['api'],
+            description: 'Delete a productOrder by id',
+            notes: 'Delete a productOrder by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                }
+            },
+            cors: {
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with']
+            }
+        },
+        method: 'DELETE',
+        path: '/api/productOrders/{id}',
+        handler: productOrders.delete
     }
 
 ];
