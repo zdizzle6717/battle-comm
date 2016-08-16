@@ -15,7 +15,7 @@ function OrderListController($state, $rootScope, AdminService, $scope) {
                     controller.orders = orders;
                     controller.order = (orders[0] ? orders[0] : {});
                 });
-        $scope.apply();
+        $scope.$apply();
     });
 
     AdminService.getAllOrders()
@@ -23,7 +23,7 @@ function OrderListController($state, $rootScope, AdminService, $scope) {
                 controller.orders = orders;
                 controller.order = (orders[0] ? orders[0] : {});
             });
-            
+
     controller.viewOrder = function(id) {
         AdminService.getOrder(id)
             .then(function() {
