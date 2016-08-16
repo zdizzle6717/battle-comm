@@ -19,10 +19,10 @@
                 <select name="selectedSort" id="selectedSort" ng-model="Order.selectedSort">
                     <option value="id">Order ID (ascending)</option>
                     <option value="-id">Order ID (descending)</option>
-                    <option value="-created">Created (most recent)</option>
-                    <option value="created">Created (ascending)</option>
-                    <option value="-updated">Updated (descending)</option>
-                    <option value="updated">Updated (ascending)</option>
+                    <option value="-createdAt">Created (most recent)</option>
+                    <option value="createdAt">Created (ascending)</option>
+                    <option value="-updatedAt">Updated (descending)</option>
+                    <option value="updatedAt">Updated (ascending)</option>
                     <option value="orderTotal">Order Total (low to high)</option>
                     <option value="-orderTotal">Order Total (high to low)</option>
                     <option value="-status">Status</option>
@@ -76,7 +76,7 @@
               <td data-title="Customer">{{order.customerFullName}}</td>
               <td data-title="Order Details">{{order.orderDetails}}</td>
               <td data-title="Order Total">{{order.orderTotal | number}} RP</td>
-              <td data-title="Last Updated">{{order.updated | jsonDate | date: 'medium'}}</td>
+              <td data-title="Last Updated">{{order.updatedAt | jsonDate | date: 'medium'}}</td>
               <td data-title="Status" ng-class="{'green': order.status === 'processing', 'blue': order.status === 'completed' , 'red': order.status === 'canceled'}"><a ui-sref="order({ id: order.id })">{{order.status}}</a></td>
             </tr>
             <!--END REPEAT-->

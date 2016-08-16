@@ -31,10 +31,6 @@ module.exports = [
                 params: {
                     id: Joi.number().required()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'GET',
@@ -45,11 +41,7 @@ module.exports = [
         config: {
             tags: ['api'],
             description: 'Get all products',
-            notes: 'Get all products',
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
-            }
+            notes: 'Get all products'
         },
         method: 'GET',
         path: '/api/products',
@@ -88,10 +80,6 @@ module.exports = [
                     imgFourFront: Joi.optional(),
                     imgFourBack: Joi.optional()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'POST',
@@ -134,10 +122,6 @@ module.exports = [
                     imgFourFront: Joi.optional(),
                     imgFourBack: Joi.optional()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'PUT',
@@ -153,10 +137,6 @@ module.exports = [
                 params: {
                     id: Joi.number().required()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'DELETE',
@@ -175,10 +155,6 @@ module.exports = [
                 params: {
                     id: Joi.number().required()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'GET',
@@ -189,11 +165,7 @@ module.exports = [
         config: {
             tags: ['api'],
             description: 'Get all productOrders',
-            notes: 'Get all productOrders',
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
-            }
+            notes: 'Get all productOrders'
         },
         method: 'GET',
         path: '/api/productOrders',
@@ -220,10 +192,6 @@ module.exports = [
                     shippingZip: Joi.string().required(),
                     shippingCountry: Joi.string().required()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'POST',
@@ -254,10 +222,6 @@ module.exports = [
                     shippingZip: Joi.string().required(),
                     shippingCountry: Joi.string().required()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'PUT',
@@ -273,10 +237,6 @@ module.exports = [
                 params: {
                     id: Joi.number().required()
                 }
-            },
-            cors: {
-                origin: ['*'],
-                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         },
         method: 'DELETE',

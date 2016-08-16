@@ -15,7 +15,7 @@ server.connection({
     port: env.port,
     routes: {
         cors: {
-            origin: ['*']
+            origin: [env.cors.origin]
         }
     }
 });
