@@ -40,6 +40,7 @@ jspm_packages
 RPStore/Connections*
 RPStore/js/app.js
 RPStore/admin/js/app.js
+RPStore/App-Store/modules/main/constants/apiRoutes.js
 RPStore/App-Admin/modules/main/constants/apiRoutes.js
 Connections
 dmxConnections
