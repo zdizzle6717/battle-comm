@@ -12,7 +12,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
             controller: 'StoreController as Store'
         })
         .state('product', {
-            url: "/products/:productId",
+            url: "/products/:id",
             template: require('./views/product.php'),
             controller: 'ProductController as Product'
         })

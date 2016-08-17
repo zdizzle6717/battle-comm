@@ -32,9 +32,8 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
     });
 
     StoreService.getAllProducts()
-        .then(function(products) {
-            controller.products = products;
-            controller.product = (products[0] ? products[0] : {});
+        .then(function(response) {
+            controller.products = response;
         });
 
     controller.update = function() {

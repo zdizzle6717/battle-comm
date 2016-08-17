@@ -24,6 +24,9 @@ mod.run(require('./run'));
 // Config
 mod.config(require('./config'));
 
+// Routes
+mod.constant('apiRoutes', require('./constants/apiRoutes'));
+
 // Constants
 mod.constant('manufacturersSchema', require('./schema/manufacturers'));
 
