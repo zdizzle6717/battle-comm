@@ -7,7 +7,8 @@ const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 let models = require('./models');
-let env = require('./config/environmentVariables.js')
+let env = require('./config/environmentVariables.js');
+let routes = require('./routes');
 
 // Create Server
 const server = new Hapi.Server();
@@ -56,7 +57,10 @@ server.register([
     });
 
 // Routes
-server.route(require('./routes'));
+for (var route in routes) {
+    server.route(routes[route]);
+}
+
 
 models.sequelize.sync().then(function() {
     server.start((err) => {
