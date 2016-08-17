@@ -16,7 +16,7 @@ server.connection({
     port: env.port,
     routes: {
         cors: {
-            origin: [env.cors.origin]
+            origin: env.cors.origin
         }
     }
 });
@@ -33,7 +33,7 @@ const options = {
     }, {
         'name': 'test'
     }],
-    enableDocumentation: env.enableDocumentation
+    enableDocumentation: env.swagger.enableDocumentation
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )
