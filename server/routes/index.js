@@ -2,6 +2,7 @@
 
 let products = require('./products');
 let productOrders = require('./productOrders');
+let userLogins = require('./userLogins');
 let Joi = require('joi');
 let models = require('../models');
 
@@ -181,12 +182,12 @@ module.exports = [
                     status: Joi.string().required(),
                     orderDetails: Joi.string().required(),
                     orderTotal: Joi.number().required(),
-                    CustomerId: Joi.number().required(),
+                    userLoginId: Joi.number().required(),
                     customerFullName: Joi.string().required(),
                     customerEmail: Joi.string().email().required(),
                     phone: Joi.optional(),
                     shippingStreet: Joi.string().required(),
-                    shippingAppartment: Joi.string().required(),
+                    shippingAppartment: Joi.optional(),
                     shippingCity: Joi.string().required(),
                     shippingState: Joi.string().required(),
                     shippingZip: Joi.string().required(),
@@ -211,12 +212,12 @@ module.exports = [
                     status: Joi.string().required(),
                     orderDetails: Joi.string().required(),
                     orderTotal: Joi.number().required(),
-                    CustomerId: Joi.number().required(),
+                    userLoginId: Joi.number().required(),
                     customerFullName: Joi.string().required(),
                     customerEmail: Joi.string().email().required(),
                     phone: Joi.optional(),
                     shippingStreet: Joi.string().required(),
-                    shippingAppartment: Joi.string().required(),
+                    shippingAppartment: Joi.optional(),
                     shippingCity: Joi.string().required(),
                     shippingState: Joi.string().required(),
                     shippingZip: Joi.string().required(),
@@ -242,6 +243,28 @@ module.exports = [
         method: 'DELETE',
         path: '/api/productOrders/{id}',
         handler: productOrders.delete
-    }
+    },
+
+
+    // User Logins
+    {
+        config: {
+            tags: ['api'],
+            description: 'Patch a User Login by id',
+            notes: 'Patch a User Login by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+                    user_points: Joi.number().required(),
+                }
+            }
+        },
+        method: 'PATCH',
+        path: '/api/userLogins/{id}',
+        handler: userLogins.updatePartial
+    },
+
 
 ];
