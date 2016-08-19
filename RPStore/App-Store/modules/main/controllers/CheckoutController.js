@@ -9,7 +9,7 @@ function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutSe
     controller.completeOrder = completeOrder;
     controller.order = {};
     controller.player = {};
-    controller.total = orderDetails.orderTotal
+    controller.total = orderDetails.orderTotal;
 
     init();
 
@@ -21,7 +21,7 @@ function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutSe
             .then(function(player) {
                 controller.player.id = player.id;
                 controller.player.user_points = player.user_points;
-                controller.order.customerId = player.id;
+                controller.order.userLoginId = player.id;
             });
         if (angular.equals({}, check)) {
             $state.go('products');
@@ -29,21 +29,31 @@ function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutSe
     }
 
     function completeOrder(info) {
-        info.status = "processing";
         CheckoutService.add(info);
         info = CheckoutService.get();
-        info.customerId = controller.player.id;
+        info.status = "processing";
+        info.userLoginId = +controller.player.id;
+        let playerPoints = {
+            user_points: controller.player.user_points - info.orderTotal
+        };
         if (controller.player.user_points < info.orderTotal) {
             alert('You do not have have enough Reward Points for this purchase.');
             $state.go('cart');
         } else {
-            controller.player.user_points = controller.player.user_points - info.orderTotal;
-            StoreService.updatePlayer(controller.player);
             StoreService.createOrder(info)
                 .then(function(response) {
-                    return response;
+                    StoreService.updatePlayer(playerPoints, controller.player.id)
+                    .then(function(response) {
+                        controller.player.user_points = playerPoints.user_points;
+                        $state.go('orderSuccess');
+                    })
+                    .catch(function(response) {
+                        console.log(response);
+                    });
+                })
+                .catch(function(response) {
+                    console.log(response);
                 });
-            $state.go('orderSuccess');
         }
     }
 }

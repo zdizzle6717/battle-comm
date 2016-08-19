@@ -2,7 +2,7 @@
     <h2>Order ID: {{Order.currentOrder.id}}</h2>
     <div class="product-col-6">
         <h3>Customer: {{Order.currentOrder.customerFullName}}</h3>
-        <h3>Customer ID: {{Order.currentOrder.customerId}}</h3>
+        <h3>Customer ID: {{Order.currentOrder.userLoginId}}</h3>
         <h3>Order Total: {{Order.currentOrder.orderTotal}} RP</h3>
     </div>
     <div class="product-col-6">
@@ -57,10 +57,17 @@
     </div>
 </div>
 <div class="product-col-3 single-product">
+    <div class="panel panel-default sidebar-menu" >
+        <div class="panel-body" style="text-align:center;">
+            <button ng-click="Order.edit()" ng-if="Order.readOnly" class="btn btn-to-cart" type="button">Edit Details</button>
+            <button ng-click="Order.save(Order.currentOrder, orderForm)" ng-if="!Order.readOnly" class="btn btn-to-cart" type="submit">Save Changes</button>
+            <button ng-click="Order.complete(Order.currentOrder)" ng-if="Order.readOnly" class="btn btn-to-cart" type="button">Ship & Complete</button>
+        </div>
+    </div>
     <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
             <h3 class="panel-title">Current Statues</h3>
-            <select name="statusSelect" id="statusSelect" ng-model="Order.currentOrder.status">
+            <select name="statusSelect" id="statusSelect" ng-model="Order.currentOrder.status" ng-disabled="Order.readOnly">
               <option value="">---Please select---</option>
               <option value="processing">Processing</option>
               <option value="canceled">Cancel</option>
@@ -69,13 +76,6 @@
         </div>
         <div class="panel-body">
             Updated: {{Order.currentOrder.updated | jsonDate | date: 'medium'}}
-        </div>
-    </div>
-    <div class="panel panel-default sidebar-menu" >
-        <div class="panel-body" style="text-align:center;">
-            <button ng-click="Order.edit()" ng-if="Order.readOnly" class="btn btn-to-cart" type="button">Edit Details</button>
-            <button ng-click="Order.save(Order.currentOrder, orderForm)" class="btn btn-to-cart" type="submit">Save Changes</button>
-            <button ng-click="Order.complete(Order.currentOrder)" ng-if="Order.readOnly" class="btn btn-to-cart" type="button">Ship & Complete</button>
         </div>
     </div>
 </div>

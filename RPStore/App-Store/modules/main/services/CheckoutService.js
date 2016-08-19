@@ -23,7 +23,7 @@ function CheckoutService($http, $stateParams) {
     };
 
     Service.add = function(data) {
-        Service.order.customer = data;
+        angular.merge(Service.order, data);
     };
 
     Service.get = function() {

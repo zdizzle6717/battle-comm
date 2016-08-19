@@ -7,9 +7,7 @@ function StoreService($http, $stateParams, apiRoutes) {
 
     Service.getProduct = getProduct;
     Service.getAllProducts = getAllProducts;
-    Service.createProduct = createProduct;
     Service.updateProduct = updateProduct;
-    Service.removeProduct = removeProduct;
     Service.getPlayer = getPlayer;
     Service.updatePlayer = updatePlayer;
     Service.createOrder = createOrder;
@@ -44,20 +42,6 @@ function StoreService($http, $stateParams, apiRoutes) {
             });
     }
 
-    function createProduct(data) {
-        let args = {
-            method: 'POST',
-            url: routes.products.create,
-            data: cleanData(data)
-        };
-
-        return $http(args)
-            .then((response) => {
-                let product = response.data;
-                return product;
-            });
-    }
-
     function updateProduct(id, data) {
         let args = {
             method: 'PUT',
@@ -72,27 +56,8 @@ function StoreService($http, $stateParams, apiRoutes) {
             });
     }
 
-    function removeProduct(id, data) {
-        let args = {
-            method: 'DELETE',
-            url: routes.products.remove + id,
-            data: data
-        };
 
-        return $http(args)
-            .then((response) => {
-                let product = response.data;
-                return product;
-            });
-    }
-
-    function cleanData(obj) {
-        let newData = angular.copy(obj);
-        delete newData.id;
-        delete newData.createdAt;
-        delete newData.updatedAt;
-        return newData;
-    }
+    // Players
 
     function getPlayer() {
         let args = {
@@ -107,12 +72,11 @@ function StoreService($http, $stateParams, apiRoutes) {
             });
     }
 
-    function updatePlayer(data) {
+    function updatePlayer(data, id) {
         let args = {
-            method: 'PUT',
-            url: 'Connections/updatePlayer.php',
-            data: data,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            method: 'PATCH',
+            url: routes.players.update + id,
+            data: data
         };
 
         return $http(args)
@@ -122,27 +86,14 @@ function StoreService($http, $stateParams, apiRoutes) {
             });
     }
 
-    function createProduct(data) {
-        let args = {
-            method: 'PUT',
-            url: 'Connections/createProduct.php',
-            data: data,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        };
 
-        return $http(args)
-            .then((response) => {
-                let product = response.data;
-                return product;
-            });
-    }
+    // Orders
 
     function createOrder(data) {
         let args = {
-            method: 'PUT',
-            url: 'Connections/createOrder.php',
-            data: data,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            method: 'POST',
+            url: routes.orders.create,
+            data: cleanData(data)
         };
 
         return $http(args)
@@ -150,6 +101,14 @@ function StoreService($http, $stateParams, apiRoutes) {
                 let order = response.data;
                 return order;
             });
+    }
+
+    function cleanData(obj) {
+        let newData = angular.copy(obj);
+        delete newData.id;
+        delete newData.createdAt;
+        delete newData.updatedAt;
+        return newData;
     }
 
     return Service;

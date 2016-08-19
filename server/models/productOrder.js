@@ -4,7 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     status: DataTypes.STRING,
     orderDetails: DataTypes.STRING,
     orderTotal: DataTypes.INTEGER,
-    CustomerId: DataTypes.INTEGER,
     customerFullName: DataTypes.STRING,
     customerEmail: DataTypes.STRING,
     phone: DataTypes.STRING,
@@ -17,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
         associate: function(models) {
-            ProductOrder.belongsTo(models.UserLogin, {as: 'Customer'});
+            ProductOrder.belongsTo(models.user_login);
         }
     }
   });
