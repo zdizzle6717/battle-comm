@@ -24,8 +24,7 @@
     "es6-promise": "^3.0.2",
     "es6-symbol": "^2.0.1",
     "es6-templates": "^0.2.2",
-    "es6-weak-map": "^1.0.2",
-    "node-sass": "^3.8.0"
+    "es6-weak-map": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -35,6 +34,9 @@
     "stringify": "^5.1.0"
   },
   "scripts": {
-    "style-store": "sass App-Store/Styles/app.scss css/app.css"
+    "build-store": "node build-store.js && npm run style-store",
+    "build-admin": "node build-admin.js && npm run style-admin",
+    "style-store": "sass App-Store/Styles/app.scss css/app.css",
+    "style-admin": "sass App-Store/Styles/app.scss admin/css/app.css"
   }
 }

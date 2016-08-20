@@ -1,0 +1,64 @@
+/* HEADER HEADER HEADER HEADER HEADER HEADER */
+.site_bg {
+    height: 100%;
+    min-width: 100%;
+    background: url("../images/BC_Web_BG.png") no-repeat scroll center top / 105% auto transparent;
+    position: absolute;
+    top: 58px;
+    z-index: -5;
+}
+.logo {
+    position: relative;
+    z-index: 1;
+    top: 69px;
+}
+.mobile-logo {
+    display: none;
+}
+.mobile-buttons {
+    display: none;
+}
+.my-profile-button {
+    float: left;
+    width: 50%;
+}
+.create-match-button {
+    float: left;
+    width: 50%;
+}
+.header.row {
+    min-width: 100%;
+    background: url("../images/BC_Web_NavBar.png") no-repeat scroll center center / 1192px transparent;
+    height: auto;
+    min-height: 200px;
+    font-size: 30px;
+    position: relative;
+    z-index: 1;
+    top: -72px;
+}
+.header_mobile.row {
+    display: none;
+    min-width: 100%;
+    background: url('../images/BC_Web_TopBar.png') repeat-x;
+    height: 165px;
+    font-size: 30px;
+    position: relative;
+    top: 0;
+    z-index: 1;
+}
+.nav.placeholder {
+    min-width: 100%;
+    background: url("../images/BC_Web_TopBar.png") repeat-x scroll 0 0 transparent;
+    height: 61px;
+    position: relative;
+    z-index: -10;
+    top: 0;
+}
+.nav.row {
+    min-width: 100%;
+    background: url("../images/BC_Web_TopBar.png") repeat-x scroll 0 0 transparent;
+    height: 61px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+}

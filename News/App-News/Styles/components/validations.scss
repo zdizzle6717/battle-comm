@@ -1,0 +1,48 @@
+/* VALIDATION */
+input.ng-touched.ng-invalid {
+    border: 1px solid red;
+}
+input.ng-touched.ng-valid {
+    border: 1px dotted green;
+}
+button:disabled {
+    opacity: 0.7;
+    border: 1px solid gray;
+}
+input {
+    transition: all 250ms;
+}
+input:not([type]):disabled,
+input[type="color"]:disabled,
+input[type="date"]:disabled,
+input[type="datetime"]:disabled,
+input[type="datetime-local"]:disabled,
+input[type="email"]:disabled,
+input[type="email"]:disabled,
+input[type="month"]:disabled,
+input[type="number"]:disabled,
+input[type="password"]:disabled,
+input[type="search"]:disabled,
+input[type="tel"]:disabled,
+input[type="text"]:disabled,
+input[type="time"]:disabled,
+input[type="url"]:disabled,
+input[type="week"]:disabled,
+select:disabled,
+textarea:disabled {
+    background-color: rgb(235, 235, 228);
+    box-shadow: none;
+    background: none;
+    border: none;
+    font-weight: bold;
+    transition: all 250ms;
+}
+.green {
+    background: #B1FFB1 !important;
+}
+.blue {
+    background: #B9C5FF !important;
+}
+.red {
+    background: #FFD2D2 !important;
+}

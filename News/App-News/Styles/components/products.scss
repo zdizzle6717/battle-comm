@@ -1,0 +1,188 @@
+/* PRODUCT LIST */
+
+.add-cart-box {
+    width: 100%;
+    display: table;
+    position: relative;
+}
+.cart-mark {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    background: transparent;
+}
+.product-box {
+    width: calc(33.33333333% - 30px);
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.product {
+    background: white;
+    border: solid 1px #e6e6e6;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .4);
+    border-radius: 4px;
+}
+.product a.invisible {
+    min-height: 300px
+}
+.product .text {
+    min-height: 180px;
+    padding: 0 10px 10px 10px;
+    text-align: center;
+}
+.product .text h3 {
+    font-size: 18px;
+    font-weight: 700;
+    height: 39.6px;
+    text-align: center;
+    overflow: hidden
+}
+.product .text h3 a {
+    color: #555;
+    cursor: pointer;
+}
+.product .text p.price {
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300
+}
+.product .text p.price del {
+    color: #999
+}
+.product .text .buttons {
+    clear: both;
+    text-align: center
+}
+.product .text .buttons .btn {
+    margin-bottom: 10px
+}
+.product .back, .product .flip-container, .product .front {
+    width: 100%
+}
+.product .flipper {
+    backface-visibility: hidden;
+    transition: .6s;
+    transform-style: preserve-3d;
+    position: relative
+}
+.product .back, .product .front {
+    backface-visibility: hidden;
+    transition: .6s;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+.product .front {
+    z-index: 2;
+    transform: rotateY(0deg)
+}
+.product .back {
+    transform: rotateY(-180deg)
+}
+.product:hover .back {
+    transform: rotateY(0deg);
+    z-index: 2;
+    cursor: pointer;
+}
+.product:hover .front {
+    transform: rotateY(180deg);
+    z-index: 1;
+    cursor: pointer;
+}
+.product .invisible {
+    visibility: hidden
+}
+.rz-bubble.rz-limit {
+    display: none;
+}
+
+
+
+/* 3. PRODUCT LIST COLUMNS */
+
+.product-col-3 {
+    width: calc(25% - 30px);
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.product-col-4 {
+    width: calc(33.33333% - 30px);
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.product-col-6 {
+    width: calc(50% - 30px);
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.product-col-9 {
+    width: calc(75% - 30px);
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.product-col-12 {
+    width: calc(100% - 30px);
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.single-product {}
+
+
+
+/* 4. PRODUCT SINGLE */
+
+.product-title {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.product-description-header {
+    text-decoration: uppercase;
+    font-size: 24px;
+}
+.single-product .product-img {
+    width: 100%;
+    border-radius: 4px;
+}
+.btn-to-cart {
+    font-size: 18px;
+    background: black;
+    color: white;
+    width: 100%;
+    text-transform: uppercase;
+}
+.btn-to-cart:active {
+    width: calc(98% - 4px);
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 2px;
+    margin-bottom: 7px;
+    padding: 4px 10px;
+}

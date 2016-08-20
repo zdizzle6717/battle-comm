@@ -1,0 +1,15 @@
+// Logo
+.store-logo {
+    margin-left: 24px;
+    margin-bottom: 3px;
+    max-width: 420px;
+    width: 100%;
+}
+.store-logo:hover {
+    opacity: .9;
+}
+.store-logo:active {
+    margin-top: 2px;
+    margin-bottom: 1px;
+    opacity: .85;
+}
