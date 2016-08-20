@@ -5,7 +5,7 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
     let controller = this;
 
     controller.searchQuery = '';
-    controller.selectedSort = 'updatedAt';
+    controller.selectedSort = '-updatedAt';
     controller.pageSize = '15';
     controller.priceFilter = 'showit';
     controller.currentMNU = {};
@@ -62,7 +62,7 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
 
     controller.reset = function() {
         controller.searchQuery = '';
-        controller.selectedSort = 'updatedAt';
+        controller.selectedSort = '-updatedAt';
         controller.pageSize = '15';
         controller.priceFilter = 'showit';
         controller.currentMNU = {};
