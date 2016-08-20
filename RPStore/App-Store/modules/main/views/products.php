@@ -36,8 +36,8 @@
             <label>Order results by:</label>
                 <select name="selectedSort" id="selectedSort" ng-model="Store.selectedSort">
                     <option value="name">Name Alphabetical</option>
-                    <option value="-updated">Newest to Oldest</option>
-                    <option value="updated">Oldest to Newest</option>
+                    <option value="-updatedAt">Newest to Oldest</option>
+                    <option value="updatedAt">Oldest to Newest</option>
                     <option value="price">Price (low to high)</option>
                     <option value="-price">Price (high to low)</option>
                     <option value="category">Category Alphabetical</option>
@@ -116,6 +116,6 @@
         </div>
     </div>
     <div class="full_width right">
-        <dir-pagination-controls boundary-links="true" ></dir-pagination-controls>
+        <dir-pagination-controls boundary-links="true" on-page-change="Store.goTop()"></dir-pagination-controls>
     </div>
 </div>
