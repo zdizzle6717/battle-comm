@@ -36,7 +36,7 @@
   "scripts": {
     "build-store": "node build-store.js && npm run style-store",
     "build-admin": "node build-admin.js && npm run style-admin",
-    "style-store": "sass App-Store/Styles/app.scss Styles/app.css",
-    "style-admin": "sass App-Store/Styles/app.scss admin/Styles/app.css"
+    "style-store": "sass App-Store/Styles/app.scss css/app.css",
+    "style-admin": "sass App-Store/Styles/app.scss admin/css/app.css"
   }
 }

@@ -113,4 +113,3 @@
         </div>
     </div>
 </div>
-<script src="js/magnify.js" type="text/javascript"></script>

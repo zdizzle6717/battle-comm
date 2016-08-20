@@ -13,7 +13,7 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <title>BattleComm: Store</title>
     <link rel="stylesheet" type="text/css" media="screen, print" href="../../Styles/global.css">
     <link rel="stylesheet" type="text/css" media="screen, print" href="../../Styles/magnificent-popup/magnificent-popup.css">
-	<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/app.css">
+	<link rel="stylesheet" type="text/css" media="screen, print" href="../css/app.css">
     <script src="../../ScriptLibrary/AngularJS/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery.magnificant-popup.js"></script>
     <script type="text/javascript" src="../../ScriptLibrary/dmxDataBindings.js"></script>

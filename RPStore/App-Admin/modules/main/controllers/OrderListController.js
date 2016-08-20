@@ -7,14 +7,17 @@ function OrderListController($state, $rootScope, AdminService, $scope) {
     controller.pageSize = '20';
     controller.selectedSort = '-createdAt';
 
+    init();
+
     ///////////////////////////////
 
-    AdminService.getAllOrders()
+    function init() {
+        AdminService.getAllOrders()
             .then(function(orders) {
                 controller.orders = orders;
                 controller.order = (orders[0] ? orders[0] : {});
             });
-
+    }
 }
 
 module.exports = OrderListController;

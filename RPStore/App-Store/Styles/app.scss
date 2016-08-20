@@ -6,6 +6,14 @@
 
 // Components
 @import 'components/base';
+@import 'components/buttons';
+@import 'components/products';
+@import 'components/sidebar';
+@import 'components/validations';
+@import 'components/magnify';
+
+// Media
+@import 'media/queries';
 
 // Animation
 @import 'animations/animate';
