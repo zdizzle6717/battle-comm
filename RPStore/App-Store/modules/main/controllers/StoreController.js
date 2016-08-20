@@ -1,11 +1,11 @@
 'use strict';
 
-StoreController.$inject = ['$state', '$rootScope', 'ngCart', 'StoreService', 'manufacturersSchema', '$scope'];
-function StoreController($state, $rootScope, ngCart, StoreService, manufacturersSchema, $scope) {
+StoreController.$inject = ['$state', '$rootScope', 'ngCart', 'StoreService', 'manufacturersSchema', '$scope', '$anchorScroll'];
+function StoreController($state, $rootScope, ngCart, StoreService, manufacturersSchema, $scope, $anchorScroll) {
     let controller = this;
 
     controller.searchQuery = '';
-    controller.selectedSort = '-updated';
+    controller.selectedSort = 'updatedAt';
     controller.pageSize = '15';
     controller.priceFilter = 'showit';
     controller.currentMNU = {};
@@ -62,7 +62,7 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
 
     controller.reset = function() {
         controller.searchQuery = '';
-        controller.selectedSort = 'updated';
+        controller.selectedSort = 'updatedAt';
         controller.pageSize = '15';
         controller.priceFilter = 'showit';
         controller.currentMNU = {};
@@ -79,6 +79,10 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
           }
         };
         controller.update();
+  };
+
+  controller.goTop = function() {
+      $anchorScroll();
   };
 }
 
