@@ -1,13 +1,16 @@
 // Main View Animations
 .view.ng-enter {
-    animation: 250ms fade-in;
+    animation: 500ms fade-in;
     z-index: 0;
 }
 .view.ng-leave {
-    animation: 250ms fade-out;
+    animation: 500ms fade-out;
     z-index: 0;
 }
-.view-container {}
+.view-container {
+    
+}
+
 .view-frame.ng-enter,
 .view-frame.ng-leave {
     top: 0;

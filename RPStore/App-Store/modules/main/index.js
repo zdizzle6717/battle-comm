@@ -14,6 +14,7 @@ let mod = angular.module(moduleName, [
     require('angular-scroll'),
     require('angular-ui-mask'),
 
+    require('../libraries/loading'),
     require('../cart'),
     'rzModule'
 ]);

@@ -50,6 +50,7 @@ if (!WA_Auth_RulePasses("verifiedUser")){
                 <hr>
                 <br/>
                 <div ui-view class="view-frame"></div>
+				<div loading></div>
 
                 <div class="product-col-12">
                     <h1 style="font-size:12px;text-align:center;">Reward Point Store</h1>

@@ -11,7 +11,10 @@ let mod = angular.module(moduleName, [
     require('angular-sanitize'),
     require('angular-utils-pagination'),
     require('angular-scroll'),
-    require('angular-ui-mask')
+    require('angular-ui-mask'),
+
+    // Libraries
+    require('../libraries/loading')
 ]);
 
 // Run
