@@ -1,7 +1,7 @@
 'use strict';
 
-OrderController.$inject = ['$state', '$stateParams', 'AdminService'];
-function OrderController($state, $stateParams, AdminService) {
+OrderController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminService'];
+function OrderController($state, $stateParams, $rootScope, AdminService) {
     let controller = this;
 
     controller.currentOrder = {};
@@ -23,6 +23,10 @@ function OrderController($state, $stateParams, AdminService) {
         if (form.$valid) {
             controller.readOnly = true;
             AdminService.updateOrder($stateParams.id, data);
+            showAlert({
+                type: 'success',
+                message: 'This order was updated successfully.'
+            });
         }
         else {
             alert('Please make sure the form is valid')
@@ -32,7 +36,15 @@ function OrderController($state, $stateParams, AdminService) {
     function complete(data) {
         data.status = 'completed'
         AdminService.updateOrder($stateParams.id, data);
+        showAlert({
+            type: 'success',
+            message: 'The status of this order is now complete.'
+        });
         $state.go('orderList');
+    }
+
+    function showAlert(config) {
+        $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});
     }
 }
 

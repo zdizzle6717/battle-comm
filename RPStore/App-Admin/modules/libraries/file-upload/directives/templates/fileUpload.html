@@ -9,4 +9,5 @@
         ngf-validate="config"
         ngf-resize="{width: 530, height: 800}">Add file...
     </button>
+    <p class="required" ng-if="restrictions">{{validationMessage}}</p>
 </div>

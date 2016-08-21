@@ -29,8 +29,8 @@
                 <input id="shippingStreet" name="shippingStreet" ng-model="Order.currentOrder.shippingStreet" type="text" value="" class="formTextfield_Large" title="Please enter your address..." ng-disabled="Order.readOnly" required>
             </div>
             <div class="lineGroup four_column_1">
-                <label for="shippingApartment" class="sublabel"> Apt/Suite #:</label>
-                <input id="shippingApartment" name="shippingApartment" ng-model="Order.currentOrder.shippingApartment" type="text" value="" class="formTextfield_Large" title="Apartment #..." ng-disabled="Order.readOnly">
+                <label for="shippingAppartment" class="sublabel"> Apt/Suite #:</label>
+                <input id="shippingAppartment" name="shippingAppartment" ng-model="Order.currentOrder.shippingAppartment" type="text" value="" class="formTextfield_Large" title="Apartment #..." ng-disabled="Order.readOnly">
             </div>
             <div class="lineGroup two_column_1">
                 <label for="shippingCity" class="sublabel"> *City:</label>

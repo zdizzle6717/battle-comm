@@ -1,13 +1,22 @@
 /* VALIDATION */
-input.ng-touched.ng-invalid {
-    border: 1px solid red;
+.required {
+    &::before {
+        content: '*';
+        color: #e43838;
+        padding-right: 3px;
+    }
 }
-input.ng-touched.ng-valid {
-    border: 1px dotted green;
-}
-button:disabled {
-    opacity: 0.7;
-    border: 1px solid gray;
+
+input, textarea, select {
+    &.ng-touched {
+        &.ng-invalid {
+            border: 1px solid #e43838;
+        }
+
+        &.ng-valid {
+            border: 1px solid #71c592;
+        }
+    }
 }
 input {
     transition: all 250ms;
@@ -37,6 +46,12 @@ textarea:disabled {
     font-weight: bold;
     transition: all 250ms;
 }
+
+button:disabled {
+    opacity: 0.7;
+    border: 1px solid gray;
+}
+
 .green {
     background: #B1FFB1 !important;
 }

@@ -1,0 +1,14 @@
+<div class="notification-backdrop animate" ng-if="show">
+    <div class="delete-record-modal animate">
+        <div ng-transclude></div>
+        <h5 class="required">This product will be removed from the database.</h5>
+        <div class="full_width">
+            <div class="two_column_1">
+                <button class="btn" ng-click="closeModal()">Cancel</button>
+            </div>
+            <div class="two_column_1">
+                <button class="btn" ng-click="deleteProduct(id)">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

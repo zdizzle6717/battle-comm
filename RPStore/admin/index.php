@@ -58,6 +58,7 @@ include ($pathToFile. "/Templates/parts/header.php"); ?>
 			<br/>
 			<div ui-view class="view-frame"></div>
 			<div loading></div>
+			<div notification></div>
 
 			<div class="product-col-12">
 				<h1 style="font-size:12px;text-align:center;">Reward Point Store: Admin</h1>

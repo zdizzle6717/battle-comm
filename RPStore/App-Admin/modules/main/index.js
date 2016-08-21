@@ -15,7 +15,9 @@ let mod = angular.module(moduleName, [
     require('ng-file-upload'),
 
     // Libraries
-    require('../libraries/loading')
+    require('../libraries/loading'),
+    require('../libraries/notifications'),
+    require('../libraries/file-upload')
 ]);
 
 // Run
@@ -37,9 +39,8 @@ mod.controller('OrderController', require('./controllers/OrderController'));
 mod.controller('ProductListController', require('./controllers/ProductListController'));
 mod.controller('ProductController', require('./controllers/ProductController'));
 
-
 // Directives
-mod.directive('fileUpload', require('./directives/FileUpload'));
+mod.directive('deleteRecordModal', require('./directives/DeleteRecordModal'));
 
 // Filters
 mod.filter('jsonDate', require('./filters/jsonDate'));

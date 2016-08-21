@@ -46,6 +46,8 @@ Connections
 dmxConnections
 server/config*
 
+# Upload folders
+RPStore/images/uploads*
 
 # SCSS
 .sass-cache
