@@ -12,6 +12,7 @@ let mod = angular.module(moduleName, [
     require('angular-utils-pagination'),
     require('angular-scroll'),
     require('angular-ui-mask'),
+    require('ng-file-upload'),
 
     // Libraries
     require('../libraries/loading')
@@ -38,7 +39,7 @@ mod.controller('ProductController', require('./controllers/ProductController'));
 
 
 // Directives
-
+mod.directive('fileUpload', require('./directives/FileUpload'));
 
 // Filters
 mod.filter('jsonDate', require('./filters/jsonDate'));
@@ -46,6 +47,7 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 // Services
 mod.service('AdminService', require('./services/AdminService'));
+mod.service('FileService', require('./services/FileService'));
 
 
 

@@ -9,6 +9,10 @@
     "email": "zanselm5@gmail.com",
     "url": "http://www.zackanselm.com/"
   },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/zdizzle6717/battle-comm.git"
+  },
   "dependencies": {
     "angular": "^1.4.4",
     "angular-animate": "^1.4.7",
@@ -25,6 +29,7 @@
     "es6-symbol": "^2.0.1",
     "es6-templates": "^0.2.2",
     "es6-weak-map": "^1.0.2",
+    "ng-file-upload": "^12.0.4",
     "node-sass": "^3.8.0"
   },
   "devDependencies": {

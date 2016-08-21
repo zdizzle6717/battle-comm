@@ -1,5 +1,6 @@
 'use strict';
 
+let files = require('./files');
 let products = require('./products');
 let productOrders = require('./productOrders');
 let userLogins = require('./userLogins');
@@ -10,9 +11,6 @@ module.exports = [
 
     // Base Route
     {
-        config: {
-            tags: ['api'],
-        },
         method: 'GET',
         path: '/api/test',
         handler: function(req, res) {
@@ -22,8 +20,28 @@ module.exports = [
         }
     },
 
+    // File Upload
+    {
+        method: 'POST',
+        path: '/api/files',
+        config: {
+            payload: {
+                output: 'stream',
+                maxBytes: 209715200,
+                parse: true,
+                allow: 'multipart/form-data'
+            },
+            tags: ['api'],
+            description: 'Upload a new file',
+            notes: 'Upload a new file',
+        },
+        handler: files.create
+    },
+
     // Products
     {
+        method: 'GET',
+        path: '/api/products/{id}',
         config: {
             tags: ['api'],
             description: 'Get one product by id',
@@ -34,21 +52,21 @@ module.exports = [
                 }
             }
         },
-        method: 'GET',
-        path: '/api/products/{id}',
         handler: products.get
     },
     {
+        method: 'GET',
+        path: '/api/products',
         config: {
             tags: ['api'],
             description: 'Get all products',
             notes: 'Get all products'
         },
-        method: 'GET',
-        path: '/api/products',
         handler: products.getAll
     },
     {
+        method: 'POST',
+        path: '/api/products',
         config: {
             tags: ['api'],
             description: 'Add a new product',
@@ -83,11 +101,11 @@ module.exports = [
                 }
             }
         },
-        method: 'POST',
-        path: '/api/products',
         handler: products.create
     },
     {
+        method: 'PUT',
+        path: '/api/products/{id}',
         config: {
             tags: ['api'],
             description: 'Update a product by id',
@@ -125,11 +143,11 @@ module.exports = [
                 }
             }
         },
-        method: 'PUT',
-        path: '/api/products/{id}',
         handler: products.update
     },
     {
+        method: 'DELETE',
+        path: '/api/products/{id}',
         config: {
             tags: ['api'],
             description: 'Delete a product by id',
@@ -140,14 +158,14 @@ module.exports = [
                 }
             }
         },
-        method: 'DELETE',
-        path: '/api/products/{id}',
         handler: products.delete
     },
 
 
     // Product Orders
     {
+        method: 'GET',
+        path: '/api/productOrders/{id}',
         config: {
             tags: ['api'],
             description: 'Get one productOrder by id',
@@ -158,21 +176,21 @@ module.exports = [
                 }
             }
         },
-        method: 'GET',
-        path: '/api/productOrders/{id}',
         handler: productOrders.get
     },
     {
+        method: 'GET',
+        path: '/api/productOrders',
         config: {
             tags: ['api'],
             description: 'Get all productOrders',
             notes: 'Get all productOrders'
         },
-        method: 'GET',
-        path: '/api/productOrders',
         handler: productOrders.getAll
     },
     {
+        method: 'POST',
+        path: '/api/productOrders',
         config: {
             tags: ['api'],
             description: 'Add a new productOrder',
@@ -195,11 +213,11 @@ module.exports = [
                 }
             }
         },
-        method: 'POST',
-        path: '/api/productOrders',
         handler: productOrders.create
     },
     {
+        method: 'PUT',
+        path: '/api/productOrders/{id}',
         config: {
             tags: ['api'],
             description: 'Update a productOrder by id',
@@ -225,11 +243,11 @@ module.exports = [
                 }
             }
         },
-        method: 'PUT',
-        path: '/api/productOrders/{id}',
         handler: productOrders.update
     },
     {
+        method: 'DELETE',
+        path: '/api/productOrders/{id}',
         config: {
             tags: ['api'],
             description: 'Delete a productOrder by id',
@@ -240,14 +258,14 @@ module.exports = [
                 }
             }
         },
-        method: 'DELETE',
-        path: '/api/productOrders/{id}',
         handler: productOrders.delete
     },
 
 
     // User Logins
     {
+        method: 'PATCH',
+        path: '/api/userLogins/{id}',
         config: {
             tags: ['api'],
             description: 'Patch a User Login by id',
@@ -261,10 +279,7 @@ module.exports = [
                 }
             }
         },
-        method: 'PATCH',
-        path: '/api/userLogins/{id}',
         handler: userLogins.updatePartial
     },
-
 
 ];

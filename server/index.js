@@ -6,6 +6,7 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
+const hapiUploader = require('hapi-uploader');
 let models = require('./models');
 let env = require('./config/environmentVariables.js');
 let routes = require('./routes');
@@ -55,6 +56,20 @@ server.register([
             server.log(['start'], 'hapi-swagger interface loaded');
         }
     });
+
+server.register({
+    register: hapiUploader,
+    options: {
+        upload: {
+            path: './'
+        }
+    }
+}, (err) => {
+    if (err) {
+        console.log('Failed loading plugin', err);
+        process.exit(1)
+    }
+});
 
 // Routes
 for (var route in routes) {

@@ -66,6 +66,9 @@
             </div>
         </form>
     </fieldset>
+    <form name="testForm">
+        <div file-upload></div>
+    </form>
 </div>
 <div class="product-col-3 single-product">
     <div class="panel panel-default sidebar-menu" >
