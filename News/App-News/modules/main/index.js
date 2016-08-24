@@ -24,18 +24,12 @@ mod.run(require('./run'));
 mod.config(require('./config'));
 
 // Routes
-mod.constant('apiRoutes', require('./constants/apiRoutes'));
+mod.constant('API_ROUTES', require('./constants/apiRoutes'));
 
 // Constants
-mod.constant('manufacturers', require('./constants/manufacturers'));
-
 
 // Controllers
-mod.controller('OrderListController', require('./controllers/OrderListController'));
-mod.controller('OrderController', require('./controllers/OrderController'));
-mod.controller('ProductListController', require('./controllers/ProductListController'));
-mod.controller('ProductController', require('./controllers/ProductController'));
-
+mod.controller('NewsController', require('./controllers/NewsController'));
 
 // Directives
 
@@ -45,7 +39,7 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 
 // Services
-mod.service('AdminService', require('./services/AdminService'));
+// mod.service('NewsService', require('./services/NewsService'));
 
 
 
