@@ -12,7 +12,6 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>BattleComm: Store</title>
     <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/global.css">
-    <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/magnificent-popup/magnificent-popup.css">
     <link rel="stylesheet" type="text/css" media="screen, print" href="node_modules/angularjs-slider/dist/rzslider.min.css">
 	<link rel="stylesheet" type="text/css" media="screen, print" href="css/app.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
