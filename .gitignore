@@ -38,6 +38,7 @@ jspm_packages
 
 # Database Connections and Credentials
 News/App-News/modules/main/constants/apiRoutes.js
+News/js/app.js
 RPStore/Connections*
 RPStore/js/app.js
 RPStore/admin/js/app.js
