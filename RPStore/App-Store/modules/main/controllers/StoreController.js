@@ -36,7 +36,7 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
             controller.products = response;
         });
 
-    controller.update = function() {
+    controller.update = function(digest = true) {
         for (let i=0, len=controller.products.length; i<len ; i++) {
              if (controller.products[i].price >= controller.slider.min && controller.products[i].price <= controller.slider.max ) {
                  controller.products[i].filterVal = 'showit';
@@ -44,7 +44,9 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
                  controller.products[i].filterVal = 'hideit';
              }
          }
-         $scope.$apply();
+         if(digest) {
+             $rootScope.$apply();
+         }
     };
 
     controller.setMNU = function(manufacturer) {
@@ -69,16 +71,16 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
         controller.selectedMNU = {};
         controller.slider = {
           min: 0,
-          max: 10000,
+          max: 100000,
           options: {
             floor: 0,
-            ceil: 10000,
+            ceil: 100000,
             translate: function(value) {
               return value + ' RP';
             }
           }
         };
-        controller.update();
+        controller.update(false);
   };
 
   controller.goTop = function() {

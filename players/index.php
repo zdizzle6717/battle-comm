@@ -12,7 +12,6 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>BattleComm: {{loggedInPlayer.data[0].user_handle}}</title>
     <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/global.css">
-    <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/magnificent-popup/magnificent-popup.css">
     <link href="../Styles/customPlayer.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script>
@@ -55,21 +54,21 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 		<?php include '../Templates/parts/container-top.php'; ?>
             <?php include '../Templates/includes/user-navigation.php'; ?>
 
-<div class="two_column_1" style="padding-top:0px">	
+<div class="two_column_1" style="padding-top:0px">
 	<h3 style="font-size:1.5em;" >Welcome, {{loggedInPlayer.data[0].firstName}} {{loggedInPlayer.data[0].lastName}}</h3>
 </div>
-<div class="two_column_1" style="padding-top:0px">	
-    <h1 style="text-align:right; font-size:1.5em; margin:10px 0 10px;">{{loggedInPlayer.data[0].user_handle}}</h1>  
-</div>  
-      
-           
+<div class="two_column_1" style="padding-top:0px">
+    <h1 style="text-align:right; font-size:1.5em; margin:10px 0 10px;">{{loggedInPlayer.data[0].user_handle}}</h1>
+</div>
+
+
 <h2>Tournaments </h2>
 <div class="full_width">
     <div class="info">
     <button type="button" class="button-link" onclick="location.href='../tool/tourneyRegistration/index.php'">Register</button>
     <br/>for upcoming Tournaments.
     </div>
-    
+
                <h3>My Active Events</h3>
       <div class="mobile-table">
       <table border="1" class="mobile-table">
@@ -92,7 +91,7 @@ if (!WA_Auth_RulePasses("verifiedUser")){
           <td><a href="FactionAssignment.php?td={{tournament_id}}&rd={{tourney_round_id}}&gsi={{game_id}}&gs={{Game_session}}">Choose<br>
             Factions</a></td>
           <td><a href="submitscoreA.php?td={{tournament_id}}&rd={{tourney_round_id}}&gs={{Game_session}}&tbl={{table_id}}">Submit Results</a>
-            
+
           </td>
           <td><a href="scoreview.php?td={{tournament_id}}&rd={{tourney_round_id}}&gs={{Game_session}}&tbl={{table_id}}">View Results</a></td>
           <td><a href="tournamentResultDetails.php?td={{tournament_id}}">Tournament Overview</a></td>

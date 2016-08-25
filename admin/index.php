@@ -1,17 +1,27 @@
 <?php require_once( "../webassist/security_assist/helper_php.php" ); ?>
+<?php
+if (!WA_Auth_RulePasses("verifiedUser")){
+	WA_Auth_RestrictAccess("../loginA.php");
+}
+?>
 <!doctype html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>BattleComm: Home</title>
+<title>BattleComm: Admin Home</title>
     <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/global.css">
-    <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/magnificent-popup/magnificent-popup.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script><script type="text/javascript" src="../ScriptLibrary/dmxDataBindings.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script>
+    <script type="text/javascript" src="../ScriptLibrary/dmxDataBindings.js"></script>
     <script type="text/javascript" src="../ScriptLibrary/dmxDataSet.js"></script>
 <script type="text/javascript">
+/* dmxDataSet name "logged_in_player_full" */
+     jQuery.dmxDataSet(
+       {"id": "logged_in_player_full", "url": "/dmxDatabaseSources/logged_in_player_full.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
+     );
+/* END dmxDataSet name "logged_in_player_full" */
   /* dmxDataSet name "LoggedInUser" */
        jQuery.dmxDataSet(
          {"id": "LoggedInUser", "url": "../dmxDatabaseSources/loggedinPlayer.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
@@ -29,7 +39,7 @@
         <?php include '../Templates/parts/container-top.php'; ?>
         <!-- Begin User Level Navigation -->
         	<div id="PlayerNav">
-                <a href="/players/index.php">Player Home</a> | <a href="/players/mydashboard.php">My Dashboard</a> | 
+                <a href="/players/index.php">Player Home</a> | <a href="/players/mydashboard.php">My Dashboard</a> |
                 <?php if(WA_Auth_RulePasses("tourneyAdmin")){ // Begin Show Region ?>
                 <a href="../tool/index.php">Tournament Admin</a> |
                   <?php } // End Show Region ?>
@@ -38,7 +48,7 @@
                 <?php if(WA_Auth_RulePasses("systemAdmin")){ // Begin Show Region ?>
                   <a href="index.php"> System Administrator</a>
                   <?php } // End Show Region ?>
-                 | 
+                 |
                 <?php if(WA_Auth_RulePasses("ClubAdmin")){ // Begin Show Region ?>
                 <a href="../clubsAdmin/index.php">Club Admin</a>
                 <?php } // End Show Region ?>
@@ -46,7 +56,7 @@
 <!-- End User Level Navigation -->
 			<h2>Site Administration Tools</h2>
             <p>&nbsp;</p>
-            
+
            <p> <table width="90%" border="1">
         <tbody>
           <tr>
