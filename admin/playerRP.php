@@ -8,7 +8,7 @@ if (!WA_Auth_RulePasses("systemAdmin")){
 <?php require_once( "../webassist/security_assist/helper_php.php" ); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -19,7 +19,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -63,7 +63,6 @@ $totalRows_State = mysql_num_rows($State);
 <script type="text/javascript" src="../Scripts/mobile-toggle.js"></script>
 <script type="text/javascript" src="../Scripts/backtotop.js"></script>
 <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/global.css">
-<link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/magnificent-popup/magnificent-popup.css">
 <style type="text/css">
 #pointAdjust {
 	width: 100px;
@@ -73,6 +72,11 @@ $totalRows_State = mysql_num_rows($State);
 <script type="text/javascript" src="../ScriptLibrary/dmxDataSet.js"></script>
 <script type="text/javascript" src="../ScriptLibrary/dmxServerAction.js"></script>
 <script type="text/javascript">
+/* dmxDataSet name "logged_in_player_full" */
+     jQuery.dmxDataSet(
+       {"id": "logged_in_player_full", "url": "/dmxDatabaseSources/logged_in_player_full.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
+     );
+/* END dmxDataSet name "logged_in_player_full" */
 /* dmxDataSet name "LoggedInUser" */
        jQuery.dmxDataSet(
          {"id": "LoggedInUser", "url": "../dmxDatabaseSources/loggedinPlayer.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
@@ -138,7 +142,7 @@ function MM_callJS(jsStr) { //v2.0
                 <?php include ($pathToFile. "/Templates/includes/mobile-buttons.php"); ?>
             <?php } // End Show Region ?>
         </div>
-    </div>     
+    </div>
 		        <!-- Middle -->
         <div class="mids">
         	<div class="container_full_width_frames no_shadow no_background no_padding">
@@ -154,7 +158,7 @@ function MM_callJS(jsStr) { //v2.0
                         <div class="frame_center col">
 				<!-- Begin User Level Navigation -->
         	<div id="PlayerNav">
-                <a href="/players/index.php">Player Home</a> | <a href="/players/mydashboard.php">My Dashboard</a> | 
+                <a href="/players/index.php">Player Home</a> | <a href="/players/mydashboard.php">My Dashboard</a> |
                 <?php if(WA_Auth_RulePasses("tourneyAdmin")){ // Begin Show Region ?>
                 <a href="/tool/index.php">Tournament Admin</a> |
                   <?php } // End Show Region ?>
@@ -162,7 +166,7 @@ function MM_callJS(jsStr) { //v2.0
                 <?php if(WA_Auth_RulePasses("systemAdmin")){ // Begin Show Region ?>
                   <a href="/admin/index.php"> System Administrator</a>
                   <?php } // End Show Region ?>
-                 | 
+                 |
                 <?php if(WA_Auth_RulePasses("ClubAdmin")){ // Begin Show Region ?>
                 <a href="/clubsAdmin/index.php">Club Admin</a>
                 <?php } // End Show Region ?>
@@ -206,12 +210,12 @@ function MM_callJS(jsStr) { //v2.0
       <td><input name="submit" type="submit" id="submit" formmethod="POST" title="Edit Player" onClick="dmxDataBindingsAction('selectCurrent','repeat1',this)" value="Edit Player"></td>
       <td>&nbsp;</td>
     </tr>
-    
+
   </tbody>
 </table>
 </p>
             </div>
-            
+
  		                    </div>
                 </div>
                 <div class="frame_b row">
