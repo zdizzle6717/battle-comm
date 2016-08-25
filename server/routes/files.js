@@ -4,8 +4,8 @@ let fs = require('fs-extra');
 
 // Product Route Configs
 let files = {
-    create: function(req, res) {
-        let data = req.payload;
+    create: function(request, reply) {
+        let data = request.payload;
         if (data.file) {
             console.log(data.file);
             let name = data.file.hapi.filename;
@@ -19,23 +19,23 @@ let files = {
             data.file.pipe(file);
 
             data.file.on('end', function(err) {
-                let ret = {
+                let response = {
                     filename: data.file.hapi.filename,
                     headers: data.file.hapi.headers,
                     status: 200,
                     statusText: 'File uploaded successfully!'
                 };
-                res(JSON.stringify(ret));
+                reply(JSON.stringify(response));
             });
         }
         else {
-            let ret = {
+            let response = {
                 filename: data.file.hapi.filename,
                 headers: data.file.hapi.headers,
                 status: 400,
                 statusText: 'There was an error uploading your file. Max sure the dimensions are 800px by 530px.'
             };
-            res(JSON.stringify(ret));
+            reply(JSON.stringify(response));
         }
     }
 };

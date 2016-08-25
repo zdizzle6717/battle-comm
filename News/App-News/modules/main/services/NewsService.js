@@ -3,8 +3,8 @@
 NewsService.$inject = ['API_ROUTES', '$http'];
 function NewsService(API_ROUTES, $http) {
     let service = {
-        getPost: get,
-        getAllNews: getAll
+        get: get,
+        getAll: getAll
     };
 
     let routes = API_ROUTES.news;
@@ -13,22 +13,28 @@ function NewsService(API_ROUTES, $http) {
 
     ///////////////////////
 
-    function getPost(id) {
+    function get(id) {
         let args = {
             method: 'GET',
-            url: routes.get
+            url: routes.get + id
         };
 
-        $http();
+        return $http(args)
+        .then(function(response) {
+            return response.data;
+        });
     }
 
-    function getAllNews() {
+    function getAll() {
         let args = {
             method: 'GET',
             url: routes.getAll
         };
 
-        $http();
+        return $http(args)
+        .then(function(response) {
+            return response.data;
+        });
     }
 
 }

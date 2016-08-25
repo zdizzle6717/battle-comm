@@ -4,91 +4,91 @@ let models = require('../models');
 
 // Product Route Configs
 let productOrders = {
-    get: function(req, res) {
+    get: function(request, reply) {
         models.ProductOrder.find({
                 where: {
-                    id: req.params.id
+                    id: request.params.id
                 }
             })
-            .then(function(productOrder) {
-                if (productOrder) {
-                    res(productOrder).code(200);
+            .then(function(response) {
+                if (response) {
+                    reply(response).code(200);
                 }
                 else {
-                    res().code(404);
+                    reply().code(404);
                 }
 
             });
     },
-    getAll: function(req, res) {
+    getAll: function(request, reply) {
         models.ProductOrder.findAll()
             .then(function(products) {
-                res(products).code(200);
+                reply(products).code(200);
             });
     },
-    create: function(req, res) {
+    create: function(request, reply) {
         models.ProductOrder.create({
-            status: req.payload.status,
-            orderDetails: req.payload.orderDetails,
-            orderTotal: req.payload.orderTotal,
-            userLoginId: req.payload.userLoginId,
-            customerFullName: req.payload.customerFullName,
-            customerEmail: req.payload.customerEmail,
-            phone: req.payload.phone,
-            shippingStreet: req.payload.shippingStreet,
-            shippingAppartment: req.payload.shippingAppartment,
-            shippingCity: req.payload.shippingCity,
-            shippingState: req.payload.shippingState,
-            shippingZip: req.payload.shippingZip,
-            shippingCountry: req.payload.shippingCountry
+            status: request.payload.status,
+            orderDetails: request.payload.orderDetails,
+            orderTotal: request.payload.orderTotal,
+            userLoginId: request.payload.userLoginId,
+            customerFullName: request.payload.customerFullName,
+            customerEmail: request.payload.customerEmail,
+            phone: request.payload.phone,
+            shippingStreet: request.payload.shippingStreet,
+            shippingAppartment: request.payload.shippingAppartment,
+            shippingCity: request.payload.shippingCity,
+            shippingState: request.payload.shippingState,
+            shippingZip: request.payload.shippingZip,
+            shippingCountry: request.payload.shippingCountry
             })
-            .then(function(productOrder) {
-                res(productOrder).code(200);
+            .then(function(response) {
+                reply(response).code(200);
             });
     },
-    update: function(req, res) {
+    update: function(request, reply) {
         models.ProductOrder.find({
                 where: {
-                    id: req.params.id
+                    id: request.params.id
                 }
             })
-            .then(function(productOrder) {
-                if (productOrder) {
-                    productOrder.updateAttributes({
-                        status: req.payload.status,
-                        orderDetails: req.payload.orderDetails,
-                        orderTotal: req.payload.orderTotal,
-                        userLoginId: req.payload.userLoginId,
-                        customerFullName: req.payload.customerFullName,
-                        customerEmail: req.payload.customerEmail,
-                        phone: req.payload.phone,
-                        shippingStreet: req.payload.shippingStreet,
-                        shippingAppartment: req.payload.shippingAppartment,
-                        shippingCity: req.payload.shippingCity,
-                        shippingState: req.payload.shippingState,
-                        shippingZip: req.payload.shippingZip,
-                        shippingCountry: req.payload.shippingCountry
-                    }).then(function(productOrder) {
-                        res(productOrder).code(200);
+            .then(function(response) {
+                if (response) {
+                    response.updateAttributes({
+                        status: request.payload.status,
+                        orderDetails: request.payload.orderDetails,
+                        orderTotal: request.payload.orderTotal,
+                        userLoginId: request.payload.userLoginId,
+                        customerFullName: request.payload.customerFullName,
+                        customerEmail: request.payload.customerEmail,
+                        phone: request.payload.phone,
+                        shippingStreet: request.payload.shippingStreet,
+                        shippingAppartment: request.payload.shippingAppartment,
+                        shippingCity: request.payload.shippingCity,
+                        shippingState: request.payload.shippingState,
+                        shippingZip: request.payload.shippingZip,
+                        shippingCountry: request.payload.shippingCountry
+                    }).then(function(response) {
+                        reply(response).code(200);
                     });
                 }
                 else {
-                    res().code(404);
+                    reply().code(404);
                 }
             });
     },
-    delete: function(req, res) {
+    delete: function(request, reply) {
         models.ProductOrder.destroy({
                 where: {
-                    id: req.params.id
+                    id: request.params.id
                 }
             })
-            .then(function(productOrder) {
-                if (productOrder) {
-                    res().code(200);
+            .then(function(response) {
+                if (response) {
+                    reply().code(200);
                 }
                 else {
-                    res().code(404);
+                    reply().code(404);
                 }
             });
     }

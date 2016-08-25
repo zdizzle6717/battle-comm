@@ -4,115 +4,115 @@ let models = require('../models');
 
 // Product Route Configs
 let products = {
-    get: function(req, res) {
+    get: function(request, reply) {
         models.Product.find({
                 where: {
-                    id: req.params.id
+                    id: request.params.id
                 }
             })
-            .then(function(product) {
-                if (product) {
-                    res(product).code(200);
+            .then(function(response) {
+                if (response) {
+                    reply(response).code(200);
                 }
                 else {
-                    res().code(404);
+                    reply().code(404);
                 }
 
             });
     },
-    getAll: function(req, res) {
+    getAll: function(request, reply) {
         models.Product.findAll()
-            .then(function(products) {
-                res(products).code(200);
+            .then(function(response) {
+                reply(response).code(200);
             });
     },
-    create: function(req, res) {
+    create: function(request, reply) {
         models.Product.create({
-            SKU: req.payload.SKU,
-            name: req.payload.name,
-            price: req.payload.price,
-            description: req.payload.description,
-            manufacturerId: req.payload.manufacturerId,
-            gameSystem: req.payload.gameSystem,
-            color: req.payload.color,
-            tags: req.payload.tags,
-            category: req.payload.category,
-            stockQty: req.payload.stockQty,
-            inStock: req.payload.inStock,
-            filterVal: req.payload.filterVal,
-            displayStatus: req.payload.displayStatus,
-            featured: req.payload.featured,
-            new: req.payload.new,
-            onSale: req.payload.onSale,
-            imgAlt: req.payload.imgAlt,
-            imgOneFront: req.payload.imgOneFront,
-            imgOneBack: req.payload.imgOneBack,
-            imgTwoFront: req.payload.imgTwoFront,
-            imgTwoBack: req.payload.imgTwoBack,
-            imgThreeFront: req.payload.imgThreeFront,
-            imgThreeBack: req.payload.imgThreeBack,
-            imgFourFront: req.payload.imgFourFront,
-            imgFourBack: req.payload.imgFourBack
+            SKU: request.payload.SKU,
+            name: request.payload.name,
+            price: request.payload.price,
+            description: request.payload.description,
+            manufacturerId: request.payload.manufacturerId,
+            gameSystem: request.payload.gameSystem,
+            color: request.payload.color,
+            tags: request.payload.tags,
+            category: request.payload.category,
+            stockQty: request.payload.stockQty,
+            inStock: request.payload.inStock,
+            filterVal: request.payload.filterVal,
+            displayStatus: request.payload.displayStatus,
+            featured: request.payload.featured,
+            new: request.payload.new,
+            onSale: request.payload.onSale,
+            imgAlt: request.payload.imgAlt,
+            imgOneFront: request.payload.imgOneFront,
+            imgOneBack: request.payload.imgOneBack,
+            imgTwoFront: request.payload.imgTwoFront,
+            imgTwoBack: request.payload.imgTwoBack,
+            imgThreeFront: request.payload.imgThreeFront,
+            imgThreeBack: request.payload.imgThreeBack,
+            imgFourFront: request.payload.imgFourFront,
+            imgFourBack: request.payload.imgFourBack
             })
-            .then(function(product) {
-                res(product).code(200);
+            .then(function(response) {
+                reply(product).code(200);
             });
     },
-    update: function(req, res) {
+    update: function(request, reply) {
         models.Product.find({
                 where: {
-                    id: req.params.id
+                    id: request.params.id
                 }
             })
-            .then(function(product) {
-                if (product) {
+            .then(function(response) {
+                if (response) {
                     product.updateAttributes({
-                        SKU: req.payload.SKU,
-                        name: req.payload.name,
-                        price: req.payload.price,
-                        description: req.payload.description,
-                        manufacturerId: req.payload.manufacturerId,
-                        gameSystem: req.payload.gameSystem,
-                        color: req.payload.color,
-                        tags: req.payload.tags,
-                        category: req.payload.category,
-                        stockQty: req.payload.stockQty,
-                        inStock: req.payload.inStock,
-                        filterVal: req.payload.filterVal,
-                        displayStatus: req.payload.displayStatus,
-                        featured: req.payload.featured,
-                        new: req.payload.new,
-                        onSale: req.payload.onSale,
-                        imgAlt: req.payload.imgAlt,
-                        imgOneFront: req.payload.imgOneFront,
-                        imgOneBack: req.payload.imgOneBack,
-                        imgTwoFront: req.payload.imgTwoFront,
-                        imgTwoBack: req.payload.imgTwoBack,
-                        imgThreeFront: req.payload.imgThreeFront,
-                        imgThreeBack: req.payload.imgThreeBack,
-                        imgFourFront: req.payload.imgFourFront,
-                        imgFourBack: req.payload.imgFourBack
-                    }).then(function(product) {
-                        res(product).code(200);
+                        SKU: request.payload.SKU,
+                        name: request.payload.name,
+                        price: request.payload.price,
+                        description: request.payload.description,
+                        manufacturerId: request.payload.manufacturerId,
+                        gameSystem: request.payload.gameSystem,
+                        color: request.payload.color,
+                        tags: request.payload.tags,
+                        category: request.payload.category,
+                        stockQty: request.payload.stockQty,
+                        inStock: request.payload.inStock,
+                        filterVal: request.payload.filterVal,
+                        displayStatus: request.payload.displayStatus,
+                        featured: request.payload.featured,
+                        new: request.payload.new,
+                        onSale: request.payload.onSale,
+                        imgAlt: request.payload.imgAlt,
+                        imgOneFront: request.payload.imgOneFront,
+                        imgOneBack: request.payload.imgOneBack,
+                        imgTwoFront: request.payload.imgTwoFront,
+                        imgTwoBack: request.payload.imgTwoBack,
+                        imgThreeFront: request.payload.imgThreeFront,
+                        imgThreeBack: request.payload.imgThreeBack,
+                        imgFourFront: request.payload.imgFourFront,
+                        imgFourBack: request.payload.imgFourBack
+                    }).then(function(response) {
+                        reply(response).code(200);
                     });
                 }
                 else {
-                    res().code(404);
+                    reply().code(404);
                 }
             });
     },
-    delete: function(req, res) {
+    delete: function(request, reply) {
         models.Product.destroy({
                 where: {
-                    id: req.params.id
+                    id: request.params.id
                 }
             })
-            .then(function(product) {
-                if (product) {
-                    res().code(200);
+            .then(function(response) {
+                if (response) {
+                    reply().code(200);
                 }
                 else {
-                    res().code(404);
+                    reply().code(404);
                 }
             });
     }

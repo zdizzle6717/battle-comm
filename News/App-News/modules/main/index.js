@@ -39,7 +39,7 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 
 // Services
-// mod.service('NewsService', require('./services/NewsService'));
+mod.service('NewsService', require('./services/NewsService'));
 
 
 
