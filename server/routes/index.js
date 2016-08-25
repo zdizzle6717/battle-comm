@@ -24,7 +24,7 @@ module.exports = [
     // File Upload
     {
         method: 'POST',
-        path: '/api/files',
+        path: '/api/files/{path}',
         config: {
             payload: {
                 output: 'stream',

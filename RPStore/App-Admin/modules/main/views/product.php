@@ -62,7 +62,7 @@
                 <div class="lineGroup full_width">
                     <div class="product-col-4">
                         <label for="imgAlt" class="sublabel required">Featured Image (front):</label>
-                        <img ng-src="/RPStore/images/uploads/{{Product.currentProduct.imgOneFront}}" ng-if="Product.currentProduct.imgOneFront"/>
+                        <img ng-src="/uploads/rpstore/{{Product.currentProduct.imgOneFront}}" ng-if="Product.currentProduct.imgOneFront"/>
                     </div>
                     <div class="product-col-4">
                         <label>Image Path:</label>
@@ -76,7 +76,7 @@
                 <div class="lineGroup full_width">
                     <div class="product-col-4">
                         <label for="imgOneBack" class="sublabel required">Featured Image (back):</label>
-                        <img ng-src="/RPStore/images/uploads/{{Product.currentProduct.imgOneBack}}" ng-if="Product.currentProduct.imgOneBack"/>
+                        <img ng-src="/uploads/rpstore/{{Product.currentProduct.imgOneBack}}" ng-if="Product.currentProduct.imgOneBack"/>
                     </div>
                     <div class="product-col-4">
                         <label>Image Path:</label>

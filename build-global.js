@@ -34,6 +34,19 @@ browserify("RPStore/App-Store/app.js")
     .bundle()
     .pipe(fs.createWriteStream("RPStore/js/app.js"));
 
+/* Compile JS for Store Admin */
+browserify("News/App-News/app.js")
+    .transform(stringify, {
+        appliesTo: {
+            includeExtensions: ['.html', '.php']
+        }
+    })
+    .transform("babelify", {
+        presets: ["es2015"]
+    })
+    .bundle()
+    .pipe(fs.createWriteStream("News/js/app.js"));
+
 /* Compile SCSS for Store and Store Admin */
 sass.render({
     file: 'RPStore/App-Store/Styles/app.scss',

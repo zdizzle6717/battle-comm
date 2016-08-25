@@ -40,7 +40,6 @@ function OrderController($state, $stateParams, $rootScope, AdminService) {
             type: 'success',
             message: 'The status of this order is now complete.'
         });
-        $state.go('orderList');
     }
 
     function showAlert(config) {

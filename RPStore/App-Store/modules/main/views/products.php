@@ -98,14 +98,14 @@
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
-                        <a ui-sref="product({ id: product.id })"><img ng-src="images/uploads/{{product.imgOneFront}}" alt="{{product.imgAlt}}" class="img-responsive"></a>
+                        <a ui-sref="product({ id: product.id })"><img ng-src="/uploads/rpstore/{{product.imgOneFront}}" alt="{{product.imgAlt}}" class="img-responsive"></a>
                     </div>
                     <div class="back">
-                        <a ui-sref="product({ id: product.id })"><img ng-src="images/uploads/{{product.imgOneBack}}" alt="{{product.imgAlt}}" class="img-responsive"></a>
+                        <a ui-sref="product({ id: product.id })"><img ng-src="/uploads/rpstore/{{product.imgOneBack}}" alt="{{product.imgAlt}}" class="img-responsive"></a>
                     </div>
                 </div>
             </div>
-            <a ui-sref="product({ id: product.id })" class="invisible"><img ng-src="images/uploads/{{product.imgOneFront}}" alt="{{product.imgAlt}}" class="img-responsive"></a>
+            <a ui-sref="product({ id: product.id })" class="invisible"><img ng-src="/uploads/rpstore/{{product.imgOneFront}}" alt="{{product.imgAlt}}" class="img-responsive"></a>
             <div class="text text-center">
                 <h3><a ui-sref="product({ id: product.id })" >{{product.name}}</a></h3>
                 <p class="price">

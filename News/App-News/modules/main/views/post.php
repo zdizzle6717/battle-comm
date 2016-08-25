@@ -14,7 +14,7 @@
                         <div class="four_column_1"><strong>Date:</strong> {{News.post.posted}}</div>
                     </div>
                     <p class="full_width no_padding">
-                        <a ng-href="{{News.post.image}}"><img ng-src="{{News.post.image}}" class="shadow" width="100%"></a>
+                        <a ng-href="/uploads/news/{{News.post.image}}"><img ng-src="/uploads/news/{{News.post.image}}" class="shadow" width="100%"></a>
                         {{post.callout}}
                     </p>
             </div>

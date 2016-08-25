@@ -1,15 +1,16 @@
 'use strict';
 
 let fs = require('fs-extra');
+let env = require('../config/environmentVariables.js');
 
 // Product Route Configs
 let files = {
     create: function(request, reply) {
         let data = request.payload;
         if (data.file) {
-            console.log(data.file);
             let name = data.file.hapi.filename;
-            let path = '/var/www/html/staging/server/uploads/' + name;
+            let path = env.uploadPath + request.params.path + '/' + name;
+            console.log(path);
             let file = fs.createWriteStream(path);
 
             file.on('error', function(err) {

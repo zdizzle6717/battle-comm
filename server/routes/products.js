@@ -55,7 +55,7 @@ let products = {
             imgFourBack: request.payload.imgFourBack
             })
             .then(function(response) {
-                reply(product).code(200);
+                reply(response).code(200);
             });
     },
     update: function(request, reply) {
@@ -66,7 +66,7 @@ let products = {
             })
             .then(function(response) {
                 if (response) {
-                    product.updateAttributes({
+                    response.updateAttributes({
                         SKU: request.payload.SKU,
                         name: request.payload.name,
                         price: request.payload.price,

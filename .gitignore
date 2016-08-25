@@ -37,6 +37,7 @@ jspm_packages
 .node_repl_history
 
 # Database Connections and Credentials
+News/App-News/modules/main/constants/apiRoutes.js
 RPStore/Connections*
 RPStore/js/app.js
 RPStore/admin/js/app.js
