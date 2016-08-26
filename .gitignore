@@ -38,8 +38,8 @@ jspm_packages
 
 # Database Connections and Credentials
 RPStore/Connections*
-*apiRoutes.js
-*js/app.js
+**/apiRoutes.js
+**/js/app.js
 Connections
 dmxConnections
 server/config*
