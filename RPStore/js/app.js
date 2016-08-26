@@ -810,18 +810,18 @@ module.exports = config;
 
 var routes = {
     products: {
-        get: 'http://www.staging.battle-comm.net:8080/api/products/',
-        getAll: 'http://www.staging.battle-comm.net:8080/api/products',
-        create: 'http://www.staging.battle-comm.net:8080/api/products',
-        update: 'http://www.staging.battle-comm.net:8080/api/products/',
-        remove: 'http://www.staging.battle-comm.net:8080/api/products/'
+        get: 'http://www.beta.battle-comm.net:3000/api/products/',
+        getAll: 'http://www.beta.battle-comm.net:3000/api/products',
+        create: 'http://www.beta.battle-comm.net:3000/api/products',
+        update: 'http://www.beta.battle-comm.net:3000/api/products/',
+        remove: 'http://www.beta.battle-comm.net:3000/api/products/'
     },
     orders: {
-        get: 'http://www.staging.battle-comm.net:8080/api/productOrders/',
-        getAll: 'http://www.staging.battle-comm.net:8080/api/productOrders',
-        create: 'http://www.staging.battle-comm.net:8080/api/productOrders',
-        update: 'http://www.staging.battle-comm.net:8080/api/productOrders/',
-        remove: 'http://www.staging.battle-comm.net:8080/api/productOrders/'
+        get: 'http://www.beta.battle-comm.net:3000/api/productOrders/',
+        getAll: 'http://www.beta.battle-comm.net:3000/api/productOrders',
+        create: 'http://www.beta.battle-comm.net:3000/api/productOrders',
+        update: 'http://www.beta.battle-comm.net:3000/api/productOrders/',
+        remove: 'http://www.beta.battle-comm.net:3000/api/productOrders/'
     },
     players: {
         update: 'http://www.staging.battle-comm.net:8080/api/userLogins/'

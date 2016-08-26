@@ -8,7 +8,7 @@ const sass = require('node-sass');
 const autoPrefixer = require('autoprefixer');
 const autoPrefix = require('postcss')([autoPrefixer]);
 
-/* Compile JS for Store Admin */
+/* Compile JS for Store */
 browserify("RPStore/App-Store/app.js")
     .transform(stringify, {
         appliesTo: {
@@ -21,7 +21,7 @@ browserify("RPStore/App-Store/app.js")
     .bundle()
     .pipe(fs.createWriteStream("RPStore/js/app.js"));
 
-/* Compile JS for Store Admin */
+/* Compile JS for News */
 browserify("News/App-News/app.js")
     .transform(stringify, {
         appliesTo: {
@@ -34,7 +34,7 @@ browserify("News/App-News/app.js")
     .bundle()
     .pipe(fs.createWriteStream("News/js/app.js"));
 
-/* Compile JS for Store Admin */
+/* Compile JS for Site Admin */
 browserify("Admin/App-Admin/app.js")
     .transform(stringify, {
         appliesTo: {
