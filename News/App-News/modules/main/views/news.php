@@ -44,7 +44,7 @@
                 <div class="fill">
                     <div class="four_column_1"><strong>Author:</strong> {{post.author}}</div>
                     <div class="four_column_1"><strong>Category:</strong> {{post.category}}</div>
-                    <div class="four_column_1"><strong>Date:</strong> {{post.createdAt}}</div>
+                    <div class="four_column_1"><strong>Date:</strong> {{post.createdAt | jsonDate | date: 'medium'}}</div>
                 </div>
                 <p class="full_width no_padding">
                     <a ui-sref="posts({ id: post.id })" class="four_column_1" style="padding-top:3px;"><img ng-src="/uploads/news/{{post.image}}" class="shadow" width="100%"></a>

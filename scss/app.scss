@@ -7,6 +7,12 @@
 // Components
 @import 'components/base';
 @import 'components/scrollbar';
+@import 'components/sidebar';
+@import 'components/magnify';
+@import 'components/notifications';
+@import 'components/products';
+@import 'components/validations';
+@import 'components/buttons';
 @import 'components/forms-tables';
 @import 'components/top-navigation';
 @import 'components/header';
@@ -17,6 +23,10 @@
 
 // Media
 @import 'media/queries';
+@import 'media/store-queries';
+
+// Libraries
+@import 'libraries/loading';
 
 // Animation
 @import 'animations/animate';

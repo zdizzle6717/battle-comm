@@ -37,13 +37,9 @@ jspm_packages
 .node_repl_history
 
 # Database Connections and Credentials
-News/App-News/modules/main/constants/apiRoutes.js
-News/js/app.js
 RPStore/Connections*
-RPStore/js/app.js
-RPStore/admin/js/app.js
-RPStore/App-Store/modules/main/constants/apiRoutes.js
-RPStore/App-Admin/modules/main/constants/apiRoutes.js
+*apiRoutes.js
+*js/app.js
 Connections
 dmxConnections
 server/config*

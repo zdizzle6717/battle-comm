@@ -8,9 +8,8 @@ const sass = require('node-sass');
 const autoPrefixer = require('autoprefixer');
 const autoPrefix = require('postcss')([autoPrefixer]);
 
-
-/* Compile JS for Store */
-browserify("App-Store/app.js")
+/* Compile JS for News Admin */
+browserify("App-Admin/app.js")
 .transform(stringify, {
       appliesTo: { includeExtensions: ['.html', '.php'] }
     })
