@@ -60,7 +60,7 @@
                         <input id="imgAlt" name="imgAlt" ng-model="Post.currentPost.image" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="24:15" model="Post.currentPost.image"></div>
+                        <div file-upload ratio="24:15" model="Post.currentPost.image" param="'news'"></div>
                     </div>
                 </div>
             </fieldset>

@@ -6,11 +6,10 @@ function FileService($http, apiRoutes, Upload) {
     let routes = apiRoutes;
     service.saveFile = saveFile;
 
-    function saveFile(file) {
-        let path = 'rpstore';
+    function saveFile(file, param) {
         let args = {
             method: 'POST',
-            url: routes.files.create + path,
+            url: routes.files.create + param,
             file: file
         };
 

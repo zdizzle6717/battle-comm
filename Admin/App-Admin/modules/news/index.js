@@ -44,7 +44,6 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 // Services
 mod.service('NewsService', require('./services/NewsService'));
-mod.service('FileService', require('./services/FileService'));
 
 
 

@@ -69,7 +69,7 @@
                         <input id="imgAlt" name="imgAlt" ng-model="Product.currentProduct.imgOneFront" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront" param="'rpstore'"></div>
                     </div>
                 </div>
                 <hr />
@@ -83,7 +83,7 @@
                         <input id="imgOneBack" name="imgOneBack" ng-model="Product.currentProduct.imgOneBack" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack" param="'rpstore'"></div>
                         <div notification></div>
                     </div>
                 </div>

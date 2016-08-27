@@ -15,7 +15,7 @@ app.constant('appTitle', appName);
 
 angular.bootstrap(document, [appName]);
 
-},{"./modules/main":18,"./modules/news":27,"./modules/rpstore":41,"angular":61,"babel-polyfill":62}],2:[function(require,module,exports){
+},{"./modules/main":19,"./modules/news":28,"./modules/rpstore":41,"angular":60,"babel-polyfill":61}],2:[function(require,module,exports){
 'use strict';
 
 deleteRecordModal.$inject = [];
@@ -74,7 +74,7 @@ mod.directive('deleteRecordModal', require('./directives/deleteRecordModal'));
 
 module.exports = moduleName;
 
-},{"./directives/deleteRecordModal":2,"angular":61}],5:[function(require,module,exports){
+},{"./directives/deleteRecordModal":2,"angular":60}],5:[function(require,module,exports){
 'use strict';
 
 fileUpload.$inject = ['FileService', '$rootScope'];
@@ -82,7 +82,8 @@ function fileUpload(FileService, $rootScope) {
     return {
         name: 'fileUpload',
         scope: {
-            model: '='
+            model: '=',
+            param: '='
         },
         replace: true,
         template: require('./templates/fileUpload.html'),
@@ -116,7 +117,7 @@ function fileUpload(FileService, $rootScope) {
                         message: 'File type must be jpg, jpeg, or png'
                     });
                 } else {
-                    FileService.saveFile(file).then(function (response) {
+                    FileService.saveFile(file, scope.param).then(function (response) {
                         scope.model = response.filename;
                         scope.restrictions = false;
                         var text = response.status + ': ' + response.statusText;
@@ -157,9 +158,37 @@ var mod = angular.module(moduleName, []);
 // Directives
 mod.directive('fileUpload', require('./directives/FileUpload'));
 
+// Services
+mod.service('FileService', require('./services/FileService'));
+
 module.exports = moduleName;
 
-},{"./directives/FileUpload":5,"angular":61}],8:[function(require,module,exports){
+},{"./directives/FileUpload":5,"./services/FileService":8,"angular":60}],8:[function(require,module,exports){
+'use strict';
+
+FileService.$inject = ['$http', 'apiRoutes', 'Upload'];
+function FileService($http, apiRoutes, Upload) {
+    var service = this;
+    var routes = apiRoutes;
+    service.saveFile = saveFile;
+
+    function saveFile(file, param) {
+        var args = {
+            method: 'POST',
+            url: routes.files.create + param,
+            file: file
+        };
+
+        return Upload.upload(args).then(function (response) {
+            var file = response.data;
+            return file;
+        });
+    }
+}
+
+module.exports = FileService;
+
+},{}],9:[function(require,module,exports){
 'use strict';
 
 loading.$inject = ['$rootScope'];
@@ -189,10 +218,10 @@ function loading($rootScope) {
 
 module.exports = loading;
 
-},{"./templates/loading.html":9}],9:[function(require,module,exports){
+},{"./templates/loading.html":10}],10:[function(require,module,exports){
 module.exports = "<div class=\"loading-container\" ng-if=\"loading\">\n    <div class=\"loading-graphic\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n    </div>\n</div>\n";
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'loading';
@@ -208,7 +237,7 @@ mod.provider('LoadingService', require('./services/LoadingService'));
 
 module.exports = moduleName;
 
-},{"./directives/loading":8,"./services/LoadingService":11,"angular":61}],11:[function(require,module,exports){
+},{"./directives/loading":9,"./services/LoadingService":12,"angular":60}],12:[function(require,module,exports){
 'use strict';
 
 function LoadingServiceProvider() {
@@ -275,7 +304,7 @@ function LoadingServiceProvider() {
 
 module.exports = LoadingServiceProvider;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 notification.$inject = ['$timeout'];
@@ -306,10 +335,10 @@ function notification($timeout) {
 
 module.exports = notification;
 
-},{"./templates/notification.html":13}],13:[function(require,module,exports){
+},{"./templates/notification.html":14}],14:[function(require,module,exports){
 module.exports = "<div class=\"notification-backdrop animate\" ng-if=\"show\">\n    <div class=\"update-notification animate\" ng-class=\"{'error': type === 'error', 'success': type === 'success'}\">\n        {{message}}\n    </div>\n</div>\n";
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'notifications';
@@ -322,7 +351,7 @@ mod.directive('notification', require('./directives/Notification'));
 
 module.exports = moduleName;
 
-},{"./directives/Notification":12,"angular":61}],15:[function(require,module,exports){
+},{"./directives/Notification":13,"angular":60}],16:[function(require,module,exports){
 'use strict';
 
 config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'LoadingServiceProvider'];
@@ -350,7 +379,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 
 module.exports = config;
 
-},{"./views/admin.php":20}],16:[function(require,module,exports){
+},{"./views/admin.php":21}],17:[function(require,module,exports){
 'use strict';
 
 var routes = {
@@ -375,7 +404,7 @@ var routes = {
 
 module.exports = routes;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 AdminController.$inject = [];
@@ -385,7 +414,7 @@ function AdminController() {
 
 module.exports = AdminController;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'main';
@@ -409,7 +438,7 @@ mod.controller('AdminController', require('./controllers/AdminController'));
 
 module.exports = moduleName;
 
-},{"./config":15,"./constants/apiRoutes":16,"./controllers/AdminController":17,"./run":19,"angular":61,"angular-animate":50,"angular-sanitize":52,"angular-scroll":54,"angular-ui-mask":56,"angular-ui-router":57,"angular-utils-pagination":59,"ng-file-upload":358}],19:[function(require,module,exports){
+},{"./config":16,"./constants/apiRoutes":17,"./controllers/AdminController":18,"./run":20,"angular":60,"angular-animate":49,"angular-sanitize":51,"angular-scroll":53,"angular-ui-mask":55,"angular-ui-router":56,"angular-utils-pagination":58,"ng-file-upload":357}],20:[function(require,module,exports){
 'use strict';
 
 run.$inject = ['$rootScope', '$anchorScroll', '$location'];
@@ -421,10 +450,10 @@ function run($rootScope, $anchorScroll, $location) {
 
 module.exports = run;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = "<!-- <div class=\"four_column_1\">\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Search</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Search selected filters:</label>\n            <div class=\"input-append span12\">\n                <input type=\"text\" class=\"search-query mac-style\" placeholder=\"Enter keyword...\" ng-model=\"query\">\n            </div>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Sort By</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Order results by:</label>\n                <select name=\"selectedSort\" id=\"selectedSort\" ng-model=\"Order.selectedSort\">\n                    <option value=\"id\">Order ID (ascending)</option>\n                    <option value=\"-id\">Order ID (descending)</option>\n                    <option value=\"-createdAt\">Created (most recent)</option>\n                    <option value=\"createdAt\">Created (ascending)</option>\n                    <option value=\"-updatedAt\">Updated (descending)</option>\n                    <option value=\"updatedAt\">Updated (ascending)</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Items Per Page</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Now Showing:</label>\n                <select name=\"pageSize\" id=\"pageSize\" ng-model=\"Order.pageSize\">\n                    <option value=\"5\">5</option>\n                    <option value=\"20\">20</option>\n                    <option value=\"50\">50</option>\n                    <option value=\"100\">100</option>\n                </select>\n            </select>\n        </div>\n    </div>\n</div>\n<div class=\"four_column_3\">\n        <div class=\"mobile-table\">\n          <table border=\"1\" class=\"mobile-table\">\n            <thead class=\"cf\">\n              <tr>\n                <th><strong>Order ID</strong></th>\n                <th><strong>Customer</strong></th>\n                <th><strong>Order Details</strong></th>\n                <th><strong>Order Total</strong></th>\n                <th><strong>Last Updated</strong></th>\n                <th><strong>Status</strong></th>\n              </tr>\n            </thead>\n          <tbody>\n            <tr dir-paginate=\"order in Order.orders | filter: query | orderBy: Order.selectedSort | itemsPerPage: Order.pageSize\" >\n              <td data-title=\"Order ID\"><a ui-sref=\"order({ id: order.id })\">{{order.id}}</a></td>\n              <td data-title=\"Customer\">{{order.customerFullName}}</td>\n              <td data-title=\"Order Details\">{{order.orderDetails}}</td>\n              <td data-title=\"Order Total\">{{order.orderTotal | number}} RP</td>\n              <td data-title=\"Last Updated\">{{order.updatedAt | jsonDate | date: 'medium'}}</td>\n              <td data-title=\"Status\" ng-class=\"{'green': order.status === 'processing', 'blue': order.status === 'completed' , 'red': order.status === 'canceled'}\"><a ui-sref=\"order({ id: order.id })\">{{order.status}}</a></td>\n            </tr>\n          </tbody>\n        </table> -->\n       \t<!-- <script>\n    \t/* Adds Header Labels for Mobile-Friendly */\n    \t\t(function ($) {\n    \t\t$.fn.rte = function () {\n    \t\t\tvar that = this;\n    \t\t\t\tthis.find('th').each(function (index) {\n    \t\t\t\t\tindex++;\n    \t\t\t\t\tthat.find('tr td:nth-child(' + index + ')').attr('data-title', that.find('th:nth-child(' + index + ')').text());\n    \t\t\t\t});\n    \t\t\t}\n    \t\t})(jQuery);\n    \t\t\t\t$('.mobile-table').rte();\n    \t</script> -->\n    <!-- </div>\n    <div class=\"full_width right\">\n        <dir-pagination-controls boundary-links=\"true\" ></dir-pagination-controls>\n    </div>\n</div> -->\n";
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'LoadingServiceProvider'];
@@ -452,7 +481,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 
 module.exports = config;
 
-},{"./views/newsList.php":31,"./views/post.php":32}],22:[function(require,module,exports){
+},{"./views/newsList.php":31,"./views/post.php":32}],23:[function(require,module,exports){
 'use strict';
 
 var routes = {
@@ -470,7 +499,7 @@ var routes = {
 
 module.exports = routes;
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var manufacturers = [{
@@ -864,7 +893,7 @@ var manufacturers = [{
 
 module.exports = manufacturers;
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 NewsListController.$inject = ['$state', '$rootScope', 'NewsService', '$scope'];
@@ -887,7 +916,7 @@ function NewsListController($state, $rootScope, NewsService, $scope) {
 
 module.exports = NewsListController;
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 PostController.$inject = ['$rootScope', '$state', '$stateParams', 'NewsService', 'manufacturers'];
@@ -997,7 +1026,7 @@ function PostController($rootScope, $state, $stateParams, NewsService, manufactu
 
 module.exports = PostController;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*jshint esversion: 6 */
 'use strict';
 
@@ -1012,7 +1041,7 @@ function jsonDate() {
 
 module.exports = jsonDate;
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'news';
@@ -1046,39 +1075,12 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 // Services
 mod.service('NewsService', require('./services/NewsService'));
-mod.service('FileService', require('./services/FileService'));
 
 module.exports = moduleName;
 
-},{"../libraries/delete-record":4,"../libraries/file-upload":7,"../libraries/loading":10,"../libraries/notifications":14,"./config":21,"./constants/apiRoutes":22,"./constants/manufacturers":23,"./controllers/NewsListController":24,"./controllers/PostController":25,"./filters/jsonDate":26,"./run":28,"./services/FileService":29,"./services/NewsService":30,"angular":61,"angular-animate":50,"angular-sanitize":52,"angular-scroll":54,"angular-ui-mask":56,"angular-ui-router":57,"angular-utils-pagination":59,"ng-file-upload":358}],28:[function(require,module,exports){
-arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],29:[function(require,module,exports){
-'use strict';
-
-FileService.$inject = ['$http', 'apiRoutes', 'Upload'];
-function FileService($http, apiRoutes, Upload) {
-    var service = this;
-    var routes = apiRoutes;
-    service.saveFile = saveFile;
-
-    function saveFile(file) {
-        var path = 'news';
-        var args = {
-            method: 'POST',
-            url: routes.files.create + path,
-            file: file
-        };
-
-        return Upload.upload(args).then(function (response) {
-            var file = response.data;
-            return file;
-        });
-    }
-}
-
-module.exports = FileService;
-
-},{}],30:[function(require,module,exports){
+},{"../libraries/delete-record":4,"../libraries/file-upload":7,"../libraries/loading":11,"../libraries/notifications":15,"./config":22,"./constants/apiRoutes":23,"./constants/manufacturers":24,"./controllers/NewsListController":25,"./controllers/PostController":26,"./filters/jsonDate":27,"./run":29,"./services/NewsService":30,"angular":60,"angular-animate":49,"angular-sanitize":51,"angular-scroll":53,"angular-ui-mask":55,"angular-ui-router":56,"angular-utils-pagination":58,"ng-file-upload":357}],29:[function(require,module,exports){
+arguments[4][20][0].apply(exports,arguments)
+},{"dup":20}],30:[function(require,module,exports){
 'use strict';
 
 NewsService.$inject = ['API_ROUTES', '$http'];
@@ -1173,7 +1175,7 @@ module.exports = NewsService;
 module.exports = "<div class=\"four_column_1\">\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Create News</h3>\n        </div>\n        <div class=\"panel-body\">\n            <button class=\"btn btn-to-cart\" ui-sref=\"post({id: undefined})\"><span class=\"glyphicon glyphicon-plus\"></span> Add New Post</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Search</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Search selected filters:</label>\n            <div class=\"input-append span12\">\n                <input type=\"text\" class=\"search-query mac-style\" placeholder=\"Enter keyword...\" ng-model=\"query\">\n            </div>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Sort By</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>News results by:</label>\n                <select name=\"selectedSort\" id=\"selectedSort\" ng-model=\"News.selectedSort\">\n                    <option value=\"id\">News ID (ascending)</option>\n                    <option value=\"-id\">News ID (descending)</option>\n                    <option value=\"-createdAt\">Created (most recent)</option>\n                    <option value=\"createdAt\">Created (ascending)</option>\n                    <option value=\"-updatedAt\">Updated (descending)</option>\n                    <option value=\"updatedAt\">Updated (ascending)</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Items Per Page</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Now Showing:</label>\n                <select name=\"pageSize\" id=\"pageSize\" ng-model=\"News.pageSize\">\n                    <option value=\"5\">5</option>\n                    <option value=\"20\">20</option>\n                    <option value=\"50\">50</option>\n                    <option value=\"100\">100</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <!--\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Reset Filter Selection</h3>\n        </div>\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button class=\"btn btn-default\" style=\"width:100%;\" ng-click=\"store.reset()\">Reset</button>\n        </div>\n    </div>\n    -->\n</div>\n<div class=\"four_column_3\">\n        <div class=\"mobile-table\">\n          <table border=\"1\" class=\"mobile-table\">\n            <thead class=\"cf\">\n              <tr>\n                <th><strong>News ID</strong></th>\n                <th><strong>Title</strong></th>\n                <th><strong>Author</strong></th>\n                <th><strong>Tags</strong></th>\n                <th><strong>Featured?</strong></th>\n                <th><strong>Last Updated</strong></th>\n                <th><strong>View/Edit</strong></th>\n              </tr>\n            </thead>\n          <tbody>\n            <!--START REPEAT-->\n            <tr dir-paginate=\"news in News.allPosts | filter: query | orderBy: News.selectedSort | itemsPerPage: News.pageSize\" >\n              <td data-title=\"News ID\"><a ui-sref=\"post({ id: news.id })\">{{news.id}}</a></td>\n              <td data-title=\"Name\">{{news.title}}</td>\n              <td data-title=\"Price\">{{news.userLoginId}}</td>\n              <td data-title=\"Quantity\">{{news.tags}}</td>\n              <td data-title=\"Featured?\">{{news.featured}}</td>\n              <td data-title=\"Last Updated\">{{news.updatedAt | jsonDate | date: 'medium'}}</td>\n              <td data-title=\"View/Edit\"><a ui-sref=\"post({ id: news.id })\"><span class=\"glyphicon glyphicon-edit\"></span></a></td>\n            </tr>\n            <!--END REPEAT-->\n          </tbody>\n        </table>\n       \t<script>\n    \t/* Adds Header Labels for Mobile-Friendly */\n    \t\t(function ($) {\n    \t\t$.fn.rte = function () {\n    \t\t\tvar that = this;\n    \t\t\t\tthis.find('th').each(function (index) {\n    \t\t\t\t\tindex++;\n    \t\t\t\t\tthat.find('tr td:nth-child(' + index + ')').attr('data-title', that.find('th:nth-child(' + index + ')').text());\n    \t\t\t\t});\n    \t\t\t}\n    \t\t})(jQuery);\n    \t\t\t\t$('.mobile-table').rte();\n    \t</script>\n    </div>\n    <div class=\"full_width right\">\n        <dir-pagination-controls boundary-links=\"true\" ></dir-pagination-controls>\n    </div>\n</div>\n";
 
 },{}],32:[function(require,module,exports){
-module.exports = "<div class=\"four_column_3 single-product\">\n    <h2>Post ID: {{Post.currentPost.id}}</h2>\n    <fieldset class=\"full_width\" ng-disabled=\"Post.readOnly\">\n        <form class=\"formoid-default-skyblue side_by_side\" style=\"margin:0 auto;\" name=\"postForm\" novalidate>\n            <h2>View/Edit</h2>\n            <div class=\"lineGroup three_column_2\">\n                <label for=\"title\" class=\"sublabel required\">Title:</label>\n                <input id=\"title\" name=\"title\" ng-model=\"Post.currentPost.title\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Post name...\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"author\" class=\"sublabel required\">Author:</label>\n                <input id=\"author\" name=\"author\" ng-model=\"Post.currentPost.userLoginId\" type=\"number\" value=\"2\" class=\"formTextfield_Large\" placeholder=\"Please enter an ID...\">\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Post.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <select name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Post.currentPost.manufacturer\" ng-options=\"manufacturer as manufacturer.name for manufacturer in Post.manufacturers\" ng-change=\"Post.setMNU(Post.currentPost.manufacturer)\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Post.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <input name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Post.currentPost.manufacturerId\" type=\"text\" class=\"formTextfield_Large\" disabled>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Post.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <select name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Post.currentPost.gameSystem\" ng-options=\"system.searchValue as system.name for system in Post.currentMNU.gameSystem\" ng-disabled=\"!Post.currentPost.manufacturer || Post.selectedMNU.name === 'Show All...'\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Post.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <input name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Post.currentPost.gameSystem\" type=\"text\" class=\"formTextfield_Large\" disabled></select>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"category\" class=\"sublabel required\">Category:</label>\n                <input id=\"category\" name=\"category\" ng-model=\"Post.currentPost.category\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Choose a Category...\" required>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"callout\" class=\"sublabel required\">Post Summary:</label>\n                <textarea id=\"callout\" name=\"callout\" ng-model=\"Post.currentPost.callout\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Summarize the article or copy/paste the news post here to auto summarize...\" maxlength=\"750\" required></textarea>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"body\" class=\"sublabel required\">Post Body:</label>\n                <textarea id=\"body\" name=\"body\" ng-model=\"Post.currentPost.body\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Type or copy/paste the news post here...\" required></textarea>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"tags\" class=\"sublabel required\">Tags:</label>\n                <input id=\"tags\" name=\"tags\" ng-model=\"Post.currentPost.tags\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Comma separated tags...\" required>\n            </div>\n            <!-- <div class=\"lineGroup full_width\">\n                <div class=\"three_column_1\">\n                    <label>Image Alt (meta name for Google Search):</label>\n                    <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Post.currentPost.imgAlt\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Enter a meta title for the image...\" required>\n                </div>\n            </div> -->\n            <fieldset>\n                <div class=\"lineGroup full_width\">\n                    <div class=\"three_column_1\">\n                        <label for=\"image\" class=\"sublabel required\">Featured Image (front):</label>\n                        <img ng-src=\"/uploads/news/{{Post.currentPost.image}}\" ng-if=\"Post.currentPost.image\"/>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <label>Image Path:</label>\n                        <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Post.currentPost.image\" type=\"text\" class=\"formTextfield_Large\" disabled required>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <div file-upload ratio=\"24:15\" model=\"Post.currentPost.image\"></div>\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    </fieldset>\n</div>\n<div class=\"four_column_1 single-product\">\n    <div class=\"panel panel-default sidebar-menu\" >\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Post.editPost()\" ng-if=\"Post.readOnly\" class=\"btn btn-to-cart\" type=\"button\">Edit Details</button>\n            <button ng-click=\"Post.savePost(Post.currentPost, postForm)\" ng-if=\"!Post.readOnly\" class=\"btn btn-to-cart\" type=\"button\" ng-disabled=\"postForm.$invalid\">Save Changes</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Featured?</h3>\n            <select name=\"featured\" id=\"featured\" ng-model=\"Post.currentPost.featured\" selected=\"Post.currentPost.featured\" ng-disabled=\"Post.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Published?</h3>\n            <select name=\"published\" id=\"published\" ng-model=\"Post.currentPost.published\" selected=\"Post.currentPost.published\" ng-disabled=\"Post.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-body\" ng-if=\"!Post.isNew\">\n            Updated: {{Post.currentPost.updated | jsonDate | date: 'medium'}}\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\" ng-if=\"Post.readOnly\">\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Post.showDeleteModal(Post.currentPost.id)\" class=\"btn btn-to-cart\" type=\"button\">Remove Post</button>\n            <div delete-record-modal delete=\"Post.removePost(Post.currentPost.id)\">\n                <div class=\"small-12 text-right\">\n                    <i class=\"fa fa-times\" ng-click=\"Post.hideDeleteModal()\"></i>\n                </div>\n                <h4>Delete this movie record?</h4>\n            </div>\n        </div>\n    </div>\n</div>\n";
+module.exports = "<div class=\"four_column_3 single-product\">\n    <h2>Post ID: {{Post.currentPost.id}}</h2>\n    <fieldset class=\"full_width\" ng-disabled=\"Post.readOnly\">\n        <form class=\"formoid-default-skyblue side_by_side\" style=\"margin:0 auto;\" name=\"postForm\" novalidate>\n            <h2>View/Edit</h2>\n            <div class=\"lineGroup three_column_2\">\n                <label for=\"title\" class=\"sublabel required\">Title:</label>\n                <input id=\"title\" name=\"title\" ng-model=\"Post.currentPost.title\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Post name...\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"author\" class=\"sublabel required\">Author:</label>\n                <input id=\"author\" name=\"author\" ng-model=\"Post.currentPost.userLoginId\" type=\"number\" value=\"2\" class=\"formTextfield_Large\" placeholder=\"Please enter an ID...\">\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Post.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <select name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Post.currentPost.manufacturer\" ng-options=\"manufacturer as manufacturer.name for manufacturer in Post.manufacturers\" ng-change=\"Post.setMNU(Post.currentPost.manufacturer)\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Post.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <input name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Post.currentPost.manufacturerId\" type=\"text\" class=\"formTextfield_Large\" disabled>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Post.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <select name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Post.currentPost.gameSystem\" ng-options=\"system.searchValue as system.name for system in Post.currentMNU.gameSystem\" ng-disabled=\"!Post.currentPost.manufacturer || Post.selectedMNU.name === 'Show All...'\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Post.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <input name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Post.currentPost.gameSystem\" type=\"text\" class=\"formTextfield_Large\" disabled></select>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"category\" class=\"sublabel required\">Category:</label>\n                <input id=\"category\" name=\"category\" ng-model=\"Post.currentPost.category\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Choose a Category...\" required>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"callout\" class=\"sublabel required\">Post Summary:</label>\n                <textarea id=\"callout\" name=\"callout\" ng-model=\"Post.currentPost.callout\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Summarize the article or copy/paste the news post here to auto summarize...\" maxlength=\"750\" required></textarea>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"body\" class=\"sublabel required\">Post Body:</label>\n                <textarea id=\"body\" name=\"body\" ng-model=\"Post.currentPost.body\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Type or copy/paste the news post here...\" required></textarea>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"tags\" class=\"sublabel required\">Tags:</label>\n                <input id=\"tags\" name=\"tags\" ng-model=\"Post.currentPost.tags\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Comma separated tags...\" required>\n            </div>\n            <!-- <div class=\"lineGroup full_width\">\n                <div class=\"three_column_1\">\n                    <label>Image Alt (meta name for Google Search):</label>\n                    <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Post.currentPost.imgAlt\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Enter a meta title for the image...\" required>\n                </div>\n            </div> -->\n            <fieldset>\n                <div class=\"lineGroup full_width\">\n                    <div class=\"three_column_1\">\n                        <label for=\"image\" class=\"sublabel required\">Featured Image (front):</label>\n                        <img ng-src=\"/uploads/news/{{Post.currentPost.image}}\" ng-if=\"Post.currentPost.image\"/>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <label>Image Path:</label>\n                        <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Post.currentPost.image\" type=\"text\" class=\"formTextfield_Large\" disabled required>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <div file-upload ratio=\"24:15\" model=\"Post.currentPost.image\" param=\"'news'\"></div>\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    </fieldset>\n</div>\n<div class=\"four_column_1 single-product\">\n    <div class=\"panel panel-default sidebar-menu\" >\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Post.editPost()\" ng-if=\"Post.readOnly\" class=\"btn btn-to-cart\" type=\"button\">Edit Details</button>\n            <button ng-click=\"Post.savePost(Post.currentPost, postForm)\" ng-if=\"!Post.readOnly\" class=\"btn btn-to-cart\" type=\"button\" ng-disabled=\"postForm.$invalid\">Save Changes</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Featured?</h3>\n            <select name=\"featured\" id=\"featured\" ng-model=\"Post.currentPost.featured\" selected=\"Post.currentPost.featured\" ng-disabled=\"Post.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Published?</h3>\n            <select name=\"published\" id=\"published\" ng-model=\"Post.currentPost.published\" selected=\"Post.currentPost.published\" ng-disabled=\"Post.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-body\" ng-if=\"!Post.isNew\">\n            Updated: {{Post.currentPost.updated | jsonDate | date: 'medium'}}\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\" ng-if=\"Post.readOnly\">\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Post.showDeleteModal(Post.currentPost.id)\" class=\"btn btn-to-cart\" type=\"button\">Remove Post</button>\n            <div delete-record-modal delete=\"Post.removePost(Post.currentPost.id)\">\n                <div class=\"small-12 text-right\">\n                    <i class=\"fa fa-times\" ng-click=\"Post.hideDeleteModal()\"></i>\n                </div>\n                <h4>Delete this movie record?</h4>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 },{}],33:[function(require,module,exports){
 'use strict';
@@ -1211,11 +1213,11 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 
 module.exports = config;
 
-},{"./views/order.php":45,"./views/orderList.php":46,"./views/product.php":47,"./views/productList.php":48}],34:[function(require,module,exports){
-arguments[4][16][0].apply(exports,arguments)
-},{"dup":16}],35:[function(require,module,exports){
-arguments[4][23][0].apply(exports,arguments)
-},{"dup":23}],36:[function(require,module,exports){
+},{"./views/order.php":44,"./views/orderList.php":45,"./views/product.php":46,"./views/productList.php":47}],34:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"dup":17}],35:[function(require,module,exports){
+arguments[4][24][0].apply(exports,arguments)
+},{"dup":24}],36:[function(require,module,exports){
 'use strict';
 
 OrderController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminService'];
@@ -1428,8 +1430,8 @@ function ProductListController($state, $rootScope, AdminService, $scope) {
 module.exports = ProductListController;
 
 },{}],40:[function(require,module,exports){
-arguments[4][26][0].apply(exports,arguments)
-},{"dup":26}],41:[function(require,module,exports){
+arguments[4][27][0].apply(exports,arguments)
+},{"dup":27}],41:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'main';
@@ -1465,13 +1467,12 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 // Services
 mod.service('AdminService', require('./services/AdminService'));
-mod.service('FileService', require('./services/FileService'));
 
 module.exports = moduleName;
 
-},{"../libraries/delete-record":4,"../libraries/file-upload":7,"../libraries/loading":10,"../libraries/notifications":14,"./config":33,"./constants/apiRoutes":34,"./constants/manufacturers":35,"./controllers/OrderController":36,"./controllers/OrderListController":37,"./controllers/ProductController":38,"./controllers/ProductListController":39,"./filters/jsonDate":40,"./run":42,"./services/AdminService":43,"./services/FileService":44,"angular":61,"angular-animate":50,"angular-sanitize":52,"angular-scroll":54,"angular-ui-mask":56,"angular-ui-router":57,"angular-utils-pagination":59,"ng-file-upload":358}],42:[function(require,module,exports){
-arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],43:[function(require,module,exports){
+},{"../libraries/delete-record":4,"../libraries/file-upload":7,"../libraries/loading":11,"../libraries/notifications":15,"./config":33,"./constants/apiRoutes":34,"./constants/manufacturers":35,"./controllers/OrderController":36,"./controllers/OrderListController":37,"./controllers/ProductController":38,"./controllers/ProductListController":39,"./filters/jsonDate":40,"./run":42,"./services/AdminService":43,"angular":60,"angular-animate":49,"angular-sanitize":51,"angular-scroll":53,"angular-ui-mask":55,"angular-ui-router":56,"angular-utils-pagination":58,"ng-file-upload":357}],42:[function(require,module,exports){
+arguments[4][20][0].apply(exports,arguments)
+},{"dup":20}],43:[function(require,module,exports){
 'use strict';
 
 AdminService.$inject = ['$http', '$stateParams', 'apiRoutes'];
@@ -1636,44 +1637,18 @@ function AdminService($http, $stateParams, apiRoutes) {
 module.exports = AdminService;
 
 },{}],44:[function(require,module,exports){
-'use strict';
-
-FileService.$inject = ['$http', 'apiRoutes', 'Upload'];
-function FileService($http, apiRoutes, Upload) {
-    var service = this;
-    var routes = apiRoutes;
-    service.saveFile = saveFile;
-
-    function saveFile(file) {
-        var path = 'rpstore';
-        var args = {
-            method: 'POST',
-            url: routes.files.create + path,
-            file: file
-        };
-
-        return Upload.upload(args).then(function (response) {
-            var file = response.data;
-            return file;
-        });
-    }
-}
-
-module.exports = FileService;
-
-},{}],45:[function(require,module,exports){
 module.exports = "<div class=\"four_column_3 single-product\">\n    <h2>Order ID: {{Order.currentOrder.id}}</h2>\n    <div class=\"two_column_1\">\n        <h3>Customer: {{Order.currentOrder.customerFullName}}</h3>\n        <h3>Customer ID: {{Order.currentOrder.userLoginId}}</h3>\n        <h3>Order Total: {{Order.currentOrder.orderTotal}} RP</h3>\n    </div>\n    <div class=\"two_column_1\">\n        <div class=\"product-description-header\">Order Details: </div>\n        <div><p>{{Order.currentOrder.orderDetails}}</p></div>\n    </div>\n    <div class=\"full_width\">\n        <form class=\"formoid-default-skyblue side_by_side\" style=\"margin:0 auto;\" name=\"orderForm\" novalidate>\n            <h2>View/Edit</h2>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"customerFullName\" class=\"sublabel\"> *Full Name:</label>\n                <input id=\"customerFullName\" name=\"customerFullName\" ng-model=\"Order.currentOrder.customerFullName\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"Please enter your full name...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"customerEmail\" class=\"sublabel\"> *Email:</label>\n                <input id=\"customerEmail\" name=\"customerEmail\" ng-model=\"Order.currentOrder.customerEmail\" type=\"email\" value=\"\" class=\"formTextfield_Large\" title=\"Please enter your email...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"phone\" class=\"sublabel\"> Phone (optional):</label>\n                <input id=\"phone\" name=\"phone\" ng-model=\"Order.currentOrder.phone\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"Please enter a phone number...\" ui-mask=\"(999) 999-9999\" ng-disabled=\"Order.readOnly\">\n            </div>\n            <div class=\"lineGroup four_column_3\">\n                <label for=\"shippingStreet\" class=\"sublabel\"> *Street Address:</label>\n                <input id=\"shippingStreet\" name=\"shippingStreet\" ng-model=\"Order.currentOrder.shippingStreet\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"Please enter your address...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n            <div class=\"lineGroup four_column_1\">\n                <label for=\"shippingAppartment\" class=\"sublabel\"> Apt/Suite #:</label>\n                <input id=\"shippingAppartment\" name=\"shippingAppartment\" ng-model=\"Order.currentOrder.shippingAppartment\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"Apartment #...\" ng-disabled=\"Order.readOnly\">\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"shippingCity\" class=\"sublabel\"> *City:</label>\n                <input id=\"shippingCity\" name=\"shippingCity\" ng-model=\"Order.currentOrder.shippingCity\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"City...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"shippingState\" class=\"sublabel\"> *State:</label>\n                <input id=\"shippingState\" name=\"shippingState\" ng-model=\"Order.currentOrder.shippingState\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"State...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"shippingZip\" class=\"sublabel\"> *Zip Code:</label>\n                <input id=\"shippingZip\" name=\"shippingZip\" ng-model=\"Order.currentOrder.shippingZip\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"Zip code...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"shippingCountry\" class=\"sublabel\"> *Country:</label>\n                <input id=\"shippingCountry\" name=\"shippingCountry\" ng-model=\"Order.currentOrder.shippingCountry\" type=\"text\" value=\"\" class=\"formTextfield_Large\" title=\"Country...\" ng-disabled=\"Order.readOnly\" required>\n            </div>\n        </form>\n    </div>\n    <h2>Products</h2>\n    <div class=\"full_width\">\n        <div class=\"product-description-header\">Order Details: </div>\n        <div><p>{{Order.currentOrder.orderDetails}}</p></div>\n    </div>\n</div>\n<div class=\"four_column_1 single-product\">\n    <div class=\"panel panel-default sidebar-menu\" >\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Order.edit()\" ng-if=\"Order.readOnly\" class=\"btn btn-to-cart\" type=\"button\">Edit Details</button>\n            <button ng-click=\"Order.save(Order.currentOrder, orderForm)\" ng-if=\"!Order.readOnly\" class=\"btn btn-to-cart\" type=\"submit\">Save Changes</button>\n            <button ng-click=\"Order.complete(Order.currentOrder)\" ng-if=\"Order.readOnly\" class=\"btn btn-to-cart\" type=\"button\">Ship & Complete</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Current Statues</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Order.currentOrder.status\" ng-disabled=\"Order.readOnly\">\n              <option value=\"\">---Please select---</option>\n              <option value=\"processing\">Processing</option>\n              <option value=\"canceled\">Cancel</option>\n              <option value=\"completed\">Complete</option>\n            </select><br>\n        </div>\n        <div class=\"panel-body\">\n            Updated: {{Order.currentOrder.updated | jsonDate | date: 'medium'}}\n        </div>\n    </div>\n</div>\n";
 
-},{}],46:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 module.exports = "<div class=\"four_column_1\">\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Search</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Search selected filters:</label>\n            <div class=\"input-append span12\">\n                <input type=\"text\" class=\"search-query mac-style\" placeholder=\"Enter keyword...\" ng-model=\"query\">\n            </div>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Sort By</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Order results by:</label>\n                <select name=\"selectedSort\" id=\"selectedSort\" ng-model=\"Order.selectedSort\">\n                    <option value=\"id\">Order ID (ascending)</option>\n                    <option value=\"-id\">Order ID (descending)</option>\n                    <option value=\"-createdAt\">Created (most recent)</option>\n                    <option value=\"createdAt\">Created (ascending)</option>\n                    <option value=\"-updatedAt\">Updated (descending)</option>\n                    <option value=\"updatedAt\">Updated (ascending)</option>\n                    <option value=\"orderTotal\">Order Total (low to high)</option>\n                    <option value=\"-orderTotal\">Order Total (high to low)</option>\n                    <option value=\"-status\">Status</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Items Per Page</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Now Showing:</label>\n                <select name=\"pageSize\" id=\"pageSize\" ng-model=\"Order.pageSize\">\n                    <option value=\"5\">5</option>\n                    <option value=\"20\">20</option>\n                    <option value=\"50\">50</option>\n                    <option value=\"100\">100</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <!--\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Reset Filter Selection</h3>\n        </div>\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button class=\"btn btn-default\" style=\"width:100%;\" ng-click=\"store.reset()\">Reset</button>\n        </div>\n    </div>\n    -->\n</div>\n<div class=\"four_column_3\">\n        <div class=\"mobile-table\">\n          <table border=\"1\" class=\"mobile-table\">\n            <thead class=\"cf\">\n              <tr>\n                <th><strong>Order ID</strong></th>\n                <th><strong>Customer</strong></th>\n                <th><strong>Order Details</strong></th>\n                <th><strong>Order Total</strong></th>\n                <th><strong>Last Updated</strong></th>\n                <th><strong>Status</strong></th>\n              </tr>\n            </thead>\n          <tbody>\n            <!--START REPEAT-->\n            <tr dir-paginate=\"order in Order.orders | filter: query | orderBy: Order.selectedSort | itemsPerPage: Order.pageSize\" >\n              <td data-title=\"Order ID\"><a ui-sref=\"order({ id: order.id })\">{{order.id}}</a></td>\n              <td data-title=\"Customer\">{{order.customerFullName}}</td>\n              <td data-title=\"Order Details\">{{order.orderDetails}}</td>\n              <td data-title=\"Order Total\">{{order.orderTotal | number}} RP</td>\n              <td data-title=\"Last Updated\">{{order.updatedAt | jsonDate | date: 'medium'}}</td>\n              <td data-title=\"Status\" ng-class=\"{'green': order.status === 'processing', 'blue': order.status === 'completed' , 'red': order.status === 'canceled'}\"><a ui-sref=\"order({ id: order.id })\">{{order.status}}</a></td>\n            </tr>\n            <!--END REPEAT-->\n          </tbody>\n        </table>\n       \t<script>\n    \t/* Adds Header Labels for Mobile-Friendly */\n    \t\t(function ($) {\n    \t\t$.fn.rte = function () {\n    \t\t\tvar that = this;\n    \t\t\t\tthis.find('th').each(function (index) {\n    \t\t\t\t\tindex++;\n    \t\t\t\t\tthat.find('tr td:nth-child(' + index + ')').attr('data-title', that.find('th:nth-child(' + index + ')').text());\n    \t\t\t\t});\n    \t\t\t}\n    \t\t})(jQuery);\n    \t\t\t\t$('.mobile-table').rte();\n    \t</script>\n    </div>\n    <div class=\"full_width right\">\n        <dir-pagination-controls boundary-links=\"true\" ></dir-pagination-controls>\n    </div>\n</div>\n";
 
-},{}],47:[function(require,module,exports){
-module.exports = "<div class=\"four_column_3 single-product\">\n    <h2>Product ID: {{Product.currentProduct.id}}</h2>\n    <fieldset class=\"full_width\" ng-disabled=\"Product.readOnly\">\n        <form class=\"formoid-default-skyblue side_by_side\" style=\"margin:0 auto;\" name=\"productForm\" novalidate>\n            <h2>View/Edit</h2>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"name\" class=\"sublabel required\">Name:</label>\n                <input id=\"name\" name=\"name\" ng-model=\"Product.currentProduct.name\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Product name...\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"price\" class=\"sublabel required\">Price:</label>\n                <input id=\"price\" name=\"customerEmail\" ng-model=\"Product.currentProduct.price\" type=\"number\" class=\"formTextfield_Large\" placeholder=\"Numbers only...\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"SKU\" class=\"sublabel required\">SKU:</label>\n                <input id=\"SKU\" name=\"SKU\" ng-model=\"Product.currentProduct.SKU\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Please enter an ID...\">\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Product.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <select name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Product.currentProduct.manufacturer\" ng-options=\"manufacturer as manufacturer.name for manufacturer in Product.manufacturers\" ng-change=\"Product.setMNU(Product.currentProduct.manufacturer)\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Product.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <input name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Product.currentProduct.manufacturerId\" type=\"text\" class=\"formTextfield_Large\" disabled>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Product.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <select name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Product.currentProduct.gameSystem\" ng-options=\"system.searchValue as system.name for system in Product.currentMNU.gameSystem\" ng-disabled=\"!Product.currentProduct.manufacturer || Product.selectedMNU.name === 'Show All...'\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Product.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <input name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Product.currentProduct.gameSystem\" type=\"text\" class=\"formTextfield_Large\" disabled></select>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"stockQty\" class=\"sublabel required\">Stock:</label>\n                <input id=\"stockQty\" name=\"stockQty\" ng-model=\"Product.currentProduct.stockQty\" type=\"number\" class=\"formTextfield_Large\" placeholder=\"Current stock quantity...\" required>\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"color\" class=\"sublabel\"> Color:</label>\n                <input id=\"color\" name=\"color\" ng-model=\"Product.currentProduct.color\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Does this product have a color for grouping...?\">\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"category\" class=\"sublabel required\">Category:</label>\n                <input id=\"category\" name=\"category\" ng-model=\"Product.currentProduct.category\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Category for sorting...\" required>\n            </div>\n\n            <div class=\"lineGroup full_width\">\n                <label for=\"tags\" class=\"sublabel required\">Tags:</label>\n                <input id=\"tags\" name=\"tags\" ng-model=\"Product.currentProduct.tags\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Comma separated tags...\" required>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"description\" class=\"sublabel required\">Description:</label>\n                <textarea id=\"description\" name=\"description\" ng-model=\"Product.currentProduct.description\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Enter a description of the product...\" required></textarea>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <div class=\"three_column_1\">\n                    <label>Image Alt (meta name for Google Search):</label>\n                    <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Product.currentProduct.imgAlt\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Enter a meta title for the image...\" required>\n                </div>\n            </div>\n            <fieldset>\n                <div class=\"lineGroup full_width\">\n                    <div class=\"three_column_1\">\n                        <label for=\"imgAlt\" class=\"sublabel required\">Featured Image (front):</label>\n                        <img ng-src=\"/uploads/rpstore/{{Product.currentProduct.imgOneFront}}\" ng-if=\"Product.currentProduct.imgOneFront\"/>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <label>Image Path:</label>\n                        <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Product.currentProduct.imgOneFront\" type=\"text\" class=\"formTextfield_Large\" disabled required>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <div file-upload ratio=\"53:80\" model=\"Product.currentProduct.imgOneFront\"></div>\n                    </div>\n                </div>\n                <hr />\n                <div class=\"lineGroup full_width\">\n                    <div class=\"three_column_1\">\n                        <label for=\"imgOneBack\" class=\"sublabel required\">Featured Image (back):</label>\n                        <img ng-src=\"/uploads/rpstore/{{Product.currentProduct.imgOneBack}}\" ng-if=\"Product.currentProduct.imgOneBack\"/>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <label>Image Path:</label>\n                        <input id=\"imgOneBack\" name=\"imgOneBack\" ng-model=\"Product.currentProduct.imgOneBack\" type=\"text\" class=\"formTextfield_Large\" disabled required>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <div file-upload ratio=\"53:80\" model=\"Product.currentProduct.imgOneBack\"></div>\n                        <div notification></div>\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    </fieldset>\n</div>\n<div class=\"four_column_1 single-product\">\n    <div class=\"panel panel-default sidebar-menu\" >\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Product.editProduct()\" ng-if=\"Product.readOnly\" class=\"btn btn-to-cart\" type=\"button\">Edit Details</button>\n            <button ng-click=\"Product.saveProduct(Product.currentProduct, productForm)\" ng-if=\"!Product.readOnly\" class=\"btn btn-to-cart\" type=\"button\" ng-disabled=\"productForm.$invalid\">Save Changes</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Featured?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.featured\" selected=\"Product.currentProduct.featured\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">New?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.new\" selected=\"Product.currentProduct.new\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">On Sale?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.onSale\" selected=\"Product.currentProduct.onSale\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Display?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.displayStatus\" selected=\"Product.currentProduct.displayStatus\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-body\" ng-if=\"!Product.isNew\">\n            Updated: {{Product.currentProduct.updated | jsonDate | date: 'medium'}}\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\" ng-if=\"Product.readOnly\">\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Product.showDeleteModal(Product.currentProduct.id)\" class=\"btn btn-to-cart\" type=\"button\">Remove Product</button>\n            <div delete-record-modal delete=\"Product.removeProduct(Product.currentProduct.id)\">\n                <div class=\"small-12 text-right\">\n                    <i class=\"fa fa-times\" ng-click=\"Product.hideDeleteModal()\"></i>\n                </div>\n                <h4>Delete this movie record?</h4>\n            </div>\n        </div>\n    </div>\n</div>\n";
+},{}],46:[function(require,module,exports){
+module.exports = "<div class=\"four_column_3 single-product\">\n    <h2>Product ID: {{Product.currentProduct.id}}</h2>\n    <fieldset class=\"full_width\" ng-disabled=\"Product.readOnly\">\n        <form class=\"formoid-default-skyblue side_by_side\" style=\"margin:0 auto;\" name=\"productForm\" novalidate>\n            <h2>View/Edit</h2>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"name\" class=\"sublabel required\">Name:</label>\n                <input id=\"name\" name=\"name\" ng-model=\"Product.currentProduct.name\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Product name...\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"price\" class=\"sublabel required\">Price:</label>\n                <input id=\"price\" name=\"customerEmail\" ng-model=\"Product.currentProduct.price\" type=\"number\" class=\"formTextfield_Large\" placeholder=\"Numbers only...\" required>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"SKU\" class=\"sublabel required\">SKU:</label>\n                <input id=\"SKU\" name=\"SKU\" ng-model=\"Product.currentProduct.SKU\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Please enter an ID...\">\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Product.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <select name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Product.currentProduct.manufacturer\" ng-options=\"manufacturer as manufacturer.name for manufacturer in Product.manufacturers\" ng-change=\"Product.setMNU(Product.currentProduct.manufacturer)\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Product.isNew\">\n                <label for=\"manufacturerId\" class=\"sublabel required\">Manufacturer ID:</label>\n                <input name=\"manufacturerId\" id=\"manufacturerId\" ng-model=\"Product.currentProduct.manufacturerId\" type=\"text\" class=\"formTextfield_Large\" disabled>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"Product.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <select name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Product.currentProduct.gameSystem\" ng-options=\"system.searchValue as system.name for system in Product.currentMNU.gameSystem\" ng-disabled=\"!Product.currentProduct.manufacturer || Product.selectedMNU.name === 'Show All...'\" required></select>\n            </div>\n            <div class=\"lineGroup three_column_1\" ng-if=\"!Product.isNew\">\n                <label for=\"gameSystem\" class=\"sublabel required\">Game System ID:</label>\n                <input name=\"gameSystem\" id=\"gameSystem\" ng-model=\"Product.currentProduct.gameSystem\" type=\"text\" class=\"formTextfield_Large\" disabled></select>\n            </div>\n            <div class=\"lineGroup three_column_1\">\n                <label for=\"stockQty\" class=\"sublabel required\">Stock:</label>\n                <input id=\"stockQty\" name=\"stockQty\" ng-model=\"Product.currentProduct.stockQty\" type=\"number\" class=\"formTextfield_Large\" placeholder=\"Current stock quantity...\" required>\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"color\" class=\"sublabel\"> Color:</label>\n                <input id=\"color\" name=\"color\" ng-model=\"Product.currentProduct.color\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Does this product have a color for grouping...?\">\n            </div>\n            <div class=\"lineGroup two_column_1\">\n                <label for=\"category\" class=\"sublabel required\">Category:</label>\n                <input id=\"category\" name=\"category\" ng-model=\"Product.currentProduct.category\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Category for sorting...\" required>\n            </div>\n\n            <div class=\"lineGroup full_width\">\n                <label for=\"tags\" class=\"sublabel required\">Tags:</label>\n                <input id=\"tags\" name=\"tags\" ng-model=\"Product.currentProduct.tags\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Comma separated tags...\" required>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <label for=\"description\" class=\"sublabel required\">Description:</label>\n                <textarea id=\"description\" name=\"description\" ng-model=\"Product.currentProduct.description\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Enter a description of the product...\" required></textarea>\n            </div>\n            <div class=\"lineGroup full_width\">\n                <div class=\"three_column_1\">\n                    <label>Image Alt (meta name for Google Search):</label>\n                    <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Product.currentProduct.imgAlt\" type=\"text\" class=\"formTextfield_Large\" placeholder=\"Enter a meta title for the image...\" required>\n                </div>\n            </div>\n            <fieldset>\n                <div class=\"lineGroup full_width\">\n                    <div class=\"three_column_1\">\n                        <label for=\"imgAlt\" class=\"sublabel required\">Featured Image (front):</label>\n                        <img ng-src=\"/uploads/rpstore/{{Product.currentProduct.imgOneFront}}\" ng-if=\"Product.currentProduct.imgOneFront\"/>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <label>Image Path:</label>\n                        <input id=\"imgAlt\" name=\"imgAlt\" ng-model=\"Product.currentProduct.imgOneFront\" type=\"text\" class=\"formTextfield_Large\" disabled required>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <div file-upload ratio=\"53:80\" model=\"Product.currentProduct.imgOneFront\" param=\"'rpstore'\"></div>\n                    </div>\n                </div>\n                <hr />\n                <div class=\"lineGroup full_width\">\n                    <div class=\"three_column_1\">\n                        <label for=\"imgOneBack\" class=\"sublabel required\">Featured Image (back):</label>\n                        <img ng-src=\"/uploads/rpstore/{{Product.currentProduct.imgOneBack}}\" ng-if=\"Product.currentProduct.imgOneBack\"/>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <label>Image Path:</label>\n                        <input id=\"imgOneBack\" name=\"imgOneBack\" ng-model=\"Product.currentProduct.imgOneBack\" type=\"text\" class=\"formTextfield_Large\" disabled required>\n                    </div>\n                    <div class=\"three_column_1\">\n                        <div file-upload ratio=\"53:80\" model=\"Product.currentProduct.imgOneBack\" param=\"'rpstore'\"></div>\n                        <div notification></div>\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    </fieldset>\n</div>\n<div class=\"four_column_1 single-product\">\n    <div class=\"panel panel-default sidebar-menu\" >\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Product.editProduct()\" ng-if=\"Product.readOnly\" class=\"btn btn-to-cart\" type=\"button\">Edit Details</button>\n            <button ng-click=\"Product.saveProduct(Product.currentProduct, productForm)\" ng-if=\"!Product.readOnly\" class=\"btn btn-to-cart\" type=\"button\" ng-disabled=\"productForm.$invalid\">Save Changes</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Featured?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.featured\" selected=\"Product.currentProduct.featured\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">New?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.new\" selected=\"Product.currentProduct.new\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">On Sale?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.onSale\" selected=\"Product.currentProduct.onSale\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Display?</h3>\n            <select name=\"statusSelect\" id=\"statusSelect\" ng-model=\"Product.currentProduct.displayStatus\" selected=\"Product.currentProduct.displayStatus\" ng-disabled=\"Product.readOnly\">\n              <option value=\"true\">Yes</option>\n              <option value=\"false\">No</option>\n            </select><br>\n        </div>\n        <div class=\"panel-body\" ng-if=\"!Product.isNew\">\n            Updated: {{Product.currentProduct.updated | jsonDate | date: 'medium'}}\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\" ng-if=\"Product.readOnly\">\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button ng-click=\"Product.showDeleteModal(Product.currentProduct.id)\" class=\"btn btn-to-cart\" type=\"button\">Remove Product</button>\n            <div delete-record-modal delete=\"Product.removeProduct(Product.currentProduct.id)\">\n                <div class=\"small-12 text-right\">\n                    <i class=\"fa fa-times\" ng-click=\"Product.hideDeleteModal()\"></i>\n                </div>\n                <h4>Delete this movie record?</h4>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
-},{}],48:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 module.exports = "<div class=\"four_column_1\">\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Create Product</h3>\n        </div>\n        <div class=\"panel-body\">\n            <button class=\"btn btn-to-cart\" ui-sref=\"product({id: undefined})\"><span class=\"glyphicon glyphicon-plus\"></span> Add New Products</button>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Search</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Search selected filters:</label>\n            <div class=\"input-append span12\">\n                <input type=\"text\" class=\"search-query mac-style\" placeholder=\"Enter keyword...\" ng-model=\"query\">\n            </div>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Sort By</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Product results by:</label>\n                <select name=\"selectedSort\" id=\"selectedSort\" ng-model=\"Product.selectedSort\">\n                    <option value=\"id\">Product ID (ascending)</option>\n                    <option value=\"-id\">Product ID (descending)</option>\n                    <option value=\"-created\">Created (most recent)</option>\n                    <option value=\"created\">Created (ascending)</option>\n                    <option value=\"-updated\">Updated (descending)</option>\n                    <option value=\"updated\">Updated (ascending)</option>\n                    <option value=\"productTotal\">Product Total (low to high)</option>\n                    <option value=\"-productTotal\">Product Total (high to low)</option>\n                    <option value=\"-status\">Status</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Items Per Page</h3>\n        </div>\n        <div class=\"panel-body\">\n            <label>Now Showing:</label>\n                <select name=\"pageSize\" id=\"pageSize\" ng-model=\"Product.pageSize\">\n                    <option value=\"5\">5</option>\n                    <option value=\"20\">20</option>\n                    <option value=\"50\">50</option>\n                    <option value=\"100\">100</option>\n                </select>\n            </select>\n        </div>\n    </div>\n    <!--\n    <div class=\"panel panel-default sidebar-menu\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Reset Filter Selection</h3>\n        </div>\n        <div class=\"panel-body\" style=\"text-align:center;\">\n            <button class=\"btn btn-default\" style=\"width:100%;\" ng-click=\"store.reset()\">Reset</button>\n        </div>\n    </div>\n    -->\n</div>\n<div class=\"four_column_3\">\n        <div class=\"mobile-table\">\n          <table border=\"1\" class=\"mobile-table\">\n            <thead class=\"cf\">\n              <tr>\n                <th><strong>Product ID</strong></th>\n                <th><strong>Name</strong></th>\n                <th><strong>Price</strong></th>\n                <th><strong>Stock Qty</strong></th>\n                <th><strong>Featured?</strong></th>\n                <th><strong>Last Updated</strong></th>\n                <th><strong>View/Edit</strong></th>\n              </tr>\n            </thead>\n          <tbody>\n            <!--START REPEAT-->\n            <tr dir-paginate=\"product in Product.products | filter: query | orderBy: Product.selectedSort | itemsPerPage: Product.pageSize\" >\n              <td data-title=\"Product ID\"><a ui-sref=\"product({ id: product.id })\">{{product.id}}</a></td>\n              <td data-title=\"Name\">{{product.name}}</td>\n              <td data-title=\"Price\">{{product.price}}</td>\n              <td data-title=\"Quantity\">{{product.stockQty}}</td>\n              <td data-title=\"Featured?\">{{product.featured}}</td>\n              <td data-title=\"Last Updated\">{{product.updatedAt | jsonDate | date: 'medium'}}</td>\n              <td data-title=\"View/Edit\"><a ui-sref=\"product({ id: product.id })\"><span class=\"glyphicon glyphicon-edit\"></span></a></td>\n            </tr>\n            <!--END REPEAT-->\n          </tbody>\n        </table>\n       \t<script>\n    \t/* Adds Header Labels for Mobile-Friendly */\n    \t\t(function ($) {\n    \t\t$.fn.rte = function () {\n    \t\t\tvar that = this;\n    \t\t\t\tthis.find('th').each(function (index) {\n    \t\t\t\t\tindex++;\n    \t\t\t\t\tthat.find('tr td:nth-child(' + index + ')').attr('data-title', that.find('th:nth-child(' + index + ')').text());\n    \t\t\t\t});\n    \t\t\t}\n    \t\t})(jQuery);\n    \t\t\t\t$('.mobile-table').rte();\n    \t</script>\n    </div>\n    <div class=\"full_width right\">\n        <dir-pagination-controls boundary-links=\"true\" ></dir-pagination-controls>\n    </div>\n</div>\n";
 
-},{}],49:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -5814,11 +5789,11 @@ angular.module('ngAnimate', [], function initAngularHelpers() {
 
 })(window, window.angular);
 
-},{}],50:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":49}],51:[function(require,module,exports){
+},{"./angular-animate":48}],50:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -6558,11 +6533,11 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 
 })(window, window.angular);
 
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 require('./angular-sanitize');
 module.exports = 'ngSanitize';
 
-},{"./angular-sanitize":51}],53:[function(require,module,exports){
+},{"./angular-sanitize":50}],52:[function(require,module,exports){
 /**
   * x is a value between 0 and 1, indicating where in the animation you are.
   */
@@ -7191,13 +7166,13 @@ angular.module('duScroll.scrollspy', ['duScroll.spyAPI'])
   };
 }]);
 
-},{}],54:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 require('angular');
 require('./angular-scroll');
 
 module.exports = 'duScroll';
 
-},{"./angular-scroll":53,"angular":61}],55:[function(require,module,exports){
+},{"./angular-scroll":52,"angular":60}],54:[function(require,module,exports){
 /*!
  * angular-ui-mask
  * https://github.com/angular-ui/ui-mask
@@ -7973,7 +7948,7 @@ angular.module('ui.mask', [])
         ]);
 
 }());
-},{}],56:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 //https://github.com/angular/angular.js/pull/10732
 
 var angular = require('angular');
@@ -7981,7 +7956,7 @@ var mask = require('./dist/mask');
 
 module.exports = 'ui.mask';
 
-},{"./dist/mask":55,"angular":61}],57:[function(require,module,exports){
+},{"./dist/mask":54,"angular":60}],56:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.18
@@ -12521,6 +12496,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
+<<<<<<< c92f8578e1c13a0e61b3233108efd8edbcea0043
 },{}],58:[function(require,module,exports){
 /**
  * dirPagination - AngularJS module for paginating (almost) anything.
@@ -13165,8 +13141,654 @@ angular.module('ui.router.state')
 },{}],59:[function(require,module,exports){
 require('./dirPagination');
 module.exports = 'angularUtils.directives.dirPagination';
+=======
+},{}],57:[function(require,module,exports){
+/**
+ * dirPagination - AngularJS module for paginating (almost) anything.
+ *
+ *
+ * Credits
+ * =======
+ *
+ * Daniel Tabuenca: https://groups.google.com/d/msg/angular/an9QpzqIYiM/r8v-3W1X5vcJ
+ * for the idea on how to dynamically invoke the ng-repeat directive.
+ *
+ * I borrowed a couple of lines and a few attribute names from the AngularUI Bootstrap project:
+ * https://github.com/angular-ui/bootstrap/blob/master/src/pagination/pagination.js
+ *
+ * Copyright 2014 Michael Bromley <michael@michaelbromley.co.uk>
+ */
 
-},{"./dirPagination":58}],60:[function(require,module,exports){
+(function() {
+
+    /**
+     * Config
+     */
+    var moduleName = 'angularUtils.directives.dirPagination';
+    var DEFAULT_ID = '__default';
+
+    /**
+     * Module
+     */
+    angular.module(moduleName, [])
+        .directive('dirPaginate', ['$compile', '$parse', 'paginationService', dirPaginateDirective])
+        .directive('dirPaginateNoCompile', noCompileDirective)
+        .directive('dirPaginationControls', ['paginationService', 'paginationTemplate', dirPaginationControlsDirective])
+        .filter('itemsPerPage', ['paginationService', itemsPerPageFilter])
+        .service('paginationService', paginationService)
+        .provider('paginationTemplate', paginationTemplateProvider)
+        .run(['$templateCache',dirPaginationControlsTemplateInstaller]);
+
+    function dirPaginateDirective($compile, $parse, paginationService) {
+
+        return  {
+            terminal: true,
+            multiElement: true,
+            priority: 100,
+            compile: dirPaginationCompileFn
+        };
+
+        function dirPaginationCompileFn(tElement, tAttrs){
+
+            var expression = tAttrs.dirPaginate;
+            // regex taken directly from https://github.com/angular/angular.js/blob/v1.4.x/src/ng/directive/ngRepeat.js#L339
+            var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+track\s+by\s+([\s\S]+?))?\s*$/);
+
+            var filterPattern = /\|\s*itemsPerPage\s*:\s*(.*\(\s*\w*\)|([^\)]*?(?=\s+as\s+))|[^\)]*)/;
+            if (match[2].match(filterPattern) === null) {
+                throw 'pagination directive: the \'itemsPerPage\' filter must be set.';
+            }
+            var itemsPerPageFilterRemoved = match[2].replace(filterPattern, '');
+            var collectionGetter = $parse(itemsPerPageFilterRemoved);
+
+            addNoCompileAttributes(tElement);
+
+            // If any value is specified for paginationId, we register the un-evaluated expression at this stage for the benefit of any
+            // dir-pagination-controls directives that may be looking for this ID.
+            var rawId = tAttrs.paginationId || DEFAULT_ID;
+            paginationService.registerInstance(rawId);
+
+            return function dirPaginationLinkFn(scope, element, attrs){
+
+                // Now that we have access to the `scope` we can interpolate any expression given in the paginationId attribute and
+                // potentially register a new ID if it evaluates to a different value than the rawId.
+                var paginationId = $parse(attrs.paginationId)(scope) || attrs.paginationId || DEFAULT_ID;
+                
+                // (TODO: this seems sound, but I'm reverting as many bug reports followed it's introduction in 0.11.0.
+                // Needs more investigation.)
+                // In case rawId != paginationId we deregister using rawId for the sake of general cleanliness
+                // before registering using paginationId
+                // paginationService.deregisterInstance(rawId);
+                paginationService.registerInstance(paginationId);
+
+                var repeatExpression = getRepeatExpression(expression, paginationId);
+                addNgRepeatToElement(element, attrs, repeatExpression);
+
+                removeTemporaryAttributes(element);
+                var compiled =  $compile(element);
+
+                var currentPageGetter = makeCurrentPageGetterFn(scope, attrs, paginationId);
+                paginationService.setCurrentPageParser(paginationId, currentPageGetter, scope);
+
+                if (typeof attrs.totalItems !== 'undefined') {
+                    paginationService.setAsyncModeTrue(paginationId);
+                    scope.$watch(function() {
+                        return $parse(attrs.totalItems)(scope);
+                    }, function (result) {
+                        if (0 <= result) {
+                            paginationService.setCollectionLength(paginationId, result);
+                        }
+                    });
+                } else {
+                    paginationService.setAsyncModeFalse(paginationId);
+                    scope.$watchCollection(function() {
+                        return collectionGetter(scope);
+                    }, function(collection) {
+                        if (collection) {
+                            var collectionLength = (collection instanceof Array) ? collection.length : Object.keys(collection).length;
+                            paginationService.setCollectionLength(paginationId, collectionLength);
+                        }
+                    });
+                }
+
+                // Delegate to the link function returned by the new compilation of the ng-repeat
+                compiled(scope);
+                 
+                // (TODO: Reverting this due to many bug reports in v 0.11.0. Needs investigation as the
+                // principle is sound)
+                // When the scope is destroyed, we make sure to remove the reference to it in paginationService
+                // so that it can be properly garbage collected
+                // scope.$on('$destroy', function destroyDirPagination() {
+                //     paginationService.deregisterInstance(paginationId);
+                // });
+            };
+        }
+
+        /**
+         * If a pagination id has been specified, we need to check that it is present as the second argument passed to
+         * the itemsPerPage filter. If it is not there, we add it and return the modified expression.
+         *
+         * @param expression
+         * @param paginationId
+         * @returns {*}
+         */
+        function getRepeatExpression(expression, paginationId) {
+            var repeatExpression,
+                idDefinedInFilter = !!expression.match(/(\|\s*itemsPerPage\s*:[^|]*:[^|]*)/);
+
+            if (paginationId !== DEFAULT_ID && !idDefinedInFilter) {
+                repeatExpression = expression.replace(/(\|\s*itemsPerPage\s*:\s*[^|\s]*)/, "$1 : '" + paginationId + "'");
+            } else {
+                repeatExpression = expression;
+            }
+
+            return repeatExpression;
+        }
+
+        /**
+         * Adds the ng-repeat directive to the element. In the case of multi-element (-start, -end) it adds the
+         * appropriate multi-element ng-repeat to the first and last element in the range.
+         * @param element
+         * @param attrs
+         * @param repeatExpression
+         */
+        function addNgRepeatToElement(element, attrs, repeatExpression) {
+            if (element[0].hasAttribute('dir-paginate-start') || element[0].hasAttribute('data-dir-paginate-start')) {
+                // using multiElement mode (dir-paginate-start, dir-paginate-end)
+                attrs.$set('ngRepeatStart', repeatExpression);
+                element.eq(element.length - 1).attr('ng-repeat-end', true);
+            } else {
+                attrs.$set('ngRepeat', repeatExpression);
+            }
+        }
+
+        /**
+         * Adds the dir-paginate-no-compile directive to each element in the tElement range.
+         * @param tElement
+         */
+        function addNoCompileAttributes(tElement) {
+            angular.forEach(tElement, function(el) {
+                if (el.nodeType === 1) {
+                    angular.element(el).attr('dir-paginate-no-compile', true);
+                }
+            });
+        }
+
+        /**
+         * Removes the variations on dir-paginate (data-, -start, -end) and the dir-paginate-no-compile directives.
+         * @param element
+         */
+        function removeTemporaryAttributes(element) {
+            angular.forEach(element, function(el) {
+                if (el.nodeType === 1) {
+                    angular.element(el).removeAttr('dir-paginate-no-compile');
+                }
+            });
+            element.eq(0).removeAttr('dir-paginate-start').removeAttr('dir-paginate').removeAttr('data-dir-paginate-start').removeAttr('data-dir-paginate');
+            element.eq(element.length - 1).removeAttr('dir-paginate-end').removeAttr('data-dir-paginate-end');
+        }
+
+        /**
+         * Creates a getter function for the current-page attribute, using the expression provided or a default value if
+         * no current-page expression was specified.
+         *
+         * @param scope
+         * @param attrs
+         * @param paginationId
+         * @returns {*}
+         */
+        function makeCurrentPageGetterFn(scope, attrs, paginationId) {
+            var currentPageGetter;
+            if (attrs.currentPage) {
+                currentPageGetter = $parse(attrs.currentPage);
+            } else {
+                // If the current-page attribute was not set, we'll make our own.
+                // Replace any non-alphanumeric characters which might confuse
+                // the $parse service and give unexpected results.
+                // See https://github.com/michaelbromley/angularUtils/issues/233
+                var defaultCurrentPage = (paginationId + '__currentPage').replace(/\W/g, '_');
+                scope[defaultCurrentPage] = 1;
+                currentPageGetter = $parse(defaultCurrentPage);
+            }
+            return currentPageGetter;
+        }
+    }
+
+    /**
+     * This is a helper directive that allows correct compilation when in multi-element mode (ie dir-paginate-start, dir-paginate-end).
+     * It is dynamically added to all elements in the dir-paginate compile function, and it prevents further compilation of
+     * any inner directives. It is then removed in the link function, and all inner directives are then manually compiled.
+     */
+    function noCompileDirective() {
+        return {
+            priority: 5000,
+            terminal: true
+        };
+    }
+
+    function dirPaginationControlsTemplateInstaller($templateCache) {
+        $templateCache.put('angularUtils.directives.dirPagination.template', '<ul class="pagination" ng-if="1 < pages.length || !autoHide"><li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }"><a href="" ng-click="setCurrent(1)">&laquo;</a></li><li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }"><a href="" ng-click="setCurrent(pagination.current - 1)">&lsaquo;</a></li><li ng-repeat="pageNumber in pages track by tracker(pageNumber, $index)" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == \'...\' || ( ! autoHide && pages.length === 1 ) }"><a href="" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a></li><li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }"><a href="" ng-click="setCurrent(pagination.current + 1)">&rsaquo;</a></li><li ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }"><a href="" ng-click="setCurrent(pagination.last)">&raquo;</a></li></ul>');
+    }
+
+    function dirPaginationControlsDirective(paginationService, paginationTemplate) {
+
+        var numberRegex = /^\d+$/;
+
+        var DDO = {
+            restrict: 'AE',
+            scope: {
+                maxSize: '=?',
+                onPageChange: '&?',
+                paginationId: '=?',
+                autoHide: '=?'
+            },
+            link: dirPaginationControlsLinkFn
+        };
+
+        // We need to check the paginationTemplate service to see whether a template path or
+        // string has been specified, and add the `template` or `templateUrl` property to
+        // the DDO as appropriate. The order of priority to decide which template to use is
+        // (highest priority first):
+        // 1. paginationTemplate.getString()
+        // 2. attrs.templateUrl
+        // 3. paginationTemplate.getPath()
+        var templateString = paginationTemplate.getString();
+        if (templateString !== undefined) {
+            DDO.template = templateString;
+        } else {
+            DDO.templateUrl = function(elem, attrs) {
+                return attrs.templateUrl || paginationTemplate.getPath();
+            };
+        }
+        return DDO;
+
+        function dirPaginationControlsLinkFn(scope, element, attrs) {
+
+            // rawId is the un-interpolated value of the pagination-id attribute. This is only important when the corresponding dir-paginate directive has
+            // not yet been linked (e.g. if it is inside an ng-if block), and in that case it prevents this controls directive from assuming that there is
+            // no corresponding dir-paginate directive and wrongly throwing an exception.
+            var rawId = attrs.paginationId ||  DEFAULT_ID;
+            var paginationId = scope.paginationId || attrs.paginationId ||  DEFAULT_ID;
+
+            if (!paginationService.isRegistered(paginationId) && !paginationService.isRegistered(rawId)) {
+                var idMessage = (paginationId !== DEFAULT_ID) ? ' (id: ' + paginationId + ') ' : ' ';
+                if (window.console) {
+                    console.warn('Pagination directive: the pagination controls' + idMessage + 'cannot be used without the corresponding pagination directive, which was not found at link time.');
+                }
+            }
+
+            if (!scope.maxSize) { scope.maxSize = 9; }
+            scope.autoHide = scope.autoHide === undefined ? true : scope.autoHide;
+            scope.directionLinks = angular.isDefined(attrs.directionLinks) ? scope.$parent.$eval(attrs.directionLinks) : true;
+            scope.boundaryLinks = angular.isDefined(attrs.boundaryLinks) ? scope.$parent.$eval(attrs.boundaryLinks) : false;
+
+            var paginationRange = Math.max(scope.maxSize, 5);
+            scope.pages = [];
+            scope.pagination = {
+                last: 1,
+                current: 1
+            };
+            scope.range = {
+                lower: 1,
+                upper: 1,
+                total: 1
+            };
+
+            scope.$watch('maxSize', function(val) {
+                if (val) {
+                    paginationRange = Math.max(scope.maxSize, 5);
+                    generatePagination();
+                }
+            });
+
+            scope.$watch(function() {
+                if (paginationService.isRegistered(paginationId)) {
+                    return (paginationService.getCollectionLength(paginationId) + 1) * paginationService.getItemsPerPage(paginationId);
+                }
+            }, function(length) {
+                if (0 < length) {
+                    generatePagination();
+                }
+            });
+
+            scope.$watch(function() {
+                if (paginationService.isRegistered(paginationId)) {
+                    return (paginationService.getItemsPerPage(paginationId));
+                }
+            }, function(current, previous) {
+                if (current != previous && typeof previous !== 'undefined') {
+                    goToPage(scope.pagination.current);
+                }
+            });
+
+            scope.$watch(function() {
+                if (paginationService.isRegistered(paginationId)) {
+                    return paginationService.getCurrentPage(paginationId);
+                }
+            }, function(currentPage, previousPage) {
+                if (currentPage != previousPage) {
+                    goToPage(currentPage);
+                }
+            });
+
+            scope.setCurrent = function(num) {
+                if (paginationService.isRegistered(paginationId) && isValidPageNumber(num)) {
+                    num = parseInt(num, 10);
+                    paginationService.setCurrentPage(paginationId, num);
+                }
+            };
+
+            /**
+             * Custom "track by" function which allows for duplicate "..." entries on long lists,
+             * yet fixes the problem of wrongly-highlighted links which happens when using
+             * "track by $index" - see https://github.com/michaelbromley/angularUtils/issues/153
+             * @param id
+             * @param index
+             * @returns {string}
+             */
+            scope.tracker = function(id, index) {
+                return id + '_' + index;
+            };
+
+            function goToPage(num) {
+                if (paginationService.isRegistered(paginationId) && isValidPageNumber(num)) {
+                    var oldPageNumber = scope.pagination.current;
+
+                    scope.pages = generatePagesArray(num, paginationService.getCollectionLength(paginationId), paginationService.getItemsPerPage(paginationId), paginationRange);
+                    scope.pagination.current = num;
+                    updateRangeValues();
+
+                    // if a callback has been set, then call it with the page number as the first argument
+                    // and the previous page number as a second argument
+                    if (scope.onPageChange) {
+                        scope.onPageChange({
+                            newPageNumber : num,
+                            oldPageNumber : oldPageNumber
+                        });
+                    }
+                }
+            }
+
+            function generatePagination() {
+                if (paginationService.isRegistered(paginationId)) {
+                    var page = parseInt(paginationService.getCurrentPage(paginationId)) || 1;
+                    scope.pages = generatePagesArray(page, paginationService.getCollectionLength(paginationId), paginationService.getItemsPerPage(paginationId), paginationRange);
+                    scope.pagination.current = page;
+                    scope.pagination.last = scope.pages[scope.pages.length - 1];
+                    if (scope.pagination.last < scope.pagination.current) {
+                        scope.setCurrent(scope.pagination.last);
+                    } else {
+                        updateRangeValues();
+                    }
+                }
+            }
+
+            /**
+             * This function updates the values (lower, upper, total) of the `scope.range` object, which can be used in the pagination
+             * template to display the current page range, e.g. "showing 21 - 40 of 144 results";
+             */
+            function updateRangeValues() {
+                if (paginationService.isRegistered(paginationId)) {
+                    var currentPage = paginationService.getCurrentPage(paginationId),
+                        itemsPerPage = paginationService.getItemsPerPage(paginationId),
+                        totalItems = paginationService.getCollectionLength(paginationId);
+
+                    scope.range.lower = (currentPage - 1) * itemsPerPage + 1;
+                    scope.range.upper = Math.min(currentPage * itemsPerPage, totalItems);
+                    scope.range.total = totalItems;
+                }
+            }
+            function isValidPageNumber(num) {
+                return (numberRegex.test(num) && (0 < num && num <= scope.pagination.last));
+            }
+        }
+
+        /**
+         * Generate an array of page numbers (or the '...' string) which is used in an ng-repeat to generate the
+         * links used in pagination
+         *
+         * @param currentPage
+         * @param rowsPerPage
+         * @param paginationRange
+         * @param collectionLength
+         * @returns {Array}
+         */
+        function generatePagesArray(currentPage, collectionLength, rowsPerPage, paginationRange) {
+            var pages = [];
+            var totalPages = Math.ceil(collectionLength / rowsPerPage);
+            var halfWay = Math.ceil(paginationRange / 2);
+            var position;
+
+            if (currentPage <= halfWay) {
+                position = 'start';
+            } else if (totalPages - halfWay < currentPage) {
+                position = 'end';
+            } else {
+                position = 'middle';
+            }
+
+            var ellipsesNeeded = paginationRange < totalPages;
+            var i = 1;
+            while (i <= totalPages && i <= paginationRange) {
+                var pageNumber = calculatePageNumber(i, currentPage, paginationRange, totalPages);
+
+                var openingEllipsesNeeded = (i === 2 && (position === 'middle' || position === 'end'));
+                var closingEllipsesNeeded = (i === paginationRange - 1 && (position === 'middle' || position === 'start'));
+                if (ellipsesNeeded && (openingEllipsesNeeded || closingEllipsesNeeded)) {
+                    pages.push('...');
+                } else {
+                    pages.push(pageNumber);
+                }
+                i ++;
+            }
+            return pages;
+        }
+
+        /**
+         * Given the position in the sequence of pagination links [i], figure out what page number corresponds to that position.
+         *
+         * @param i
+         * @param currentPage
+         * @param paginationRange
+         * @param totalPages
+         * @returns {*}
+         */
+        function calculatePageNumber(i, currentPage, paginationRange, totalPages) {
+            var halfWay = Math.ceil(paginationRange/2);
+            if (i === paginationRange) {
+                return totalPages;
+            } else if (i === 1) {
+                return i;
+            } else if (paginationRange < totalPages) {
+                if (totalPages - halfWay < currentPage) {
+                    return totalPages - paginationRange + i;
+                } else if (halfWay < currentPage) {
+                    return currentPage - halfWay + i;
+                } else {
+                    return i;
+                }
+            } else {
+                return i;
+            }
+        }
+    }
+
+    /**
+     * This filter slices the collection into pages based on the current page number and number of items per page.
+     * @param paginationService
+     * @returns {Function}
+     */
+    function itemsPerPageFilter(paginationService) {
+
+        return function(collection, itemsPerPage, paginationId) {
+            if (typeof (paginationId) === 'undefined') {
+                paginationId = DEFAULT_ID;
+            }
+            if (!paginationService.isRegistered(paginationId)) {
+                throw 'pagination directive: the itemsPerPage id argument (id: ' + paginationId + ') does not match a registered pagination-id.';
+            }
+            var end;
+            var start;
+            if (angular.isObject(collection)) {
+                itemsPerPage = parseInt(itemsPerPage) || 9999999999;
+                if (paginationService.isAsyncMode(paginationId)) {
+                    start = 0;
+                } else {
+                    start = (paginationService.getCurrentPage(paginationId) - 1) * itemsPerPage;
+                }
+                end = start + itemsPerPage;
+                paginationService.setItemsPerPage(paginationId, itemsPerPage);
+
+                if (collection instanceof Array) {
+                    // the array just needs to be sliced
+                    return collection.slice(start, end);
+                } else {
+                    // in the case of an object, we need to get an array of keys, slice that, then map back to
+                    // the original object.
+                    var slicedObject = {};
+                    angular.forEach(keys(collection).slice(start, end), function(key) {
+                        slicedObject[key] = collection[key];
+                    });
+                    return slicedObject;
+                }
+            } else {
+                return collection;
+            }
+        };
+    }
+
+    /**
+     * Shim for the Object.keys() method which does not exist in IE < 9
+     * @param obj
+     * @returns {Array}
+     */
+    function keys(obj) {
+        if (!Object.keys) {
+            var objKeys = [];
+            for (var i in obj) {
+                if (obj.hasOwnProperty(i)) {
+                    objKeys.push(i);
+                }
+            }
+            return objKeys;
+        } else {
+            return Object.keys(obj);
+        }
+    }
+
+    /**
+     * This service allows the various parts of the module to communicate and stay in sync.
+     */
+    function paginationService() {
+
+        var instances = {};
+        var lastRegisteredInstance;
+
+        this.registerInstance = function(instanceId) {
+            if (typeof instances[instanceId] === 'undefined') {
+                instances[instanceId] = {
+                    asyncMode: false
+                };
+                lastRegisteredInstance = instanceId;
+            }
+        };
+
+        this.deregisterInstance = function(instanceId) {
+            delete instances[instanceId];
+        };
+        
+        this.isRegistered = function(instanceId) {
+            return (typeof instances[instanceId] !== 'undefined');
+        };
+
+        this.getLastInstanceId = function() {
+            return lastRegisteredInstance;
+        };
+
+        this.setCurrentPageParser = function(instanceId, val, scope) {
+            instances[instanceId].currentPageParser = val;
+            instances[instanceId].context = scope;
+        };
+        this.setCurrentPage = function(instanceId, val) {
+            instances[instanceId].currentPageParser.assign(instances[instanceId].context, val);
+        };
+        this.getCurrentPage = function(instanceId) {
+            var parser = instances[instanceId].currentPageParser;
+            return parser ? parser(instances[instanceId].context) : 1;
+        };
+
+        this.setItemsPerPage = function(instanceId, val) {
+            instances[instanceId].itemsPerPage = val;
+        };
+        this.getItemsPerPage = function(instanceId) {
+            return instances[instanceId].itemsPerPage;
+        };
+
+        this.setCollectionLength = function(instanceId, val) {
+            instances[instanceId].collectionLength = val;
+        };
+        this.getCollectionLength = function(instanceId) {
+            return instances[instanceId].collectionLength;
+        };
+
+        this.setAsyncModeTrue = function(instanceId) {
+            instances[instanceId].asyncMode = true;
+        };
+
+        this.setAsyncModeFalse = function(instanceId) {
+            instances[instanceId].asyncMode = false;
+        };
+
+        this.isAsyncMode = function(instanceId) {
+            return instances[instanceId].asyncMode;
+        };
+    }
+
+    /**
+     * This provider allows global configuration of the template path used by the dir-pagination-controls directive.
+     */
+    function paginationTemplateProvider() {
+
+        var templatePath = 'angularUtils.directives.dirPagination.template';
+        var templateString;
+
+        /**
+         * Set a templateUrl to be used by all instances of <dir-pagination-controls>
+         * @param {String} path
+         */
+        this.setPath = function(path) {
+            templatePath = path;
+        };
+
+        /**
+         * Set a string of HTML to be used as a template by all instances
+         * of <dir-pagination-controls>. If both a path *and* a string have been set,
+         * the string takes precedence.
+         * @param {String} str
+         */
+        this.setString = function(str) {
+            templateString = str;
+        };
+
+        this.$get = function() {
+            return {
+                getPath: function() {
+                    return templatePath;
+                },
+                getString: function() {
+                    return templateString;
+                }
+            };
+        };
+    }
+})();
+
+},{}],58:[function(require,module,exports){
+require('./dirPagination');
+module.exports = 'angularUtils.directives.dirPagination';
+>>>>>>> Fixed file upload bug
+
+},{"./dirPagination":57}],59:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -44935,11 +45557,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],61:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":60}],62:[function(require,module,exports){
+},{"./angular":59}],61:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -44974,21 +45596,21 @@ define(String.prototype, "padRight", "".padEnd);
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"core-js/fn/regexp/escape":63,"core-js/shim":356,"regenerator-runtime/runtime":360}],63:[function(require,module,exports){
+},{"core-js/fn/regexp/escape":62,"core-js/shim":355,"regenerator-runtime/runtime":359}],62:[function(require,module,exports){
 require('../../modules/core.regexp.escape');
 module.exports = require('../../modules/_core').RegExp.escape;
-},{"../../modules/_core":84,"../../modules/core.regexp.escape":180}],64:[function(require,module,exports){
+},{"../../modules/_core":83,"../../modules/core.regexp.escape":179}],63:[function(require,module,exports){
 module.exports = function(it){
   if(typeof it != 'function')throw TypeError(it + ' is not a function!');
   return it;
 };
-},{}],65:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var cof = require('./_cof');
 module.exports = function(it, msg){
   if(typeof it != 'number' && cof(it) != 'Number')throw TypeError(msg);
   return +it;
 };
-},{"./_cof":79}],66:[function(require,module,exports){
+},{"./_cof":78}],65:[function(require,module,exports){
 // 22.1.3.31 Array.prototype[@@unscopables]
 var UNSCOPABLES = require('./_wks')('unscopables')
   , ArrayProto  = Array.prototype;
@@ -44996,19 +45618,19 @@ if(ArrayProto[UNSCOPABLES] == undefined)require('./_hide')(ArrayProto, UNSCOPABL
 module.exports = function(key){
   ArrayProto[UNSCOPABLES][key] = true;
 };
-},{"./_hide":101,"./_wks":178}],67:[function(require,module,exports){
+},{"./_hide":100,"./_wks":177}],66:[function(require,module,exports){
 module.exports = function(it, Constructor, name, forbiddenField){
   if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
     throw TypeError(name + ': incorrect invocation!');
   } return it;
 };
-},{}],68:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 var isObject = require('./_is-object');
 module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
-},{"./_is-object":110}],69:[function(require,module,exports){
+},{"./_is-object":109}],68:[function(require,module,exports){
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 'use strict';
 var toObject = require('./_to-object')
@@ -45035,7 +45657,7 @@ module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0,
     from += inc;
   } return O;
 };
-},{"./_to-index":166,"./_to-length":169,"./_to-object":170}],70:[function(require,module,exports){
+},{"./_to-index":165,"./_to-length":168,"./_to-object":169}],69:[function(require,module,exports){
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 'use strict';
 var toObject = require('./_to-object')
@@ -45051,7 +45673,7 @@ module.exports = function fill(value /*, start = 0, end = @length */){
   while(endPos > index)O[index++] = value;
   return O;
 };
-},{"./_to-index":166,"./_to-length":169,"./_to-object":170}],71:[function(require,module,exports){
+},{"./_to-index":165,"./_to-length":168,"./_to-object":169}],70:[function(require,module,exports){
 var forOf = require('./_for-of');
 
 module.exports = function(iter, ITERATOR){
@@ -45060,7 +45682,7 @@ module.exports = function(iter, ITERATOR){
   return result;
 };
 
-},{"./_for-of":98}],72:[function(require,module,exports){
+},{"./_for-of":97}],71:[function(require,module,exports){
 // false -> Array#indexOf
 // true  -> Array#includes
 var toIObject = require('./_to-iobject')
@@ -45082,7 +45704,7 @@ module.exports = function(IS_INCLUDES){
     } return !IS_INCLUDES && -1;
   };
 };
-},{"./_to-index":166,"./_to-iobject":168,"./_to-length":169}],73:[function(require,module,exports){
+},{"./_to-index":165,"./_to-iobject":167,"./_to-length":168}],72:[function(require,module,exports){
 // 0 -> Array#forEach
 // 1 -> Array#map
 // 2 -> Array#filter
@@ -45127,7 +45749,7 @@ module.exports = function(TYPE, $create){
     return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
   };
 };
-},{"./_array-species-create":76,"./_ctx":86,"./_iobject":106,"./_to-length":169,"./_to-object":170}],74:[function(require,module,exports){
+},{"./_array-species-create":75,"./_ctx":85,"./_iobject":105,"./_to-length":168,"./_to-object":169}],73:[function(require,module,exports){
 var aFunction = require('./_a-function')
   , toObject  = require('./_to-object')
   , IObject   = require('./_iobject')
@@ -45156,7 +45778,7 @@ module.exports = function(that, callbackfn, aLen, memo, isRight){
   }
   return memo;
 };
-},{"./_a-function":64,"./_iobject":106,"./_to-length":169,"./_to-object":170}],75:[function(require,module,exports){
+},{"./_a-function":63,"./_iobject":105,"./_to-length":168,"./_to-object":169}],74:[function(require,module,exports){
 var isObject = require('./_is-object')
   , isArray  = require('./_is-array')
   , SPECIES  = require('./_wks')('species');
@@ -45173,14 +45795,14 @@ module.exports = function(original){
     }
   } return C === undefined ? Array : C;
 };
-},{"./_is-array":108,"./_is-object":110,"./_wks":178}],76:[function(require,module,exports){
+},{"./_is-array":107,"./_is-object":109,"./_wks":177}],75:[function(require,module,exports){
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
 var speciesConstructor = require('./_array-species-constructor');
 
 module.exports = function(original, length){
   return new (speciesConstructor(original))(length);
 };
-},{"./_array-species-constructor":75}],77:[function(require,module,exports){
+},{"./_array-species-constructor":74}],76:[function(require,module,exports){
 'use strict';
 var aFunction  = require('./_a-function')
   , isObject   = require('./_is-object')
@@ -45205,7 +45827,7 @@ module.exports = Function.bind || function bind(that /*, args... */){
   if(isObject(fn.prototype))bound.prototype = fn.prototype;
   return bound;
 };
-},{"./_a-function":64,"./_invoke":105,"./_is-object":110}],78:[function(require,module,exports){
+},{"./_a-function":63,"./_invoke":104,"./_is-object":109}],77:[function(require,module,exports){
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = require('./_cof')
   , TAG = require('./_wks')('toStringTag')
@@ -45229,13 +45851,13 @@ module.exports = function(it){
     // ES3 arguments fallback
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
-},{"./_cof":79,"./_wks":178}],79:[function(require,module,exports){
+},{"./_cof":78,"./_wks":177}],78:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = function(it){
   return toString.call(it).slice(8, -1);
 };
-},{}],80:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 'use strict';
 var dP          = require('./_object-dp').f
   , create      = require('./_object-create')
@@ -45378,7 +46000,7 @@ module.exports = {
     setSpecies(NAME);
   }
 };
-},{"./_an-instance":67,"./_ctx":86,"./_defined":88,"./_descriptors":89,"./_for-of":98,"./_iter-define":114,"./_iter-step":116,"./_meta":123,"./_object-create":127,"./_object-dp":128,"./_redefine-all":147,"./_set-species":152}],81:[function(require,module,exports){
+},{"./_an-instance":66,"./_ctx":85,"./_defined":87,"./_descriptors":88,"./_for-of":97,"./_iter-define":113,"./_iter-step":115,"./_meta":122,"./_object-create":126,"./_object-dp":127,"./_redefine-all":146,"./_set-species":151}],80:[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var classof = require('./_classof')
   , from    = require('./_array-from-iterable');
@@ -45388,7 +46010,7 @@ module.exports = function(NAME){
     return from(this);
   };
 };
-},{"./_array-from-iterable":71,"./_classof":78}],82:[function(require,module,exports){
+},{"./_array-from-iterable":70,"./_classof":77}],81:[function(require,module,exports){
 'use strict';
 var redefineAll       = require('./_redefine-all')
   , getWeak           = require('./_meta').getWeak
@@ -45472,7 +46094,7 @@ module.exports = {
   },
   ufstore: uncaughtFrozenStore
 };
-},{"./_an-instance":67,"./_an-object":68,"./_array-methods":73,"./_for-of":98,"./_has":100,"./_is-object":110,"./_meta":123,"./_redefine-all":147}],83:[function(require,module,exports){
+},{"./_an-instance":66,"./_an-object":67,"./_array-methods":72,"./_for-of":97,"./_has":99,"./_is-object":109,"./_meta":122,"./_redefine-all":146}],82:[function(require,module,exports){
 'use strict';
 var global            = require('./_global')
   , $export           = require('./_export')
@@ -45558,10 +46180,10 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 
   return C;
 };
-},{"./_an-instance":67,"./_export":93,"./_fails":95,"./_for-of":98,"./_global":99,"./_inherit-if-required":104,"./_is-object":110,"./_iter-detect":115,"./_meta":123,"./_redefine":148,"./_redefine-all":147,"./_set-to-string-tag":153}],84:[function(require,module,exports){
+},{"./_an-instance":66,"./_export":92,"./_fails":94,"./_for-of":97,"./_global":98,"./_inherit-if-required":103,"./_is-object":109,"./_iter-detect":114,"./_meta":122,"./_redefine":147,"./_redefine-all":146,"./_set-to-string-tag":152}],83:[function(require,module,exports){
 var core = module.exports = {version: '2.4.0'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],85:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 'use strict';
 var $defineProperty = require('./_object-dp')
   , createDesc      = require('./_property-desc');
@@ -45570,7 +46192,7 @@ module.exports = function(object, index, value){
   if(index in object)$defineProperty.f(object, index, createDesc(0, value));
   else object[index] = value;
 };
-},{"./_object-dp":128,"./_property-desc":146}],86:[function(require,module,exports){
+},{"./_object-dp":127,"./_property-desc":145}],85:[function(require,module,exports){
 // optional / simple context binding
 var aFunction = require('./_a-function');
 module.exports = function(fn, that, length){
@@ -45591,7 +46213,7 @@ module.exports = function(fn, that, length){
     return fn.apply(that, arguments);
   };
 };
-},{"./_a-function":64}],87:[function(require,module,exports){
+},{"./_a-function":63}],86:[function(require,module,exports){
 'use strict';
 var anObject    = require('./_an-object')
   , toPrimitive = require('./_to-primitive')
@@ -45601,18 +46223,18 @@ module.exports = function(hint){
   if(hint !== 'string' && hint !== NUMBER && hint !== 'default')throw TypeError('Incorrect hint');
   return toPrimitive(anObject(this), hint != NUMBER);
 };
-},{"./_an-object":68,"./_to-primitive":171}],88:[function(require,module,exports){
+},{"./_an-object":67,"./_to-primitive":170}],87:[function(require,module,exports){
 // 7.2.1 RequireObjectCoercible(argument)
 module.exports = function(it){
   if(it == undefined)throw TypeError("Can't call method on  " + it);
   return it;
 };
-},{}],89:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 // Thank's IE8 for his funny defineProperty
 module.exports = !require('./_fails')(function(){
   return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"./_fails":95}],90:[function(require,module,exports){
+},{"./_fails":94}],89:[function(require,module,exports){
 var isObject = require('./_is-object')
   , document = require('./_global').document
   // in old IE typeof document.createElement is 'object'
@@ -45620,12 +46242,12 @@ var isObject = require('./_is-object')
 module.exports = function(it){
   return is ? document.createElement(it) : {};
 };
-},{"./_global":99,"./_is-object":110}],91:[function(require,module,exports){
+},{"./_global":98,"./_is-object":109}],90:[function(require,module,exports){
 // IE 8- don't enum bug keys
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
-},{}],92:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 // all enumerable object keys, includes symbols
 var getKeys = require('./_object-keys')
   , gOPS    = require('./_object-gops')
@@ -45641,7 +46263,7 @@ module.exports = function(it){
     while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
   } return result;
 };
-},{"./_object-gops":134,"./_object-keys":137,"./_object-pie":138}],93:[function(require,module,exports){
+},{"./_object-gops":133,"./_object-keys":136,"./_object-pie":137}],92:[function(require,module,exports){
 var global    = require('./_global')
   , core      = require('./_core')
   , hide      = require('./_hide')
@@ -45685,7 +46307,7 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library` 
 module.exports = $export;
-},{"./_core":84,"./_ctx":86,"./_global":99,"./_hide":101,"./_redefine":148}],94:[function(require,module,exports){
+},{"./_core":83,"./_ctx":85,"./_global":98,"./_hide":100,"./_redefine":147}],93:[function(require,module,exports){
 var MATCH = require('./_wks')('match');
 module.exports = function(KEY){
   var re = /./;
@@ -45698,7 +46320,7 @@ module.exports = function(KEY){
     } catch(f){ /* empty */ }
   } return true;
 };
-},{"./_wks":178}],95:[function(require,module,exports){
+},{"./_wks":177}],94:[function(require,module,exports){
 module.exports = function(exec){
   try {
     return !!exec();
@@ -45706,7 +46328,7 @@ module.exports = function(exec){
     return true;
   }
 };
-},{}],96:[function(require,module,exports){
+},{}],95:[function(require,module,exports){
 'use strict';
 var hide     = require('./_hide')
   , redefine = require('./_redefine')
@@ -45735,7 +46357,7 @@ module.exports = function(KEY, length, exec){
     );
   }
 };
-},{"./_defined":88,"./_fails":95,"./_hide":101,"./_redefine":148,"./_wks":178}],97:[function(require,module,exports){
+},{"./_defined":87,"./_fails":94,"./_hide":100,"./_redefine":147,"./_wks":177}],96:[function(require,module,exports){
 'use strict';
 // 21.2.5.3 get RegExp.prototype.flags
 var anObject = require('./_an-object');
@@ -45749,7 +46371,7 @@ module.exports = function(){
   if(that.sticky)     result += 'y';
   return result;
 };
-},{"./_an-object":68}],98:[function(require,module,exports){
+},{"./_an-object":67}],97:[function(require,module,exports){
 var ctx         = require('./_ctx')
   , call        = require('./_iter-call')
   , isArrayIter = require('./_is-array-iter')
@@ -45775,17 +46397,17 @@ var exports = module.exports = function(iterable, entries, fn, that, ITERATOR){
 };
 exports.BREAK  = BREAK;
 exports.RETURN = RETURN;
-},{"./_an-object":68,"./_ctx":86,"./_is-array-iter":107,"./_iter-call":112,"./_to-length":169,"./core.get-iterator-method":179}],99:[function(require,module,exports){
+},{"./_an-object":67,"./_ctx":85,"./_is-array-iter":106,"./_iter-call":111,"./_to-length":168,"./core.get-iterator-method":178}],98:[function(require,module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
   ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
 if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],100:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function(it, key){
   return hasOwnProperty.call(it, key);
 };
-},{}],101:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 var dP         = require('./_object-dp')
   , createDesc = require('./_property-desc');
 module.exports = require('./_descriptors') ? function(object, key, value){
@@ -45794,13 +46416,13 @@ module.exports = require('./_descriptors') ? function(object, key, value){
   object[key] = value;
   return object;
 };
-},{"./_descriptors":89,"./_object-dp":128,"./_property-desc":146}],102:[function(require,module,exports){
+},{"./_descriptors":88,"./_object-dp":127,"./_property-desc":145}],101:[function(require,module,exports){
 module.exports = require('./_global').document && document.documentElement;
-},{"./_global":99}],103:[function(require,module,exports){
+},{"./_global":98}],102:[function(require,module,exports){
 module.exports = !require('./_descriptors') && !require('./_fails')(function(){
   return Object.defineProperty(require('./_dom-create')('div'), 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"./_descriptors":89,"./_dom-create":90,"./_fails":95}],104:[function(require,module,exports){
+},{"./_descriptors":88,"./_dom-create":89,"./_fails":94}],103:[function(require,module,exports){
 var isObject       = require('./_is-object')
   , setPrototypeOf = require('./_set-proto').set;
 module.exports = function(that, target, C){
@@ -45809,7 +46431,7 @@ module.exports = function(that, target, C){
     setPrototypeOf(that, P);
   } return that;
 };
-},{"./_is-object":110,"./_set-proto":151}],105:[function(require,module,exports){
+},{"./_is-object":109,"./_set-proto":150}],104:[function(require,module,exports){
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
 module.exports = function(fn, args, that){
   var un = that === undefined;
@@ -45826,13 +46448,13 @@ module.exports = function(fn, args, that){
                       : fn.call(that, args[0], args[1], args[2], args[3]);
   } return              fn.apply(that, args);
 };
-},{}],106:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 var cof = require('./_cof');
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
-},{"./_cof":79}],107:[function(require,module,exports){
+},{"./_cof":78}],106:[function(require,module,exports){
 // check on default Array iterator
 var Iterators  = require('./_iterators')
   , ITERATOR   = require('./_wks')('iterator')
@@ -45841,24 +46463,24 @@ var Iterators  = require('./_iterators')
 module.exports = function(it){
   return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
 };
-},{"./_iterators":117,"./_wks":178}],108:[function(require,module,exports){
+},{"./_iterators":116,"./_wks":177}],107:[function(require,module,exports){
 // 7.2.2 IsArray(argument)
 var cof = require('./_cof');
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
-},{"./_cof":79}],109:[function(require,module,exports){
+},{"./_cof":78}],108:[function(require,module,exports){
 // 20.1.2.3 Number.isInteger(number)
 var isObject = require('./_is-object')
   , floor    = Math.floor;
 module.exports = function isInteger(it){
   return !isObject(it) && isFinite(it) && floor(it) === it;
 };
-},{"./_is-object":110}],110:[function(require,module,exports){
+},{"./_is-object":109}],109:[function(require,module,exports){
 module.exports = function(it){
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
-},{}],111:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 // 7.2.8 IsRegExp(argument)
 var isObject = require('./_is-object')
   , cof      = require('./_cof')
@@ -45867,7 +46489,7 @@ module.exports = function(it){
   var isRegExp;
   return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : cof(it) == 'RegExp');
 };
-},{"./_cof":79,"./_is-object":110,"./_wks":178}],112:[function(require,module,exports){
+},{"./_cof":78,"./_is-object":109,"./_wks":177}],111:[function(require,module,exports){
 // call something on iterator step with safe closing on error
 var anObject = require('./_an-object');
 module.exports = function(iterator, fn, value, entries){
@@ -45880,7 +46502,7 @@ module.exports = function(iterator, fn, value, entries){
     throw e;
   }
 };
-},{"./_an-object":68}],113:[function(require,module,exports){
+},{"./_an-object":67}],112:[function(require,module,exports){
 'use strict';
 var create         = require('./_object-create')
   , descriptor     = require('./_property-desc')
@@ -45894,7 +46516,7 @@ module.exports = function(Constructor, NAME, next){
   Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
   setToStringTag(Constructor, NAME + ' Iterator');
 };
-},{"./_hide":101,"./_object-create":127,"./_property-desc":146,"./_set-to-string-tag":153,"./_wks":178}],114:[function(require,module,exports){
+},{"./_hide":100,"./_object-create":126,"./_property-desc":145,"./_set-to-string-tag":152,"./_wks":177}],113:[function(require,module,exports){
 'use strict';
 var LIBRARY        = require('./_library')
   , $export        = require('./_export')
@@ -45965,7 +46587,7 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED
   }
   return methods;
 };
-},{"./_export":93,"./_has":100,"./_hide":101,"./_iter-create":113,"./_iterators":117,"./_library":119,"./_object-gpo":135,"./_redefine":148,"./_set-to-string-tag":153,"./_wks":178}],115:[function(require,module,exports){
+},{"./_export":92,"./_has":99,"./_hide":100,"./_iter-create":112,"./_iterators":116,"./_library":118,"./_object-gpo":134,"./_redefine":147,"./_set-to-string-tag":152,"./_wks":177}],114:[function(require,module,exports){
 var ITERATOR     = require('./_wks')('iterator')
   , SAFE_CLOSING = false;
 
@@ -45987,13 +46609,13 @@ module.exports = function(exec, skipClosing){
   } catch(e){ /* empty */ }
   return safe;
 };
-},{"./_wks":178}],116:[function(require,module,exports){
+},{"./_wks":177}],115:[function(require,module,exports){
 module.exports = function(done, value){
   return {value: value, done: !!done};
 };
-},{}],117:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 module.exports = {};
-},{}],118:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 var getKeys   = require('./_object-keys')
   , toIObject = require('./_to-iobject');
 module.exports = function(object, el){
@@ -46004,9 +46626,9 @@ module.exports = function(object, el){
     , key;
   while(length > index)if(O[key = keys[index++]] === el)return key;
 };
-},{"./_object-keys":137,"./_to-iobject":168}],119:[function(require,module,exports){
+},{"./_object-keys":136,"./_to-iobject":167}],118:[function(require,module,exports){
 module.exports = false;
-},{}],120:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 // 20.2.2.14 Math.expm1(x)
 var $expm1 = Math.expm1;
 module.exports = (!$expm1
@@ -46017,17 +46639,17 @@ module.exports = (!$expm1
 ) ? function expm1(x){
   return (x = +x) == 0 ? x : x > -1e-6 && x < 1e-6 ? x + x * x / 2 : Math.exp(x) - 1;
 } : $expm1;
-},{}],121:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 // 20.2.2.20 Math.log1p(x)
 module.exports = Math.log1p || function log1p(x){
   return (x = +x) > -1e-8 && x < 1e-8 ? x - x * x / 2 : Math.log(1 + x);
 };
-},{}],122:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 // 20.2.2.28 Math.sign(x)
 module.exports = Math.sign || function sign(x){
   return (x = +x) == 0 || x != x ? x : x < 0 ? -1 : 1;
 };
-},{}],123:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 var META     = require('./_uid')('meta')
   , isObject = require('./_is-object')
   , has      = require('./_has')
@@ -46081,7 +46703,7 @@ var meta = module.exports = {
   getWeak:  getWeak,
   onFreeze: onFreeze
 };
-},{"./_fails":95,"./_has":100,"./_is-object":110,"./_object-dp":128,"./_uid":175}],124:[function(require,module,exports){
+},{"./_fails":94,"./_has":99,"./_is-object":109,"./_object-dp":127,"./_uid":174}],123:[function(require,module,exports){
 var Map     = require('./es6.map')
   , $export = require('./_export')
   , shared  = require('./_shared')('metadata')
@@ -46133,7 +46755,7 @@ module.exports = {
   key: toMetaKey,
   exp: exp
 };
-},{"./_export":93,"./_shared":155,"./es6.map":210,"./es6.weak-map":316}],125:[function(require,module,exports){
+},{"./_export":92,"./_shared":154,"./es6.map":209,"./es6.weak-map":315}],124:[function(require,module,exports){
 var global    = require('./_global')
   , macrotask = require('./_task').set
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
@@ -46202,7 +46824,7 @@ module.exports = function(){
     } last = task;
   };
 };
-},{"./_cof":79,"./_global":99,"./_task":165}],126:[function(require,module,exports){
+},{"./_cof":78,"./_global":98,"./_task":164}],125:[function(require,module,exports){
 'use strict';
 // 19.1.2.1 Object.assign(target, source, ...)
 var getKeys  = require('./_object-keys')
@@ -46236,7 +46858,7 @@ module.exports = !$assign || require('./_fails')(function(){
     while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
   } return T;
 } : $assign;
-},{"./_fails":95,"./_iobject":106,"./_object-gops":134,"./_object-keys":137,"./_object-pie":138,"./_to-object":170}],127:[function(require,module,exports){
+},{"./_fails":94,"./_iobject":105,"./_object-gops":133,"./_object-keys":136,"./_object-pie":137,"./_to-object":169}],126:[function(require,module,exports){
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject    = require('./_an-object')
   , dPs         = require('./_object-dps')
@@ -46279,7 +46901,7 @@ module.exports = Object.create || function create(O, Properties){
   return Properties === undefined ? result : dPs(result, Properties);
 };
 
-},{"./_an-object":68,"./_dom-create":90,"./_enum-bug-keys":91,"./_html":102,"./_object-dps":129,"./_shared-key":154}],128:[function(require,module,exports){
+},{"./_an-object":67,"./_dom-create":89,"./_enum-bug-keys":90,"./_html":101,"./_object-dps":128,"./_shared-key":153}],127:[function(require,module,exports){
 var anObject       = require('./_an-object')
   , IE8_DOM_DEFINE = require('./_ie8-dom-define')
   , toPrimitive    = require('./_to-primitive')
@@ -46296,7 +46918,7 @@ exports.f = require('./_descriptors') ? Object.defineProperty : function defineP
   if('value' in Attributes)O[P] = Attributes.value;
   return O;
 };
-},{"./_an-object":68,"./_descriptors":89,"./_ie8-dom-define":103,"./_to-primitive":171}],129:[function(require,module,exports){
+},{"./_an-object":67,"./_descriptors":88,"./_ie8-dom-define":102,"./_to-primitive":170}],128:[function(require,module,exports){
 var dP       = require('./_object-dp')
   , anObject = require('./_an-object')
   , getKeys  = require('./_object-keys');
@@ -46310,7 +46932,7 @@ module.exports = require('./_descriptors') ? Object.defineProperties : function 
   while(length > i)dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
-},{"./_an-object":68,"./_descriptors":89,"./_object-dp":128,"./_object-keys":137}],130:[function(require,module,exports){
+},{"./_an-object":67,"./_descriptors":88,"./_object-dp":127,"./_object-keys":136}],129:[function(require,module,exports){
 // Forced replacement prototype accessors methods
 module.exports = require('./_library')|| !require('./_fails')(function(){
   var K = Math.random();
@@ -46318,7 +46940,7 @@ module.exports = require('./_library')|| !require('./_fails')(function(){
   __defineSetter__.call(null, K, function(){ /* empty */});
   delete require('./_global')[K];
 });
-},{"./_fails":95,"./_global":99,"./_library":119}],131:[function(require,module,exports){
+},{"./_fails":94,"./_global":98,"./_library":118}],130:[function(require,module,exports){
 var pIE            = require('./_object-pie')
   , createDesc     = require('./_property-desc')
   , toIObject      = require('./_to-iobject')
@@ -46335,7 +46957,7 @@ exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor
   } catch(e){ /* empty */ }
   if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
 };
-},{"./_descriptors":89,"./_has":100,"./_ie8-dom-define":103,"./_object-pie":138,"./_property-desc":146,"./_to-iobject":168,"./_to-primitive":171}],132:[function(require,module,exports){
+},{"./_descriptors":88,"./_has":99,"./_ie8-dom-define":102,"./_object-pie":137,"./_property-desc":145,"./_to-iobject":167,"./_to-primitive":170}],131:[function(require,module,exports){
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var toIObject = require('./_to-iobject')
   , gOPN      = require('./_object-gopn').f
@@ -46356,7 +46978,7 @@ module.exports.f = function getOwnPropertyNames(it){
   return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
 };
 
-},{"./_object-gopn":133,"./_to-iobject":168}],133:[function(require,module,exports){
+},{"./_object-gopn":132,"./_to-iobject":167}],132:[function(require,module,exports){
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
 var $keys      = require('./_object-keys-internal')
   , hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
@@ -46364,9 +46986,9 @@ var $keys      = require('./_object-keys-internal')
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
   return $keys(O, hiddenKeys);
 };
-},{"./_enum-bug-keys":91,"./_object-keys-internal":136}],134:[function(require,module,exports){
+},{"./_enum-bug-keys":90,"./_object-keys-internal":135}],133:[function(require,module,exports){
 exports.f = Object.getOwnPropertySymbols;
-},{}],135:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has         = require('./_has')
   , toObject    = require('./_to-object')
@@ -46380,7 +47002,7 @@ module.exports = Object.getPrototypeOf || function(O){
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
 };
-},{"./_has":100,"./_shared-key":154,"./_to-object":170}],136:[function(require,module,exports){
+},{"./_has":99,"./_shared-key":153,"./_to-object":169}],135:[function(require,module,exports){
 var has          = require('./_has')
   , toIObject    = require('./_to-iobject')
   , arrayIndexOf = require('./_array-includes')(false)
@@ -46398,7 +47020,7 @@ module.exports = function(object, names){
   }
   return result;
 };
-},{"./_array-includes":72,"./_has":100,"./_shared-key":154,"./_to-iobject":168}],137:[function(require,module,exports){
+},{"./_array-includes":71,"./_has":99,"./_shared-key":153,"./_to-iobject":167}],136:[function(require,module,exports){
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
 var $keys       = require('./_object-keys-internal')
   , enumBugKeys = require('./_enum-bug-keys');
@@ -46406,9 +47028,9 @@ var $keys       = require('./_object-keys-internal')
 module.exports = Object.keys || function keys(O){
   return $keys(O, enumBugKeys);
 };
-},{"./_enum-bug-keys":91,"./_object-keys-internal":136}],138:[function(require,module,exports){
+},{"./_enum-bug-keys":90,"./_object-keys-internal":135}],137:[function(require,module,exports){
 exports.f = {}.propertyIsEnumerable;
-},{}],139:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 // most Object methods by ES6 should accept primitives
 var $export = require('./_export')
   , core    = require('./_core')
@@ -46419,7 +47041,7 @@ module.exports = function(KEY, exec){
   exp[KEY] = exec(fn);
   $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
 };
-},{"./_core":84,"./_export":93,"./_fails":95}],140:[function(require,module,exports){
+},{"./_core":83,"./_export":92,"./_fails":94}],139:[function(require,module,exports){
 var getKeys   = require('./_object-keys')
   , toIObject = require('./_to-iobject')
   , isEnum    = require('./_object-pie').f;
@@ -46436,7 +47058,7 @@ module.exports = function(isEntries){
     } return result;
   };
 };
-},{"./_object-keys":137,"./_object-pie":138,"./_to-iobject":168}],141:[function(require,module,exports){
+},{"./_object-keys":136,"./_object-pie":137,"./_to-iobject":167}],140:[function(require,module,exports){
 // all object keys, includes non-enumerable and symbols
 var gOPN     = require('./_object-gopn')
   , gOPS     = require('./_object-gops')
@@ -46447,7 +47069,7 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it){
     , getSymbols = gOPS.f;
   return getSymbols ? keys.concat(getSymbols(it)) : keys;
 };
-},{"./_an-object":68,"./_global":99,"./_object-gopn":133,"./_object-gops":134}],142:[function(require,module,exports){
+},{"./_an-object":67,"./_global":98,"./_object-gopn":132,"./_object-gops":133}],141:[function(require,module,exports){
 var $parseFloat = require('./_global').parseFloat
   , $trim       = require('./_string-trim').trim;
 
@@ -46456,7 +47078,7 @@ module.exports = 1 / $parseFloat(require('./_string-ws') + '-0') !== -Infinity ?
     , result = $parseFloat(string);
   return result === 0 && string.charAt(0) == '-' ? -0 : result;
 } : $parseFloat;
-},{"./_global":99,"./_string-trim":163,"./_string-ws":164}],143:[function(require,module,exports){
+},{"./_global":98,"./_string-trim":162,"./_string-ws":163}],142:[function(require,module,exports){
 var $parseInt = require('./_global').parseInt
   , $trim     = require('./_string-trim').trim
   , ws        = require('./_string-ws')
@@ -46466,7 +47088,7 @@ module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? f
   var string = $trim(String(str), 3);
   return $parseInt(string, (radix >>> 0) || (hex.test(string) ? 16 : 10));
 } : $parseInt;
-},{"./_global":99,"./_string-trim":163,"./_string-ws":164}],144:[function(require,module,exports){
+},{"./_global":98,"./_string-trim":162,"./_string-ws":163}],143:[function(require,module,exports){
 'use strict';
 var path      = require('./_path')
   , invoke    = require('./_invoke')
@@ -46490,9 +47112,9 @@ module.exports = function(/* ...pargs */){
     return invoke(fn, args, that);
   };
 };
-},{"./_a-function":64,"./_invoke":105,"./_path":145}],145:[function(require,module,exports){
+},{"./_a-function":63,"./_invoke":104,"./_path":144}],144:[function(require,module,exports){
 module.exports = require('./_global');
-},{"./_global":99}],146:[function(require,module,exports){
+},{"./_global":98}],145:[function(require,module,exports){
 module.exports = function(bitmap, value){
   return {
     enumerable  : !(bitmap & 1),
@@ -46501,13 +47123,13 @@ module.exports = function(bitmap, value){
     value       : value
   };
 };
-},{}],147:[function(require,module,exports){
+},{}],146:[function(require,module,exports){
 var redefine = require('./_redefine');
 module.exports = function(target, src, safe){
   for(var key in src)redefine(target, key, src[key], safe);
   return target;
 };
-},{"./_redefine":148}],148:[function(require,module,exports){
+},{"./_redefine":147}],147:[function(require,module,exports){
 var global    = require('./_global')
   , hide      = require('./_hide')
   , has       = require('./_has')
@@ -46540,7 +47162,7 @@ require('./_core').inspectSource = function(it){
 })(Function.prototype, TO_STRING, function toString(){
   return typeof this == 'function' && this[SRC] || $toString.call(this);
 });
-},{"./_core":84,"./_global":99,"./_has":100,"./_hide":101,"./_uid":175}],149:[function(require,module,exports){
+},{"./_core":83,"./_global":98,"./_has":99,"./_hide":100,"./_uid":174}],148:[function(require,module,exports){
 module.exports = function(regExp, replace){
   var replacer = replace === Object(replace) ? function(part){
     return replace[part];
@@ -46549,12 +47171,12 @@ module.exports = function(regExp, replace){
     return String(it).replace(regExp, replacer);
   };
 };
-},{}],150:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 // 7.2.9 SameValue(x, y)
 module.exports = Object.is || function is(x, y){
   return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
 };
-},{}],151:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var isObject = require('./_is-object')
@@ -46580,7 +47202,7 @@ module.exports = {
     }({}, false) : undefined),
   check: check
 };
-},{"./_an-object":68,"./_ctx":86,"./_is-object":110,"./_object-gopd":131}],152:[function(require,module,exports){
+},{"./_an-object":67,"./_ctx":85,"./_is-object":109,"./_object-gopd":130}],151:[function(require,module,exports){
 'use strict';
 var global      = require('./_global')
   , dP          = require('./_object-dp')
@@ -46594,7 +47216,7 @@ module.exports = function(KEY){
     get: function(){ return this; }
   });
 };
-},{"./_descriptors":89,"./_global":99,"./_object-dp":128,"./_wks":178}],153:[function(require,module,exports){
+},{"./_descriptors":88,"./_global":98,"./_object-dp":127,"./_wks":177}],152:[function(require,module,exports){
 var def = require('./_object-dp').f
   , has = require('./_has')
   , TAG = require('./_wks')('toStringTag');
@@ -46602,20 +47224,20 @@ var def = require('./_object-dp').f
 module.exports = function(it, tag, stat){
   if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 };
-},{"./_has":100,"./_object-dp":128,"./_wks":178}],154:[function(require,module,exports){
+},{"./_has":99,"./_object-dp":127,"./_wks":177}],153:[function(require,module,exports){
 var shared = require('./_shared')('keys')
   , uid    = require('./_uid');
 module.exports = function(key){
   return shared[key] || (shared[key] = uid(key));
 };
-},{"./_shared":155,"./_uid":175}],155:[function(require,module,exports){
+},{"./_shared":154,"./_uid":174}],154:[function(require,module,exports){
 var global = require('./_global')
   , SHARED = '__core-js_shared__'
   , store  = global[SHARED] || (global[SHARED] = {});
 module.exports = function(key){
   return store[key] || (store[key] = {});
 };
-},{"./_global":99}],156:[function(require,module,exports){
+},{"./_global":98}],155:[function(require,module,exports){
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject  = require('./_an-object')
   , aFunction = require('./_a-function')
@@ -46624,7 +47246,7 @@ module.exports = function(O, D){
   var C = anObject(O).constructor, S;
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
 };
-},{"./_a-function":64,"./_an-object":68,"./_wks":178}],157:[function(require,module,exports){
+},{"./_a-function":63,"./_an-object":67,"./_wks":177}],156:[function(require,module,exports){
 var fails = require('./_fails');
 
 module.exports = function(method, arg){
@@ -46632,7 +47254,7 @@ module.exports = function(method, arg){
     arg ? method.call(null, function(){}, 1) : method.call(null);
   });
 };
-},{"./_fails":95}],158:[function(require,module,exports){
+},{"./_fails":94}],157:[function(require,module,exports){
 var toInteger = require('./_to-integer')
   , defined   = require('./_defined');
 // true  -> String#at
@@ -46650,7 +47272,7 @@ module.exports = function(TO_STRING){
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
-},{"./_defined":88,"./_to-integer":167}],159:[function(require,module,exports){
+},{"./_defined":87,"./_to-integer":166}],158:[function(require,module,exports){
 // helper for String#{startsWith, endsWith, includes}
 var isRegExp = require('./_is-regexp')
   , defined  = require('./_defined');
@@ -46659,7 +47281,7 @@ module.exports = function(that, searchString, NAME){
   if(isRegExp(searchString))throw TypeError('String#' + NAME + " doesn't accept regex!");
   return String(defined(that));
 };
-},{"./_defined":88,"./_is-regexp":111}],160:[function(require,module,exports){
+},{"./_defined":87,"./_is-regexp":110}],159:[function(require,module,exports){
 var $export = require('./_export')
   , fails   = require('./_fails')
   , defined = require('./_defined')
@@ -46679,7 +47301,7 @@ module.exports = function(NAME, exec){
     return test !== test.toLowerCase() || test.split('"').length > 3;
   }), 'String', O);
 };
-},{"./_defined":88,"./_export":93,"./_fails":95}],161:[function(require,module,exports){
+},{"./_defined":87,"./_export":92,"./_fails":94}],160:[function(require,module,exports){
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = require('./_to-length')
   , repeat   = require('./_string-repeat')
@@ -46697,7 +47319,7 @@ module.exports = function(that, maxLength, fillString, left){
   return left ? stringFiller + S : S + stringFiller;
 };
 
-},{"./_defined":88,"./_string-repeat":162,"./_to-length":169}],162:[function(require,module,exports){
+},{"./_defined":87,"./_string-repeat":161,"./_to-length":168}],161:[function(require,module,exports){
 'use strict';
 var toInteger = require('./_to-integer')
   , defined   = require('./_defined');
@@ -46710,7 +47332,7 @@ module.exports = function repeat(count){
   for(;n > 0; (n >>>= 1) && (str += str))if(n & 1)res += str;
   return res;
 };
-},{"./_defined":88,"./_to-integer":167}],163:[function(require,module,exports){
+},{"./_defined":87,"./_to-integer":166}],162:[function(require,module,exports){
 var $export = require('./_export')
   , defined = require('./_defined')
   , fails   = require('./_fails')
@@ -46741,10 +47363,10 @@ var trim = exporter.trim = function(string, TYPE){
 };
 
 module.exports = exporter;
-},{"./_defined":88,"./_export":93,"./_fails":95,"./_string-ws":164}],164:[function(require,module,exports){
+},{"./_defined":87,"./_export":92,"./_fails":94,"./_string-ws":163}],163:[function(require,module,exports){
 module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
   '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
-},{}],165:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 var ctx                = require('./_ctx')
   , invoke             = require('./_invoke')
   , html               = require('./_html')
@@ -46820,7 +47442,7 @@ module.exports = {
   set:   setTask,
   clear: clearTask
 };
-},{"./_cof":79,"./_ctx":86,"./_dom-create":90,"./_global":99,"./_html":102,"./_invoke":105}],166:[function(require,module,exports){
+},{"./_cof":78,"./_ctx":85,"./_dom-create":89,"./_global":98,"./_html":101,"./_invoke":104}],165:[function(require,module,exports){
 var toInteger = require('./_to-integer')
   , max       = Math.max
   , min       = Math.min;
@@ -46828,34 +47450,34 @@ module.exports = function(index, length){
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
-},{"./_to-integer":167}],167:[function(require,module,exports){
+},{"./_to-integer":166}],166:[function(require,module,exports){
 // 7.1.4 ToInteger
 var ceil  = Math.ceil
   , floor = Math.floor;
 module.exports = function(it){
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
-},{}],168:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = require('./_iobject')
   , defined = require('./_defined');
 module.exports = function(it){
   return IObject(defined(it));
 };
-},{"./_defined":88,"./_iobject":106}],169:[function(require,module,exports){
+},{"./_defined":87,"./_iobject":105}],168:[function(require,module,exports){
 // 7.1.15 ToLength
 var toInteger = require('./_to-integer')
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 };
-},{"./_to-integer":167}],170:[function(require,module,exports){
+},{"./_to-integer":166}],169:[function(require,module,exports){
 // 7.1.13 ToObject(argument)
 var defined = require('./_defined');
 module.exports = function(it){
   return Object(defined(it));
 };
-},{"./_defined":88}],171:[function(require,module,exports){
+},{"./_defined":87}],170:[function(require,module,exports){
 // 7.1.1 ToPrimitive(input [, PreferredType])
 var isObject = require('./_is-object');
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
@@ -46868,7 +47490,7 @@ module.exports = function(it, S){
   if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
   throw TypeError("Can't convert object to primitive value");
 };
-},{"./_is-object":110}],172:[function(require,module,exports){
+},{"./_is-object":109}],171:[function(require,module,exports){
 'use strict';
 if(require('./_descriptors')){
   var LIBRARY             = require('./_library')
@@ -47348,7 +47970,7 @@ if(require('./_descriptors')){
     if(!LIBRARY && !CORRECT_ITER_NAME)hide(TypedArrayPrototype, ITERATOR, $iterator);
   };
 } else module.exports = function(){ /* empty */ };
-},{"./_an-instance":67,"./_array-copy-within":69,"./_array-fill":70,"./_array-includes":72,"./_array-methods":73,"./_classof":78,"./_ctx":86,"./_descriptors":89,"./_export":93,"./_fails":95,"./_global":99,"./_has":100,"./_hide":101,"./_is-array-iter":107,"./_is-object":110,"./_iter-detect":115,"./_iterators":117,"./_library":119,"./_object-create":127,"./_object-dp":128,"./_object-gopd":131,"./_object-gopn":133,"./_object-gpo":135,"./_property-desc":146,"./_redefine-all":147,"./_same-value":150,"./_set-species":152,"./_species-constructor":156,"./_to-index":166,"./_to-integer":167,"./_to-length":169,"./_to-object":170,"./_to-primitive":171,"./_typed":174,"./_typed-buffer":173,"./_uid":175,"./_wks":178,"./core.get-iterator-method":179,"./es6.array.iterator":191}],173:[function(require,module,exports){
+},{"./_an-instance":66,"./_array-copy-within":68,"./_array-fill":69,"./_array-includes":71,"./_array-methods":72,"./_classof":77,"./_ctx":85,"./_descriptors":88,"./_export":92,"./_fails":94,"./_global":98,"./_has":99,"./_hide":100,"./_is-array-iter":106,"./_is-object":109,"./_iter-detect":114,"./_iterators":116,"./_library":118,"./_object-create":126,"./_object-dp":127,"./_object-gopd":130,"./_object-gopn":132,"./_object-gpo":134,"./_property-desc":145,"./_redefine-all":146,"./_same-value":149,"./_set-species":151,"./_species-constructor":155,"./_to-index":165,"./_to-integer":166,"./_to-length":168,"./_to-object":169,"./_to-primitive":170,"./_typed":173,"./_typed-buffer":172,"./_uid":174,"./_wks":177,"./core.get-iterator-method":178,"./es6.array.iterator":190}],172:[function(require,module,exports){
 'use strict';
 var global         = require('./_global')
   , DESCRIPTORS    = require('./_descriptors')
@@ -47622,7 +48244,7 @@ setToStringTag($DataView, DATA_VIEW);
 hide($DataView[PROTOTYPE], $typed.VIEW, true);
 exports[ARRAY_BUFFER] = $ArrayBuffer;
 exports[DATA_VIEW] = $DataView;
-},{"./_an-instance":67,"./_array-fill":70,"./_descriptors":89,"./_fails":95,"./_global":99,"./_hide":101,"./_library":119,"./_object-dp":128,"./_object-gopn":133,"./_redefine-all":147,"./_set-to-string-tag":153,"./_to-integer":167,"./_to-length":169,"./_typed":174}],174:[function(require,module,exports){
+},{"./_an-instance":66,"./_array-fill":69,"./_descriptors":88,"./_fails":94,"./_global":98,"./_hide":100,"./_library":118,"./_object-dp":127,"./_object-gopn":132,"./_redefine-all":146,"./_set-to-string-tag":152,"./_to-integer":166,"./_to-length":168,"./_typed":173}],173:[function(require,module,exports){
 var global = require('./_global')
   , hide   = require('./_hide')
   , uid    = require('./_uid')
@@ -47649,13 +48271,13 @@ module.exports = {
   TYPED:  TYPED,
   VIEW:   VIEW
 };
-},{"./_global":99,"./_hide":101,"./_uid":175}],175:[function(require,module,exports){
+},{"./_global":98,"./_hide":100,"./_uid":174}],174:[function(require,module,exports){
 var id = 0
   , px = Math.random();
 module.exports = function(key){
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
-},{}],176:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 var global         = require('./_global')
   , core           = require('./_core')
   , LIBRARY        = require('./_library')
@@ -47665,9 +48287,9 @@ module.exports = function(name){
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
   if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
 };
-},{"./_core":84,"./_global":99,"./_library":119,"./_object-dp":128,"./_wks-ext":177}],177:[function(require,module,exports){
+},{"./_core":83,"./_global":98,"./_library":118,"./_object-dp":127,"./_wks-ext":176}],176:[function(require,module,exports){
 exports.f = require('./_wks');
-},{"./_wks":178}],178:[function(require,module,exports){
+},{"./_wks":177}],177:[function(require,module,exports){
 var store      = require('./_shared')('wks')
   , uid        = require('./_uid')
   , Symbol     = require('./_global').Symbol
@@ -47679,7 +48301,7 @@ var $exports = module.exports = function(name){
 };
 
 $exports.store = store;
-},{"./_global":99,"./_shared":155,"./_uid":175}],179:[function(require,module,exports){
+},{"./_global":98,"./_shared":154,"./_uid":174}],178:[function(require,module,exports){
 var classof   = require('./_classof')
   , ITERATOR  = require('./_wks')('iterator')
   , Iterators = require('./_iterators');
@@ -47688,21 +48310,21 @@ module.exports = require('./_core').getIteratorMethod = function(it){
     || it['@@iterator']
     || Iterators[classof(it)];
 };
-},{"./_classof":78,"./_core":84,"./_iterators":117,"./_wks":178}],180:[function(require,module,exports){
+},{"./_classof":77,"./_core":83,"./_iterators":116,"./_wks":177}],179:[function(require,module,exports){
 // https://github.com/benjamingr/RexExp.escape
 var $export = require('./_export')
   , $re     = require('./_replacer')(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 
 $export($export.S, 'RegExp', {escape: function escape(it){ return $re(it); }});
 
-},{"./_export":93,"./_replacer":149}],181:[function(require,module,exports){
+},{"./_export":92,"./_replacer":148}],180:[function(require,module,exports){
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 var $export = require('./_export');
 
 $export($export.P, 'Array', {copyWithin: require('./_array-copy-within')});
 
 require('./_add-to-unscopables')('copyWithin');
-},{"./_add-to-unscopables":66,"./_array-copy-within":69,"./_export":93}],182:[function(require,module,exports){
+},{"./_add-to-unscopables":65,"./_array-copy-within":68,"./_export":92}],181:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $every  = require('./_array-methods')(4);
@@ -47713,14 +48335,14 @@ $export($export.P + $export.F * !require('./_strict-method')([].every, true), 'A
     return $every(this, callbackfn, arguments[1]);
   }
 });
-},{"./_array-methods":73,"./_export":93,"./_strict-method":157}],183:[function(require,module,exports){
+},{"./_array-methods":72,"./_export":92,"./_strict-method":156}],182:[function(require,module,exports){
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 var $export = require('./_export');
 
 $export($export.P, 'Array', {fill: require('./_array-fill')});
 
 require('./_add-to-unscopables')('fill');
-},{"./_add-to-unscopables":66,"./_array-fill":70,"./_export":93}],184:[function(require,module,exports){
+},{"./_add-to-unscopables":65,"./_array-fill":69,"./_export":92}],183:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $filter = require('./_array-methods')(2);
@@ -47731,7 +48353,7 @@ $export($export.P + $export.F * !require('./_strict-method')([].filter, true), '
     return $filter(this, callbackfn, arguments[1]);
   }
 });
-},{"./_array-methods":73,"./_export":93,"./_strict-method":157}],185:[function(require,module,exports){
+},{"./_array-methods":72,"./_export":92,"./_strict-method":156}],184:[function(require,module,exports){
 'use strict';
 // 22.1.3.9 Array.prototype.findIndex(predicate, thisArg = undefined)
 var $export = require('./_export')
@@ -47746,7 +48368,7 @@ $export($export.P + $export.F * forced, 'Array', {
   }
 });
 require('./_add-to-unscopables')(KEY);
-},{"./_add-to-unscopables":66,"./_array-methods":73,"./_export":93}],186:[function(require,module,exports){
+},{"./_add-to-unscopables":65,"./_array-methods":72,"./_export":92}],185:[function(require,module,exports){
 'use strict';
 // 22.1.3.8 Array.prototype.find(predicate, thisArg = undefined)
 var $export = require('./_export')
@@ -47761,7 +48383,7 @@ $export($export.P + $export.F * forced, 'Array', {
   }
 });
 require('./_add-to-unscopables')(KEY);
-},{"./_add-to-unscopables":66,"./_array-methods":73,"./_export":93}],187:[function(require,module,exports){
+},{"./_add-to-unscopables":65,"./_array-methods":72,"./_export":92}],186:[function(require,module,exports){
 'use strict';
 var $export  = require('./_export')
   , $forEach = require('./_array-methods')(0)
@@ -47773,7 +48395,7 @@ $export($export.P + $export.F * !STRICT, 'Array', {
     return $forEach(this, callbackfn, arguments[1]);
   }
 });
-},{"./_array-methods":73,"./_export":93,"./_strict-method":157}],188:[function(require,module,exports){
+},{"./_array-methods":72,"./_export":92,"./_strict-method":156}],187:[function(require,module,exports){
 'use strict';
 var ctx            = require('./_ctx')
   , $export        = require('./_export')
@@ -47812,7 +48434,7 @@ $export($export.S + $export.F * !require('./_iter-detect')(function(iter){ Array
   }
 });
 
-},{"./_create-property":85,"./_ctx":86,"./_export":93,"./_is-array-iter":107,"./_iter-call":112,"./_iter-detect":115,"./_to-length":169,"./_to-object":170,"./core.get-iterator-method":179}],189:[function(require,module,exports){
+},{"./_create-property":84,"./_ctx":85,"./_export":92,"./_is-array-iter":106,"./_iter-call":111,"./_iter-detect":114,"./_to-length":168,"./_to-object":169,"./core.get-iterator-method":178}],188:[function(require,module,exports){
 'use strict';
 var $export       = require('./_export')
   , $indexOf      = require('./_array-includes')(false)
@@ -47828,12 +48450,12 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !require('./_strict-method')($
       : $indexOf(this, searchElement, arguments[1]);
   }
 });
-},{"./_array-includes":72,"./_export":93,"./_strict-method":157}],190:[function(require,module,exports){
+},{"./_array-includes":71,"./_export":92,"./_strict-method":156}],189:[function(require,module,exports){
 // 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
 var $export = require('./_export');
 
 $export($export.S, 'Array', {isArray: require('./_is-array')});
-},{"./_export":93,"./_is-array":108}],191:[function(require,module,exports){
+},{"./_export":92,"./_is-array":107}],190:[function(require,module,exports){
 'use strict';
 var addToUnscopables = require('./_add-to-unscopables')
   , step             = require('./_iter-step')
@@ -47868,7 +48490,7 @@ Iterators.Arguments = Iterators.Array;
 addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
-},{"./_add-to-unscopables":66,"./_iter-define":114,"./_iter-step":116,"./_iterators":117,"./_to-iobject":168}],192:[function(require,module,exports){
+},{"./_add-to-unscopables":65,"./_iter-define":113,"./_iter-step":115,"./_iterators":116,"./_to-iobject":167}],191:[function(require,module,exports){
 'use strict';
 // 22.1.3.13 Array.prototype.join(separator)
 var $export   = require('./_export')
@@ -47881,7 +48503,7 @@ $export($export.P + $export.F * (require('./_iobject') != Object || !require('./
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
 });
-},{"./_export":93,"./_iobject":106,"./_strict-method":157,"./_to-iobject":168}],193:[function(require,module,exports){
+},{"./_export":92,"./_iobject":105,"./_strict-method":156,"./_to-iobject":167}],192:[function(require,module,exports){
 'use strict';
 var $export       = require('./_export')
   , toIObject     = require('./_to-iobject')
@@ -47904,7 +48526,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !require('./_strict-method')($
     return -1;
   }
 });
-},{"./_export":93,"./_strict-method":157,"./_to-integer":167,"./_to-iobject":168,"./_to-length":169}],194:[function(require,module,exports){
+},{"./_export":92,"./_strict-method":156,"./_to-integer":166,"./_to-iobject":167,"./_to-length":168}],193:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $map    = require('./_array-methods')(1);
@@ -47915,7 +48537,7 @@ $export($export.P + $export.F * !require('./_strict-method')([].map, true), 'Arr
     return $map(this, callbackfn, arguments[1]);
   }
 });
-},{"./_array-methods":73,"./_export":93,"./_strict-method":157}],195:[function(require,module,exports){
+},{"./_array-methods":72,"./_export":92,"./_strict-method":156}],194:[function(require,module,exports){
 'use strict';
 var $export        = require('./_export')
   , createProperty = require('./_create-property');
@@ -47935,7 +48557,7 @@ $export($export.S + $export.F * require('./_fails')(function(){
     return result;
   }
 });
-},{"./_create-property":85,"./_export":93,"./_fails":95}],196:[function(require,module,exports){
+},{"./_create-property":84,"./_export":92,"./_fails":94}],195:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $reduce = require('./_array-reduce');
@@ -47946,7 +48568,7 @@ $export($export.P + $export.F * !require('./_strict-method')([].reduceRight, tru
     return $reduce(this, callbackfn, arguments.length, arguments[1], true);
   }
 });
-},{"./_array-reduce":74,"./_export":93,"./_strict-method":157}],197:[function(require,module,exports){
+},{"./_array-reduce":73,"./_export":92,"./_strict-method":156}],196:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $reduce = require('./_array-reduce');
@@ -47957,7 +48579,7 @@ $export($export.P + $export.F * !require('./_strict-method')([].reduce, true), '
     return $reduce(this, callbackfn, arguments.length, arguments[1], false);
   }
 });
-},{"./_array-reduce":74,"./_export":93,"./_strict-method":157}],198:[function(require,module,exports){
+},{"./_array-reduce":73,"./_export":92,"./_strict-method":156}],197:[function(require,module,exports){
 'use strict';
 var $export    = require('./_export')
   , html       = require('./_html')
@@ -47986,7 +48608,7 @@ $export($export.P + $export.F * require('./_fails')(function(){
     return cloned;
   }
 });
-},{"./_cof":79,"./_export":93,"./_fails":95,"./_html":102,"./_to-index":166,"./_to-length":169}],199:[function(require,module,exports){
+},{"./_cof":78,"./_export":92,"./_fails":94,"./_html":101,"./_to-index":165,"./_to-length":168}],198:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $some   = require('./_array-methods')(3);
@@ -47997,7 +48619,7 @@ $export($export.P + $export.F * !require('./_strict-method')([].some, true), 'Ar
     return $some(this, callbackfn, arguments[1]);
   }
 });
-},{"./_array-methods":73,"./_export":93,"./_strict-method":157}],200:[function(require,module,exports){
+},{"./_array-methods":72,"./_export":92,"./_strict-method":156}],199:[function(require,module,exports){
 'use strict';
 var $export   = require('./_export')
   , aFunction = require('./_a-function')
@@ -48021,14 +48643,14 @@ $export($export.P + $export.F * (fails(function(){
       : $sort.call(toObject(this), aFunction(comparefn));
   }
 });
-},{"./_a-function":64,"./_export":93,"./_fails":95,"./_strict-method":157,"./_to-object":170}],201:[function(require,module,exports){
+},{"./_a-function":63,"./_export":92,"./_fails":94,"./_strict-method":156,"./_to-object":169}],200:[function(require,module,exports){
 require('./_set-species')('Array');
-},{"./_set-species":152}],202:[function(require,module,exports){
+},{"./_set-species":151}],201:[function(require,module,exports){
 // 20.3.3.1 / 15.9.4.4 Date.now()
 var $export = require('./_export');
 
 $export($export.S, 'Date', {now: function(){ return new Date().getTime(); }});
-},{"./_export":93}],203:[function(require,module,exports){
+},{"./_export":92}],202:[function(require,module,exports){
 'use strict';
 // 20.3.4.36 / 15.9.5.43 Date.prototype.toISOString()
 var $export = require('./_export')
@@ -48057,7 +48679,7 @@ $export($export.P + $export.F * (fails(function(){
       ':' + lz(d.getUTCSeconds()) + '.' + (m > 99 ? m : '0' + lz(m)) + 'Z';
   }
 });
-},{"./_export":93,"./_fails":95}],204:[function(require,module,exports){
+},{"./_export":92,"./_fails":94}],203:[function(require,module,exports){
 'use strict';
 var $export     = require('./_export')
   , toObject    = require('./_to-object')
@@ -48072,12 +48694,12 @@ $export($export.P + $export.F * require('./_fails')(function(){
     return typeof pv == 'number' && !isFinite(pv) ? null : O.toISOString();
   }
 });
-},{"./_export":93,"./_fails":95,"./_to-object":170,"./_to-primitive":171}],205:[function(require,module,exports){
+},{"./_export":92,"./_fails":94,"./_to-object":169,"./_to-primitive":170}],204:[function(require,module,exports){
 var TO_PRIMITIVE = require('./_wks')('toPrimitive')
   , proto        = Date.prototype;
 
 if(!(TO_PRIMITIVE in proto))require('./_hide')(proto, TO_PRIMITIVE, require('./_date-to-primitive'));
-},{"./_date-to-primitive":87,"./_hide":101,"./_wks":178}],206:[function(require,module,exports){
+},{"./_date-to-primitive":86,"./_hide":100,"./_wks":177}],205:[function(require,module,exports){
 var DateProto    = Date.prototype
   , INVALID_DATE = 'Invalid Date'
   , TO_STRING    = 'toString'
@@ -48089,12 +48711,12 @@ if(new Date(NaN) + '' != INVALID_DATE){
     return value === value ? $toString.call(this) : INVALID_DATE;
   });
 }
-},{"./_redefine":148}],207:[function(require,module,exports){
+},{"./_redefine":147}],206:[function(require,module,exports){
 // 19.2.3.2 / 15.3.4.5 Function.prototype.bind(thisArg, args...)
 var $export = require('./_export');
 
 $export($export.P, 'Function', {bind: require('./_bind')});
-},{"./_bind":77,"./_export":93}],208:[function(require,module,exports){
+},{"./_bind":76,"./_export":92}],207:[function(require,module,exports){
 'use strict';
 var isObject       = require('./_is-object')
   , getPrototypeOf = require('./_object-gpo')
@@ -48108,7 +48730,7 @@ if(!(HAS_INSTANCE in FunctionProto))require('./_object-dp').f(FunctionProto, HAS
   while(O = getPrototypeOf(O))if(this.prototype === O)return true;
   return false;
 }});
-},{"./_is-object":110,"./_object-dp":128,"./_object-gpo":135,"./_wks":178}],209:[function(require,module,exports){
+},{"./_is-object":109,"./_object-dp":127,"./_object-gpo":134,"./_wks":177}],208:[function(require,module,exports){
 var dP         = require('./_object-dp').f
   , createDesc = require('./_property-desc')
   , has        = require('./_has')
@@ -48134,7 +48756,7 @@ NAME in FProto || require('./_descriptors') && dP(FProto, NAME, {
     }
   }
 });
-},{"./_descriptors":89,"./_has":100,"./_object-dp":128,"./_property-desc":146}],210:[function(require,module,exports){
+},{"./_descriptors":88,"./_has":99,"./_object-dp":127,"./_property-desc":145}],209:[function(require,module,exports){
 'use strict';
 var strong = require('./_collection-strong');
 
@@ -48152,7 +48774,7 @@ module.exports = require('./_collection')('Map', function(get){
     return strong.def(this, key === 0 ? 0 : key, value);
   }
 }, strong, true);
-},{"./_collection":83,"./_collection-strong":80}],211:[function(require,module,exports){
+},{"./_collection":82,"./_collection-strong":79}],210:[function(require,module,exports){
 // 20.2.2.3 Math.acosh(x)
 var $export = require('./_export')
   , log1p   = require('./_math-log1p')
@@ -48171,7 +48793,7 @@ $export($export.S + $export.F * !($acosh
       : log1p(x - 1 + sqrt(x - 1) * sqrt(x + 1));
   }
 });
-},{"./_export":93,"./_math-log1p":121}],212:[function(require,module,exports){
+},{"./_export":92,"./_math-log1p":120}],211:[function(require,module,exports){
 // 20.2.2.5 Math.asinh(x)
 var $export = require('./_export')
   , $asinh  = Math.asinh;
@@ -48182,7 +48804,7 @@ function asinh(x){
 
 // Tor Browser bug: Math.asinh(0) -> -0 
 $export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', {asinh: asinh});
-},{"./_export":93}],213:[function(require,module,exports){
+},{"./_export":92}],212:[function(require,module,exports){
 // 20.2.2.7 Math.atanh(x)
 var $export = require('./_export')
   , $atanh  = Math.atanh;
@@ -48193,7 +48815,7 @@ $export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
     return (x = +x) == 0 ? x : Math.log((1 + x) / (1 - x)) / 2;
   }
 });
-},{"./_export":93}],214:[function(require,module,exports){
+},{"./_export":92}],213:[function(require,module,exports){
 // 20.2.2.9 Math.cbrt(x)
 var $export = require('./_export')
   , sign    = require('./_math-sign');
@@ -48203,7 +48825,7 @@ $export($export.S, 'Math', {
     return sign(x = +x) * Math.pow(Math.abs(x), 1 / 3);
   }
 });
-},{"./_export":93,"./_math-sign":122}],215:[function(require,module,exports){
+},{"./_export":92,"./_math-sign":121}],214:[function(require,module,exports){
 // 20.2.2.11 Math.clz32(x)
 var $export = require('./_export');
 
@@ -48212,7 +48834,7 @@ $export($export.S, 'Math', {
     return (x >>>= 0) ? 31 - Math.floor(Math.log(x + 0.5) * Math.LOG2E) : 32;
   }
 });
-},{"./_export":93}],216:[function(require,module,exports){
+},{"./_export":92}],215:[function(require,module,exports){
 // 20.2.2.12 Math.cosh(x)
 var $export = require('./_export')
   , exp     = Math.exp;
@@ -48222,13 +48844,13 @@ $export($export.S, 'Math', {
     return (exp(x = +x) + exp(-x)) / 2;
   }
 });
-},{"./_export":93}],217:[function(require,module,exports){
+},{"./_export":92}],216:[function(require,module,exports){
 // 20.2.2.14 Math.expm1(x)
 var $export = require('./_export')
   , $expm1  = require('./_math-expm1');
 
 $export($export.S + $export.F * ($expm1 != Math.expm1), 'Math', {expm1: $expm1});
-},{"./_export":93,"./_math-expm1":120}],218:[function(require,module,exports){
+},{"./_export":92,"./_math-expm1":119}],217:[function(require,module,exports){
 // 20.2.2.16 Math.fround(x)
 var $export   = require('./_export')
   , sign      = require('./_math-sign')
@@ -48255,7 +48877,7 @@ $export($export.S, 'Math', {
     return $sign * result;
   }
 });
-},{"./_export":93,"./_math-sign":122}],219:[function(require,module,exports){
+},{"./_export":92,"./_math-sign":121}],218:[function(require,module,exports){
 // 20.2.2.17 Math.hypot([value1[, value2[, … ]]])
 var $export = require('./_export')
   , abs     = Math.abs;
@@ -48281,7 +48903,7 @@ $export($export.S, 'Math', {
     return larg === Infinity ? Infinity : larg * Math.sqrt(sum);
   }
 });
-},{"./_export":93}],220:[function(require,module,exports){
+},{"./_export":92}],219:[function(require,module,exports){
 // 20.2.2.18 Math.imul(x, y)
 var $export = require('./_export')
   , $imul   = Math.imul;
@@ -48299,7 +48921,7 @@ $export($export.S + $export.F * require('./_fails')(function(){
     return 0 | xl * yl + ((UINT16 & xn >>> 16) * yl + xl * (UINT16 & yn >>> 16) << 16 >>> 0);
   }
 });
-},{"./_export":93,"./_fails":95}],221:[function(require,module,exports){
+},{"./_export":92,"./_fails":94}],220:[function(require,module,exports){
 // 20.2.2.21 Math.log10(x)
 var $export = require('./_export');
 
@@ -48308,12 +48930,12 @@ $export($export.S, 'Math', {
     return Math.log(x) / Math.LN10;
   }
 });
-},{"./_export":93}],222:[function(require,module,exports){
+},{"./_export":92}],221:[function(require,module,exports){
 // 20.2.2.20 Math.log1p(x)
 var $export = require('./_export');
 
 $export($export.S, 'Math', {log1p: require('./_math-log1p')});
-},{"./_export":93,"./_math-log1p":121}],223:[function(require,module,exports){
+},{"./_export":92,"./_math-log1p":120}],222:[function(require,module,exports){
 // 20.2.2.22 Math.log2(x)
 var $export = require('./_export');
 
@@ -48322,12 +48944,12 @@ $export($export.S, 'Math', {
     return Math.log(x) / Math.LN2;
   }
 });
-},{"./_export":93}],224:[function(require,module,exports){
+},{"./_export":92}],223:[function(require,module,exports){
 // 20.2.2.28 Math.sign(x)
 var $export = require('./_export');
 
 $export($export.S, 'Math', {sign: require('./_math-sign')});
-},{"./_export":93,"./_math-sign":122}],225:[function(require,module,exports){
+},{"./_export":92,"./_math-sign":121}],224:[function(require,module,exports){
 // 20.2.2.30 Math.sinh(x)
 var $export = require('./_export')
   , expm1   = require('./_math-expm1')
@@ -48343,7 +48965,7 @@ $export($export.S + $export.F * require('./_fails')(function(){
       : (exp(x - 1) - exp(-x - 1)) * (Math.E / 2);
   }
 });
-},{"./_export":93,"./_fails":95,"./_math-expm1":120}],226:[function(require,module,exports){
+},{"./_export":92,"./_fails":94,"./_math-expm1":119}],225:[function(require,module,exports){
 // 20.2.2.33 Math.tanh(x)
 var $export = require('./_export')
   , expm1   = require('./_math-expm1')
@@ -48356,7 +48978,7 @@ $export($export.S, 'Math', {
     return a == Infinity ? 1 : b == Infinity ? -1 : (a - b) / (exp(x) + exp(-x));
   }
 });
-},{"./_export":93,"./_math-expm1":120}],227:[function(require,module,exports){
+},{"./_export":92,"./_math-expm1":119}],226:[function(require,module,exports){
 // 20.2.2.34 Math.trunc(x)
 var $export = require('./_export');
 
@@ -48365,7 +48987,7 @@ $export($export.S, 'Math', {
     return (it > 0 ? Math.floor : Math.ceil)(it);
   }
 });
-},{"./_export":93}],228:[function(require,module,exports){
+},{"./_export":92}],227:[function(require,module,exports){
 'use strict';
 var global            = require('./_global')
   , has               = require('./_has')
@@ -48435,12 +49057,12 @@ if(!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')){
   proto.constructor = $Number;
   require('./_redefine')(global, NUMBER, $Number);
 }
-},{"./_cof":79,"./_descriptors":89,"./_fails":95,"./_global":99,"./_has":100,"./_inherit-if-required":104,"./_object-create":127,"./_object-dp":128,"./_object-gopd":131,"./_object-gopn":133,"./_redefine":148,"./_string-trim":163,"./_to-primitive":171}],229:[function(require,module,exports){
+},{"./_cof":78,"./_descriptors":88,"./_fails":94,"./_global":98,"./_has":99,"./_inherit-if-required":103,"./_object-create":126,"./_object-dp":127,"./_object-gopd":130,"./_object-gopn":132,"./_redefine":147,"./_string-trim":162,"./_to-primitive":170}],228:[function(require,module,exports){
 // 20.1.2.1 Number.EPSILON
 var $export = require('./_export');
 
 $export($export.S, 'Number', {EPSILON: Math.pow(2, -52)});
-},{"./_export":93}],230:[function(require,module,exports){
+},{"./_export":92}],229:[function(require,module,exports){
 // 20.1.2.2 Number.isFinite(number)
 var $export   = require('./_export')
   , _isFinite = require('./_global').isFinite;
@@ -48450,12 +49072,12 @@ $export($export.S, 'Number', {
     return typeof it == 'number' && _isFinite(it);
   }
 });
-},{"./_export":93,"./_global":99}],231:[function(require,module,exports){
+},{"./_export":92,"./_global":98}],230:[function(require,module,exports){
 // 20.1.2.3 Number.isInteger(number)
 var $export = require('./_export');
 
 $export($export.S, 'Number', {isInteger: require('./_is-integer')});
-},{"./_export":93,"./_is-integer":109}],232:[function(require,module,exports){
+},{"./_export":92,"./_is-integer":108}],231:[function(require,module,exports){
 // 20.1.2.4 Number.isNaN(number)
 var $export = require('./_export');
 
@@ -48464,7 +49086,7 @@ $export($export.S, 'Number', {
     return number != number;
   }
 });
-},{"./_export":93}],233:[function(require,module,exports){
+},{"./_export":92}],232:[function(require,module,exports){
 // 20.1.2.5 Number.isSafeInteger(number)
 var $export   = require('./_export')
   , isInteger = require('./_is-integer')
@@ -48475,27 +49097,27 @@ $export($export.S, 'Number', {
     return isInteger(number) && abs(number) <= 0x1fffffffffffff;
   }
 });
-},{"./_export":93,"./_is-integer":109}],234:[function(require,module,exports){
+},{"./_export":92,"./_is-integer":108}],233:[function(require,module,exports){
 // 20.1.2.6 Number.MAX_SAFE_INTEGER
 var $export = require('./_export');
 
 $export($export.S, 'Number', {MAX_SAFE_INTEGER: 0x1fffffffffffff});
-},{"./_export":93}],235:[function(require,module,exports){
+},{"./_export":92}],234:[function(require,module,exports){
 // 20.1.2.10 Number.MIN_SAFE_INTEGER
 var $export = require('./_export');
 
 $export($export.S, 'Number', {MIN_SAFE_INTEGER: -0x1fffffffffffff});
-},{"./_export":93}],236:[function(require,module,exports){
+},{"./_export":92}],235:[function(require,module,exports){
 var $export     = require('./_export')
   , $parseFloat = require('./_parse-float');
 // 20.1.2.12 Number.parseFloat(string)
 $export($export.S + $export.F * (Number.parseFloat != $parseFloat), 'Number', {parseFloat: $parseFloat});
-},{"./_export":93,"./_parse-float":142}],237:[function(require,module,exports){
+},{"./_export":92,"./_parse-float":141}],236:[function(require,module,exports){
 var $export   = require('./_export')
   , $parseInt = require('./_parse-int');
 // 20.1.2.13 Number.parseInt(string, radix)
 $export($export.S + $export.F * (Number.parseInt != $parseInt), 'Number', {parseInt: $parseInt});
-},{"./_export":93,"./_parse-int":143}],238:[function(require,module,exports){
+},{"./_export":92,"./_parse-int":142}],237:[function(require,module,exports){
 'use strict';
 var $export      = require('./_export')
   , toInteger    = require('./_to-integer')
@@ -48609,7 +49231,7 @@ $export($export.P + $export.F * (!!$toFixed && (
     } return m;
   }
 });
-},{"./_a-number-value":65,"./_export":93,"./_fails":95,"./_string-repeat":162,"./_to-integer":167}],239:[function(require,module,exports){
+},{"./_a-number-value":64,"./_export":92,"./_fails":94,"./_string-repeat":161,"./_to-integer":166}],238:[function(require,module,exports){
 'use strict';
 var $export      = require('./_export')
   , $fails       = require('./_fails')
@@ -48628,24 +49250,24 @@ $export($export.P + $export.F * ($fails(function(){
     return precision === undefined ? $toPrecision.call(that) : $toPrecision.call(that, precision); 
   }
 });
-},{"./_a-number-value":65,"./_export":93,"./_fails":95}],240:[function(require,module,exports){
+},{"./_a-number-value":64,"./_export":92,"./_fails":94}],239:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $export = require('./_export');
 
 $export($export.S + $export.F, 'Object', {assign: require('./_object-assign')});
-},{"./_export":93,"./_object-assign":126}],241:[function(require,module,exports){
+},{"./_export":92,"./_object-assign":125}],240:[function(require,module,exports){
 var $export = require('./_export')
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 $export($export.S, 'Object', {create: require('./_object-create')});
-},{"./_export":93,"./_object-create":127}],242:[function(require,module,exports){
+},{"./_export":92,"./_object-create":126}],241:[function(require,module,exports){
 var $export = require('./_export');
 // 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
 $export($export.S + $export.F * !require('./_descriptors'), 'Object', {defineProperties: require('./_object-dps')});
-},{"./_descriptors":89,"./_export":93,"./_object-dps":129}],243:[function(require,module,exports){
+},{"./_descriptors":88,"./_export":92,"./_object-dps":128}],242:[function(require,module,exports){
 var $export = require('./_export');
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 $export($export.S + $export.F * !require('./_descriptors'), 'Object', {defineProperty: require('./_object-dp').f});
-},{"./_descriptors":89,"./_export":93,"./_object-dp":128}],244:[function(require,module,exports){
+},{"./_descriptors":88,"./_export":92,"./_object-dp":127}],243:[function(require,module,exports){
 // 19.1.2.5 Object.freeze(O)
 var isObject = require('./_is-object')
   , meta     = require('./_meta').onFreeze;
@@ -48655,7 +49277,7 @@ require('./_object-sap')('freeze', function($freeze){
     return $freeze && isObject(it) ? $freeze(meta(it)) : it;
   };
 });
-},{"./_is-object":110,"./_meta":123,"./_object-sap":139}],245:[function(require,module,exports){
+},{"./_is-object":109,"./_meta":122,"./_object-sap":138}],244:[function(require,module,exports){
 // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 var toIObject                 = require('./_to-iobject')
   , $getOwnPropertyDescriptor = require('./_object-gopd').f;
@@ -48665,12 +49287,12 @@ require('./_object-sap')('getOwnPropertyDescriptor', function(){
     return $getOwnPropertyDescriptor(toIObject(it), key);
   };
 });
-},{"./_object-gopd":131,"./_object-sap":139,"./_to-iobject":168}],246:[function(require,module,exports){
+},{"./_object-gopd":130,"./_object-sap":138,"./_to-iobject":167}],245:[function(require,module,exports){
 // 19.1.2.7 Object.getOwnPropertyNames(O)
 require('./_object-sap')('getOwnPropertyNames', function(){
   return require('./_object-gopn-ext').f;
 });
-},{"./_object-gopn-ext":132,"./_object-sap":139}],247:[function(require,module,exports){
+},{"./_object-gopn-ext":131,"./_object-sap":138}],246:[function(require,module,exports){
 // 19.1.2.9 Object.getPrototypeOf(O)
 var toObject        = require('./_to-object')
   , $getPrototypeOf = require('./_object-gpo');
@@ -48680,7 +49302,7 @@ require('./_object-sap')('getPrototypeOf', function(){
     return $getPrototypeOf(toObject(it));
   };
 });
-},{"./_object-gpo":135,"./_object-sap":139,"./_to-object":170}],248:[function(require,module,exports){
+},{"./_object-gpo":134,"./_object-sap":138,"./_to-object":169}],247:[function(require,module,exports){
 // 19.1.2.11 Object.isExtensible(O)
 var isObject = require('./_is-object');
 
@@ -48689,7 +49311,7 @@ require('./_object-sap')('isExtensible', function($isExtensible){
     return isObject(it) ? $isExtensible ? $isExtensible(it) : true : false;
   };
 });
-},{"./_is-object":110,"./_object-sap":139}],249:[function(require,module,exports){
+},{"./_is-object":109,"./_object-sap":138}],248:[function(require,module,exports){
 // 19.1.2.12 Object.isFrozen(O)
 var isObject = require('./_is-object');
 
@@ -48698,7 +49320,7 @@ require('./_object-sap')('isFrozen', function($isFrozen){
     return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
   };
 });
-},{"./_is-object":110,"./_object-sap":139}],250:[function(require,module,exports){
+},{"./_is-object":109,"./_object-sap":138}],249:[function(require,module,exports){
 // 19.1.2.13 Object.isSealed(O)
 var isObject = require('./_is-object');
 
@@ -48707,11 +49329,11 @@ require('./_object-sap')('isSealed', function($isSealed){
     return isObject(it) ? $isSealed ? $isSealed(it) : false : true;
   };
 });
-},{"./_is-object":110,"./_object-sap":139}],251:[function(require,module,exports){
+},{"./_is-object":109,"./_object-sap":138}],250:[function(require,module,exports){
 // 19.1.3.10 Object.is(value1, value2)
 var $export = require('./_export');
 $export($export.S, 'Object', {is: require('./_same-value')});
-},{"./_export":93,"./_same-value":150}],252:[function(require,module,exports){
+},{"./_export":92,"./_same-value":149}],251:[function(require,module,exports){
 // 19.1.2.14 Object.keys(O)
 var toObject = require('./_to-object')
   , $keys    = require('./_object-keys');
@@ -48721,7 +49343,7 @@ require('./_object-sap')('keys', function(){
     return $keys(toObject(it));
   };
 });
-},{"./_object-keys":137,"./_object-sap":139,"./_to-object":170}],253:[function(require,module,exports){
+},{"./_object-keys":136,"./_object-sap":138,"./_to-object":169}],252:[function(require,module,exports){
 // 19.1.2.15 Object.preventExtensions(O)
 var isObject = require('./_is-object')
   , meta     = require('./_meta').onFreeze;
@@ -48731,7 +49353,7 @@ require('./_object-sap')('preventExtensions', function($preventExtensions){
     return $preventExtensions && isObject(it) ? $preventExtensions(meta(it)) : it;
   };
 });
-},{"./_is-object":110,"./_meta":123,"./_object-sap":139}],254:[function(require,module,exports){
+},{"./_is-object":109,"./_meta":122,"./_object-sap":138}],253:[function(require,module,exports){
 // 19.1.2.17 Object.seal(O)
 var isObject = require('./_is-object')
   , meta     = require('./_meta').onFreeze;
@@ -48741,11 +49363,11 @@ require('./_object-sap')('seal', function($seal){
     return $seal && isObject(it) ? $seal(meta(it)) : it;
   };
 });
-},{"./_is-object":110,"./_meta":123,"./_object-sap":139}],255:[function(require,module,exports){
+},{"./_is-object":109,"./_meta":122,"./_object-sap":138}],254:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $export = require('./_export');
 $export($export.S, 'Object', {setPrototypeOf: require('./_set-proto').set});
-},{"./_export":93,"./_set-proto":151}],256:[function(require,module,exports){
+},{"./_export":92,"./_set-proto":150}],255:[function(require,module,exports){
 'use strict';
 // 19.1.3.6 Object.prototype.toString()
 var classof = require('./_classof')
@@ -48756,17 +49378,17 @@ if(test + '' != '[object z]'){
     return '[object ' + classof(this) + ']';
   }, true);
 }
-},{"./_classof":78,"./_redefine":148,"./_wks":178}],257:[function(require,module,exports){
+},{"./_classof":77,"./_redefine":147,"./_wks":177}],256:[function(require,module,exports){
 var $export     = require('./_export')
   , $parseFloat = require('./_parse-float');
 // 18.2.4 parseFloat(string)
 $export($export.G + $export.F * (parseFloat != $parseFloat), {parseFloat: $parseFloat});
-},{"./_export":93,"./_parse-float":142}],258:[function(require,module,exports){
+},{"./_export":92,"./_parse-float":141}],257:[function(require,module,exports){
 var $export   = require('./_export')
   , $parseInt = require('./_parse-int');
 // 18.2.5 parseInt(string, radix)
 $export($export.G + $export.F * (parseInt != $parseInt), {parseInt: $parseInt});
-},{"./_export":93,"./_parse-int":143}],259:[function(require,module,exports){
+},{"./_export":92,"./_parse-int":142}],258:[function(require,module,exports){
 'use strict';
 var LIBRARY            = require('./_library')
   , global             = require('./_global')
@@ -49066,7 +49688,7 @@ $export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(functi
     return capability.promise;
   }
 });
-},{"./_a-function":64,"./_an-instance":67,"./_classof":78,"./_core":84,"./_ctx":86,"./_export":93,"./_for-of":98,"./_global":99,"./_is-object":110,"./_iter-detect":115,"./_library":119,"./_microtask":125,"./_redefine-all":147,"./_set-species":152,"./_set-to-string-tag":153,"./_species-constructor":156,"./_task":165,"./_wks":178}],260:[function(require,module,exports){
+},{"./_a-function":63,"./_an-instance":66,"./_classof":77,"./_core":83,"./_ctx":85,"./_export":92,"./_for-of":97,"./_global":98,"./_is-object":109,"./_iter-detect":114,"./_library":118,"./_microtask":124,"./_redefine-all":146,"./_set-species":151,"./_set-to-string-tag":152,"./_species-constructor":155,"./_task":164,"./_wks":177}],259:[function(require,module,exports){
 // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
 var $export   = require('./_export')
   , aFunction = require('./_a-function')
@@ -49083,7 +49705,7 @@ $export($export.S + $export.F * !require('./_fails')(function(){
     return rApply ? rApply(T, thisArgument, L) : fApply.call(T, thisArgument, L);
   }
 });
-},{"./_a-function":64,"./_an-object":68,"./_export":93,"./_fails":95,"./_global":99}],261:[function(require,module,exports){
+},{"./_a-function":63,"./_an-object":67,"./_export":92,"./_fails":94,"./_global":98}],260:[function(require,module,exports){
 // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
 var $export    = require('./_export')
   , create     = require('./_object-create')
@@ -49131,7 +49753,7 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
     return isObject(result) ? result : instance;
   }
 });
-},{"./_a-function":64,"./_an-object":68,"./_bind":77,"./_export":93,"./_fails":95,"./_global":99,"./_is-object":110,"./_object-create":127}],262:[function(require,module,exports){
+},{"./_a-function":63,"./_an-object":67,"./_bind":76,"./_export":92,"./_fails":94,"./_global":98,"./_is-object":109,"./_object-create":126}],261:[function(require,module,exports){
 // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
 var dP          = require('./_object-dp')
   , $export     = require('./_export')
@@ -49154,7 +49776,7 @@ $export($export.S + $export.F * require('./_fails')(function(){
     }
   }
 });
-},{"./_an-object":68,"./_export":93,"./_fails":95,"./_object-dp":128,"./_to-primitive":171}],263:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_fails":94,"./_object-dp":127,"./_to-primitive":170}],262:[function(require,module,exports){
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
 var $export  = require('./_export')
   , gOPD     = require('./_object-gopd').f
@@ -49166,7 +49788,7 @@ $export($export.S, 'Reflect', {
     return desc && !desc.configurable ? false : delete target[propertyKey];
   }
 });
-},{"./_an-object":68,"./_export":93,"./_object-gopd":131}],264:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_object-gopd":130}],263:[function(require,module,exports){
 'use strict';
 // 26.1.5 Reflect.enumerate(target)
 var $export  = require('./_export')
@@ -49193,7 +49815,7 @@ $export($export.S, 'Reflect', {
     return new Enumerate(target);
   }
 });
-},{"./_an-object":68,"./_export":93,"./_iter-create":113}],265:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_iter-create":112}],264:[function(require,module,exports){
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
 var gOPD     = require('./_object-gopd')
   , $export  = require('./_export')
@@ -49204,7 +49826,7 @@ $export($export.S, 'Reflect', {
     return gOPD.f(anObject(target), propertyKey);
   }
 });
-},{"./_an-object":68,"./_export":93,"./_object-gopd":131}],266:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_object-gopd":130}],265:[function(require,module,exports){
 // 26.1.8 Reflect.getPrototypeOf(target)
 var $export  = require('./_export')
   , getProto = require('./_object-gpo')
@@ -49215,7 +49837,7 @@ $export($export.S, 'Reflect', {
     return getProto(anObject(target));
   }
 });
-},{"./_an-object":68,"./_export":93,"./_object-gpo":135}],267:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_object-gpo":134}],266:[function(require,module,exports){
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
 var gOPD           = require('./_object-gopd')
   , getPrototypeOf = require('./_object-gpo')
@@ -49237,7 +49859,7 @@ function get(target, propertyKey/*, receiver*/){
 }
 
 $export($export.S, 'Reflect', {get: get});
-},{"./_an-object":68,"./_export":93,"./_has":100,"./_is-object":110,"./_object-gopd":131,"./_object-gpo":135}],268:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_has":99,"./_is-object":109,"./_object-gopd":130,"./_object-gpo":134}],267:[function(require,module,exports){
 // 26.1.9 Reflect.has(target, propertyKey)
 var $export = require('./_export');
 
@@ -49246,7 +49868,7 @@ $export($export.S, 'Reflect', {
     return propertyKey in target;
   }
 });
-},{"./_export":93}],269:[function(require,module,exports){
+},{"./_export":92}],268:[function(require,module,exports){
 // 26.1.10 Reflect.isExtensible(target)
 var $export       = require('./_export')
   , anObject      = require('./_an-object')
@@ -49258,12 +49880,12 @@ $export($export.S, 'Reflect', {
     return $isExtensible ? $isExtensible(target) : true;
   }
 });
-},{"./_an-object":68,"./_export":93}],270:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92}],269:[function(require,module,exports){
 // 26.1.11 Reflect.ownKeys(target)
 var $export = require('./_export');
 
 $export($export.S, 'Reflect', {ownKeys: require('./_own-keys')});
-},{"./_export":93,"./_own-keys":141}],271:[function(require,module,exports){
+},{"./_export":92,"./_own-keys":140}],270:[function(require,module,exports){
 // 26.1.12 Reflect.preventExtensions(target)
 var $export            = require('./_export')
   , anObject           = require('./_an-object')
@@ -49280,7 +49902,7 @@ $export($export.S, 'Reflect', {
     }
   }
 });
-},{"./_an-object":68,"./_export":93}],272:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92}],271:[function(require,module,exports){
 // 26.1.14 Reflect.setPrototypeOf(target, proto)
 var $export  = require('./_export')
   , setProto = require('./_set-proto');
@@ -49296,7 +49918,7 @@ if(setProto)$export($export.S, 'Reflect', {
     }
   }
 });
-},{"./_export":93,"./_set-proto":151}],273:[function(require,module,exports){
+},{"./_export":92,"./_set-proto":150}],272:[function(require,module,exports){
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
 var dP             = require('./_object-dp')
   , gOPD           = require('./_object-gopd')
@@ -49328,7 +49950,7 @@ function set(target, propertyKey, V/*, receiver*/){
 }
 
 $export($export.S, 'Reflect', {set: set});
-},{"./_an-object":68,"./_export":93,"./_has":100,"./_is-object":110,"./_object-dp":128,"./_object-gopd":131,"./_object-gpo":135,"./_property-desc":146}],274:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_has":99,"./_is-object":109,"./_object-dp":127,"./_object-gopd":130,"./_object-gpo":134,"./_property-desc":145}],273:[function(require,module,exports){
 var global            = require('./_global')
   , inheritIfRequired = require('./_inherit-if-required')
   , dP                = require('./_object-dp').f
@@ -49372,13 +49994,13 @@ if(require('./_descriptors') && (!CORRECT_NEW || require('./_fails')(function(){
 }
 
 require('./_set-species')('RegExp');
-},{"./_descriptors":89,"./_fails":95,"./_flags":97,"./_global":99,"./_inherit-if-required":104,"./_is-regexp":111,"./_object-dp":128,"./_object-gopn":133,"./_redefine":148,"./_set-species":152,"./_wks":178}],275:[function(require,module,exports){
+},{"./_descriptors":88,"./_fails":94,"./_flags":96,"./_global":98,"./_inherit-if-required":103,"./_is-regexp":110,"./_object-dp":127,"./_object-gopn":132,"./_redefine":147,"./_set-species":151,"./_wks":177}],274:[function(require,module,exports){
 // 21.2.5.3 get RegExp.prototype.flags()
 if(require('./_descriptors') && /./g.flags != 'g')require('./_object-dp').f(RegExp.prototype, 'flags', {
   configurable: true,
   get: require('./_flags')
 });
-},{"./_descriptors":89,"./_flags":97,"./_object-dp":128}],276:[function(require,module,exports){
+},{"./_descriptors":88,"./_flags":96,"./_object-dp":127}],275:[function(require,module,exports){
 // @@match logic
 require('./_fix-re-wks')('match', 1, function(defined, MATCH, $match){
   // 21.1.3.11 String.prototype.match(regexp)
@@ -49389,7 +50011,7 @@ require('./_fix-re-wks')('match', 1, function(defined, MATCH, $match){
     return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
   }, $match];
 });
-},{"./_fix-re-wks":96}],277:[function(require,module,exports){
+},{"./_fix-re-wks":95}],276:[function(require,module,exports){
 // @@replace logic
 require('./_fix-re-wks')('replace', 2, function(defined, REPLACE, $replace){
   // 21.1.3.14 String.prototype.replace(searchValue, replaceValue)
@@ -49402,7 +50024,7 @@ require('./_fix-re-wks')('replace', 2, function(defined, REPLACE, $replace){
       : $replace.call(String(O), searchValue, replaceValue);
   }, $replace];
 });
-},{"./_fix-re-wks":96}],278:[function(require,module,exports){
+},{"./_fix-re-wks":95}],277:[function(require,module,exports){
 // @@search logic
 require('./_fix-re-wks')('search', 1, function(defined, SEARCH, $search){
   // 21.1.3.15 String.prototype.search(regexp)
@@ -49413,7 +50035,7 @@ require('./_fix-re-wks')('search', 1, function(defined, SEARCH, $search){
     return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[SEARCH](String(O));
   }, $search];
 });
-},{"./_fix-re-wks":96}],279:[function(require,module,exports){
+},{"./_fix-re-wks":95}],278:[function(require,module,exports){
 // @@split logic
 require('./_fix-re-wks')('split', 2, function(defined, SPLIT, $split){
   'use strict';
@@ -49484,7 +50106,7 @@ require('./_fix-re-wks')('split', 2, function(defined, SPLIT, $split){
     return fn !== undefined ? fn.call(separator, O, limit) : $split.call(String(O), separator, limit);
   }, $split];
 });
-},{"./_fix-re-wks":96,"./_is-regexp":111}],280:[function(require,module,exports){
+},{"./_fix-re-wks":95,"./_is-regexp":110}],279:[function(require,module,exports){
 'use strict';
 require('./es6.regexp.flags');
 var anObject    = require('./_an-object')
@@ -49510,7 +50132,7 @@ if(require('./_fails')(function(){ return $toString.call({source: 'a', flags: 'b
     return $toString.call(this);
   });
 }
-},{"./_an-object":68,"./_descriptors":89,"./_fails":95,"./_flags":97,"./_redefine":148,"./es6.regexp.flags":275}],281:[function(require,module,exports){
+},{"./_an-object":67,"./_descriptors":88,"./_fails":94,"./_flags":96,"./_redefine":147,"./es6.regexp.flags":274}],280:[function(require,module,exports){
 'use strict';
 var strong = require('./_collection-strong');
 
@@ -49523,7 +50145,7 @@ module.exports = require('./_collection')('Set', function(get){
     return strong.def(this, value = value === 0 ? 0 : value, value);
   }
 }, strong);
-},{"./_collection":83,"./_collection-strong":80}],282:[function(require,module,exports){
+},{"./_collection":82,"./_collection-strong":79}],281:[function(require,module,exports){
 'use strict';
 // B.2.3.2 String.prototype.anchor(name)
 require('./_string-html')('anchor', function(createHTML){
@@ -49531,7 +50153,7 @@ require('./_string-html')('anchor', function(createHTML){
     return createHTML(this, 'a', 'name', name);
   }
 });
-},{"./_string-html":160}],283:[function(require,module,exports){
+},{"./_string-html":159}],282:[function(require,module,exports){
 'use strict';
 // B.2.3.3 String.prototype.big()
 require('./_string-html')('big', function(createHTML){
@@ -49539,7 +50161,7 @@ require('./_string-html')('big', function(createHTML){
     return createHTML(this, 'big', '', '');
   }
 });
-},{"./_string-html":160}],284:[function(require,module,exports){
+},{"./_string-html":159}],283:[function(require,module,exports){
 'use strict';
 // B.2.3.4 String.prototype.blink()
 require('./_string-html')('blink', function(createHTML){
@@ -49547,7 +50169,7 @@ require('./_string-html')('blink', function(createHTML){
     return createHTML(this, 'blink', '', '');
   }
 });
-},{"./_string-html":160}],285:[function(require,module,exports){
+},{"./_string-html":159}],284:[function(require,module,exports){
 'use strict';
 // B.2.3.5 String.prototype.bold()
 require('./_string-html')('bold', function(createHTML){
@@ -49555,7 +50177,7 @@ require('./_string-html')('bold', function(createHTML){
     return createHTML(this, 'b', '', '');
   }
 });
-},{"./_string-html":160}],286:[function(require,module,exports){
+},{"./_string-html":159}],285:[function(require,module,exports){
 'use strict';
 var $export = require('./_export')
   , $at     = require('./_string-at')(false);
@@ -49565,7 +50187,7 @@ $export($export.P, 'String', {
     return $at(this, pos);
   }
 });
-},{"./_export":93,"./_string-at":158}],287:[function(require,module,exports){
+},{"./_export":92,"./_string-at":157}],286:[function(require,module,exports){
 // 21.1.3.6 String.prototype.endsWith(searchString [, endPosition])
 'use strict';
 var $export   = require('./_export')
@@ -49586,7 +50208,7 @@ $export($export.P + $export.F * require('./_fails-is-regexp')(ENDS_WITH), 'Strin
       : that.slice(end - search.length, end) === search;
   }
 });
-},{"./_export":93,"./_fails-is-regexp":94,"./_string-context":159,"./_to-length":169}],288:[function(require,module,exports){
+},{"./_export":92,"./_fails-is-regexp":93,"./_string-context":158,"./_to-length":168}],287:[function(require,module,exports){
 'use strict';
 // B.2.3.6 String.prototype.fixed()
 require('./_string-html')('fixed', function(createHTML){
@@ -49594,7 +50216,7 @@ require('./_string-html')('fixed', function(createHTML){
     return createHTML(this, 'tt', '', '');
   }
 });
-},{"./_string-html":160}],289:[function(require,module,exports){
+},{"./_string-html":159}],288:[function(require,module,exports){
 'use strict';
 // B.2.3.7 String.prototype.fontcolor(color)
 require('./_string-html')('fontcolor', function(createHTML){
@@ -49602,7 +50224,7 @@ require('./_string-html')('fontcolor', function(createHTML){
     return createHTML(this, 'font', 'color', color);
   }
 });
-},{"./_string-html":160}],290:[function(require,module,exports){
+},{"./_string-html":159}],289:[function(require,module,exports){
 'use strict';
 // B.2.3.8 String.prototype.fontsize(size)
 require('./_string-html')('fontsize', function(createHTML){
@@ -49610,7 +50232,7 @@ require('./_string-html')('fontsize', function(createHTML){
     return createHTML(this, 'font', 'size', size);
   }
 });
-},{"./_string-html":160}],291:[function(require,module,exports){
+},{"./_string-html":159}],290:[function(require,module,exports){
 var $export        = require('./_export')
   , toIndex        = require('./_to-index')
   , fromCharCode   = String.fromCharCode
@@ -49634,7 +50256,7 @@ $export($export.S + $export.F * (!!$fromCodePoint && $fromCodePoint.length != 1)
     } return res.join('');
   }
 });
-},{"./_export":93,"./_to-index":166}],292:[function(require,module,exports){
+},{"./_export":92,"./_to-index":165}],291:[function(require,module,exports){
 // 21.1.3.7 String.prototype.includes(searchString, position = 0)
 'use strict';
 var $export  = require('./_export')
@@ -49647,7 +50269,7 @@ $export($export.P + $export.F * require('./_fails-is-regexp')(INCLUDES), 'String
       .indexOf(searchString, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-},{"./_export":93,"./_fails-is-regexp":94,"./_string-context":159}],293:[function(require,module,exports){
+},{"./_export":92,"./_fails-is-regexp":93,"./_string-context":158}],292:[function(require,module,exports){
 'use strict';
 // B.2.3.9 String.prototype.italics()
 require('./_string-html')('italics', function(createHTML){
@@ -49655,7 +50277,7 @@ require('./_string-html')('italics', function(createHTML){
     return createHTML(this, 'i', '', '');
   }
 });
-},{"./_string-html":160}],294:[function(require,module,exports){
+},{"./_string-html":159}],293:[function(require,module,exports){
 'use strict';
 var $at  = require('./_string-at')(true);
 
@@ -49673,7 +50295,7 @@ require('./_iter-define')(String, 'String', function(iterated){
   this._i += point.length;
   return {value: point, done: false};
 });
-},{"./_iter-define":114,"./_string-at":158}],295:[function(require,module,exports){
+},{"./_iter-define":113,"./_string-at":157}],294:[function(require,module,exports){
 'use strict';
 // B.2.3.10 String.prototype.link(url)
 require('./_string-html')('link', function(createHTML){
@@ -49681,7 +50303,7 @@ require('./_string-html')('link', function(createHTML){
     return createHTML(this, 'a', 'href', url);
   }
 });
-},{"./_string-html":160}],296:[function(require,module,exports){
+},{"./_string-html":159}],295:[function(require,module,exports){
 var $export   = require('./_export')
   , toIObject = require('./_to-iobject')
   , toLength  = require('./_to-length');
@@ -49700,14 +50322,14 @@ $export($export.S, 'String', {
     } return res.join('');
   }
 });
-},{"./_export":93,"./_to-iobject":168,"./_to-length":169}],297:[function(require,module,exports){
+},{"./_export":92,"./_to-iobject":167,"./_to-length":168}],296:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.P, 'String', {
   // 21.1.3.13 String.prototype.repeat(count)
   repeat: require('./_string-repeat')
 });
-},{"./_export":93,"./_string-repeat":162}],298:[function(require,module,exports){
+},{"./_export":92,"./_string-repeat":161}],297:[function(require,module,exports){
 'use strict';
 // B.2.3.11 String.prototype.small()
 require('./_string-html')('small', function(createHTML){
@@ -49715,7 +50337,7 @@ require('./_string-html')('small', function(createHTML){
     return createHTML(this, 'small', '', '');
   }
 });
-},{"./_string-html":160}],299:[function(require,module,exports){
+},{"./_string-html":159}],298:[function(require,module,exports){
 // 21.1.3.18 String.prototype.startsWith(searchString [, position ])
 'use strict';
 var $export     = require('./_export')
@@ -49734,7 +50356,7 @@ $export($export.P + $export.F * require('./_fails-is-regexp')(STARTS_WITH), 'Str
       : that.slice(index, index + search.length) === search;
   }
 });
-},{"./_export":93,"./_fails-is-regexp":94,"./_string-context":159,"./_to-length":169}],300:[function(require,module,exports){
+},{"./_export":92,"./_fails-is-regexp":93,"./_string-context":158,"./_to-length":168}],299:[function(require,module,exports){
 'use strict';
 // B.2.3.12 String.prototype.strike()
 require('./_string-html')('strike', function(createHTML){
@@ -49742,7 +50364,7 @@ require('./_string-html')('strike', function(createHTML){
     return createHTML(this, 'strike', '', '');
   }
 });
-},{"./_string-html":160}],301:[function(require,module,exports){
+},{"./_string-html":159}],300:[function(require,module,exports){
 'use strict';
 // B.2.3.13 String.prototype.sub()
 require('./_string-html')('sub', function(createHTML){
@@ -49750,7 +50372,7 @@ require('./_string-html')('sub', function(createHTML){
     return createHTML(this, 'sub', '', '');
   }
 });
-},{"./_string-html":160}],302:[function(require,module,exports){
+},{"./_string-html":159}],301:[function(require,module,exports){
 'use strict';
 // B.2.3.14 String.prototype.sup()
 require('./_string-html')('sup', function(createHTML){
@@ -49758,7 +50380,7 @@ require('./_string-html')('sup', function(createHTML){
     return createHTML(this, 'sup', '', '');
   }
 });
-},{"./_string-html":160}],303:[function(require,module,exports){
+},{"./_string-html":159}],302:[function(require,module,exports){
 'use strict';
 // 21.1.3.25 String.prototype.trim()
 require('./_string-trim')('trim', function($trim){
@@ -49766,7 +50388,7 @@ require('./_string-trim')('trim', function($trim){
     return $trim(this, 3);
   };
 });
-},{"./_string-trim":163}],304:[function(require,module,exports){
+},{"./_string-trim":162}],303:[function(require,module,exports){
 'use strict';
 // ECMAScript 6 symbols shim
 var global         = require('./_global')
@@ -50002,7 +50624,7 @@ setToStringTag($Symbol, 'Symbol');
 setToStringTag(Math, 'Math', true);
 // 24.3.3 JSON[@@toStringTag]
 setToStringTag(global.JSON, 'JSON', true);
-},{"./_an-object":68,"./_descriptors":89,"./_enum-keys":92,"./_export":93,"./_fails":95,"./_global":99,"./_has":100,"./_hide":101,"./_is-array":108,"./_keyof":118,"./_library":119,"./_meta":123,"./_object-create":127,"./_object-dp":128,"./_object-gopd":131,"./_object-gopn":133,"./_object-gopn-ext":132,"./_object-gops":134,"./_object-keys":137,"./_object-pie":138,"./_property-desc":146,"./_redefine":148,"./_set-to-string-tag":153,"./_shared":155,"./_to-iobject":168,"./_to-primitive":171,"./_uid":175,"./_wks":178,"./_wks-define":176,"./_wks-ext":177}],305:[function(require,module,exports){
+},{"./_an-object":67,"./_descriptors":88,"./_enum-keys":91,"./_export":92,"./_fails":94,"./_global":98,"./_has":99,"./_hide":100,"./_is-array":107,"./_keyof":117,"./_library":118,"./_meta":122,"./_object-create":126,"./_object-dp":127,"./_object-gopd":130,"./_object-gopn":132,"./_object-gopn-ext":131,"./_object-gops":133,"./_object-keys":136,"./_object-pie":137,"./_property-desc":145,"./_redefine":147,"./_set-to-string-tag":152,"./_shared":154,"./_to-iobject":167,"./_to-primitive":170,"./_uid":174,"./_wks":177,"./_wks-define":175,"./_wks-ext":176}],304:[function(require,module,exports){
 'use strict';
 var $export      = require('./_export')
   , $typed       = require('./_typed')
@@ -50049,66 +50671,66 @@ $export($export.P + $export.U + $export.F * require('./_fails')(function(){
 });
 
 require('./_set-species')(ARRAY_BUFFER);
-},{"./_an-object":68,"./_export":93,"./_fails":95,"./_global":99,"./_is-object":110,"./_set-species":152,"./_species-constructor":156,"./_to-index":166,"./_to-length":169,"./_typed":174,"./_typed-buffer":173}],306:[function(require,module,exports){
+},{"./_an-object":67,"./_export":92,"./_fails":94,"./_global":98,"./_is-object":109,"./_set-species":151,"./_species-constructor":155,"./_to-index":165,"./_to-length":168,"./_typed":173,"./_typed-buffer":172}],305:[function(require,module,exports){
 var $export = require('./_export');
 $export($export.G + $export.W + $export.F * !require('./_typed').ABV, {
   DataView: require('./_typed-buffer').DataView
 });
-},{"./_export":93,"./_typed":174,"./_typed-buffer":173}],307:[function(require,module,exports){
+},{"./_export":92,"./_typed":173,"./_typed-buffer":172}],306:[function(require,module,exports){
 require('./_typed-array')('Float32', 4, function(init){
   return function Float32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],308:[function(require,module,exports){
+},{"./_typed-array":171}],307:[function(require,module,exports){
 require('./_typed-array')('Float64', 8, function(init){
   return function Float64Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],309:[function(require,module,exports){
+},{"./_typed-array":171}],308:[function(require,module,exports){
 require('./_typed-array')('Int16', 2, function(init){
   return function Int16Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],310:[function(require,module,exports){
+},{"./_typed-array":171}],309:[function(require,module,exports){
 require('./_typed-array')('Int32', 4, function(init){
   return function Int32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],311:[function(require,module,exports){
+},{"./_typed-array":171}],310:[function(require,module,exports){
 require('./_typed-array')('Int8', 1, function(init){
   return function Int8Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],312:[function(require,module,exports){
+},{"./_typed-array":171}],311:[function(require,module,exports){
 require('./_typed-array')('Uint16', 2, function(init){
   return function Uint16Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],313:[function(require,module,exports){
+},{"./_typed-array":171}],312:[function(require,module,exports){
 require('./_typed-array')('Uint32', 4, function(init){
   return function Uint32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],314:[function(require,module,exports){
+},{"./_typed-array":171}],313:[function(require,module,exports){
 require('./_typed-array')('Uint8', 1, function(init){
   return function Uint8Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
-},{"./_typed-array":172}],315:[function(require,module,exports){
+},{"./_typed-array":171}],314:[function(require,module,exports){
 require('./_typed-array')('Uint8', 1, function(init){
   return function Uint8ClampedArray(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 }, true);
-},{"./_typed-array":172}],316:[function(require,module,exports){
+},{"./_typed-array":171}],315:[function(require,module,exports){
 'use strict';
 var each         = require('./_array-methods')(0)
   , redefine     = require('./_redefine')
@@ -50165,7 +50787,7 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
     });
   });
 }
-},{"./_array-methods":73,"./_collection":83,"./_collection-weak":82,"./_is-object":110,"./_meta":123,"./_object-assign":126,"./_redefine":148}],317:[function(require,module,exports){
+},{"./_array-methods":72,"./_collection":82,"./_collection-weak":81,"./_is-object":109,"./_meta":122,"./_object-assign":125,"./_redefine":147}],316:[function(require,module,exports){
 'use strict';
 var weak = require('./_collection-weak');
 
@@ -50178,7 +50800,7 @@ require('./_collection')('WeakSet', function(get){
     return weak.def(this, value, true);
   }
 }, weak, false, true);
-},{"./_collection":83,"./_collection-weak":82}],318:[function(require,module,exports){
+},{"./_collection":82,"./_collection-weak":81}],317:[function(require,module,exports){
 'use strict';
 // https://github.com/tc39/Array.prototype.includes
 var $export   = require('./_export')
@@ -50191,7 +50813,7 @@ $export($export.P, 'Array', {
 });
 
 require('./_add-to-unscopables')('includes');
-},{"./_add-to-unscopables":66,"./_array-includes":72,"./_export":93}],319:[function(require,module,exports){
+},{"./_add-to-unscopables":65,"./_array-includes":71,"./_export":92}],318:[function(require,module,exports){
 // https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-09/sept-25.md#510-globalasap-for-enqueuing-a-microtask
 var $export   = require('./_export')
   , microtask = require('./_microtask')()
@@ -50204,7 +50826,7 @@ $export($export.G, {
     microtask(domain ? domain.bind(fn) : fn);
   }
 });
-},{"./_cof":79,"./_export":93,"./_global":99,"./_microtask":125}],320:[function(require,module,exports){
+},{"./_cof":78,"./_export":92,"./_global":98,"./_microtask":124}],319:[function(require,module,exports){
 // https://github.com/ljharb/proposal-is-error
 var $export = require('./_export')
   , cof     = require('./_cof');
@@ -50214,12 +50836,12 @@ $export($export.S, 'Error', {
     return cof(it) === 'Error';
   }
 });
-},{"./_cof":79,"./_export":93}],321:[function(require,module,exports){
+},{"./_cof":78,"./_export":92}],320:[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var $export  = require('./_export');
 
 $export($export.P + $export.R, 'Map', {toJSON: require('./_collection-to-json')('Map')});
-},{"./_collection-to-json":81,"./_export":93}],322:[function(require,module,exports){
+},{"./_collection-to-json":80,"./_export":92}],321:[function(require,module,exports){
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
 var $export = require('./_export');
 
@@ -50231,7 +50853,7 @@ $export($export.S, 'Math', {
     return $x1 + (y1 >>> 0) + (($x0 & $y0 | ($x0 | $y0) & ~($x0 + $y0 >>> 0)) >>> 31) | 0;
   }
 });
-},{"./_export":93}],323:[function(require,module,exports){
+},{"./_export":92}],322:[function(require,module,exports){
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
 var $export = require('./_export');
 
@@ -50248,7 +50870,7 @@ $export($export.S, 'Math', {
     return u1 * v1 + (t >> 16) + ((u0 * v1 >>> 0) + (t & UINT16) >> 16);
   }
 });
-},{"./_export":93}],324:[function(require,module,exports){
+},{"./_export":92}],323:[function(require,module,exports){
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
 var $export = require('./_export');
 
@@ -50260,7 +50882,7 @@ $export($export.S, 'Math', {
     return $x1 - (y1 >>> 0) - ((~$x0 & $y0 | ~($x0 ^ $y0) & $x0 - $y0 >>> 0) >>> 31) | 0;
   }
 });
-},{"./_export":93}],325:[function(require,module,exports){
+},{"./_export":92}],324:[function(require,module,exports){
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
 var $export = require('./_export');
 
@@ -50277,7 +50899,7 @@ $export($export.S, 'Math', {
     return u1 * v1 + (t >>> 16) + ((u0 * v1 >>> 0) + (t & UINT16) >>> 16);
   }
 });
-},{"./_export":93}],326:[function(require,module,exports){
+},{"./_export":92}],325:[function(require,module,exports){
 'use strict';
 var $export         = require('./_export')
   , toObject        = require('./_to-object')
@@ -50290,7 +50912,7 @@ require('./_descriptors') && $export($export.P + require('./_object-forced-pam')
     $defineProperty.f(toObject(this), P, {get: aFunction(getter), enumerable: true, configurable: true});
   }
 });
-},{"./_a-function":64,"./_descriptors":89,"./_export":93,"./_object-dp":128,"./_object-forced-pam":130,"./_to-object":170}],327:[function(require,module,exports){
+},{"./_a-function":63,"./_descriptors":88,"./_export":92,"./_object-dp":127,"./_object-forced-pam":129,"./_to-object":169}],326:[function(require,module,exports){
 'use strict';
 var $export         = require('./_export')
   , toObject        = require('./_to-object')
@@ -50303,7 +50925,7 @@ require('./_descriptors') && $export($export.P + require('./_object-forced-pam')
     $defineProperty.f(toObject(this), P, {set: aFunction(setter), enumerable: true, configurable: true});
   }
 });
-},{"./_a-function":64,"./_descriptors":89,"./_export":93,"./_object-dp":128,"./_object-forced-pam":130,"./_to-object":170}],328:[function(require,module,exports){
+},{"./_a-function":63,"./_descriptors":88,"./_export":92,"./_object-dp":127,"./_object-forced-pam":129,"./_to-object":169}],327:[function(require,module,exports){
 // https://github.com/tc39/proposal-object-values-entries
 var $export  = require('./_export')
   , $entries = require('./_object-to-array')(true);
@@ -50313,7 +50935,7 @@ $export($export.S, 'Object', {
     return $entries(it);
   }
 });
-},{"./_export":93,"./_object-to-array":140}],329:[function(require,module,exports){
+},{"./_export":92,"./_object-to-array":139}],328:[function(require,module,exports){
 // https://github.com/tc39/proposal-object-getownpropertydescriptors
 var $export        = require('./_export')
   , ownKeys        = require('./_own-keys')
@@ -50333,7 +50955,7 @@ $export($export.S, 'Object', {
     return result;
   }
 });
-},{"./_create-property":85,"./_export":93,"./_object-gopd":131,"./_own-keys":141,"./_to-iobject":168}],330:[function(require,module,exports){
+},{"./_create-property":84,"./_export":92,"./_object-gopd":130,"./_own-keys":140,"./_to-iobject":167}],329:[function(require,module,exports){
 'use strict';
 var $export                  = require('./_export')
   , toObject                 = require('./_to-object')
@@ -50352,7 +50974,7 @@ require('./_descriptors') && $export($export.P + require('./_object-forced-pam')
     } while(O = getPrototypeOf(O));
   }
 });
-},{"./_descriptors":89,"./_export":93,"./_object-forced-pam":130,"./_object-gopd":131,"./_object-gpo":135,"./_to-object":170,"./_to-primitive":171}],331:[function(require,module,exports){
+},{"./_descriptors":88,"./_export":92,"./_object-forced-pam":129,"./_object-gopd":130,"./_object-gpo":134,"./_to-object":169,"./_to-primitive":170}],330:[function(require,module,exports){
 'use strict';
 var $export                  = require('./_export')
   , toObject                 = require('./_to-object')
@@ -50371,7 +50993,7 @@ require('./_descriptors') && $export($export.P + require('./_object-forced-pam')
     } while(O = getPrototypeOf(O));
   }
 });
-},{"./_descriptors":89,"./_export":93,"./_object-forced-pam":130,"./_object-gopd":131,"./_object-gpo":135,"./_to-object":170,"./_to-primitive":171}],332:[function(require,module,exports){
+},{"./_descriptors":88,"./_export":92,"./_object-forced-pam":129,"./_object-gopd":130,"./_object-gpo":134,"./_to-object":169,"./_to-primitive":170}],331:[function(require,module,exports){
 // https://github.com/tc39/proposal-object-values-entries
 var $export = require('./_export')
   , $values = require('./_object-to-array')(false);
@@ -50381,7 +51003,7 @@ $export($export.S, 'Object', {
     return $values(it);
   }
 });
-},{"./_export":93,"./_object-to-array":140}],333:[function(require,module,exports){
+},{"./_export":92,"./_object-to-array":139}],332:[function(require,module,exports){
 'use strict';
 // https://github.com/zenparsing/es-observable
 var $export     = require('./_export')
@@ -50581,7 +51203,7 @@ hide($Observable.prototype, OBSERVABLE, function(){ return this; });
 $export($export.G, {Observable: $Observable});
 
 require('./_set-species')('Observable');
-},{"./_a-function":64,"./_an-instance":67,"./_an-object":68,"./_core":84,"./_export":93,"./_for-of":98,"./_global":99,"./_hide":101,"./_microtask":125,"./_redefine-all":147,"./_set-species":152,"./_wks":178}],334:[function(require,module,exports){
+},{"./_a-function":63,"./_an-instance":66,"./_an-object":67,"./_core":83,"./_export":92,"./_for-of":97,"./_global":98,"./_hide":100,"./_microtask":124,"./_redefine-all":146,"./_set-species":151,"./_wks":177}],333:[function(require,module,exports){
 var metadata                  = require('./_metadata')
   , anObject                  = require('./_an-object')
   , toMetaKey                 = metadata.key
@@ -50590,7 +51212,7 @@ var metadata                  = require('./_metadata')
 metadata.exp({defineMetadata: function defineMetadata(metadataKey, metadataValue, target, targetKey){
   ordinaryDefineOwnMetadata(metadataKey, metadataValue, anObject(target), toMetaKey(targetKey));
 }});
-},{"./_an-object":68,"./_metadata":124}],335:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123}],334:[function(require,module,exports){
 var metadata               = require('./_metadata')
   , anObject               = require('./_an-object')
   , toMetaKey              = metadata.key
@@ -50606,7 +51228,7 @@ metadata.exp({deleteMetadata: function deleteMetadata(metadataKey, target /*, ta
   targetMetadata['delete'](targetKey);
   return !!targetMetadata.size || store['delete'](target);
 }});
-},{"./_an-object":68,"./_metadata":124}],336:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123}],335:[function(require,module,exports){
 var Set                     = require('./es6.set')
   , from                    = require('./_array-from-iterable')
   , metadata                = require('./_metadata')
@@ -50626,7 +51248,7 @@ var ordinaryMetadataKeys = function(O, P){
 metadata.exp({getMetadataKeys: function getMetadataKeys(target /*, targetKey */){
   return ordinaryMetadataKeys(anObject(target), arguments.length < 2 ? undefined : toMetaKey(arguments[1]));
 }});
-},{"./_an-object":68,"./_array-from-iterable":71,"./_metadata":124,"./_object-gpo":135,"./es6.set":281}],337:[function(require,module,exports){
+},{"./_an-object":67,"./_array-from-iterable":70,"./_metadata":123,"./_object-gpo":134,"./es6.set":280}],336:[function(require,module,exports){
 var metadata               = require('./_metadata')
   , anObject               = require('./_an-object')
   , getPrototypeOf         = require('./_object-gpo')
@@ -50644,7 +51266,7 @@ var ordinaryGetMetadata = function(MetadataKey, O, P){
 metadata.exp({getMetadata: function getMetadata(metadataKey, target /*, targetKey */){
   return ordinaryGetMetadata(metadataKey, anObject(target), arguments.length < 3 ? undefined : toMetaKey(arguments[2]));
 }});
-},{"./_an-object":68,"./_metadata":124,"./_object-gpo":135}],338:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123,"./_object-gpo":134}],337:[function(require,module,exports){
 var metadata                = require('./_metadata')
   , anObject                = require('./_an-object')
   , ordinaryOwnMetadataKeys = metadata.keys
@@ -50653,7 +51275,7 @@ var metadata                = require('./_metadata')
 metadata.exp({getOwnMetadataKeys: function getOwnMetadataKeys(target /*, targetKey */){
   return ordinaryOwnMetadataKeys(anObject(target), arguments.length < 2 ? undefined : toMetaKey(arguments[1]));
 }});
-},{"./_an-object":68,"./_metadata":124}],339:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123}],338:[function(require,module,exports){
 var metadata               = require('./_metadata')
   , anObject               = require('./_an-object')
   , ordinaryGetOwnMetadata = metadata.get
@@ -50663,7 +51285,7 @@ metadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, ta
   return ordinaryGetOwnMetadata(metadataKey, anObject(target)
     , arguments.length < 3 ? undefined : toMetaKey(arguments[2]));
 }});
-},{"./_an-object":68,"./_metadata":124}],340:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123}],339:[function(require,module,exports){
 var metadata               = require('./_metadata')
   , anObject               = require('./_an-object')
   , getPrototypeOf         = require('./_object-gpo')
@@ -50680,7 +51302,7 @@ var ordinaryHasMetadata = function(MetadataKey, O, P){
 metadata.exp({hasMetadata: function hasMetadata(metadataKey, target /*, targetKey */){
   return ordinaryHasMetadata(metadataKey, anObject(target), arguments.length < 3 ? undefined : toMetaKey(arguments[2]));
 }});
-},{"./_an-object":68,"./_metadata":124,"./_object-gpo":135}],341:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123,"./_object-gpo":134}],340:[function(require,module,exports){
 var metadata               = require('./_metadata')
   , anObject               = require('./_an-object')
   , ordinaryHasOwnMetadata = metadata.has
@@ -50690,7 +51312,7 @@ metadata.exp({hasOwnMetadata: function hasOwnMetadata(metadataKey, target /*, ta
   return ordinaryHasOwnMetadata(metadataKey, anObject(target)
     , arguments.length < 3 ? undefined : toMetaKey(arguments[2]));
 }});
-},{"./_an-object":68,"./_metadata":124}],342:[function(require,module,exports){
+},{"./_an-object":67,"./_metadata":123}],341:[function(require,module,exports){
 var metadata                  = require('./_metadata')
   , anObject                  = require('./_an-object')
   , aFunction                 = require('./_a-function')
@@ -50706,12 +51328,12 @@ metadata.exp({metadata: function metadata(metadataKey, metadataValue){
     );
   };
 }});
-},{"./_a-function":64,"./_an-object":68,"./_metadata":124}],343:[function(require,module,exports){
+},{"./_a-function":63,"./_an-object":67,"./_metadata":123}],342:[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var $export  = require('./_export');
 
 $export($export.P + $export.R, 'Set', {toJSON: require('./_collection-to-json')('Set')});
-},{"./_collection-to-json":81,"./_export":93}],344:[function(require,module,exports){
+},{"./_collection-to-json":80,"./_export":92}],343:[function(require,module,exports){
 'use strict';
 // https://github.com/mathiasbynens/String.prototype.at
 var $export = require('./_export')
@@ -50722,7 +51344,7 @@ $export($export.P, 'String', {
     return $at(this, pos);
   }
 });
-},{"./_export":93,"./_string-at":158}],345:[function(require,module,exports){
+},{"./_export":92,"./_string-at":157}],344:[function(require,module,exports){
 'use strict';
 // https://tc39.github.io/String.prototype.matchAll/
 var $export     = require('./_export')
@@ -50753,7 +51375,7 @@ $export($export.P, 'String', {
     return new $RegExpStringIterator(rx, S);
   }
 });
-},{"./_defined":88,"./_export":93,"./_flags":97,"./_is-regexp":111,"./_iter-create":113,"./_to-length":169}],346:[function(require,module,exports){
+},{"./_defined":87,"./_export":92,"./_flags":96,"./_is-regexp":110,"./_iter-create":112,"./_to-length":168}],345:[function(require,module,exports){
 'use strict';
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = require('./_export')
@@ -50764,7 +51386,7 @@ $export($export.P, 'String', {
     return $pad(this, maxLength, arguments.length > 1 ? arguments[1] : undefined, false);
   }
 });
-},{"./_export":93,"./_string-pad":161}],347:[function(require,module,exports){
+},{"./_export":92,"./_string-pad":160}],346:[function(require,module,exports){
 'use strict';
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = require('./_export')
@@ -50775,7 +51397,7 @@ $export($export.P, 'String', {
     return $pad(this, maxLength, arguments.length > 1 ? arguments[1] : undefined, true);
   }
 });
-},{"./_export":93,"./_string-pad":161}],348:[function(require,module,exports){
+},{"./_export":92,"./_string-pad":160}],347:[function(require,module,exports){
 'use strict';
 // https://github.com/sebmarkbage/ecmascript-string-left-right-trim
 require('./_string-trim')('trimLeft', function($trim){
@@ -50783,7 +51405,7 @@ require('./_string-trim')('trimLeft', function($trim){
     return $trim(this, 1);
   };
 }, 'trimStart');
-},{"./_string-trim":163}],349:[function(require,module,exports){
+},{"./_string-trim":162}],348:[function(require,module,exports){
 'use strict';
 // https://github.com/sebmarkbage/ecmascript-string-left-right-trim
 require('./_string-trim')('trimRight', function($trim){
@@ -50791,16 +51413,16 @@ require('./_string-trim')('trimRight', function($trim){
     return $trim(this, 2);
   };
 }, 'trimEnd');
-},{"./_string-trim":163}],350:[function(require,module,exports){
+},{"./_string-trim":162}],349:[function(require,module,exports){
 require('./_wks-define')('asyncIterator');
-},{"./_wks-define":176}],351:[function(require,module,exports){
+},{"./_wks-define":175}],350:[function(require,module,exports){
 require('./_wks-define')('observable');
-},{"./_wks-define":176}],352:[function(require,module,exports){
+},{"./_wks-define":175}],351:[function(require,module,exports){
 // https://github.com/ljharb/proposal-global
 var $export = require('./_export');
 
 $export($export.S, 'System', {global: require('./_global')});
-},{"./_export":93,"./_global":99}],353:[function(require,module,exports){
+},{"./_export":92,"./_global":98}],352:[function(require,module,exports){
 var $iterators    = require('./es6.array.iterator')
   , redefine      = require('./_redefine')
   , global        = require('./_global')
@@ -50823,14 +51445,14 @@ for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList'
     for(key in $iterators)if(!proto[key])redefine(proto, key, $iterators[key], true);
   }
 }
-},{"./_global":99,"./_hide":101,"./_iterators":117,"./_redefine":148,"./_wks":178,"./es6.array.iterator":191}],354:[function(require,module,exports){
+},{"./_global":98,"./_hide":100,"./_iterators":116,"./_redefine":147,"./_wks":177,"./es6.array.iterator":190}],353:[function(require,module,exports){
 var $export = require('./_export')
   , $task   = require('./_task');
 $export($export.G + $export.B, {
   setImmediate:   $task.set,
   clearImmediate: $task.clear
 });
-},{"./_export":93,"./_task":165}],355:[function(require,module,exports){
+},{"./_export":92,"./_task":164}],354:[function(require,module,exports){
 // ie9- setTimeout & setInterval additional parameters fix
 var global     = require('./_global')
   , $export    = require('./_export')
@@ -50851,7 +51473,7 @@ $export($export.G + $export.B + $export.F * MSIE, {
   setTimeout:  wrap(global.setTimeout),
   setInterval: wrap(global.setInterval)
 });
-},{"./_export":93,"./_global":99,"./_invoke":105,"./_partial":144}],356:[function(require,module,exports){
+},{"./_export":92,"./_global":98,"./_invoke":104,"./_partial":143}],355:[function(require,module,exports){
 require('./modules/es6.symbol');
 require('./modules/es6.object.create');
 require('./modules/es6.object.define-property');
@@ -51028,7 +51650,7 @@ require('./modules/web.timers');
 require('./modules/web.immediate');
 require('./modules/web.dom.iterable');
 module.exports = require('./modules/_core');
-},{"./modules/_core":84,"./modules/es6.array.copy-within":181,"./modules/es6.array.every":182,"./modules/es6.array.fill":183,"./modules/es6.array.filter":184,"./modules/es6.array.find":186,"./modules/es6.array.find-index":185,"./modules/es6.array.for-each":187,"./modules/es6.array.from":188,"./modules/es6.array.index-of":189,"./modules/es6.array.is-array":190,"./modules/es6.array.iterator":191,"./modules/es6.array.join":192,"./modules/es6.array.last-index-of":193,"./modules/es6.array.map":194,"./modules/es6.array.of":195,"./modules/es6.array.reduce":197,"./modules/es6.array.reduce-right":196,"./modules/es6.array.slice":198,"./modules/es6.array.some":199,"./modules/es6.array.sort":200,"./modules/es6.array.species":201,"./modules/es6.date.now":202,"./modules/es6.date.to-iso-string":203,"./modules/es6.date.to-json":204,"./modules/es6.date.to-primitive":205,"./modules/es6.date.to-string":206,"./modules/es6.function.bind":207,"./modules/es6.function.has-instance":208,"./modules/es6.function.name":209,"./modules/es6.map":210,"./modules/es6.math.acosh":211,"./modules/es6.math.asinh":212,"./modules/es6.math.atanh":213,"./modules/es6.math.cbrt":214,"./modules/es6.math.clz32":215,"./modules/es6.math.cosh":216,"./modules/es6.math.expm1":217,"./modules/es6.math.fround":218,"./modules/es6.math.hypot":219,"./modules/es6.math.imul":220,"./modules/es6.math.log10":221,"./modules/es6.math.log1p":222,"./modules/es6.math.log2":223,"./modules/es6.math.sign":224,"./modules/es6.math.sinh":225,"./modules/es6.math.tanh":226,"./modules/es6.math.trunc":227,"./modules/es6.number.constructor":228,"./modules/es6.number.epsilon":229,"./modules/es6.number.is-finite":230,"./modules/es6.number.is-integer":231,"./modules/es6.number.is-nan":232,"./modules/es6.number.is-safe-integer":233,"./modules/es6.number.max-safe-integer":234,"./modules/es6.number.min-safe-integer":235,"./modules/es6.number.parse-float":236,"./modules/es6.number.parse-int":237,"./modules/es6.number.to-fixed":238,"./modules/es6.number.to-precision":239,"./modules/es6.object.assign":240,"./modules/es6.object.create":241,"./modules/es6.object.define-properties":242,"./modules/es6.object.define-property":243,"./modules/es6.object.freeze":244,"./modules/es6.object.get-own-property-descriptor":245,"./modules/es6.object.get-own-property-names":246,"./modules/es6.object.get-prototype-of":247,"./modules/es6.object.is":251,"./modules/es6.object.is-extensible":248,"./modules/es6.object.is-frozen":249,"./modules/es6.object.is-sealed":250,"./modules/es6.object.keys":252,"./modules/es6.object.prevent-extensions":253,"./modules/es6.object.seal":254,"./modules/es6.object.set-prototype-of":255,"./modules/es6.object.to-string":256,"./modules/es6.parse-float":257,"./modules/es6.parse-int":258,"./modules/es6.promise":259,"./modules/es6.reflect.apply":260,"./modules/es6.reflect.construct":261,"./modules/es6.reflect.define-property":262,"./modules/es6.reflect.delete-property":263,"./modules/es6.reflect.enumerate":264,"./modules/es6.reflect.get":267,"./modules/es6.reflect.get-own-property-descriptor":265,"./modules/es6.reflect.get-prototype-of":266,"./modules/es6.reflect.has":268,"./modules/es6.reflect.is-extensible":269,"./modules/es6.reflect.own-keys":270,"./modules/es6.reflect.prevent-extensions":271,"./modules/es6.reflect.set":273,"./modules/es6.reflect.set-prototype-of":272,"./modules/es6.regexp.constructor":274,"./modules/es6.regexp.flags":275,"./modules/es6.regexp.match":276,"./modules/es6.regexp.replace":277,"./modules/es6.regexp.search":278,"./modules/es6.regexp.split":279,"./modules/es6.regexp.to-string":280,"./modules/es6.set":281,"./modules/es6.string.anchor":282,"./modules/es6.string.big":283,"./modules/es6.string.blink":284,"./modules/es6.string.bold":285,"./modules/es6.string.code-point-at":286,"./modules/es6.string.ends-with":287,"./modules/es6.string.fixed":288,"./modules/es6.string.fontcolor":289,"./modules/es6.string.fontsize":290,"./modules/es6.string.from-code-point":291,"./modules/es6.string.includes":292,"./modules/es6.string.italics":293,"./modules/es6.string.iterator":294,"./modules/es6.string.link":295,"./modules/es6.string.raw":296,"./modules/es6.string.repeat":297,"./modules/es6.string.small":298,"./modules/es6.string.starts-with":299,"./modules/es6.string.strike":300,"./modules/es6.string.sub":301,"./modules/es6.string.sup":302,"./modules/es6.string.trim":303,"./modules/es6.symbol":304,"./modules/es6.typed.array-buffer":305,"./modules/es6.typed.data-view":306,"./modules/es6.typed.float32-array":307,"./modules/es6.typed.float64-array":308,"./modules/es6.typed.int16-array":309,"./modules/es6.typed.int32-array":310,"./modules/es6.typed.int8-array":311,"./modules/es6.typed.uint16-array":312,"./modules/es6.typed.uint32-array":313,"./modules/es6.typed.uint8-array":314,"./modules/es6.typed.uint8-clamped-array":315,"./modules/es6.weak-map":316,"./modules/es6.weak-set":317,"./modules/es7.array.includes":318,"./modules/es7.asap":319,"./modules/es7.error.is-error":320,"./modules/es7.map.to-json":321,"./modules/es7.math.iaddh":322,"./modules/es7.math.imulh":323,"./modules/es7.math.isubh":324,"./modules/es7.math.umulh":325,"./modules/es7.object.define-getter":326,"./modules/es7.object.define-setter":327,"./modules/es7.object.entries":328,"./modules/es7.object.get-own-property-descriptors":329,"./modules/es7.object.lookup-getter":330,"./modules/es7.object.lookup-setter":331,"./modules/es7.object.values":332,"./modules/es7.observable":333,"./modules/es7.reflect.define-metadata":334,"./modules/es7.reflect.delete-metadata":335,"./modules/es7.reflect.get-metadata":337,"./modules/es7.reflect.get-metadata-keys":336,"./modules/es7.reflect.get-own-metadata":339,"./modules/es7.reflect.get-own-metadata-keys":338,"./modules/es7.reflect.has-metadata":340,"./modules/es7.reflect.has-own-metadata":341,"./modules/es7.reflect.metadata":342,"./modules/es7.set.to-json":343,"./modules/es7.string.at":344,"./modules/es7.string.match-all":345,"./modules/es7.string.pad-end":346,"./modules/es7.string.pad-start":347,"./modules/es7.string.trim-left":348,"./modules/es7.string.trim-right":349,"./modules/es7.symbol.async-iterator":350,"./modules/es7.symbol.observable":351,"./modules/es7.system.global":352,"./modules/web.dom.iterable":353,"./modules/web.immediate":354,"./modules/web.timers":355}],357:[function(require,module,exports){
+},{"./modules/_core":83,"./modules/es6.array.copy-within":180,"./modules/es6.array.every":181,"./modules/es6.array.fill":182,"./modules/es6.array.filter":183,"./modules/es6.array.find":185,"./modules/es6.array.find-index":184,"./modules/es6.array.for-each":186,"./modules/es6.array.from":187,"./modules/es6.array.index-of":188,"./modules/es6.array.is-array":189,"./modules/es6.array.iterator":190,"./modules/es6.array.join":191,"./modules/es6.array.last-index-of":192,"./modules/es6.array.map":193,"./modules/es6.array.of":194,"./modules/es6.array.reduce":196,"./modules/es6.array.reduce-right":195,"./modules/es6.array.slice":197,"./modules/es6.array.some":198,"./modules/es6.array.sort":199,"./modules/es6.array.species":200,"./modules/es6.date.now":201,"./modules/es6.date.to-iso-string":202,"./modules/es6.date.to-json":203,"./modules/es6.date.to-primitive":204,"./modules/es6.date.to-string":205,"./modules/es6.function.bind":206,"./modules/es6.function.has-instance":207,"./modules/es6.function.name":208,"./modules/es6.map":209,"./modules/es6.math.acosh":210,"./modules/es6.math.asinh":211,"./modules/es6.math.atanh":212,"./modules/es6.math.cbrt":213,"./modules/es6.math.clz32":214,"./modules/es6.math.cosh":215,"./modules/es6.math.expm1":216,"./modules/es6.math.fround":217,"./modules/es6.math.hypot":218,"./modules/es6.math.imul":219,"./modules/es6.math.log10":220,"./modules/es6.math.log1p":221,"./modules/es6.math.log2":222,"./modules/es6.math.sign":223,"./modules/es6.math.sinh":224,"./modules/es6.math.tanh":225,"./modules/es6.math.trunc":226,"./modules/es6.number.constructor":227,"./modules/es6.number.epsilon":228,"./modules/es6.number.is-finite":229,"./modules/es6.number.is-integer":230,"./modules/es6.number.is-nan":231,"./modules/es6.number.is-safe-integer":232,"./modules/es6.number.max-safe-integer":233,"./modules/es6.number.min-safe-integer":234,"./modules/es6.number.parse-float":235,"./modules/es6.number.parse-int":236,"./modules/es6.number.to-fixed":237,"./modules/es6.number.to-precision":238,"./modules/es6.object.assign":239,"./modules/es6.object.create":240,"./modules/es6.object.define-properties":241,"./modules/es6.object.define-property":242,"./modules/es6.object.freeze":243,"./modules/es6.object.get-own-property-descriptor":244,"./modules/es6.object.get-own-property-names":245,"./modules/es6.object.get-prototype-of":246,"./modules/es6.object.is":250,"./modules/es6.object.is-extensible":247,"./modules/es6.object.is-frozen":248,"./modules/es6.object.is-sealed":249,"./modules/es6.object.keys":251,"./modules/es6.object.prevent-extensions":252,"./modules/es6.object.seal":253,"./modules/es6.object.set-prototype-of":254,"./modules/es6.object.to-string":255,"./modules/es6.parse-float":256,"./modules/es6.parse-int":257,"./modules/es6.promise":258,"./modules/es6.reflect.apply":259,"./modules/es6.reflect.construct":260,"./modules/es6.reflect.define-property":261,"./modules/es6.reflect.delete-property":262,"./modules/es6.reflect.enumerate":263,"./modules/es6.reflect.get":266,"./modules/es6.reflect.get-own-property-descriptor":264,"./modules/es6.reflect.get-prototype-of":265,"./modules/es6.reflect.has":267,"./modules/es6.reflect.is-extensible":268,"./modules/es6.reflect.own-keys":269,"./modules/es6.reflect.prevent-extensions":270,"./modules/es6.reflect.set":272,"./modules/es6.reflect.set-prototype-of":271,"./modules/es6.regexp.constructor":273,"./modules/es6.regexp.flags":274,"./modules/es6.regexp.match":275,"./modules/es6.regexp.replace":276,"./modules/es6.regexp.search":277,"./modules/es6.regexp.split":278,"./modules/es6.regexp.to-string":279,"./modules/es6.set":280,"./modules/es6.string.anchor":281,"./modules/es6.string.big":282,"./modules/es6.string.blink":283,"./modules/es6.string.bold":284,"./modules/es6.string.code-point-at":285,"./modules/es6.string.ends-with":286,"./modules/es6.string.fixed":287,"./modules/es6.string.fontcolor":288,"./modules/es6.string.fontsize":289,"./modules/es6.string.from-code-point":290,"./modules/es6.string.includes":291,"./modules/es6.string.italics":292,"./modules/es6.string.iterator":293,"./modules/es6.string.link":294,"./modules/es6.string.raw":295,"./modules/es6.string.repeat":296,"./modules/es6.string.small":297,"./modules/es6.string.starts-with":298,"./modules/es6.string.strike":299,"./modules/es6.string.sub":300,"./modules/es6.string.sup":301,"./modules/es6.string.trim":302,"./modules/es6.symbol":303,"./modules/es6.typed.array-buffer":304,"./modules/es6.typed.data-view":305,"./modules/es6.typed.float32-array":306,"./modules/es6.typed.float64-array":307,"./modules/es6.typed.int16-array":308,"./modules/es6.typed.int32-array":309,"./modules/es6.typed.int8-array":310,"./modules/es6.typed.uint16-array":311,"./modules/es6.typed.uint32-array":312,"./modules/es6.typed.uint8-array":313,"./modules/es6.typed.uint8-clamped-array":314,"./modules/es6.weak-map":315,"./modules/es6.weak-set":316,"./modules/es7.array.includes":317,"./modules/es7.asap":318,"./modules/es7.error.is-error":319,"./modules/es7.map.to-json":320,"./modules/es7.math.iaddh":321,"./modules/es7.math.imulh":322,"./modules/es7.math.isubh":323,"./modules/es7.math.umulh":324,"./modules/es7.object.define-getter":325,"./modules/es7.object.define-setter":326,"./modules/es7.object.entries":327,"./modules/es7.object.get-own-property-descriptors":328,"./modules/es7.object.lookup-getter":329,"./modules/es7.object.lookup-setter":330,"./modules/es7.object.values":331,"./modules/es7.observable":332,"./modules/es7.reflect.define-metadata":333,"./modules/es7.reflect.delete-metadata":334,"./modules/es7.reflect.get-metadata":336,"./modules/es7.reflect.get-metadata-keys":335,"./modules/es7.reflect.get-own-metadata":338,"./modules/es7.reflect.get-own-metadata-keys":337,"./modules/es7.reflect.has-metadata":339,"./modules/es7.reflect.has-own-metadata":340,"./modules/es7.reflect.metadata":341,"./modules/es7.set.to-json":342,"./modules/es7.string.at":343,"./modules/es7.string.match-all":344,"./modules/es7.string.pad-end":345,"./modules/es7.string.pad-start":346,"./modules/es7.string.trim-left":347,"./modules/es7.string.trim-right":348,"./modules/es7.symbol.async-iterator":349,"./modules/es7.symbol.observable":350,"./modules/es7.system.global":351,"./modules/web.dom.iterable":352,"./modules/web.immediate":353,"./modules/web.timers":354}],356:[function(require,module,exports){
 /**!
  * AngularJS file upload directives and services. Supports: file upload/drop/paste, resume, cancel/abort,
  * progress, resize, thumbnail, preview, validation and CORS
@@ -53900,10 +54522,10 @@ ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize
 }]);
 
 
-},{}],358:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 require('./dist/ng-file-upload-all');
 module.exports = 'ngFileUpload';
-},{"./dist/ng-file-upload-all":357}],359:[function(require,module,exports){
+},{"./dist/ng-file-upload-all":356}],358:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -54065,7 +54687,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],360:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
 (function (process,global){
 /**
  * Copyright (c) 2014, Facebook, Inc.
@@ -54737,4 +55359,4 @@ process.umask = function() { return 0; };
 );
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":359}]},{},[1]);
+},{"_process":358}]},{},[1]);
