@@ -8,7 +8,8 @@ let files = {
     create: function(request, reply) {
         let data = request.payload;
         if (data.file) {
-            let name = data.file.hapi.filename;
+            let name = Date.now() + '-' + data.file.hapi.filename;
+			console.log(name);
             let path = env.uploadPath + request.params.path + '/' + name;
             let file = fs.createWriteStream(path);
 
@@ -20,7 +21,7 @@ let files = {
 
             data.file.on('end', function(err) {
                 let response = {
-                    filename: data.file.hapi.filename,
+                    filename: name,
                     headers: data.file.hapi.headers,
                     status: 200,
                     statusText: 'File uploaded successfully!'
