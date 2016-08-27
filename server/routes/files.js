@@ -10,7 +10,6 @@ let files = {
         if (data.file) {
             let name = data.file.hapi.filename;
             let path = env.uploadPath + request.params.path + '/' + name;
-            console.log(path);
             let file = fs.createWriteStream(path);
 
             file.on('error', function(err) {
