@@ -42,6 +42,7 @@ if (!WA_Auth_RulePasses("verifiedUser")){
                     <a ui-sref="cart" style="padding: 5px 0 0 0; width:150px">
                         <ngcart-summary></ngcart-summary>
                     </a>
+					<div user-details></div>
                 </div>
             </div>
             <div class="full_width view-container">

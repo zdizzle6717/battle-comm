@@ -38,7 +38,7 @@ mod.controller('ProductController', require('./controllers/ProductController'));
 mod.controller('CheckoutController', require('./controllers/CheckoutController'));
 
 // Directives
-// mod.directive('header', require('./directives/Header'));
+mod.directive('userDetails', require('./directives/userDetails'));
 
 // Services
 mod.service('StoreService', require('./services/StoreService'));

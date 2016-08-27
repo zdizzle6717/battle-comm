@@ -14,7 +14,18 @@
             <div style="text-align:center;padding-top:10px;">All Items <strong>{{Store.slider.min | number}}</strong> RP - <strong>{{Store.slider.max | number}}</strong> RP</div>
         </div>
     </div>
-    <div class="panel panel-default sidebar-menu">
+	<div class="panel panel-default sidebar-menu">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search</h3>
+        </div>
+        <div class="panel-body">
+            <label>Search selected filters:</label>
+            <div class="input-append span12">
+                <input type="text" class="search-query mac-style" placeholder="Enter keyword..." ng-model="Store.searchQuery">
+            </div>
+        </div>
+    </div>
+	<div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
             <h3 class="panel-title">Game Developer</h3>
         </div>
@@ -22,10 +33,10 @@
             <label>Manufacturer:</label>
             <select name="manufacturerSelect" id="manufacturerSelect" ng-model="Store.selectedMNU" ng-options="manufacturer as manufacturer.name for manufacturer in Store.manufacturers" ng-change="Store.setMNU(Store.selectedMNU)"></select>
             </select>
-            <!-- <div ng-hide="!Store.selectedMNU.name || Store.selectedMNU.name === 'Show All...'">
+            <div ng-hide="!Store.selectedMNU.name || Store.selectedMNU.name === 'Show All...'">
                 <label>Game System:</label>
                 <select name="systemSelect" id="systemSelect" ng-model="Store.selectedSystem" ng-options="system as system.name for system in Store.currentMNU.gameSystem"></select>
-            </div> -->
+            </div>
         </div>
     </div>
     <div class="panel panel-default sidebar-menu">
@@ -58,17 +69,6 @@
                     <option value="100">100</option>
                 </select>
             </select>
-        </div>
-    </div>
-    <div class="panel panel-default sidebar-menu">
-        <div class="panel-heading">
-            <h3 class="panel-title">Search</h3>
-        </div>
-        <div class="panel-body">
-            <label>Search selected filters:</label>
-            <div class="input-append span12">
-                <input type="text" class="search-query mac-style" placeholder="Enter keyword..." ng-model="Store.searchQuery">
-            </div>
         </div>
     </div>
     <div class="panel panel-default sidebar-menu">
