@@ -18,7 +18,7 @@ function notification($timeout) {
                 scope.show = true;
                 $timeout(() => {
                     scope.show = false;
-                }, 3000);
+                }, 2000);
             });
 
             scope.$on('$destroy', listener);

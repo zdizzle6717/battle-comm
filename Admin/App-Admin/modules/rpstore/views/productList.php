@@ -27,13 +27,16 @@
                 <select name="selectedSort" id="selectedSort" ng-model="Product.selectedSort">
                     <option value="id">Product ID (ascending)</option>
                     <option value="-id">Product ID (descending)</option>
-                    <option value="-created">Created (most recent)</option>
-                    <option value="created">Created (ascending)</option>
-                    <option value="-updated">Updated (descending)</option>
-                    <option value="updated">Updated (ascending)</option>
-                    <option value="productTotal">Product Total (low to high)</option>
-                    <option value="-productTotal">Product Total (high to low)</option>
-                    <option value="-status">Status</option>
+                    <option value="-createdAt">Created (most recent)</option>
+                    <option value="createdAt">Created (ascending)</option>
+                    <option value="-updatedAt">Updated (descending)</option>
+                    <option value="updatedAt">Updated (ascending)</option>
+                    <option value="price">Price (descending)</option>
+                    <option value="-price">Price (ascending)</option>
+                    <option value="stockQty">Stock (descending)</option>
+                    <option value="-stockQty">Stock (ascending)</option>
+                    <option value="featured">Featured (descending)</option>
+                    <option value="-featured">Featured (ascending)</option>
                 </select>
             </select>
         </div>
