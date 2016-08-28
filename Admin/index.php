@@ -45,6 +45,9 @@ include ($pathToFile. "/Templates/parts/header.php"); ?>
 			<div class="four_column_1">
 				<button class="btn" ui-sref="newsList"><span class="glyphicon glyphicon-tasks"></span> News</button>
 			</div>
+			<div class="four_column_1">
+				<button class="btn" ui-sref="playerList"><span class="glyphicon glyphicon-user"></span> Players</button>
+			</div>
 		</div>
 		<div class="full_width view-container">
 			<hr>

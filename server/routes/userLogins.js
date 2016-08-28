@@ -4,30 +4,30 @@ let models = require('../models');
 
 // Product Route Configs
 let userLogins = {
-    // get: function(request, reply) {
-    //     models.UserLogin.find({
-    //             where: {
-    //                 id: request.params.id
-    //             }
-    //         })
-    //         .then(function(response) {
-    //             if (response) {
-    //                 reply(response).code(200);
-    //             }
-    //             else {
-    //                 reply().code(404);
-    //             }
-    //
-    //         });
-    // },
-    // getAll: function(request, reply) {
-    //     models.UserLogin.findAll()
-    //         .then(function(products) {
-    //             reply(products).code(200);
-    //         });
-    // },
+    get: function(request, reply) {
+        models.user_login.find({
+                where: {
+                    id: request.params.id
+                }
+            })
+            .then(function(response) {
+                if (response) {
+                    reply(response).code(200);
+                }
+                else {
+                    reply().code(404);
+                }
+
+            });
+    },
+    getAll: function(request, reply) {
+        models.user_login.findAll()
+            .then(function(products) {
+                reply(products).code(200);
+            });
+    },
     // create: function(request, reply) {
-    //     models.UserLogin.create({
+    //     models.user_login.create({
     //         })
     //         .then(function(response) {
     //             reply(response).code(200);
@@ -42,20 +42,20 @@ let userLogins = {
             .then(function(response) {
                 if (response) {
                     response.updateAttributes({
-                        // email: request.payload.email,
+                        email: request.payload.email,
                         // password: request.payload.password,
                         // activation_key: request.payload.activation_key,
                         // activation_state: request.payload.activation_state,
-                        // firstName: request.payload.firstName,
-                        // lastName: request.payload.lastName,
+                        firstName: request.payload.firstName,
+                        lastName: request.payload.lastName,
                         // join_date: request.payload.join_date,
-                        // tourneyAdmin: request.payload.tourneyAdmin,
-                        // EventAdmin: request.payload.EventAdmin,
+                        tourneyAdmin: request.payload.tourneyAdmin,
+                        EventAdmin: request.payload.EventAdmin,
                         // NewsContributor: request.payload.NewsContributor,
-                        // venueAdmin: request.payload.venueAdmin,
-                        // clubAdmin: request.payload.clubAdmin,
-                        // siteAdmin: request.payload.siteAdmin,
-                        // user_handle: request.payload.user_handle,
+                        venueAdmin: request.payload.venueAdmin,
+                        clubAdmin: request.payload.clubAdmin,
+                        siteAdmin: request.payload.siteAdmin,
+                        user_handle: request.payload.user_handle,
                         // user_club: request.payload.user_club,
                         // user_main_phone: request.payload.user_main_phone,
                         // user_mobile_phone: request.payload.user_mobile_phone,

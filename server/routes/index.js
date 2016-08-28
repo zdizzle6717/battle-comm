@@ -360,6 +360,31 @@ module.exports = [
 
 
     // User Logins
+	{
+        method: 'GET',
+        path: '/api/userLogins/{id}',
+        config: {
+            tags: ['api'],
+            description: 'Get one player by id',
+            notes: 'Get one player by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                }
+            }
+        },
+        handler: userLogins.get
+    },
+    {
+        method: 'GET',
+        path: '/api/userLogins',
+        config: {
+            tags: ['api'],
+            description: 'Get all players',
+            notes: 'Get all players'
+        },
+        handler: userLogins.getAll
+    },
     {
         method: 'PATCH',
         path: '/api/userLogins/{id}',
@@ -372,7 +397,17 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
+					email: Joi.optional(),
                     user_points: Joi.number().required(),
+					firstName: Joi.optional(),
+					lastName: Joi.optional(),
+					tourneyAdmin: Joi.optional(),
+					EventAdmin: Joi.optional(),
+					venueAdmin: Joi.optional(),
+					clubAdmin: Joi.optional(),
+					siteAdmin: Joi.optional(),
+					user_handle: Joi.optional(),
+					user_points: Joi.optional()
                 }
             }
         },

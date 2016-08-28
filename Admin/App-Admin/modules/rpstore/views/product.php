@@ -128,7 +128,7 @@
             </select><br>
         </div>
         <div class="panel-body" ng-if="!Product.isNew">
-            Updated: {{Product.currentProduct.updated | jsonDate | date: 'medium'}}
+            Updated: {{Product.currentProduct.updatedAt | jsonDate | date: 'medium'}}
         </div>
     </div>
     <div class="panel panel-default sidebar-menu" ng-if="Product.readOnly">

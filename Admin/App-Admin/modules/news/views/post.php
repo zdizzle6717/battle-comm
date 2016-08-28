@@ -90,7 +90,7 @@
             </select><br>
         </div>
         <div class="panel-body" ng-if="!Post.isNew">
-            Updated: {{Post.currentPost.updated | jsonDate | date: 'medium'}}
+            Updated: {{Post.currentPost.updatedAt | jsonDate | date: 'medium'}}
         </div>
     </div>
     <div class="panel panel-default sidebar-menu" ng-if="Post.readOnly">

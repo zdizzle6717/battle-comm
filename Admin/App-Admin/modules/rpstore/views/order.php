@@ -75,7 +75,7 @@
             </select><br>
         </div>
         <div class="panel-body">
-            Updated: {{Order.currentOrder.updated | jsonDate | date: 'medium'}}
+            Updated: {{Order.currentOrder.updatedAt | jsonDate | date: 'medium'}}
         </div>
     </div>
 </div>
