@@ -65,6 +65,10 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
         }
     }
 
+	function showAlert(config) {
+        $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});
+    }
+
 }
 
 module.exports = PlayerController;
