@@ -3,7 +3,7 @@
 <?php require_once("webassist/form_validations/wavt_validatedform_php.php"); ?>
 <?php require_once( "webassist/security_assist/helper_php.php" ); ?>
 <?php require_once("webassist/database_management/wa_appbuilder_php.php"); ?>
-<?php 
+<?php
  if ((isset($_POST["Registration_submit"]) || isset($_POST["Registration_submit_x"])))  {
    $WAFV_Redirect = "".(htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES))  ."?invalid=true";
    $_SESSION['WAVT_registration_Errors'] = "";
@@ -26,7 +26,7 @@
    }
  }
  ?>
-<?php 
+<?php
 // WA DataAssist Insert
 if ((isset($_POST["Registration_submit"]) && $_POST["Registration_submit"] != "")) // Trigger
 {
@@ -126,22 +126,12 @@ if (ValidatedField('registration','registration'))  {
       <fieldset class="Basic_Default" id="Registration">
      <div class="two_column_1">
         <div class="lineGroup">
-          <label for="Registration_group_6_Handle_Nickname" class="sublabel" > Handle/Nickname:<span class="requiredIndicator">&nbsp;*</span></label>
-          <input id="Registration_group_6_Handle_Nickname" name="Registration_group_6_Handle_Nickname" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_6_Handle_Nickname"):"")); ?>" class="formTextfield_Medium" tabindex="6" title="Please enter a value." required="true">
-          <?php
-if (ValidatedField('registration','registration'))  {
-  if ((strpos((",".ValidatedField("registration","registration").","), "," . "6" . ",") !== false || "6" == "") || (strpos((",".ValidatedField("registration","registration").","), "," . "7" . ",") !== false || "7" == ""))  {
-    if (!(false))  {
-?>
-            <span class="serverInvalidState" id="Registration_group_6_Handle_Nickname_ServerError">Please enter a Handle.</span>
-            <?php //WAFV_Conditional registration.php registration(6,7:)
-    }
-  }
-}?>
+          <label for="Registration_group_4_First_Name" class="sublabel" > First Name:</label>
+          <input id="Registration_group_4_First_Name" name="Registration_group_4_First_Name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_4_First_Name"):"")); ?>" class="formTextfield_Medium" tabindex="1" title="Please enter a value.">
         </div>
         <div class="lineGroup">
           <label for="Registration_group_Email_Address" class="sublabel" > Email Address:<span class="requiredIndicator">&nbsp;*</span></label>
-          <input id="Registration_group_Email_Address" name="Registration_group_Email_Address" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_Email_Address"):"")); ?>" class="formTextfield_Large" tabindex="1" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="Please enter a value." required="true">
+          <input id="Registration_group_Email_Address" name="Registration_group_Email_Address" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_Email_Address"):"")); ?>" class="formTextfield_Large" tabindex="3" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="Please enter a value." required="true">
           <?php
 if (ValidatedField('registration','registration'))  {
   if ((strpos((",".ValidatedField("registration","registration").","), "," . "1" . ",") !== false || "1" == "") || (strpos((",".ValidatedField("registration","registration").","), "," . "2" . ",") !== false || "2" == ""))  {
@@ -155,7 +145,7 @@ if (ValidatedField('registration','registration'))  {
         </div>
         <div class="lineGroup">
           <label for="Registration_group_2_Password" class="sublabel" > Password:<span class="requiredIndicator">&nbsp;*</span></label>
-          <input id="Registration_group_2_Password" name="Registration_group_2_Password" type="password" value="" class="formPasswordfield_Large" tabindex="2" title="Password strength requirement not met. @@strengthmessage@@" confirm="" required="true">
+          <input id="Registration_group_2_Password" name="Registration_group_2_Password" type="password" value="" class="formPasswordfield_Large" tabindex="3" title="Password strength requirement not met. @@strengthmessage@@" confirm="" required="true">
           <?php
 if (ValidatedField('registration','registration'))  {
   if ((strpos((",".ValidatedField("registration","registration").","), "," . "3" . ",") !== false || "3" == "") || (strpos((",".ValidatedField("registration","registration").","), "," . "4" . ",") !== false || "4" == ""))  {
@@ -169,7 +159,7 @@ if (ValidatedField('registration','registration'))  {
         </div>
         <div class="lineGroup">
           <label for="Registration_group_3_Confirm" class="sublabel" > Confirm:<span class="requiredIndicator">&nbsp;*</span></label>
-          <input id="Registration_group_3_Confirm" name="Registration_group_3_Confirm" type="password" value="" class="formPasswordfield_Large" tabindex="3" title="A value is required." confirm="Registration_group_2_Password" required="true">
+          <input id="Registration_group_3_Confirm" name="Registration_group_3_Confirm" type="password" value="" class="formPasswordfield_Large" tabindex="4" title="A value is required." confirm="Registration_group_2_Password" required="true">
           <?php
 if (ValidatedField('registration','registration'))  {
   if ((strpos((",".ValidatedField("registration","registration").","), "," . "5" . ",") !== false || "5" == ""))  {
@@ -181,15 +171,25 @@ if (ValidatedField('registration','registration'))  {
   }
 }?>
         </div>
-        <div class="lineGroup">
-          <label for="Registration_group_4_First_Name" class="sublabel" > First Name:</label>
-          <input id="Registration_group_4_First_Name" name="Registration_group_4_First_Name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_4_First_Name"):"")); ?>" class="formTextfield_Medium" tabindex="4" title="Please enter a value.">
+		<div class="lineGroup">
+          <label for="Registration_group_6_Handle_Nickname" class="sublabel" > Handle/Nickname:<span class="requiredIndicator">&nbsp;*</span></label>
+          <input id="Registration_group_6_Handle_Nickname" name="Registration_group_6_Handle_Nickname" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_6_Handle_Nickname"):"")); ?>" class="formTextfield_Medium" tabindex="5" title="Please enter a value." required="true">
+          <?php
+if (ValidatedField('registration','registration'))  {
+  if ((strpos((",".ValidatedField("registration","registration").","), "," . "6" . ",") !== false || "6" == "") || (strpos((",".ValidatedField("registration","registration").","), "," . "7" . ",") !== false || "7" == ""))  {
+    if (!(false))  {
+?>
+            <span class="serverInvalidState" id="Registration_group_6_Handle_Nickname_ServerError">Please enter a Handle.</span>
+            <?php //WAFV_Conditional registration.php registration(6,7:)
+    }
+  }
+}?>
         </div>
     </div>
     <div class="two_column_1">
         <div class="lineGroup">
           <label for="Registration_group_5_Last_Name" class="sublabel" > Last Name:</label>
-          <input id="Registration_group_5_Last_Name" name="Registration_group_5_Last_Name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_5_Last_Name"):"")); ?>" class="formTextfield_Medium" tabindex="5" title="Please enter a value.">
+          <input id="Registration_group_5_Last_Name" name="Registration_group_5_Last_Name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_5_Last_Name"):"")); ?>" class="formTextfield_Medium" tabindex="2" title="Please enter a value.">
         </div>
         <div class="lineGroup">
           <label for="Security_Code" class="sublabel" >&nbsp;</label>
@@ -197,7 +197,7 @@ if (ValidatedField('registration','registration'))  {
           <img src="webassist/captcha/wavt_captchasecurityimages.php?field=Security_Code&amp;noisefreq=15&amp;noisecolor=060606&amp;gridcolor=080808&amp;font=fonts/MOM_T___.TTF&amp;textcolor=040404" alt="Security Code" class="Captcha">
           <div class="fullColumnGroup" style="clear:left;">
             <label for="Security_Code" class="sublabel" > Security code:<span class="requiredIndicator">&nbsp;*</span></label>
-            <input id="Security_Code" name="Security_Code" type="text" value="" class="formTextfield_Large" tabindex="7" title="Please enter a value" required="true">
+            <input id="Security_Code" name="Security_Code" type="text" value="" class="formTextfield_Large" tabindex="6" title="Please enter a value" required="true">
             <?php
 if (ValidatedField('registration','registration'))  {
   if ((strpos((",".ValidatedField("registration","registration").","), "," . "8" . ",") !== false || "8" == ""))  {
@@ -217,7 +217,7 @@ if (ValidatedField('registration','registration'))  {
           </span>
           <div class="fullColumnGroup" style="clear:left;">
             <label for="Security_Answer" class="sublabel" > Answer:<span class="requiredIndicator">&nbsp;*</span></label>
-            <input id="Security_Answer" name="Security_Answer" type="text" value="" class="formTextfield_Large" tabindex="8" title="Please enter a value" required="true">
+            <input id="Security_Answer" name="Security_Answer" type="text" value="" class="formTextfield_Large" tabindex="7" title="Please enter a value" required="true">
             <?php
 if (ValidatedField('registration','registration'))  {
   if ((strpos((",".ValidatedField("registration","registration").","), "," . "9" . ",") !== false || "9" == ""))  {
@@ -283,16 +283,16 @@ $(document).ready(function () {
                 <br>
                 <h2>Games we support...</h2>
                 <div class="four_column_1">
-                    <img src="media/DZC_Logo_white_web_grande.png" alt="Dropzone Commander"> 
+                    <img src="media/DZC_Logo_white_web_grande.png" alt="Dropzone Commander">
                 </div>
                 <div class="four_column_1">
-                    <img src="media/fantasy_flight-SWX01.png" alt="Starwars X-Wing: Miniature Games"> 
+                    <img src="media/fantasy_flight-SWX01.png" alt="Starwars X-Wing: Miniature Games">
                 </div>
                 <div class="four_column_1">
-                    <img src="media/MTGlogo.png" alt=""> 
+                    <img src="media/MTGlogo.png" alt="">
                 </div>
                 <div class="four_column_1">
-                    <img src="media/LandingPageLogo_40k.png" alt=""> 
+                    <img src="media/LandingPageLogo_40k.png" alt="">
                 </div>
             </div>
             <div class="full_width right">
