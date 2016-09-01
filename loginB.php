@@ -6,7 +6,7 @@
 <?php require_once("webassist/form_validations/wavt_scripts_php.php"); ?>
 <?php require_once("webassist/form_validations/wavt_validatedform_php.php"); ?>
 <?php require_once( "webassist/security_assist/helper_php.php" ); ?>
-<?php 
+<?php
  if ((isset($_POST["LogIn_submit"]) || isset($_POST["LogIn_submit_x"])))  {
    $WAFV_Redirect = "".(htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES))  ."?invalid=true";
    $_SESSION['WAVT_login_Errors'] = "";
@@ -79,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	"gotoPreviousURL" => TRUE,
 	"keepQueryString" => TRUE
 	);
-	
+
 	WA_AuthenticateUser($WA_Auth_Parameter);
 }
 ?>
@@ -99,7 +99,7 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
 	"gotoPreviousURL" => TRUE,
 	"keepQueryString" => TRUE
 	);
-	
+
 	WA_AuthenticateUser($WA_Auth_Parameter);
 }
 ?>
@@ -124,21 +124,6 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
 <?php include 'Templates/parts/header.php'; ?>
         <?php include 'Templates/parts/container-top.php'; ?>
 			<div class="two_column_1">
-                            <?php if(WA_Auth_RulePasses("Validated form")){ // Begin Show Region ?>
-<p>Invalid username or password</p>
-<?php } // End Show Region ?>
-<?php if(WA_Auth_RulePasses("Log in success")){ // Begin Show Region ?>
-<p>You have been logged in</p>
-<?php } // End Show Region ?>
-<?php if(WA_Auth_RulePasses("Failed log in")){ // Begin Show Region ?>
-<p>Invalid username or password</p>
-<?php } // End Show Region ?>
-<?php if(WA_Auth_RulePasses("Emailed password")){ // Begin Show Region ?>
-<p>Password information emailed, please check your inbox</p>
-<?php } // End Show Region ?>
-<?php if(WA_Auth_RulePasses("Successful update")){ // Begin Show Region ?>
-<p>Registration completed successfully, please log in to access the site</p>
-<?php } // End Show Region ?>
 <div id="LogInContainer" class="WAATK">
   <div id="LogIn_Basic_Default_ProgressWrapper">
     <form class="formoid-default-skyblue side_by_side" id="LogIn_Basic_Default" style="max-width:760px" name="LogIn_Basic_Default" method="post" action="<?php echo (htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES)); ?>">
@@ -188,7 +173,23 @@ if (ValidatedField('login','login'))  {
           <input class="" name="LogIn_submit" type="submit" id="LogIn_submit" value="Log In"  onClick="clearAllServerErrors('LogIn_Basic_Default')" tabindex="5">
         </span>
       </fieldset>
+	  <?php if(WA_Auth_RulePasses("Validated form")){ // Begin Show Region ?>
+<p>Invalid username or password</p>
+<?php } // End Show Region ?>
+<?php if(WA_Auth_RulePasses("Log in success")){ // Begin Show Region ?>
+<p>You have been logged in</p>
+<?php } // End Show Region ?>
+<?php if(WA_Auth_RulePasses("Failed log in")){ // Begin Show Region ?>
+<p>Invalid username or password</p>
+<?php } // End Show Region ?>
+<?php if(WA_Auth_RulePasses("Emailed password")){ // Begin Show Region ?>
+<p>Password information emailed, please check your inbox</p>
+<?php } // End Show Region ?>
+<?php if(WA_Auth_RulePasses("Successful update")){ // Begin Show Region ?>
+<p>Registration completed successfully, please log in to access the site</p>
+<?php } // End Show Region ?>
     </form>
+
   </div>
   <div id="LogIn_Basic_Default_ProgressMessageWrapper" class="blockUIOverlay" style="display:none;">
     <script type="text/javascript">
@@ -199,6 +200,7 @@ WADFP_SetProgressToForm('LogIn_Basic_Default', 'LogIn_Basic_Default_ProgressMess
     </div>
   </div>
 </div>
+
 <script src="webassist/forms/wa_servervalidation.js" type="text/javascript"></script>
 <script src="webassist/jq_validation/jquery.h5validate.js"></script>
 <script>
@@ -234,7 +236,7 @@ $(document).ready(function () {
                 <h4>Please login to access your account.</h4>
             <h2 class="no_shadow right">&nbsp;</h2>
 	</form>
-</div>                                  
+</div>
               </div>
                     </div>
                     <div class="frame_b row">
@@ -245,7 +247,7 @@ $(document).ready(function () {
                 </div>
             </div>
 </div>
-        
+
         <!-- FOOTER -->
         <div class="footer">
             <div class="sub-footer center" id="contact">
