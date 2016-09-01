@@ -21,13 +21,9 @@
         left: 0;
         padding: .5rem;
         color: white;
-        display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-        display: -ms-flexbox;  /* TWEENER - IE 10 */
-        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-        display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+        display: flex;
         align-items: center;
         justify-content: center;
-        -webkit-justify-content: center;
 
         &.success {
             background: #3c8c3c;

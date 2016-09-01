@@ -9,7 +9,6 @@ let files = {
         let data = request.payload;
         if (data.file) {
             let name = Date.now() + '-' + data.file.hapi.filename;
-			console.log(name);
             let path = env.uploadPath + request.params.path + '/' + name;
             let file = fs.createWriteStream(path);
 
