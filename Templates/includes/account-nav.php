@@ -10,7 +10,9 @@
 	}
 //-->
 </script>
-<div class="profilenav" onclick="toggle_visibility('account-nav');"><img src="/uploads/player/<?php echo $_SESSION['SecurityAssist_id']; ?>/{{logged_in_player_full.data[0].user_icon}}" width="37" alt=""/>
+<div class="profilenav" onclick="toggle_visibility('account-nav');">
+<!-- <img src="/uploads/player/<?php echo $_SESSION['SecurityAssist_id']; ?>/{{logged_in_player_full.data[0].user_icon}}" width="37" alt=""/> -->
+<img src="/images/profile_image_small.png" width="37" alt=""/>
     <div id="account-nav">
     	<div class="account_name"><?php echo $_SESSION['firstName']; ?> <?php echo $_SESSION['lastName']; ?></div>
         <ul class="accountnav no_bullets">

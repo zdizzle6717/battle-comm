@@ -42,7 +42,7 @@
             <li id="news_summary">
                 <div class="two_column_1 no_padding"><a ui-sref="posts({ id: post.id })"><h5><u>{{post.title}}</u></h5></a></div>
                 <div class="fill">
-                    <div class="four_column_1"><strong>Author:</strong> {{post.author}}</div>
+                    <div class="four_column_1"><strong>Author:</strong> {{post.author || 'Bryce'}}</div>
                     <div class="four_column_1"><strong>Category:</strong> {{post.category}}</div>
                     <div class="four_column_1"><strong>Date:</strong> {{post.createdAt | jsonDate | date: 'medium'}}</div>
                 </div>
@@ -50,7 +50,7 @@
                     <a ui-sref="posts({ id: post.id })" class="four_column_1" style="padding-top:3px;"><img ng-src="/uploads/news/{{post.image}}" class="shadow" width="100%"></a>
                     {{post.callout}}
                 </p>
-                <div class="four_column_3"><strong>Tags:</strong> {{post.Tags}}</div>
+                <div class="four_column_3"><strong>Tags:</strong> {{post.tags}}</div>
                 <div class="fill right">
                     <a ui-sref="posts({ id: post.id })">
                         <button type="button" class="button-link-reverse">Read More</button>
