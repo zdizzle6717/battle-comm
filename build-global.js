@@ -21,6 +21,19 @@ browserify("RPStore/App-Store/app.js")
     .bundle()
     .pipe(fs.createWriteStream("RPStore/js/app.js"));
 
+/* Compile JS for Players */
+browserify("Players/App-Players/app.js")
+    .transform(stringify, {
+        appliesTo: {
+            includeExtensions: ['.html', '.php']
+        }
+    })
+    .transform("babelify", {
+        presets: ["es2015"]
+    })
+    .bundle()
+    .pipe(fs.createWriteStream("Players/js/app.js"));
+
 /* Compile JS for News */
 browserify("News/App-News/app.js")
     .transform(stringify, {
