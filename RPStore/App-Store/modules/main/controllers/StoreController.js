@@ -15,10 +15,10 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
 
     controller.slider = {
       min: 0,
-      max: 100000,
+      max: 30000,
       options: {
         floor: 0,
-        ceil: 100000,
+        ceil: 30000,
         translate: function(value) {
           return value + ' RP';
         }
@@ -71,10 +71,10 @@ function StoreController($state, $rootScope, ngCart, StoreService, manufacturers
         controller.selectedMNU = {};
         controller.slider = {
           min: 0,
-          max: 100000,
+          max: 30000,
           options: {
             floor: 0,
-            ceil: 100000,
+            ceil: 30000,
             translate: function(value) {
               return value + ' RP';
             }

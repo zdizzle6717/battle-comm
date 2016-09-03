@@ -54,7 +54,7 @@
             </div>
             <div class="lineGroup full_width">
                 <div class="three_column_1">
-                    <label>Image Alt (meta name for Google Search):</label>
+                    <label class="required">Image Alt (meta name for Google Search):</label>
                     <input id="imgAlt" name="imgAlt" ng-model="Product.currentProduct.imgAlt" type="text" class="formTextfield_Large" placeholder="Enter a meta title for the image..." required>
                 </div>
             </div>

@@ -4,16 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>BattleComm: Home</title>
-    <link rel="stylesheet" type="text/css" media="screen, print" href="Styles/global.css">
-    <link rel="stylesheet" type="text/css" media="screen, print" href="Styles/magnificent-popup/magnificent-popup.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="Scripts/jquery.magnificant-popup.js"></script>
-    <script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>
-    <script type="text/javascript" src="Scripts/custom-slider.js"></script>
-    <script type="text/javascript" src="Scripts/custom-slider2.js"></script>
-	<script type="text/javascript" src="../ScriptLibrary/dmxDataBindings.js"></script>
-    <script type="text/javascript" src="../ScriptLibrary/dmxDataSet.js"></script>
+
+<title>Battle-Comm: Home</title>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers.">
+<meta property="og:title" content="Battle-Comm: Home"/>
+<meta property="og:url" content="http://www.beta.battle-comm.net/"/>
+<meta property="og:image" content="http://www.beta.battle-comm.net/images/meta-image.jpg"/>
+<meta property="og:site_name" content="Battle-Comm"/>
+<meta property="og:description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers."/>
+
+<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/global.css">
+<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/magnificent-popup/magnificent-popup.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="Scripts/jquery.magnificant-popup.js"></script>
+<script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>
+<script type="text/javascript" src="Scripts/custom-slider.js"></script>
+<script type="text/javascript" src="Scripts/custom-slider2.js"></script>
+<script type="text/javascript" src="../ScriptLibrary/dmxDataBindings.js"></script>
+<script type="text/javascript" src="../ScriptLibrary/dmxDataSet.js"></script>
     <script type="text/javascript">
   /* dmxDataSet name "logged_in_player_full" */
        jQuery.dmxDataSet(
@@ -28,7 +37,7 @@
     </script>
 </head>
 
-<?php include 'Templates/parts/header.php'; ?>                  
+<?php include 'Templates/parts/header.php'; ?>
         <!-- Middle -->
         <div class="mids">
         	<div class="full_width_slideshow home_slide_small center no_padding shadow">
@@ -194,6 +203,6 @@
                 </div>
             </div>
         </div>
-        
+
 
 <?php include 'Templates/parts/footer.php'; ?>
