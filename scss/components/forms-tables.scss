@@ -342,6 +342,7 @@ fieldset {
 /* Stylesheet for all user edit buttons and functionality */
 
 .editable {
+	float: left;
 	padding: 10px;
 	border-radius: 5px;
 	border: 1px solid rgba(255,255,255,0.45);
