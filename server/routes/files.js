@@ -13,7 +13,7 @@ let files = {
             let file = fs.createWriteStream(path);
 
             file.on('error', function(err) {
-                console.error(err);
+                reply().code(404);
             });
 
             data.file.pipe(file);

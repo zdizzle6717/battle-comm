@@ -163,7 +163,7 @@
 				</div>
 				<div class="form-group inline">
 					<label class="title bold">Zip:</label>
-					<input name="user_zip" type="text" id="user_zip" ng-model="Dashboard.currentUser.user_zip" minlength="5" maxlength="12" required/>
+					<input name="user_zip" type="text" id="user_zip" ng-model="Dashboard.currentUser.user_zip" minlength="5" maxlength="12"/>
 				</div>
 			</form>
 			<div style="text-align:right;">
