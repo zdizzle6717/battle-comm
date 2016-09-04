@@ -8,11 +8,11 @@
             <form ng-submit="Checkout.completeOrder(Checkout.order)" class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="orderForm" novalidate>
                 <h2>Shipping Info</h2>
                 <div class="lineGroup three_column_1">
-                    <label for="customerFullName" class="sublabel"> *Full Name:</label>
+                    <label for="customerFullName" class="sublabel required">Full Name:</label>
                     <input id="customerFullName" name="customerFullName" ng-model="Checkout.order.customerFullName" type="text" value="" class="formTextfield_Large" title="Please enter your full name..." maxlength="30" required>
                 </div>
                 <div class="lineGroup three_column_1">
-                    <label for="customerEmail" class="sublabel"> *Email:</label>
+                    <label for="customerEmail" class="sublabel required">Email:</label>
                     <input id="customerEmail" name="customerEmail" ng-model="Checkout.order.customerEmail" type="email" value="" class="formTextfield_Large" title="Please enter your email..." required>
                 </div>
                 <div class="lineGroup three_column_1">
@@ -20,27 +20,27 @@
                     <input id="phone" name="phone" ng-model="Checkout.order.phone" type="text" value="" class="formTextfield_Large" title="Please enter a phone number..." ui-mask="(999) 999-9999" >
                 </div>
                 <div class="lineGroup full_width">
-                    <label for="shippingStreet" class="sublabel"> *Street Address:</label>
+                    <label for="shippingStreet" class="sublabel required">Street Address:</label>
                     <input id="shippingStreet" name="shippingStreet" ng-model="Checkout.order.shippingStreet" type="text" value="" class="formTextfield_Large" title="Please enter your address..." maxlength="50" required>
                 </div>
                 <div class="lineGroup three_column_1">
-                    <label for="shippingApartment" class="sublabel"> Apt/Suite #:</label>
-                    <input id="shippingApartment" name="shippingApartment" ng-model="Checkout.order.shippingApartment" type="text" value="" class="formTextfield_Large" title="Apartment #..." maxlength="10">
+                    <label for="shippingAppartment" class="sublabel"> Apt/Suite # (optional):</label>
+                    <input id="shippingAppartment" name="shippingAppartment" ng-model="Checkout.order.shippingAppartment" type="text" value="" class="formTextfield_Large" title="Apartment #..." maxlength="10">
                 </div>
                 <div class="lineGroup three_column_1">
-                    <label for="shippingCity" class="sublabel"> *City/Town:</label>
+                    <label for="shippingCity" class="sublabel required">City/Town:</label>
                     <input id="shippingCity" name="shippingCity" ng-model="Checkout.order.shippingCity" type="text" value="" class="formTextfield_Large" title="City..." maxlength="30" required>
                 </div>
                 <div class="lineGroup three_column_1">
-                    <label for="shippingState" class="sublabel"> *State/Province:</label>
+                    <label for="shippingState" class="sublabel required">State/Province:</label>
                     <input id="shippingState" name="shippingState" ng-model="Checkout.order.shippingState" type="text" value="" class="formTextfield_Large" title="State..." maxlength="30" required>
                 </div>
                 <div class="lineGroup two_column_1">
-                    <label for="shippingZip" class="sublabel"> *Zip Code:</label>
-                    <input id="shippingZip" name="shippingZip" ng-model="Checkout.order.shippingZip" type="text" value="" class="formTextfield_Large" title="Zip code..." maxlength="15" required>
+                    <label for="shippingZip" class="sublabel required">Zip Code:</label>
+                    <input id="shippingZip" name="shippingZip" ng-model="Checkout.order.shippingZip" type="text" value="" class="formTextfield_Large" title="Zip code..." minlength="5" maxlength="15" required>
                 </div>
                 <div class="lineGroup two_column_1">
-                    <label for="shippingCountry" class="sublabel"> *Country:</label>
+                    <label for="shippingCountry" class="sublabel required">Country:</label>
                     <input id="shippingCountry" name="shippingCountry" ng-model="Checkout.order.shippingCountry" type="text" value="" class="formTextfield_Large" title="Country..." maxlength="50" required>
                 </div>
                 <div class="lineGroup full_width right">
