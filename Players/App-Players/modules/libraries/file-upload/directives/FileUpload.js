@@ -6,12 +6,15 @@ function fileUpload(FileService, $rootScope) {
         name: 'fileUpload',
         scope: {
             model: '=',
-			param: '='
+			param: '=',
+			save: '&'
         },
         replace: true,
         template: require('./templates/fileUpload.html'),
         link: function(scope, elem, attrs) {
             scope.addFile = addFile;
+			scope.showWarning = false;
+			scope.removeWarning = removeWarning;
             scope.config = {
                 pattern: 'image/*',
                 size: {
@@ -29,6 +32,7 @@ function fileUpload(FileService, $rootScope) {
             function addFile(file) {
                 if (file === null) {
                     scope.restrictions = true;
+					scope.showWarning = true;
                     return;
                 } else if (file.size >= maxFileSize) {
                     showAlert({
@@ -46,6 +50,7 @@ function fileUpload(FileService, $rootScope) {
                         scope.model = response.filename;
                         scope.restrictions = false;
                         let text = response.status + ': ' + response.statusText;
+						scope.save();
                         showAlert({
                             type: 'success',
                             message: text
@@ -60,6 +65,11 @@ function fileUpload(FileService, $rootScope) {
                     });
                 }
             }
+
+			function removeWarning() {
+				scope.showWarning = false;
+				console.log(scope.showWarning)
+			}
 
             function showAlert(config) {
                 $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});

@@ -74,7 +74,7 @@ let userLogins = {
                         // user_youtube: request.payload.user_youtube,
                         user_twitch: request.payload.user_twitch,
                         user_website: request.payload.user_website,
-                        user_points: request.payload.user_points
+                        user_points: request.payload.user_points,
                         // user_visibility: request.payload.user_visibility,
                         // user_share_contact: request.payload.user_share_contact,
                         // user_share_name: request.payload.user_share_name,
@@ -83,7 +83,7 @@ let userLogins = {
                         // user_marketing: request.payload.user_marketing,
                         // user_sms: request.payload.user_sms,
                         // user_allow_play: request.payload.user_allow_play,
-                        // user_icon: request.payload.user_icon,
+                        user_icon: request.payload.user_icon
                         // totalWins: request.payload.totalWins,
                         // totalLoss: request.payload.totalLoss,
                         // totalDraw: request.payload.totalDraw,

@@ -27,10 +27,14 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService) {
         controller.readOnly[section] = !controller.readOnly[section];
     }
 
-    function savePlayer(data, section) {
-        toggleEdit(section);
+    function savePlayer(section) {
+		let data = controller.currentUser;
+		if (section) {
+			toggleEdit(section);
+		}
 		let newData = {
 			user_bio: data.user_bio,
+			user_icon: data.user_icon,
 			user_facebook: data.user_facebook,
 			user_twitter: data.user_twitter,
 			user_instagram: data.user_instagram,

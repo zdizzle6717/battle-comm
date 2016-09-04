@@ -1,9 +1,9 @@
 'use strict';
 
-FileService.$inject = ['$http', 'apiRoutes', 'Upload'];
-function FileService($http, apiRoutes, Upload) {
+FileService.$inject = ['$http', 'API_ROUTES', 'Upload'];
+function FileService($http, API_ROUTES, Upload) {
     let service = this;
-    let routes = apiRoutes;
+    let routes = API_ROUTES;
     service.saveFile = saveFile;
 
     function saveFile(file, param) {

@@ -13,7 +13,7 @@
 			</div>
 		</form>
 		<div style="text-align:right;">
-			<button class="exit" ng-click="Dashboard.savePlayer(Dashboard.currentUser, 'bio')" ng-show="!Dashboard.readOnly.bio" ng-disabled="bioForm.$invalid">
+			<button class="exit" ng-click="Dashboard.savePlayer('bio')" ng-show="!Dashboard.readOnly.bio" ng-disabled="bioForm.$invalid">
 				<span class="glyphicon glyphicon-check"></span>
 			</button>
 		</div>
@@ -26,11 +26,16 @@
 </div>
 <div class="two_column_1">
 	<h2 class="no_shadow" style="text-align:center;">{{Dashboard.currentUser.firstName}} {{Dashboard.currentUser.lastName}}</h2>
-	<div class="center">
-		<h3 style="font-size:1.8em;color:gold;text-shadow:1px 1px 5px black;">RP Stash: <span><strong>{{Dashboard.currentUser.user_points || 0}}</strong> Points</span></h3>
-			<img ng-src="/uploads/players/{{Dashboard.currentUser.user_icon}}" alt="" class="shadow push-top" width="220px" />
+	<div class="text-center">
+		<h3 class="gold-label">RP Stash: <span><strong>{{Dashboard.currentUser.user_points || 0}}</strong> Points</span></h3>
+		<div class="flex-row-center push-top">
+			<div class="profile-picture">
+				<img ng-src="/uploads/players/{{Dashboard.currentUser.user_icon}}" alt="{{Dashboard.currentUser.user_handle}}" class="shadow"/>
+				<div class="upload-overlay" file-upload ratio="1:1" model="Dashboard.currentUser.user_icon" save="Dashboard.savePlayer()" param="'players'"></div>
+			</div>
 		</div>
-	<h1 class="center" style="text-transform: initial;"><a ui-sref="profile" style="color:black;text-decoration:none;"><span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Dashboard.currentUser.user_handle}}</a></h1>
+	</div>
+	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile" style="color:black;text-decoration:none;"><span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Dashboard.currentUser.user_handle}}</a></h1>
 	<div class="center">
 		<ul class="inline">
 			<li class="item">
@@ -111,7 +116,7 @@
 				</div>
 			</form>
 			<div style="text-align:right;">
-				<button class="exit" ng-click="Dashboard.savePlayer(Dashboard.currentUser, 'links')" ng-show="!Dashboard.readOnly.links" ng-disabled="linksForm.$invalid">
+				<button class="exit" ng-click="Dashboard.savePlayer('links')" ng-show="!Dashboard.readOnly.links" ng-disabled="linksForm.$invalid">
 					<span class="glyphicon glyphicon-check"></span>
 				</button>
 			</div>
@@ -168,7 +173,7 @@
 				</div>
 			</form>
 			<div style="text-align:right;">
-				<button class="exit" ng-click="Dashboard.savePlayer(Dashboard.currentUser, 'contact')" ng-show="!Dashboard.readOnly.contact" ng-disabled="contactForm.$invalid">
+				<button class="exit" ng-click="Dashboard.savePlayer('contact')" ng-show="!Dashboard.readOnly.contact" ng-disabled="contactForm.$invalid">
 					<span class="glyphicon glyphicon-check"></span>
 				</button>
 			</div>

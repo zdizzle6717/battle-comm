@@ -13,7 +13,7 @@
           <a class="nav-item" href="/admin/index.php"> System Admin</a>
           <?php } // End Show Region ?>
 		<?php if(WA_Auth_RulePasses("systemAdmin")){ // Begin Show Region ?>
-		<a class="nav-item" href="/Admin/#/orderList/">System Admin (New)</a>
+		<a class="nav-item" href="/Admin/#/orderList">System Admin (New)</a>
 		 <?php } // End Show Region ?>
     </div>
 <!-- End User Level Navigation -->

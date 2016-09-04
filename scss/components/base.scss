@@ -20,6 +20,7 @@ body {
 // Specific Elements (a, h1, h2, h3, buttons, etc.
 h1 {
 	width: 100%;
+	float: left;
 	font-family: Titillium Semibold;
 	text-transform: uppercase;
 	font-size: 2.4em;
@@ -29,7 +30,8 @@ h1 {
 }
 
 h2 {
-	width: calc(100% - 12px);
+	width: calc(100% - 10px);
+	float: left;
 	font-family: Titillium Semibold;
 	font-size: 1.6em;
 	font-weight: 400;
@@ -38,16 +40,17 @@ h2 {
 	box-shadow: 0 0 2px 1px #929292;
 	display: table;
 	line-height: 1rem;
+	box-sizing: border-box;
 	border: 1px solid #177F82;
 	background: rgba(31, 89, 123, 0.6);
 }
 
 h3 {
 	width: 98%;
+	float: left;
 	font-family: Titillium Semibold;
 	font-size: 1.2em;
 	font-weight: 400;
-	float: left;
 	margin: 10px 0;
 	line-height: 1rem;
 	padding: 0 1%;
@@ -55,6 +58,7 @@ h3 {
 
 h4 {
 	width: 98%;
+	float: left;
 	font-family: Titillium Regular Upright;
 	font-size: 1.2em;
 	font-weight: 400;
@@ -65,6 +69,7 @@ h4 {
 
 h5 {
 	width: 100%;
+	float: left;
 	font-family: Titillium Thin Upright;
 	font-size: 1.6em;
 	margin: 0;

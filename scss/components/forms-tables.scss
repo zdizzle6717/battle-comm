@@ -48,6 +48,7 @@ th:first-child {
 tr td:hover {
     background: #F7F03E;
 }
+
 .button-link {
     color: #fff;
     background-color: #3885B1;
@@ -158,6 +159,13 @@ tr td:hover {
 			}
 		}
 	}
+}
+
+.gold-label {
+	font-size: 1.8em;
+	color: gold;
+	float: left;
+	text-shadow: 1px 1px 5px black;
 }
 
 input {

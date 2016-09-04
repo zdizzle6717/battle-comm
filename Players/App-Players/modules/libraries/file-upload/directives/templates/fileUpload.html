@@ -7,7 +7,9 @@
         name="file"
         ngf-accept="'image/*'"
         ngf-validate="config"
-        ngf-resize="{width: 530, height: 800}">Add file...
+        ngf-resize="{width: 500, height: 500}">Add file...
     </button>
-    <p class="required" ng-if="restrictions">{{validationMessage}}</p>
+    <p class="required file-restrictions" ng-if="restrictions && showWarning">
+		<span class="glyphicon glyphicon-remove" ng-click="removeWarning()"></span> {{validationMessage}}
+	</p>
 </div>

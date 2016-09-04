@@ -4,6 +4,22 @@
 .text-right {
 	text-align: right;
 }
+.flex-row-center {
+	float: left;
+	width: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: row;
+}
+.flex-col-center {
+	float: left;
+	width: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+}
 
 // Margins
 // push-top, push-right, push-bottom, push-left
