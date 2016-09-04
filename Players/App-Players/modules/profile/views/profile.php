@@ -13,11 +13,11 @@
 </div>
 <div class="two_column_1">
 	<h2 class="text-center">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}</h2>
-	<h1 class="center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
+	<div class="text-center"><br/><img ng-src="/uploads/players/{{Profile.currentUser.user_icon}}" alt="" class="shadow" width="220px"/></div>
+	<h1 class="text-center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.user_handle}}
 	</h1>
-	<div class="center"><br/><img ng-src="/uploads/players/{{Profile.currentUser.user_icon}}" alt="" class="shadow" width="220px"/></div>
-	<div class="center">
+	<div class="text-center">
 		<ul class="inline">
 			<li class="item"><a class="" ui-sref="profile" target="_self">Send a Message (pending)</a></li>
 			<li><a ui-sref="profile">Create Match (pending)</a></li>
