@@ -1,0 +1,152 @@
+.WADANoResults,
+.WADAResults {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #BABDC2;
+}
+
+.WADAResultsNavigation {
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.WADAResultsCount {
+	font-size: 11px;
+}
+
+.WADAResultsInsertButton,
+.WADAResultsNavTop {
+	clear: none;
+}
+
+.WADAResultsNavTop,
+WADAResultsNavBottom {
+	width: 60%;
+	float: left;
+}
+
+div.WADAResultsInsertButton {
+	width: 30%;
+	float: right;
+	text-align: right;
+}
+
+.WADAResultsInsertButton,
+.WADAResultsNavButtonCell {
+	padding: 2px;
+}
+
+.WADAResultsTable {
+	font-size: 11px;
+	clear: both;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.WADAResultsTableHeader {
+	text-align: left;
+	padding-left: 13px;
+	padding-right: 13px;
+}
+
+.WADAResultsTableCell {
+	text-align: left;
+	padding-left: 14px;
+	padding-right: 14px;
+}
+
+.WADAResultsEditButtons {
+	text-align: right;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #BABDC2;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #BABDC2;
+}
+
+form .WADAResultsContainer input.formButton.ResultsNavButton {
+	margin: 2px 0;
+	padding: 2px;
+	border-radius: 6px;
+	outline: 0;
+}
+
+form .WADAResultsContainer input.formButton.ResultsPageButton {
+	margin: 2px;
+	padding: 0;
+	border-radius: 6px;
+	outline: 0;
+}
+
+.WADAResultThumbArea {
+	float: left;
+}
+
+.WADAResultInfoArea {
+	margin-left: 170px;
+}
+.WADAResultsTable th {
+	color: #ffffff;
+	background-color: #287697;
+}
+
+.WADAResultsTableWrapper {
+	clear: left;
+	border: 1px solid #287697;
+}
+
+.WADAResultsRowDark {
+	color: table;
+	background-color: #CCF0FF;
+}
+
+
+
+
+form.Basic_Default input.formButton.Modular.DetailButton {
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	width: 29px;
+	height: 29px;
+}
+
+form.Basic_Default input.formButton.Modular.DetailButton:hover {
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	width: 29px;
+	height: 29px;
+}
+
+form.Basic_Default input.formButton.Modular.UpdateButton {
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	width: 29px;
+	height: 29px;
+}
+
+form.Basic_Default input.formButton.Modular.UpdateButton:hover {
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	width: 29px;
+}
+
+form.Basic_Default input.formButton.Modular.DeleteButton {
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	width: 29px;
+	height: 29px;
+}
+
+form.Basic_Default input.formButton.Modular.DeleteButton:hover {
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	width: 29px;
+	height: 29px;
+}

@@ -38,7 +38,10 @@ if (!WA_Auth_RulePasses("ClubAdmin")){
 <?php include '../Templates/parts/header.php'; ?>
 		<?php include '../Templates/parts/container-top.php'; ?>
         	<?php include '../Templates/includes/user-navigation.php'; ?>
-			<h2>Club Admin</h2>
+			<div class="full_width">
+				<hr>
+				<h2 class="push-top-2x">Club Admin</h2>
+			</div>
             <button type="button" class="button-link" onclick="location.href='clubinsert.php'">Add/Insert New Club</button>
             <br/>
            <h3>My Clubs</h3>
@@ -61,5 +64,5 @@ if (!WA_Auth_RulePasses("ClubAdmin")){
            </table>
             </div>
             <h3>Membership Requests (Coming Soon)</h3>
- 		<?php include '../Templates/parts/container-bottom.php'; ?>   
-<?php include '../Templates/parts/footer.php'; ?> 
+ 		<?php include '../Templates/parts/container-bottom.php'; ?>
+<?php include '../Templates/parts/footer.php'; ?>

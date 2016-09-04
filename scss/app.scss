@@ -15,9 +15,15 @@
 @import 'components/validations';
 @import 'components/buttons';
 @import 'components/forms-tables';
-@import 'components/top-navigation';
+@import 'components/top-nav';
+@import 'components/user-nav';
+@import 'components/popup';
+@import 'components/slider';
 @import 'components/header';
 @import 'components/footer';
+
+// Temporary (Need to delete)
+@import 'components/WADA';
 
 // Third Party
 @import 'third-party/magnificent-popup';

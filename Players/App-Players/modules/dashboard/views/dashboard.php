@@ -27,8 +27,9 @@
 <div class="two_column_1">
 	<h2 class="no_shadow" style="text-align:center;">{{Dashboard.currentUser.firstName}} {{Dashboard.currentUser.lastName}}</h2>
 	<div class="center">
-		<h3 style="font-size:1.8em;color:gold;text-shadow:1px 1px 5px black;">RP Stash: <span><strong>{{Dashboard.currentUser.user_points || 0}}</strong> Points</span></h3><h3 style="font-size:1.8em;color:gold;text-shadow:1px 1px 5px black;">No Points Available</h3></span><br/><img ng-src="/uploads/players/{{Dashboard.currentUser.user_icon}}" alt="" class="shadow"
-						width="220px" /></div>
+		<h3 style="font-size:1.8em;color:gold;text-shadow:1px 1px 5px black;">RP Stash: <span><strong>{{Dashboard.currentUser.user_points || 0}}</strong> Points</span></h3>
+			<img ng-src="/uploads/players/{{Dashboard.currentUser.user_icon}}" alt="" class="shadow push-top" width="220px" />
+		</div>
 	<h1 class="center" style="text-transform: initial;"><a ui-sref="profile" style="color:black;text-decoration:none;"><span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Dashboard.currentUser.user_handle}}</a></h1>
 	<div class="center">
 		<ul class="inline">

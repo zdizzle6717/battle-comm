@@ -53,13 +53,16 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <?php include '../Templates/parts/header.php'; ?>
 		<?php include '../Templates/parts/container-top.php'; ?>
             <?php include '../Templates/includes/user-navigation.php'; ?>
+<div class="full_width">
+	<hr>
+	<div class="two_column_1" style="padding-top:0px">
+		<h3 style="font-size:1.5em;" >Welcome, {{loggedInPlayer.data[0].firstName}} {{loggedInPlayer.data[0].lastName}}</h3>
+	</div>
+	<div class="two_column_1" style="padding-top:0px">
+	    <h1 style="text-align:right; font-size:1.5em; margin:10px 0 10px;">{{loggedInPlayer.data[0].user_handle}}</h1>
+	</div>
+</div>
 
-<div class="two_column_1" style="padding-top:0px">
-	<h3 style="font-size:1.5em;" >Welcome, {{loggedInPlayer.data[0].firstName}} {{loggedInPlayer.data[0].lastName}}</h3>
-</div>
-<div class="two_column_1" style="padding-top:0px">
-    <h1 style="text-align:right; font-size:1.5em; margin:10px 0 10px;">{{loggedInPlayer.data[0].user_handle}}</h1>
-</div>
 
 
 <h2>Tournaments </h2>

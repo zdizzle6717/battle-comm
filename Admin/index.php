@@ -10,7 +10,7 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>BattleComm: Store</title>
+<title>BattleComm: System Admin</title>
     <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/global.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script>
@@ -32,8 +32,10 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <?php $pathToFile = $_SERVER['DOCUMENT_ROOT'];
 include ($pathToFile. "/Templates/parts/header.php"); ?>
 	<?php include ($pathToFile. "/Templates/parts/container-top.php"); ?>
+		<?php include ($pathToFile. "/Templates/includes/user-navigation.php"); ?>
 		<div class="full_width">
-			<h2>Admin</h2>
+			<hr>
+			<h2 class="push-top-2x">System Admin</h2>
 		</div>
 		<div class="full_width">
 			<div class="four_column_1">

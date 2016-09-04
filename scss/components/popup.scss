@@ -1,0 +1,37 @@
+/* POPUP, SLIDESHOW ETC. */
+.game-list-popup {
+	height: 505px;
+	color: black;
+	position: relative;
+	background: #FFF;
+	padding: 20px;
+	width: auto;
+	max-width: 500px;
+	margin: 20px auto;
+	overflow-y: scroll;
+}
+
+.copyright-statement-popup {
+	height: 505px;
+	color: black;
+	position: relative;
+	background: #FFF;
+	padding: 30px 20px 20px;
+	width: auto;
+	max-width: 500px;
+	margin: 20px auto;
+	overflow-y: scroll;
+}
+
+.privacy-policy {
+	width: calc(50% - 7px);
+	float: left;
+	text-align: right;
+	padding-right: 3px;
+}
+
+.copyright-statement {
+	width: calc(50% - 10px);
+	float: left;
+	text-align: left;
+}

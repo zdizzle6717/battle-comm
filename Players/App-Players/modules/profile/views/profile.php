@@ -1,5 +1,5 @@
 <div class="two_column_1">
-  <h2 style="text-align:center;">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}'s Player Bio</h2>
+  <h2 class="text-center">Player Bio</h2>
 		<p class="user-bio" ng-if="Profile.currentUser.user_bio">{{Profile.currentUser.user_bio}}</p>
 		<p class="user-bio" ng-if="!Profile.currentUser.user_bio">This player has not yet updaed their bio.</p>
 
@@ -12,7 +12,10 @@
 		<a class="fill text-center push-bottom" ng-href="{{Profile.currentUser.user_website}}" target="_blank">Website</a>
 </div>
 <div class="two_column_1">
-	<h1 class="center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;"><span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.user_handle}}</h1>
+	<h2 class="text-center">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}</h2>
+	<h1 class="center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
+		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.user_handle}}
+	</h1>
 	<div class="center"><br/><img ng-src="/uploads/players/{{Profile.currentUser.user_icon}}" alt="" class="shadow" width="220px"/></div>
 	<div class="center">
 		<ul class="inline">

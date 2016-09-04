@@ -36,26 +36,12 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 
 </head>
 <?php include '../Templates/parts/header.php'; ?>
-        <?php include '../Templates/parts/container-top.php'; ?>
-        <!-- Begin User Level Navigation -->
-        	<div id="PlayerNav">
-                <a href="/players/index.php">Player Home</a> | <a href="/players/mydashboard.php">My Dashboard</a> |
-                <?php if(WA_Auth_RulePasses("tourneyAdmin")){ // Begin Show Region ?>
-                <a href="../tool/index.php">Tournament Admin</a> |
-                  <?php } // End Show Region ?>
-                <a href="../players/user_login_update.php?id=<?php echo $_SESSION['SecurityAssist_id']; ?>">Edit Account</a> |
-                <a href="../players/editProfileA.php">Edit Profile</a> |
-                <?php if(WA_Auth_RulePasses("systemAdmin")){ // Begin Show Region ?>
-                  <a href="index.php"> System Administrator</a>
-                  <?php } // End Show Region ?>
-                 |
-                <?php if(WA_Auth_RulePasses("ClubAdmin")){ // Begin Show Region ?>
-                <a href="../clubsAdmin/index.php">Club Admin</a>
-                <?php } // End Show Region ?>
-            </div>
-<!-- End User Level Navigation -->
-			<h2>Site Administration Tools</h2>
-            <p>&nbsp;</p>
+    <?php include '../Templates/parts/container-top.php'; ?>
+        <?php include ($pathToFile. "/Templates/includes/user-navigation.php"); ?>
+		<div class="full_width">
+			<hr>
+			<h2 class="push-top-2x">Site Administration Tools</h2>
+		</div>
 
            <p> <table width="90%" border="1">
         <tbody>

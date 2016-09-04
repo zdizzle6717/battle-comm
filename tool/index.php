@@ -1,4 +1,4 @@
-<?php require_once( "../webassist/security_assist/helper_php.php" ); 
+<?php require_once( "../webassist/security_assist/helper_php.php" );
 if (!WA_Auth_RulePasses("tourneyAdmin")){
 	WA_Auth_RestrictAccess("../accessdenied.php");
 }
@@ -29,7 +29,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
        jQuery.dmxDataSet(
          {"id": "tournamentAdminFilter", "url": "../dmxDatabaseSources/tournamentAdminFilter.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
        );
-  /* END dmxDataSet name "tournamentAdminFilter" */ 
+  /* END dmxDataSet name "tournamentAdminFilter" */
   /* dmxDataSet name "logged_in_player_full" */
        jQuery.dmxDataSet(
          {"id": "logged_in_player_full", "url": "../dmxDatabaseSources/logged_in_player_full.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
@@ -79,7 +79,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
         <li class="news"><a href="/News" ><h2 id="phoneOnly">NEWS</h2></a></li>
         <li class="events"><a href="/events.php" ><h2 id="phoneOnly">EVENTS</h2></a></li>
         <li class="logintab"><a href="/loginA.php" class="scrollDown"><h2 id="phoneOnly">LOGIN</h2></a></li>
-        <li class="registertab"><a href="/registrationA.php" class="scrollDown"><h2 id="phoneOnly">REGISTER</h2></a></li>  
+        <li class="registertab"><a href="/registrationA.php" class="scrollDown"><h2 id="phoneOnly">REGISTER</h2></a></li>
     </ul>
 </nav>
         </div>
@@ -90,7 +90,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
         <li class="news"><a href="/News" ></a></li>
         <li class="events"><a href="/events.php" ></a></li>
         <li class="logintab"><a href="/loginA.php" class="scrollDown"></a></li>
-        <li class="registertab"><a href="/registrationA.php" class="scrollDown"></a></li>  
+        <li class="registertab"><a href="/registrationA.php" class="scrollDown"></a></li>
     </ul>
 </nav>
         </div>
@@ -113,7 +113,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
 </div>
             <?php } // End Show Region ?>
         </div>
-    </div>     
+    </div>
 		 <!-- Middle -->
         <div class="mids">
         	<div class="container_full_width_frames no_shadow no_background no_padding">
@@ -128,9 +128,11 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
                         <div class="frame_r_bar col"></div>
                         <div class="frame_center col">
                        <?php include '../Templates/includes/user-navigation.php'; ?>
-			<h2>Tournament Admin - {{LoggedInUser.data[0].user_handle}} </h2>
-            <button type="button" class="button-link" onclick="location.href='tournamentAdmin/tournament_insert.php'">Create New Tournament</button>
-            
+					   <div class="full_width">
+						   <hr>
+							<h2 class="push-top-2x">Tournament Admin - {{LoggedInUser.data[0].user_handle}} </h2>
+				            <button type="button" class="button-link" onclick="location.href='tournamentAdmin/tournament_insert.php'">Create New Tournament</button>
+						</div>
            <p> <table width="95%" border="0" align="center">
         <tbody>
           <tr data-binding-repeat="{{tournamentAdminFilter.data}}" data-binding-id="repeat1">
@@ -152,7 +154,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
             </div>
         </div>
     </div>
-</div>  
+</div>
         <!-- FOOTER -->
         <div class="footer">
             <div class="sub-footer center" id="contact">
@@ -176,7 +178,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
 <div class="copyright">© 2015 Battle-Comm.com. All Rights Reserved.
         <!--<a class="privacy_policy">Privacy Policy.</a>-->
         <br/>
-        <div class="privacy-policy" ><a href="#">Privacy Policy</a> ~ </div> 
+        <div class="privacy-policy" ><a href="#">Privacy Policy</a> ~ </div>
         <div class="copyright-statement" ><a href="#copyright-statement" class="open-popup-link" >Copyright Statement</a></div>
         <div id="copyright-statement" class="copyright-statement-popup mfp-hide">
 			<div class="col-lg-6">
@@ -202,4 +204,3 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
     <script><?php include ("../Scripts/mobile-toggle.js"); ?></script>
     <script><?php include ("../Scripts/backtotop.js"); ?></script>
 </html>
- 
