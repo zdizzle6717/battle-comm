@@ -1,7 +1,7 @@
 'use strict';
 
-PlayerService.$inject = ['API_ROUTES', '$http'];
-function PlayerService(API_ROUTES, $http) {
+ProfileService.$inject = ['API_ROUTES', '$http'];
+function ProfileService(API_ROUTES, $http) {
     let service = {
 		getUser: getUser,
         getPlayer: get,
@@ -76,4 +76,4 @@ function PlayerService(API_ROUTES, $http) {
 
 }
 
-module.exports = PlayerService;
+module.exports = ProfileService;

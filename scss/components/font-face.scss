@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('/bootstrap/3/fonts/glyphicons-halflings-regular.eot');
+    src: url('/bootstrap/3/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/bootstrap/3/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('/bootstrap/3/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/bootstrap/3/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/bootstrap/3/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+@font-face {
+    font-family: 'Mono Social Icons Font';
+    src: url('../WebFonts/MonoSocialIconsFont-1.10.eot');
+    src: url('../WebFonts/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'), url('../WebFonts/MonoSocialIconsFont-1.10.woff') format('woff'), url('../WebFonts/MonoSocialIconsFont-1.10.ttf') format('truetype'), url('../WebFonts/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
+    src: url('../WebFonts/MonoSocialIconsFont-1.10.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Titillium Thin Upright';
+    src: url('../WebFonts/Titillium-ThinUpright.eot');
+    src: url('../WebFonts/Titillium-ThinUpright.eot?#iefix') format('embedded-opentype'), url('../WebFonts/Titillium-ThinUpright.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Titillium Regular Upright';
+    src: url('../WebFonts/Titillium-RegularUpright.eot');
+    src: url('../WebFonts/Titillium-RegularUpright.eot?#iefix') format('embedded-opentype'), url('../WebFonts/Titillium-RegularUpright.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Titillium Semibold';
+    src: url('../WebFonts/Titillium-Semibold.eot');
+    src: url('../WebFonts/Titillium-Semibold.eot?#iefix') format('embedded-opentype'), url('../WebFonts/Titillium-Semibold.ttf') format('truetype');
+}
+
+
+/* SOCIAL BUTTON LINKS */
+@font-face {
+    font-family: 'Mono Social Icons Font';
+    src: url('../WebFonts/MonoSocialIconsFont-1.10.eot');
+    src: url('../WebFonts/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'), url('../WebFonts/MonoSocialIconsFont-1.10.woff') format('woff'), url('../WebFonts/MonoSocialIconsFont-1.10.ttf') format('truetype'), url('../WebFonts/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
+    src: url('../WebFonts/MonoSocialIconsFont-1.10.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.sociallinks a {
+    text-decoration: none !important;
+}
+
+.symbol,
+a.symbol:before {
+    font-family: 'Mono Social Icons Font';
+    text-rendering: optimizeLegibility;
+    font-smoothing: antialiased;
+    color: white;
+    margin: 5px;
+    font-size: 2.5em !important;
+    text-shadow: 1px 1px 3px black;
+}
+
+.sub-footer .symbol,
+.sub-footer a.symbol:before {
+    color: white;
+    font-size: 4em !important;
+    text-shadow: 1px 1px 4px black;
+}
+
+.symbol.face:hover {
+    color: #3B5998;
+    text-shadow: 1px 1px 4px black;
+}
+
+.symbol.twit:hover {
+    color: #55acee;
+    text-shadow: 1px 1px 4px black;
+}
+
+.symbol.insta:hover {
+    color: rgb(255, 142, 42);
+    text-shadow: 1px 1px 4px black;
+}
+
+.symbol.face:active {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.49);
+}
+
+.symbol.twit:active {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.49);
+}
+
+.symbol.insta:active {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.49);
+}
+
+a.symbol:before {
+    content: attr(title);
+    margin-right: 0.3em;
+    font-size: 130%;
+}
+
+.social-links {
+    position: absolute;
+    top: 128px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.twitter-stream iframe {
+    width: 100% !important;
+    min-width: 0 !important;
+}

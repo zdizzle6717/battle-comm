@@ -5,6 +5,7 @@
 // Variables
 
 // Components
+@import 'components/font-face';
 @import 'components/base';
 @import 'components/scrollbar';
 @import 'components/sidebar';
@@ -15,12 +16,12 @@
 @import 'components/buttons';
 @import 'components/forms-tables';
 @import 'components/top-navigation';
-@import 'components/players';
 @import 'components/header';
 @import 'components/footer';
 
 // Third Party
 @import 'third-party/magnificent-popup';
+@import 'third-party/glyphicons';
 
 // Media
 @import 'media/queries';
@@ -28,6 +29,9 @@
 
 // Libraries
 @import 'libraries/loading';
+
+// Helpers
+@import 'helpers/formatting';
 
 // Animation
 @import 'animations/animate';

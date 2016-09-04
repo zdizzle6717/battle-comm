@@ -1,4 +1,4 @@
-/* Forms & Tables */
+/* Tables */
 table {
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
@@ -20,9 +20,7 @@ table {
 td,
 th {
     border: 1px solid transparent;
-    /* No more visible border */
     transition: all 0.05s;
-    /* Simple transition for hover effect */
     -webkit-transition: all 0.05s;
     -moz-transition: all 0.05s;
     -o-transition: all 0.05s;
@@ -30,17 +28,14 @@ th {
 }
 th {
     background: #DFDFDF;
-    /* Darken header a bit */
     font-weight: normal;
 }
 td {
     background: #FAFAFA;
 }
-/* Cells in even rows (2,4,6...) are one color */
 tr:nth-child(even) td {
     background: #F1F1F1;
 }
-/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
 tr:nth-child(odd) td {
     background: #FEFEFE;
 }
@@ -112,50 +107,173 @@ tr td:hover {
     border-radius: 20px;
     box-shadow: 0 0 10px 1px;
 }
+.info {
+    border: 2px solid rgba(167, 112, 112, 0.28);
+    background-color: rgba(255, 255, 246, 0.75);
+    border-radius: 5px;
+    padding: 7px;
+    box-shadow: 1px 1px 6px 2px rgba(80, 66, 78, 0.43);
+    text-align: center;
+}
+
+/* Forms */
 .form-group {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
+	float: left;
+	width: 100%;
+
+	label {
+		padding: 0 20px 4px 10px;
+		display: inline-block;
+	}
+
+	input,
+	select {
+	    width: 100%;
+	    border: 1px solid rgba(0, 0, 0, .25);
+	    border-left-width: 12px !important;
+	    background-color: #f8f8f8;
+	    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+	    border-radius: 2px;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	    -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+	    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+	}
+
+	button {
+		&[type='submit'] {
+		    background-color: #278eca;
+		    color: #ffffff;
+		    font-size: 13px;
+		    font-weight: bold;
+		    border-radius: 4px;
+		    text-transform: uppercase;
+		    border: none;
+		    padding: 14px 30px;
+		    background-image: linear-gradient(to top,#4d90fe,#4787ed);
+
+			&:hover {
+				border-color: black;
+			    background: white;
+			    color: #0078e7;
+			    cursor: pointer;
+			}
+		}
+	}
 }
-.form-group label {
-    padding-right: 20px;
-    margin-right: 12px;
-    display: inline-block;
-    margin-bottom: 5px;
+
+input {
+	transition: all 250ms;
+
+	&[type='email'],
+	&[type='number'],
+	&[type='password'],
+	&[type='text'],
+	&[type='url'] {
+		width: 100%;
+	    padding: 0.5em 0.6em;
+	    display: inline-block;
+	    border: 1px solid #ccc;
+	    box-shadow: inset 0 1px 3px #ddd;
+	    border-radius: 4px;
+	    vertical-align: middle;
+	    box-sizing: border-box;
+	    text-align: left;
+	}
+
+	&[type='button'] {
+	    background-color: rgb(52, 124, 165);
+	    color: #fff;
+	    font-family: inherit;
+	    font-size: 100%;
+	    padding: 0.5em 1em;
+	    border: 1px solid #999;
+	    border: 0 rgba(0,0,0,0);
+	    text-decoration: none;
+	    border-radius: 4px;
+	    margin-top: 28px;
+	    margin-bottom: 5px;
+	    box-shadow: 0 0 2px 1px #ADCDEA;
+
+		&:hover {
+		    border-color: black;
+		    background: white;
+		    color: #0078e7;
+		    cursor: pointer;
+		}
+
+		&:active {
+		    box-shadow: none;
+		    background: white;
+		    color: #0078e7;
+		    text-align: center;
+		}
+	}
+
+	&[type='submit'] {
+	    background-color: #278eca;
+	    color: #fff;
+	    font-family: inherit;
+	    font-size: 100%;
+	    padding: 0.5em 1em;
+	    border: 1px solid #999;
+	    border: 0 rgba(0,0,0,0);
+	    text-decoration: none;
+	    border-radius: 4px;
+	    margin-top: 10px;
+	    margin-bottom: 5px;
+	    box-shadow: 0 0 2px 1px #ADCDEA;
+
+		&:active {
+		    box-shadow: none;
+		    background: white;
+		    color: #0078e7;
+		}
+
+		&:hover {
+		    border-color: black;
+		    background: white;
+		    color: #0078e7;
+		    cursor: pointer;
+		}
+	}
+
+	&:not([type]),
+	&[type="color"],
+	&[type="date"],
+	&[type="datetime"],
+	&[type="datetime-local"],
+	&[type="email"],
+	&[type="email"],
+	&[type="month"],
+	&[type="number"],
+	&[type="password"],
+	&[type="search"],
+	&[type="tel"],
+	&[type="text"],
+	&[type="time"],
+	&[type="url"],
+	&[type="week"] {
+		&:disabled {
+			background-color: rgb(235, 235, 228);
+		    box-shadow: none;
+		    background: none;
+		    border: none;
+		    font-weight: bold;
+		    transition: all 250ms;
+			font-size: .9rem;
+			margin-left: 5px;
+		}
+	}
 }
-.form-group input,
-select {
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, .25);
-    border-left-width: 12px !important;
-    background-color: #f8f8f8;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
-    border-radius: 2px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
-    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+
+button:disabled {
+    opacity: 0.7;
+    border: 1px solid gray;
 }
-.form-group button[type='submit'] {
-    background-color: #278eca;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 4px;
-    text-transform: uppercase;
-    border: none;
-    padding: 14px 30px;
-    background-image: linear-gradient(to top,#4d90fe,#4787ed);
-}
-.form-group button[type='submit']:hover {
-    border-color: black;
-    background: white;
-    color: #0078e7;
-    cursor: pointer;
-}
-input[type=email],
-input[type=number],
-input[type=password],
-input[type=text],
+
 textarea {
     width: 100%;
     padding: 0.5em 0.6em;
@@ -164,86 +282,23 @@ textarea {
     box-shadow: inset 0 1px 3px #ddd;
     border-radius: 4px;
     vertical-align: middle;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin-bottom: 10px;
     text-align: left;
-}
-textarea {
     min-height: 100px;
+
+	&:disabled {
+	    background-color: rgb(235, 235, 228);
+	    box-shadow: none;
+	    background: none;
+	    border: none;
+	    font-weight: bold;
+	    transition: all 250ms;
+		font-size: .9rem;
+		margin-left: 5px;
+	}
 }
-input[type=button] {
-    background-color: rgb(52, 124, 165);
-    color: #fff;
-    font-family: inherit;
-    font-size: 100%;
-    padding: 0.5em 1em;
-    border: 1px solid #999;
-    border: 0 rgba(0,0,0,0);
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 28px;
-    margin-bottom: 5px;
-    box-shadow: 0 0 2px 1px #ADCDEA;
-}
-input[type=button]:hover {
-    border-color: black;
-    background: white;
-    color: #0078e7;
-    cursor: pointer;
-}
-input[type=button]:active {
-    box-shadow: none;
-    background: white;
-    color: #0078e7;
-    text-align: center;
-}
-input[type=submit] {
-    background-color: #278eca;
-    color: #fff;
-    font-family: inherit;
-    font-size: 100%;
-    padding: 0.5em 1em;
-    border: 1px solid #999;
-    border: 0 rgba(0,0,0,0);
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    box-shadow: 0 0 2px 1px #ADCDEA;
-}
-input[type=submit]:hover {
-    border-color: black;
-    background: white;
-    color: #0078e7;
-    cursor: pointer;
-}
-input[type=reset] {
-    background-color: #278eca;
-    color: #fff;
-    font-family: inherit;
-    font-size: 100%;
-    padding: 0.5em 1em;
-    border: 1px solid #999;
-    border: 0 rgba(0,0,0,0);
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    box-shadow: 0 0 2px 1px #ADCDEA;
-}
-input[type=reset]:hover {
-    border-color: black;
-    background: white;
-    color: #0078e7;
-    cursor: pointer;
-}
-input[type=submit]:active {
-    box-shadow: none;
-    background: white;
-    color: #0078e7;
-}
+
 select {
     display: inline-block;
     height: 30px;
@@ -256,7 +311,19 @@ select {
     font-size: 13px;
     color: #404040;
     margin-bottom: 10px;
+
+	&:disabled {
+	    background-color: rgb(235, 235, 228);
+	    box-shadow: none;
+	    background: none;
+	    border: none;
+	    font-weight: bold;
+	    transition: all 250ms;
+		font-size: .9rem;
+		margin-left: 5px;
+	}
 }
+
 fieldset {
     border: 1px solid white;
     border-radius: 0.6em;
@@ -264,11 +331,21 @@ fieldset {
     padding: 0.5em 1em;
     min-width: 1%;
 }
-.info {
-    border: 2px solid rgba(167, 112, 112, 0.28);
-    background-color: rgba(255, 255, 246, 0.75);
-    border-radius: 5px;
-    padding: 7px;
-    box-shadow: 1px 1px 6px 2px rgba(80, 66, 78, 0.43);
-    text-align: center;
+
+/* Stylesheet for all user edit buttons and functionality */
+
+.editable {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid rgba(255,255,255,0.45);
+	background: rgba(212,212,212,0.27);
+	width: 98%;
+	box-sizing: border-box;
+	margin: 1%;
+
+	ul {
+		li {
+			padding-bottom: 5px;
+		}
+	}
 }

@@ -1,7 +1,15 @@
 <div class="two_column_1">
   <h2 style="text-align:center;">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}'s Player Bio</h2>
-		<p class="user-bio">{{PlayerProfile.data[0].user_bio}}</p>
-		<?php include '../Templates/includes/profile-social-links.php'; ?>
+		<p class="user-bio" ng-if="Profile.currentUser.user_bio">{{Profile.currentUser.user_bio}}</p>
+		<p class="user-bio" ng-if="!Profile.currentUser.user_bio">This player has not yet updaed their bio.</p>
+
+		<div class="sociallinks push-bottom" style="text-align:center;">
+			<a ng-href="{{Profile.currentUser.user_facebook}}" target="_blank" ><span class="symbol face" style="font-size: 38px;">&#xe427;</span></a>
+			<a ng-href="{{Profile.currentUser.user_twitter}}" target="_blank" ><span class="symbol twit" style="font-size: 38px;">&#xe286;</span></a>
+			<a ng-href="{{Profile.currentUser.user_instagram}}" target="_blank" ><span class="symbol insta" style="font-size: 38px;">&#xe500;</span></a>
+		</div>
+		<a class="fill text-center push-bottom" ng-href="{{Profile.currentUser.user_twitch}}" target="_blank">Twitch</a>
+		<a class="fill text-center push-bottom" ng-href="{{Profile.currentUser.user_website}}" target="_blank">Website</a>
 </div>
 <div class="two_column_1">
 	<h1 class="center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;"><span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.user_handle}}</h1>
