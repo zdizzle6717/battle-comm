@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	"columnTypes" => explode($WA_Auth_Separator,"text".$WA_Auth_Separator."text"),
 	"sessionColumns" => explode($WA_Auth_Separator,"id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName".$WA_Auth_Separator."tourneyAdmin".$WA_Auth_Separator."EventAdmin".$WA_Auth_Separator."venueAdmin".$WA_Auth_Separator."NewsContributor".$WA_Auth_Separator."siteAdmin".$WA_Auth_Separator."clubAdmin"),
 	"sessionNames" => explode($WA_Auth_Separator,"SecurityAssist_id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName".$WA_Auth_Separator."tourneyAdmin".$WA_Auth_Separator."EventAdmin".$WA_Auth_Separator."venueAdmin".$WA_Auth_Separator."NewsContributor".$WA_Auth_Separator."siteAdmin".$WA_Auth_Separator."clubAdmin"),
-	"successRedirect" => "players/index.php",
+	"successRedirect" => "/Players/#/dashboard/",
 	"failRedirect" => "loginA.php?failedLogin=1",
 	"gotoPreviousURL" => TRUE,
 	"keepQueryString" => TRUE
@@ -96,7 +96,7 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
 	"columnTypes" => explode($WA_Auth_Separator,"text".$WA_Auth_Separator."text"),
 	"sessionColumns" => explode($WA_Auth_Separator,"id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName"),
 	"sessionNames" => explode($WA_Auth_Separator,"SecurityAssist_id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName"),
-	"successRedirect" => "players/index.php",
+	"successRedirect" => "/Players/#/dashboard/",
 	"failRedirect" => "loginA.php",
 	"gotoPreviousURL" => TRUE,
 	"keepQueryString" => TRUE

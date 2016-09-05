@@ -1,6 +1,5 @@
 <!-- Begin User Level Navigation -->
 	<div class="user-nav">
-        <a class="nav-item" href="/players/index.php">Player Home</a>
 		<a class="nav-item" href="/Players/#/dashboard/">My Dashboard</a>
 		<a class="nav-item" href="/Players/#/profile/">My Public Profile</a>
         <?php if(WA_Auth_RulePasses("tourneyAdmin")){ // Begin Show Region ?>
