@@ -4,7 +4,7 @@
             <h3 class="panel-title">Create Product</h3>
         </div>
         <div class="panel-body">
-            <button class="btn btn-to-cart" ui-sref="product({id: undefined})"><span class="glyphicon glyphicon-plus"></span> Add New Products</button>
+            <button class="btn btn-to-cart" ui-sref="product({id: undefined})"><span class="fa fa-plus"></span> Add New Products</button>
         </div>
     </div>
     <div class="panel panel-default sidebar-menu">
@@ -90,7 +90,7 @@
               <td data-title="Quantity">{{product.stockQty}}</td>
               <td data-title="Featured?">{{product.featured}}</td>
               <td data-title="Last Updated">{{product.updatedAt | jsonDate | date: 'medium'}}</td>
-              <td data-title="View/Edit"><a ui-sref="product({ id: product.id })"><span class="glyphicon glyphicon-edit"></span></a></td>
+              <td data-title="View/Edit"><a ui-sref="product({ id: product.id })"><span class="fa fa-edit"></span></a></td>
             </tr>
             <!--END REPEAT-->
           </tbody>

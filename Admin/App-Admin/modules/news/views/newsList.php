@@ -4,7 +4,7 @@
             <h3 class="panel-title">Create News</h3>
         </div>
         <div class="panel-body">
-            <button class="btn btn-to-cart" ui-sref="post({id: undefined})"><span class="glyphicon glyphicon-plus"></span> Add New Post</button>
+            <button class="btn btn-to-cart" ui-sref="post({id: undefined})"><span class="fa fa-plus"></span> Add New Post</button>
         </div>
     </div>
     <div class="panel panel-default sidebar-menu">
@@ -84,7 +84,7 @@
               <td data-title="Quantity">{{news.tags}}</td>
               <td data-title="Featured?">{{news.featured}}</td>
               <td data-title="Last Updated">{{news.updatedAt | jsonDate | date: 'medium'}}</td>
-              <td data-title="View/Edit"><a ui-sref="post({ id: news.id })"><span class="glyphicon glyphicon-edit"></span></a></td>
+              <td data-title="View/Edit"><a ui-sref="post({ id: news.id })"><span class="fa fa-edit"></span></a></td>
             </tr>
             <!--END REPEAT-->
           </tbody>

@@ -1,15 +1,15 @@
 <div class="two_column_1">
-  <h2 class="text-center">Player Bio</h2>
+  <h2 class="text-center">Player Info</h2>
 		<p class="user-bio" ng-if="Profile.currentUser.user_bio">{{Profile.currentUser.user_bio}}</p>
 		<p class="user-bio" ng-if="!Profile.currentUser.user_bio">This player has not yet updaed their bio.</p>
 
 		<div class="sociallinks push-bottom" style="text-align:center;">
-			<a ng-href="{{Profile.currentUser.user_facebook}}" target="_blank" ><span class="symbol face" style="font-size: 38px;">&#xe427;</span></a>
-			<a ng-href="{{Profile.currentUser.user_twitter}}" target="_blank" ><span class="symbol twit" style="font-size: 38px;">&#xe286;</span></a>
-			<a ng-href="{{Profile.currentUser.user_instagram}}" target="_blank" ><span class="symbol insta" style="font-size: 38px;">&#xe500;</span></a>
+			<a ng-href="{{Profile.currentUser.user_facebook}}" class="push-right push-left" target="_blank" ng-if="Profile.currentUser.user_facebook"><span class="fa fa-facebook" style="font-size: 38px;"></span></a>
+			<a ng-href="{{Profile.currentUser.user_twitter}}" class="push-right push-left" target="_blank" ng-if="Profile.currentUser.user_twitter"><span class="fa fa-twitter" style="font-size: 38px;"></span></a>
+			<a ng-href="{{Profile.currentUser.user_instagram}}" class="push-right push-left" target="_blank" ng-if="Profile.currentUser.user_instagram"><span class="fa fa-instagram" style="font-size: 38px;"></span></a>
+			<a ng-href="{{Profile.currentUser.user_twitch}}" class="push-right push-left" target="_blank" ng-if="Profile.currentUser.user_twitch"><span class="fa fa-twitch" style="font-size: 38px;"></span></a>
+			<a ng-href="{{Profile.currentUser.user_website}}" class="push-right push-left" target="_blank" ng-if="Profile.currentUser.user_website"><span class="fa fa-globe" style="font-size: 38px;"></span></a>
 		</div>
-		<a class="fill text-center push-bottom" ng-href="{{Profile.currentUser.user_twitch}}" target="_blank">Twitch</a>
-		<a class="fill text-center push-bottom" ng-href="{{Profile.currentUser.user_website}}" target="_blank">Website</a>
 </div>
 <div class="two_column_1">
 	<h2 class="text-center">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}</h2>

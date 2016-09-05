@@ -67,7 +67,7 @@
                     <h4>Remaining Balance: {{Checkout.player.user_points - Checkout.total | number}} RP</h4>
                 </div>
 
-                <div class="two_column_1">
+                <div class="two_column_1" style="height: 10px;">
                 </div>
                 <div class="two_column_1 right">
                     <span class="buttonFieldGroup">

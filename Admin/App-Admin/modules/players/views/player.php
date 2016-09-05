@@ -3,26 +3,30 @@
     <fieldset class="full_width" ng-disabled="Player.readOnly">
         <form class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="playerForm" novalidate>
             <h2>View/Edit</h2>
-            <div class="lineGroup three_column_1">
-                <label for="firstName" class="sublabel required">Firstname:</label>
-                <input id="firstName" name="firstName" ng-model="Player.currentPlayer.firstName" type="text" class="formTextfield_Large" placeholder="Player first name...">
-            </div>
-            <div class="lineGroup three_column_1">
-                <label for="lastName" class="sublabel required">Lastname:</label>
-                <input id="lastName" name="lastName" ng-model="Player.currentPlayer.lastName" type="text" class="formTextfield_Large" placeholder="Player last name...">
-            </div>
-            <div class="lineGroup three_column_1">
-                <label for="email" class="sublabel required">Email:</label>
-                <input id="email" name="email" ng-model="Player.currentPlayer.email" type="text" class="formTextfield_Large" placeholder="Player email...">
-            </div>
-            <div class="lineGroup two_column_1">
-                <label for="user_handle" class="sublabel required">Handle:</label>
-                <input id="user_handle" name="user_handle" ng-model="Player.currentPlayer.user_handle" type="text" class="formTextfield_Large" placeholder="Player handle...">
-            </div>
-            <div class="lineGroup two_column_1">
-                <label for="user_points" class="sublabel required">RP Points:</label>
-                <input id="user_points" name="user_points" ng-model="Player.currentPlayer.user_points" type="number" class="formTextfield_Large">
-            </div>
+			<div class="form-group">
+				<div class="three_column_1">
+	                <label for="firstName" class="sublabel required">Firstname:</label>
+	                <input id="firstName" name="firstName" ng-model="Player.currentPlayer.firstName" type="text" class="formTextfield_Large" placeholder="Player first name...">
+	            </div>
+	            <div class="three_column_1">
+	                <label for="lastName" class="sublabel required">Lastname:</label>
+	                <input id="lastName" name="lastName" ng-model="Player.currentPlayer.lastName" type="text" class="formTextfield_Large" placeholder="Player last name...">
+	            </div>
+	            <div class="three_column_1">
+	                <label for="email" class="sublabel required">Email:</label>
+	                <input id="email" name="email" ng-model="Player.currentPlayer.email" type="text" class="formTextfield_Large" placeholder="Player email...">
+	            </div>
+			</div>
+			<div class="form-group">
+				<div class="two_column_1">
+	                <label for="user_handle" class="sublabel required">Handle:</label>
+	                <input id="user_handle" name="user_handle" ng-model="Player.currentPlayer.user_handle" type="text" class="formTextfield_Large" placeholder="Player handle...">
+	            </div>
+	            <div class="two_column_1">
+	                <label for="user_points" class="sublabel required">RP Points:</label>
+	                <input id="user_points" name="user_points" ng-model="Player.currentPlayer.user_points" type="number" class="formTextfield_Large">
+	            </div>
+			</div>
         </form>
     </fieldset>
 </div>

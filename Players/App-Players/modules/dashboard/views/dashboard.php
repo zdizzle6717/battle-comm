@@ -14,12 +14,12 @@
 		</form>
 		<div style="text-align:right;">
 			<button class="exit" ng-click="Dashboard.savePlayer('bio')" ng-show="!Dashboard.readOnly.bio" ng-disabled="bioForm.$invalid">
-				<span class="glyphicon glyphicon-check"></span>
+				<span class="fa fa-check-square-o"></span>
 			</button>
 		</div>
 		<div style="text-align:right;" ng-show="Dashboard.readOnly.bio">
 			<button class="edit" ng-click="Dashboard.toggleEdit('bio')">
-				<span class="glyphicon glyphicon-edit"></span>
+				<span class="fa fa-edit"></span>
 			</button>
 		</div>
 	</div>
@@ -35,14 +35,14 @@
 			</div>
 		</div>
 	</div>
-	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile" style="color:black;text-decoration:none;"><span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Dashboard.currentUser.user_handle}}</a></h1>
+	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile" style="color:black;text-decoration:none;">{{Dashboard.currentUser.user_handle}}</a></h1>
 	<div class="center">
 		<ul class="inline">
 			<li class="item">
-				<span class="glyphicon glyphicon-envelope" style="font-size:2em;"></span>
+				<span class="fa fa-envelope" style="font-size:2em;"></span>
 				<!--<li><aui-sref="dashboard"">Create Match</a></li>-->
 				<li>
-					<aui-sref="dashboard" ">View Your Friends List</a></li>
+					<a ui-sref="dashboard">View Your Friends List</a></li>
 			<li><a ui-sref="dashboard ">Account Settings</a></li>
 		</ul>
 	</div>
@@ -117,12 +117,12 @@
 			</form>
 			<div style="text-align:right;">
 				<button class="exit" ng-click="Dashboard.savePlayer('links')" ng-show="!Dashboard.readOnly.links" ng-disabled="linksForm.$invalid">
-					<span class="glyphicon glyphicon-check"></span>
+					<span class="fa fa-check-square-o"></span>
 				</button>
 			</div>
 			<div style="text-align:right;" ng-show="Dashboard.readOnly.links">
 				<button class="edit" ng-click="Dashboard.toggleEdit('links')">
-					<span class="glyphicon glyphicon-edit"></span>
+					<span class="fa fa-edit"></span>
 				</button>
 			</div>
 		</div>
@@ -174,12 +174,12 @@
 			</form>
 			<div style="text-align:right;">
 				<button class="exit" ng-click="Dashboard.savePlayer('contact')" ng-show="!Dashboard.readOnly.contact" ng-disabled="contactForm.$invalid">
-					<span class="glyphicon glyphicon-check"></span>
+					<span class="fa fa-check-square-o"></span>
 				</button>
 			</div>
 			<div style="text-align:right;" ng-show="Dashboard.readOnly.contact">
 				<button class="edit" ng-click="Dashboard.toggleEdit('contact')">
-					<span class="glyphicon glyphicon-edit"></span>
+					<span class="fa fa-edit"></span>
 				</button>
 			</div>
 		</div>
@@ -188,7 +188,7 @@
 <div class="full_width">
 	<h2>Photostream
 		<aui-sref="dashboard"">
-		  <span class="glyphicon glyphicon-upload" style="float:right;"></span>
+		  <span class="fa fa-upload" style="float:right;"></span>
 		</a>
 	</h2>
 	<div class="center thumbnail">

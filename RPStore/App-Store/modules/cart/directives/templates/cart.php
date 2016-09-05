@@ -42,7 +42,7 @@
     </script>
     <h3 style="text-align:right;"><strong>Total:</strong>{{ ngCart.totalCost() | currency : 'RP ' }}</h3>
 </div>
-<div class="two_column_1">
+<div class="two_column_1" style="height:10px">
 
 </div>
 <div class="two_column_1 right">

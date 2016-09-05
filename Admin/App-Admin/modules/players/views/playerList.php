@@ -4,7 +4,7 @@
             <h3 class="panel-title">Create Player</h3>
         </div>
         <div class="panel-body">
-            <button class="btn btn-to-cart" ui-sref="player({id: undefined})"><span class="glyphicon glyphicon-plus"></span> Add New Player</button>
+            <button class="btn btn-to-cart" ui-sref="player({id: undefined})"><span class="fa fa-plus"></span> Add New Player</button>
         </div>
     </div> -->
     <div class="panel panel-default sidebar-menu">
@@ -88,7 +88,7 @@
               <td data-title="Email">{{player.email}}</td>
               <td data-title="Last Name">{{player.lastName}}</td>
               <td data-title="Created">{{player.createdAt | jsonDate | date: 'medium'}}</td>
-              <td data-title="View/Edit"><a ui-sref="player({ id: player.id })"><span class="glyphicon glyphicon-edit"></span></a></td>
+              <td data-title="View/Edit"><a ui-sref="player({ id: player.id })"><span class="fa fa-edit"></span></a></td>
             </tr>
             <!--END REPEAT-->
           </tbody>
