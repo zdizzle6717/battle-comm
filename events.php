@@ -67,6 +67,8 @@
                                 	<h3>State</h3>
                                     <a href="tool/tourneyRegistration/index.php"><img src="media/state-tournament.jpg" class="fill" alt=""/></a>
                                 </div>
+							</div>
+							<div class="full_width">
                                 <div class="two_column_1">
                                 	<h3>National</h3>
                                     <a href="tool/tourneyRegistration/index.php"><img src="media/national-tournament.jpg" class="fill" alt=""/></a>
