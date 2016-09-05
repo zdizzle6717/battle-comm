@@ -13,7 +13,7 @@
 	</div>
     <div class="full_width push-top">
         <form class="formoid-default-skyblue side_by_side" name="orderForm" novalidate>
-            <h2>View/Edit</h2>
+            <h2 class="push-bottom">View/Edit</h2>
 			<div class="form-group">
 				<div class="three_column_1">
 	                <label for="customerFullName" class="sublabel"> *Full Name:</label>

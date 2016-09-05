@@ -2,7 +2,7 @@
     <h2>Player ID: {{Player.currentPlayer.id}}</h2>
     <fieldset class="full_width" ng-disabled="Player.readOnly">
         <form class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="playerForm" novalidate>
-            <h2>View/Edit</h2>
+            <h2 class="push-bottom">View/Edit</h2>
 			<div class="form-group">
 				<div class="three_column_1">
 	                <label for="firstName" class="sublabel required">Firstname:</label>

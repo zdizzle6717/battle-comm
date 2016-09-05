@@ -2,7 +2,7 @@
     <h2>Post ID: {{Post.currentPost.id}}</h2>
     <fieldset class="full_width" ng-disabled="Post.readOnly">
         <form class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="postForm" novalidate>
-            <h2>View/Edit</h2>
+            <h2 class="push-bottom">View/Edit</h2>
 			<div class="form-group">
 				<div class="three_column_2">
 	                <label for="title" class="sublabel required">Title:</label>
