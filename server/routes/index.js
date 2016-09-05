@@ -407,7 +407,7 @@ module.exports = [
 					EventAdmin: Joi.optional(),
 					venueAdmin: Joi.optional(),
 					clubAdmin: Joi.optional(),
-					siteAdmin: Joi.optional(),
+					systemAdmin: Joi.optional(),
 					user_main_phone: Joi.optional(),
 					user_street_address: Joi.optional(),
 					user_apt_suite: Joi.optional(),

@@ -17,7 +17,7 @@ if (!WA_Auth_RulePasses("verifiedUser")){
 <p>EventAdmin: <?php echo $_SESSION['EventAdmin']; ?></p>
 <p>venueAdmin: <?php echo $_SESSION['venueAdmin']; ?></p>
 <p>NewsContributor: <?php echo $_SESSION['NewsContributor']; ?></p>
-<p>siteAdmin: <?php echo $_SESSION['siteAdmin']; ?></p>
+<p>systemAdmin: <?php echo $_SESSION['systemAdmin']; ?></p>
 <p>ClubAdmin: <?php echo $_SESSION['clubAdmin']; ?></p>
 </body>
 </html>

@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         NewsContributor: DataTypes.STRING,
         venueAdmin: DataTypes.STRING,
         clubAdmin: DataTypes.STRING,
-        siteAdmin: DataTypes.STRING,
+        systemAdmin: DataTypes.STRING,
         user_handle: DataTypes.STRING,
         user_club: DataTypes.INTEGER,
         user_main_phone: DataTypes.STRING,

@@ -68,7 +68,7 @@
         </div>
         <div class="panel-heading">
             <h3 class="panel-title">Site Admin?</h3>
-            <select name="siteAdmin" id="siteAdmin" ng-model="Player.currentPlayer.siteAdmin" selected="Player.currentPlayer.siteAdmin" ng-disabled="Player.readOnly">
+            <select name="systemAdmin" id="systemAdmin" ng-model="Player.currentPlayer.systemAdmin" selected="Player.currentPlayer.systemAdmin" ng-disabled="Player.readOnly">
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select><br>

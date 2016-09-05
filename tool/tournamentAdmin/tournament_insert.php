@@ -1,9 +1,9 @@
-<?php require_once('../Connections/local_local.php'); ?>
+<?php require_once('../../Connections/local_local.php'); ?>
 <?php require_once("../webassist/ckeditor/ckeditor.php"); ?>
 <?php require_once("../webassist/form_validations/wavt_scripts_php.php"); ?>
 <?php require_once("../webassist/form_validations/wavt_validatedform_php.php"); ?>
 <?php require_once('../../Connections/local.php'); ?>
-<?php 
+<?php
  if ((isset($_POST["Insert"]) || isset($_POST["Insert_x"])))  {
    $WAFV_Redirect = "".(htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES))  ."?invalid=true";
    $_SESSION['WAVT_tournamentinsert_Errors'] = "";
@@ -35,7 +35,7 @@ if (!WA_Auth_RulePasses("tourneyAdmin")){
 }
 
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -46,7 +46,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -109,7 +109,7 @@ if(isset($_POST["Insert"]) || isset($_POST["Insert_x"])){
 	WA_DFP_UploadFiles("WA_UploadResult1", "tournament_logo_icon", "2", "[ExistingFileName]_[Increment]", "true", $WA_UploadResult1_Params);
 }
 ?>
-<?php 
+<?php
 // WA DataAssist Insert
 if (isset($_POST["Insert"]) || isset($_POST["Insert_x"])) // Trigger
 {
@@ -204,7 +204,7 @@ function closeDatePicker_Tournament_endDate() {
 <style>
 
 form.DetailsPage {
-    width: auto;	
+    width: auto;
 }
 .WADAResults, .WADANoResults {
   border-top-width: 1px;
@@ -313,10 +313,10 @@ form .WADAResultsContainer input.formButton.ResultsPageButton {
 	overflow: hidden;
 }
 .messageWrapper {
-	#position: absolute; 
+	#position: absolute;
 	#top: 50%;
-	display: table-cell; 
-	vertical-align: middle;	
+	display: table-cell;
+	vertical-align: middle;
 }
 .messageContent {
 	background-color:white;
@@ -326,7 +326,7 @@ form .WADAResultsContainer input.formButton.ResultsPageButton {
 	z-index:1002;
 	overflow: auto;
 	margin: auto;
-	#position: relative; 
+	#position: relative;
 	#top: -50%;
 }
 .WADAResultsTable th{
@@ -350,13 +350,13 @@ form.Basic_Default input.formButton.Dark.DetailButton {
 	height:29px;
 	background-image:url(../images/Icons/view_details_white.png), url(../webassist/forms/gradient.php?from=262626&to=3E3E3E);
 	background-image:url(../images/Icons/view_details_white.png),  -moz-linear-gradient(top, #262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/view_details_white.png),  -o-linear-gradient(top, #262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/view_details_white.png),  -webkit-linear-gradient(#262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/view_details_white.png),  -webkit-gradient(linear,left top, left bottom, color-stop(0, #262626), color-stop(1, #3E3E3E));
-	
+
 	background-image:url(../images/Icons/view_details_white.png),  linear-gradient(top, #262626, #3E3E3E);
 	filter:none;
 }
@@ -377,13 +377,13 @@ form.Basic_Default input.formButton.Dark.UpdateButton {
 	height:29px;
 	background-image:url(../images/Icons/edit_white.png), url(../webassist/forms/gradient.php?from=262626&to=3E3E3E);
 	background-image:url(../images/Icons/edit_white.png),  -moz-linear-gradient(top, #262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/edit_white.png),  -o-linear-gradient(top, #262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/edit_white.png),  -webkit-linear-gradient(#262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/edit_white.png),  -webkit-gradient(linear,left top, left bottom, color-stop(0, #262626), color-stop(1, #3E3E3E));
-	
+
 	background-image:url(../images/Icons/edit_white.png),  linear-gradient(top, #262626, #3E3E3E);
 	filter:none;
 }
@@ -404,13 +404,13 @@ form.Basic_Default input.formButton.Dark.DeleteButton {
 	height:29px;
 	background-image:url(../images/Icons/delete_white.png), url(../webassist/forms/gradient.php?from=262626&to=3E3E3E);
 	background-image:url(../images/Icons/delete_white.png),  -moz-linear-gradient(top, #262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/delete_white.png),  -o-linear-gradient(top, #262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/delete_white.png),  -webkit-linear-gradient(#262626, #3E3E3E);
-	
+
 	background-image:url(../images/Icons/delete_white.png),  -webkit-gradient(linear,left top, left bottom, color-stop(0, #262626), color-stop(1, #3E3E3E));
-	
+
 	background-image:url(../images/Icons/delete_white.png),  linear-gradient(top, #262626, #3E3E3E);
 	filter:none;
 }
@@ -424,7 +424,7 @@ form.Basic_Default input.formButton.Dark.DeleteButton:hover {
 
 /* Details page CSS */
 form.DetailsPage {
-    width: auto;	
+    width: auto;
 }
 
 .black_overlay{
@@ -452,10 +452,10 @@ form.DetailsPage {
 	overflow: hidden;
 }
 .messageWrapper {
-	#position: absolute; 
+	#position: absolute;
 	#top: 50%;
-	display: table-cell; 
-	vertical-align: middle;	
+	display: table-cell;
+	vertical-align: middle;
 }
 .messageContent {
 	background-color:white;
@@ -465,7 +465,7 @@ form.DetailsPage {
 	z-index:1002;
 	overflow: auto;
 	margin: auto;
-	#position: relative; 
+	#position: relative;
 	#top: -50%;
 }
 </style>
@@ -540,7 +540,7 @@ function closeDatePicker_tournament_startDate() {
             }
           }
         }?>
-            </li> 
+            </li>
             <li> <label for="tournament_startDate" class="sublabel" > Start Date:</label>
           <input id="tournament_startDate" name="tournament_startDate" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_startDate"):"")); ?>" class="formTextfield_Medium" tabindex="2" title="Please enter a value.">
                <?php
@@ -556,7 +556,7 @@ function closeDatePicker_tournament_startDate() {
             </li>
             <li> <label for="tournament_startTime" class="sublabel" > Start Time:</label>
           <input id="tournament_startTime" name="tournament_startTime" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_startTime"):"")); ?>" class="formTextfield_Small" tabindex="3" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="Tournament_endDate" class="sublabel" > End Date:</label>
           <input id="Tournament_endDate" name="Tournament_endDate" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","Tournament_endDate"):"")); ?>" class="formTextfield_Medium" tabindex="4" title="Please enter a value.">
                <?php
@@ -569,13 +569,13 @@ function closeDatePicker_tournament_startDate() {
             }
           }
         }?>
-            </li> 
+            </li>
             <li> <label for="Tournament_endTime" class="sublabel" > End Time:</label>
           <input id="Tournament_endTime" name="Tournament_endTime" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","Tournament_endTime"):"")); ?>" class="formTextfield_Small" tabindex="5" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="tournament_logo_icon" class="sublabel" > Upload Logo/Icon:</label>
           <input name="tournament_logo_icon" type="file" id="tournament_logo_icon" size="30" tabindex="6" title="Please enter a value.">
-            </li> 
+            </li>
     </li>
   		</ol>
   	  </fieldset>
@@ -585,18 +585,18 @@ function closeDatePicker_tournament_startDate() {
 		<ol>
             <li> <label for="tournament_location _name" class="sublabel" > Location Name:</label>
           <input id="tournament_location _name" name="tournament_location _name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_location _name"):"")); ?>" class="formTextfield_Large" tabindex="7" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="tournament_address" class="sublabel" > Address:</label>
           <input id="tournament_address" name="tournament_address" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_address"):"")); ?>" class="formTextfield_Large" tabindex="8" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="tournament_city" class="sublabel" > City:</label>
           <input id="tournament_city" name="tournament_city" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_city"):"")); ?>" class="formTextfield_Medium" tabindex="9" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="tournament_state" class="sublabel" > State:</label>
               <select class="formMenufield_Small" name="tournament_state" id="tournament_state" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_state"):"")); ?>" tabindex="10" title="Please enter a value.">
         <option value="">Choose State:</option>
         <?php
-        do {  
+        do {
         ?>
                 <option value="<?php echo $row_WADAMenutournament_state['state_abbr']?>"<?php if (!(strcmp($row_WADAMenutournament_state['state_abbr'], (isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_state"):"")))) {echo "selected=\"selected\"";} ?>><?php echo $row_WADAMenutournament_state['state_abbr']?></option>
                 <?php
@@ -608,7 +608,7 @@ function closeDatePicker_tournament_startDate() {
           }
         ?>
         </select>
-            </li> 
+            </li>
             <li> <label for="tournament_zip" class="sublabel" > Zip:</label>
           <input id="tournament_zip" name="tournament_zip" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_zip"):"")); ?>" class="formTextfield_Medium" tabindex="11" pattern="(\d{5}([\-]\d{4})?)" title="Please enter a value.">
                <?php
@@ -641,7 +641,7 @@ function closeDatePicker_tournament_startDate() {
             }
           }
         }?>
-            </li> 
+            </li>
             <li> <label for="tournament_email" class="sublabel" > Main Contact Email:<span class="requiredIndicator">&nbsp;*</span></label>
           <input id="tournament_email" name="tournament_email" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_email"):"")); ?>" class="formTextfield_Large" tabindex="13" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="Please enter a value." required>
                <?php
@@ -654,7 +654,7 @@ function closeDatePicker_tournament_startDate() {
             }
           }
         }?>
-            </li> 
+            </li>
             <li> <label for="tournament_URL" class="sublabel" > Tournament Website:</label>
           <input id="tournament_URL" name="tournament_URL" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","tournament_URL"):"")); ?>" class="formTextfield_Large" tabindex="14" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
                <?php
@@ -667,7 +667,7 @@ function closeDatePicker_tournament_startDate() {
             }
           }
         }?>
-            </li> 
+            </li>
             <li> <label for="tournament_info" class="sublabel" > Tournament Information:</label><div style="display:inline-block; width:100%;">
               <?php
         // The initial value to be displayed in the editor.
@@ -702,7 +702,7 @@ function closeDatePicker_tournament_startDate() {
         $CKEditor->editor("tournament_info", $CKEditor_initialValue, $CKEditor_config);
         ?>
             </div>
-            </li> 
+            </li>
     </li>
   		</ol>
   	  </fieldset>
@@ -722,18 +722,18 @@ function closeDatePicker_tournament_startDate() {
             }
           }
         }?>
-            </li> 
+            </li>
             <li> <label for="factions_cap" class="sublabel" > Factions Cap:</label>
           <input id="factions_cap" name="factions_cap" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","factions_cap"):"")); ?>" class="formTextfield_Small" tabindex="16" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="No_of_Games" class="sublabel" > Number of Games (per Round):</label>
           <input id="No_of_Games" name="No_of_Games" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","No_of_Games"):"")); ?>" class="formTextfield_Small" tabindex="17" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="game_id" class="sublabel" > Game System:</label>
               <select class="formMenufield_Medium" name="game_id" id="game_id" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","game_id"):"")); ?>" tabindex="18" title="Please enter a value.">
                 <option value="" <?php if (!(strcmp("", (isset($_GET["invalid"])?ValidatedField("tournamentinsert","game_id"):"")))) {echo "selected=\"selected\"";} ?>>Choose Game...</option>
                 <?php
-        do {  
+        do {
         ?>
         <option value="<?php echo $row_WADAMenugame_id['game_system_id']?>"<?php if (!(strcmp($row_WADAMenugame_id['game_system_id'], (isset($_GET["invalid"])?ValidatedField("tournamentinsert","game_id"):"")))) {echo "selected=\"selected\"";} ?>><?php echo $row_WADAMenugame_id['game_system_Title']?></option>
                 <?php
@@ -746,16 +746,16 @@ function closeDatePicker_tournament_startDate() {
         ?>
         </select>
               <input name="tournamentOwner" type="hidden" id="tournamentOwner" value="<?php echo $_SESSION['SecurityAssist_id']; ?>">
-            </li> 
+            </li>
              <li> <label for="WinPointValue" class="sublabel" > Win Point Value:</label>
           <input id="WinPointValue" name="WinPointValue" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","WinPointValue"):"")); ?>" class="formTextfield_Medium" tabindex="20" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="DrawPointValue" class="sublabel" > Draw Point Value:</label>
           <input id="DrawPointValue" name="DrawPointValue" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","DrawPointValue"):"")); ?>" class="formTextfield_Medium" tabindex="21" title="Please enter a value.">
-            </li> 
+            </li>
             <li> <label for="LossPointValue" class="sublabel" > Loss Point Value:</label>
           <input id="LossPointValue" name="LossPointValue" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("tournamentinsert","LossPointValue"):"")); ?>" class="formTextfield_Medium" tabindex="22" title="Please enter a value.">
-            </li> 
+            </li>
       </ol>
     </fieldset>
                     <span class="buttonFieldGroup" >

@@ -54,7 +54,7 @@ let userLogins = {
                         // NewsContributor: request.payload.NewsContributor,
                         venueAdmin: request.payload.venueAdmin,
                         clubAdmin: request.payload.clubAdmin,
-                        siteAdmin: request.payload.siteAdmin,
+                        systemAdmin: request.payload.systemAdmin,
                         user_handle: request.payload.user_handle,
                         // user_club: request.payload.user_club,
                         user_main_phone: request.payload.user_main_phone,

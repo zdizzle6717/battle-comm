@@ -25,8 +25,8 @@
     <div class="header row center">
         <div class="logo"><a href="/"><img src="/images/BC_Web_Logo.png" alt="BattleComm"></a></div>
         <div class="mobile-logo"><a href="/"><img src="/images/BC_Web_Logo_mobile.png" alt="BattleComm"></a>
-            <?php if(WA_Auth_RulePasses("verifiedUser")){ // Begin Show Region ?>
+            <!-- <?php if(WA_Auth_RulePasses("verifiedUser")){ // Begin Show Region ?>
                 <?php include ($pathToFile. "/Templates/includes/mobile-buttons.php"); ?>
-            <?php } // End Show Region ?>
+            <?php } // End Show Region ?> -->
         </div>
     </div>

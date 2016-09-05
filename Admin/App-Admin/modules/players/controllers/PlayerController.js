@@ -40,7 +40,7 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
 			EventAdmin: data.EventAdmin,
 			venueAdmin: data.venueAdmin,
 			clubAdmin: data.clubAdmin,
-			siteAdmin: data.siteAdmin
+			systemAdmin: data.systemAdmin
 		}
         if ($stateParams.id) {
             controller.readOnly = true;

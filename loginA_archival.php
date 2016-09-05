@@ -18,7 +18,7 @@
 <?php require_once("webassist/form_validations/wavt_scripts_php.php"); ?>
 <?php require_once("webassist/form_validations/wavt_validatedform_php.php"); ?>
 <?php require_once( "webassist/security_assist/helper_php.php" ); ?>
-<?php 
+<?php
  if ((isset($_POST["LogIn_submit"]) || isset($_POST["LogIn_submit_x"])))  {
    $WAFV_Redirect = "".(htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES))  ."?invalid=true";
    $_SESSION['WAVT_login_Errors'] = "";
@@ -84,14 +84,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	"columns" => explode($WA_Auth_Separator,"email".$WA_Auth_Separator."password"),
 	"columnValues" => explode($WA_Auth_Separator,"".((isset($_POST["Log_In_group_Email_Address"]))?$_POST["Log_In_group_Email_Address"]:"")  ."".$WA_Auth_Separator."".(WA_MD5Encryption((isset($_POST["Log_In_group_2_Password"]))?$_POST["Log_In_group_2_Password"]:""))  .""),
 	"columnTypes" => explode($WA_Auth_Separator,"text".$WA_Auth_Separator."text"),
-	"sessionColumns" => explode($WA_Auth_Separator,"id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName".$WA_Auth_Separator."tourneyAdmin".$WA_Auth_Separator."EventAdmin".$WA_Auth_Separator."venueAdmin".$WA_Auth_Separator."NewsContributor".$WA_Auth_Separator."siteAdmin".$WA_Auth_Separator."clubAdmin"),
-	"sessionNames" => explode($WA_Auth_Separator,"SecurityAssist_id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName".$WA_Auth_Separator."tourneyAdmin".$WA_Auth_Separator."EventAdmin".$WA_Auth_Separator."venueAdmin".$WA_Auth_Separator."NewsContributor".$WA_Auth_Separator."siteAdmin".$WA_Auth_Separator."clubAdmin"),
+	"sessionColumns" => explode($WA_Auth_Separator,"id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName".$WA_Auth_Separator."tourneyAdmin".$WA_Auth_Separator."EventAdmin".$WA_Auth_Separator."venueAdmin".$WA_Auth_Separator."NewsContributor".$WA_Auth_Separator."systemAdmin".$WA_Auth_Separator."clubAdmin"),
+	"sessionNames" => explode($WA_Auth_Separator,"SecurityAssist_id".$WA_Auth_Separator."activation_state".$WA_Auth_Separator."firstName".$WA_Auth_Separator."lastName".$WA_Auth_Separator."tourneyAdmin".$WA_Auth_Separator."EventAdmin".$WA_Auth_Separator."venueAdmin".$WA_Auth_Separator."NewsContributor".$WA_Auth_Separator."systemAdmin".$WA_Auth_Separator."clubAdmin"),
 	"successRedirect" => "players/index.php",
 	"failRedirect" => "loginA.php?failedLogin=1",
 	"gotoPreviousURL" => TRUE,
 	"keepQueryString" => TRUE
 	);
-	
+
 	WA_AuthenticateUser($WA_Auth_Parameter);
 }
 ?>
@@ -111,7 +111,7 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
 	"gotoPreviousURL" => TRUE,
 	"keepQueryString" => TRUE
 	);
-	
+
 	WA_AuthenticateUser($WA_Auth_Parameter);
 }
 ?>
@@ -136,7 +136,7 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
 <?php $pathToFile = $_SERVER['DOCUMENT_ROOT']; ?>
 <body>
 		<?php require_once($pathToFile. "/webassist/security_assist/helper_php.php" ); ?>
-    	<!-- HEADER --> 
+    	<!-- HEADER -->
         <div class="nav placeholder center" id="returnhome"></div>
         <div class="nav row center">
         	<?php if(WA_Auth_RulePasses("verifiedUser")){ // Begin Show Region ?>
@@ -166,8 +166,8 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
                 </div>
             </div>
         </div>
-        
-  
+
+
 		<!-- Middle -->
         <div class="mids">
         	<div class="container_full_width_frames no_shadow no_background no_padding">
@@ -290,8 +290,8 @@ $(document).ready(function () {
 });
 </script>
    				</div>
-							
-                              
+
+
               </div>
                     </div>
                     <div class="frame_b row">
@@ -301,6 +301,6 @@ $(document).ready(function () {
                     </div>
                 </div>
             </div>
-              
-        
+
+
 <?php include 'Templates/parts/footer.php'; ?>

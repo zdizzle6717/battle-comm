@@ -8,7 +8,7 @@ $totalRows_WADAMenuuser_state = mysql_num_rows($WADAMenuuser_state);
 */
 ?>
 <?php require_once("../../../webassist/database_management/wa_appbuilder_php.php"); ?>
-<?php 
+<?php
 // WA DataAssist Insert
 if (isset($_POST["Insert"]) || isset($_POST["Insert_x"])) // Trigger
 {
@@ -18,8 +18,8 @@ if (isset($_POST["Insert"]) || isset($_POST["Insert_x"])) // Trigger
   $WA_redirectURL = "user_login_detail.php?id=[Insert_ID]";
   if (function_exists("rel2abs")) $WA_redirectURL = $WA_redirectURL?rel2abs($WA_redirectURL,dirname(__FILE__)):"";
   $WA_keepQueryString = false;
-  $WA_fieldNamesStr = "email|user_handle|firstName|lastName|join_date|tourneyAdmin|EventAdmin|NewsContributor|venueAdmin|clubAdmin|siteAdmin|user_Date_of_Birth|user_main_phone|user_mobile_phone|user_work_phone|user_street_address|user_apt_suite|user_city|user_state|user_zip|user_bio|user_facebook|user_twitter|user_instagram|user_google_plus|user_youtube|user_twitch|user_website|user_share_contact|user_share_name|user_share_status|user_newsletter|user_marketing|user_visibility|user_sms|user_allow_play|user_icon|totalWins|totalLoss|totalDraw|totalPoints|accountActive";
-  $WA_fieldValuesStr = "".((isset($_POST["email"]))?$_POST["email"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_handle"]))?$_POST["user_handle"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["firstName"]))?$_POST["firstName"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["lastName"]))?$_POST["lastName"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["join_date"]) && $_POST["join_date"]!="" )?date("Y-m-d H:i:s", strtotime($_POST["join_date"])):"")  ."" . $WA_AB_Split . "".((isset($_POST["tourneyAdmin"]))?$_POST["tourneyAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["EventAdmin"]))?$_POST["EventAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["NewsContributor"]))?$_POST["NewsContributor"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["venueAdmin"]))?$_POST["venueAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["clubAdmin"]))?$_POST["clubAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["siteAdmin"]))?$_POST["siteAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_Date_of_Birth"]) && $_POST["user_Date_of_Birth"]!="" )?date("Y-m-d H:i:s", strtotime($_POST["user_Date_of_Birth"])):"")  ."" . $WA_AB_Split . "".((isset($_POST["user_main_phone"]))?$_POST["user_main_phone"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_mobile_phone"]))?$_POST["user_mobile_phone"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_work_phone"]))?$_POST["user_work_phone"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_street_address"]))?$_POST["user_street_address"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_apt_suite"]))?$_POST["user_apt_suite"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_city"]))?$_POST["user_city"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_state"]))?$_POST["user_state"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_zip"]))?$_POST["user_zip"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_bio"]))?$_POST["user_bio"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_facebook"]))?$_POST["user_facebook"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_twitter"]))?$_POST["user_twitter"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_instagram"]))?$_POST["user_instagram"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_google_plus"]))?$_POST["user_google_plus"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_youtube"]))?$_POST["user_youtube"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_twitch"]))?$_POST["user_twitch"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_website"]))?$_POST["user_website"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_share_contact"]))?$_POST["user_share_contact"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_share_name"]))?$_POST["user_share_name"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_share_status"]))?$_POST["user_share_status"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_newsletter"]))?$_POST["user_newsletter"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_marketing"]))?$_POST["user_marketing"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_visibility"]))?$_POST["user_visibility"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_sms"]))?$_POST["user_sms"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_allow_play"]))?$_POST["user_allow_play"]:"")  ."" . $WA_AB_Split . "".($WA_DFP_UploadStatus["WA_UploadResult1"]["serverFileName"])  ."" . $WA_AB_Split . "".((isset($_POST["totalWins"]))?$_POST["totalWins"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["totalLoss"]))?$_POST["totalLoss"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["totalDraw"]))?$_POST["totalDraw"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["totalPoints"]))?$_POST["totalPoints"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["accountActive"]))?$_POST["accountActive"]:"")  ."";
+  $WA_fieldNamesStr = "email|user_handle|firstName|lastName|join_date|tourneyAdmin|EventAdmin|NewsContributor|venueAdmin|clubAdmin|systemAdmin|user_Date_of_Birth|user_main_phone|user_mobile_phone|user_work_phone|user_street_address|user_apt_suite|user_city|user_state|user_zip|user_bio|user_facebook|user_twitter|user_instagram|user_google_plus|user_youtube|user_twitch|user_website|user_share_contact|user_share_name|user_share_status|user_newsletter|user_marketing|user_visibility|user_sms|user_allow_play|user_icon|totalWins|totalLoss|totalDraw|totalPoints|accountActive";
+  $WA_fieldValuesStr = "".((isset($_POST["email"]))?$_POST["email"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_handle"]))?$_POST["user_handle"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["firstName"]))?$_POST["firstName"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["lastName"]))?$_POST["lastName"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["join_date"]) && $_POST["join_date"]!="" )?date("Y-m-d H:i:s", strtotime($_POST["join_date"])):"")  ."" . $WA_AB_Split . "".((isset($_POST["tourneyAdmin"]))?$_POST["tourneyAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["EventAdmin"]))?$_POST["EventAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["NewsContributor"]))?$_POST["NewsContributor"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["venueAdmin"]))?$_POST["venueAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["clubAdmin"]))?$_POST["clubAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["systemAdmin"]))?$_POST["systemAdmin"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_Date_of_Birth"]) && $_POST["user_Date_of_Birth"]!="" )?date("Y-m-d H:i:s", strtotime($_POST["user_Date_of_Birth"])):"")  ."" . $WA_AB_Split . "".((isset($_POST["user_main_phone"]))?$_POST["user_main_phone"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_mobile_phone"]))?$_POST["user_mobile_phone"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_work_phone"]))?$_POST["user_work_phone"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_street_address"]))?$_POST["user_street_address"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_apt_suite"]))?$_POST["user_apt_suite"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_city"]))?$_POST["user_city"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_state"]))?$_POST["user_state"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_zip"]))?$_POST["user_zip"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_bio"]))?$_POST["user_bio"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_facebook"]))?$_POST["user_facebook"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_twitter"]))?$_POST["user_twitter"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_instagram"]))?$_POST["user_instagram"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_google_plus"]))?$_POST["user_google_plus"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_youtube"]))?$_POST["user_youtube"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_twitch"]))?$_POST["user_twitch"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_website"]))?$_POST["user_website"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_share_contact"]))?$_POST["user_share_contact"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_share_name"]))?$_POST["user_share_name"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_share_status"]))?$_POST["user_share_status"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_newsletter"]))?$_POST["user_newsletter"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_marketing"]))?$_POST["user_marketing"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_visibility"]))?$_POST["user_visibility"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_sms"]))?$_POST["user_sms"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["user_allow_play"]))?$_POST["user_allow_play"]:"")  ."" . $WA_AB_Split . "".($WA_DFP_UploadStatus["WA_UploadResult1"]["serverFileName"])  ."" . $WA_AB_Split . "".((isset($_POST["totalWins"]))?$_POST["totalWins"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["totalLoss"]))?$_POST["totalLoss"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["totalDraw"]))?$_POST["totalDraw"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["totalPoints"]))?$_POST["totalPoints"]:"")  ."" . $WA_AB_Split . "".((isset($_POST["accountActive"]))?$_POST["accountActive"]:"")  ."";
   $WA_columnTypesStr = "',none,''|',none,''|',none,''|',none,''|',none,NULL|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,NULL|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''|',none,''";
   $WA_fieldNames = explode("|", $WA_fieldNamesStr);
   $WA_fieldValues = explode($WA_AB_Split, $WA_fieldValuesStr);
@@ -65,7 +65,7 @@ if(isset($_POST["Insert"]) || isset($_POST["Insert_x"])){
 <?php require_once('../../../Connections/local.php'); ?>
 <?php require_once("../../../webassist/form_validations/wavt_scripts_php.php"); ?>
 <?php require_once("../../../webassist/form_validations/wavt_validatedform_php.php"); ?>
-<?php 
+<?php
  if ((isset($_POST["Insert"]) || isset($_POST["Insert_x"])))  {
    $WAFV_Redirect = "".(htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES))  ."?invalid=true";
    $_SESSION['WAVT_userprofileinsert_Errors'] = "";
@@ -181,7 +181,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_handle" class="sublabel" > Handle:<span class="requiredIndicator">&nbsp;*</span></label>
   <input id="user_handle" name="user_handle" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_handle"):"")); ?>" class="formTextfield_Medium" tabindex="2" title="Please enter a value." required="true">
 	   <?php
@@ -192,56 +192,56 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="firstName" class="sublabel" > First Name:</label>
   <input id="firstName" name="firstName" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","firstName"):"")); ?>" class="formTextfield_Medium" tabindex="3" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="lastName" class="sublabel" > Last Name:</label>
   <input id="lastName" name="lastName" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","lastName"):"")); ?>" class="formTextfield_Medium" tabindex="4" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="join_date" class="sublabel" > Date Joined:</label>
   <input id="join_date" name="join_date" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","join_date"):"")); ?>" class="formTextfield_Medium" tabindex="5" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="tourneyAdmin" class="sublabel" > Tournament Admin:</label>
       <select class="formMenufield_Small" name="tourneyAdmin" id="tourneyAdmin" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","tourneyAdmin"):"")); ?>" tabindex="6" title="Please enter a value.">
         <option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
       </select>
-    </li> 
+    </li>
     <li> <label for="EventAdmin" class="sublabel" > EventAdmin:</label>
       <select class="formMenufield_Small" name="EventAdmin" id="EventAdmin" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","EventAdmin"):"")); ?>" tabindex="7" title="Please enter a value.">
       <option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
 
       </select>
-    </li> 
+    </li>
     <li> <label for="NewsContributor" class="sublabel" > NewsContributor:</label>
       <select class="formMenufield_Small" name="NewsContributor" id="NewsContributor" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","NewsContributor"):"")); ?>" tabindex="8" title="Please enter a value."><option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
 
       </select>
-    </li> 
+    </li>
     <li> <label for="venueAdmin" class="sublabel" > venueAdmin:</label>
       <select class="formMenufield_Small" name="venueAdmin" id="venueAdmin" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","venueAdmin"):"")); ?>" tabindex="9" title="Please enter a value.">
       <option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
 
       </select>
-    </li> 
+    </li>
     <li> <label for="clubAdmin" class="sublabel" > clubAdmin:</label>
       <select class="formMenufield_Small" name="clubAdmin" id="clubAdmin" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","clubAdmin"):"")); ?>" tabindex="10" title="Please enter a value.">
       <option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
 
       </select>
-    </li> 
-    <li> <label for="siteAdmin" class="sublabel" > siteAdmin:</label>
-      <select class="formMenufield_Small" name="siteAdmin" id="siteAdmin" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","siteAdmin"):"")); ?>" tabindex="11" title="Please enter a value.">
+    </li>
+    <li> <label for="systemAdmin" class="sublabel" > systemAdmin:</label>
+      <select class="formMenufield_Small" name="systemAdmin" id="systemAdmin" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","systemAdmin"):"")); ?>" tabindex="11" title="Please enter a value.">
       <option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
 
       </select>
-    </li> 
+    </li>
     <li> <label for="user_Date_of_Birth" class="sublabel" > Date Of Birth:</label>
   <input id="user_Date_of_Birth" name="user_Date_of_Birth" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_Date_of_Birth"):"")); ?>" class="formTextfield_Medium" tabindex="12" title="Please enter a value.">
 	   <?php
@@ -252,7 +252,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_main_phone" class="sublabel" > Main Phone:</label>
   <input id="user_main_phone" name="user_main_phone" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_main_phone"):"")); ?>" class="formTextfield_Medium" tabindex="13" pattern="\(\d{3}\) \d{3}[\-]\d{4}" title="Please enter a value." onBlur="WAValidatePN(document.getElementById('Insert_Basic_Default').user_main_phone,'',false,true,'x (xxx) xxx-xxxx',document.getElementById('Insert_Basic_Default').user_main_phone,0,true);">
 	   <?php
@@ -263,7 +263,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_mobile_phone" class="sublabel" > Mobile Phone:</label>
   <input id="user_mobile_phone" name="user_mobile_phone" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_mobile_phone"):"")); ?>" class="formTextfield_Medium" tabindex="14" pattern="\(\d{3}\) \d{3}[\-]\d{4}" title="Please enter a value." onBlur="WAValidatePN(document.getElementById('Insert_Basic_Default').user_mobile_phone,'',false,true,'x (xxx) xxx-xxxx',document.getElementById('Insert_Basic_Default').user_mobile_phone,0,true);">
 	   <?php
@@ -274,7 +274,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_work_phone" class="sublabel" > Work Phone:</label>
   <input id="user_work_phone" name="user_work_phone" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_work_phone"):"")); ?>" class="formTextfield_Medium" tabindex="15" pattern="\(\d{3}\) \d{3}[\-]\d{4}" title="Please enter a value." onBlur="WAValidatePN(document.getElementById('Insert_Basic_Default').user_work_phone,'',false,true,'x (xxx) xxx-xxxx',document.getElementById('Insert_Basic_Default').user_work_phone,0,true);">
 	   <?php
@@ -285,21 +285,21 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_street_address" class="sublabel" > Street Address:</label>
   <input id="user_street_address" name="user_street_address" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_street_address"):"")); ?>" class="formTextfield_Medium" tabindex="16" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="user_apt_suite" class="sublabel" > Apt/Suite:</label>
   <input id="user_apt_suite" name="user_apt_suite" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_apt_suite"):"")); ?>" class="formTextfield_Medium" tabindex="17" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="user_city" class="sublabel" > City:</label>
   <input id="user_city" name="user_city" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_city"):"")); ?>" class="formTextfield_Medium" tabindex="18" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="user_state" class="sublabel" > State:</label>
       <select class="formMenufield_XSmall" name="user_state" id="user_state" rel="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_state"):"")); ?>" tabindex="19" title="Please enter a value.">
 <option value="">Choose State: </option>
 <?php
-do {  
+do {
 ?>
         <option value="<?php echo $row_WADAMenuuser_state['state_name']?>"<?php if (!(strcmp($row_WADAMenuuser_state['state_name'], (isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_state"):"")))) {echo "selected=\"selected\"";} ?>><?php echo $row_WADAMenuuser_state['state_abbr']?></option>
         <?php
@@ -311,7 +311,7 @@ do {
   }
 ?>
 </select>
-    </li> 
+    </li>
     <li> <label for="user_zip" class="sublabel" > Zip Code: :</label>
   <input id="user_zip" name="user_zip" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_zip"):"")); ?>" class="formTextfield_Medium" tabindex="20" pattern="(\d{5}([\-]\d{4})?)" title="Please enter a value.">
 	   <?php
@@ -322,18 +322,18 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_bio" class="sublabel" > About/Bio:</label>
   <textarea name="user_bio" id="user_bio" class="formTextarea_Large" rows="1" cols="1" tabindex="21" title="Please enter a value."><?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_bio"):"")); ?></textarea>
-    </li> 
-</ol> 
+    </li>
+</ol>
 </fieldset>
-</div>    
-    
+</div>
+
 <div class="two_column_1" style="margin-right:1%">
 <fieldset>
 	<legend>Social Links</legend>
-<ol>  
+<ol>
     <li> <label for="user_facebook" class="sublabel" > Facebook:</label>
   <input id="user_facebook" name="user_facebook" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_facebook"):"")); ?>" class="formTextfield_Medium" tabindex="22" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -344,7 +344,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_twitter" class="sublabel" > Twitter:</label>
   <input id="user_twitter" name="user_twitter" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_twitter"):"")); ?>" class="formTextfield_Medium" tabindex="23" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -355,7 +355,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_instagram" class="sublabel" > Instagram:</label>
   <input id="user_instagram" name="user_instagram" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_instagram"):"")); ?>" class="formTextfield_Medium" tabindex="24" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -366,7 +366,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_google_plus" class="sublabel" > Google+:</label>
   <input id="user_google_plus" name="user_google_plus" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_google_plus"):"")); ?>" class="formTextfield_Medium" tabindex="25" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -377,7 +377,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_youtube" class="sublabel" > YouTube:</label>
   <input id="user_youtube" name="user_youtube" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_youtube"):"")); ?>" class="formTextfield_Medium" tabindex="26" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -388,7 +388,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_twitch" class="sublabel" > Twitch:</label>
   <input id="user_twitch" name="user_twitch" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_twitch"):"")); ?>" class="formTextfield_Medium" tabindex="27" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -399,7 +399,7 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="user_website" class="sublabel" > Personal Website:</label>
   <input id="user_website" name="user_website" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_website"):"")); ?>" class="formTextfield_Medium" tabindex="28" pattern="(?:https?|ftp)\:\/\/(?:(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=:]|%[0-9a-f]{2,2})*\@)?(?:((?:(?:[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\.)*(?:[a-z][a-z0-9\-]*[a-z0-9]|[a-z])|(?:\[[^\]]*\]))(?:\:[0-9]*)?)(?:\/(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@]|%[0-9a-f]{2,2})*)*(?:\?(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?(?:\#(?:[a-z0-9\-\._~\!\$\&\'\(\)\*\+\,\;\=\:\@\/\?]|%[0-9a-f]{2,2})*)?" title="Please enter a value.">
 	   <?php
@@ -410,58 +410,58 @@ if (ValidatedField('userprofileinsert','userprofileinsert'))  {
     }
   }
 }?>
-    </li> 
+    </li>
     <li> <label for="totalWins" class="sublabel" > Total Wins:</label>
   <input id="totalWins" name="totalWins" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","totalWins"):"")); ?>" class="formTextfield_Medium" tabindex="38" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="totalLoss" class="sublabel" > Total Losses: :</label>
   <input id="totalLoss" name="totalLoss" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","totalLoss"):"")); ?>" class="formTextfield_Medium" tabindex="39" title="Please enter a value.">
-    </li> 
+    </li>
     <li> <label for="totalDraw" class="sublabel" > Total Draw:</label>
   <input id="totalDraw" name="totalDraw" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("userprofileinsert","totalDraw"):"")); ?>" class="formTextfield_Medium" tabindex="40" title="Please enter a value.">
     </li>
 </ol>
 </fieldset>
-</div> 
-    
+</div>
+
 <div class="two_column_1" style="margin-left:1%;" >
 <fieldset>
 	<legend>Notification Settings</legend>
-<ol>    
+<ol>
     <li>
 <label class="checklabel" for="user_share_contact"><input type="checkbox" name="user_share_contact" id="user_share_contact" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_share_contact"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="29" title="Please enter a value.">&nbsp;Share Contact Information</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_share_name"><input type="checkbox" name="user_share_name" id="user_share_name" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_share_name"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="30" title="Please enter a value.">&nbsp;Share Real Name</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_share_status"><input type="checkbox" name="user_share_status" id="user_share_status" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_share_status"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="31" title="Please enter a value.">&nbsp;Share Status</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_newsletter"><input type="checkbox" name="user_newsletter" id="user_newsletter" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_newsletter"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="32" title="Please enter a value.">&nbsp;Subscribe to Newsletter</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_marketing"><input type="checkbox" name="user_marketing" id="user_marketing" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_marketing"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="33" title="Please enter a value.">&nbsp;Subscribe to Marketing Messages</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_visibility"><input type="checkbox" name="user_visibility" id="user_visibility" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_visibility"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="34" title="Please enter a value.">&nbsp;Show as Visible</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_sms"><input type="checkbox" name="user_sms" id="user_sms" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_sms"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="35" title="Please enter a value.">&nbsp;Allow SMS</label>
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="user_allow_play"><input type="checkbox" name="user_allow_play" id="user_allow_play" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","user_allow_play"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="36" title="Please enter a value.">&nbsp;Allow Play Requests</label>
-    </li> 
+    </li>
     <li> <label for="user_icon" class="sublabel" > Icon:</label>
   <input name="user_icon" type="file" id="user_icon" size="30" tabindex="37" title="Please enter a value.">
-    </li> 
-    <li> 
+    </li>
+    <li>
 <label class="checklabel" for="accountActive"><input type="checkbox" name="accountActive" id="accountActive" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("userprofileinsert","accountActive"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="41" title="Please enter a value.">&nbsp;Account is Active</label>
-    </li> 
+    </li>
 </ol>
 </fieldset>
-</div>   
-    
+</div>
+
 	<div class="full_width" >
 		<div class="center">
         <span class="buttonFieldGroup" >
@@ -482,9 +482,9 @@ WADFP_SetProgressToForm('Insert_Basic_Default', 'Insert_Basic_Default_ProgressMe
 </div>
 
 
-  		<?php include '../../../Templates/parts/container-bottom.php'; ?>   
+  		<?php include '../../../Templates/parts/container-bottom.php'; ?>
 <?php include '../../../Templates/parts/footer.php'; ?>
- 
+
 <script src="../../../webassist/forms/wa_servervalidation.js" type="text/javascript"></script>
 <script src="../../../webassist/forms/wa_clientvalidation.js" type="text/javascript"></script>
 <script src="../../../webassist/jq_validation/jquery.h5validate.js"></script>

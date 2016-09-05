@@ -24,6 +24,16 @@
          {"id": "tournamentAdminFilter", "url": "dmxDatabaseSources/tournamentAdminFilter.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
        );
   /* END dmxDataSet name "tournamentAdminFilter" */
+	/* dmxDataSet name "logged_in_player_full" */
+		 jQuery.dmxDataSet(
+		   {"id": "logged_in_player_full", "url": "dmxDatabaseSources/logged_in_player_full.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
+		 );
+	/* END dmxDataSet name "logged_in_player_full" */
+	/* dmxDataSet name "loggedInPlayer" */
+		 jQuery.dmxDataSet(
+		   {"id": "loggedInPlayer", "url": "dmxDatabaseSources/loggedinPlayer.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
+		 );
+	/* END dmxDataSet name "loggedInPlayer" */
 </script>
 
 </head>
@@ -61,7 +71,7 @@
         <li class="news"><a href="/News/" ></a></li>
         <li class="events"><a href="/events.php" ></a></li>
         <li class="logintab"><a href="/loginA.php" class="scrollDown"></a></li>
-        <li class="registertab"><a href="/registrationA.php" class="scrollDown"></a></li>  
+        <li class="registertab"><a href="/registrationA.php" class="scrollDown"></a></li>
     </ul>
 </nav>
             </div>
@@ -73,7 +83,7 @@
         <li class="news"><a href="/News/" ></a></li>
         <li class="events"><a href="/events.php" ></a></li>
         <li class="logintab"><a href="/loginA.php" class="scrollDown"></a></li>
-        <li class="registertab"><a href="/registrationA.php" class="scrollDown"></a></li>  
+        <li class="registertab"><a href="/registrationA.php" class="scrollDown"></a></li>
     </ul>
 </nav>
             </div>
@@ -111,10 +121,10 @@
                         <!-- Begin User Level Navigation --><!-- End User Level Navigation -->
 			<span style="text-align: center"><h2>ACCESS DENIED</h2></span></p>
             <p>
-            You have attempted access  content that you do not currently have permissions to.</p>
+            You have attempted access to content that you do not currently have permissions to.</p>
             <p>&nbsp;</p>
-            <p>If you feel this was in error, please contact us at help[at]battlecomm.com and let us know what you were trying to access at the time you got this message.</p>
-            <p> If you are follwing a link from outside battlecomm.com and you got this message you can attempt to<a href="loginA.php"> login</a> to access the content (if your Battlecomm account has the applicable permissions).</p>
+            <p>If you feel this was in error, please contact us at bryce (at) battlecomm.com and let us know what what happened.</p>
+            <p>If you are follwing a link from outside battlecomm.com and you got this message you can attempt to<a href="loginA.php"> login</a> to access the content (if your Battlecomm account has the correct permissions).</p>
 		</div>
                 </div>
                 <div class="frame_b row">
@@ -149,7 +159,7 @@
 <div class="copyright">© 2015 Battle-Comm.com. All Rights Reserved.
         <!--<a class="privacy_policy">Privacy Policy.</a>-->
         <br/>
-        <div class="privacy-policy" ><a href="#">Privacy Policy</a> ~ </div> 
+        <div class="privacy-policy" ><a href="#">Privacy Policy</a> ~ </div>
         <div class="copyright-statement" ><a href="#copyright-statement" class="open-popup-link" >Copyright Statement</a></div>
         <div id="copyright-statement" class="copyright-statement-popup mfp-hide">
 			<div class="col-lg-6">

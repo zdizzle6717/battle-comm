@@ -2,7 +2,7 @@
 
 function WA_Auth_GetComparisonsForRule($ruleName){
 	$comparisons = array();
-	
+
 	switch ($ruleName){
 		case "Bad return url from encryption email":
 			$comparisons[0] = array(TRUE, "".((isset($_GET['badURL']))?$_GET['badURL']:"")  ."", 2, "");
@@ -50,8 +50,8 @@ function WA_Auth_GetComparisonsForRule($ruleName){
 			$comparisons[0] = array(TRUE, "".((isset($_GET['success']))?$_GET['success']:"")  ."", 2, "");
 			break;
 		case "systemAdmin":
-			$comparisons[0] = array(TRUE, "".((isset($_SESSION['siteAdmin']))?$_SESSION['siteAdmin']:"")  ."", 1, "yes");
-			$comparisons[1] = array(FALSE, "".((isset($_SESSION['siteAdmin']))?$_SESSION['siteAdmin']:"")  ."", 1, "no");
+			$comparisons[0] = array(TRUE, "".((isset($_SESSION['systemAdmin']))?$_SESSION['systemAdmin']:"")  ."", 1, "yes");
+			$comparisons[1] = array(FALSE, "".((isset($_SESSION['systemAdmin']))?$_SESSION['systemAdmin']:"")  ."", 1, "no");
 			break;
 		case "tourneyAdmin":
 			$comparisons[0] = array(TRUE, "".((isset($_SESSION['tourneyAdmin']))?$_SESSION['tourneyAdmin']:"")  ."", 1, "yes");
@@ -70,15 +70,15 @@ function WA_Auth_GetComparisonsForRule($ruleName){
 			$comparisons[1] = array(TRUE, "".((isset($_SESSION['activation_state']))?$_SESSION['activation_state']:"")  ."", 1, "1");
 			break;
 	}
-	return $comparisons;	
+	return $comparisons;
 }
 
 
 function WA_Auth_GetGroup($groupName){
 	$group = Array();
-	
+
 	switch($groupName){
-	
+
 	}
 
 	return $group;
