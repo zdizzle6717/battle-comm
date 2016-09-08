@@ -1,6 +1,9 @@
 'use strict';
 
 let models = require('../models');
+let nodemailer = require('nodemailer');
+let env = require('../config/environmentVariables');
+let buildOrderSuccessEmail = require('../email-templates/orderSuccess');
 
 // Product Route Configs
 let productOrders = {
@@ -27,6 +30,14 @@ let productOrders = {
             });
     },
     create: function(request, reply) {
+		let transporter = nodemailer.createTransport({
+			service: 'Gmail',
+			auth: {
+				user: env.email.user,
+				pass: env.email.pass
+			}
+		});
+
         models.ProductOrder.create({
             status: request.payload.status,
             orderDetails: request.payload.orderDetails,
@@ -43,7 +54,21 @@ let productOrders = {
             shippingCountry: request.payload.shippingCountry
             })
             .then(function(response) {
-                reply(response).code(200);
+				let mailOptions = {
+				    from: env.email.user,
+				    to: response.customerEmail,
+				    subject: 'Email Example',
+				    html: buildOrderSuccessEmail(response) // You can choose to send an HTML body instead
+				};
+
+				transporter.sendMail(mailOptions, function(error, info){
+				    if(error){
+				        console.log(error);
+				        reply('Somthing went wrong');
+				    } else{
+				        reply(response).code(200);
+				    };
+				});
             });
     },
     update: function(request, reply) {
