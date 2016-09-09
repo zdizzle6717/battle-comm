@@ -170,7 +170,7 @@ if (ValidatedField('login','login'))  {
         <div class="lineGroup">
           <label for="Log_In_group_2_Password" class="sublabel" > Password:<span class="requiredIndicator">&nbsp;*</span></label>
           <input id="Log_In_group_2_Password" name="Log_In_group_2_Password" type="password" value="" class="formPasswordfield_Large" tabindex="2" title="Please enter a value." confirm="" required="true">
-          <a href="forgotpassword.php">forgot password?</a>
+          <a href="forgotpassword.php" class="right">forgot password?</a>
           <?php
 if (ValidatedField('login','login'))  {
   if ((strpos((",".ValidatedField("login","login").","), "," . "2" . ",") !== false || "2" == "") || (strpos((",".ValidatedField("login","login").","), "," . "3" . ",") !== false || "3" == ""))  {
