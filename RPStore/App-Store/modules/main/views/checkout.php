@@ -6,7 +6,7 @@
     <div class="shipping-info">
         <div>
             <form ng-submit="Checkout.completeOrder(Checkout.order)" class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="orderForm" novalidate>
-                <h2>Shipping Info</h2>
+                <h2 class="push-bottom-2x">Shipping Info</h2>
                 <div class="three_column_1">
 					<div class="form-group">
                     	<label for="customerFullName" class="sublabel required">Full Name:</label>

@@ -21,11 +21,12 @@ function buildTemplate(data) {
 		if (index === 0 || index % 2 === 0) {
 			productTable +=
 			`
-			<tr style="background-color: #dddddd;">
+			<tr style="background-color: #e8e8e8;">
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.id}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.name}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.quantity}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.price} RP</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.price}</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">(${product.quantity})</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${parseFloat(product.price) * parseFloat(product.quantity)} RP</td>
 			</tr>
 			`
 		} else {
@@ -34,15 +35,16 @@ function buildTemplate(data) {
 			<tr>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.id}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.name}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.quantity}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.price} RP</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.price}</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">(${product.quantity})</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${parseFloat(product.price) * parseFloat(product.quantity)} RP</td>
 			</tr>
 			`
 		}
 	});
 
 	return `
-		<div style="max-width:800px;position:relative;margin:20px auto;padding:10px;border:2px solid black;">
+		<div style="max-width:800px;position:relative;margin:20px auto;padding:15px;border:2px solid black;box-shadow:0 0 5px 2px lightgray;letter-spacing:1px;">
 			<div style="text-align:center;">
 				<h1 style="font-size:40px">Thank You For Your Order!</h1>
 				<h2 style="font-size:28px">...and thanks for being a part of Battle-Comm.</h2>
@@ -61,13 +63,18 @@ function buildTemplate(data) {
 			  <tr>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">ID</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Product Name</th>
-				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Quantity</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Reward Points</th>
+				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Quantity</th>
+				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Subtotal</th>
 			  </tr>
 			  ${productTable}
 			</table>
 
 			<h2 style="font-size:28px">Order Total: ${data.orderTotal} Reward Points</h2>
+			<br>
+			<div style="text-align:center;">
+				<img src="http://www.beta.battle-comm.net/images/BC_Web_Logo.png">
+			</div>
 		</div>
 	`
 }

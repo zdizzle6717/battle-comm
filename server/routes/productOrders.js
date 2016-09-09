@@ -54,18 +54,26 @@ let productOrders = {
             shippingCountry: request.payload.shippingCountry
             })
             .then(function(response) {
-				let mailOptions = {
+				let customerMailConfig = {
 				    from: env.email.user,
 				    to: response.customerEmail,
-				    subject: 'Email Example',
+				    subject: `Order Confirmation: Battle-Comm, Order #${response.id}`,
 				    html: buildOrderSuccessEmail(response) // You can choose to send an HTML body instead
 				};
 
-				transporter.sendMail(mailOptions, function(error, info){
+				let adminMailConfig = {
+				    from: env.email.user,
+				    to: env.email.user,
+				    subject: `New Order: #${response.id}, ${response.customerFullName}`,
+				    html: buildOrderSuccessEmail(response) // You can choose to send an HTML body instead
+				};
+
+				transporter.sendMail(customerMailConfig, function(error, info){
 				    if(error){
 				        console.log(error);
 				        reply('Somthing went wrong');
 				    } else{
+						transporter.sendMail(adminMailConfig);
 				        reply(response).code(200);
 				    };
 				});
