@@ -59,7 +59,7 @@ let userLogins = {
                 if (response) {
 					let sendEmail = false;
 					let previousUserData = {};
-					if (request.payload.user_points !== response.user_points) {
+					if (request.payload.user_points && request.payload.user_points !== response.user_points) {
 						sendEmail = true;
 						previousUserData = response;
 					}
