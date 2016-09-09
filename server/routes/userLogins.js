@@ -1,6 +1,15 @@
 'use strict';
 
+let env = require('../config/environmentVariables');
 let models = require('../models');
+let nodemailer = require('nodemailer');
+var generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
+let buildRPUpdateEmail = require('../email-templates/rpUpdate');
+// listen for token updates
+// you probably want to store these to a db
+generator.on('token', function(token){
+    console.log('New token for %s: %s', token.user, token.accessToken);
+});
 
 // Product Route Configs
 let userLogins = {
@@ -34,6 +43,13 @@ let userLogins = {
     //         });
     // },
     updatePartial: function(request, reply) {
+		let transporter = nodemailer.createTransport(({
+			service: 'Gmail',
+			auth: {
+				xoauth2: generator
+			}
+		}));
+
         models.user_login.find({
                 where: {
                     id: request.params.id
@@ -41,6 +57,12 @@ let userLogins = {
             })
             .then(function(response) {
                 if (response) {
+					let sendEmail = false;
+					let previousUserData = {};
+					if (request.payload.user_points !== response.user_points) {
+						sendEmail = true;
+						previousUserData = response;
+					}
                     response.updateAttributes({
                         // email: request.payload.email,
                         // password: request.payload.password,
@@ -90,7 +112,25 @@ let userLogins = {
                         // totalPoints: request.payload.totalPoints,
                         // accountActive: request.payload.accountActive
                     }).then(function(response) {
-                        reply(response).code(200);
+						if (sendEmail === true) {
+							let customerMailConfig = {
+							    from: env.email.user,
+							    to: response.email,
+							    subject: `Reward Point Update: New Total of ${response.user_points}`,
+							    html: buildRPUpdateEmail(response) // You can choose to send an HTML body instead
+							};
+
+							transporter.sendMail(customerMailConfig, function(error, info){
+							    if(error){
+							        console.log(error);
+							        reply('Somthing went wrong');
+							    } else{
+							        reply(response).code(200);
+							    };
+							});
+						} else{
+						    reply(response).code(200);
+						}
                     });
                 }
                 else {

@@ -46,7 +46,7 @@ function buildTemplate(data) {
 	return `
 		<div style="max-width:800px;position:relative;margin:20px auto;padding:15px;border:2px solid black;box-shadow:0 0 5px 2px lightgray;letter-spacing:1px;">
 			<div style="text-align:center;">
-				<h1 style="font-size:40px">Thank You For Your Order!</h1>
+				<h1 style="font-size:40px; font-size:40px; padding-bottom:5px; margin-top:15px;  border-bottom:1px solid #cacaca;">Thank You For Your Order!</h1>
 				<h2 style="font-size:28px">...and thanks for being a part of Battle-Comm.</h2>
 
 				<b>This is a confirmation for ${data.customerFullName} with order #${data.id}</b>
@@ -71,8 +71,8 @@ function buildTemplate(data) {
 			</table>
 
 			<h2 style="font-size:28px">Order Total: ${data.orderTotal} Reward Points</h2>
-			<br>
-			<div style="text-align:center;">
+
+			<div style="text-align:center; border-top:1px solid #cacaca; padding:20px 0 0;">
 				<img src="http://www.beta.battle-comm.net/images/BC_Web_Logo.png">
 			</div>
 		</div>
