@@ -1,9 +1,15 @@
 'use strict';
 
+let env = require('../config/environmentVariables');
 let models = require('../models');
 let nodemailer = require('nodemailer');
-let env = require('../config/environmentVariables');
+var generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
 let buildOrderSuccessEmail = require('../email-templates/orderSuccess');
+// listen for token updates
+// you probably want to store these to a db
+generator.on('token', function(token){
+    console.log('New token for %s: %s', token.user, token.accessToken);
+});
 
 // Product Route Configs
 let productOrders = {
@@ -30,13 +36,12 @@ let productOrders = {
             });
     },
     create: function(request, reply) {
-		let transporter = nodemailer.createTransport({
+		let transporter = nodemailer.createTransport(({
 			service: 'Gmail',
 			auth: {
-				user: env.email.user,
-				pass: env.email.pass
+				xoauth2: generator
 			}
-		});
+		}));
 
         models.ProductOrder.create({
             status: request.payload.status,
