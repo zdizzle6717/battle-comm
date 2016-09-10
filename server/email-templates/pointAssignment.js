@@ -5,7 +5,7 @@ function buildTemplate(data) {
 	let playerList = data.players;
 	let playerTable = '';
 	let totalEventRP = 0;
-	
+
 	playerList.forEach(function(player, index) {
 		if (index === 0 || index % 2 === 0) {
 			playerTable +=
@@ -50,7 +50,7 @@ function buildTemplate(data) {
 			  ${playerTable}
 			</table>
 
-			<h2 style="font-size:28px">Total Event RP: ${totalEventRP} Reward Points</h2>
+			<h2 style="font-size:28px;text-align:center;">Total Event RP: ${totalEventRP} Reward Points</h2>
 
 			<div style="text-align:center; border-top:1px solid #cacaca; padding:20px 0 0;">
 				<img src="http://www.beta.battle-comm.net/images/BC_Web_Logo.png">

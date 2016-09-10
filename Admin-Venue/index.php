@@ -39,7 +39,7 @@ include ($pathToFile. "/Templates/parts/header.php"); ?>
 		</div>
 		<div class="full_width">
 			<div class="four_column_1 text-center">
-				<button class="btn" ui-sref="assignPoints"><span class="fa fa-credit-card"></span> Assign Points</button>
+				<button class="btn" ui-sref="assignPoints"><span class="fa fa-list-alt"></span> Assign Points</button>
 			</div>
 		</div>
 		<div class="full_width view-container">

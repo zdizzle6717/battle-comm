@@ -5,9 +5,29 @@ function PointAssignmentController($rootScope, $state, VenueService) {
     let controller = this;
 
 	controller.submitPoints = submitPoints;
-	controller.players = [];
+	controller.addPlayer = addPlayer;
+	controller.removePlayer = removePlayer;
+	controller.players = [
+		{
+			fullName: '',
+			email: '',
+			pointsEarned: 0
+		}
+	];
 
     ///////////////////////////////////////////
+
+	function addPlayer() {
+		controller.players.push({
+			fullName: '',
+			email: '',
+			pointsEarned: 0
+		});
+	}
+
+	function removePlayer(index) {
+		controller.players.splice(index, 1);
+	}
 
 	function submitPoints() {
 		VenueService.assignPoints(controller.venueEvent, controller.players)
