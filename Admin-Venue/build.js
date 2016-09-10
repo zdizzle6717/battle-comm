@@ -6,7 +6,7 @@ const browserify = require("browserify");
 const stringify = require("stringify");
 
 /* Compile JS for News Admin */
-browserify("App-Admin/app.js")
+browserify("App-Venue/app.js")
 .transform(stringify, {
       appliesTo: { includeExtensions: ['.html', '.php'] }
     })

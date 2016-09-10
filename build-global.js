@@ -60,6 +60,19 @@ browserify("Admin/App-Admin/app.js")
     .bundle()
     .pipe(fs.createWriteStream("Admin/js/app.js"));
 
+/* Compile JS for Site Admin */
+browserify("Admin-Venue/Venue-Admin/app.js")
+    .transform(stringify, {
+        appliesTo: {
+            includeExtensions: ['.html', '.php']
+        }
+    })
+    .transform("babelify", {
+        presets: ["es2015"]
+    })
+    .bundle()
+    .pipe(fs.createWriteStream("Admin-Venue/js/app.js"));
+
 // Compile global SCSS
 sass.render({
     file: 'scss/app.scss',

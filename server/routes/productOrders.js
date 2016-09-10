@@ -8,7 +8,6 @@ let buildOrderSuccessEmail = require('../email-templates/orderSuccess');
 // listen for token updates
 // you probably want to store these to a db
 generator.on('token', function(token){
-    console.log('New token for %s: %s', token.user, token.accessToken);
 });
 
 // Product Route Configs
