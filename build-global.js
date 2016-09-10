@@ -61,7 +61,7 @@ browserify("Admin/App-Admin/app.js")
     .pipe(fs.createWriteStream("Admin/js/app.js"));
 
 /* Compile JS for Site Admin */
-browserify("Admin-Venue/Venue-Admin/app.js")
+browserify("Admin-Venue/App-Venue/app.js")
     .transform(stringify, {
         appliesTo: {
             includeExtensions: ['.html', '.php']

@@ -11,8 +11,7 @@ let app = angular.module(appName, [
     require('./modules/main'),
     require('./modules/rpstore'),
     require('./modules/news'),
-    require('./modules/players'),
-    require('./modules/venue'),
+    require('./modules/players')
 ]);
 
 // Constants
