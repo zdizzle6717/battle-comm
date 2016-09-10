@@ -1,3 +1,12 @@
+<?php require_once( "../webassist/security_assist/helper_php.php" ); ?>
+<?php
+if (!WA_Auth_RulePasses("verifiedUser")){
+	WA_Auth_RestrictAccess("../loginA.php");
+}
+if (!WA_Auth_RulePasses("newsAdmin")){
+	WA_Auth_RestrictAccess("../accessdenied.php");
+}
+?>
 <!doctype html>
 <html>
 <head>
