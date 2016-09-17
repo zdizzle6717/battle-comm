@@ -1,9 +1,0 @@
-<wa_field_group name="Single field">
-	<wa_field_line>
-		<wa_field_column>
-			<wa_field_set_validation>Please enter a value</wa_field_set_validation>
-			<wa_field_reference src="Text_Medium.xml" label="Same as field" validation="{ required: true, type: 'none', format: null, minChars: null, maxChars: null, minValue: null, maxValue: null }" serverValidation="required" spryValidation="none" continueLine="false" >
-		</wa_field_reference>
-		</wa_field_column>
-	</wa_field_line>
-</wa_field_group>

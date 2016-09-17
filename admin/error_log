@@ -1,6 +1,0 @@
-[29-Oct-2015 17:31:25 America/Chicago] PHP Warning:  include(Templates/parts/container-bottom.php): failed to open stream: No such file or directory in /home4/hyberion/public_html/testBC/admin/index.php on line 145
-[29-Oct-2015 17:31:25 America/Chicago] PHP Warning:  include(Templates/parts/container-bottom.php): failed to open stream: No such file or directory in /home4/hyberion/public_html/testBC/admin/index.php on line 145
-[29-Oct-2015 17:31:25 America/Chicago] PHP Warning:  include(): Failed opening 'Templates/parts/container-bottom.php' for inclusion (include_path='.:/opt/php54/lib/php') in /home4/hyberion/public_html/testBC/admin/index.php on line 145
-[29-Oct-2015 17:31:25 America/Chicago] PHP Warning:  include(Templates/parts/footer.php): failed to open stream: No such file or directory in /home4/hyberion/public_html/testBC/admin/index.php on line 146
-[29-Oct-2015 17:31:25 America/Chicago] PHP Warning:  include(Templates/parts/footer.php): failed to open stream: No such file or directory in /home4/hyberion/public_html/testBC/admin/index.php on line 146
-[29-Oct-2015 17:31:25 America/Chicago] PHP Warning:  include(): Failed opening 'Templates/parts/footer.php' for inclusion (include_path='.:/opt/php54/lib/php') in /home4/hyberion/public_html/testBC/admin/index.php on line 146

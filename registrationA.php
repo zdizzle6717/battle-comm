@@ -125,11 +125,11 @@ if (ValidatedField('registration','registration'))  {
             <span class="fieldsetDescription"> Required = * </span>
       <fieldset class="Basic_Default" id="Registration">
      <div class="two_column_1">
-        <div class="lineGroup">
+        <div class="form-group">
           <label for="Registration_group_4_First_Name" class="sublabel" > First Name:</label>
           <input id="Registration_group_4_First_Name" name="Registration_group_4_First_Name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_4_First_Name"):"")); ?>" class="formTextfield_Medium" tabindex="1" title="Please enter a value.">
         </div>
-        <div class="lineGroup">
+        <div class="form-group">
           <label for="Registration_group_Email_Address" class="sublabel" > Email Address:<span class="requiredIndicator">&nbsp;*</span></label>
           <input id="Registration_group_Email_Address" name="Registration_group_Email_Address" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_Email_Address"):"")); ?>" class="formTextfield_Large" tabindex="3" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="Please enter a value." required="true">
           <?php
@@ -143,7 +143,7 @@ if (ValidatedField('registration','registration'))  {
   }
 }?>
         </div>
-        <div class="lineGroup">
+        <div class="form-group">
           <label for="Registration_group_2_Password" class="sublabel" > Password:<span class="requiredIndicator">&nbsp;*</span></label>
           <input id="Registration_group_2_Password" name="Registration_group_2_Password" type="password" value="" class="formPasswordfield_Large" tabindex="3" title="Password strength requirement not met. @@strengthmessage@@" confirm="" required="true">
           <?php
@@ -157,7 +157,7 @@ if (ValidatedField('registration','registration'))  {
   }
 }?>
         </div>
-        <div class="lineGroup">
+        <div class="form-group">
           <label for="Registration_group_3_Confirm" class="sublabel" > Confirm:<span class="requiredIndicator">&nbsp;*</span></label>
           <input id="Registration_group_3_Confirm" name="Registration_group_3_Confirm" type="password" value="" class="formPasswordfield_Large" tabindex="4" title="A value is required." confirm="Registration_group_2_Password" required="true">
           <?php
@@ -171,7 +171,7 @@ if (ValidatedField('registration','registration'))  {
   }
 }?>
         </div>
-		<div class="lineGroup">
+		<div class="form-group">
           <label for="Registration_group_6_Handle_Nickname" class="sublabel" > Handle/Nickname:<span class="requiredIndicator">&nbsp;*</span></label>
           <input id="Registration_group_6_Handle_Nickname" name="Registration_group_6_Handle_Nickname" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_6_Handle_Nickname"):"")); ?>" class="formTextfield_Medium" tabindex="5" title="Please enter a value." required="true">
           <?php
@@ -187,13 +187,11 @@ if (ValidatedField('registration','registration'))  {
         </div>
     </div>
     <div class="two_column_1">
-        <div class="lineGroup">
+        <div class="form-group">
           <label for="Registration_group_5_Last_Name" class="sublabel" > Last Name:</label>
           <input id="Registration_group_5_Last_Name" name="Registration_group_5_Last_Name" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Registration_group_5_Last_Name"):"")); ?>" class="formTextfield_Medium" tabindex="2" title="Please enter a value.">
         </div>
-        <div class="lineGroup">
-          <label for="Security_Code" class="sublabel" >&nbsp;</label>
-          <label for="Security_Answer_2" class="sublabel" >&nbsp;</label>
+        <div class="form-group push-top-2x">
           <img src="webassist/captcha/wavt_captchasecurityimages.php?field=Security_Code&amp;noisefreq=15&amp;noisecolor=060606&amp;gridcolor=080808&amp;font=fonts/MOM_T___.TTF&amp;textcolor=040404" alt="Security Code" class="Captcha">
           <div class="fullColumnGroup" style="clear:left;">
             <label for="Security_Code" class="sublabel" > Security code:<span class="requiredIndicator">&nbsp;*</span></label>
@@ -210,7 +208,7 @@ if (ValidatedField('registration','registration'))  {
 }?>
           </div>
         </div>
-        <div class="lineGroup">
+        <div class="form-group">
           <label for="Security_Answer_2" class="sublabel" >&nbsp;</label>
           <span class="precedingText">
             <?php require_once("webassist/captcha/wavt_captchasecurityquestion.php"); ?>
@@ -231,7 +229,7 @@ if (ValidatedField('registration','registration'))  {
           </div>
         </div>
         </div>
-        <div class="center float_left">
+        <div class="center float_left push-top">
         <span class="buttonFieldGroup" >
           <input id="Hidden_Field" name="Hidden_Field" type="hidden" value="<?php echo((isset($_GET["invalid"])?ValidatedField("registration","Hidden_Field"):"")); ?>">
           <input class="formButton" name="Registration_submit" type="submit" id="Registration_submit" value="Register"  onClick="clearAllServerErrors('Registration_Basic_Default')" tabindex="9">

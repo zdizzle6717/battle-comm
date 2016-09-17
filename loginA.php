@@ -151,10 +151,10 @@ if((((isset($_SESSION["SecurityAssist_id"]) && $_SESSION["SecurityAssist_id"] !=
 <div id="LogInContainer" class="WAATK">
   <div id="LogIn_Basic_Default_ProgressWrapper">
     <form class="formoid-default-skyblue side_by_side" id="LogIn_Basic_Default" style="max-width:760px" name="LogIn_Basic_Default" method="post" action="<?php echo (htmlentities($_SERVER["PHP_SELF"], ENT_QUOTES)); ?>">
-        <h1 class="headerseo" style="width: calc(100% - 12px);font-family: Titillium Semibold;color:black;font-size: 1.6em;font-weight: 400;padding: 5px;margin: .2em 0;box-shadow: 0 0 2px 1px #929292;display: table;line-height: 1em;border: 1px solid #177F82;background: rgba(37,100,119,0.42);background:rgba(37, 100, 119, 0.6);">Login</h1>
-        <span class="fieldsetDescription"> Required = * </span>
-        <div class="lineGroup">
-          <label for="Log_In_group_Email_Address" class="sublabel" > Email Address:<span class="requiredIndicator">&nbsp;*</span></label>
+        <h1 class="headerseo push-bottom-2x" style="width: calc(100% - 12px);font-family: Titillium Semibold;color:black;font-size: 1.6em;font-weight: 400;padding: 5px;margin: .2em 0;box-shadow: 0 0 2px 1px #929292;display: table;line-height: 1em;border: 1px solid #177F82;background: rgba(37,100,119,0.42);background:rgba(37, 100, 119, 0.6);">Login</h1>
+
+		<div class="form-group collapse">
+          <label for="Log_In_group_Email_Address" class="sublabel required" > Email Address:</label>
           <input id="Log_In_group_Email_Address" name="Log_In_group_Email_Address" type="text" value="<?php echo((isset($_GET["invalid"])?ValidatedField("login","Log_In_group_Email_Address"):"".((isset($_COOKIE["RememberMeUN"]))?$_COOKIE["RememberMeUN"]:"")  ."")); ?>" class="formTextfield_Large" tabindex="1" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="Please enter a value." required="true">
           <?php
 if (ValidatedField('login','login'))  {
@@ -167,8 +167,8 @@ if (ValidatedField('login','login'))  {
   }
 }?>
         </div>
-        <div class="lineGroup">
-          <label for="Log_In_group_2_Password" class="sublabel" > Password:<span class="requiredIndicator">&nbsp;*</span></label>
+        <div class="form-group collapse">
+          <label for="Log_In_group_2_Password" class="sublabel required"> Password:</label>
           <input id="Log_In_group_2_Password" name="Log_In_group_2_Password" type="password" value="" class="formPasswordfield_Large" tabindex="2" title="Please enter a value." confirm="" required="true">
           <a href="forgotpassword.php" class="right">forgot password?</a>
           <?php
@@ -192,7 +192,7 @@ if (ValidatedField('login','login'))  {
             <input type="checkbox" name="Log_In_group_4_Log_me_in_automatically" id="Log_In_group_4_Log_me_in_automatically" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("login","Log_In_group_4_Log_me_in_automatically"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="4" title="Please enter a value">
             &nbsp;Log me in automatically</label>
         </div>
-        <span class="buttonFieldGroup" >
+        <span class="full_width text-right">
           <input class="" name="LogIn_submit" type="submit" id="LogIn_submit" value="Log In"  onClick="clearAllServerErrors('LogIn_Basic_Default')" tabindex="5">
         </span>
     </form>

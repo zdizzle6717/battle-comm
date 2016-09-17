@@ -49,48 +49,48 @@
                         <div class="frame_l_bar col"></div>
                         <div class="frame_r_bar col"></div>
                         <div class="frame_center col">
-                            <div class="full_width">
+                            <!-- <div class="full_width">
                             	<h2 style="margin:35px 0 10px 0;">My Game Schedule</h2>
                                 <ul class="card_bullets">
-                                	<li><a href="tool/tourneyRegistration/index.php">Currently Registered</a></li>
-                                	<li><a href="tool/tourneyRegistration/index.php">Past Event Listing</a></li>
-                                    <li><a href="tool/tourneyRegistration/index.php">Ranking</a></li>
+                                	<li><a href="News/#/">Currently Registered</a></li>
+                                	<li><a href="News/#/">Past Event Listing</a></li>
+                                    <li><a href="News/#/">Ranking</a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         	<div class="full_width">
                             	<h2 style="margin:15px 0 10px 0;">Tournaments</h2>
                                 <div class="two_column_1">
                                 	<h3>Local</h3>
-                                	<a href="tool/tourneyRegistration/index.php"><img src="media/local-tournament.jpg" class="fill" alt=""/></a>
+                                	<a href="News/#/"><img src="media/local-tournament.jpg" class="fill" alt=""/></a>
                                 </div>
                                 <div class="two_column_1">
                                 	<h3>State</h3>
-                                    <a href="tool/tourneyRegistration/index.php"><img src="media/state-tournament.jpg" class="fill" alt=""/></a>
+                                    <a href="News/#/"><img src="media/state-tournament.jpg" class="fill" alt=""/></a>
                                 </div>
 							</div>
 							<div class="full_width">
                                 <div class="two_column_1">
                                 	<h3>National</h3>
-                                    <a href="tool/tourneyRegistration/index.php"><img src="media/national-tournament.jpg" class="fill" alt=""/></a>
+                                    <a href="News/#/"><img src="media/national-tournament.jpg" class="fill" alt=""/></a>
                                 </div>
                                 <div class="two_column_1">
                                 	<h3>Worldwide</h3>
-                                    <a href="tool/tourneyRegistration/index.php"><img src="media/worldwide-tournament.jpg" class="fill" alt=""/></a>
+                                    <a href="News/#/"><img src="media/worldwide-tournament.jpg" class="fill" alt=""/></a>
                                 </div>
             				</div>
                             <div class="full_width">
                             	<h2 style="margin:20px 0 10px 0;">Locations</h2>
                                 <div class="three_column_1">
                                 	<h3>Friendly Local Gaming Stores (FLGS)</h3>
-                                    <a href="tool/tourneyRegistration/index.php"><img src="media/flgs-locations.jpg" class="fill" alt=""/></a>
+                                    <a href="News/#/"><img src="media/flgs-locations.jpg" class="fill" alt=""/></a>
                                 </div>
                                 <div class="three_column_1">
                                 	<h3>Venues</h3>
-                                    <a href="tool/tourneyRegistration/index.php"><img src="media/venue-locations.jpg" class="fill" alt=""/></a>
+                                    <a href="News/#/"><img src="media/venue-locations.jpg" class="fill" alt=""/></a>
                                 </div>
                                 <div class="three_column_1">
                                 	<h3>Independent</h3>
-                                    <a href="tool/tourneyRegistration/index.php"><img src="media/independent-locations.jpg" class="fill" alt=""/></a>
+                                    <a href="News/#/"><img src="media/independent-locations.jpg" class="fill" alt=""/></a>
                                 </div>
             				</div>
 	<?php include 'Templates/parts/container-bottom.php'; ?>
