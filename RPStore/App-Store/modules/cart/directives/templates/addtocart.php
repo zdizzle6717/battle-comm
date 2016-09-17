@@ -6,7 +6,7 @@
     <div>
         <span ng-show="quantityMax">
             <select name="quantity" id="quantity" ng-model="q"
-                    ng-options=" v for v in qtyOpt"></select>
+                    ng-options=" v for v in qtyOpt" ng-change="ngCart.addItem(id, name, price, q, data)"></select>
         </span>
         <button ng-show="!inCart()" class="btn btn-addtocart" ng-click="ngCart.addItem(id, name, price, q, data)" >Add to Cart</button>
         <button ng-show="inCart()" ng-click="ngCart.removeItemById(id)" class="btn btn-remove">Remove</button>

@@ -1,7 +1,7 @@
 <div class="two_column_1">
   <h2 class="text-center">Player Info</h2>
-		<p class="user-bio" ng-if="Profile.currentUser.user_bio">{{Profile.currentUser.user_bio}}</p>
-		<p class="user-bio" ng-if="!Profile.currentUser.user_bio">This player has not yet updaed their bio.</p>
+		<h3 class="user-bio" ng-if="Profile.currentUser.user_bio">{{Profile.currentUser.user_bio}}</h3>
+		<h3 class="user-bio" ng-if="!Profile.currentUser.user_bio">This player has not yet updaed their bio.</h3>
 
 		<div class="sociallinks push-bottom" style="text-align:center;">
 			<a ng-href="{{Profile.currentUser.user_facebook}}" class="push-right push-left" target="_blank" ng-if="Profile.currentUser.user_facebook"><span class="fa fa-facebook" style="font-size: 38px;"></span></a>
@@ -18,45 +18,15 @@
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.user_handle}}
 	</h1>
 	<div class="text-center">
-		<ul class="inline">
-			<li class="item"><a class="" ui-sref="profile" target="_self">Send a Message (pending)</a></li>
-			<li><a ui-sref="profile">Create Match (pending)</a></li>
-			<li><a ui-sref="profile">Add as Friend (pending)</a></li>
-		</ul>
+			<p><a class="" ui-sref="profile" target="_self">Send a Message (pending)</a></p>
+			<p><a ui-sref="profile">Create Match (pending)</a></p>
+			<p><a ui-sref="profile">Add as Friend (pending)</a></p>
 	</div>
 </div>
 <div class="full_width">
-	<div class="two_column_1">
-		   <h2 style="text-align:center;">Info (demo content)</h2>
-			<ul class="list">
-			  <li class="">Available to Play: <b>&nbsp;Yes</b></li>
-			  <li class="">Local to you: <b>&nbsp;Yes</b> (Approx. 10 mi)</li>
-			  <li class="">Local Store: <a ui-sref="profile" target="_self" class="anchor3">DryRox Games and Artisinal Cheeses</a></li>
-			  <li class="">Games: &nbsp;Chess, Warhammer 40K, Magic.</li>
-			</ul>
-	</div>
-	<div class="two_column_1">
-		<div class="recent_articles">
-		  <h2 style="text-align:center;">Recent Activity (demo content)</h2>
-		  <ul>
-			<li> <a ui-sref="profile">Played [Game] with [Username] and [Username]</a>
-			  <div class="separator"></div>
-			</li>
-			<li> <a ui-sref="profile">Played [Game] with [Username]</a>
-			  <div class="separator"></div>
-			</li>
-			<li> <a ui-sref="profile">Signed up for [Tournament]</a>
-			  <div class="separator"></div>
-			</li>
-			<li> <a ui-sref="profile">Attended [Event] at [FLGS]</a>
-			  <div class="separator"></div>
-			</li>
-		  </ul>
-		</div>
-	</div>
+	<h2>Achievements</h2>
+	<h3 class="text-center">This player has not yet been awarded any achievements.</h3>
 </div>
-<br/>
-<br/>
 <div class="full_width">
 	<h2>Photostream</h2>
 	<div class="center thumbnail">

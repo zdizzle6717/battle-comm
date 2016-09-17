@@ -17,10 +17,10 @@
         <tbody>
             <!--START REPEAT-->
             <tr ng-repeat="item in ngCart.getCart().items track by $index">
-                <td data-title=""><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
+                <td data-title=""><span ng-click="ngCart.removeItemById(item.getId())" class="fa fa-remove"></span></td>
                 <td data-title="Product Name">{{ item.getName() }}</td>
-                <td data-title="Quantity"><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span> &nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
-                    <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span></td>
+                <td data-title="Quantity"><span class="fa fa-minus" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span> &nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
+                    <span class="fa fa-plus" ng-click="item.setQuantity(1, true)"></span></td>
                 <td data-title="Amount">{{ item.getPrice() | currency : 'RP ' }}</td>
                 <td data-title="Total">{{ item.getTotal() | currency : 'RP ' }}</td>
             </tr>
@@ -55,7 +55,7 @@
         cursor: pointer;
     }
 
-    .ngCart.cart .glyphicon.disabled {
+    .ngCart.cart .fa.disabled {
         color: #aaa;
     }
 </style>

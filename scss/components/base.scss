@@ -77,6 +77,28 @@ h5 {
 	padding: 5px;
 }
 
+a {
+	color: $darkblue;
+	font-weight: bold;
+	text-shadow: 1px 1px rgba(68, 68, 68, 0.25);
+
+	&:hover {
+		text-shadow: 1px 1px 1px rgba(68, 68, 68, 0.5);
+	}
+
+	&:active {
+		text-shadow: none;
+	}
+}
+
+li {
+	line-height: 1.35rem;
+
+	a {
+		color: $darkblue;
+	}
+}
+
 .headerseo {
 	white-space: nowrap;
 	width: 98%;
@@ -88,6 +110,8 @@ h5 {
 }
 
 p {
+	width: 100%;
+	float: left;
 	font-size: 1rem;
 	margin: 10px 1%;
 	display: block;
@@ -98,17 +122,6 @@ p {
 p.indent:before {
 	content: 'eeeee';
 	color: rgba(255, 255, 255, 0);
-}
-
-a:link,
-a:visited {
-	color: rgb(239, 214, 79);
-	text-decoration: none;
-}
-
-a:hover {
-	color: rgb(140, 239, 223);
-	text-decoration: none;
 }
 
 ol {
@@ -182,82 +195,6 @@ input {
 #search {
 	width: 92%;
 	height: 21px;
-}
-
-a {
-	&:link,
-	&:visited {
-		color: #B70F16;
-		text-decoration: underline;
-	}
-
-	&:active,
-	&:hover {
-		color: rgb(140, 239, 223);
-		text-decoration: none;
-	}
-}
-
-
-
-span a:link {
-	color: #ffffff;
-	text-decoration: none;
-}
-
-a:active,
-span a:hover {
-	color: rgb(140, 239, 223);
-	text-decoration: none;
-}
-
-a:visited,
-div a:link {
-	color: white;
-	text-decoration: none;
-}
-
-a:active,
-div a:hover {
-	color: rgb(140, 239, 223);
-	text-decoration: none;
-}
-
-a:visited,
-p a:link {
-	color: white;
-	text-decoration: none;
-}
-
-a:active,
-p a:hover {
-	color: rgb(140, 239, 223);
-	text-decoration: none;
-}
-
-.frame_center.col a:link,
-.frame_center.col a:visited {
-	color: #177F82;
-	text-decoration: underline;
-	text-shadow: 1px 1px black;
-}
-
-.frame_center.col a:hover {
-	color: white;
-	text-decoration: underline;
-	text-shadow: 1px 1px 6px black;
-}
-
-a:link.standard,
-a:visited.standard {
-	color: rgb(239, 214, 79);
-	text-decoration: none;
-}
-
-a:active.standard,
-a:hover.standard {
-	color: rgb(140, 239, 223);
-	text-decoration: none;
 }
 
 .vid {
@@ -610,29 +547,6 @@ a.menu-link {
 	margin: -10px auto 0;
 }
 
-.mids a:link,
-.mids a:visited {
-	color: white;
-	text-decoration: none;
-	text-shadow: 1px 2px black;
-}
-
-.mids a:hover {
-	color: #2B89A3;
-	text-shadow: 1px 1px black;
-}
-
-.mids a:active {
-	color: #2B89A3;
-	text-shadow: none;
-}
-
-.mids td a:link,
-.mids td a:visited {
-	color: black;
-	text-decoration: underline;
-	text-shadow: none;
-}
 /* FRAME HOLDERS */
 .full_content.col {
 	width: 100%;
