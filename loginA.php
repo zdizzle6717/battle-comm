@@ -182,12 +182,12 @@ if (ValidatedField('login','login'))  {
   }
 }?>
         </div>
-        <div class="lineGroup">
+        <div class="form-group collapse">
           <label class="checklabel" for="Log_In_group_3_Remember_my_information">
             <input type="checkbox" name="Log_In_group_3_Remember_my_information" id="Log_In_group_3_Remember_my_information" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("login","Log_In_group_3_Remember_my_information"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="3" title="Please enter a value">
             &nbsp;Remember my information</label>
         </div>
-        <div class="lineGroup">
+        <div class="form-group collapse">
           <label class="checklabel" for="Log_In_group_4_Log_me_in_automatically">
             <input type="checkbox" name="Log_In_group_4_Log_me_in_automatically" id="Log_In_group_4_Log_me_in_automatically" value="1" class="formCheckboxField_Standard" <?php if (!(strcmp((isset($_GET["invalid"])?ValidatedField("login","Log_In_group_4_Log_me_in_automatically"):""),"1"))) {echo "checked=\"checked\"";} ?> tabindex="4" title="Please enter a value">
             &nbsp;Log me in automatically</label>
