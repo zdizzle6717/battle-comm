@@ -29,7 +29,7 @@
 		<hr>
 		<h3>Players:</h3>
 		<fieldset ng-repeat="player in Points.players track by $index">
-			<legend>Player 1</legend>
+			<legend>Player {{$index + 1}}</legend>
 			<div class="form-group">
 				<div class="three_column_1">
 					<label for="fullName" class="sublabel required">Full Name:</label>
