@@ -17,9 +17,8 @@
                 </div>
             </div>
             <?php include ($pathToFile. "/Templates/includes/footer.php"); ?>
-            <a href="#" id="backtotop" style="display: block;">
-                <span class="fa fa-angle-up"></span>
-                <span class="back-to-top">Top</span>
+            <a href="#" id="backtotop">
+                <span class="fa fa-arrow-circle-up"></span>
             </a>
         </div>
     </body>
