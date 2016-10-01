@@ -24,7 +24,7 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
 			PlayerService.getPlayer(AuthService.currentUser.id)
 			.then(function(response) {
 				controller.currentUser = response;
-				controller.currentUser.user_icon = controller.currentUser.user_icon ? controller.currentUser.user_icon : 'profile_image_default.png';
+				controller.currentUser.icon = controller.currentUser.icon ? controller.currentUser.icon : 'profile_image_default.png';
 			}).catch(function() {
 				let config = {
 					type: 'error',
@@ -51,19 +51,22 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
 			toggleEdit(section);
 		}
 		let newData = {
-			user_bio: data.user_bio,
-			user_icon: data.user_icon,
-			user_facebook: data.user_facebook,
-			user_twitter: data.user_twitter,
-			user_instagram: data.user_instagram,
-			user_twitch: data.user_twitch,
-			user_website: data.user_website,
-			user_main_phone: data.user_main_phone,
-			user_street_address: data.user_street_address,
-			user_apt_suite: data.user_apt_suite,
-			user_city: data.user_city,
-			user_state: data.user_state,
-			user_zip: data.user_zip
+			bio: data.bio,
+			icon: data.icon,
+			facebook: data.facebook,
+			twitter: data.twitter,
+			instagram: data.instagram,
+			googlePlus: data.googlePlus,
+			twitch: data.twitch,
+			website: data.website,
+			firstName: data.firstName,
+			lastName: data.lastName,
+			mainPhone: data.mainPhone,
+			streetAddress: data.streetAddress,
+			aptSuite: data.aptSuite,
+			city: data.city,
+			state: data.state,
+			zip: data.zip
 		}
         PlayerService.updatePlayer(controller.currentUser.id, newData)
         .then(function(response) {

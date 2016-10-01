@@ -68,6 +68,8 @@ let users = {
 		res({
 			id_token: createToken(req.pre.user),
 			id: req.pre.user.id,
+			firstName: req.pre.user.firstName,
+			lastName: req.pre.user.lastName,
 			subscriber: req.pre.user.subscriber,
 			tourneyAdmin: req.pre.user.tourneyAdmin,
 			eventAdmin: req.pre.user.eventAdmin,
@@ -112,7 +114,7 @@ let users = {
                         systemAdmin: request.payload.systemAdmin,
                         username: request.payload.username,
                         club: request.payload.club,
-                        main_phone: request.payload.main_phone,
+                        mainPhone: request.payload.mainPhone,
                         mobilePhone: request.payload.mobilePhone,
                         streetAddress: request.payload.streetAddress,
                         aptSuite: request.payload.aptSuite,

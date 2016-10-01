@@ -28,7 +28,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
           template: require('./views/productList.php'),
           controller: 'ProductListController as Product'
         })
-        .state('product', {
+        .state('productEdit', {
           url: "/admin/store/products/:id",
           template: require('./views/product.php'),
           controller: 'ProductController as Product'

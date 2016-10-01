@@ -108,7 +108,7 @@ module.exports = [
                 },
                 payload: {
 					email: Joi.optional(),
-                    rewardPoints: Joi.number().required(),
+                    rewardPoints: Joi.number(),
                     icon: Joi.optional(),
 					firstName: Joi.optional(),
 					lastName: Joi.optional(),

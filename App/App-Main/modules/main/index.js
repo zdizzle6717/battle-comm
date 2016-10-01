@@ -41,6 +41,10 @@ mod.config(require('./config'));
 // Routes
 mod.constant('API_ROUTES', require('../../constants/apiRoutes'));
 
+// Directives
+mod.directive('userNav', require('./directives/userNav'));
+mod.directive('accountNav', require('./directives/accountNav'));
+
 
 // Controllers
 

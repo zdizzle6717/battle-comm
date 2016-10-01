@@ -17,10 +17,29 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script>
 </head>
-<?php $pathToFile = $_SERVER['DOCUMENT_ROOT'];
-include ($pathToFile. "/Templates/parts/header.php"); ?>
+<?php $pathToFile = $_SERVER['DOCUMENT_ROOT']; ?>
+<body>
+    <!-- HEADER -->
+    <div class="nav placeholder center" id="returnhome"></div>
+    <div class="nav row center">
+		<div account-nav></div>
+        <div class="mobilenav">
+            <?php include ($pathToFile. "/Templates/includes/top-navigation-mobile.php"); ?>
+        </div>
+        <div class="uppernav">
+            <?php include ($pathToFile. "/Templates/includes/top-navigation.php"); ?>
+        </div>
+    </div>
+    <div class="site_bg"></div>
+    <div class="header row center">
+        <div class="logo"><a href="/"><img src="/images/BC_Web_Logo.png" alt="BattleComm"></a></div>
+        <div class="mobile-logo"><a href="/"><img src="/images/BC_Web_Logo_mobile.png" alt="BattleComm"></a>
+            <?php include ($pathToFile. "/Templates/includes/mobile-buttons.php"); ?>
+        </div>
+    </div>
 	<?php include ($pathToFile. "/Templates/parts/container-top.php"); ?>
 		<div class="full_width view-container">
+			<div user-nav></div>
 			<div ui-view class="view-frame"></div>
 			<div loading></div>
 			<div notification></div>

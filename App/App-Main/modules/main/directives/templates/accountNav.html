@@ -1,0 +1,12 @@
+<div class="account-nav" ng-class="{active: showNav}">
+	<img ng-src="/images/profile_image_small.png" ng-click="toggleNav()" width="37" alt=""/>
+    <div class="nav" ng-if="showNav">
+    	<div class="account-name">{{user.firstName}} {{user.lastName}}</div>
+        <ul class="nav-list no_bullets">
+            <li><a ui-sref="dashboard({'playerId': user.id})"><span class="fa fa-user"></span> My Dashboard</a></li>
+            <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-user"></span> My Public Profile</a></li>
+            <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-envelope"></span> Messages</a></li>
+            <li><a ng-click="logout()"><span class="fa fa-sign-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</div>

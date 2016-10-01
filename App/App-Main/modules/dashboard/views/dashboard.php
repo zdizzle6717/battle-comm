@@ -34,6 +34,7 @@
 			<li class="">Twitter:<a href="{{Dashboard.currentUser.twitter}}" target="_blank" style="display:inline;text-decoration:initial;"> {{Dashboard.currentUser.twitter}}</a></li>
 			<li class="">Instagram: <a href="{{Dashboard.currentUser.instagram}}" target="_blank" style="display:inline;text-decoration:initial;">{{Dashboard.currentUser.instagram}}</a></li>
 			<li class="">Twitch: <a href="{{Dashboard.currentUser.twitch}}" target="_blank" style="display:inline;text-decoration:initial;">{{Dashboard.currentUser.twitch}}</a></li>
+			<li class="">Google +: <a href="{{Dashboard.currentUser.googlePlus}}" target="_blank" style="display:inline;text-decoration:initial;">{{Dashboard.currentUser.googlePlus}}</a></li>
 			<li class="">Custom Url: <a href="{{Dashboard.currentUser.website}}" target="_blank" style="display:inline;text-decoration:initial;">{{Dashboard.currentUser.website}}</a></li>
 		</ul>
 		<form name="linksForm" ng-show="!Dashboard.readOnly.links" novalidate>
@@ -52,6 +53,10 @@
 			<div class="form-group inline">
 				<label class="title bold">Twitch:</label>
 				<input name="twitch" type="url" id="twitch" placeholder="http://..." ng-model="Dashboard.currentUser.twitch" />
+			</div>
+			<div class="form-group inline">
+				<label class="title bold">Google +:</label>
+				<input name="googlePlus" type="url" id="googlePlus" placeholder="http://..." ng-model="Dashboard.currentUser.googlePlus" />
 			</div>
 			<div class="form-group inline">
 				<label class="title bold">Website:</label>
@@ -74,7 +79,7 @@
 	<h2 class="no_shadow text-center" ng-if="!Dashboard.currentUser.firstName">Anonymous</h2>
 	<h2 class="no_shadow text-center" ng-if="Dashboard.currentUser.firstName">{{Dashboard.currentUser.firstName}} {{Dashboard.currentUser.lastName}}</h2>
 	<div class="text-center">
-		<h3 class="gold-label">RP Stash: <span><strong>{{Dashboard.currentUser.points || 0}}</strong> Points</span></h3>
+		<h3 class="gold-label">RP Stash: <span><strong>{{Dashboard.currentUser.rewardPoints || 0}}</strong> Points</span></h3>
 		<div class="flex-row-center push-top">
 			<div class="profile-picture">
 				<img ng-src="/uploads/players/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow"/>
@@ -99,10 +104,12 @@
 		<div class="editable">
 			<div class="user-contact" ng-if="Dashboard.readOnly.contact">
 				<ul>
+					<li>First Name: {{Dashboard.currentUser.firstName}}</li>
+					<li>Last Name: {{Dashboard.currentUser.lastName}}</li>
 					<li>E-mail: {{Dashboard.currentUser.email}}</li>
-					<li>Phone: {{Dashboard.currentUser.main_phone}}</li>
-					<li>Address: {{Dashboard.currentUser.street_address}}</li>
-					<li>Apt/Suite: {{Dashboard.currentUser.apt_suite}}
+					<li>Phone: {{Dashboard.currentUser.mainPhone}}</li>
+					<li>Address: {{Dashboard.currentUser.streetAddress}}</li>
+					<li>Apt/Suite: {{Dashboard.currentUser.aptSuite}}
 					<li>City: {{Dashboard.currentUser.city}}</li>
 					<li>State: {{Dashboard.currentUser.state}}</li>
 					<li>Zip: {{Dashboard.currentUser.zip}}</li>
@@ -111,20 +118,28 @@
 
 			<form name="contactForm" ng-show="!Dashboard.readOnly.contact" novalidate>
 				<div class="form-group inline">
+					<label class="title bold">First Name:</label>
+					<input name="firstName" type="text" id="firstName" ng-model="Dashboard.currentUser.firstName"/>
+				</div>
+				<div class="form-group inline">
+					<label class="title bold">Last Name:</label>
+					<input name="lastName" type="text" id="lastName" ng-model="Dashboard.currentUser.lastName"/>
+				</div>
+				<div class="form-group inline">
 					<label class="title bold">E-mail:</label>
 					<input name="email" type="email" id="email" ng-model="Dashboard.currentUser.email" disabled/>
 				</div>
 				<div class="form-group inline">
 					<label class="title bold">Phone:</label>
-					<input name="main_phone" type="text" id="main_phone" ng-model="Dashboard.currentUser.main_phone" ui-mask="(999) 999-9999" />
+					<input name="mainPhone" type="text" id="mainPhone" ng-model="Dashboard.currentUser.mainPhone" ui-mask="(999) 999-9999" />
 				</div>
 				<div class="form-group inline">
 					<label class="title bold">Address:</label>
-					<input name="street_address" type="text" id="street_address" ng-model="Dashboard.currentUser.street_address" maxlength="50"/>
+					<input name="streetAddress" type="text" id="streetAddress" ng-model="Dashboard.currentUser.streetAddress" maxlength="50"/>
 				</div>
 				<div class="form-group inline">
 					<label class="title bold">Apt/Suite:</label>
-					<input name="apt_suite" type="text" id="apt_suite" ng-model="Dashboard.currentUser.apt_suite" maxlength="10"/>
+					<input name="aptSuite" type="text" id="aptSuite" ng-model="Dashboard.currentUser.aptSuite" maxlength="10"/>
 				</div>
 				<div class="form-group inline">
 					<label class="title bold">City:</label>

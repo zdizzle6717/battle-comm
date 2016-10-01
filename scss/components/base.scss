@@ -36,7 +36,7 @@ h2 {
 	font-size: 1.6em;
 	font-weight: 400;
 	padding: 5px;
-	margin: 0 0 10px;
+	margin: 15px 0;
 	box-shadow: 0 0 2px 1px #929292;
 	display: table;
 	line-height: 1rem;
@@ -411,14 +411,14 @@ p.description_content {
 .full_width {
 	float: left;
 	width: 98%;
-	padding: 1%;
+	padding: 0 1%;
 }
 
 .full_width_spacer {
 	height: 20px;
 	float: left;
 	width: 98%;
-	padding: 1%;
+	padding: 10px 1%;
 }
 
 .full_width_slideshow {

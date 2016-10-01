@@ -12,7 +12,7 @@ function notification($timeout) {
                 scope.message = config.message;
                 scope.type = config.type;
                 scope.show = true;
-				let timeout = parseFloat(config.timeout) || 3000;
+				let timeout = parseFloat(config.timeout) || 2500;
                 $timeout(() => {
                     scope.show = false;
                 }, timeout);

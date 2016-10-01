@@ -1,3 +1,21 @@
+<div class="full_width">
+	<hr>
+	<h2 class="push-top-2x">System Admin</h2>
+</div>
+<div class="full_width">
+	<div class="four_column_1 text-center">
+		<button class="btn" ui-sref="orderList"><span class="fa fa-credit-card"></span> RP Store: Orders</button>
+	</div>
+	<div class="four_column_1 text-center">
+		<button class="btn" ui-sref="productList"><span class="fa fa-list"></span> RP Store: Products</button>
+	</div>
+	<div class="four_column_1 text-center">
+		<button class="btn" ui-sref="newsList"><span class="fa fa-tasks"></span> News</button>
+	</div>
+	<div class="four_column_1 text-center">
+		<button class="btn" ui-sref="playerList"><span class="fa fa-user"></span> Players</button>
+	</div>
+</div>
 <div class="four_column_1">
     <!-- <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">

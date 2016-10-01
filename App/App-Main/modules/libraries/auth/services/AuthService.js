@@ -71,13 +71,19 @@ function AuthService($q, $http, API_ROUTES) {
 				_user = response.data;
 				_user.username = credentials.username;
 				_user.password = credentials.password;
-				if (credentials.rememberLogin || credentials.loginAuto) {
+				_user.rememberLogin = credentials.rememberLogin;
+				_user.loginAuto = credentials.loginAuto;
+				
+				if (credentials.rememberLogin) {
+					localStorage.setItem('currentUser', JSON.stringify(_user));
+				}
+				if (credentials.loginAuto) {
 					localStorage.setItem('currentUser', JSON.stringify(_user));
 					localStorage.setItem('isAuthenticated', JSON.stringify(_isAuthenticated));
-				} else {
-					sessionStorage.setItem('currentUser', JSON.stringify(_user));
-					sessionStorage.setItem('isAuthenticated', JSON.stringify(_isAuthenticated));
 				}
+
+				sessionStorage.setItem('currentUser', JSON.stringify(_user));
+				sessionStorage.setItem('isAuthenticated', JSON.stringify(_isAuthenticated));
 
 				return response;
 			});
