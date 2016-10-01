@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Battle-Comm: Home</title>
+<title>Battle-Comm | Home</title>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers.">
-<meta property="og:title" content="Battle-Comm: Home"/>
+<meta property="og:title" content="Battle-Comm | Home"/>
 <meta property="og:url" content="http://www.beta.battle-comm.net/"/>
 <meta property="og:image" content="http://www.beta.battle-comm.net/images/meta-image.jpg"/>
 <meta property="og:site_name" content="Battle-Comm"/>
@@ -21,20 +21,6 @@
 <script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>
 <script type="text/javascript" src="Scripts/custom-slider.js"></script>
 <script type="text/javascript" src="Scripts/custom-slider2.js"></script>
-<script type="text/javascript" src="../ScriptLibrary/dmxDataBindings.js"></script>
-<script type="text/javascript" src="../ScriptLibrary/dmxDataSet.js"></script>
-    <script type="text/javascript">
-  /* dmxDataSet name "logged_in_player_full" */
-       jQuery.dmxDataSet(
-         {"id": "logged_in_player_full", "url": "/dmxDatabaseSources/logged_in_player_full.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
-       );
-  /* END dmxDataSet name "logged_in_player_full" */
-  /* dmxDataSet name "loggedInPlayer" */
-       jQuery.dmxDataSet(
-         {"id": "loggedInPlayer", "url": "../dmxDatabaseSources/loggedinPlayer.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
-       );
-  /* END dmxDataSet name "loggedInPlayer" */
-    </script>
 </head>
 
 <?php include 'Templates/parts/header.php'; ?>
@@ -203,6 +189,4 @@
                 </div>
             </div>
         </div>
-
-
 <?php include 'Templates/parts/footer.php'; ?>

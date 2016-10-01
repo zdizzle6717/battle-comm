@@ -8,6 +8,19 @@ const sass = require('node-sass');
 const autoPrefixer = require('autoprefixer');
 const autoPrefix = require('postcss')([autoPrefixer]);
 
+/* Compile JS Main Site */
+browserify("App/App-Main/app.js")
+    .transform(stringify, {
+        appliesTo: {
+            includeExtensions: ['.html', '.php']
+        }
+    })
+    .transform("babelify", {
+        presets: ["es2015"]
+    })
+    .bundle()
+    .pipe(fs.createWriteStream("Login/js/app.js"));
+
 /* Compile JS for Store */
 browserify("RPStore/App-Store/app.js")
     .transform(stringify, {

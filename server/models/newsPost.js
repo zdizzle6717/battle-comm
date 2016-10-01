@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
       classMethods: {
           associate: function(models) {
-              NewsPost.belongsTo(models.user_login);
+              NewsPost.belongsTo(models.User);
           }
       }
   });

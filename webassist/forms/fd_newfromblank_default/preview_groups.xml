@@ -1,9 +1,0 @@
-<wa_form name="Simple log in" id="SimpleLogIn">
-  <wa_form_fieldset label="Preview" submit_text="Preview" id="Preview">
-    <wa_fieldset_description>Required *</wa_fieldset_description>
-    <wa_form_line>
-        <wa_form_group_reference group="Login.xml" src="Username.xml" label="Username" continueLine="false" />
-        <wa_form_group_reference group="Login.xml" src="Password.xml" label="Password" continueLine="true" />
-    </wa_form_line>
-  </wa_form_fieldset>
-</wa_form>

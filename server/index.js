@@ -3,12 +3,14 @@
 require('babel-core/register');
 
 const Hapi = require('hapi');
+const Boom = require('boom');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const hapiUploader = require('hapi-uploader');
+const HapiAuthJwt = require('hapi-auth-jwt');
 let models = require('./models');
-let env = require('./config/environmentVariables.js');
+let env = require('./config/environmentVariables');
 let routes = require('./routes');
 
 // Create Server
@@ -29,12 +31,7 @@ const options = {
     },
     basePath: '/api/',
     pathPrefixSize: 2,
-    tags: [{
-        'name': 'products'
-    }, {
-        'name': 'test'
-    }],
-    enableDocumentation: env.swagger.enableDocumentation
+    documentationPage: env.swagger.documentationPage
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )
@@ -69,6 +66,16 @@ server.register({
         console.log('Failed loading plugin', err);
         process.exit(1)
     }
+});
+
+// Register hapi-auth-jwt Plugin
+server.register(HapiAuthJwt, (err) => {
+	server.auth.strategy('jsonWebToken', 'jwt', {
+		key: env.secret,
+		verifyOptions: {
+			algorithms: ['HS256']
+		}
+	});
 });
 
 // Routes

@@ -11,10 +11,10 @@
 @import 'components/scrollbar';
 @import 'components/sidebar';
 @import 'components/magnify';
-@import 'components/notifications';
 @import 'components/products';
 @import 'components/validations';
 @import 'components/buttons';
+@import 'components/cards';
 @import 'components/forms-tables';
 @import 'components/top-nav';
 @import 'components/user-nav';
@@ -29,6 +29,7 @@
 
 // Third Party
 @import 'third-party/magnificent-popup';
+@import 'third-party/rzslider';
 @import 'third-party/font-awesome/font-awesome';
 
 // Media
@@ -37,6 +38,7 @@
 
 // Libraries
 @import 'libraries/loading';
+@import 'libraries/notifications';
 
 // Helpers
 @import 'helpers/formatting';

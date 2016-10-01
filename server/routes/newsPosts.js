@@ -28,7 +28,7 @@ let newsPosts = {
     },
     create: function(request, reply) {
         models.NewsPost.create({
-            userLoginId: request.payload.userLoginId,
+            userId: request.payload.userId,
             title: request.payload.title,
             image: request.payload.image,
             callout: request.payload.callout,
@@ -53,7 +53,7 @@ let newsPosts = {
             .then(function(newsPost) {
                 if (newsPost) {
                     newsPost.updateAttributes({
-                        userLoginId: request.payload.userLoginId,
+                        userId: request.payload.userId,
                         title: request.payload.title,
                         image: request.payload.image,
                         callout: request.payload.callout,

@@ -1,1 +1,0 @@
-<progress total="1" current="1" remaining="1" />

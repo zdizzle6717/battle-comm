@@ -138,26 +138,11 @@ tr td:hover {
 	    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
 	    border-radius: 2px;
 	    box-sizing: border-box;
-	}
 
-	button {
-		&[type='submit'] {
-		    background-color: #278eca;
-		    color: #ffffff;
-		    font-size: 13px;
-		    font-weight: bold;
-		    border-radius: 4px;
-		    text-transform: uppercase;
-		    border: none;
-		    padding: 14px 30px;
-		    background-image: linear-gradient(to top,#4d90fe,#4787ed);
-
-			&:hover {
-				border-color: black;
-			    background: white;
-			    color: #0078e7;
-			    cursor: pointer;
-			}
+		&[type='checkbox'] {
+			float: left;
+			width: auto;
+			cursor: pointer;
 		}
 	}
 }
@@ -181,7 +166,7 @@ input {
 	    padding: 0.5em 0.6em;
 	    display: inline-block;
 	    border: 1px solid rgba(154,157,158,.5);
-	    box-shadow: 0 1px 3px 1px rgba(119, 120, 132, 0.5);
+	    box-shadow: 0 1px 3px 1px rgba(119, 120, 132, 0.25);
 	    border-radius: 4px;
 	    vertical-align: middle;
 	    box-sizing: border-box;

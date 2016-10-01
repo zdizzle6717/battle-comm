@@ -1,2 +1,0 @@
-var jQueryTabs2_json = {"name":"jQueryTabs2","skin":"skin 10","mobile_friendly":true,"tab_action":"click","effect":"fade","effectDuration":"500","effectEasing":"ease","auto_rotate":true,"smooth_height":true,"waitTime":"1000","devices":{"desktop":{"mediaQuery":null,"width":"1140px"},"mobile":{"mediaQuery":"@media (max-width:640px)","width":"640px"}},"mobile":{"fontColor":"#cccccc"},"xtdCode":"ed79cad751"};
-tabs_jQuery(window).load(function() {  tabs_jQuery('#jQueryTabs2').jQueryTabs(); })

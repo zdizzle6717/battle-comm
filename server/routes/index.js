@@ -4,10 +4,11 @@ let files = require('./files');
 let products = require('./products');
 let productOrders = require('./productOrders');
 let newsPosts = require('./newsPosts');
-let userLogins = require('./userLogins');
+let users = require('./users');
 let venues = require('./venues')
 let Joi = require('joi');
 let models = require('../models');
+const userFunctions = require('../utils/userFunctions');
 
 module.exports = [
 
@@ -20,6 +21,128 @@ module.exports = [
                 'api': 'Hello world!'
             });
         }
+    },
+
+	// User Logins
+	{
+        method: 'POST',
+        path: '/api/users',
+        config: {
+            pre: [{
+                method: userFunctions.verifyUniqueUser
+            }],
+            handler: users.create,
+            tags: ['api'],
+            description: 'Register a new user',
+            notes: 'Register a new user',
+            validate: {
+                payload: {
+                    username: Joi.string().min(4).max(50).required(),
+                    email: Joi.string().email().required(),
+                    password: Joi.string().required()
+                }
+            }
+        }
+    },
+	{
+        method: 'POST',
+        path: '/api/users/authenticate',
+        config: {
+            pre: [{
+                method: userFunctions.verifyCredentials,
+                assign: 'user'
+            }],
+            handler: users.authenticate,
+            tags: ['api'],
+            description: 'Authenticate an existing user',
+            notes: 'Authenticate an existing user',
+            validate: {
+                payload: Joi.alternatives().try(
+                    Joi.object({
+                        username: Joi.string().min(4).max(50).required(),
+                        password: Joi.string().required()
+                    }),
+                    Joi.object({
+                        username: Joi.string().email().required(),
+                        password: Joi.string().required()
+                    })
+                )
+            }
+        }
+    },
+	{
+        method: 'GET',
+        path: '/api/users/{id}',
+        config: {
+            tags: ['api'],
+            description: 'Get one player by id',
+            notes: 'Get one player by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                }
+            }
+        },
+        handler: users.get
+    },
+    {
+        method: 'GET',
+        path: '/api/users',
+        config: {
+            tags: ['api'],
+            description: 'Get all players',
+            notes: 'Get all players'
+        },
+        handler: users.getAll
+    },
+    {
+        method: 'PATCH',
+        path: '/api/users/{id}',
+        config: {
+            tags: ['api'],
+            description: 'Patch a User Login by id',
+            notes: 'Patch a User Login by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+					email: Joi.optional(),
+                    rewardPoints: Joi.number().required(),
+                    icon: Joi.optional(),
+					firstName: Joi.optional(),
+					lastName: Joi.optional(),
+					bio: Joi.optional(),
+					subscriber: Joi.optional(),
+					tourneyAdmin: Joi.optional(),
+					eventAdmin: Joi.optional(),
+					newsContributor: Joi.optional(),
+					venueAdmin: Joi.optional(),
+					clubAdmin: Joi.optional(),
+					systemAdmin: Joi.optional(),
+					mainPhone: Joi.optional(),
+					mobilePhone: Joi.optional(),
+					streetAddress: Joi.optional(),
+					aptSuite: Joi.optional(),
+					city: Joi.optional(),
+					state: Joi.optional(),
+					zip: Joi.optional(),
+					facebook: Joi.optional(),
+					twitter: Joi.optional(),
+					instagram: Joi.optional(),
+					googlePlus: Joi.optional(),
+					twitch: Joi.optional(),
+					website: Joi.optional(),
+					username: Joi.optional(),
+					totalWins: Joi.optional(),
+					totalLosses: Joi.optional(),
+					totalDraws: Joi.optional(),
+					totalPoints: Joi.optional(),
+					eloRanking: Joi.optional()
+                }
+            }
+        },
+        handler: users.updatePartial
     },
 
     // File Upload
@@ -202,7 +325,7 @@ module.exports = [
                     status: Joi.string().required(),
                     orderDetails: Joi.string().required(),
                     orderTotal: Joi.number().required(),
-                    userLoginId: Joi.number().required(),
+                    userId: Joi.number().required(),
                     customerFullName: Joi.string().required(),
                     customerEmail: Joi.string().email().required(),
                     phone: Joi.optional(),
@@ -232,7 +355,7 @@ module.exports = [
                     status: Joi.string().required(),
                     orderDetails: Joi.string().required(),
                     orderTotal: Joi.number().required(),
-                    userLoginId: Joi.number().required(),
+                    userId: Joi.number().required(),
                     customerFullName: Joi.string().required(),
                     customerEmail: Joi.string().email().required(),
                     phone: Joi.optional(),
@@ -299,7 +422,7 @@ module.exports = [
             notes: 'Add a new newsPost',
             validate: {
                 payload: {
-                    userLoginId: Joi.number().required(),
+                    userId: Joi.number().required(),
                     title: Joi.string().required(),
                     image: Joi.string().required(),
                     callout: Joi.string().required(),
@@ -327,7 +450,7 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
-                    userLoginId: Joi.number().required(),
+                    userId: Joi.number().required(),
                     title: Joi.string().required(),
                     image: Joi.string().required(),
                     callout: Joi.string().required(),
@@ -357,75 +480,6 @@ module.exports = [
             }
         },
         handler: newsPosts.delete
-    },
-
-
-    // User Logins
-	{
-        method: 'GET',
-        path: '/api/userLogins/{id}',
-        config: {
-            tags: ['api'],
-            description: 'Get one player by id',
-            notes: 'Get one player by id',
-            validate: {
-                params: {
-                    id: Joi.number().required()
-                }
-            }
-        },
-        handler: userLogins.get
-    },
-    {
-        method: 'GET',
-        path: '/api/userLogins',
-        config: {
-            tags: ['api'],
-            description: 'Get all players',
-            notes: 'Get all players'
-        },
-        handler: userLogins.getAll
-    },
-    {
-        method: 'PATCH',
-        path: '/api/userLogins/{id}',
-        config: {
-            tags: ['api'],
-            description: 'Patch a User Login by id',
-            notes: 'Patch a User Login by id',
-            validate: {
-                params: {
-                    id: Joi.number().required()
-                },
-                payload: {
-					email: Joi.optional(),
-                    user_points: Joi.number().required(),
-                    user_icon: Joi.optional(),
-					firstName: Joi.optional(),
-					lastName: Joi.optional(),
-					user_bio: Joi.optional(),
-					tourneyAdmin: Joi.optional(),
-					EventAdmin: Joi.optional(),
-					venueAdmin: Joi.optional(),
-					clubAdmin: Joi.optional(),
-					systemAdmin: Joi.optional(),
-					user_main_phone: Joi.optional(),
-					user_street_address: Joi.optional(),
-					user_apt_suite: Joi.optional(),
-					user_city: Joi.optional(),
-					user_state: Joi.optional(),
-					user_zip: Joi.optional(),
-					user_facebook: Joi.optional(),
-					user_twitter: Joi.optional(),
-					user_instagram: Joi.optional(),
-					user_twitch: Joi.optional(),
-					user_website: Joi.optional(),
-					user_handle: Joi.optional(),
-					user_points: Joi.optional()
-                }
-            }
-        },
-        handler: userLogins.updatePartial
     },
 
 	// Venues

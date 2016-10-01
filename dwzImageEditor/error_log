@@ -1,8 +1,0 @@
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home4/hyberion/public_html/testBC/dwzImageEditor/dwzImage.php on line 8
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  imagesx() expects parameter 1 to be resource, null given in /home4/hyberion/public_html/testBC/dwzImageEditor/dwzImage.php on line 61
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  imagesy() expects parameter 1 to be resource, null given in /home4/hyberion/public_html/testBC/dwzImageEditor/dwzImage.php on line 64
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  unlink(/home4/hyberion/public_html/testBC/uploads/editTemp/dwz_1d2e6da94f56e4129f01a834f5c0312b_#image_index#_dwz_): Is a directory in /home4/hyberion/public_html/testBC/dwzImageEditor/FrmImageEditor.php on line 260
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home4/hyberion/public_html/testBC/dwzImageEditor/dwzImage.php on line 8
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  imagesx() expects parameter 1 to be resource, null given in /home4/hyberion/public_html/testBC/dwzImageEditor/dwzImage.php on line 61
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  imagesy() expects parameter 1 to be resource, null given in /home4/hyberion/public_html/testBC/dwzImageEditor/dwzImage.php on line 64
-[03-Feb-2016 02:03:34 America/Chicago] PHP Warning:  mkdir(): No such file or directory in /home4/hyberion/public_html/testBC/dwzImageEditor/FrmImageEditor.php on line 253
