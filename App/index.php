@@ -13,9 +13,9 @@
 	<meta property="og:site_name" content="Battle-Comm"/>
 	<meta property="og:description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers."/>
 
-    <link rel="stylesheet" type="text/css" media="screen, print" href="../Styles/global.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen, print" href="../styles/global.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="../Scripts/jquery.magnificant-popup.js"></script>
 </head>
 <?php $pathToFile = $_SERVER['DOCUMENT_ROOT']; ?>
 <body>
@@ -39,7 +39,12 @@
     </div>
 	<?php include ($pathToFile. "/Templates/parts/container-top.php"); ?>
 		<div class="full_width view-container">
-			<div user-nav></div>
+			<span access-level="['systemAdmin', 'venueAdmin']">
+				<div user-nav></div>
+			</span>
+			<span access-level="['systemAdmin']">
+				<div admin-nav></div>
+			</span>
 			<div ui-view class="view-frame"></div>
 			<div loading></div>
 			<div notification></div>

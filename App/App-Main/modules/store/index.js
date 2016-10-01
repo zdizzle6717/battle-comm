@@ -21,9 +21,6 @@ let mod = angular.module(moduleName, [
 // Config
 mod.config(require('./config'));
 
-// Routes
-mod.constant('apiRoutes', require('./constants/apiRoutes'));
-
 // Constants
 mod.constant('manufacturersSchema', require('./schema/manufacturers'));
 

@@ -1,5 +1,6 @@
 <div class="account-nav" ng-class="{active: showNav}">
 	<img ng-src="/images/profile_image_small.png" ng-click="toggleNav()" width="37" alt=""/>
+	<div class="clickaway-backdrop" ng-click="toggleNav()" ng-if="showNav"></div>
     <div class="nav" ng-if="showNav">
     	<div class="account-name">{{user.firstName}} {{user.lastName}}</div>
         <ul class="nav-list no_bullets">

@@ -11,7 +11,6 @@ function accountNav($compile, $state, $rootScope, AuthService) {
 	function link(scope, elem, attrs) {
 		let template = require('./templates/accountNav.html');
 		scope.user = AuthService.currentUser;
-		scope.showNav = false;
 		scope.toggleNav = toggleNav;
 		scope.logout = logout;
 
@@ -22,6 +21,7 @@ function accountNav($compile, $state, $rootScope, AuthService) {
 		/////////////////////////////////
 
 		function checkAuthentication() {
+			scope.showNav = false;
 			if (AuthService.isAuthenticated) {
 				elem.html(template);
 			} else {

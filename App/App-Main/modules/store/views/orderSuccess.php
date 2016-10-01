@@ -12,6 +12,6 @@
 </div>
 <h1 style="text-align:center;">Order Success!</h1>
 
-<h3>You order was successfully processed. You will receive a confirmation e-mail and a secondary e-mail when the products have shipped.</h3>
+<h3 class="text-center">You order was successfully processed. You will receive a confirmation e-mail and a secondary e-mail when the products have shipped.</h3>
 
-<h4>Thank you! We appreciate your participation in Battle-Comm!</h4>
+<h4 class="text-center">Thank you! We appreciate your participation in Battle-Comm!</h4>

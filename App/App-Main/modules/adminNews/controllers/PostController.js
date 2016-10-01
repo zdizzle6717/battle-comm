@@ -1,7 +1,7 @@
 'use strict';
 
-PostController.$inject = ['$rootScope', '$state', '$stateParams', 'NewsService', 'manufacturers'];
-function PostController($rootScope, $state, $stateParams, NewsService, manufacturers) {
+PostController.$inject = ['$rootScope', '$state', '$stateParams', 'NewsService', 'manufacturers', 'AuthService'];
+function PostController($rootScope, $state, $stateParams, NewsService, manufacturers, AuthService) {
     let controller = this;
 
     controller.readOnly = true;
@@ -31,7 +31,7 @@ function PostController($rootScope, $state, $stateParams, NewsService, manufactu
             });
         } else {
             controller.currentPost = {
-                userLoginId: 2,
+                UserId: AuthService.currentUser.id,
                 featured: 'false',
                 published: 'false'
             };

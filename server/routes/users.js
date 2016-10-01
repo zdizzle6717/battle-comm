@@ -21,7 +21,8 @@ let users = {
         models.User.find({
                 where: {
                     id: request.params.id
-                }
+                },
+				attributes: { exclude: ['password'] }
             })
             .then(function(response) {
                 if (response) {
@@ -39,15 +40,15 @@ let users = {
                 reply(products).code(200);
             });
     },
-	create: function(req, res) {
-		userFunctions.hashPassword(req.payload.password, (err, hash) => {
+	create: function(request, reply) {
+		userFunctions.hashPassword(request.payload.password, (err, hash) => {
 			models.User.create({
-	                email: req.payload.email,
-	                username: req.payload.username,
+	                email: request.payload.email,
+	                username: request.payload.username,
 					password: hash
 	            })
 				.then(function(user) {
-					res({
+					reply({
 						id_token: createToken(user),
 						id: user.id,
 						subscriber: user.subscriber,
@@ -64,19 +65,19 @@ let users = {
 				})
 		});
 	},
-	authenticate: function(req, res) {
-		res({
-			id_token: createToken(req.pre.user),
-			id: req.pre.user.id,
-			firstName: req.pre.user.firstName,
-			lastName: req.pre.user.lastName,
-			subscriber: req.pre.user.subscriber,
-			tourneyAdmin: req.pre.user.tourneyAdmin,
-			eventAdmin: req.pre.user.eventAdmin,
-			newsContributor: req.pre.user.newsContributor,
-			venueAdmin: req.pre.user.venueAdmin,
-			clubAdmin: req.pre.user.clubAdmin,
-			systemAdmin: req.pre.user.systemAdmin
+	authenticate: function(request, reply) {
+		reply({
+			id_token: createToken(request.pre.user),
+			id: request.pre.user.id,
+			firstName: request.pre.user.firstName,
+			lastName: request.pre.user.lastName,
+			subscriber: request.pre.user.subscriber,
+			tourneyAdmin: request.pre.user.tourneyAdmin,
+			eventAdmin: request.pre.user.eventAdmin,
+			newsContributor: request.pre.user.newsContributor,
+			venueAdmin: request.pre.user.venueAdmin,
+			clubAdmin: request.pre.user.clubAdmin,
+			systemAdmin: request.pre.user.systemAdmin
 		}).code(201);
 	},
     updatePartial: function(request, reply) {
@@ -95,10 +96,8 @@ let users = {
             .then(function(response) {
                 if (response) {
 					let sendEmail = false;
-					let previousUserData = {};
 					if (request.payload.rewardPoints && request.payload.rewardPoints !== response.rewardPoints) {
 						sendEmail = true;
-						previousUserData = response;
 					}
                     response.updateAttributes({
                         // email: request.payload.email,
@@ -152,7 +151,7 @@ let users = {
 							    from: env.email.user,
 							    to: response.email,
 							    subject: `Reward Point Update: New Total of ${response.rewardPoints}`,
-							    html: buildRPUpdateEmail(response) // You can choose to send an HTML body instead
+							    html: buildRPUpdateEmail(response)
 							};
 
 							transporter.sendMail(customerMailConfig, function(error, info){
@@ -163,7 +162,7 @@ let users = {
 							        reply(response).code(200);
 							    };
 							});
-						} else{
+						} else {
 						    reply(response).code(200);
 						}
                     });
@@ -171,7 +170,9 @@ let users = {
                 else {
                     reply().code(404);
                 }
-            });
+            }).catch(function(err) {
+				console.log(err);
+			});
     },
     // delete: function(request, reply) {
     //     models.UserLogin.destroy({

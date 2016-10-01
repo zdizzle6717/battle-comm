@@ -1,7 +1,7 @@
 'use strict';
 
-CheckoutController.$inject = ['$state', '$rootScope', 'ngCart', 'StoreService', 'CheckoutService', '$scope'];
-function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutService, $scope) {
+CheckoutController.$inject = ['$state', '$rootScope', 'ngCart', 'StoreService', 'CheckoutService', 'AuthService', '$scope'];
+function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutService, AuthService, $scope) {
     let controller = this;
 
     let orderDetails = CheckoutService.get();
@@ -17,14 +17,14 @@ function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutSe
 
     function init() {
         let check = CheckoutService.get();
-        StoreService.getPlayer()
+        StoreService.getPlayer(AuthService.currentUser.id)
             .then(function(player) {
                 controller.player.id = player.id;
-                controller.player.user_points = player.user_points;
-                controller.order.userLoginId = player.id;
+                controller.player.rewardPoints = player.rewardPoints;
+                controller.order.UserId = player.id;
             });
         if (angular.equals({}, check)) {
-            $state.go('products');
+            $state.go('store');
         }
     }
 
@@ -32,11 +32,11 @@ function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutSe
         CheckoutService.add(info);
         info = CheckoutService.get();
         info.status = "processing";
-        info.userLoginId = +controller.player.id;
+        info.UserId = +controller.player.id;
         let playerPoints = {
-            user_points: controller.player.user_points - info.orderTotal
+            rewardPoints: controller.player.rewardPoints - info.orderTotal
         };
-        if (controller.player.user_points < info.orderTotal) {
+        if (controller.player.rewardPoints < info.orderTotal) {
             alert('You do not have have enough Reward Points for this purchase.');
             $state.go('cart');
         } else {
@@ -44,7 +44,7 @@ function CheckoutController($state, $rootScope, ngCart, StoreService, CheckoutSe
                 .then(function(response) {
                     StoreService.updatePlayer(playerPoints, controller.player.id)
                     .then(function(response) {
-                        controller.player.user_points = playerPoints.user_points;
+                        controller.player.rewardPoints = playerPoints.rewardPoints;
                         $state.go('orderSuccess');
                     })
                     .catch(function(response) {

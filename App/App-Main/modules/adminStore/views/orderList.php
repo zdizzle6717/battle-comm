@@ -1,3 +1,6 @@
+<div class="full_width">
+	<h2>System Admin</h2>
+</div>
 <div class="four_column_1">
     <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">

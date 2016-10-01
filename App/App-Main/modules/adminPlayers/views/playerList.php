@@ -1,20 +1,5 @@
 <div class="full_width">
-	<hr>
 	<h2 class="push-top-2x">System Admin</h2>
-</div>
-<div class="full_width">
-	<div class="four_column_1 text-center">
-		<button class="btn" ui-sref="orderList"><span class="fa fa-credit-card"></span> RP Store: Orders</button>
-	</div>
-	<div class="four_column_1 text-center">
-		<button class="btn" ui-sref="productList"><span class="fa fa-list"></span> RP Store: Products</button>
-	</div>
-	<div class="four_column_1 text-center">
-		<button class="btn" ui-sref="newsList"><span class="fa fa-tasks"></span> News</button>
-	</div>
-	<div class="four_column_1 text-center">
-		<button class="btn" ui-sref="playerList"><span class="fa fa-user"></span> Players</button>
-	</div>
 </div>
 <div class="four_column_1">
     <!-- <div class="panel panel-default sidebar-menu">
@@ -22,7 +7,7 @@
             <h3 class="panel-title">Create Player</h3>
         </div>
         <div class="panel-body">
-            <button class="btn btn-to-cart" ui-sref="player({id: undefined})"><span class="fa fa-plus"></span> Add New Player</button>
+            <button class="btn btn-to-cart" ui-sref="player"><span class="fa fa-plus"></span> Add New Player</button>
         </div>
     </div> -->
     <div class="panel panel-default sidebar-menu">
@@ -45,8 +30,8 @@
                 <select name="selectedSort" id="selectedSort" ng-model="Player.selectedSort">
                     <option value="id">ID (ascending)</option>
                     <option value="-id">ID (descending)</option>
-                    <option value="user_handle">Handle (ascending)</option>
-                    <option value="-user_handle">Handle (descending)</option>
+                    <option value="username">Username (ascending)</option>
+                    <option value="-username">Username (descending)</option>
                     <option value="email">Email (ascending)</option>
                     <option value="-email">Email (descending)</option>
                     <option value="lastName">Last Name (ascending)</option>
@@ -91,7 +76,7 @@
             <thead class="cf">
               <tr>
                 <th><strong>Player ID</strong></th>
-                <th><strong>Handle</strong></th>
+                <th><strong>Username</strong></th>
                 <th><strong>Email</strong></th>
                 <th><strong>Last Name</strong></th>
                 <th><strong>Created</strong></th>
@@ -101,12 +86,12 @@
           <tbody>
             <!--START REPEAT-->
             <tr dir-paginate="player in Player.allPlayers | filter: query | orderBy: Player.selectedSort | itemsPerPage: Player.pageSize" >
-              <td data-title="Player ID"><a ui-sref="player({ id: player.id })">{{player.id}}</a></td>
-              <td data-title="Handle">{{player.user_handle}}</td>
+              <td data-title="Player ID"><a ui-sref="player({ userId: player.id })">{{player.id}}</a></td>
+              <td data-title="Username">{{player.username}}</td>
               <td data-title="Email">{{player.email}}</td>
               <td data-title="Last Name">{{player.lastName}}</td>
               <td data-title="Created">{{player.createdAt | jsonDate | date: 'medium'}}</td>
-              <td data-title="View/Edit"><a ui-sref="player({ id: player.id })"><span class="fa fa-edit"></span></a></td>
+              <td data-title="View/Edit"><a ui-sref="player({ userId: player.id })"><span class="fa fa-edit"></span></a></td>
             </tr>
             <!--END REPEAT-->
           </tbody>

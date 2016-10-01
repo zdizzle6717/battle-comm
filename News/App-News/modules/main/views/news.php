@@ -9,11 +9,11 @@
     <div class="four_column_1">
         <h3>Sort Search By:</h3>
         <select ng-model="orderProp">
-            <option value="Posted">Newest</option>
-            <option value="Title">Title</option>
-            <option value="Author">Author</option>
-            <option value="GameSystem">Game System</option>
-            <option value="Category">News Category</option>
+            <option value="createdAt">Newest</option>
+            <option value="title">Title</option>
+            <option value="User.lastName">Author</option>
+            <option value="gameSystem">Game System</option>
+            <option value="category">News Category</option>
         </select>
     </div>
     <div class="four_column_1">
@@ -42,7 +42,7 @@
             <li id="news_summary">
                 <div class="two_column_1 no_padding"><a ui-sref="posts({ id: post.id })"><h5><u>{{post.title}}</u></h5></a></div>
                 <div class="fill">
-                    <div class="four_column_1"><strong>Author:</strong> {{post.author || 'Bryce'}}</div>
+                    <div class="four_column_1"><strong>Author:</strong> {{post.User.firstName + ' ' + post.User.lastName}}</div>
                     <div class="four_column_1"><strong>Category:</strong> {{post.category}}</div>
                     <div class="four_column_1"><strong>Date:</strong> {{post.createdAt | jsonDate | date: 'medium'}}</div>
                 </div>

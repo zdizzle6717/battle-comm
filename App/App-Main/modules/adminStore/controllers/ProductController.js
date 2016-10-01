@@ -82,7 +82,7 @@ function ProductController($rootScope, $state, $stateParams, AdminService, manuf
                     type: 'success',
                     message: 'A new product was successfully created.'
                 });
-                $state.go('product', {id: response.id});
+                $state.go('productEdit', {id: response.id});
             });
         }
     }

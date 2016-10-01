@@ -14,6 +14,7 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 		if ($stateParams.playerId) {
 			PlayerService.getPlayer($stateParams.playerId).then(function(response) {
 				controller.currentUser = response;
+				controller.currentUser.icon = controller.currentUser.icon ? controller.currentUser.icon : 'profile_image_default.png';
 				controller.readOnly = true;
 				controller.isNew = false;
 			}).catch(function() {

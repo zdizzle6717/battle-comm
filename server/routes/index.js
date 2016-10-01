@@ -325,7 +325,7 @@ module.exports = [
                     status: Joi.string().required(),
                     orderDetails: Joi.string().required(),
                     orderTotal: Joi.number().required(),
-                    userId: Joi.number().required(),
+                    UserId: Joi.number().required(),
                     customerFullName: Joi.string().required(),
                     customerEmail: Joi.string().email().required(),
                     phone: Joi.optional(),
@@ -355,7 +355,7 @@ module.exports = [
                     status: Joi.string().required(),
                     orderDetails: Joi.string().required(),
                     orderTotal: Joi.number().required(),
-                    userId: Joi.number().required(),
+                    UserId: Joi.number().required(),
                     customerFullName: Joi.string().required(),
                     customerEmail: Joi.string().email().required(),
                     phone: Joi.optional(),
@@ -422,7 +422,7 @@ module.exports = [
             notes: 'Add a new newsPost',
             validate: {
                 payload: {
-                    userId: Joi.number().required(),
+                    UserId: Joi.number().required(),
                     title: Joi.string().required(),
                     image: Joi.string().required(),
                     callout: Joi.string().required(),
@@ -450,7 +450,7 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
-                    userId: Joi.number().required(),
+                    UserId: Joi.number().required(),
                     title: Joi.string().required(),
                     image: Joi.string().required(),
                     callout: Joi.string().required(),

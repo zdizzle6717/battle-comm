@@ -3,7 +3,6 @@
 </div>
 <div class="two_column_1">
 	<h2 class="no_shadow text-center">Player Bio</h2>
-	<a ng-click="Dashboard.logout()">Logout?</a>
 	<div class="editable">
 		<div ng-if="Dashboard.readOnly.bio">
 			<label class="title">Bio:</label>
@@ -179,4 +178,7 @@
 		<img src="../media/filler/game3.jpg" alt="" />
 		<img src="../media/filler/game2.jpg" alt="" />
 	</div>
+</div>
+<div class="full_width text-right">
+	<a ng-click="Dashboard.logout()">Logout?</a>
 </div>

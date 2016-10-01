@@ -1,6 +1,10 @@
 <div class="user-nav">
 	<a class="nav-item" ui-sref="dashboard">My Dashboard</a>
 	<a class="nav-item" ui-sref="profile({'playerId': user.id})">My Public Profile</a>
-	<a class="nav-item" ui-sref="assignPoints">Venue Admin</a>
-	<a class="nav-item" ui-sref="productList">System Admin</a>
+	<span access-level="['venueAdmin']" class="inherit-display">
+		<a class="nav-item" ui-sref="assignPoints">Venue Admin</a>
+	</span>
+	<span access-level="['systemAdmin']" class="inherit-display">
+		<a class="nav-item" ui-sref="productList">System Admin</a>
+	</span>
 </div>

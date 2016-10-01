@@ -8,7 +8,7 @@
                     <div class="two_column_1 no_padding">
                         <h1>{{News.post.title}}</h1></div>
                     <div class="fill">
-                        <div class="four_column_1"><strong>Author:</strong> {{News.post.author}}</div>
+                        <div class="four_column_1"><strong>Author:</strong> {{News.post.User.firstName + ' ' + News.post.User.lastName}}</div>
                         <!-- <div class="four_column_1"><strong>Game:</strong> {{News.post.gameSystem}}</div> -->
                         <div class="four_column_1"><strong>Category:</strong> {{News.post.category}}</div>
                         <div class="four_column_1"><strong>Date:</strong> {{News.post.createdAt | jsonDate | date: 'medium'}}</div>

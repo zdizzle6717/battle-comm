@@ -13,24 +13,9 @@
 <meta property="og:site_name" content="Battle-Comm"/>
 <meta property="og:description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers."/>
 
-<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/global.css">
-<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/magnificent-popup/magnificent-popup.css">
+<link rel="stylesheet" type="text/css" media="screen, print" href="styles/global.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="Scripts/jquery.magnificant-popup.js"></script>
-<script type="text/javascript" src="../ScriptLibrary/dmxDataBindings.js"></script>
-<script type="text/javascript" src="../ScriptLibrary/dmxDataSet.js"></script>
-<script type="text/javascript">
-/* dmxDataSet name "logged_in_player_full" */
-   jQuery.dmxDataSet(
-     {"id": "logged_in_player_full", "url": "/dmxDatabaseSources/logged_in_player_full.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
-   );
-/* END dmxDataSet name "logged_in_player_full" */
-/* dmxDataSet name "loggedInPlayer" */
-   jQuery.dmxDataSet(
-     {"id": "loggedInPlayer", "url": "../dmxDatabaseSources/loggedinPlayer.php", "data": {"limit": "25"}, "dataSourceType": "database", "dataType": "jsonp"}
-   );
-/* END dmxDataSet name "loggedInPlayer" */
-</script>
 </head>
 <?php include 'Templates/parts/header.php'; ?>
 

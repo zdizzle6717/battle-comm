@@ -80,9 +80,6 @@
     .mobilenav {
         display: block;
     }
-    .mobilenav ul {
-        padding-bottom: 10px;
-    }
     a.menu-link {
         display: block;
         background-size: 100% 100%;
@@ -302,28 +299,40 @@
         padding-bottom: 10px;
     }
     #phoneOnly {
-        display: block;
-        color: white;
-        text-align: left;
-        box-shadow: none;
+		color: white;
+		text-align: left;
+		display: flex;
+		align-items: center;
+		padding-left: 2%;
+		border: 1px solid #177F82;
+		background: rgba(31,89,123,0.6);
     }
     #phoneOnly:active,
     #phoneOnly:hover {
         color: #29EA42;
     }
-    li.events,
-    li.home,
-    li.logintab,
-    li.news,
-	li.store,
-    li.registertab {
-        height: 37px;
-        width: 96%;
-        background: none;
-        padding: 1.5% !important;
-        margin: 0 !important;
-        box-shadow: none !important;
-    }
+	.mobilenav {
+		li {
+			&.events,
+		    &.home,
+		    &.login,
+		    &.news,
+			&.store,
+		    &.registertab {
+				height: 37px;
+				width: 94%;
+				background: none;
+				padding: 1.5%;
+				margin: 0;
+				box-shadow: none;
+
+				a {
+					font-size: 20px;
+				}
+		    }
+		}
+	}
+
     .topnav li a {
         float: left;
         width: 100%;
@@ -593,6 +602,7 @@
     }
     .topnav li:hover {
         color: white;
+		cursor: pointer;
     }
     .topnav li a:hover,
     .topnav li a:hover:visited {

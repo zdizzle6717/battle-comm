@@ -74,9 +74,9 @@
 					</div>
 				</div>
                 <div class="full_width right">
-                    <h4>Your Current Reward Point Total: {{Checkout.player.user_points | number}} RP</h4>
+                    <h4>Your Current Reward Point Total: {{Checkout.player.rewardPoints | number}} RP</h4>
                     <h4>Total Price: {{Checkout.total | number}} RP</h4>
-                    <h4>Remaining Balance: {{Checkout.player.user_points - Checkout.total | number}} RP</h4>
+                    <h4>Remaining Balance: {{Checkout.player.rewardPoints - Checkout.total | number}} RP</h4>
                 </div>
 
                 <div class="two_column_1" style="height: 10px;">

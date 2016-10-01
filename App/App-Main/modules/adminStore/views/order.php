@@ -1,9 +1,12 @@
+<div class="full_width">
+	<h2>System Admin</h2>
+</div>
 <div class="four_column_3 single-product">
 	<div class="full_width">
 	    <h2>Order ID: {{Order.currentOrder.id}}</h2>
 	    <div class="two_column_1">
 	        <h3>Customer: {{Order.currentOrder.customerFullName}}</h3>
-	        <h3>Customer ID: {{Order.currentOrder.userLoginId}}</h3>
+	        <h3>Customer ID: {{Order.currentOrder.UserId}}</h3>
 	        <h3>Order Total: {{Order.currentOrder.orderTotal}} RP</h3>
 	    </div>
 	    <div class="two_column_1">

@@ -19,7 +19,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
           controller: 'PlayerListController as Player'
         })
         .state('player', {
-          url: "/admin/players/:id",
+          url: "/admin/players/:userId",
           template: require('./views/player.php'),
           controller: 'PlayerController as Player'
         });

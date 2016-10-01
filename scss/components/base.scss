@@ -139,6 +139,8 @@ img {
 hr {
 	margin-top: 5px;
 	margin-bottom: 5px;
+	float: left;
+	width: 100%;
 }
 
 .bold {
@@ -995,5 +997,6 @@ a.menu-link {
 }
 
 #phoneOnly {
-	display: none;
+	color: transparent;
+	text-shadow: none;
 }

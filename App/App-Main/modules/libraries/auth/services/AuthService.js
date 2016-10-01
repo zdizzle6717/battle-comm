@@ -73,7 +73,7 @@ function AuthService($q, $http, API_ROUTES) {
 				_user.password = credentials.password;
 				_user.rememberLogin = credentials.rememberLogin;
 				_user.loginAuto = credentials.loginAuto;
-				
+
 				if (credentials.rememberLogin) {
 					localStorage.setItem('currentUser', JSON.stringify(_user));
 				}
@@ -93,12 +93,12 @@ function AuthService($q, $http, API_ROUTES) {
 		if (accessLevel[0] === 'public') {
 			return true;
 		} else if (_isAuthenticated) {
-			let check = true;
-			accessLevel.forEach(role => {
-				if (_user[role] !== true) {
-					check = false;
+			let check = false;
+			for (var i in accessLevel) {
+				if (_user[accessLevel[i]] === true) {
+					check = true;
 				}
-			})
+			}
 			return check;
 		} else {
 			return false;

@@ -13,12 +13,15 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
     ///////////////////////////////////////////
 
     function init() {
-        if ($stateParams.id) {PlayerService.getPlayer($stateParams.id)
+        if ($stateParams.userId) {PlayerService.getPlayer($stateParams.userId)
             .then(function(response) {
                 controller.currentPlayer = response;
                 controller.readOnly = true;
                 controller.isNew = false;
-            });
+            })
+			.catch(function() {
+				$state.go('playerList');
+			});
         } else {
             controller.readOnly = false;
             controller.isNew = true;
@@ -34,17 +37,18 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
 			firstName: data.firstName,
 			lastName: data.lastName,
 			email: data.email,
-			user_handle: data.user_handle,
-			user_points: data.user_points,
+			username: data.username,
+			rewardPoints: data.rewardPoints,
+			subscriber: data.subscriber,
 			tourneyAdmin: data.tourneyAdmin,
-			EventAdmin: data.EventAdmin,
+			eventAdmin: data.eventAdmin,
 			venueAdmin: data.venueAdmin,
 			clubAdmin: data.clubAdmin,
 			systemAdmin: data.systemAdmin
 		}
-        if ($stateParams.id) {
+        if ($stateParams.userId) {
             controller.readOnly = true;
-            PlayerService.updatePlayer($stateParams.id, newData)
+            PlayerService.updatePlayer($stateParams.userId, newData)
             .then(function(response) {
                 controller.currentPlayer = response;
                 showAlert({
@@ -60,7 +64,7 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
                     type: 'success',
                     message: 'A new post was successfully created.'
                 });
-                $state.go('post', {id: response.id});
+                $state.go('player', {'userId': response.id}, {reload: true});
             });
         }
     }

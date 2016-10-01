@@ -1,9 +1,9 @@
 'use strict';
 
-AdminService.$inject = ['$http', '$stateParams', 'apiRoutes'];
-function AdminService($http, $stateParams, apiRoutes) {
+AdminService.$inject = ['$http', '$stateParams', 'API_ROUTES'];
+function AdminService($http, $stateParams, API_ROUTES) {
     let service = {};
-    let routes = apiRoutes;
+    let routes = API_ROUTES;
 
     service.getProduct = getProduct;
     service.getAllProducts = getAllProducts;

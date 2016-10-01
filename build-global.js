@@ -21,32 +21,6 @@ browserify("App/App-Main/app.js")
     .bundle()
     .pipe(fs.createWriteStream("Login/js/app.js"));
 
-/* Compile JS for Store */
-browserify("RPStore/App-Store/app.js")
-    .transform(stringify, {
-        appliesTo: {
-            includeExtensions: ['.html', '.php']
-        }
-    })
-    .transform("babelify", {
-        presets: ["es2015"]
-    })
-    .bundle()
-    .pipe(fs.createWriteStream("RPStore/js/app.js"));
-
-/* Compile JS for Players */
-browserify("Players/App-Players/app.js")
-    .transform(stringify, {
-        appliesTo: {
-            includeExtensions: ['.html', '.php']
-        }
-    })
-    .transform("babelify", {
-        presets: ["es2015"]
-    })
-    .bundle()
-    .pipe(fs.createWriteStream("Players/js/app.js"));
-
 /* Compile JS for News */
 browserify("News/App-News/app.js")
     .transform(stringify, {
@@ -59,32 +33,6 @@ browserify("News/App-News/app.js")
     })
     .bundle()
     .pipe(fs.createWriteStream("News/js/app.js"));
-
-/* Compile JS for Site Admin */
-browserify("Admin/App-Admin/app.js")
-    .transform(stringify, {
-        appliesTo: {
-            includeExtensions: ['.html', '.php']
-        }
-    })
-    .transform("babelify", {
-        presets: ["es2015"]
-    })
-    .bundle()
-    .pipe(fs.createWriteStream("Admin/js/app.js"));
-
-/* Compile JS for Site Admin */
-browserify("Admin-Venue/App-Venue/app.js")
-    .transform(stringify, {
-        appliesTo: {
-            includeExtensions: ['.html', '.php']
-        }
-    })
-    .transform("babelify", {
-        presets: ["es2015"]
-    })
-    .bundle()
-    .pipe(fs.createWriteStream("Admin-Venue/js/app.js"));
 
 // Compile global SCSS
 sass.render({

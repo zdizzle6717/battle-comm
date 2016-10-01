@@ -8,7 +8,11 @@ let newsPosts = {
         models.NewsPost.find({
                 where: {
                     id: request.params.id
-                }
+                },
+				include: [{
+					model: models.User,
+					attributes: ['firstName', 'lastName']
+				}]
             })
             .then(function(response) {
                 if (response) {
@@ -21,14 +25,19 @@ let newsPosts = {
             });
     },
     getAll: function(request, reply) {
-        models.NewsPost.findAll()
+        models.NewsPost.findAll({
+				include: [{
+					model: models.User,
+					attributes: ['firstName', 'lastName']
+				}]
+			})
             .then(function(response) {
                 reply(response).code(200);
             });
     },
     create: function(request, reply) {
         models.NewsPost.create({
-            userId: request.payload.userId,
+            UserId: request.payload.UserId,
             title: request.payload.title,
             image: request.payload.image,
             callout: request.payload.callout,
@@ -53,7 +62,7 @@ let newsPosts = {
             .then(function(newsPost) {
                 if (newsPost) {
                     newsPost.updateAttributes({
-                        userId: request.payload.userId,
+                        UserId: request.payload.UserId,
                         title: request.payload.title,
                         image: request.payload.image,
                         callout: request.payload.callout,

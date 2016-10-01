@@ -1,3 +1,6 @@
+<div class="full_width">
+	<h2>News Contributor</h2>
+</div>
 <div class="four_column_3 single-product">
     <h2>Post ID: {{Post.currentPost.id}}</h2>
     <fieldset class="full_width" ng-disabled="Post.readOnly">
@@ -7,10 +10,6 @@
 				<div class="three_column_2">
 	                <label for="title" class="sublabel required">Title:</label>
 	                <input id="title" name="title" ng-model="Post.currentPost.title" type="text" class="formTextfield_Large" placeholder="Post name..." required>
-	            </div>
-	            <div class="three_column_1">
-	                <label for="author" class="sublabel required">Author:</label>
-	                <input id="author" name="author" ng-model="Post.currentPost.userLoginId" type="number" value="2" class="formTextfield_Large" placeholder="Please enter an ID...">
 	            </div>
 			</div>
 			<div class="form-group">

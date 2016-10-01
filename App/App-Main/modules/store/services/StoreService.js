@@ -1,9 +1,9 @@
 'use strict';
 
-StoreService.$inject =['$http', '$stateParams', 'apiRoutes'];
-function StoreService($http, $stateParams, apiRoutes) {
+StoreService.$inject =['$http', '$stateParams', 'API_ROUTES'];
+function StoreService($http, $stateParams, API_ROUTES) {
     let Service = {};
-    let routes = apiRoutes;
+    let routes = API_ROUTES;
 
     Service.getProduct = getProduct;
     Service.getAllProducts = getAllProducts;
@@ -59,16 +59,15 @@ function StoreService($http, $stateParams, apiRoutes) {
 
     // Players
 
-    function getPlayer() {
+	function getPlayer(id) {
         let args = {
             method: 'GET',
-            url: '../dmxDatabaseSources/PlayerProfileEdit.php'
+            url: routes.players.get + id
         };
 
         return $http(args)
             .then((response) => {
-                let player = response.data.data[0];
-                return player;
+                return response.data;
             });
     }
 
@@ -81,8 +80,7 @@ function StoreService($http, $stateParams, apiRoutes) {
 
         return $http(args)
             .then((response) => {
-                let player = response.data;
-                return player;
+                return response.data;
             });
     }
 

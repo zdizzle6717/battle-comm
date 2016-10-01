@@ -14,8 +14,7 @@
 <meta property="og:site_name" content="Battle-Comm"/>
 <meta property="og:description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers."/>
 
-<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/global.css">
-<link rel="stylesheet" type="text/css" media="screen, print" href="Styles/magnificent-popup/magnificent-popup.css">
+<link rel="stylesheet" type="text/css" media="screen, print" href="styles/global.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="Scripts/jquery.magnificant-popup.js"></script>
 <script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>

@@ -1,3 +1,6 @@
+<div class="full_width">
+	<h2>System Admin</h2>
+</div>
 <div class="four_column_3 single-product">
     <h2>Player ID: {{Player.currentPlayer.id}}</h2>
     <fieldset class="full_width" ng-disabled="Player.readOnly">
@@ -19,12 +22,12 @@
 			</div>
 			<div class="form-group">
 				<div class="two_column_1">
-	                <label for="user_handle" class="sublabel required">Handle:</label>
-	                <input id="user_handle" name="user_handle" ng-model="Player.currentPlayer.user_handle" type="text" class="formTextfield_Large" placeholder="Player handle...">
+	                <label for="username" class="sublabel required">Handle:</label>
+	                <input id="username" name="username" ng-model="Player.currentPlayer.username" type="text" class="formTextfield_Large" placeholder="Player handle...">
 	            </div>
 	            <div class="two_column_1">
-	                <label for="user_points" class="sublabel required">RP Points:</label>
-	                <input id="user_points" name="user_points" ng-model="Player.currentPlayer.user_points" type="number" class="formTextfield_Large">
+	                <label for="rewardPoints" class="sublabel required">RP Points:</label>
+	                <input id="rewardPoints" name="rewardPoints" ng-model="Player.currentPlayer.rewardPoints" type="number" class="formTextfield_Large">
 	            </div>
 			</div>
         </form>
@@ -39,38 +42,39 @@
     </div>
     <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
+            <h3 class="panel-title">Subscriber?</h3>
+            <select name="subscriber" id="subscriber" ng-model="Player.currentPlayer.subscriber" ng-disabled="Player.readOnly"
+              ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
+            </select><br>
+        </div>
+        <div class="panel-heading">
             <h3 class="panel-title">Tourney Admin?</h3>
-            <select name="tourneyAdmin" id="tourneyAdmin" ng-model="Player.currentPlayer.tourneyAdmin" selected="Player.currentPlayer.tourneyAdmin" ng-disabled="Player.readOnly">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select name="tourneyAdmin" id="tourneyAdmin" ng-model="Player.currentPlayer.tourneyAdmin" selected="Player.currentPlayer.tourneyAdmin" ng-disabled="Player.readOnly"
+              ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
             </select><br>
         </div>
         <div class="panel-heading">
             <h3 class="panel-title">Event Admin?</h3>
-            <select name="EventAdmin" id="EventAdmin" ng-model="Player.currentPlayer.EventAdmin" selected="Player.currentPlayer.EventAdmin" ng-disabled="Player.readOnly">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select name="eventAdmin" id="eventAdmin" ng-model="Player.currentPlayer.eventAdmin" selected="Player.currentPlayer.eventAdmin" ng-disabled="Player.readOnly"
+              ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
             </select><br>
         </div>
         <div class="panel-heading">
             <h3 class="panel-title">Venue Admin?</h3>
-            <select name="venueAdmin" id="venueAdmin" ng-model="Player.currentPlayer.venueAdmin" selected="Player.currentPlayer.venueAdmin" ng-disabled="Player.readOnly">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select name="venueAdmin" id="venueAdmin" ng-model="Player.currentPlayer.venueAdmin" selected="Player.currentPlayer.venueAdmin" ng-disabled="Player.readOnly"
+              ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
             </select><br>
         </div>
         <div class="panel-heading">
             <h3 class="panel-title">Club Admin?</h3>
-            <select name="clubAdmin" id="clubAdmin" ng-model="Player.currentPlayer.clubAdmin" selected="Player.currentPlayer.clubAdmin" ng-disabled="Player.readOnly">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select name="clubAdmin" id="clubAdmin" ng-model="Player.currentPlayer.clubAdmin" selected="Player.currentPlayer.clubAdmin" ng-disabled="Player.readOnly"
+              ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
             </select><br>
         </div>
         <div class="panel-heading">
             <h3 class="panel-title">Site Admin?</h3>
-            <select name="systemAdmin" id="systemAdmin" ng-model="Player.currentPlayer.systemAdmin" selected="Player.currentPlayer.systemAdmin" ng-disabled="Player.readOnly">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select name="systemAdmin" id="systemAdmin" ng-model="Player.currentPlayer.systemAdmin" selected="Player.currentPlayer.systemAdmin" ng-disabled="Player.readOnly"
+              ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
             </select><br>
         </div>
         <div class="panel-body" ng-if="!Player.isNew">

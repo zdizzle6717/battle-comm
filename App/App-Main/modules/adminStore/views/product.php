@@ -1,3 +1,6 @@
+<div class="full_width">
+	<h2>System Admin</h2>
+</div>
 <div class="four_column_3 single-product">
     <h2>Product ID: {{Product.currentProduct.id}}</h2>
     <fieldset class="full_width" ng-disabled="Product.readOnly">
