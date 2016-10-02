@@ -1,10 +1,12 @@
 'use strict';
 
-ProfileController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService', 'PlayerService'];
-function ProfileController($rootScope, $state, $stateParams, AuthService, PlayerService) {
+ProfileController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService', 'PlayerService', 'NotificationService'];
+function ProfileController($rootScope, $state, $stateParams, AuthService, PlayerService, NotificationService) {
     let controller = this;
 
     controller.readOnly = true;
+	controller.addFriend = addFriend;
+	controller.isMe = false;
 
 	init();
 
@@ -14,9 +16,11 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 		if ($stateParams.playerId) {
 			PlayerService.getPlayer($stateParams.playerId).then(function(response) {
 				controller.currentUser = response;
-				controller.currentUser.icon = controller.currentUser.icon ? controller.currentUser.icon : 'profile_image_default.png';
 				controller.readOnly = true;
 				controller.isNew = false;
+				if ($stateParams.playerId === AuthService.currentUser.id) {
+					controller.isMe = true;
+				}
 			}).catch(function() {
 				let config = {
 					type: 'error',
@@ -29,6 +33,21 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 			$state.go('login');
 		}
 	};
+
+	function addFriend() {
+		let config = {
+			'UserId': parseFloat($stateParams.playerId),
+			'fromId': AuthService.currentUser.id,
+			'fromName': `${AuthService.currentUser.firstName} ${AuthService.currentUser.lastName}`,
+			'type': 'friendRequest'
+		}
+		NotificationService.create(config).then((response) => {
+			showAlert({
+				type: 'success',
+				message: 'Friend request sent.'
+			})
+		})
+	}
 
 	function showAlert(config) {
 		$rootScope.$broadcast('show:notification', {type: config.type, message: config.message});

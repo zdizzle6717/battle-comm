@@ -1,10 +1,12 @@
 'use strict';
 
+let users = require('./users');
+let userNotifications = require('./userNotifications');
+
 let files = require('./files');
 let products = require('./products');
 let productOrders = require('./productOrders');
 let newsPosts = require('./newsPosts');
-let users = require('./users');
 let venues = require('./venues')
 let Joi = require('joi');
 let models = require('../models');
@@ -147,6 +149,81 @@ module.exports = [
         },
         handler: users.updatePartial
     },
+	{
+        method: 'POST',
+        path: '/api/search/users',
+        config: {
+            tags: ['api'],
+            description: 'Return User/Player search results',
+            notes: 'Return User/Player search results',
+			validate: {
+				payload: {
+                    maxResults: Joi.number().optional(),
+                    query: Joi.string().required()
+				}
+			}
+        },
+        handler: users.search
+    },
+
+	// User Notifications
+    {
+        method: 'POST',
+        path: '/api/userNotifications',
+        config: {
+            tags: ['api'],
+            description: 'Add a new userNotification',
+            notes: 'Add a new userNotification',
+            validate: {
+                payload: {
+                    UserId: Joi.number().required(),
+                    type: Joi.string().required(),
+                    status: Joi.string(),
+                    fromId: Joi.number().required(),
+                    fromName: Joi.string().required()
+                }
+            }
+        },
+        handler: userNotifications.create
+    },
+    {
+        method: 'PUT',
+        path: '/api/userNotifications/{id}',
+        config: {
+            tags: ['api'],
+            description: 'Update a user notification by id',
+            notes: 'Update a user notification by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+					UserId: Joi.number().required(),
+                    type: Joi.string().required(),
+                    status: Joi.string().required(),
+                    fromId: Joi.number().required(),
+                    fromName: Joi.string().required()
+                }
+            }
+        },
+        handler: userNotifications.update
+    },
+    {
+        method: 'DELETE',
+        path: '/api/userNotifications/{id}',
+        config: {
+            tags: ['api'],
+            description: 'Delete a user notification by id',
+            notes: 'Delete a user notification by id',
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                }
+            }
+        },
+        handler: userNotifications.delete
+    },
+
 
     // File Upload
     {

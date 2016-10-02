@@ -55,7 +55,7 @@ function PlayerService(API_ROUTES, $http) {
 
     function search(criteria) {
         let args = {
-            method: 'GET',
+            method: 'POST',
             url: routes.search,
             data: criteria
         };

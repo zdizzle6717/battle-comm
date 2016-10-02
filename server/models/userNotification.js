@@ -1,7 +1,19 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var UserNotification = sequelize.define('UserNotification', {
-    status: DataTypes.STRING,
+	  type: {
+	  		type: DataTypes.STRING,
+	  },
+	  status: {
+	  		type: DataTypes.STRING,
+			defaultValue: 'unRead'
+	  },
+	  fromId: {
+	  		type: DataTypes.INTEGER
+	  },
+	  fromName: {
+	  		type: DataTypes.STRING
+	  }
   }, {
     classMethods: {
         associate: function(models) {

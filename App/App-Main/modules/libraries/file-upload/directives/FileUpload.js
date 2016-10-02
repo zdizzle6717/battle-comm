@@ -1,7 +1,7 @@
 'use strict';
 
-fileUpload.$inject = ['FileService', '$rootScope'];
-function fileUpload(FileService, $rootScope) {
+fileUpload.$inject = ['FileService', '$rootScope', '$timeout'];
+function fileUpload(FileService, $rootScope, $timeout) {
     return {
         name: 'fileUpload',
         scope: {
@@ -50,7 +50,9 @@ function fileUpload(FileService, $rootScope) {
                         scope.model = response.filename;
                         scope.restrictions = false;
                         let text = response.status + ': ' + response.statusText;
-						scope.save();
+						$timeout(() => {
+							scope.save();
+						});
                         showAlert({
                             type: 'success',
                             message: text

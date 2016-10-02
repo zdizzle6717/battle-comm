@@ -89,8 +89,7 @@
 	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile({playerId: Dashboard.currentUser.id})" style="color:black;text-decoration:none;">{{Dashboard.currentUser.username}}</a></h1>
 	<div class="center">
 		<p><span class="fa fa-envelope" style="font-size:2em;"></span></p>
-		<p><a ui-sref="dashboard">View Your Friends List</a></p>
-		<p><a ui-sref="dashboard ">Account Settings</a></p>
+		<p><a ui-sref="dashboard">Account Settings</a></p>
 	</div>
 </div>
 <div class="full_width ">

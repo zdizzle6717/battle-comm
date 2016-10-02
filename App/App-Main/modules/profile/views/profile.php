@@ -23,9 +23,7 @@
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
 	<div class="text-center">
-			<p><a class="" ui-sref="profile" target="_self">Send a Message (pending)</a></p>
-			<p><a ui-sref="profile">Create Match (pending)</a></p>
-			<p><a ui-sref="profile">Add as Friend (pending)</a></p>
+		<p ng-hide="Profile.isMe"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Add as Friend</a></p>
 	</div>
 </div>
 <div class="full_width">

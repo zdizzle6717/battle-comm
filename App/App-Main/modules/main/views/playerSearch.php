@@ -2,13 +2,13 @@
 	<h2>Search: Players</h2>
 </div>
 <div class="full_width">
-	<div class="form-group">
-		<input type="text" placeholder="Enter search criteria..." ng-model="PlayerSearch.criteria.query"/>
-	</div>
+	<form name="playerSearchForm" class="form-group">
+		<input type="text" placeholder="Enter search criteria..." ng-model="PlayerSearch.criteria.query" required/>
+	</form>
 	<div class="form-group text-right">
-		<button class="button button-primary" ng-click="PlayerSearch.search()"><i class="fa fa-search"></i> Search</button>
+		<button class="button button-primary" ng-click="PlayerSearch.search()" ng-disabled="playerSearchForm.$invalid"><i class="fa fa-search"></i> Search</button>
 	</div>
-	<h5 ng-if="PlayerSearch.results.length === 0">No results found.</h5>
+	<h5 class="text-center" ng-if="PlayerSearch.results.length === 0">No results found. Enter a new search term.</h5>
 	<table ng-if="PlayerSearch.results.length > 0" class="search-results">
 		<tr>
 	  	    <th>Full Name</th>

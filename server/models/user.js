@@ -66,7 +66,10 @@ module.exports = function(sequelize, DataTypes) {
         marketing: DataTypes.STRING,
         sms: DataTypes.STRING,
         allowPlay: DataTypes.STRING,
-        icon: DataTypes.STRING,
+		icon: {
+			type: DataTypes.STRING,
+			defaultValue: 'profile_image_default.png'
+		},
         totalWins: DataTypes.INTEGER,
         totalLosses: DataTypes.INTEGER,
         totalDraws: DataTypes.INTEGER,
@@ -77,7 +80,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
 				User.hasMany(models.ProductOrder);
-				User.hasMany(models.User, { as: 'Friends', joinTableName: 'userHasFriends'})
+				User.hasMany(models.User, { as: 'Friends', joinTableName: 'userHasFriends'});
 				User.hasMany(models.UserNotification);
                 User.hasMany(models.UserMessage);
                 User.hasMany(models.UserAchievement);

@@ -15,11 +15,11 @@
 			<div class="form-group">
 				<div class="two_column_1">
 					<label class="required">First Name</label>
-					<input type="text" ng-model="Register.credentials.firstName" ng-minlength="4" maxlength="50" required/>
+					<input type="text" ng-model="Register.credentials.firstName" maxlength="50" required/>
 				</div>
 				<div class="two_column_1">
 					<label class="required">Last Name</label>
-					<input type="text" ng-model="Register.credentials.lastName" ng-minlength="4" maxlength="50" required/>
+					<input type="text" ng-model="Register.credentials.lastName" maxlength="50" required/>
 				</div>
 			</div>
 			<div class="form-group">

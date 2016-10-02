@@ -24,7 +24,6 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
 			PlayerService.getPlayer(AuthService.currentUser.id)
 			.then(function(response) {
 				controller.currentUser = response;
-				controller.currentUser.icon = controller.currentUser.icon ? controller.currentUser.icon : 'profile_image_default.png';
 			}).catch(function() {
 				let config = {
 					type: 'error',

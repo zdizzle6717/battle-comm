@@ -30,7 +30,10 @@ let users = {
                 where: {
                     id: request.params.id
                 },
-				attributes: { exclude: ['password'] }
+				attributes: { exclude: ['password'] },
+				include: [
+				     { model: models.UserNotification }
+				  ],
             })
             .then(function(response) {
                 if (response) {
@@ -207,7 +210,35 @@ let users = {
     //                 reply().code(404);
     //             }
     //         });
-    // }
+    // },
+	search: function(request, reply) {
+        models.User.findAll({
+			where: {
+				$or: [
+				    {
+				      firstName: {
+				        $like: '%' + request.payload.query + '%'
+				      }
+				    },
+				    {
+				      lastName: {
+				        $like: '%' + request.payload.query + '%'
+				      }
+				    },
+				    {
+				      username: {
+				        $like: '%' + request.payload.query + '%'
+				      }
+				    },
+				  ]
+			},
+			attributes: ['id', 'firstName', 'lastName', 'username', 'icon'],
+			limit: request.payload.maxResults || 20
+		})
+        .then(function(products) {
+            reply(products).code(200);
+        });
+    },
 };
 
 
