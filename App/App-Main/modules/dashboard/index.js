@@ -24,14 +24,9 @@ mod.config(require('./config'));
 
 // Controllers
 mod.controller('DashboardController', require('./controllers/DashboardController'));
-
-// Filters
-mod.filter('jsonDate', require('./filters/jsonDate'));
-
+mod.controller('NotificationsController', require('./controllers/NotificationsController'));
 
 // Services
-mod.service('PlayerService', require('./services/PlayerService'));
-
 
 
 module.exports = moduleName;

@@ -25,13 +25,5 @@ mod.config(require('./config'));
 // Controllers
 mod.controller('ProfileController', require('./controllers/ProfileController'));
 
-// Filters
-mod.filter('jsonDate', require('./filters/jsonDate'));
-
-
-// Services
-mod.service('ProfileService', require('./services/ProfileService'));
-
-
 
 module.exports = moduleName;

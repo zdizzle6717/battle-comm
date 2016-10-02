@@ -34,7 +34,6 @@ mod.filter('jsonDate', require('./filters/jsonDate'));
 
 
 // Services
-mod.service('PlayerService', require('./services/PlayerService'));
 
 
 

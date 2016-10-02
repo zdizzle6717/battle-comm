@@ -5,7 +5,8 @@ function PlayerService(API_ROUTES, $http) {
     let service = {
         getPlayer: get,
         getAllPlayers: getAll,
-        updatePlayer: updatePlayer
+        updatePlayer: update,
+		searchPlayers: search
     };
 
     let routes = API_ROUTES.players;
@@ -38,7 +39,7 @@ function PlayerService(API_ROUTES, $http) {
         });
     }
 
-    function updatePlayer(id, data) {
+    function update(id, data) {
         let args = {
             method: 'PATCH',
             url: routes.update + id,
@@ -49,6 +50,19 @@ function PlayerService(API_ROUTES, $http) {
             .then((response) => {
                 let post = response.data;
                 return post;
+            });
+    }
+
+    function search(criteria) {
+        let args = {
+            method: 'GET',
+            url: routes.search,
+            data: criteria
+        };
+
+        return $http(args)
+            .then((response) => {
+                return response.data;
             });
     }
 

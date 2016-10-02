@@ -31,7 +31,7 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
 					message: `Redirect: No player was found with id ${$stateParams.playerId}`
 				}
 				showAlert(config);
-				$state.go('home');
+				$state.go('login');
 			});
 		}
     }

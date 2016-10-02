@@ -23,6 +23,14 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
           url: "/register",
           template: require('./views/register.php'),
           controller: 'RegisterController as Register'
+        })
+		.state('playerSearch', {
+          url: "/player-search",
+          template: require('./views/playerSearch.php'),
+          controller: 'PlayerSearchController as PlayerSearch',
+		  data: {
+			  accessLevel: ['subscriber']
+		  }
         });
 
         $urlRouterProvider.otherwise('/login');

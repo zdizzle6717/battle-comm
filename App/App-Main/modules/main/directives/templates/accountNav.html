@@ -6,7 +6,9 @@
         <ul class="nav-list no_bullets">
             <li><a ui-sref="dashboard({'playerId': user.id})"><span class="fa fa-user"></span> My Dashboard</a></li>
             <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-user"></span> My Public Profile</a></li>
-            <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-envelope"></span> Messages</a></li>
+            <!-- <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-user"></span> Account Settings</a></li> -->
+            <li><a ui-sref="playerSearch"><span class="fa fa-search"></span> Search</a></li>
+            <li><a ui-sref="notifications({'playerId': user.id})"><span class="fa fa-envelope"></span> Notifications</a></li>
             <li><a ng-click="logout()"><span class="fa fa-sign-out"></span>Logout</a></li>
         </ul>
     </div>

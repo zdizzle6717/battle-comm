@@ -23,6 +23,17 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 		  data: {
 			  accessLevel: ['subscriber']
 		  }
+        })
+        .state('notifications', {
+          url: "/notifications/:playerId",
+          template: require('./views/notifications.php'),
+          controller: 'NotificationsController as Notifications',
+		  params: {
+			  playerId: ''
+		  },
+		  data: {
+			  accessLevel: ['subscriber']
+		  }
         });
 
 }

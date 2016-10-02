@@ -46,8 +46,14 @@ mod.directive('userNav', require('./directives/userNav'));
 mod.directive('accountNav', require('./directives/accountNav'));
 mod.directive('adminNav', require('./directives/adminNav'));
 
-
 // Controllers
+mod.controller('PlayerSearchController', require('./controllers/PlayerSearchController'));
+
+// Filters
+mod.filter('jsonDate', require('./filters/jsonDate'));
+
+// Services
+mod.service('PlayerService', require('./services/PlayerService'));
 
 
 
