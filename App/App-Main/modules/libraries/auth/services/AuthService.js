@@ -31,7 +31,9 @@ function AuthService($q, $http, API_ROUTES) {
 			data: {
 				email: credentials.email,
 				username: credentials.username,
-				password: credentials.password
+				password: credentials.password,
+				firstName: credentials.firstName,
+				lastName: credentials.lastName,
 			}
 		};
 

@@ -39,7 +39,9 @@ module.exports = [
                 payload: {
                     username: Joi.string().min(4).max(50).required(),
                     email: Joi.string().email().required(),
-                    password: Joi.string().required()
+                    password: Joi.string().required(),
+					firstName: Joi.string().optional(),
+					lastName: Joi.string().optional()
                 }
             }
         }
@@ -61,6 +63,7 @@ module.exports = [
                     Joi.object({
                         username: Joi.string().min(4).max(50).required(),
                         password: Joi.string().required()
+
                     }),
                     Joi.object({
                         username: Joi.string().email().required(),

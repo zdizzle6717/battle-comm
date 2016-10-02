@@ -3,20 +3,34 @@
 		<form name="loginForm" ng-submit="Register.register(Register.credentials)" novalidate>
 			<h2 class="push-bottom-2x">REGISTER</h2>
 			<div class="form-group">
-				<label class="required">Email</label>
-				<input type="email" ng-model="Register.credentials.email" maxlength="50" required/>
+				<div class="two_column_1">
+					<label class="required">Email</label>
+					<input type="email" ng-model="Register.credentials.email" maxlength="50" required/>
+				</div>
+				<div class="two_column_1">
+					<label class="required">User Handle</label>
+					<input type="text" ng-model="Register.credentials.username" ng-minlength="4" maxlength="50" required/>
+				</div>
 			</div>
 			<div class="form-group">
-				<label class="required">User Handle</label>
-				<input type="text" ng-model="Register.credentials.username" ng-minlength="4" maxlength="50" required/>
+				<div class="two_column_1">
+					<label class="required">First Name</label>
+					<input type="text" ng-model="Register.credentials.firstName" ng-minlength="4" maxlength="50" required/>
+				</div>
+				<div class="two_column_1">
+					<label class="required">Last Name</label>
+					<input type="text" ng-model="Register.credentials.lastName" ng-minlength="4" maxlength="50" required/>
+				</div>
 			</div>
 			<div class="form-group">
-				<label class="required">Password</label>
-				<input type="password" ng-model="Register.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
-			</div>
-			<div class="form-group">
-				<label class="required">Repeat Password</label>
-				<input type="password" ng-model="Register.passwordRepeat" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
+				<div class="two_column_1">
+					<label class="required">Password</label>
+					<input type="password" ng-model="Register.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
+				</div>
+				<div class="two_column_1">
+					<label class="required">Repeat Password</label>
+					<input type="password" ng-model="Register.passwordRepeat" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
+				</div>
 			</div>
 			<div class="form-group text-right">
 				<a ui-sref="login">Login?</a>

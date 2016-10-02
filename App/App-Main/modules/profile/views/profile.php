@@ -1,3 +1,6 @@
+<div class="full_width ">
+	<h2>Player Profile</h2>
+</div>
 <div class="two_column_1">
   <h2 class="text-center">Player Info</h2>
 		<h3 class="user-bio push-bottom-2x" ng-if="Profile.currentUser.bio">{{Profile.currentUser.bio}}</h3>
@@ -26,15 +29,30 @@
 	</div>
 </div>
 <div class="full_width">
+	<h2>Friends</h2>
+	<div class="friend-list">
+		<img src="#" class="friend-icon">
+		<img src="#" class="friend-icon">
+		<img src="#" class="friend-icon">
+		<img src="#" class="friend-icon">
+	</div>
+</div>
+<div class="full_width">
 	<h2>Achievements</h2>
 	<h3 class="text-center">This player has not yet been awarded any achievements.</h3>
 </div>
 <div class="full_width">
 	<h2>Photostream</h2>
-	<div class="center thumbnail">
+	<div class="photostream">
 		<img src="../media/filler/dice.png" alt="" />
+		<img src="../media/filler/game1.jpeg" alt=""/>
+		<img src="../media/filler/game2.jpg" alt=""/>
+		<img src="../media/filler/game1.jpeg" alt=""/>
+		<img src="../media/filler/game3.jpg" alt=""/>
 		<img src="../media/filler/game1.jpeg" alt=""/>
 		<img src="../media/filler/game3.jpg" alt=""/>
 		<img src="../media/filler/game2.jpg" alt=""/>
+		<img src="../media/filler/game1.jpeg" alt=""/>
+		<img src="../media/filler/dice.png" alt=""/>
 	</div>
 </div>

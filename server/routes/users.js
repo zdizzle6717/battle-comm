@@ -6,6 +6,7 @@ const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
 const buildRPUpdateEmail = require('../email-templates/rpUpdate');
+const buildRegistrationEmail = require('../email-templates/registrationSuccess');
 const Boom = require('boom');
 const createToken = require('../utils/createToken');
 const userFunctions = require('../utils/userFunctions');
@@ -14,6 +15,13 @@ const userFunctions = require('../utils/userFunctions');
 // you probably want to store these to a db
 generator.on('token', function(token){
 });
+
+let transporter = nodemailer.createTransport(({
+	service: 'Gmail',
+	auth: {
+		xoauth2: generator
+	}
+}));
 
 // Product Route Configs
 let users = {
@@ -44,21 +52,39 @@ let users = {
 		userFunctions.hashPassword(request.payload.password, (err, hash) => {
 			models.User.create({
 	                email: request.payload.email,
+	                firstName: request.payload.firstName,
+	                lastName: request.payload.lastName,
 	                username: request.payload.username,
 					password: hash
 	            })
 				.then(function(user) {
-					reply({
-						id_token: createToken(user),
-						id: user.id,
-						subscriber: user.subscriber,
-						tourneyAdmin: user.tourneyAdmin,
-						eventAdmin: user.eventAdmin,
-						newsContributor: user.newsContributor,
-						venueAdmin: user.venueAdmin,
-						clubAdmin: user.clubAdmin,
-						systemAdmin: user.systemAdmin
-					}).code(201);
+					let customerMailConfig = {
+						from: env.email.user,
+						to: user.email,
+						subject: `Welcome to Battle-Comm!`,
+						html: buildRegistrationEmail(user)
+					};
+
+					transporter.sendMail(customerMailConfig, function(error, info){
+						if(error) {
+							console.log(error);
+							reply('Somthing went wrong');
+						} else{
+							reply({
+								id_token: createToken(user),
+								id: user.id,
+								firstName: user.firstName,
+								lastName: user.lastName,
+								subscriber: user.subscriber,
+								tourneyAdmin: user.tourneyAdmin,
+								eventAdmin: user.eventAdmin,
+								newsContributor: user.newsContributor,
+								venueAdmin: user.venueAdmin,
+								clubAdmin: user.clubAdmin,
+								systemAdmin: user.systemAdmin
+							}).code(201);
+						};
+					});
 				})
 				.catch(function(response) {
 					throw Boom.badRequest(response);
@@ -81,25 +107,18 @@ let users = {
 		}).code(201);
 	},
     updatePartial: function(request, reply) {
-		let transporter = nodemailer.createTransport(({
-			service: 'Gmail',
-			auth: {
-				xoauth2: generator
-			}
-		}));
-
         models.User.find({
                 where: {
                     id: request.params.id
                 }
             })
-            .then(function(response) {
-                if (response) {
+            .then(function(user) {
+                if (user) {
 					let sendEmail = false;
-					if (request.payload.rewardPoints && request.payload.rewardPoints !== response.rewardPoints) {
+					if (request.payload.rewardPoints && request.payload.rewardPoints !== user.rewardPoints) {
 						sendEmail = true;
 					}
-                    response.updateAttributes({
+                    user.updateAttributes({
                         // email: request.payload.email,
                         // password: request.payload.password,
                         firstName: request.payload.firstName,
@@ -120,7 +139,7 @@ let users = {
                         city: request.payload.city,
                         state: request.payload.state,
                         zip: request.payload.zip,
-                        // dob: request.payload.dob,
+                        dob: request.payload.dob,
                         bio: request.payload.bio,
                         facebook: request.payload.facebook,
                         twitter: request.payload.twitter,
@@ -130,21 +149,21 @@ let users = {
                         twitch: request.payload.twitch,
                         website: request.payload.website,
                         rewardPoints: request.payload.rewardPoints,
-                        // visibility: request.payload.visibility,
-                        // shareContact: request.payload.shareContact,
-                        // shareName: request.payload.shareName,
-                        // shareStatus: request.payload.shareStatus,
-                        // newsletter: request.payload.newsletter,
-                        // marketing: request.payload.marketing,
-                        // sms: request.payload.sms,
-                        // allowPlay: request.payload.allowPlay,
+                        visibility: request.payload.visibility,
+                        shareContact: request.payload.shareContact,
+                        shareName: request.payload.shareName,
+                        shareStatus: request.payload.shareStatus,
+                        newsletter: request.payload.newsletter,
+                        marketing: request.payload.marketing,
+                        sms: request.payload.sms,
+                        allowPlay: request.payload.allowPlay,
                         icon: request.payload.icon,
                         totalWins: request.payload.totalWins,
                         totalLoss: request.payload.totalLoss,
                         totalDraw: request.payload.totalDraw,
                         totalPoints: request.payload.totalPoints,
                         eloRanking: request.payload.eloRanking,
-                        // accountActive: request.payload.accountActive
+                        accountActive: request.payload.accountActive
                     }).then(function(response) {
 						if (sendEmail === true) {
 							let customerMailConfig = {
@@ -155,7 +174,7 @@ let users = {
 							};
 
 							transporter.sendMail(customerMailConfig, function(error, info){
-							    if(error){
+							    if(error) {
 							        console.log(error);
 							        reply('Somthing went wrong');
 							    } else{

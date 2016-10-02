@@ -74,7 +74,6 @@ module.exports = function(sequelize, DataTypes) {
         eloRanking: DataTypes.INTEGER,
         accountActive: DataTypes.STRING
     }, {
-        freezeTableName: true,
         classMethods: {
             associate: function(models) {
 				User.hasMany(models.ProductOrder);
