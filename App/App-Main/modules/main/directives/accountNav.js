@@ -21,6 +21,7 @@ function accountNav($compile, $state, $rootScope, AuthService) {
 		/////////////////////////////////
 
 		function checkAuthentication() {
+			scope.user = AuthService.currentUser;
 			scope.showNav = false;
 			if (AuthService.isAuthenticated) {
 				elem.html(template);

@@ -46,6 +46,13 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 				type: 'success',
 				message: 'Friend request sent.'
 			})
+		}).catch((response) => {
+			if (response.data.message === 'Request already sent') {
+				showAlert({
+					type: 'error',
+					message: 'Friend request already sent.'
+				})
+			};
 		})
 	}
 

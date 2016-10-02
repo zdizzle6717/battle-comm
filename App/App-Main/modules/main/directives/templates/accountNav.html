@@ -8,7 +8,7 @@
             <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-user"></span> My Public Profile</a></li>
             <!-- <li><a ui-sref="profile({'playerId': user.id})"><span class="fa fa-user"></span> Account Settings</a></li> -->
             <li><a ui-sref="playerSearch"><span class="fa fa-search"></span> Search</a></li>
-            <li><a ui-sref="notifications({'playerId': user.id})"><span class="fa fa-envelope"></span> Notifications</a></li>
+            <li><a ui-sref="notifications({'playerId': user.id})"><span class="fa fa-envelope"></span><span class="fa fa-circle has-notifications" ng-if="user.totalNotifications > 0"></span> Notifications</a></li>
             <li><a ng-click="logout()"><span class="fa fa-sign-out"></span>Logout</a></li>
         </ul>
     </div>

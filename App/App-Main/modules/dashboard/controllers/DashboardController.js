@@ -24,6 +24,7 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
 			PlayerService.getPlayer(AuthService.currentUser.id)
 			.then(function(response) {
 				controller.currentUser = response;
+				AuthService.totalNotifications = controller.currentUser.UserNotifications.length;
 			}).catch(function() {
 				let config = {
 					type: 'error',

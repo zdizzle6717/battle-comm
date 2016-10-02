@@ -1,8 +1,12 @@
 'use strict';
 
-NotificationsController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'AuthService'];
-function NotificationsController($rootScope, $state, $stateParams, PlayerService, AuthService) {
+NotificationsController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'NotificationService', 'AuthService'];
+function NotificationsController($rootScope, $state, $stateParams, PlayerService, NotificationService, AuthService) {
     let controller = this;
+
+	controller.acceptFriend = acceptFriend;
+	controller.removeNote = removeNote;
+	controller.logout = logout;
 
     init();
 
@@ -14,7 +18,8 @@ function NotificationsController($rootScope, $state, $stateParams, PlayerService
 		} else {
 			PlayerService.getPlayer(AuthService.currentUser.id)
 			.then(function(response) {
-				console.log('Get Notifications')
+				controller.notifications = response.UserNotifications;
+				AuthService.totalNotifications = controller.notifications.length;
 			}).catch(function() {
 				let config = {
 					type: 'error',
@@ -26,6 +31,32 @@ function NotificationsController($rootScope, $state, $stateParams, PlayerService
 		}
     }
 
+	function acceptFriend(notification, index) {
+		let config = {
+			'UserId': parseFloat(notification.fromId),
+			'fromId': AuthService.currentUser.id,
+			'fromName': `${AuthService.currentUser.firstName} ${AuthService.currentUser.lastName}`,
+			'type': 'friendshipAccepted'
+		}
+		NotificationService.create(config).then((response) => {
+			NotificationService.remove(notification.id).then((response) => {
+				controller.notifications.splice(index, 1);
+				AuthService.totalNotifications = controller.notifications.length;
+			});
+		});
+	}
+
+	function removeNote(id, index) {
+		NotificationService.remove(id).then((response) => {
+			controller.notifications.splice(index, 1);
+			AuthService.totalNotifications = controller.notifications.length;
+		});
+	}
+
+	function logout() {
+		AuthService.logout();
+		$state.go('login');
+	}
 
 	function showAlert(config) {
         $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});

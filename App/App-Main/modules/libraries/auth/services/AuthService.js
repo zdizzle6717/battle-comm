@@ -16,11 +16,16 @@ function AuthService($q, $http, API_ROUTES) {
 				return _isAuthenticated;
 			}
 		},
+		'totalNotifications': {
+			'set': (total) => {
+				_user.totalNotifications = total;
+			}
+		},
 		'token': {
 			'get': () => {
 				return _user.id_token;
 			}
-		},
+		}
 	});
 
 	this.register = function(credentials) {

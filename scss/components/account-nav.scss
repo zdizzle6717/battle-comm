@@ -18,6 +18,16 @@
 	    cursor: pointer;
 	}
 
+	.has-notifications {
+		position: absolute;
+	    left: 19px;
+	    top: 9px;
+	    color: #ea0d00;
+	    text-shadow: 0 1px 1px black;
+	    font-weight: bold;
+	    font-size: .5rem;
+	}
+
 	.nav {
 	    margin-top: 24px;
 	    border-radius: 4px;

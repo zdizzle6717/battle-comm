@@ -1,19 +1,35 @@
 'use strict';
 
 let models = require('../models');
+const Boom = require('boom');
 
 // Product Route Configs
 let userNotifications = {
     create: function(request, reply) {
-        models.UserNotification.create({
-            UserId: request.payload.UserId,
-            type: request.payload.type,
-            status: request.payload.status,
-            fromId: request.payload.fromId,
-            fromName: request.payload.fromName
+        models.UserNotification.findOrCreate({
+                where: {
+					$and: [
+						{ UserId: request.payload.UserId },
+						{ type: request.payload.type },
+						{ fromId: request.payload.fromId },
+						{ fromName: request.payload.fromName }
+					]
+                },
+                defaults: {
+                    UserId: request.payload.UserId,
+                    type: request.payload.type,
+                    status: request.payload.status,
+                    fromId: request.payload.fromId,
+                    fromName: request.payload.fromName
+                }
             })
             .then(function(response) {
-                reply(response).code(200);
+                let created = response[1];
+                if (created) {
+                    reply(response).code(200);
+                } else {
+                    reply(Boom.badRequest('Request already sent'));
+                }
             });
     },
     update: function(request, reply) {
@@ -25,14 +41,13 @@ let userNotifications = {
             .then(function(newsPost) {
                 if (newsPost) {
                     newsPost.updateAttributes({
-						UserId: request.payload.UserId,
-			            type: request.payload.type,
-			            status: request.payload.status,
+                        UserId: request.payload.UserId,
+                        type: request.payload.type,
+                        status: request.payload.status,
                     }).then(function(response) {
                         reply(response).code(200);
                     });
-                }
-                else {
+                } else {
                     reply().code(404);
                 }
             });
@@ -46,8 +61,7 @@ let userNotifications = {
             .then(function(response) {
                 if (response) {
                     reply().code(200);
-                }
-                else {
+                } else {
                     reply().code(404);
                 }
             });
