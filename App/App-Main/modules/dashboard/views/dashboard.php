@@ -92,6 +92,15 @@
 		<p><a ui-sref="dashboard">Account Settings</a></p>
 	</div>
 </div>
+<div class="full_width">
+	<h2>Friends</h2>
+	<div class="friend-list">
+		<img class="friend-icon" ng-src="/uploads/players/{{player.username}}/playerIcon/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Dashboard.currentUser.Friends">
+	</div>
+	<div class="text-center" ng-if="Dashboard.currentUser.Friends.length <= 0">
+		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>
+	</div>
+</div>
 <div class="full_width ">
 	<div class="two_column_1">
 		<h2 class="text-center">Achievements</h2>
@@ -167,15 +176,15 @@
 </div>
 <div class="full_width">
 	<h2>Photostream
-		<a ui-sref="dashboard">
-		  <span class="fa fa-upload" style="float:right;"></span>
-		</a>
+		<div file-upload class="right collapse" model="Dashboard.newPhoto" save="Dashboard.savePhoto()" params="['players', Dashboard.currentUser.username, 'photostream']" button-text="Add Photo" icon-class="fa-plus" ng-if="Dashboard.currentUser.UserPhotos.length <= 50"></div>
 	</h2>
-	<div class="center thumbnail">
-		<img src="../media/filler/dice.png" alt="" />
-		<img src="../media/filler/game1.jpeg" alt="" />
-		<img src="../media/filler/game3.jpg" alt="" />
-		<img src="../media/filler/game2.jpg" alt="" />
+	<div class="photostream">
+		<a ng-href="/uploads/players/{{Dashboard.currentUser.username}}/photostream/{{photo.url}}" ng-repeat="photo in Dashboard.currentUser.UserPhotos" target="_blank">
+			<img ng-src="/uploads/players/{{Dashboard.currentUser.username}}/photostream/{{photo.url}}" alt=""/>
+		</a>
+	</div>
+	<div class="text-center" ng-if="Dashboard.currentUser.UserPhotos.length <= 0">
+		<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
 	</div>
 </div>
 <div class="full_width text-right">

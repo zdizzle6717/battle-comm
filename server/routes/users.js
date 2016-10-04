@@ -32,7 +32,9 @@ let users = {
                 },
 				attributes: { exclude: ['password'] },
 				include: [
-				     { model: models.UserNotification }
+				     { model: models.UserNotification },
+					 { model: models.UserPhoto },
+					 { model: models.User, as: 'Friends' },
 				  ],
             })
             .then(function(response) {

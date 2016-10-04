@@ -20,7 +20,7 @@ function buildTemplate(data) {
 				<b>Follow the link to login and update your account.</b>
 			</div>
 
-			<div style="text-align:center;margin:20 0;">
+			<div style="text-align:center;margin:20px 0;">
 				<a style="padding: 6px 12px;font-size: 20px;line-height: 1.42857143;border-radius: 3px;background: #278ECA;color: white;text-decoration: none;" href="http://www.beta.battle-comm.net/App/#/login">Login</a>
 			</div>
 

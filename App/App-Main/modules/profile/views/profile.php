@@ -18,7 +18,7 @@
 <div class="two_column_1">
 	<h2 class="text-center" ng-if="!Profile.currentUser.firstName">Anonymous</h2>
 	<h2 class="text-center" ng-if="Profile.currentUser.firstName">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}</h2>
-	<div class="text-center"><br/><img ng-src="/uploads/players/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px"/></div>
+	<div class="text-center"><br/><img ng-src="/uploads/players/{{Profile.currentUser.username}}/playerIcon/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px"/></div>
 	<h1 class="text-center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
@@ -29,10 +29,10 @@
 <div class="full_width">
 	<h2>Friends</h2>
 	<div class="friend-list">
-		<img src="#" class="friend-icon">
-		<img src="#" class="friend-icon">
-		<img src="#" class="friend-icon">
-		<img src="#" class="friend-icon">
+		<img class="friend-icon" ng-src="/uploads/players/{{player.username}}/playerIcon/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Profile.currentUser.Friends">
+	</div>
+	<div class="text-center" ng-if="Profile.currentUser.Friends.length <= 0">
+		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>
 	</div>
 </div>
 <div class="full_width">
@@ -42,15 +42,9 @@
 <div class="full_width">
 	<h2>Photostream</h2>
 	<div class="photostream">
-		<img src="../media/filler/dice.png" alt="" />
-		<img src="../media/filler/game1.jpeg" alt=""/>
-		<img src="../media/filler/game2.jpg" alt=""/>
-		<img src="../media/filler/game1.jpeg" alt=""/>
-		<img src="../media/filler/game3.jpg" alt=""/>
-		<img src="../media/filler/game1.jpeg" alt=""/>
-		<img src="../media/filler/game3.jpg" alt=""/>
-		<img src="../media/filler/game2.jpg" alt=""/>
-		<img src="../media/filler/game1.jpeg" alt=""/>
-		<img src="../media/filler/dice.png" alt=""/>
+		<img ng-src="/uploads/players/{{Profile.currentUser.username}}/photostream/{{photo.name}}" alt="" ng-repeat="photo in Profile.currentUser.UserPhotos"/>
+	</div>
+	<div class="text-center" ng-if="Profile.currentUser.UserPhotos.length <= 0">
+		<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
 	</div>
 </div>

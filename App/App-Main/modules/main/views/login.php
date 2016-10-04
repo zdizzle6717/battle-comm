@@ -37,7 +37,16 @@
 			stats, match up with local players, and compete at the national level.  You'll also have the opportunity to earn ranking, achievements,
 			and BC Reward Points to trade-in for related products!
 		</h4>
-		<h3 class="text-right"><a href="#test-popup" class="open-popup-link">→Supported Platforms</a></h3>
+		<h3 class="text-right"><a href="#supported-platforms-popup" class="open-popup-link">→Supported Platforms</a></h3>
+		<div id="supported-platforms-popup" class="supported-platforms-popup mfp-hide">
+		  <?php include '../Templates/includes/full-game-list.php'; ?>
+		</div>
+		<script>
+			$('.open-popup-link').magnificPopup({
+			  type:'inline',
+			  midClick: true
+			});
+		</script>
 		<h2>Sign Up</h2>
 		<h5><a ui-sref="register">→Player Registration</a></h5>
 	</div>

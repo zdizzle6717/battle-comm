@@ -2,6 +2,7 @@
 
 let users = require('./users');
 let userNotifications = require('./userNotifications');
+let userPhotos = require('./userPhotos');
 
 let files = require('./files');
 let products = require('./products');
@@ -222,6 +223,24 @@ module.exports = [
             }
         },
         handler: userNotifications.delete
+    },
+
+	// User photos
+	{
+        method: 'POST',
+        path: '/api/userPhotos',
+        config: {
+            handler: userPhotos.create,
+            tags: ['api'],
+            description: 'Create a new user photo',
+            notes: 'Create a new user photo',
+            validate: {
+                payload: {
+                    UserId: Joi.number().required(),
+                    url: Joi.string().required(),
+                }
+            }
+        }
     },
 
 

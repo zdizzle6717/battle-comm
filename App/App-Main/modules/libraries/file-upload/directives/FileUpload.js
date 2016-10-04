@@ -15,12 +15,14 @@ function fileUpload(FileService, $rootScope, $timeout) {
             scope.addFile = addFile;
 			scope.showWarning = false;
 			scope.removeWarning = removeWarning;
+			scope.buttonText = attrs.buttonText || 'Add File...';
+			scope.iconClass = attrs.iconClass || '';
             scope.config = {
                 pattern: 'image/*',
                 size: {
                     max: '20MB'
                 },
-                ratio: attrs.ratio
+                ratio: attrs.ratio || undefined
             };
             scope.validationMessage = 'Max file size: ' + scope.config.size.max + ' | ' +
                                         'File dimensions must have a ratio of: ' + scope.config.ratio;

@@ -1,7 +1,7 @@
 'use strict';
 
-DashboardController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'AuthService'];
-function DashboardController($rootScope, $state, $stateParams, PlayerService, AuthService) {
+DashboardController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'UserPhotoService', 'AuthService'];
+function DashboardController($rootScope, $state, $stateParams, PlayerService, UserPhotoService, AuthService) {
     let controller = this;
 
     controller.readOnly = {
@@ -11,6 +11,7 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
 	};
     controller.toggleEdit = toggleEdit;
     controller.savePlayer = savePlayer;
+    controller.savePhoto = savePhoto;
 	controller.logout = logout;
 
     init();
@@ -83,6 +84,22 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Au
             });
 		});
     }
+
+	function savePhoto() {
+		let data = {
+			'UserId': controller.currentUser.id,
+			'url': controller.newPhoto
+		};
+		UserPhotoService.create(data).then(function(response) {
+			$state.go('dashboard', {'playerId': controller.currentUser.id}, {'reload': true})
+		})
+		.catch(function(response) {
+			showAlert({
+				type: 'error',
+				message: 'Oops, something went wrong. Double check that all entries are valid.'
+			});
+		});;
+	}
 
 	function showAlert(config) {
         $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});
