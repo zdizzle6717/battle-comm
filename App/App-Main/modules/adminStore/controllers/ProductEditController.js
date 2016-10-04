@@ -1,7 +1,7 @@
 'use strict';
 
-ProductController.$inject = ['$rootScope', '$state', '$stateParams', 'AdminService', 'manufacturers'];
-function ProductController($rootScope, $state, $stateParams, AdminService, manufacturers) {
+ProductEditController.$inject = ['$rootScope', '$state', '$stateParams', 'AdminService', 'manufacturers'];
+function ProductEditController($rootScope, $state, $stateParams, AdminService, manufacturers) {
     let controller = this;
 
     controller.readOnly = true;
@@ -114,4 +114,4 @@ function ProductController($rootScope, $state, $stateParams, AdminService, manuf
     }
 }
 
-module.exports = ProductController;
+module.exports = ProductEditController;

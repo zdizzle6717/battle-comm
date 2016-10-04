@@ -76,28 +76,28 @@
                 <div class="form-group">
                     <div class="three_column_1">
                         <label for="imgAlt" class="sublabel required">Featured Image (front):</label>
-                        <img ng-src="/uploads/rpstore/{{Product.currentProduct.imgOneFront}}" ng-if="Product.currentProduct.imgOneFront"/>
+                        <img ng-src="/uploads/rpstore/{{Product.currentProduct.manufacturerId}}/{{Product.currentProduct.imgOneFront}}" ng-if="Product.currentProduct.imgOneFront"/>
                     </div>
                     <div class="three_column_1">
                         <label>Image Path:</label>
                         <input id="imgAlt" name="imgAlt" ng-model="Product.currentProduct.imgOneFront" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront" param="'rpstore'"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront" params="['rpstore', Product.currentProduct.manufacturerId]"></div>
                     </div>
                 </div>
                 <hr />
                 <div class="form-group">
                     <div class="three_column_1">
                         <label for="imgOneBack" class="sublabel required">Featured Image (back):</label>
-                        <img ng-src="/uploads/rpstore/{{Product.currentProduct.imgOneBack}}" ng-if="Product.currentProduct.imgOneBack"/>
+                        <img ng-src="/uploads/rpstore/{{Product.currentProduct.manufacturerId}}/{{Product.currentProduct.imgOneBack}}" ng-if="Product.currentProduct.imgOneBack"/>
                     </div>
                     <div class="three_column_1">
                         <label>Image Path:</label>
                         <input id="imgOneBack" name="imgOneBack" ng-model="Product.currentProduct.imgOneBack" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack" param="'rpstore'"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack" params="['rpstore', Product.currentProduct.manufacturerId]"></div>
                         <div notification></div>
                     </div>
                 </div>

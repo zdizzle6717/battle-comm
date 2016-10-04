@@ -35,10 +35,6 @@ mod.constant('manufacturers', require('./constants/manufacturers'));
 mod.controller('NewsListController', require('./controllers/NewsListController'));
 mod.controller('PostController', require('./controllers/PostController'));
 
-// Filters
-mod.filter('jsonDate', require('./filters/jsonDate'));
-
-
 // Services
 mod.service('NewsService', require('./services/NewsService'));
 

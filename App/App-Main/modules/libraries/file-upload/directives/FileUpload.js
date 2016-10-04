@@ -6,7 +6,7 @@ function fileUpload(FileService, $rootScope, $timeout) {
         name: 'fileUpload',
         scope: {
             model: '=',
-			param: '=',
+			params: '=',
 			save: '&'
         },
         replace: true,
@@ -45,7 +45,7 @@ function fileUpload(FileService, $rootScope, $timeout) {
                         message: 'File type must be jpg, jpeg, or png'
                     });
                 } else {
-                    FileService.saveFile(file, scope.param)
+                    FileService.saveFile(file, scope.params)
                     .then(function(response) {
                         scope.model = response.filename;
                         scope.restrictions = false;

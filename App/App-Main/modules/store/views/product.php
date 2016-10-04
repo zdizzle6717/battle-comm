@@ -15,9 +15,9 @@
     <div class="product-col-6">
         <div class="magnify">
         	<!-- This is the magnifying glass which will contain the original/large version -->
-        	<div class="large" style="background: url('/uploads/rpstore/{{Product.product.imgOneFront}}') no-repeat;"></div>
+        	<div class="large" style="background: url('/uploads/rpstore/{{Product.product.manufacturerId}}/{{Product.product.imgOneFront}}') no-repeat;"></div>
         	<!-- This is the small image -->
-        	<img ng-src="/uploads/rpstore/{{Product.product.imgOneFront}}" alt="Table Top Product" class="img-responsive product-img small">
+        	<img ng-src="/uploads/rpstore/{{Product.product.manufacturerId}}/{{Product.product.imgOneFront}}" alt="Table Top Product" class="img-responsive product-img small">
         </div>
     </div>
     <div class="product-col-6">

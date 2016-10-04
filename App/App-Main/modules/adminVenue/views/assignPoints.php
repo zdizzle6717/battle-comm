@@ -31,17 +31,31 @@
 		<fieldset ng-repeat="player in Points.players track by $index">
 			<legend>Player {{$index + 1}}</legend>
 			<div class="form-group">
-				<div class="three_column_1">
+				<div class="four_column_1">
 					<label for="fullName" class="sublabel required">Full Name:</label>
 					<input id="fullName" name="fullName" ng-model="player.fullName" type="text" class="formTextfield_Large" placeholder="Player full name..." required>
 				</div>
-				<div class="three_column_1">
+				<div class="four_column_1">
 					<label for="email" class="sublabel required">E-mail:</label>
 					<input id="email" name="email" ng-model="player.email" type="email" class="formTextfield_Large" placeholder="Player E-mail..." required>
 				</div>
-				<div class="three_column_1">
+				<div class="four_column_1">
 					<label for="pointsEarned" class="sublabel required">Points Earned:</label>
 					<input id="pointsEarned" name="pointsEarned" ng-model="player.pointsEarned" type="number" class="formTextfield_Large" placeholder="Total Points Earned..." required>
+				</div>
+				<div class="four_column_1">
+					<div class="three_column_1">
+						<label for="totalWins" class="sublabel">Wins:</label>
+						<input id="totalWins" name="totalWins" ng-model="player.totalWins" type="number" class="formTextfield_Large" placeholder="Total wins during the event/day...">
+					</div>
+					<div class="three_column_1">
+						<label for="totalDraws" class="sublabel">Draws:</label>
+						<input id="totalDraws" name="totalDraws" ng-model="player.totalDraws" type="number" class="formTextfield_Large" placeholder="Total draws during the event/day...">
+					</div>
+					<div class="three_column_1">
+						<label for="totalLosses" class="sublabel">Losses:</label>
+						<input id="totalLosses" name="totalLosses" ng-model="player.totalLosses" type="number" class="formTextfield_Large" placeholder="Total losses during the event/day...">
+					</div>
 				</div>
 			</div>
 			<button class="button button-danger right" ng-click="Points.removePlayer($index)"><span class="fa fa-minus"></span></button>

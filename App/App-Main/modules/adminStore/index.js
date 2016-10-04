@@ -35,7 +35,7 @@ mod.constant('manufacturers', require('./constants/manufacturers'));
 mod.controller('OrderListController', require('./controllers/OrderListController'));
 mod.controller('OrderController', require('./controllers/OrderController'));
 mod.controller('ProductListController', require('./controllers/ProductListController'));
-mod.controller('ProductController', require('./controllers/ProductController'));
+mod.controller('ProductEditController', require('./controllers/ProductEditController'));
 
 
 // Filters

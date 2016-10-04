@@ -36,7 +36,7 @@ function PointAssignmentController($rootScope, $state, VenueService) {
 				type: 'success',
 				message: response
 			});
-			$state.go('venueAdmin');
+			$state.go('dashboard');
 		});
 	}
 

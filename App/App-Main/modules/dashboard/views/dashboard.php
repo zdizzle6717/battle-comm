@@ -81,14 +81,14 @@
 		<h3 class="gold-label">RP Stash: <span><strong>{{Dashboard.currentUser.rewardPoints || 0}}</strong> Points</span></h3>
 		<div class="flex-row-center push-top">
 			<div class="profile-picture">
-				<img ng-src="/uploads/players/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow"/>
-				<div class="upload-overlay" file-upload ratio="1:1" model="Dashboard.currentUser.icon" save="Dashboard.savePlayer()" param="'players'"></div>
+				<img ng-src="/uploads/players/{{Dashboard.currentUser.username}}/playerIcon/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow"/>
+				<div class="upload-overlay" file-upload ratio="1:1" model="Dashboard.currentUser.icon" save="Dashboard.savePlayer()" params="['players', Dashboard.currentUser.username, 'playerIcon']"></div>
 			</div>
 		</div>
 	</div>
 	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile({playerId: Dashboard.currentUser.id})" style="color:black;text-decoration:none;">{{Dashboard.currentUser.username}}</a></h1>
 	<div class="center">
-		<p><span class="fa fa-envelope" style="font-size:2em;"></span></p>
+		<p><strong>{{Dashboard.currentUser.totalWins}} / {{Dashboard.currentUser.totalDraws}} / {{Dashboard.currentUser.totalLosses}}</strong></p>
 		<p><a ui-sref="dashboard">Account Settings</a></p>
 	</div>
 </div>

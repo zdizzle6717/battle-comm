@@ -70,11 +70,26 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			defaultValue: 'profile_image_default.png'
 		},
-        totalWins: DataTypes.INTEGER,
-        totalLosses: DataTypes.INTEGER,
-        totalDraws: DataTypes.INTEGER,
-        totalPoints: DataTypes.INTEGER,
-        eloRanking: DataTypes.INTEGER,
+        totalWins: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		},
+        totalLosses: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		},
+        totalDraws: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		},
+        totalPoints: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		},
+        eloRanking: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		},
         accountActive: DataTypes.STRING
     }, {
         classMethods: {

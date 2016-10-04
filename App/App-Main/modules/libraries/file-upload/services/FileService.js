@@ -6,10 +6,17 @@ function FileService($http, API_ROUTES, Upload) {
     let routes = API_ROUTES;
     service.saveFile = saveFile;
 
-    function saveFile(file, param) {
+    function saveFile(file, directoryFolders) {
+		let path = '';
+		for (let i in directoryFolders) {
+			path += directoryFolders[i];
+			if (i < directoryFolders.length - 1) {
+				path += '/';
+			}
+		}
         let args = {
             method: 'POST',
-            url: routes.files.create + param,
+            url: routes.files.create + path,
             file: file
         };
 

@@ -14,7 +14,7 @@
                         <div class="four_column_1"><strong>Date:</strong> {{News.post.createdAt | jsonDate | date: 'medium'}}</div>
                     </div>
                     <p class="full_width no_padding">
-                        <a class="three_column_1" style="padding-top:0;margin-top:0;"><img ng-src="/uploads/news/{{News.post.image}}" class="shadow" width="100%"></a>
+                        <a class="three_column_1" style="padding-top:0;margin-top:0;"><img ng-src="/uploads/news/{{News.post.manufacturerId}}/{{News.post.image}}" class="shadow" width="100%"></a>
                         {{News.post.body}}
                     </p>
                     <div class="full_width"><strong>Tags:</strong> {{News.post.tags}}</div>

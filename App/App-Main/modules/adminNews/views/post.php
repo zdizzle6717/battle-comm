@@ -65,14 +65,14 @@
                 <div class="full_width">
                     <div class="three_column_1">
                         <label for="image" class="sublabel required">Featured Image (front):</label>
-                        <img ng-src="/uploads/news/{{Post.currentPost.image}}" ng-if="Post.currentPost.image"/>
+                        <img ng-src="/uploads/news/{{Post.currentPost.manufacturerId}}/{{Post.currentPost.image}}" ng-if="Post.currentPost.image"/>
                     </div>
                     <div class="three_column_1">
                         <label>Image Path:</label>
                         <input id="imgAlt" name="imgAlt" ng-model="Post.currentPost.image" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="24:15" model="Post.currentPost.image" param="'news'"></div>
+                        <div file-upload ratio="24:15" model="Post.currentPost.image" params="['news', Post.currentPost.manufacturerId]"></div>
                     </div>
                 </div>
             </fieldset>

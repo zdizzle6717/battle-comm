@@ -228,7 +228,7 @@ module.exports = [
     // File Upload
     {
         method: 'POST',
-        path: '/api/files/{path}',
+        path: '/api/files/{path*}',
         config: {
             payload: {
                 output: 'stream',
@@ -582,7 +582,10 @@ module.exports = [
 					players: Joi.array().items(Joi.object({
 							  fullName: Joi.string().required(),
 							  email: Joi.string().required(),
-							  pointsEarned: Joi.number().required()
+							  pointsEarned: Joi.number().required(),
+							  totalWins: Joi.number().optional(),
+							  totalDraws: Joi.number().optional(),
+							  totalLosses: Joi.number().optional(),
 							}))
                 }
             }
