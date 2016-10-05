@@ -18,7 +18,7 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 				controller.currentUser = response;
 				controller.readOnly = true;
 				controller.isNew = false;
-				if ($stateParams.playerId === AuthService.currentUser.id) {
+				if ($stateParams.playerId == AuthService.currentUser.id) {
 					controller.isMe = true;
 				}
 			}).catch(function() {

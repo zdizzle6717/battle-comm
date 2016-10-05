@@ -27,7 +27,7 @@
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
 	<div class="text-center">
-		<p ng-hide="Profile.isMe"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Add as Friend</a></p>
+		<p ng-if="!Profile.isMe"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Add as Friend</a></p>
 	</div>
 </div>
 <div class="full_width">

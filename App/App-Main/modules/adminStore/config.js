@@ -31,7 +31,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
         .state('productEdit', {
           url: "/admin/store/products/:id",
           template: require('./views/product.php'),
-          controller: 'ProductController as Product'
+          controller: 'ProductEditController as Product'
       });
 
 }
