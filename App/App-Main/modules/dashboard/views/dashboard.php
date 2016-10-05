@@ -81,8 +81,9 @@
 		<h3 class="gold-label">RP Stash: <span><strong>{{Dashboard.currentUser.rewardPoints || 0}}</strong> Points</span></h3>
 		<div class="flex-row-center push-top">
 			<div class="profile-picture">
-				<img ng-src="/uploads/players/{{Dashboard.currentUser.username}}/playerIcon/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow"/>
-				<div class="upload-overlay" file-upload ratio="1:1" model="Dashboard.currentUser.icon" save="Dashboard.savePlayer()" params="['players', Dashboard.currentUser.username, 'playerIcon']"></div>
+				<img ng-src="/uploads/players/{{Dashboard.currentUser.id}}/playerIcon/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow" ng-if="Dashboard.currentUser.icon !== 'profile_image_default.png'"/>
+				<img ng-src="/uploads/players/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow" ng-if="Dashboard.currentUser.icon === 'profile_image_default.png'"/>
+				<div class="upload-overlay" file-upload ratio="1:1" model="Dashboard.currentUser.icon" save="Dashboard.savePlayer()" params="['players', Dashboard.currentUser.id, 'playerIcon']"></div>
 			</div>
 		</div>
 	</div>
@@ -176,12 +177,12 @@
 </div>
 <div class="full_width">
 	<h2>Photostream
-		<div file-upload class="right collapse" model="Dashboard.newPhoto" save="Dashboard.savePhoto()" params="['players', Dashboard.currentUser.username, 'photostream']" button-text="Add Photo" icon-class="fa-plus" ng-if="Dashboard.currentUser.UserPhotos.length <= 50"></div>
+		<div file-upload class="right collapse" model="Dashboard.newPhoto" save="Dashboard.savePhoto()" params="['players', Dashboard.currentUser.id, 'photostream']" button-text="Add Photo" icon-class="fa-plus" ng-if="Dashboard.currentUser.UserPhotos.length <= 50"></div>
 	</h2>
 	<div class="photostream">
-		<a ng-href="/uploads/players/{{Dashboard.currentUser.username}}/photostream/{{photo.url}}" ng-repeat="photo in Dashboard.currentUser.UserPhotos" target="_blank">
-			<img ng-src="/uploads/players/{{Dashboard.currentUser.username}}/photostream/{{photo.url}}" alt=""/>
-		</a>
+		<div popup ng-repeat="photo in Dashboard.currentUser.UserPhotos">
+			<img ng-src="/uploads/players/{{Dashboard.currentUser.id}}/photostream/{{photo.url}}" alt=""/>
+		</div>
 	</div>
 	<div class="text-center" ng-if="Dashboard.currentUser.UserPhotos.length <= 0">
 		<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>

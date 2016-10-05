@@ -18,7 +18,11 @@
 <div class="two_column_1">
 	<h2 class="text-center" ng-if="!Profile.currentUser.firstName">Anonymous</h2>
 	<h2 class="text-center" ng-if="Profile.currentUser.firstName">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}</h2>
-	<div class="text-center"><br/><img ng-src="/uploads/players/{{Profile.currentUser.username}}/playerIcon/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px"/></div>
+	<div class="text-center">
+		<br/>
+		<img ng-src="/uploads/players/{{Profile.currentUser.id}}/playerIcon/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px" ng-if="Profile.currentUser.icon !== 'profile_image_default.png'"/>
+		<img ng-src="/uploads/players/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px" ng-if="Profile.currentUser.icon === 'profile_image_default.png'"/>
+	</div>
 	<h1 class="text-center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
@@ -42,7 +46,9 @@
 <div class="full_width">
 	<h2>Photostream</h2>
 	<div class="photostream">
-		<img ng-src="/uploads/players/{{Profile.currentUser.username}}/photostream/{{photo.name}}" alt="" ng-repeat="photo in Profile.currentUser.UserPhotos"/>
+		<div popup ng-repeat="photo in Profile.currentUser.UserPhotos">
+			<img ng-src="/uploads/players/{{Profile.currentUser.id}}/photostream/{{photo.url}}" alt=""/>
+		</div>
 	</div>
 	<div class="text-center" ng-if="Profile.currentUser.UserPhotos.length <= 0">
 		<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
