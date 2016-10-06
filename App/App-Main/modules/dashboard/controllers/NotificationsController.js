@@ -1,7 +1,7 @@
 'use strict';
 
-NotificationsController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'NotificationService', 'AuthService'];
-function NotificationsController($rootScope, $state, $stateParams, PlayerService, NotificationService, AuthService) {
+NotificationsController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'FriendService', 'NotificationService', 'AuthService'];
+function NotificationsController($rootScope, $state, $stateParams, PlayerService, FriendService, NotificationService, AuthService) {
     let controller = this;
 
 	controller.acceptFriend = acceptFriend;
@@ -18,6 +18,7 @@ function NotificationsController($rootScope, $state, $stateParams, PlayerService
 		} else {
 			PlayerService.getPlayer(AuthService.currentUser.id)
 			.then(function(response) {
+				controller.currentPlayer = response;
 				controller.notifications = response.UserNotifications;
 				AuthService.totalNotifications = controller.notifications.length;
 			}).catch(function() {
@@ -40,8 +41,20 @@ function NotificationsController($rootScope, $state, $stateParams, PlayerService
 		}
 		NotificationService.create(config).then((response) => {
 			NotificationService.remove(notification.id).then((response) => {
-				controller.notifications.splice(index, 1);
-				AuthService.totalNotifications = controller.notifications.length;
+				let friendData = {
+					UserId: controller.currentPlayer.id,
+					userIcon: controller.currentPlayer.icon,
+					InviteeId: parseFloat(notification.fromId)
+				}
+				FriendService.create(friendData).then(function(response) {
+					controller.notifications.splice(index, 1);
+					AuthService.totalNotifications = controller.notifications.length;
+					let config = {
+						type: 'success',
+						message: `You are now friends!`
+					}
+					showAlert(config);
+				})
 			});
 		});
 	}

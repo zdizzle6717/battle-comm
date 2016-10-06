@@ -95,7 +95,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
 				User.hasMany(models.ProductOrder);
-				User.hasMany(models.User, { as: 'Friends', joinTableName: 'userHasFriends'});
+				User.hasMany(models.UserFriend);
 				User.hasMany(models.UserNotification);
                 User.hasMany(models.UserMessage);
                 User.hasMany(models.UserAchievement);

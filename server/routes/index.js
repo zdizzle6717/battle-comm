@@ -3,6 +3,7 @@
 let users = require('./users');
 let userNotifications = require('./userNotifications');
 let userPhotos = require('./userPhotos');
+let userFriends = require('./userFriends');
 
 let files = require('./files');
 let products = require('./products');
@@ -223,6 +224,25 @@ module.exports = [
             }
         },
         handler: userNotifications.delete
+    },
+
+	// User photos
+	{
+        method: 'POST',
+        path: '/api/userFriends',
+        config: {
+            handler: userFriends.create,
+            tags: ['api'],
+            description: 'Create a new user friend',
+            notes: 'Create a new user friend',
+            validate: {
+                payload: {
+                    UserId: Joi.number().required(),
+					userIcon: Joi.string().required(),
+                    InviteeId: Joi.number().required(),
+                }
+            }
+        }
     },
 
 	// User photos

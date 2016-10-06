@@ -96,7 +96,7 @@
 <div class="full_width">
 	<h2>Friends</h2>
 	<div class="friend-list">
-		<img class="friend-icon" ng-src="/uploads/players/{{player.username}}/playerIcon/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Dashboard.currentUser.Friends">
+		<img class="friend-icon" ng-src="/uploads/players/{{friend.friendId}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Dashboard.currentUser.UserFriends">
 	</div>
 	<div class="text-center" ng-if="Dashboard.currentUser.Friends.length <= 0">
 		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>

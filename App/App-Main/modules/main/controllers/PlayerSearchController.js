@@ -11,13 +11,7 @@ function PlayerSearchController($rootScope, $state, $stateParams, PlayerService,
 		query: ''
 	}
 
-    init();
-
     ///////////////////////////////////////////
-
-    function init() {
-		console.log('Search Players');
-    }
 
 	function search() {
 		PlayerService.searchPlayers(controller.criteria).then((response) => {

@@ -21,6 +21,11 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 				if ($stateParams.playerId == AuthService.currentUser.id) {
 					controller.isMe = true;
 				}
+				for (var i in controller.currentUser.UserFriends) {
+					if (controller.currentUser.UserFriends[i].friendId == AuthService.currentUser.id) {
+						controller.alreadyFriends = true;
+					}
+				}
 			}).catch(function() {
 				let config = {
 					type: 'error',

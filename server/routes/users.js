@@ -34,7 +34,7 @@ let users = {
 				include: [
 				     { model: models.UserNotification },
 					 { model: models.UserPhoto },
-					 { model: models.User, as: 'Friends' },
+					 { model: models.UserFriend },
 				  ],
             })
             .then(function(response) {
