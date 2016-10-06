@@ -81,8 +81,7 @@
 		<h3 class="gold-label">RP Stash: <span><strong>{{Dashboard.currentUser.rewardPoints || 0}}</strong> Points</span></h3>
 		<div class="flex-row-center push-top">
 			<div class="profile-picture">
-				<img ng-src="/uploads/players/{{Dashboard.currentUser.id}}/playerIcon/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow" ng-if="Dashboard.currentUser.icon !== 'profile_image_default.png'"/>
-				<img ng-src="/uploads/players/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow" ng-if="Dashboard.currentUser.icon === 'profile_image_default.png'"/>
+				<img ng-src="/uploads/players/{{Dashboard.currentUser.id}}/playerIcon/{{Dashboard.currentUser.icon}}" alt="{{Dashboard.currentUser.username}}" class="shadow"/>
 				<div class="upload-overlay" file-upload ratio="1:1" model="Dashboard.currentUser.icon" save="Dashboard.savePlayer()" params="['players', Dashboard.currentUser.id, 'playerIcon']"></div>
 			</div>
 		</div>
@@ -96,7 +95,7 @@
 <div class="full_width">
 	<h2>Friends</h2>
 	<div class="friend-list">
-		<img class="friend-icon" ng-src="/uploads/players/{{friend.friendId}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Dashboard.currentUser.UserFriends">
+		<img class="friend-icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Dashboard.currentUser.Friends">
 	</div>
 	<div class="text-center" ng-if="Dashboard.currentUser.Friends.length <= 0">
 		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>

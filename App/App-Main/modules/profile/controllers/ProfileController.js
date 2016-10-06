@@ -43,6 +43,7 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 		let config = {
 			'UserId': parseFloat($stateParams.playerId),
 			'fromId': AuthService.currentUser.id,
+			'fromUsername': AuthService.currentUser.username,
 			'fromName': `${AuthService.currentUser.firstName} ${AuthService.currentUser.lastName}`,
 			'type': 'friendRequest'
 		}

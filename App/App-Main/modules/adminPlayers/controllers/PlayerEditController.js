@@ -1,7 +1,7 @@
 'use strict';
 
-PlayerController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService'];
-function PlayerController($rootScope, $state, $stateParams, PlayerService) {
+PlayerEditController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService'];
+function PlayerEditController($rootScope, $state, $stateParams, PlayerService) {
     let controller = this;
 
     controller.readOnly = true;
@@ -18,6 +18,7 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
                 controller.currentPlayer = response;
                 controller.readOnly = true;
                 controller.isNew = false;
+				controller.currentPlayer.rewardPoints = controller.currentPlayer.rewardPoints ? controller.currentPlayer.rewardPoints : 0;
             })
 			.catch(function() {
 				$state.go('playerList');
@@ -75,4 +76,4 @@ function PlayerController($rootScope, $state, $stateParams, PlayerService) {
 
 }
 
-module.exports = PlayerController;
+module.exports = PlayerEditController;

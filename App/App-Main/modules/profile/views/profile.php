@@ -20,8 +20,7 @@
 	<h2 class="text-center" ng-if="Profile.currentUser.firstName">{{Profile.currentUser.firstName}} {{Profile.currentUser.lastName}}</h2>
 	<div class="text-center">
 		<br/>
-		<img ng-src="/uploads/players/{{Profile.currentUser.id}}/playerIcon/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px" ng-if="Profile.currentUser.icon !== 'profile_image_default.png'"/>
-		<img ng-src="/uploads/players/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px" ng-if="Profile.currentUser.icon === 'profile_image_default.png'"/>
+		<img ng-src="/uploads/players/{{Profile.currentUser.id}}/playerIcon/{{Profile.currentUser.icon}}" alt="" class="shadow" width="220px"/>
 	</div>
 	<h1 class="text-center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
@@ -33,7 +32,7 @@
 <div class="full_width">
 	<h2>Friends</h2>
 	<div class="friend-list">
-		<img class="friend-icon" ng-src="/uploads/players/{{friend.friendId}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Profile.currentUser.UserFriends">
+		<img class="friend-icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Profile.currentUser.Friends">
 	</div>
 	<div class="text-center" ng-if="Profile.currentUser.Friends.length <= 0">
 		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>

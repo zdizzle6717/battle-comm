@@ -4,7 +4,7 @@
 <div class="four_column_3 single-product">
     <h2>Player ID: {{Player.currentPlayer.id}}</h2>
     <fieldset class="full_width" ng-disabled="Player.readOnly">
-        <form class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="playerForm" novalidate>
+        <form style="margin:0 auto;" name="playerForm" novalidate>
             <h2 class="push-bottom">View/Edit</h2>
 			<div class="form-group">
 				<div class="three_column_1">
@@ -17,17 +17,17 @@
 	            </div>
 	            <div class="three_column_1">
 	                <label for="email" class="sublabel required">Email:</label>
-	                <input id="email" name="email" ng-model="Player.currentPlayer.email" type="text" class="formTextfield_Large" placeholder="Player email...">
+	                <input id="email" name="email" ng-model="Player.currentPlayer.email" type="text" class="formTextfield_Large" placeholder="Player email..." required>
 	            </div>
 			</div>
 			<div class="form-group">
 				<div class="two_column_1">
 	                <label for="username" class="sublabel required">Handle:</label>
-	                <input id="username" name="username" ng-model="Player.currentPlayer.username" type="text" class="formTextfield_Large" placeholder="Player handle...">
+	                <input id="username" name="username" ng-model="Player.currentPlayer.username" type="text" class="formTextfield_Large" placeholder="Player handle..." required>
 	            </div>
 	            <div class="two_column_1">
 	                <label for="rewardPoints" class="sublabel required">RP Points:</label>
-	                <input id="rewardPoints" name="rewardPoints" ng-model="Player.currentPlayer.rewardPoints" type="number" class="formTextfield_Large">
+	                <input id="rewardPoints" name="rewardPoints" ng-model="Player.currentPlayer.rewardPoints" type="number" class="formTextfield_Large" required>
 	            </div>
 			</div>
         </form>

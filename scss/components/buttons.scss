@@ -1,10 +1,4 @@
 /* BUTTONS */
-[ng-click],
-[data-ng-click],
-[x-ng-click] {
-    cursor: pointer;
-}
-
 button {
 	&.button {
 		color: $white;
@@ -53,7 +47,7 @@ button {
 		    padding: 4px 10px;
 		}
 	}
-	
+
 	&.button-primary {
 		background: $primary;
 	}

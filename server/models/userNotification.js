@@ -13,6 +13,9 @@ module.exports = function(sequelize, DataTypes) {
 	  },
 	  fromName: {
 	  		type: DataTypes.STRING
+	  },
+	  fromUsername: {
+	  		type: DataTypes.STRING
 	  }
   }, {
     classMethods: {

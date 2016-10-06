@@ -3,11 +3,13 @@
 const env = require('../config/environmentVariables');
 const models = require('../models');
 const fs = require('fs-extra');
+const Boom = require('boom');
+const im = require('imagemagick-stream');
 const nodemailer = require('nodemailer');
 const generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
 const buildRPUpdateEmail = require('../email-templates/rpUpdate');
 const buildRegistrationEmail = require('../email-templates/registrationSuccess');
-const Boom = require('boom');
+
 const createToken = require('../utils/createToken');
 const userFunctions = require('../utils/userFunctions');
 
@@ -34,7 +36,11 @@ let users = {
 				include: [
 				     { model: models.UserNotification },
 					 { model: models.UserPhoto },
-					 { model: models.UserFriend },
+					 {
+						 model: models.User,
+						 as: 'Friends',
+						 attributes: ['id', 'firstName', 'lastName', 'username', 'icon']
+					 },
 				  ],
             })
             .then(function(response) {
@@ -63,6 +69,35 @@ let users = {
 					password: hash
 	            })
 				.then(function(user) {
+					let defaultPath = env.uploadPath + 'players/profile_image_default.png';
+					let path = env.uploadPath + 'players/' + user.id + '/playerIcon/' + 'profile_image_default.png';
+					let thumbPath = env.uploadPath + 'players/' + user.id + '/playerIcon/thumbs/' + 'profile_image_default.png';
+
+					// Create default image in folder
+					fs.ensureFile(path, function(err) {
+						let read1 = fs.createReadStream(defaultPath);
+		                let file = fs.createWriteStream(path);
+						const resize = im().resize('100x100').quality(90);
+		                file.on('error', function(err) {
+		                    console.log('Icon upload error' + err);
+		                });
+		                read1.pipe(file);
+		                read1.on('end', function(err) {
+							fs.ensureFile(thumbPath, function(err) {
+								let read2 = fs.createReadStream(defaultPath);
+								let thumb = fs.createWriteStream(thumbPath);
+								file.on('error', function(err) {
+									console.log('Thumb upload error.' + err);
+								});
+								read2.pipe(resize).pipe(thumb);
+								read2.on('end', function(err) {
+									console.log('Default image created.');
+								});
+							});
+						})
+					});
+
+					// Send confirmation e-mail
 					let customerMailConfig = {
 						from: env.email.user,
 						to: user.email,
@@ -70,7 +105,7 @@ let users = {
 						html: buildRegistrationEmail(user)
 					};
 
-					transporter.sendMail(customerMailConfig, function(error, info){
+					transporter.sendMail(customerMailConfig, function(error, info) {
 						if(error) {
 							console.log(error);
 							reply('Somthing went wrong');

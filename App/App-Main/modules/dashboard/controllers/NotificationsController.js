@@ -36,22 +36,22 @@ function NotificationsController($rootScope, $state, $stateParams, PlayerService
 		let config = {
 			'UserId': parseFloat(notification.fromId),
 			'fromId': AuthService.currentUser.id,
+			'fromUsername': AuthService.currentUser.username,
 			'fromName': `${AuthService.currentUser.firstName} ${AuthService.currentUser.lastName}`,
 			'type': 'friendshipAccepted'
 		}
 		NotificationService.create(config).then((response) => {
 			NotificationService.remove(notification.id).then((response) => {
 				let friendData = {
-					UserId: controller.currentPlayer.id,
-					userIcon: controller.currentPlayer.icon,
-					InviteeId: parseFloat(notification.fromId)
+					UserId: parseFloat(notification.fromId),
+					InviteeId: controller.currentPlayer.id
 				}
 				FriendService.create(friendData).then(function(response) {
 					controller.notifications.splice(index, 1);
 					AuthService.totalNotifications = controller.notifications.length;
 					let config = {
 						type: 'success',
-						message: `You are now friends!`
+						message: `You and ${response.username} are now friends!`
 					}
 					showAlert(config);
 				})

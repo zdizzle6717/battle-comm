@@ -11,8 +11,7 @@ let userNotifications = {
 					$and: [
 						{ UserId: request.payload.UserId },
 						{ type: request.payload.type },
-						{ fromId: request.payload.fromId },
-						{ fromName: request.payload.fromName }
+						{ fromId: request.payload.fromId }
 					]
                 },
                 defaults: {
@@ -20,6 +19,7 @@ let userNotifications = {
                     type: request.payload.type,
                     status: request.payload.status,
                     fromId: request.payload.fromId,
+                    fromUsername: request.payload.fromUsername,
                     fromName: request.payload.fromName
                 }
             })

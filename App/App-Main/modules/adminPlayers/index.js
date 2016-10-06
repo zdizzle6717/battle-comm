@@ -27,7 +27,7 @@ mod.constant('API_ROUTES', require('../../constants/apiRoutes'));
 
 // Controllers
 mod.controller('PlayerListController', require('./controllers/PlayerListController'));
-mod.controller('PlayerController', require('./controllers/PlayerController'));
+mod.controller('PlayerEditController', require('./controllers/PlayerEditController'));
 
 // Filters
 mod.filter('jsonDate', require('./filters/jsonDate'));

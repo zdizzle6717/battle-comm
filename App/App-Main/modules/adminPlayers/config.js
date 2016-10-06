@@ -21,7 +21,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
         .state('player', {
           url: "/admin/players/:userId",
           template: require('./views/player.php'),
-          controller: 'PlayerController as Player'
+          controller: 'PlayerEditController as Player'
         });
 
 }

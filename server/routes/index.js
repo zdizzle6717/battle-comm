@@ -3,7 +3,7 @@
 let users = require('./users');
 let userNotifications = require('./userNotifications');
 let userPhotos = require('./userPhotos');
-let userFriends = require('./userFriends');
+let friends = require('./friends');
 
 let files = require('./files');
 let products = require('./products');
@@ -182,6 +182,7 @@ module.exports = [
                     type: Joi.string().required(),
                     status: Joi.string(),
                     fromId: Joi.number().required(),
+                    fromUsername: Joi.string().required(),
                     fromName: Joi.string().required()
                 }
             }
@@ -229,16 +230,15 @@ module.exports = [
 	// User photos
 	{
         method: 'POST',
-        path: '/api/userFriends',
+        path: '/api/friends',
         config: {
-            handler: userFriends.create,
+            handler: friends.create,
             tags: ['api'],
             description: 'Create a new user friend',
             notes: 'Create a new user friend',
             validate: {
                 payload: {
                     UserId: Joi.number().required(),
-					userIcon: Joi.string().required(),
                     InviteeId: Joi.number().required(),
                 }
             }
