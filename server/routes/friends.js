@@ -18,8 +18,8 @@ let friends = {
 				}
 			})
 			.then(function(invitee) {
-				user.setFriends(invitee).then(function(newFriend) {
-					invitee.setFriends(user).then(function(response) {
+				user.addFriend(invitee).then(function(newFriend) {
+					invitee.addFriend(user).then(function(response) {
 						reply(newFriend).code(200);
 					})
 				});

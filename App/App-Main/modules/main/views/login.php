@@ -3,7 +3,7 @@
 		<form name="loginForm" ng-submit="Login.login(Login.credentials)" novalidate>
 			<h2 class="push-bottom-2x">LOGIN</h2>
 			<div class="form-group">
-				<label class="required">Email/Handle</label>
+				<label class="required">Email/Username</label>
 				<input type="text" ng-model="Login.credentials.username" required/>
 			</div>
 			<div class="form-group">
@@ -23,7 +23,7 @@
 				<button class="button button-primary" type="submit" ng-disabled="loginForm.$invalid">Log in</button>
 			</div>
 			<div class="form-group text-center">
-				<p class="required" ng-if="Login.incorrectUsername">Incorrect user handle or email.</p>
+				<p class="required" ng-if="Login.incorrectUsername">Incorrect username or email.</p>
 				<p class="required" ng-if="Login.incorrectPassword">Incorrect password.</p>
 			</div>
 		</form>
