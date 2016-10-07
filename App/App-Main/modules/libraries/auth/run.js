@@ -28,7 +28,7 @@ function run($rootScope, $state, AuthService, $http) {
 								timeout: '3500'
 							}
 							showAlert(config);
-							$state.go('login', {reload:true});
+							$state.go('login', {}, {reload:true});
 						}
 					})
 					.catch(function(response) {
@@ -39,7 +39,7 @@ function run($rootScope, $state, AuthService, $http) {
 						}
 						showAlert(config);
 						console.log(response.status + ": Unauthenticated, please log in");
-						$state.go('login', {reload: true});
+						$state.go('login', {}, {reload: true});
 					});
 			}
 		}

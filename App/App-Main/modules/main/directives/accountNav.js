@@ -38,7 +38,7 @@ function accountNav($compile, $state, $rootScope, AuthService) {
 
 		function logout() {
 			AuthService.logout();
-			$state.go('login');
+			$state.go('login', {}, {reload: true});
 		}
 	}
 }

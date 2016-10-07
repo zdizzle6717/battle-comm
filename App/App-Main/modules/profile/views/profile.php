@@ -26,16 +26,16 @@
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
 	<div class="text-center" ng-if="!Profile.alreadyFriends">
-		<p ng-if="!Profile.isMe"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Add as Friend</a></p>
+		<p ng-if="!Profile.isMe"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Send Ally Request</a></p>
 	</div>
 </div>
 <div class="full_width">
-	<h2>Friends</h2>
+	<h2>Allies</h2>
 	<div class="friend-list">
 		<img class="friend-icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Profile.currentUser.Friends">
 	</div>
 	<div class="text-center" ng-if="Profile.currentUser.Friends.length <= 0">
-		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>
+		<h5>This is a new player. Send an ally request to welcome them to Battle-Comm!</h5>
 	</div>
 </div>
 <div class="full_width">

@@ -42,9 +42,6 @@
 			<span access-level="['systemAdmin', 'venueAdmin']">
 				<div user-nav></div>
 			</span>
-			<span access-level="['systemAdmin']">
-				<div admin-nav></div>
-			</span>
 			<div ui-view class="view-frame"></div>
 			<div loading></div>
 			<div notification></div>

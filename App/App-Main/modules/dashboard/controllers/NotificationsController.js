@@ -51,7 +51,7 @@ function NotificationsController($rootScope, $state, $stateParams, PlayerService
 					AuthService.totalNotifications = controller.notifications.length;
 					let config = {
 						type: 'success',
-						message: `You and ${response.username} are now friends!`
+						message: `You and ${response.username} are now allies!`
 					}
 					showAlert(config);
 				})

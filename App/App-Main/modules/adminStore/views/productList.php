@@ -1,3 +1,6 @@
+<span access-level="['systemAdmin']">
+	<div admin-nav></div>
+</span>
 <div class="full_width">
 	<h2>System Admin</h2>
 </div>

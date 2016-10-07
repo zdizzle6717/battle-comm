@@ -1,7 +1,7 @@
 'use strict';
 
-AuthService.$inject = ['$q', '$http', 'API_ROUTES'];
-function AuthService($q, $http, API_ROUTES) {
+AuthService.$inject = ['$rootScope', '$q', '$http', 'API_ROUTES'];
+function AuthService($rootScope, $q, $http, API_ROUTES) {
 	let _user = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser')) || { username: '', password: '' };
 	let _isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated')) || JSON.parse(sessionStorage.getItem('isAuthenticated')) || false;
 
@@ -120,7 +120,6 @@ function AuthService($q, $http, API_ROUTES) {
 		localStorage.removeItem('currentUser');
 		localStorage.removeItem('isAuthenticated');
 	}
-
 }
 
 module.exports = AuthService;

@@ -1,3 +1,6 @@
+<span access-level="['systemAdmin']">
+	<div admin-nav></div>
+</span>
 <div class="full_width">
 	<form class="" style="margin:0 auto;" name="pointAssignmentForm" novalidate>
 		<h2 class="push-bottom-2x">Point Assignment</h2>

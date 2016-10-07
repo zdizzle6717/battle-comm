@@ -42,7 +42,6 @@ mod.config(require('./config'));
 mod.constant('API_ROUTES', require('../../constants/apiRoutes'));
 
 // Directives
-mod.directive('userNav', require('./directives/userNav'));
 mod.directive('accountNav', require('./directives/accountNav'));
 mod.directive('adminNav', require('./directives/adminNav'));
 mod.directive('popup', require('./directives/popup'));

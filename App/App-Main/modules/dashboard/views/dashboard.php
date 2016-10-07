@@ -93,12 +93,12 @@
 	</div>
 </div>
 <div class="full_width">
-	<h2>Friends</h2>
+	<h2>Allies</h2>
 	<div class="friend-list">
 		<img class="friend-icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Dashboard.currentUser.Friends">
 	</div>
 	<div class="text-center" ng-if="Dashboard.currentUser.Friends.length <= 0">
-		<h5>Search by player profile and click 'Add Friend' to send a friend request.</h5>
+		<h5>Search by player profile and click 'Add Ally' to send a ally request.</h5>
 	</div>
 </div>
 <div class="full_width ">
