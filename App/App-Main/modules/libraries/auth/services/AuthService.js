@@ -9,7 +9,12 @@ function AuthService($rootScope, $q, $http, API_ROUTES) {
 		'currentUser': {
 			'get': () => {
 				return _user;
-			}
+			},
+			'set': (userObject) => {
+				for (var prop in userObject) {
+					_user[prop] = userObject[prop];
+				}
+			},
 		},
 		'isAuthenticated': {
 			'get': () => {

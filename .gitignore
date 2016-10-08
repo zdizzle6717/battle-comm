@@ -37,17 +37,8 @@ jspm_packages
 .node_repl_history
 
 # Database Connections and Credentials
-RPStore/Connections*
 **/apiRoutes.js
 **/js/app.js
-Admin/App-Admin/modules/main/constants/apiRoutes.js
-Admin/App-Admin/modules/news/constants/apiRoutes.js
-Admin/App-Admin/modules/rpstore/constants/apiRoutes.js
-Admin/js/app.js
-News/js/app.js
-RPStore/js/app.js
-Connections
-dmxConnections
 server/config*
 
 # Upload folders
@@ -55,5 +46,4 @@ uploads*
 
 # SCSS
 .sass-cache
-Styles/global.css
 

@@ -30,7 +30,7 @@
 	</div>
 </div>
 <div class="full_width">
-	<h2>Allies</h2>
+	<h2>Allies <a ui-sref="allyList">View All</a></h2>
 	<div class="friend-list">
 		<span class="icon-box" ng-repeat="friend in Profile.currentUser.Friends">
 			<img class="icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})">

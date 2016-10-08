@@ -72,6 +72,12 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Us
         PlayerService.updatePlayer(controller.currentUser.id, newData)
         .then(function(response) {
             controller.currentPlayer = response;
+			AuthService.currentUser = {
+				firstName: response.firstName,
+				lastName: response.lastName,
+				icon: response.icon,
+				email: response.email
+			};
             showAlert({
                 type: 'success',
                 message: 'Your profile was successfully updated.'
