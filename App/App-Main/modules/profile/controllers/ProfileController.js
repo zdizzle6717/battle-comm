@@ -1,11 +1,12 @@
 'use strict';
 
-ProfileController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService', 'PlayerService', 'NotificationService'];
-function ProfileController($rootScope, $state, $stateParams, AuthService, PlayerService, NotificationService) {
+ProfileController.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService', 'PlayerService', 'FriendService', 'NotificationService'];
+function ProfileController($rootScope, $state, $stateParams, AuthService, PlayerService, FriendService, NotificationService) {
     let controller = this;
 
     controller.readOnly = true;
 	controller.addFriend = addFriend;
+	controller.removeFriend = removeFriend;
 	controller.isMe = false;
 
 	init();
@@ -63,6 +64,21 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 					message: 'Friend request already sent.'
 				})
 			};
+		})
+	}
+
+	function removeFriend(username) {
+		let friendData = {
+			UserId: parseFloat($stateParams.playerId),
+			InviteeId: AuthService.currentUser.id
+		}
+		FriendService.remove(friendData).then(function(response) {
+			let config = {
+				type: 'success',
+				message: `You and ${username} are no longer allies!`
+			}
+			showAlert(config);
+			$state.go('dashboard');
 		})
 	}
 

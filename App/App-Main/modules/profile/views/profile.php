@@ -25,8 +25,9 @@
 	<h1 class="text-center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
-	<div class="text-center" ng-if="!Profile.alreadyFriends">
-		<p ng-if="!Profile.isMe"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Send Ally Request</a></p>
+	<div class="text-center" ng-if="!Profile.isMe">
+		<p ng-if="!Profile.alreadyFriends"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Send Ally Request</a></p>
+		<p ng-if="Profile.alreadyFriends"><a ng-click="Profile.removeFriend(Profile.currentUser.username)"><i class="fa fa-plus"></i> Remove Alliance</a></p>
 	</div>
 </div>
 <div class="full_width">

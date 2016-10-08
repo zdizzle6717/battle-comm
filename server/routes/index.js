@@ -244,6 +244,22 @@ module.exports = [
             }
         }
     },
+	{
+        method: 'DELETE',
+        path: '/api/friends',
+        config: {
+            handler: friends.remove,
+            tags: ['api'],
+            description: 'Remove a friend association',
+            notes: 'Remove a friend association',
+            validate: {
+                payload: {
+                    UserId: Joi.number().required(),
+                    InviteeId: Joi.number().required(),
+                }
+            }
+        }
+    },
 
 	// User photos
 	{
