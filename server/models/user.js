@@ -96,6 +96,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
 				User.hasMany(models.ProductOrder);
 				User.hasMany(models.User, { as: 'Friends', joinTableName: 'userHasFriends'});
+				User.belongsToMany(models.User, { as: 'Friends', through: 'userHasFriends'});
 				User.hasMany(models.UserNotification);
                 User.hasMany(models.UserMessage);
                 User.hasMany(models.UserAchievement);

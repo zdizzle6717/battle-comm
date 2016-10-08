@@ -6,7 +6,6 @@ const Boom = require('boom');
 // Product Route Configs
 let friends = {
     create: function(request, reply) {
-		console.log('Request: ' + request.payload)
 		models.User.find({
 			where: {
 				id: request.payload.UserId
