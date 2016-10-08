@@ -52,6 +52,6 @@ sass.render({
             result.warnings().forEach(function(warn) {
                 console.warn(warn.toString());
             });
-            fs.writeFileSync('Styles/global.css', dataString, 'utf8');
+            fs.writeFileSync('styles/global.css', dataString, 'utf8');
         });
 });

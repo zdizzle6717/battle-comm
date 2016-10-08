@@ -85,9 +85,9 @@
             <!--START REPEAT-->
             <tr dir-paginate="news in News.allPosts | filter: query | orderBy: News.selectedSort | itemsPerPage: News.pageSize" >
               <td data-title="News ID"><a ui-sref="post({ id: news.id })">{{news.id}}</a></td>
-              <td data-title="Name">{{news.title}}</td>
-              <td data-title="Price">{{news.userLoginId}}</td>
-              <td data-title="Quantity">{{news.tags}}</td>
+              <td data-title="Title">{{news.title}}</td>
+              <td data-title="Author">{{news.User.firstName}} {{news.User.lastName}}</td>
+              <td data-title="Tags">{{news.tags}}</td>
               <td data-title="Featured?">{{news.featured}}</td>
               <td data-title="Last Updated">{{news.updatedAt | jsonDate | date: 'medium'}}</td>
               <td data-title="View/Edit"><a ui-sref="post({ id: news.id })"><span class="fa fa-edit"></span></a></td>

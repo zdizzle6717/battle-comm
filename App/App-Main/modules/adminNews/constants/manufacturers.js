@@ -13,6 +13,9 @@ let manufacturers = [{
         "name": "Show All Systems...",
         "searchValue": ""
     }, {
+        "name": "General",
+        "searchValue": "mnu901Gen"
+    }, {
         "name": "Chess",
         "searchValue": "mnu901CHESS"
     }, {

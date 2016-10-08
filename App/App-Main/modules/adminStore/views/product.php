@@ -86,7 +86,8 @@
                         <input id="imgAlt" name="imgAlt" ng-model="Product.currentProduct.imgOneFront" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront" params="['rpstore', Product.currentProduct.manufacturerId]"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront" params="['rpstore', Product.currentProduct.manufacturer.id]" ng-if="Product.isNew"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneFront" params="['rpstore', Product.currentProduct.manufacturerId]" ng-if="!Product.isNew"></div>
                     </div>
                 </div>
                 <hr />
@@ -100,7 +101,8 @@
                         <input id="imgOneBack" name="imgOneBack" ng-model="Product.currentProduct.imgOneBack" type="text" class="formTextfield_Large" disabled required>
                     </div>
                     <div class="three_column_1">
-                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack" params="['rpstore', Product.currentProduct.manufacturerId]"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack" params="['rpstore', Product.currentProduct.manufacturer.id]" ng-if="Product.isNew"></div>
+                        <div file-upload ratio="53:80" model="Product.currentProduct.imgOneBack" params="['rpstore', Product.currentProduct.manufacturerId]" ng-if="!Product.isNew"></div>
                         <div notification></div>
                     </div>
                 </div>

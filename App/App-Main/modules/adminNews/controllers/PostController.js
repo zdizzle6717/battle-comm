@@ -55,6 +55,7 @@ function PostController($rootScope, $state, $stateParams, NewsService, manufactu
     function savePost(data, images) {
         data.manufacturerId = data.manufacturer ? data.manufacturer.id : data.manufacturerId;
         delete data.manufacturer;
+		delete data.User;
         if ($stateParams.id) {
             controller.readOnly = true;
             NewsService.updatePost($stateParams.id, data)
