@@ -20,6 +20,14 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 		  params: {
 			  playerId: ''
 		  }
+        })
+		.state('allyList', {
+          url: "/allyList/:playerId",
+          template: require('./views/allyList.php'),
+          controller: 'ProfileController as Profile',
+		  params: {
+			  playerId: ''
+		  }
         });
 
 }

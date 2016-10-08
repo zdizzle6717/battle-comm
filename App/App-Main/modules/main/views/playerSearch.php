@@ -24,7 +24,3 @@
 		</tr>
 	</table>
 </div>
-
-<div class="full_width text-right">
-	<a ng-click="Dashboard.logout()">Logout?</a>
-</div>

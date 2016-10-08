@@ -72,7 +72,7 @@
                         	<div class="full_width right">
                             <h2 class="no_shadow no_margin"><a href="#test-popup" class="open-popup-link">...And many, many more--></a></h2>
                             <div id="test-popup" class="game-list-popup mfp-hide">
-                              <?php include 'includes/full-game-list.php'; ?>
+                              <?php include 'Templates/includes/full-game-list.php'; ?>
                             </div>
                             <script>
                                 $('.open-popup-link').magnificPopup({
