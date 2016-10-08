@@ -32,7 +32,10 @@
 <div class="full_width">
 	<h2>Allies</h2>
 	<div class="friend-list">
-		<img class="friend-icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})" ng-repeat="friend in Profile.currentUser.Friends">
+		<span class="icon-box" ng-repeat="friend in Profile.currentUser.Friends">
+			<img class="icon" ng-src="/uploads/players/{{friend.id}}/playerIcon/thumbs/{{friend.icon}}" ui-sref="profile({'playerId': friend.id})">
+			<span class="name-label">{{friend.firstName + ' ' + friend.lastName}}</span>
+		</span>
 	</div>
 	<div class="text-center" ng-if="Profile.currentUser.Friends.length <= 0">
 		<h5>This is a new player. Send an ally request to welcome them to Battle-Comm!</h5>

@@ -20,7 +20,7 @@
 			<td><a>{{player.firstName}}  {{player.lastName}}</a></td>
 			<td><a>{{player.username}}</a></td>
 			<td></td>
-			<td><img ng-src="/uploads/players/profile_image_default.png"/></td>
+			<td><img ng-src="/uploads/players/{{player.id}}/playerIcon/thumbs/{{player.icon}}"></td>
 		</tr>
 	</table>
 </div>

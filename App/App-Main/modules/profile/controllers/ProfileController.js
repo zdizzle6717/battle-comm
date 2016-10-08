@@ -21,11 +21,7 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 				if ($stateParams.playerId == AuthService.currentUser.id) {
 					controller.isMe = true;
 				}
-				for (var i in controller.currentUser.Friends) {
-					if (controller.currentUser.Friends[i].id == AuthService.currentUser.id) {
-						controller.alreadyFriends = true;
-					}
-				}
+				checkFriendship();
 			}).catch(function() {
 				let config = {
 					type: 'error',
@@ -38,6 +34,14 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 			$state.go('login');
 		}
 	};
+
+	function checkFriendship() {
+		for (var i in controller.currentUser.Friends) {
+			if (controller.currentUser.Friends[i].id == AuthService.currentUser.id) {
+				controller.alreadyFriends = true;
+			}
+		}
+	}
 
 	function addFriend() {
 		let config = {
