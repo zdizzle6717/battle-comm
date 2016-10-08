@@ -6,21 +6,25 @@ const Boom = require('boom');
 // Product Route Configs
 let friends = {
     create: function(request, reply) {
+		console.log('Request: ' + request.payload)
 		models.User.find({
 			where: {
 				id: request.payload.UserId
 			}
 		})
-        .then(function(user) {
+        .then(function(user1) {
 			models.User.find({
 				where: {
 					id: request.payload.InviteeId
 				}
 			})
-			.then(function(invitee) {
-				user.addFriend(invitee).then(function(newFriend) {
-					invitee.addFriend(user).then(function(response) {
-						reply(newFriend).code(200);
+			.then(function(user2) {
+				user1.addFriend(user2).then(function(user1Response) {
+					user2.addFriend(user1).then(function(user2Response) {
+						let response = [];
+						response.push(user1Response);
+						response.push(user2Response);
+						reply(response).code(200);
 					})
 				});
 			})
