@@ -160,11 +160,12 @@ input {
 	    padding: 0.5em 0.6em;
 	    display: inline-block;
 	    border: 1px solid rgba(154,157,158,.5);
-	    box-shadow: 0 1px 3px 1px rgba(119, 120, 132, 0.25);
+	    box-shadow: 0 1px 3px 1px rgba(119, 120, 132, 0.25) inset;
 	    border-radius: 4px;
 	    vertical-align: middle;
 	    box-sizing: border-box;
 	    text-align: left;
+		background: rgba(255,255,255,0.75);
 	}
 
 	&[type='button'] {
