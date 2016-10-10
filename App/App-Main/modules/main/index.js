@@ -45,6 +45,7 @@ mod.constant('API_ROUTES', require('../../constants/apiRoutes'));
 mod.directive('accountNav', require('./directives/accountNav'));
 mod.directive('adminNav', require('./directives/adminNav'));
 mod.directive('popup', require('./directives/popup'));
+mod.directive('chatBox', require('./directives/chatBox'));
 
 // Controllers
 mod.controller('PlayerSearchController', require('./controllers/PlayerSearchController'));
@@ -58,7 +59,8 @@ mod.service('FriendService', require('./services/FriendService'));
 mod.service('NotificationService', require('./services/NotificationService'));
 mod.service('UserPhotoService', require('./services/UserPhotoService'));
 
-
+// Factories
+mod.factory('socket', require('./factories/socket'));
 
 
 module.exports = moduleName;

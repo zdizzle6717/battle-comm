@@ -65,22 +65,23 @@
                         <div class="frame_l_bar col"></div>
                         <div class="frame_r_bar col"></div>
                         <div class="frame_center col">
+							<br>
                    	    	<div class="four_column_1"><img src="media/DZC_Logo_white_web_grande.png" class="fill" alt=""/></div>
                             <div class="four_column_1"><img src="media/MTGlogo.png" class="fill" alt=""/></div>
                             <div class="four_column_1"><img src="media/fantasy_flight-SWX01.png" class="fill" alt=""/></div>
                             <div class="four_column_1"><img src="media/LandingPageLogo_40k.png" class="fill" alt=""/></div>
-                        	<div class="full_width right">
-                            <h2 class="no_shadow no_margin"><a href="#test-popup" class="open-popup-link">...And many, many more--></a></h2>
-                            <div id="test-popup" class="game-list-popup mfp-hide">
-                              <?php include 'Templates/includes/full-game-list.php'; ?>
-                            </div>
-                            <script>
-                                $('.open-popup-link').magnificPopup({
-                                  type:'inline',
-                                  midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
-                                });
-                            </script>
-                        </div>
+                        	<div class="full_width push-top-2x text-right">
+	                            <h2 class="no_shadow no_margin"><a href="#test-popup" class="open-popup-link">...And many, many more--></a></h2>
+	                            <div id="test-popup" class="game-list-popup mfp-hide">
+	                              <?php include 'Templates/includes/full-game-list.php'; ?>
+	                            </div>
+	                            <script>
+	                                $('.open-popup-link').magnificPopup({
+	                                  type:'inline',
+	                                  midClick: true
+	                                });
+	                            </script>
+	                        </div>
                         </div>
                     </div>
                     <div class="frame_b row">

@@ -8,18 +8,27 @@
     z-index: 0;
 }
 
-.animate.ng-enter, .animate.ng-leave {
-  transition: all 500ms;
+.animate {
+	animation-duration: 500ms;
 }
 
-.animate.ng-enter,
-.animate.ng-leave.ng-leave-active {
-  opacity:0;
+.animate-fast {
+	animation-duration: 250ms;
 }
 
-.animate.ng-leave,
-.animate.ng-enter.ng-enter-active {
-  opacity:1;
+.animate,
+.animate-fast {
+	&.fade {
+		&.ng-enter,
+		&.ng-hide-remove {
+			animation-name: fadeIn;
+		}
+
+		&.ng-leave,
+		&.ng-hide-add {
+			animation-name: fadeOut;
+		}
+	}
 }
 
 .view-frame.ng-enter,
@@ -60,7 +69,7 @@
 }
 
 /* Animation */
-@-webkit-keyframes flyin {
+@keyframes fly-in {
     0% {
         left: -100%;
     }
@@ -69,61 +78,7 @@
         left: 0;
     }
 }
-@-moz-keyframes flyin {
-    0% {
-        left: -100%;
-    }
-
-    100% {
-        left: 0;
-    }
-}
-@-o-keyframes flying {
-    0% {
-        left: -100%;
-    }
-
-    100% {
-        left: 0;
-    }
-}
-@keyframes flyin {
-    0% {
-        left: -100%;
-    }
-
-    100% {
-        left: 0;
-    }
-}
-@-webkit-keyframes flyout {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -100%;
-    }
-}
-@-moz-keyframes flyout {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -100%;
-    }
-}
-@-o-keyframes flyout {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -100%;
-    }
-}
-@keyframes flyout {
+@keyframes fly-out {
     0% {
         left: 0;
     }
@@ -141,43 +96,7 @@
         opacity: 1;
     }
 }
-@-moz-keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-@-webkit-keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
 @keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-@-moz-keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-@-webkit-keyframes fade-out {
     from {
         opacity: 1;
     }

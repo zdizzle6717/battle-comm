@@ -6,15 +6,6 @@ require('angularjs-slider');
 
 
 let mod = angular.module(moduleName, [
-    // Angular
-    require('angular-animate'),
-    require('angular-ui-router'),
-    require('angular-sanitize'),
-    require('angular-utils-pagination'),
-    require('angular-scroll'),
-    require('angular-ui-mask'),
-
-    require('../libraries/loading'),
     'rzModule'
 ]);
 

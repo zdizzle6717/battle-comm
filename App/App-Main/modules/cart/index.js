@@ -3,9 +3,7 @@
 const moduleName = 'cart';
 const angular = require('angular');
 
-
 let mod = angular.module(moduleName, [
-
 ]);
 
 // Run

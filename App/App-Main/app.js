@@ -9,6 +9,7 @@ const appName = 'Battle-Comm';
 const appVersion = '1.0.0';
 
 let app = angular.module(appName, [
+	require('angular-animate'),
     require('./modules/main')
 ]);
 

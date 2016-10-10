@@ -9,21 +9,44 @@ const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const hapiUploader = require('hapi-uploader');
 const HapiAuthJwt = require('hapi-auth-jwt');
+
 let models = require('./models');
 let env = require('./config/environmentVariables');
 let routes = require('./routes');
 
 // Create Server
-const server = new Hapi.Server();
+var server = new Hapi.Server();
 server.connection({
-    port: env.port,
+    port: env.port.api,
     routes: {
         cors: {
             origin: env.cors.origin
         }
-    }
+    },
+	labels: ['api']
+});
+server.connection({
+    port: env.port.chat,
+    routes: {
+        cors: {
+            origin: env.cors.origin
+        }
+    },
+	labels: ['chat']
 });
 
+
+// Socket.io
+// Register Socket.io chat Config
+server.register(require('./chat'), function(err) {
+	if (err) {
+		throw err;
+	}
+
+});
+
+
+// Documentation (Swagger) Config
 const options = {
     info: {
         'title': 'Hapi Stack API Documentation',
@@ -52,21 +75,22 @@ server.register([
         } else {
             server.log(['start'], 'hapi-swagger interface loaded');
         }
-    });
+    }
+);
 
-server.register({
-    register: hapiUploader,
-    options: {
-        upload: {
-            path: './'
-        }
-    }
-}, (err) => {
-    if (err) {
-        console.log('Failed loading plugin', err);
-        process.exit(1)
-    }
-});
+// server.register({
+//     register: hapiUploader,
+//     options: {
+//         upload: {
+//             path: './'
+//         }
+//     }
+// }, (err) => {
+//     if (err) {
+//         console.log('Failed loading plugin', err);
+//         process.exit(1)
+//     }
+// });
 
 // Register hapi-auth-jwt Plugin
 server.register(HapiAuthJwt, (err) => {
@@ -78,17 +102,17 @@ server.register(HapiAuthJwt, (err) => {
 	});
 });
 
-// Routes
+// Api Routes
 for (var route in routes) {
-    server.route(routes[route]);
+    server.select('api').route(routes[route]);
 }
-
 
 models.sequelize.sync().then(function() {
     server.start((err) => {
         if (err) {
             throw err;
         }
-        console.log('Server running at:', server.info.uri);
+        console.log('API server running at:', server.select('api').info.uri);
+        console.log('Chat server running at:', server.select('chat').info.uri);
     });
 });
