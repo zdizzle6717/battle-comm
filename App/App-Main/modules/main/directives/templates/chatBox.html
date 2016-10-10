@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<form class="send" ng-submit="sendMessage()">
-			<input name="newMessage" type="text" id="newMessage" ng-maxlength="300" required/>
+			<input name="newMessage" type="text" id="newMessage" ng-maxlength="300" autocomplete="off" required/>
 			<button type="submit" class="button button-primary" ng-disabled="newMessage.$invalid">Send</button>
 		</form>
 	</div>

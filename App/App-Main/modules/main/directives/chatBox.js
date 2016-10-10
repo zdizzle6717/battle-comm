@@ -51,7 +51,7 @@ function chatBox($compile, $state, $rootScope, $timeout, AuthService, socket) {
 			};
 			let sentTime = new Date().getTime();
 			let time = getTimeElapsed(sentTime - initialTime);
-			time = (time[3] > 0 ? time[3] + 'h' : '') + (time[2] > 0 ? time[2] + 'm' : '') + time[1] + 's';
+			time = (time[3] > 0 ? time[3] + 'h ' : '') + (time[2] > 0 ? time[2] + 'm ' : '') + time[1] + 's';
 			theMessage.time = time;
 			socket.emit('chat:sendMessage', theMessage);
 		}
