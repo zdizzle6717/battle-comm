@@ -2,7 +2,10 @@
 	<span ng-click="toggleChat()" class="fa fa-users"></span>
 	<div class="clickaway-backdrop" ng-click="toggleChat()" ng-if="showChat"></div>
 	<div class="box" ng-if="showChat">
-		<div class="header">Battle-Comm: General Chat</div>
+		<div class="header">
+			<span class="title">Battle-Comm: General Chat ({{connections}})</span>
+			<span class="fa fa-times-circle-o" ng-click="toggleChat()"></span>
+		</div>
 		<div class="messages" id="messages">
 			<div class="message" ng-repeat="message in messages">
 				<span class="username" ng-class="{red: $index%2 === 0, blue: $index%2 !== 0}">

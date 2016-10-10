@@ -19,6 +19,7 @@ function chatBox($compile, $state, $rootScope, $timeout, AuthService, socket) {
 		scope.newMessage = '';
 		scope.sendMessage = sendMessage;
 		let initialTime = new Date().getTime();
+		let container;
 
 		checkAuthentication();
 
@@ -46,28 +47,38 @@ function chatBox($compile, $state, $rootScope, $timeout, AuthService, socket) {
 			let msg = document.querySelector('#newMessage').value;
 			let theMessage = {
 					username: scope.user.username,
-					text: msg,
-					time: ''
+					text: msg
 			};
+			let sentTime = new Date().getTime();
+			let time = getTimeElapsed(sentTime - initialTime);
+			time = (time[3] > 0 ? time[3] + 'h' : '') + (time[2] > 0 ? time[2] + 'm' : '') + time[1] + 's';
+			theMessage.time = time;
 			socket.emit('chat:sendMessage', theMessage);
 		}
 
 		// Socket Watchers
 
 		socket.on('chat:addMessage', function(msg) {
-			let sentTime = new Date().getTime();
-			let time = getTimeElapsed(sentTime - initialTime);
-			time = (time[3] > 0 ? time[3] + 'h' : '') + (time[2] > 0 ? time[2] + 'm' : '') + time[1] + 's';
-			msg.time = time;
 			if (scope.messages.length > 298) {
 				scope.messages = scope.messages.splice(scope.messages.length - 200, scope.messages.length)
 			}
 			scope.messages.push(msg);
-			var container = document.getElementById('messages');
+			container = document.getElementById('messages');
 			$timeout(function() {
 				container.scrollTop = container.scrollHeight;
 			});
 			document.querySelector('#newMessage').value = '';
+		});
+
+		socket.on('chat:storedMessages', function(msgs) {
+			for (var i in msgs) {
+				msgs[i].time = 'recent'
+			}
+			scope.messages = msgs;
+		});
+
+		socket.on('chat:totalConnections', function(total) {
+			scope.connections = total;
 		});
 
 		function getTimeElapsed(time) {
