@@ -30,7 +30,7 @@
 	</div>
 	<div class="text-center" ng-if="!Profile.isMe">
 		<p ng-if="!Profile.alreadyFriends"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Send Ally Request</a></p>
-		<p ng-if="Profile.alreadyFriends"><a ng-click="Profile.removeFriend(Profile.currentUser.username)"><i class="fa fa-minu"></i> Remove Alliance</a></p>
+		<p ng-if="Profile.alreadyFriends"><a ng-click="Profile.removeFriend(Profile.currentUser.username)"><i class="fa fa-minus"></i> Remove Alliance</a></p>
 	</div>
 </div>
 <div class="full_width">
