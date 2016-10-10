@@ -1,6 +1,6 @@
 'use strict';
 
-let port = require('./port');
+let port = require('./port').api;
 
 let routes = {
 	'users': {

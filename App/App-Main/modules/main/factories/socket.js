@@ -1,9 +1,10 @@
 'use strict';
 
-socket.$inject = ['$rootScope'];
+let serverPort = require('../../../constants/port').chat;
 
+socket.$inject = ['$rootScope'];
 function socket($rootScope) {
-    let socket = io.connect('http://52.26.195.10:8081/');
+    let socket = io.connect(`http://52.26.195.10:${serverPort}/`);
 
     return {
         on: function(eventName, callback) {
