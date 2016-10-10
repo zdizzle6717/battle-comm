@@ -1,6 +1,8 @@
 'use strict';
 
 let Handlers = require('./handlers');
+let Filter = require('bad-words');
+let profanityFilter = new Filter();
 
 exports.register = function(server, options, next) {
     var io = require('socket.io')(server.select('chat').listener);
@@ -16,6 +18,7 @@ exports.register = function(server, options, next) {
 
 
         socket.on('chat:sendMessage', function(msg) {
+			msg.text = profanityFilter.clean(msg.text);
             io.emit('chat:addMessage', msg);
 			storedMessages.push(msg);
 			if (storedMessages.length > 8) {
