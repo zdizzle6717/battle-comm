@@ -109,6 +109,10 @@ module.exports = [
             tags: ['api'],
             description: 'Patch a User Login by id',
             notes: 'Patch a User Login by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -158,6 +162,10 @@ module.exports = [
             tags: ['api'],
             description: 'Return User/Player search results',
             notes: 'Return User/Player search results',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
 			validate: {
 				payload: {
                     maxResults: Joi.number().optional(),
@@ -176,6 +184,10 @@ module.exports = [
             tags: ['api'],
             description: 'Add a new userNotification',
             notes: 'Add a new userNotification',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     UserId: Joi.number().required(),
@@ -196,6 +208,10 @@ module.exports = [
             tags: ['api'],
             description: 'Update a user notification by id',
             notes: 'Update a user notification by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -218,6 +234,10 @@ module.exports = [
             tags: ['api'],
             description: 'Delete a user notification by id',
             notes: 'Delete a user notification by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -236,6 +256,10 @@ module.exports = [
             tags: ['api'],
             description: 'Create a new user friend',
             notes: 'Create a new user friend',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     UserId: Joi.number().required(),
@@ -252,6 +276,10 @@ module.exports = [
             tags: ['api'],
             description: 'Remove a friend association',
             notes: 'Remove a friend association',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     UserId: Joi.number().required(),
@@ -270,6 +298,10 @@ module.exports = [
             tags: ['api'],
             description: 'Create a new user photo',
             notes: 'Create a new user photo',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     UserId: Joi.number().required(),
@@ -294,6 +326,10 @@ module.exports = [
             tags: ['api'],
             description: 'Upload a new file',
             notes: 'Upload a new file',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
         },
         handler: files.create
     },
@@ -306,6 +342,10 @@ module.exports = [
             tags: ['api'],
             description: 'Get one product by id',
             notes: 'Get one product by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -320,7 +360,11 @@ module.exports = [
         config: {
             tags: ['api'],
             description: 'Get all products',
-            notes: 'Get all products'
+            notes: 'Get all products',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
         },
         handler: products.getAll
     },
@@ -331,6 +375,10 @@ module.exports = [
             tags: ['api'],
             description: 'Add a new product',
             notes: 'Add a new product',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['systemAdmin']
+            },
             validate: {
                 payload: {
                     SKU: Joi.string().required(),
@@ -370,6 +418,10 @@ module.exports = [
             tags: ['api'],
             description: 'Update a product by id',
             notes: 'Update a product by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -412,6 +464,10 @@ module.exports = [
             tags: ['api'],
             description: 'Delete a product by id',
             notes: 'Delete a product by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -430,6 +486,10 @@ module.exports = [
             tags: ['api'],
             description: 'Get one productOrder by id',
             notes: 'Get one productOrder by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -444,7 +504,11 @@ module.exports = [
         config: {
             tags: ['api'],
             description: 'Get all productOrders',
-            notes: 'Get all productOrders'
+            notes: 'Get all productOrders',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
         },
         handler: productOrders.getAll
     },
@@ -455,6 +519,10 @@ module.exports = [
             tags: ['api'],
             description: 'Add a new productOrder',
             notes: 'Add a new productOrder',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     status: Joi.string().required(),
@@ -482,6 +550,10 @@ module.exports = [
             tags: ['api'],
             description: 'Update a productOrder by id',
             notes: 'Update a productOrder by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -512,6 +584,10 @@ module.exports = [
             tags: ['api'],
             description: 'Delete a productOrder by id',
             notes: 'Delete a productOrder by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -555,6 +631,10 @@ module.exports = [
             tags: ['api'],
             description: 'Add a new newsPost',
             notes: 'Add a new newsPost',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['newsContributor', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     UserId: Joi.number().required(),
@@ -580,6 +660,10 @@ module.exports = [
             tags: ['api'],
             description: 'Update a newsPost by id',
             notes: 'Update a newsPost by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['newsContributor', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -608,6 +692,10 @@ module.exports = [
             tags: ['api'],
             description: 'Delete a newsPost by id',
             notes: 'Delete a newsPost by id',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['newsContributor', 'systemAdmin']
+            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -625,6 +713,10 @@ module.exports = [
             tags: ['api'],
             description: 'Add new points assignment',
             notes: 'Add new points assignment by e-mail',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
             validate: {
                 payload: {
                     venueEvent: {

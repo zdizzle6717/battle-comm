@@ -256,17 +256,17 @@ let users = {
 				$or: [
 				    {
 				      firstName: {
-				        $like: '%' + request.payload.query + '%'
+				        $ilike: '%' + request.payload.query + '%'
 				      }
 				    },
 				    {
 				      lastName: {
-				        $like: '%' + request.payload.query + '%'
+				        $ilike: '%' + request.payload.query + '%'
 				      }
 				    },
 				    {
 				      username: {
-				        $like: '%' + request.payload.query + '%'
+				        $ilike: '%' + request.payload.query + '%'
 				      }
 				    },
 				  ]
