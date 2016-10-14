@@ -51,5 +51,5 @@
 		</div>
 	<?php include ($pathToFile. "/Templates/parts/container-bottom.php"); ?>
 <?php include ($pathToFile. "/Templates/parts/footer.php"); ?>
-<script src="http://52.26.195.10:8081/socket.io/socket.io.js"></script>
+<script src="http://52.26.195.10:3001/socket.io/socket.io.js"></script>
 <script src="js/app.js"></script>
