@@ -20,7 +20,6 @@ mod.controller('GameSystemListController', require('./controllers/GameSystemList
 mod.controller('GameSystemController', require('./controllers/GameSystemController'));
 
 // Services
-mod.service('GameSystemService', require('./services/GameSystemService'));
 
 
 

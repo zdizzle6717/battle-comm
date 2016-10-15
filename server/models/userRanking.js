@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 UserRanking.belongsTo(models.User);
                 UserRanking.hasOne(models.GameSystem);
+                UserRanking.hasOne(models.Faction);
             }
         }
     });

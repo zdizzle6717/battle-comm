@@ -20,7 +20,6 @@ mod.controller('ManufacturerListController', require('./controllers/Manufacturer
 mod.controller('ManufacturerController', require('./controllers/ManufacturerController'));
 
 // Services
-mod.service('ManufacturerService', require('./services/ManufacturerService'));
 
 
 

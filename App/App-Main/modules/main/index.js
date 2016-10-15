@@ -61,6 +61,10 @@ mod.service('FriendService', require('./services/FriendService'));
 mod.service('NotificationService', require('./services/NotificationService'));
 mod.service('UserPhotoService', require('./services/UserPhotoService'));
 mod.service('RankingService', require('./services/RankingService'));
+mod.service('GameSystemService', require('./services/GameSystemService'));
+mod.service('ManufacturerService', require('./services/ManufacturerService'));
+mod.service('FactionService', require('./services/FactionService'));
+
 
 // Factories
 mod.factory('socket', require('./factories/socket'));

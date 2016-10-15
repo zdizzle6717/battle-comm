@@ -10,6 +10,11 @@ let routes = {
 		'create': `http://52.26.195.10:${port}/api/friends`,
 		'remove': `http://52.26.195.10:${port}/api/friends`
 	},
+	'factions': {
+		'create': `http://52.26.195.10:${port}/api/factions`,
+		'update': `http://52.26.195.10:${port}/api/factions/`,
+		'remove': `http://52.26.195.10:${port}/api/factions/`
+	},
 	'gameSystems': {
 		'get': `http://52.26.195.10:${port}/api/gameSystems/`,
 		'getAll': `http://52.26.195.10:${port}/api/gameSystems`,

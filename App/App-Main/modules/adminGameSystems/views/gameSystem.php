@@ -7,7 +7,7 @@
 <div class="four_column_3 single-product">
     <h2>Game System ID: {{GameSystem.currentGameSystem.id}}</h2>
     <fieldset class="full_width" ng-disabled="GameSystem.readOnly">
-        <form class="formoid-default-skyblue side_by_side" style="margin:0 auto;" name="postForm" novalidate>
+        <form style="margin:0 auto;" name="postForm" novalidate>
             <h2 class="push-bottom">View/Edit</h2>
 			<div class="form-group">
 				<div class="three_column_1">
@@ -53,6 +53,29 @@
             </fieldset>
         </form>
     </fieldset>
+	<hr ng-if="!GameSystem.isNew">
+	<div class="full_width" ng-if="!GameSystem.isNew">
+		<h2 class="push-bottom">Factions for This Game System</h2>
+		<ul>
+			<li ng-repeat="faction in GameSystem.currentGameSystem.Factions"><h3>{{faction.name}} <span class="fa fa-times" ng-click="GameSystem.removeFaction(faction.id, $index)"></span></h3></li>
+		</ul>
+		<h3 ng-if="GameSystem.currentGameSystem.Factions.length < 1">There are currently no factions associated with this game system.</h3>
+		<hr>
+		<form style="margin:0 auto;" name="factionForm" novalidate>
+			<h2 class="push-bottom">Add Faction to {{GameSystem.currentGameSystem.name}}</h2>
+			<div class="form-group">
+				<div class="three_column_1">
+					<label for="name" class="sublabel required">Faction Name:</label>
+					<input id="name" name="name" ng-model="GameSystem.faction.name" type="text" class="formTextfield_Large" placeholder="Game System name..." required>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="full_width">
+					<button class="button button-primary" ng-click="GameSystem.addFaction()" ng-disabled="factionForm.$invalid"><span class="fa fa-plus"></span> Add Faction</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 <div class="four_column_1 single-product">
     <div class="panel panel-default sidebar-menu" >

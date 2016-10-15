@@ -9,9 +9,10 @@ let gameSystems = {
                 where: {
                     id: request.params.id
                 },
-				include: [{
-					model: models.Manufacturer
-				}]
+				include: [
+					{ model: models.Manufacturer },
+					{ model: models.Faction }
+				]
             })
             .then(function(response) {
                 if (response) {
@@ -25,9 +26,10 @@ let gameSystems = {
     },
     getAll: function(request, reply) {
         models.GameSystem.findAll({
-				include: [{
-					model: models.Manufacturer
-				}]
+				include: [
+					{ model: models.Manufacturer },
+					{ model: models.Faction }
+				]
 			})
             .then(function(response) {
                 reply(response).code(200);

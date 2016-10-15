@@ -12,6 +12,7 @@ module.exports = [
         }
     }
 ]
+.concat(require('./api/factions'))
 .concat(require('./api/files'))
 .concat(require('./api/gameSystems'))
 .concat(require('./api/manufacturers'))
