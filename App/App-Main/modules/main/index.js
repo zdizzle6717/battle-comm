@@ -15,14 +15,16 @@ let mod = angular.module(moduleName, [
     require('ng-file-upload'),
 
 	// Modules
-	require('../profile'),
-	require('../dashboard'),
-	require('../cart'),
-	require('../store'),
+	require('../adminGameSystems'),
+	require('../adminManufacturers'),
 	require('../adminNews'),
 	require('../adminPlayers'),
 	require('../adminStore'),
 	require('../adminVenue'),
+	require('../cart'),
+	require('../dashboard'),
+	require('../profile'),
+	require('../store'),
 
 	// Libraries
     require('../libraries/auth'),

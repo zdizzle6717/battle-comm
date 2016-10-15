@@ -10,15 +10,15 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
     // $httpProvider.defaults.withCredentials = true;
 
     $stateProvider
-        .state('playerList', {
-          url: "/admin/players/all-players",
-          template: require('./views/playerList.php'),
-          controller: 'PlayerListController as Player'
+        .state('manufacturerList', {
+          url: "/admin/manufacturers",
+          template: require('./views/manufacturerList.php'),
+          controller: 'ManufacturerListController as Manufacturers'
         })
-        .state('player', {
-          url: "/admin/players/:userId",
-          template: require('./views/player.php'),
-          controller: 'PlayerEditController as Player'
+        .state('manufacturer', {
+          url: "/admin/manufacturers/:id",
+          template: require('./views/manufacturer.php'),
+          controller: 'ManufacturerController as Manufacturer'
         });
 
 }
