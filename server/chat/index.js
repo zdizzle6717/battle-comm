@@ -27,6 +27,7 @@ exports.register = function(server, options, next) {
         });
 
 		socket.on('disconnect', function() {
+			console.log('User disconnected!');
 			numConnections--;
 			io.emit('chat:totalConnections', numConnections);
 		})

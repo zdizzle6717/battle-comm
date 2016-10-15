@@ -1,6 +1,6 @@
 'use strict';
 
-let models = require('../models');
+let models = require('../../models');
 
 // Product Route Configs
 let products = {

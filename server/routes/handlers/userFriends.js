@@ -1,10 +1,10 @@
 'use strict';
 
-let models = require('../models');
+let models = require('../../models');
 const Boom = require('boom');
 
 // Product Route Configs
-let friends = {
+let userFriends = {
     create: function(request, reply) {
 		models.User.find({
 			where: {
@@ -62,4 +62,4 @@ let friends = {
 };
 
 
-module.exports = friends;
+module.exports = userFriends;

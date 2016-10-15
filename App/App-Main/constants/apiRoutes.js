@@ -25,6 +25,9 @@ let routes = {
 	'userPhotos': {
 		'create': `http://52.26.195.10:${port}/api/userPhotos`
 	},
+	'rankings': {
+		'create': `http://52.26.195.10:${port}/api/userRankings`
+	},
 	'files': {
 		'create': `http://52.26.195.10:${port}/api/files/`
 	},

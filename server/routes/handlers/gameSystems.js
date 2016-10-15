@@ -1,17 +1,16 @@
 'use strict';
 
-let models = require('../models');
+let models = require('../../models');
 
 // Product Route Configs
-let newsPosts = {
+let gameSystems = {
     get: function(request, reply) {
-        models.NewsPost.find({
+        models.GameSystem.find({
                 where: {
                     id: request.params.id
                 },
 				include: [{
-					model: models.User,
-					attributes: ['firstName', 'lastName']
+					model: models.Manufacturer
 				}]
             })
             .then(function(response) {
@@ -25,36 +24,25 @@ let newsPosts = {
             });
     },
     getAll: function(request, reply) {
-        models.NewsPost.findAll({
-				include: [{
-					model: models.User,
-					attributes: ['firstName', 'lastName']
-				}]
-			})
+        models.GameSystem.findAll()
             .then(function(response) {
                 reply(response).code(200);
             });
     },
     create: function(request, reply) {
-        models.NewsPost.create({
-            UserId: request.payload.UserId,
-            title: request.payload.title,
-            image: request.payload.image,
-            callout: request.payload.callout,
-            body: request.payload.body,
-            published: request.payload.published,
-            featured: request.payload.featured,
-            tags: request.payload.tags,
-            manufacturerId: request.payload.manufacturerId,
-            gameSystem: request.payload.gameSystem,
-            category: request.payload.category
+        models.GameSystem.create({
+            ManufacturerId: request.payload.ManufacturerId,
+            description: request.payload.description,
+            searchKey: request.payload.searchKey,
+            photo: request.payload.photo,
+            url: request.payload.url
             })
             .then(function(response) {
                 reply(response).code(200);
             });
     },
     update: function(request, reply) {
-        models.NewsPost.find({
+        models.GameSystem.find({
                 where: {
                     id: request.params.id
                 }
@@ -62,17 +50,11 @@ let newsPosts = {
             .then(function(newsPost) {
                 if (newsPost) {
                     newsPost.updateAttributes({
-                        UserId: request.payload.UserId,
-                        title: request.payload.title,
-                        image: request.payload.image,
-                        callout: request.payload.callout,
-                        body: request.payload.body,
-                        published: request.payload.published,
-                        featured: request.payload.featured,
-                        tags: request.payload.tags,
-                        manufacturerId: request.payload.manufacturerId,
-                        gameSystem: request.payload.gameSystem,
-                        category: request.payload.category
+						ManufacturerId: request.payload.ManufacturerId,
+			            description: request.payload.description,
+			            searchKey: request.payload.searchKey,
+			            photo: request.payload.photo,
+			            url: request.payload.url
                     }).then(function(response) {
                         reply(response).code(200);
                     });
@@ -83,7 +65,7 @@ let newsPosts = {
             });
     },
     delete: function(request, reply) {
-        models.NewsPost.destroy({
+        models.GameSystem.destroy({
                 where: {
                     id: request.params.id
                 }
@@ -100,4 +82,4 @@ let newsPosts = {
 };
 
 
-module.exports = newsPosts;
+module.exports = gameSystems;

@@ -19,6 +19,16 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 				controller.currentUser = response;
 				controller.readOnly = true;
 				controller.isNew = false;
+				controller.currentUser.totalWins = 0;
+				controller.currentUser.totalDraws = 0;
+				controller.currentUser.totalLosses = 0;
+				if (response.UserRankings.length > 0) {
+					for (var i in response.UserRankings) {
+						controller.currentUser.totalWins += response.UserRankings[i].totalWins;
+						controller.currentUser.totalDraws += response.UserRankings[i].totalDraws;
+						controller.currentUser.totalLosses += response.UserRankings[i].totalLosses;
+					}
+				}
 				if ($stateParams.playerId == AuthService.currentUser.id) {
 					controller.isMe = true;
 				}

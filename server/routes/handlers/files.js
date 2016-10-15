@@ -2,7 +2,7 @@
 
 const fs = require('fs-extra');
 const Boom = require('boom');
-const env = require('../config/environmentVariables.js');
+const env = require('../../config/environmentVariables.js');
 const im = require('imagemagick-stream');
 
 // Product Route Configs

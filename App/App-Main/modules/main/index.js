@@ -58,6 +58,7 @@ mod.service('PlayerService', require('./services/PlayerService'));
 mod.service('FriendService', require('./services/FriendService'));
 mod.service('NotificationService', require('./services/NotificationService'));
 mod.service('UserPhotoService', require('./services/UserPhotoService'));
+mod.service('RankingService', require('./services/RankingService'));
 
 // Factories
 mod.factory('socket', require('./factories/socket'));

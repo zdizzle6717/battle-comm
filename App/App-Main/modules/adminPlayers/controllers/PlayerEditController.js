@@ -1,21 +1,24 @@
 'use strict';
 
-PlayerEditController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService'];
-function PlayerEditController($rootScope, $state, $stateParams, PlayerService) {
+PlayerEditController.$inject = ['$rootScope', '$state', '$stateParams', 'PlayerService', 'RankingService'];
+function PlayerEditController($rootScope, $state, $stateParams, PlayerService, RankingService) {
     let controller = this;
 
     controller.readOnly = true;
     controller.editPlayer = editPlayer;
     controller.savePlayer = savePlayer;
+	controller.saveRanking = saveRanking;
 
     init();
 
     ///////////////////////////////////////////
 
     function init() {
-        if ($stateParams.userId) {PlayerService.getPlayer($stateParams.userId)
+        if ($stateParams.userId) {
+			PlayerService.getPlayer($stateParams.userId)
             .then(function(response) {
                 controller.currentPlayer = response;
+				controller.newRanking = {};
                 controller.readOnly = true;
                 controller.isNew = false;
 				controller.currentPlayer.rewardPoints = controller.currentPlayer.rewardPoints ? controller.currentPlayer.rewardPoints : 0;
@@ -24,8 +27,7 @@ function PlayerEditController($rootScope, $state, $stateParams, PlayerService) {
 				$state.go('playerList');
 			});
         } else {
-            controller.readOnly = false;
-            controller.isNew = true;
+            $state.go('playerList');
         }
     }
 
@@ -69,6 +71,12 @@ function PlayerEditController($rootScope, $state, $stateParams, PlayerService) {
             });
         }
     }
+
+	function saveRanking() {
+		RankingService.create(controller.newRanking).then(() => {
+			$state.go('player', {'userId': controller.currentPlayer.id}, {reload: true});
+		});
+	}
 
 	function showAlert(config) {
         $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});

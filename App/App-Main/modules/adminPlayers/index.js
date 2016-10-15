@@ -20,7 +20,6 @@ mod.controller('PlayerEditController', require('./controllers/PlayerEditControll
 // Filters
 mod.filter('jsonDate', require('./filters/jsonDate'));
 
-
 // Services
 
 

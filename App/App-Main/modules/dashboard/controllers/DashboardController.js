@@ -25,6 +25,16 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Us
 			PlayerService.getPlayer(AuthService.currentUser.id)
 			.then(function(response) {
 				controller.currentUser = response;
+				controller.currentUser.totalWins = 0;
+				controller.currentUser.totalDraws = 0;
+				controller.currentUser.totalLosses = 0;
+				if (response.UserRankings.length > 0) {
+					for (var i in response.UserRankings) {
+						controller.currentUser.totalWins += response.UserRankings[i].totalWins;
+						controller.currentUser.totalDraws += response.UserRankings[i].totalDraws;
+						controller.currentUser.totalLosses += response.UserRankings[i].totalLosses;
+					}
+				}
 				AuthService.totalNotifications = controller.currentUser.UserNotifications.length;
 			}).catch(function() {
 				let config = {

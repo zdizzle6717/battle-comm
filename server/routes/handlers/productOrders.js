@@ -1,10 +1,10 @@
 'use strict';
 
-let env = require('../config/environmentVariables');
-let models = require('../models');
+let env = require('../../config/environmentVariables');
+let models = require('../../models');
 let nodemailer = require('nodemailer');
 var generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
-let buildOrderSuccessEmail = require('../email-templates/orderSuccess');
+let buildOrderSuccessEmail = require('../../email-templates/orderSuccess');
 // listen for token updates
 // you probably want to store these to a db
 generator.on('token', function(token){

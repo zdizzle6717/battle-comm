@@ -1,17 +1,17 @@
 'use strict';
 
-const env = require('../config/environmentVariables');
-const models = require('../models');
+const env = require('../../config/environmentVariables');
+const models = require('../../models');
 const fs = require('fs-extra');
 const Boom = require('boom');
 const im = require('imagemagick-stream');
 const nodemailer = require('nodemailer');
 const generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
-const buildRPUpdateEmail = require('../email-templates/rpUpdate');
-const buildRegistrationEmail = require('../email-templates/registrationSuccess');
+const buildRPUpdateEmail = require('../../email-templates/rpUpdate');
+const buildRegistrationEmail = require('../../email-templates/registrationSuccess');
 
-const createToken = require('../utils/createToken');
-const userFunctions = require('../utils/userFunctions');
+const createToken = require('../../utils/createToken');
+const userFunctions = require('../../utils/userFunctions');
 
 // listen for token updates
 // you probably want to store these to a db
@@ -41,6 +41,7 @@ let users = {
 						 as: 'Friends',
 						 attributes: ['id', 'firstName', 'lastName', 'username', 'icon']
 					 },
+					 { model: models.UserRanking }
 				  ],
             })
             .then(function(response) {

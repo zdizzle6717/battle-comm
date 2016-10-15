@@ -35,6 +35,48 @@
 			</div>
         </form>
     </fieldset>
+	<hr>
+	<form name="rankingForm">
+		<div class="form-group">
+			<div class="four_column_1">
+				<label for="gameSystem" class="sublabel required">Game System:</label>
+				<input id="gameSystem" name="gameSystem" ng-model="Player.newRanking.GameSystem.searchKey" type="text" class="formTextfield_Large" placeholder="Player first name...">
+			</div>
+			<div class="four_column_1">
+				<label for="totalWins" class="sublabel required">Total Wins:</label>
+				<input id="totalWins" name="totalWins" ng-model="Player.newRanking.totalWins" type="number" class="formTextfield_Large" placeholder="Player first name...">
+			</div>
+			<div class="four_column_1">
+				<label for="totalDraws" class="sublabel required">Total Draws:</label>
+				<input id="totalDraws" name="totalDraws" ng-model="Player.newRanking.totalDraws" type="number" class="formTextfield_Large" placeholder="Player last name...">
+			</div>
+			<div class="four_column_1">
+				<label for="totalLosses" class="sublabel required"> Total Losses:</label>
+				<input id="totalLosses" name="totalLosses" ng-model="Player.newRanking.totalLosses" type="number" class="formTextfield_Large" placeholder="Player email..." required>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="full_width text-right">
+				<button class="button button-primary" ng-click="Player.saveRanking()">Update Ranking</button>
+			</div>
+		</div>
+	</form>
+	<hr>
+	<h2>Player Ranking</h2>
+	<table>
+	  <tr>
+	    <th>Game System</th>
+	    <th>Total Wins</th>
+	    <th>Total Draws</th>
+	    <th>Total Losses</th>
+	  </tr>
+	  <tr ng-repeat="ranking in Player.currentPlayer.UserRankings">
+	    <td>{{ranking.GameSystem.name}}</td>
+	    <td>{{ranking.totalWins}}</td>
+	    <td>{{ranking.totalDraws}}</td>
+	    <td>{ranking.totalLosses}</td>
+	  </tr>
+	 </table>
 </div>
 <div class="four_column_1 single-product">
     <div class="panel panel-default sidebar-menu" >
