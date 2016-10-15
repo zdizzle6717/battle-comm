@@ -51,6 +51,7 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
             GameSystemService.updateGameSystem($stateParams.id, data)
             .then(function(response) {
                 controller.currentGameSystem = response;
+				$state.go('gameSystem', {'id': controller.currentGameSystem.id}, {reload: true})
                 showAlert({
                     type: 'success',
                     message: 'This Game System was successfully updated.'
@@ -90,7 +91,8 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
 			controller.currentGameSystem.Factions.push(response);
 			showAlert({
 				type: 'success',
-				message: 'A faction was successfully added to this game system.'
+				message: 'A faction was successfully added to this game system.',
+				timeout: 1000
 			});
 		})
 	}
@@ -100,7 +102,8 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
 			controller.currentGameSystem.Factions.splice(index, 1);
 			showAlert({
 				type: 'success',
-				message: 'A faction was successfully deleted.'
+				message: 'A faction was successfully deleted.',
+				timeout: 1000
 			});
 		})
 	}
@@ -117,7 +120,7 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
     }
 
     function showAlert(config) {
-        $rootScope.$broadcast('show:notification', {type: config.type, message: config.message});
+        $rootScope.$broadcast('show:notification', {type: config.type, message: config.message, timeout: config.timeout});
     }
 }
 
