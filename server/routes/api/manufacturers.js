@@ -2,17 +2,17 @@
 
 let Joi = require('joi');
 let models = require('../../models');
-let gameSystems = require('../handlers/gameSystems');
+let manufacturers = require('../handlers/manufacturers');
 
 module.exports = [
-	// Game Systems
+	// Manufacturers
     {
         method: 'GET',
-        path: '/api/gameSystems/{id}',
+        path: '/api/manufacturers/{id}',
         config: {
             tags: ['api'],
-            description: 'Get one game system by id',
-            notes: 'Get one game system by id',
+            description: 'Get one manufacturer by id',
+            notes: 'Get one manufacturer by id',
 			auth: {
                 strategy: 'jsonWebToken',
                 scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
@@ -23,53 +23,52 @@ module.exports = [
                 }
             }
         },
-        handler: gameSystems.get
+        handler: manufacturers.get
     },
     {
         method: 'GET',
-        path: '/api/gameSystems',
+        path: '/api/manufacturers',
         config: {
             tags: ['api'],
-            description: 'Get all gameSystems',
-            notes: 'Get all gameSystems',
+            description: 'Get all manufacturers',
+            notes: 'Get all manufacturers',
 			auth: {
                 strategy: 'jsonWebToken',
                 scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
         },
-        handler: gameSystems.getAll
+        handler: manufacturers.getAll
     },
     {
         method: 'POST',
-        path: '/api/gameSystems',
+        path: '/api/manufacturers',
         config: {
             tags: ['api'],
-            description: 'Add a new game system',
-            notes: 'Add a new game system',
+            description: 'Add a new manufacturer',
+            notes: 'Add a new manufacturer',
 			auth: {
                 strategy: 'jsonWebToken',
                 scope: ['systemAdmin']
             },
             validate: {
                 payload: {
-                    ManufacturerId: Joi.number().required(),
                     name: Joi.string().required(),
+                    searchKey: Joi.optional(),
                     description: Joi.optional(),
-                    searchKey: Joi.string().required(),
                     photo: Joi.optional(),
                     url: Joi.optional()
                 }
             }
         },
-        handler: gameSystems.create
+        handler: manufacturers.create
     },
     {
         method: 'PUT',
-        path: '/api/gameSystems/{id}',
+        path: '/api/manufacturers/{id}',
         config: {
             tags: ['api'],
-            description: 'Update a game system by id',
-            notes: 'Update a game system by id',
+            description: 'Update a manufacturer by id',
+            notes: 'Update a manufacturer by id',
 			auth: {
                 strategy: 'jsonWebToken',
                 scope: ['systemAdmin']
@@ -79,24 +78,23 @@ module.exports = [
                     id: Joi.number().required()
                 },
                 payload: {
-					ManufacturerId: Joi.number().required(),
-                    name: Joi.string().required(),
+					name: Joi.string().required(),
+                    searchKey: Joi.optional(),
                     description: Joi.optional(),
-                    searchKey: Joi.string().required(),
                     photo: Joi.optional(),
                     url: Joi.optional()
                 }
             }
         },
-        handler: gameSystems.update
+        handler: manufacturers.update
     },
     {
         method: 'DELETE',
-        path: '/api/gameSystems/{id}',
+        path: '/api/manufacturers/{id}',
         config: {
             tags: ['api'],
-            description: 'Delete a game system by id',
-            notes: 'Delete a game system by id',
+            description: 'Delete a manufacturer by id',
+            notes: 'Delete a manufacturer by id',
 			auth: {
                 strategy: 'jsonWebToken',
                 scope: ['systemAdmin']
@@ -107,6 +105,6 @@ module.exports = [
                 }
             }
         },
-        handler: gameSystems.delete
+        handler: manufacturers.delete
     }
 ];

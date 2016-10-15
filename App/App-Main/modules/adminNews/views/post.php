@@ -116,7 +116,7 @@
                 <div class="small-12 text-right">
                     <i class="fa fa-times" ng-click="Post.hideDeleteModal()"></i>
                 </div>
-                <h4>Delete this movie record?</h4>
+                <h4>Delete this record?</h4>
             </div>
         </div>
     </div>

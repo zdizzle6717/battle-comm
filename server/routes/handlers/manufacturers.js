@@ -3,14 +3,14 @@
 let models = require('../../models');
 
 // Product Route Configs
-let gameSystems = {
+let manufacturers = {
     get: function(request, reply) {
-        models.GameSystem.find({
+        models.Manufacturer.find({
                 where: {
                     id: request.params.id
                 },
 				include: [{
-					model: models.Manufacturer
+					model: models.GameSystem
 				}]
             })
             .then(function(response) {
@@ -24,9 +24,9 @@ let gameSystems = {
             });
     },
     getAll: function(request, reply) {
-        models.GameSystem.findAll({
+        models.Manufacturer.findAll({
 				include: [{
-					model: models.Manufacturer
+					model: models.GameSystem
 				}]
 			})
             .then(function(response) {
@@ -34,11 +34,10 @@ let gameSystems = {
             });
     },
     create: function(request, reply) {
-        models.GameSystem.create({
-            ManufacturerId: request.payload.ManufacturerId,
-            name: request.payload.name,
+        models.Manufacturer.create({
+			name: request.payload.name,
+			searchKey: request.payload.searchKey,
             description: request.payload.description,
-            searchKey: request.payload.searchKey,
             photo: request.payload.photo,
             url: request.payload.url
             })
@@ -47,7 +46,7 @@ let gameSystems = {
             });
     },
     update: function(request, reply) {
-        models.GameSystem.find({
+        models.Manufacturer.find({
                 where: {
                     id: request.params.id
                 }
@@ -55,10 +54,9 @@ let gameSystems = {
             .then(function(newsPost) {
                 if (newsPost) {
                     newsPost.updateAttributes({
-						ManufacturerId: request.payload.ManufacturerId,
-			            name: request.payload.name,
+						name: request.payload.name,
+						searchKey: request.payload.searchKey,
 			            description: request.payload.description,
-			            searchKey: request.payload.searchKey,
 			            photo: request.payload.photo,
 			            url: request.payload.url
                     }).then(function(response) {
@@ -71,7 +69,7 @@ let gameSystems = {
             });
     },
     delete: function(request, reply) {
-        models.GameSystem.destroy({
+        models.Manufacturer.destroy({
                 where: {
                     id: request.params.id
                 }
@@ -88,4 +86,4 @@ let gameSystems = {
 };
 
 
-module.exports = gameSystems;
+module.exports = manufacturers;

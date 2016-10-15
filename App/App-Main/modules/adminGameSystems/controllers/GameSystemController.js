@@ -1,18 +1,13 @@
 'use strict';
 
-GameSystemController.$inject = ['$rootScope', '$state', '$stateParams', 'GameSystemService', 'manufacturers', 'AuthService'];
-function GameSystemController($rootScope, $state, $stateParams, GameSystemService, manufacturers, AuthService) {
+GameSystemController.$inject = ['$rootScope', '$state', '$stateParams', 'GameSystemService', 'ManufacturerService', 'AuthService'];
+function GameSystemController($rootScope, $state, $stateParams, GameSystemService, ManufacturerService, AuthService) {
     let controller = this;
 
     controller.readOnly = true;
-    controller.editPost = editPost;
-    controller.savePost = savePost;
-    controller.removePost = removePost;
-    controller.setMNU = setMNU;
-    controller.currentMNU = {};
-    controller.selectedMNU = {};
-    controller.manufacturers = manufacturers;
-    controller.manufacturer = manufacturers[0];
+    controller.editGameSystem = editGameSystem;
+    controller.saveGameSystem = saveGameSystem;
+    controller.removeGameSystem = removeGameSystem;
     controller.showDeleteModal = showDeleteModal;
     controller.hideDeleteModal = hideDeleteModal;
 
@@ -21,76 +16,65 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
     ///////////////////////////////////////////
 
     function init() {
-        if ($stateParams.id) {GameSystemService.getPost($stateParams.id)
-            .then(function(response) {
-                controller.currentPost = response;
-                controller.currentPost.published = response.published === true ? 'true' : 'false';
-                controller.currentPost.featured = response.featured === true ? 'true' : 'false';
-                controller.readOnly = true;
-                controller.isNew = false;
-            });
-        } else {
-            controller.currentPost = {
-                UserId: AuthService.currentUser.id,
-                featured: 'false',
-                published: 'false'
-            };
-            controller.readOnly = false;
-            controller.isNew = true;
-        }
+		ManufacturerService.getAllManufacturers().then((response) => {
+			controller.manufacturers = response;
+		}).then(() => {
+			if ($stateParams.id) {GameSystemService.getGameSystem($stateParams.id)
+	            .then(function(response) {
+	                controller.currentGameSystem = response;
+	                controller.readOnly = true;
+	                controller.isNew = false;
+					controller.manufacturer = response.Manufacturer;
+	            });
+	        } else {
+	            controller.currentGameSystem = {};
+	            controller.readOnly = false;
+	            controller.isNew = true;
+	        }
+		});
+
     }
 
-    function setMNU(manufacturer) {
-        controller.currentMNU = manufacturer;
-    }
-
-    // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
-    //     if ($state)
-    // });
-
-    function editPost() {
+    function editGameSystem() {
         controller.readOnly = false;
     }
 
-    function savePost(data, images) {
-        data.manufacturerId = data.manufacturer ? data.manufacturer.id : data.manufacturerId;
-        delete data.manufacturer;
-		delete data.User;
+    function saveGameSystem(data) {
         if ($stateParams.id) {
             controller.readOnly = true;
-            GameSystemService.updatePost($stateParams.id, data)
+			data.ManufacturerId = controller.manufacturer.id;
+			delete data.UserRankingId;
+			delete data.Manufacturer;
+            GameSystemService.updateGameSystem($stateParams.id, data)
             .then(function(response) {
-                controller.currentPost = response;
-                controller.currentPost.displayStatus = response.displayStatus === true ? 'true' : 'false';
-                controller.currentPost.new = response.new === true ? 'true' : 'false';
-                controller.currentPost.featured = response.featured === true ? 'true' : 'false';
-                controller.currentPost.onSale = response.onSale === true ? 'true' : 'false';
+                controller.currentGameSystem = response;
                 showAlert({
                     type: 'success',
-                    message: 'This post was successfully updated.'
+                    message: 'This Game System was successfully updated.'
                 });
             });
         }
         else {
-            GameSystemService.createPost(data)
+			data.ManufacturerId = controller.manufacturer.id;
+            GameSystemService.createGameSystem(data)
             .then(function(response) {
                 showAlert({
                     type: 'success',
-                    message: 'A new post was successfully created.'
+                    message: 'A new Game System was successfully created.'
                 });
-                $state.go('post', {id: response.id});
+                $state.go('gameSystem', {id: response.id});
             });
         }
     }
 
-    function removePost(id) {
-        GameSystemService.removePost(id)
+    function removeGameSystem(id) {
+        GameSystemService.removeGameSystem(id)
         .then(function() {
             showAlert({
                 type: 'success',
-                message: 'Post was successfully deleted.'
+                message: 'Game System was successfully deleted.'
             });
-            $state.go('newsList');
+            $state.go('gameSystemList');
         });
     }
 

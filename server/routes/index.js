@@ -14,6 +14,7 @@ module.exports = [
 ]
 .concat(require('./api/files'))
 .concat(require('./api/gameSystems'))
+.concat(require('./api/manufacturers'))
 .concat(require('./api/newsPosts'))
 .concat(require('./api/productOrders'))
 .concat(require('./api/products'))

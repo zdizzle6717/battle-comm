@@ -12,9 +12,9 @@ function GameSystemListController($state, $rootScope, GameSystemService, $scope)
     ///////////////////////////////
 
     function init() {
-        GameSystemService.getAllPosts()
+        GameSystemService.getAllGameSystems()
             .then(function(response) {
-                controller.allPosts = response;
+                controller.allGameSystems = response;
             });
     }
 

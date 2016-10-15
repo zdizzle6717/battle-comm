@@ -128,8 +128,8 @@ tr:first-child {
 	    width: 100%;
 	    border: 1px solid rgba(154,157,158,.5);
 	    border-left-width: 12px !important;
-	    background-color: #f8f8f8;
-	    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+	    background-color: $white-transparent;
+	    box-shadow: $box-shadow-inset-1;
 	    border-radius: 2px;
 	    box-sizing: border-box;
 

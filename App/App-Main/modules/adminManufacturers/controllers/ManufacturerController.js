@@ -1,18 +1,13 @@
 'use strict';
 
-ManufacturerController.$inject = ['$rootScope', '$state', '$stateParams', 'ManufacturerService', 'manufacturers', 'AuthService'];
-function ManufacturerController($rootScope, $state, $stateParams, ManufacturerService, manufacturers, AuthService) {
+ManufacturerController.$inject = ['$rootScope', '$state', '$stateParams', 'ManufacturerService', 'AuthService'];
+function ManufacturerController($rootScope, $state, $stateParams, ManufacturerService, AuthService) {
     let controller = this;
 
     controller.readOnly = true;
-    controller.editPost = editPost;
-    controller.savePost = savePost;
-    controller.removePost = removePost;
-    controller.setMNU = setMNU;
-    controller.currentMNU = {};
-    controller.selectedMNU = {};
-    controller.manufacturers = manufacturers;
-    controller.manufacturer = manufacturers[0];
+    controller.editManufacturer = editManufacturer;
+    controller.saveManufacturer = saveManufacturer;
+    controller.removeManufacturer = removeManufacturer;
     controller.showDeleteModal = showDeleteModal;
     controller.hideDeleteModal = hideDeleteModal;
 
@@ -21,76 +16,56 @@ function ManufacturerController($rootScope, $state, $stateParams, ManufacturerSe
     ///////////////////////////////////////////
 
     function init() {
-        if ($stateParams.id) {ManufacturerService.getPost($stateParams.id)
+        if ($stateParams.id) {ManufacturerService.getManufacturer($stateParams.id)
             .then(function(response) {
-                controller.currentPost = response;
-                controller.currentPost.published = response.published === true ? 'true' : 'false';
-                controller.currentPost.featured = response.featured === true ? 'true' : 'false';
+                controller.currentManufacturer = response;
                 controller.readOnly = true;
                 controller.isNew = false;
             });
         } else {
-            controller.currentPost = {
-                UserId: AuthService.currentUser.id,
-                featured: 'false',
-                published: 'false'
-            };
+            controller.currentManufacturer = {};
             controller.readOnly = false;
             controller.isNew = true;
         }
     }
 
-    function setMNU(manufacturer) {
-        controller.currentMNU = manufacturer;
-    }
-
-    // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
-    //     if ($state)
-    // });
-
-    function editPost() {
+    function editManufacturer() {
         controller.readOnly = false;
     }
 
-    function savePost(data, images) {
-        data.manufacturerId = data.manufacturer ? data.manufacturer.id : data.manufacturerId;
-        delete data.manufacturer;
-		delete data.User;
+    function saveManufacturer(data) {
         if ($stateParams.id) {
             controller.readOnly = true;
-            ManufacturerService.updatePost($stateParams.id, data)
+			delete data.GameSystems;
+            ManufacturerService.updateManufacturer($stateParams.id, data)
             .then(function(response) {
-                controller.currentPost = response;
-                controller.currentPost.displayStatus = response.displayStatus === true ? 'true' : 'false';
-                controller.currentPost.new = response.new === true ? 'true' : 'false';
-                controller.currentPost.featured = response.featured === true ? 'true' : 'false';
-                controller.currentPost.onSale = response.onSale === true ? 'true' : 'false';
+                controller.currentManufacturer = response;
                 showAlert({
                     type: 'success',
-                    message: 'This post was successfully updated.'
+                    message: 'This manufacturer was successfully updated.'
                 });
             });
         }
         else {
-            ManufacturerService.createPost(data)
+            ManufacturerService.createManufacturer(data)
             .then(function(response) {
                 showAlert({
                     type: 'success',
-                    message: 'A new post was successfully created.'
+                    message: 'A new manufacturer was successfully created.'
                 });
-                $state.go('post', {id: response.id});
+                $state.go('manufacturer', {id: response.id});
             });
         }
     }
 
-    function removePost(id) {
-        ManufacturerService.removePost(id)
+    function removeManufacturer(id) {
+        ManufacturerService.removeManufacturer(id)
         .then(function() {
             showAlert({
                 type: 'success',
-                message: 'Post was successfully deleted.'
+                message: 'Manufacturer was successfully deleted.'
             });
-            $state.go('newsList');
+            $state.go('manufacturerList');
         });
     }
 

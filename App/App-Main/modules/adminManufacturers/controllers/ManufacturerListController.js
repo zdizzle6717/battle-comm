@@ -12,9 +12,9 @@ function ManufacturerListController($state, $rootScope, ManufacturerService, $sc
     ///////////////////////////////
 
     function init() {
-        ManufacturerService.getAllPosts()
+        ManufacturerService.getAllManufacturers()
             .then(function(response) {
-                controller.allPosts = response;
+                controller.allManufacturers = response;
             });
     }
 

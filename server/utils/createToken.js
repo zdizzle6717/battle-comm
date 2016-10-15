@@ -27,7 +27,7 @@ function createToken(user) {
     scopes.push('systemAdmin');
   }
   // Sign the JWT
-  return jwt.sign({ id: user.id, username: user.username, scope: scopes }, env.secret, { algorithm: 'HS256', expiresIn: "1h" } );
+  return jwt.sign({ id: user.id, username: user.username, scope: scopes }, env.secret, { algorithm: 'HS256', expiresIn: "4h" } );
 }
 
 module.exports = createToken;
