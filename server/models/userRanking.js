@@ -17,8 +17,8 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 UserRanking.belongsTo(models.User);
-                UserRanking.hasOne(models.GameSystem);
-                UserRanking.hasOne(models.Faction);
+                UserRanking.belongsTo(models.GameSystem);
+                UserRanking.belongsTo(models.Faction);
             }
         }
     });

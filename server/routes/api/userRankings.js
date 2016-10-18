@@ -10,7 +10,7 @@ module.exports = [
         method: 'POST',
         path: '/api/userRankings',
         config: {
-            handler: userRankings.create,
+            handler: userRankings.createOrUpdate,
             tags: ['api'],
             description: 'Create a new user ranking',
             notes: 'Create a new user ranking',
@@ -20,14 +20,35 @@ module.exports = [
             },
             validate: {
                 payload: {
-					GameSystem: Joi.object({
-							  searchKey: Joi.string().required(),
-						  }),
+					UserId: Joi.number().required(),
+					GameSystemId: Joi.number().required(),
+					FactionId: Joi.number().required(),
                     totalWins: Joi.number().required(),
                     totalDraws: Joi.number().required(),
-                    totalLosses: Joi.number().required(),
+                    totalLosses: Joi.number().required()
                 }
             }
+        }
+    },
+	{
+        method: 'POST',
+        path: '/api/search/userRankings',
+        config: {
+			handler: userRankings.search,
+            tags: ['api'],
+            description: 'Return ranking search results',
+            notes: 'Return ranking search results',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+            },
+			validate: {
+				payload: {
+                    maxResults: Joi.number().optional(),
+                    GameSystemId: Joi.number().required(),
+                    FactionId: Joi.number().required()
+				}
+			}
         }
     }
 ];

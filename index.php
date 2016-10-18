@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Battle-Comm | Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers.">
+	<meta name="keyword" content="battle-comm, table-top, table, games, battle, home, warhammer 40k, worldwide, community, hobbyist, player, reward point, gaming, point, battlecomm, match, friendly, tournament, event, magic the gathering, star wars, warhammer">
+	<meta property="og:title" content="Battle-Comm | Home"/>
+	<meta property="og:url" content="http://www.beta.battle-comm.net/"/>
+	<meta property="og:image" content="http://www.beta.battle-comm.net/images/meta-image.jpg"/>
+	<meta property="og:site_name" content="Battle-Comm"/>
+	<meta property="og:description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers."/>
 
-<title>Battle-Comm | Home</title>
-<meta name=viewport content="width=device-width, initial-scale=1">
-<meta name="description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers.">
-<meta property="og:title" content="Battle-Comm | Home"/>
-<meta property="og:url" content="http://www.beta.battle-comm.net/"/>
-<meta property="og:image" content="http://www.beta.battle-comm.net/images/meta-image.jpg"/>
-<meta property="og:site_name" content="Battle-Comm"/>
-<meta property="og:description" content="Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers."/>
-
-<link rel="stylesheet" type="text/css" media="screen, print" href="styles/global.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="Scripts/jquery.magnificant-popup.js"></script>
-<script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>
-<script type="text/javascript" src="Scripts/custom-slider.js"></script>
-<script type="text/javascript" src="Scripts/custom-slider2.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen, print" href="styles/global.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="Scripts/jquery.magnificant-popup.js"></script>
+	<script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>
+	<script type="text/javascript" src="Scripts/custom-slider.js"></script>
+	<script type="text/javascript" src="Scripts/custom-slider2.js"></script>
 </head>
 
 <?php include 'Templates/parts/header.php'; ?>

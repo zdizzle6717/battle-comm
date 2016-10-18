@@ -51,6 +51,7 @@ mod.directive('chatBox', require('./directives/chatBox'));
 
 // Controllers
 mod.controller('PlayerSearchController', require('./controllers/PlayerSearchController'));
+mod.controller('PlayerRankingController', require('./controllers/PlayerRankingController'));
 
 // Filters
 mod.filter('jsonDate', require('./filters/jsonDate'));

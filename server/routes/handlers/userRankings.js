@@ -5,17 +5,22 @@ const Boom = require('boom');
 
 // Product Route Configs
 let userRankings = {
-    create: function(request, reply) {
+    createOrUpdate: function(request, reply) {
         models.UserRanking.findOrCreate({
                 where: {
-					 GameSystem: {
-						 searchKey: request.payload.GameSystem.searchKey
-					 }
+					$and: [
+					   {
+						 GameSystemId: request.payload.GameSystemId
+					   },
+					   {
+						 FactionId: request.payload.FactionId
+					   }
+					 ]
                 },
                 defaults: {
-                    GameSystem: {
-						searchKey: request.payload.GameSystem.searchKey
-					},
+                    UserId: request.payload.UserId,
+                    GameSystemId: request.payload.GameSystemId,
+					FactionId: request.payload.FactionId,
 					totalWins: request.payload.totalWins,
 					totalDraws: request.payload.totalDraws,
 					totalLosses: request.payload.totalLosses
@@ -26,29 +31,41 @@ let userRankings = {
                 if (created) {
                     reply(response).code(200);
                 } else {
-                    reply(Boom.badRequest('Request already sent'));
-                }
-            });
-    },
-    update: function(request, reply) {
-        models.UserRanking.find({
-                where: {
-                    id: request.params.id
-                }
-            })
-            .then(function(newsPost) {
-                if (newsPost) {
-                    newsPost.updateAttributes({
-                        UserId: request.payload.UserId,
-                        type: request.payload.type,
-                        status: request.payload.status,
-                    }).then(function(response) {
+					response[0].increment({
+						'totalWins': request.payload.totalWins,
+						'totalDraws': request.payload.totalDraws,
+						'totalLosses': request.payload.totalLosses
+					})
+					.then(function(response) {
                         reply(response).code(200);
                     });
-                } else {
-                    reply().code(404);
                 }
-            });
+            }).catch((respone) => {
+				throw Boom.badRequest(response);
+			});
+    },
+	search: function(request, reply) {
+        models.UserRanking.findAll({
+			where: {
+				$and: [
+				    {
+				      GameSystemId: request.payload.GameSystemId
+				    },
+				    {
+				      FactionId: request.payload.FactionId
+				    }
+				  ]
+			},
+			include: [
+				{ model: models.User, attributes: ['username'] },
+				{ model: models.GameSystem, attributes: ['name'] },
+				{ model: models.Faction, attributes: ['name'] },
+			],
+			limit: request.payload.maxResults || 20
+		})
+        .then(function(rankings) {
+            reply(rankings).code(200);
+        });
     }
 };
 

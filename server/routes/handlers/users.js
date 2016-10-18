@@ -41,7 +41,13 @@ let users = {
 						 as: 'Friends',
 						 attributes: ['id', 'firstName', 'lastName', 'username', 'icon']
 					 },
-					 { model: models.UserRanking }
+					 {
+						 model: models.UserRanking,
+						 include: [
+							 { model: models.GameSystem },
+							 { model: models.Faction },
+						 ]
+					 }
 				  ],
             })
             .then(function(response) {
