@@ -13,8 +13,11 @@ let userRankings = {
 						 GameSystemId: request.payload.GameSystemId
 					   },
 					   {
-						 FactionId: request.payload.FactionId
-					   }
+							 FactionId: request.payload.FactionId
+					   },
+					   {
+							 UserId: request.payload.UserId
+					   },
 					 ]
                 },
                 defaults: {
@@ -57,7 +60,7 @@ let userRankings = {
 				  ]
 			},
 			include: [
-				{ model: models.User, attributes: ['username'] },
+				{ model: models.User, attributes: ['username', 'id'] },
 				{ model: models.GameSystem, attributes: ['name'] },
 				{ model: models.Faction, attributes: ['name'] },
 			],

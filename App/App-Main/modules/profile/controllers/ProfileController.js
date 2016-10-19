@@ -28,6 +28,7 @@ function ProfileController($rootScope, $state, $stateParams, AuthService, Player
 						controller.currentUser.totalDraws += response.UserRankings[i].totalDraws;
 						controller.currentUser.totalLosses += response.UserRankings[i].totalLosses;
 					}
+					controller.currentUser.totalPointValue = controller.currentUser.totalWins + (controller.currentUser.totalDraws * .5)
 				}
 				if ($stateParams.playerId == AuthService.currentUser.id) {
 					controller.isMe = true;

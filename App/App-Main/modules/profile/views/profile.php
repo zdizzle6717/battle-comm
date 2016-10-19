@@ -25,9 +25,6 @@
 	<h1 class="text-center" style="text-transform: initial;color: gold;text-shadow: 1px 1px 5px black;">
 		<span class="glyphicon glyphicon-user" style="font-size:.7em"></span> {{Profile.currentUser.username}}
 	</h1>
-	<div class="text-center">
-		<p><strong>{{Profile.currentUser.totalWins}} / {{Profile.currentUser.totalDraws}} / {{Profile.currentUser.totalLosses}}</strong></p>
-	</div>
 	<div class="text-center" ng-if="!Profile.isMe">
 		<p ng-if="!Profile.alreadyFriends"><a ng-click="Profile.addFriend()"><i class="fa fa-plus"></i> Send Ally Request</a></p>
 		<p ng-if="Profile.alreadyFriends"><a ng-click="Profile.removeFriend(Profile.currentUser.username)"><i class="fa fa-minus"></i> Remove Alliance</a></p>
@@ -48,6 +45,26 @@
 <div class="full_width">
 	<h2>Achievements</h2>
 	<h3 class="text-center">This player has not yet been awarded any achievements.</h3>
+</div>
+<div class="full_width">
+	<h2>Ranking <a ui-sref="playerRanking">Leaderboards</a></h2>
+	<h5>Overall: <strong>{{Profile.currentUser.totalWins}} / {{Profile.currentUser.totalLosses}} / {{Profile.currentUser.totalDraws}}</strong></5>
+	<h5>Overall Point Value: <strong>{{Profile.currentUser.totalPointValue}}</strong></5>
+	<h3 class="text-center" ng-if="Profile.currentUser.UserRankings.length < 1">This player has not yet submitted currentUser.UserRankings to an event admin.</h3>
+	<table ng-if="Profile.currentUser.UserRankings.length > 0" class="search-results">
+		<tr>
+	  	    <th>Game System</th>
+			<th>Faction</th>
+			<th>Ranking</th>
+			<th>Point Value</th>
+	  	</tr>
+		<tr ng-repeat="ranking in Profile.currentUser.UserRankings" class="item" ui-sref="profile({'rankingId': ranking.id})">
+			<td>{{ranking.GameSystem.name}}</td>
+			<td>{{ranking.Faction.name}}</td>
+			<td>{{ranking.totalWins}}/{{ranking.totalLosses}}/{{ranking.totalDraws}}</td>
+			<td>{{ranking.pointValue}}</td>
+		</tr>
+	</table>
 </div>
 <div class="full_width">
 	<h2>Photostream</h2>

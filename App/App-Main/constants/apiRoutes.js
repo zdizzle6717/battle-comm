@@ -62,7 +62,9 @@ let routes = {
 		'remove': `http://52.26.195.10:${port}/api/products/`
 	},
 	'rankings': {
-		'create': `http://52.26.195.10:${port}/api/userRankings`
+		'create': `http://52.26.195.10:${port}/api/userRankings`,
+		'update': `http://52.26.195.10:${port}/api/userRankings/`,
+		'search': `http://52.26.195.10:${port}/api/search/userRankings`
 	},
 	'userPhotos': {
 		'create': `http://52.26.195.10:${port}/api/userPhotos`

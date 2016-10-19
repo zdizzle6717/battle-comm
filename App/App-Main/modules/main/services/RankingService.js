@@ -4,7 +4,8 @@ RankingService.$inject = ['API_ROUTES', '$http'];
 function RankingService(API_ROUTES, $http) {
     let service = {
         create: create,
-        update: update
+        update: update,
+		searchRankings: search
     };
 
     let routes = API_ROUTES.rankings;
@@ -37,6 +38,19 @@ function RankingService(API_ROUTES, $http) {
             .then((response) => {
                 let post = response.data;
                 return post;
+            });
+    }
+
+    function search(criteria) {
+        let args = {
+            method: 'POST',
+            url: routes.search,
+            data: criteria
+        };
+
+        return $http(args)
+            .then((response) => {
+                return response.data;
             });
     }
 

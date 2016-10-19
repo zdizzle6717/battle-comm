@@ -31,6 +31,14 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 		  data: {
 			  accessLevel: ['subscriber']
 		  }
+        })
+		.state('playerRanking', {
+          url: "/player-ranking",
+          template: require('./views/playerRanking.php'),
+          controller: 'PlayerRankingController as PlayerRanking',
+		  data: {
+			  accessLevel: ['subscriber']
+		  }
         });
 
         $urlRouterProvider.otherwise('/login');

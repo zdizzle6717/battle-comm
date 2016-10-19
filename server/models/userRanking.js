@@ -20,7 +20,12 @@ module.exports = function(sequelize, DataTypes) {
                 UserRanking.belongsTo(models.GameSystem);
                 UserRanking.belongsTo(models.Faction);
             }
-        }
+        },
+		getterMethods: {
+			pointValue: function() {
+				return this.totalWins + (this.totalDraws * .5);
+			}
+		}
     });
     return UserRanking;
 };

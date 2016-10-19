@@ -72,15 +72,17 @@
 	<table>
 	  <tr>
 	    <th>Game System</th>
+	    <th>Faction</th>
 	    <th>Total Wins</th>
+		<th>Total Losses</th>
 	    <th>Total Draws</th>
-	    <th>Total Losses</th>
 	  </tr>
 	  <tr ng-repeat="ranking in Player.currentPlayer.UserRankings">
 	    <td>{{ranking.GameSystem.name}}</td>
+	    <td>{{ranking.Faction.name}}</td>
 	    <td>{{ranking.totalWins}}</td>
+		<td>{{ranking.totalLosses}}</td>
 	    <td>{{ranking.totalDraws}}</td>
-	    <td>{{ranking.totalLosses}}</td>
 	  </tr>
 	 </table>
 </div>
