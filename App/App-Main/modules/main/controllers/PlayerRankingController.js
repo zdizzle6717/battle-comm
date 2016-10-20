@@ -55,16 +55,19 @@ function PlayerRankingController($rootScope, $state, $stateParams, RankingServic
 		let config = {
 			FactionId: controller.FactionId
 		}
-		RankingService.searchByFaction(config).then((response) => {
-			controller.results = response;
-			controller.byGameSystem = false;
-			controller.byFaction = true;
-			if (response.length > 0) {
-				controller.rankingHeader = response[0].GameSystem.GameSystemRanking.name + ' / ' + response[0].Faction.name;
-			}
-		}).catch((response) => {
-			console.log('Invalid search criteria');
-		})
+		if (controller.FactionId) {
+			RankingService.searchByFaction(config).then((response) => {
+				controller.results = response;
+				controller.byGameSystem = false;
+				controller.byFaction = true;
+				if (response.length > 0) {
+					controller.rankingHeader = response[0].GameSystemRanking.GameSystem.name + ' / ' + response[0].Faction.name;
+				}
+			}).catch((response) => {
+				console.log('Invalid search criteria');
+			})
+		}
+
 	}
 
 	function getFactionsAndSearch() {
