@@ -50,7 +50,7 @@
 	<h2>Ranking <a ui-sref="playerRanking">Leaderboards</a></h2>
 	<h5>Overall: <strong>{{Profile.currentUser.totalWins}} / {{Profile.currentUser.totalLosses}} / {{Profile.currentUser.totalDraws}}</strong></5>
 	<h5>Overall Point Value: <strong>{{Profile.currentUser.totalPointValue}}</strong></5>
-	<h3 class="text-center" ng-if="Profile.currentUser.UserRankings.length < 1">This player has not yet submitted currentUser.UserRankings to an event admin.</h3>
+	<h3 class="text-center" ng-if="Profile.currentUser.UserRankings.length < 1">This player has not yet submitted game results to an event/venue administrator.</h3>
 	<table ng-if="Profile.currentUser.UserRankings.length > 0" class="search-results">
 		<tr>
 	  	    <th>Game System</th>

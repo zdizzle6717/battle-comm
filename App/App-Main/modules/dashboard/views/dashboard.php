@@ -108,7 +108,7 @@
 	<h2>Ranking <a ui-sref="playerRanking">Leaderboards</a></h2>
 	<h5>Overall: <strong>{{Dashboard.currentUser.totalWins}} / {{Dashboard.currentUser.totalLosses}} / {{Dashboard.currentUser.totalDraws}}</strong></5>
 	<h5>Overall Point Value: <strong>{{Dashboard.currentUser.totalPointValue}}</strong></5>
-	<h3 class="text-center" ng-if="Dashboard.currentUser.UserRankings.length < 1">This player has not yet submitted currentUser.UserRankings to an event admin.</h3>
+	<h3 class="text-center" ng-if="Dashboard.currentUser.UserRankings.length < 1">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h3>
 	<table ng-if="Dashboard.currentUser.UserRankings.length > 0" class="search-results">
 		<tr>
 	  	    <th>Game System</th>
