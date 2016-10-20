@@ -7,7 +7,7 @@ function PlayerEditController($rootScope, $state, $stateParams, PlayerService, G
     controller.readOnly = true;
     controller.editPlayer = editPlayer;
     controller.savePlayer = savePlayer;
-	controller.updateRanking = updateRanking;
+	controller.createOrUpdateRanking = createOrUpdateRanking;
 	controller.getFactions = getFactions;
 
     init();
@@ -78,8 +78,8 @@ function PlayerEditController($rootScope, $state, $stateParams, PlayerService, G
         }
     }
 
-	function updateRanking() {
-		RankingService.create(controller.newRanking).then(() => {
+	function createOrUpdateRanking() {
+		RankingService.createOrUpdate(controller.newRanking).then(() => {
 			$state.go('player', {'userId': controller.currentPlayer.id}, {reload: true});
 		});
 	}

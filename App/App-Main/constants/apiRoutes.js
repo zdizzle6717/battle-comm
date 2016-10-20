@@ -12,8 +12,7 @@ let routes = {
 	},
 	'factions': {
 		'create': `http://52.26.195.10:${port}/api/factions`,
-		'update': `http://52.26.195.10:${port}/api/factions/`,
-		'remove': `http://52.26.195.10:${port}/api/factions/`
+		'update': `http://52.26.195.10:${port}/api/factions/`
 	},
 	'gameSystems': {
 		'get': `http://52.26.195.10:${port}/api/gameSystems/`,
@@ -62,9 +61,9 @@ let routes = {
 		'remove': `http://52.26.195.10:${port}/api/products/`
 	},
 	'rankings': {
-		'create': `http://52.26.195.10:${port}/api/userRankings`,
-		'update': `http://52.26.195.10:${port}/api/userRankings/`,
-		'search': `http://52.26.195.10:${port}/api/search/userRankings`
+		'createOrUpdate': `http://52.26.195.10:${port}/api/gameSystemRankings`,
+		'searchByGameSystem': `http://52.26.195.10:${port}/api/search/gameSystemRankings`,
+		'searchByFaction': `http://52.26.195.10:${port}/api/search/factionRankings`,
 	},
 	'userPhotos': {
 		'create': `http://52.26.195.10:${port}/api/userPhotos`

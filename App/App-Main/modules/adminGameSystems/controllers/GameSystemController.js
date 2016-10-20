@@ -9,7 +9,7 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
     controller.saveGameSystem = saveGameSystem;
     controller.removeGameSystem = removeGameSystem;
 	controller.addFaction = addFaction;
-	controller.removeFaction = removeFaction;
+	controller.updateFaction = updateFaction;
     controller.showDeleteModal = showDeleteModal;
     controller.hideDeleteModal = hideDeleteModal;
 
@@ -97,15 +97,12 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
 		})
 	}
 
-	function removeFaction(id, index) {
-		FactionService.removeFaction(id).then(() => {
-			controller.currentGameSystem.Factions.splice(index, 1);
-			showAlert({
-				type: 'success',
-				message: 'A faction was successfully deleted.',
-				timeout: 1000
-			});
-		})
+	function updateFaction(id, index) {
+		showAlert({
+			type: 'error',
+			message: 'Ask Zack about this...',
+			timeout: 1000
+		});
 	}
 
     function showDeleteModal(id) {

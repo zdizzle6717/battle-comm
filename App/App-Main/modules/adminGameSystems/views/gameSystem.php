@@ -57,7 +57,7 @@
 	<div class="full_width" ng-if="!GameSystem.isNew">
 		<h2 class="push-bottom">Factions for This Game System</h2>
 		<ul>
-			<li ng-repeat="faction in GameSystem.currentGameSystem.Factions"><h3>{{faction.name}} <span class="fa fa-times" ng-click="GameSystem.removeFaction(faction.id, $index)"></span></h3></li>
+			<li ng-repeat="faction in GameSystem.currentGameSystem.Factions"><h3>{{faction.name}} <span class="fa fa-edit" ng-click="GameSystem.updateFaction(faction.id, $index)"></span></h3></li>
 		</ul>
 		<h3 ng-if="GameSystem.currentGameSystem.Factions.length < 1">There are currently no factions associated with this game system.</h3>
 		<hr>

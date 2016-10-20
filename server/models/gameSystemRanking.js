@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-    var UserRanking = sequelize.define('UserRanking', {
+    var GameSystemRanking = sequelize.define('GameSystemRanking', {
         totalWins: {
             type: DataTypes.INTEGER,
             defaultValue: 0
@@ -16,9 +16,9 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                UserRanking.belongsTo(models.User);
-                UserRanking.belongsTo(models.GameSystem);
-                UserRanking.belongsTo(models.Faction);
+                GameSystemRanking.belongsTo(models.User);
+                GameSystemRanking.belongsTo(models.GameSystem);
+                GameSystemRanking.hasMany(models.FactionRanking);
             }
         },
 		getterMethods: {
@@ -27,5 +27,5 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		}
     });
-    return UserRanking;
+    return GameSystemRanking;
 };

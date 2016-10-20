@@ -42,10 +42,12 @@ let users = {
 						 attributes: ['id', 'firstName', 'lastName', 'username', 'icon']
 					 },
 					 {
-						 model: models.UserRanking,
+						 model: models.GameSystemRanking,
 						 include: [
-							 { model: models.GameSystem },
-							 { model: models.Faction },
+							 { model: models.GameSystem, attributes: ['name'] },
+							 { model: models.FactionRanking, include: [
+								 { model: models.Faction, attributes: ['name'] }
+							 ] }
 						 ]
 					 }
 				  ],

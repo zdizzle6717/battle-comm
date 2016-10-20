@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
         associate: function(models) {
 			Faction.belongsTo(models.GameSystem);
-			Faction.hasMany(models.UserRanking);
+			Faction.hasMany(models.FactionRanking);
         }
     }
   });

@@ -1,19 +1,19 @@
 'use strict';
 
-let userRankings = require('../handlers/userRankings');
+let gameSystemRankings = require('../handlers/gameSystemRankings');
 let Joi = require('joi');
 let models = require('../../models');
 
 module.exports = [
-	// User Rankings
+	// Game System Rankings
 	{
         method: 'POST',
-        path: '/api/userRankings',
+        path: '/api/gameSystemRankings',
         config: {
-            handler: userRankings.createOrUpdate,
+            handler: gameSystemRankings.createOrUpdate,
             tags: ['api'],
-            description: 'Create a new user ranking',
-            notes: 'Create a new user ranking',
+            description: 'Create a new ranking with game system and faction',
+            notes: 'Create a new ranking with game system and faction',
 			auth: {
                 strategy: 'jsonWebToken',
                 scope: ['subscriber', 'systemAdmin']
@@ -32,9 +32,9 @@ module.exports = [
     },
 	{
         method: 'POST',
-        path: '/api/search/userRankings',
+        path: '/api/search/gameSystemRankings',
         config: {
-			handler: userRankings.search,
+			handler: gameSystemRankings.search,
             tags: ['api'],
             description: 'Return ranking search results',
             notes: 'Return ranking search results',
@@ -45,8 +45,7 @@ module.exports = [
 			validate: {
 				payload: {
                     maxResults: Joi.number().optional(),
-                    GameSystemId: Joi.number().required(),
-                    FactionId: Joi.number().required()
+                    GameSystemId: Joi.number().required()
 				}
 			}
         }

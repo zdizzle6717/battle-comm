@@ -3,9 +3,9 @@
 RankingService.$inject = ['API_ROUTES', '$http'];
 function RankingService(API_ROUTES, $http) {
     let service = {
-        create: create,
-        update: update,
-		searchRankings: search
+        createOrUpdate: createOrUpdate,
+		searchByGameSystem: searchByGameSystem,
+		searchByFaction: searchByFaction
     };
 
     let routes = API_ROUTES.rankings;
@@ -14,11 +14,11 @@ function RankingService(API_ROUTES, $http) {
 
     ///////////////////////
 
-    function create(data) {
+    function createOrUpdate(data) {
         let args = {
             method: 'POST',
-            url: routes.create,
-            data: data
+            url: routes.createOrUpdate,
+            data: cleanData(data)
         };
 
         return $http(args)
@@ -27,24 +27,23 @@ function RankingService(API_ROUTES, $http) {
             });
     }
 
-    function update(id, data) {
+    function searchByGameSystem(criteria) {
         let args = {
-            method: 'PUT',
-            url: routes.update + id,
-            data: cleanData(data)
+            method: 'POST',
+            url: routes.searchByGameSystem,
+            data: criteria
         };
 
         return $http(args)
             .then((response) => {
-                let post = response.data;
-                return post;
+                return response.data;
             });
     }
 
-    function search(criteria) {
+    function searchByFaction(criteria) {
         let args = {
             method: 'POST',
-            url: routes.search,
+            url: routes.searchByFaction,
             data: criteria
         };
 

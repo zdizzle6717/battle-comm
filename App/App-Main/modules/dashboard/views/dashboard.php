@@ -106,23 +106,26 @@
 </div>
 <div class="full_width">
 	<h2>Ranking <a ui-sref="playerRanking">Leaderboards</a></h2>
-	<h5>Overall: <strong>{{Dashboard.currentUser.totalWins}} / {{Dashboard.currentUser.totalLosses}} / {{Dashboard.currentUser.totalDraws}}</strong></5>
-	<h5>Overall Point Value: <strong>{{Dashboard.currentUser.totalPointValue}}</strong></5>
-	<h3 class="text-center" ng-if="Dashboard.currentUser.UserRankings.length < 1">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h3>
-	<table ng-if="Dashboard.currentUser.UserRankings.length > 0" class="search-results">
-		<tr>
-	  	    <th>Game System</th>
-			<th>Faction</th>
-			<th>Ranking</th>
-			<th>Point Value</th>
-	  	</tr>
-		<tr ng-repeat="ranking in Dashboard.currentUser.UserRankings" class="item">
-			<td>{{ranking.GameSystem.name}}</td>
-			<td><a ui-sref="playerRanking({ gameSystemId: ranking.GameSystemId, factionId: ranking.FactionId })">{{ranking.Faction.name}}</a></td>
-			<td>{{ranking.totalWins}}/{{ranking.totalLosses}}/{{ranking.totalDraws}}</td>
-			<td>{{ranking.pointValue}}</td>
-		</tr>
-	</table>
+	<h5 class="text-center">Overall Rank: <strong>{{Dashboard.currentUser.totalWins}} / {{Dashboard.currentUser.totalLosses}} / {{Dashboard.currentUser.totalDraws}}</strong> <span class="fa fa-arrows-h"></span> Overall Point Value: <strong>{{Dashboard.currentUser.totalPointValue}}</strong></5>
+	<h3 class="text-center" ng-if="Dashboard.currentUser.GameSystemRankings.length < 1">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h3>
+	<div class="full_width" ng-repeat="gameRanking in Dashboard.currentUser.GameSystemRankings" ng-if="Dashboard.currentUser.GameSystemRankings.length > 0">
+		<h4><a ui-sref="playerRanking({ gameSystemId: gameRanking.GameSystemId })">{{gameRanking.GameSystem.name}}</a>: {{gameRanking.totalWins}}/{{gameRanking.totalLosses}}/{{gameRanking.totalDraws}}</h4>
+		<table class="search-results">
+			<tr>
+		  	    <th>Game System</th>
+				<th>Faction</th>
+				<th>Ranking</th>
+				<th>Point Value</th>
+		  	</tr>
+			<tr ng-repeat="ranking in gameRanking.FactionRankings" class="item">
+				<td>{{gameRanking.GameSystem.name}}</td>
+				<td>{{ranking.Faction.name}}</td>
+				<td>{{ranking.totalWins}}/{{ranking.totalLosses}}/{{ranking.totalDraws}}</td>
+				<td>{{ranking.pointValue}}</td>
+			</tr>
+		</table>
+		<hr>
+	</div>
 </div>
 <div class="full_width ">
 	<div class="two_column_1">

@@ -28,12 +28,13 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Us
 				controller.currentUser.totalWins = 0;
 				controller.currentUser.totalDraws = 0;
 				controller.currentUser.totalLosses = 0;
-				if (response.UserRankings.length > 0) {
-					for (var i in response.UserRankings) {
-						controller.currentUser.totalWins += response.UserRankings[i].totalWins;
-						controller.currentUser.totalDraws += response.UserRankings[i].totalDraws;
-						controller.currentUser.totalLosses += response.UserRankings[i].totalLosses;
+				if (response.GameSystemRankings.length > 0) {
+					for (var i in response.GameSystemRankings) {
+						controller.currentUser.totalWins += response.GameSystemRankings[i].totalWins;
+						controller.currentUser.totalDraws += response.GameSystemRankings[i].totalDraws;
+						controller.currentUser.totalLosses += response.GameSystemRankings[i].totalLosses;
 					}
+					controller.currentUser.totalPointValue = controller.currentUser.totalWins + (controller.currentUser.totalDraws * .5)
 				}
 				AuthService.totalNotifications = controller.currentUser.UserNotifications.length;
 			}).catch(function() {

@@ -12,8 +12,10 @@ module.exports = [
         }
     }
 ]
+.concat(require('./api/factionRankings'))
 .concat(require('./api/factions'))
 .concat(require('./api/files'))
+.concat(require('./api/gameSystemRankings'))
 .concat(require('./api/gameSystems'))
 .concat(require('./api/manufacturers'))
 .concat(require('./api/newsPosts'))
@@ -23,5 +25,4 @@ module.exports = [
 .concat(require('./api/userFriends'))
 .concat(require('./api/userNotifications'))
 .concat(require('./api/userPhotos'))
-.concat(require('./api/userRankings'))
 .concat(require('./api/venues'));

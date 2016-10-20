@@ -86,7 +86,7 @@ module.exports = function(sequelize, DataTypes) {
                 User.hasMany(models.UserMessage);
                 User.hasMany(models.UserAchievement);
                 User.hasMany(models.UserPhoto);
-                User.hasMany(models.UserRanking);
+                User.hasMany(models.GameSystemRanking);
             }
         }
     });

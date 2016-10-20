@@ -50,41 +50,46 @@
 		<div class="form-group">
 			<div class="three_column_1">
 				<label for="totalWins" class="sublabel required">Total Wins:</label>
-				<input id="totalWins" name="totalWins" ng-model="Player.newRanking.totalWins" type="number" class="formTextfield_Large" placeholder="Player first name..." required>
-			</div>
-			<div class="three_column_1">
-				<label for="totalDraws" class="sublabel required">Total Draws:</label>
-				<input id="totalDraws" name="totalDraws" ng-model="Player.newRanking.totalDraws" type="number" class="formTextfield_Large" placeholder="Player last name..." required>
+				<input id="totalWins" name="totalWins" ng-model="Player.newRanking.totalWins" type="number" class="formTextfield_Large" required>
 			</div>
 			<div class="three_column_1">
 				<label for="totalLosses" class="sublabel required"> Total Losses:</label>
-				<input id="totalLosses" name="totalLosses" ng-model="Player.newRanking.totalLosses" type="number" class="formTextfield_Large" placeholder="Player email..." required>
+				<input id="totalLosses" name="totalLosses" ng-model="Player.newRanking.totalLosses" type="number" class="formTextfield_Large" required>
+			</div>
+			<div class="three_column_1">
+				<label for="totalDraws" class="sublabel required">Total Draws:</label>
+				<input id="totalDraws" name="totalDraws" ng-model="Player.newRanking.totalDraws" type="number" class="formTextfield_Large" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="full_width text-right">
-				<button class="button button-primary" ng-click="Player.updateRanking()" ng-disabled="rankingForm.$invalid">Update Ranking</button>
+				<button class="button button-primary" ng-click="Player.createOrUpdateRanking()" ng-disabled="rankingForm.$invalid">Update Ranking</button>
 			</div>
 		</div>
 	</form>
 	<hr>
-	<h2>Player Ranking</h2>
-	<table>
-	  <tr>
-	    <th>Game System</th>
-	    <th>Faction</th>
-	    <th>Total Wins</th>
-		<th>Total Losses</th>
-	    <th>Total Draws</th>
-	  </tr>
-	  <tr ng-repeat="ranking in Player.currentPlayer.UserRankings">
-	    <td>{{ranking.GameSystem.name}}</td>
-	    <td>{{ranking.Faction.name}}</td>
-	    <td>{{ranking.totalWins}}</td>
-		<td>{{ranking.totalLosses}}</td>
-	    <td>{{ranking.totalDraws}}</td>
-	  </tr>
-	 </table>
+	<div class="full_width">
+		<h2>Ranking</h2>
+		<h3 class="text-center" ng-if="Player.currentPlayer.GameSystemRankings.length < 1">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h3>
+		<div class="full_width" ng-repeat="gameRanking in Player.currentPlayer.GameSystemRankings" ng-if="Player.currentPlayer.GameSystemRankings.length > 0">
+			<h4>{{gameRanking.GameSystem.name}}: {{gameRanking.totalWins}}/{{gameRanking.totalLosses}}/{{gameRanking.totalDraws}}</h4>
+			<table class="search-results">
+				<tr>
+			  	    <th>Game System</th>
+					<th>Faction</th>
+					<th>Ranking</th>
+					<th>Point Value</th>
+			  	</tr>
+				<tr ng-repeat="ranking in gameRanking.FactionRankings" class="item">
+					<td>{{gameRanking.GameSystem.name}}</td>
+					<td>{{ranking.Faction.name}}</td>
+					<td>{{ranking.totalWins}}/{{ranking.totalLosses}}/{{ranking.totalDraws}}</td>
+					<td>{{ranking.pointValue}}</td>
+				</tr>
+			</table>
+			<hr>
+		</div>
+	</div>
 </div>
 <div class="four_column_1 single-product">
     <div class="panel panel-default sidebar-menu" >
