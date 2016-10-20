@@ -1,6 +1,6 @@
 'use strict';
 
-const moduleName = 'news';
+const moduleName = 'adminNews';
 const angular = require('angular');
 
 

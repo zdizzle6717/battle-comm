@@ -58,9 +58,9 @@
 			<th>Ranking</th>
 			<th>Point Value</th>
 	  	</tr>
-		<tr ng-repeat="ranking in Profile.currentUser.UserRankings" class="item" ui-sref="profile({'rankingId': ranking.id})">
+		<tr ng-repeat="ranking in Profile.currentUser.UserRankings" class="item">
 			<td>{{ranking.GameSystem.name}}</td>
-			<td>{{ranking.Faction.name}}</td>
+			<td><a ui-sref="playerRanking({ gameSystemId: ranking.GameSystemId, factionId: ranking.FactionId })">{{ranking.Faction.name}}</a></td>
 			<td>{{ranking.totalWins}}/{{ranking.totalLosses}}/{{ranking.totalDraws}}</td>
 			<td>{{ranking.pointValue}}</td>
 		</tr>

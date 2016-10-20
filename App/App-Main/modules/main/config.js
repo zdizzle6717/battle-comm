@@ -36,6 +36,10 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
           url: "/player-ranking",
           template: require('./views/playerRanking.php'),
           controller: 'PlayerRankingController as PlayerRanking',
+		  params: {
+			  gameSystemId: null,
+			  factionId: null
+		  },
 		  data: {
 			  accessLevel: ['subscriber']
 		  }

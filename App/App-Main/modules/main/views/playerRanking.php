@@ -1,5 +1,5 @@
 <div class="full_width ">
-	<h2>Ranking: Overall</h2>
+	<h2>Ranking: {{PlayerRanking.rankingHeader}}</h2>
 </div>
 <div class="full_width">
 	<form name="rankingSearchForm" ng-submit="PlayerRanking.search()">
@@ -16,11 +16,11 @@
 				<select ng-options="faction.id as faction.name for faction in PlayerRanking.factions track by faction.id" ng-model="PlayerRanking.FactionId" required ng-if="PlayerRanking.factions"></select>
 			</div>
 			<div class="three_column_1 text-right">
-				<button class="button button-primary" type="submit" ng-click="PlayerRanking.search()" ng-disabled="rankingSearchForm.$invalid"><i class="fa fa-search"></i> Search</button>
+				<button class="button button-primary" type="submit" ng-click="PlayerRanking.searchRankings()" ng-disabled="rankingSearchForm.$invalid"><i class="fa fa-search"></i> Search</button>
 			</div>
 		</div>
 	</form>
-	<h5 class="text-center" ng-if="PlayerRanking.results.length === 0">No results found. Enter a new search term.</h5>
+	<h5 class="text-center" ng-if="PlayerRanking.results.length === 0">Select a game system and faction to search the Battle-Comm leaderboards.</h5>
 	<table ng-if="PlayerRanking.results.length > 0" class="search-results">
 		<tr>
 	  	    <th>Username</th>

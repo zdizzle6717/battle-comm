@@ -104,6 +104,26 @@
 		<h5>Search by player profile and click 'Add Ally' to send a ally request.</h5>
 	</div>
 </div>
+<div class="full_width">
+	<h2>Ranking <a ui-sref="playerRanking">Leaderboards</a></h2>
+	<h5>Overall: <strong>{{Dashboard.currentUser.totalWins}} / {{Dashboard.currentUser.totalLosses}} / {{Dashboard.currentUser.totalDraws}}</strong></5>
+	<h5>Overall Point Value: <strong>{{Dashboard.currentUser.totalPointValue}}</strong></5>
+	<h3 class="text-center" ng-if="Dashboard.currentUser.UserRankings.length < 1">This player has not yet submitted currentUser.UserRankings to an event admin.</h3>
+	<table ng-if="Dashboard.currentUser.UserRankings.length > 0" class="search-results">
+		<tr>
+	  	    <th>Game System</th>
+			<th>Faction</th>
+			<th>Ranking</th>
+			<th>Point Value</th>
+	  	</tr>
+		<tr ng-repeat="ranking in Dashboard.currentUser.UserRankings" class="item">
+			<td>{{ranking.GameSystem.name}}</td>
+			<td><a ui-sref="playerRanking({ gameSystemId: ranking.GameSystemId, factionId: ranking.FactionId })">{{ranking.Faction.name}}</a></td>
+			<td>{{ranking.totalWins}}/{{ranking.totalLosses}}/{{ranking.totalDraws}}</td>
+			<td>{{ranking.pointValue}}</td>
+		</tr>
+	</table>
+</div>
 <div class="full_width ">
 	<div class="two_column_1">
 		<h2 class="text-center">Achievements</h2>
