@@ -1,8 +1,8 @@
 'use strict';
 
-config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'LoadingServiceProvider'];
+config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'LoadingServiceProvider', 'AuthInterceptorProvider'];
 
-function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServiceProvider) {
+function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServiceProvider, AuthInterceptorProvider) {
     $httpProvider.useApplyAsync(true);
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.cache = false;
@@ -11,6 +11,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 
     // Loading
     $httpProvider.interceptors.push(LoadingServiceProvider.interceptor);
+    $httpProvider.interceptors.push(AuthInterceptorProvider.interceptor);
 
     $stateProvider
         // RP Store

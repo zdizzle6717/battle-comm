@@ -19,6 +19,9 @@ mod.controller('RegisterController', require('./controllers/RegisterController')
 // Services
 mod.service('AuthService', require('./services/AuthService'));
 
+// Providers
+mod.provider('AuthInterceptor', require('./providers/AuthInterceptor'));
+
 // Directives
 mod.directive('accessLevel', require('./directives/accessLevel'));
 
