@@ -88,7 +88,6 @@
 	</div>
 	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile({playerId: Dashboard.currentUser.id})" style="color:black;text-decoration:none;">{{Dashboard.currentUser.username}}</a></h1>
 	<div class="center">
-		<p><strong>{{Dashboard.currentUser.totalWins}} / {{Dashboard.currentUser.totalDraws}} / {{Dashboard.currentUser.totalLosses}}</strong></p>
 		<p><a ui-sref="dashboard">Account Settings</a></p>
 	</div>
 </div>
@@ -114,7 +113,7 @@
 			<tr>
 		  	    <th>Game System</th>
 				<th>Faction</th>
-				<th>Ranking</th>
+				<th>Ranking W/L/D</th>
 				<th>Point Value</th>
 		  	</tr>
 			<tr ng-repeat="ranking in gameRanking.FactionRankings" class="item">

@@ -30,6 +30,8 @@ module.exports = [
 							  fullName: Joi.string().required(),
 							  email: Joi.string().required(),
 							  pointsEarned: Joi.number().required(),
+							  gameSystem: Joi.string().required(),
+							  faction: Joi.string().required(),
 							  totalWins: Joi.number().optional(),
 							  totalDraws: Joi.number().optional(),
 							  totalLosses: Joi.number().optional(),

@@ -14,14 +14,14 @@ let factions = {
             });
     },
 	update: function(request, reply) {
-        models.GameSystem.find({
+        models.Faction.find({
                 where: {
                     id: request.params.id
                 }
             })
-            .then(function(newsPost) {
-                if (newsPost) {
-                    newsPost.updateAttributes({
+            .then(function(faction) {
+                if (faction) {
+                    faction.updateAttributes({
 			            name: request.payload.name,
                     }).then(function(response) {
                         reply(response).code(200);

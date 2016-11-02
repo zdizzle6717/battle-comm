@@ -55,7 +55,7 @@
 			<tr>
 		  	    <th>Game System</th>
 				<th>Faction</th>
-				<th>Ranking</th>
+				<th>Ranking W/L/D</th>
 				<th>Point Value</th>
 		  	</tr>
 			<tr ng-repeat="ranking in gameRanking.FactionRankings" class="item">

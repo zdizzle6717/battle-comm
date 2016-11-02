@@ -23,9 +23,9 @@
 			<th>#</th>
 	  	    <th>Username</th>
 	  	    <th>Game System</th>
-			<th>Ranking</th>
+			<th>Ranking W/L/D</th>
 	  	</tr>
-		<tr ng-repeat="ranking in PlayerRanking.results | orderBy: ranking.pointValue" class="item" ui-sref="profile({'playerId': ranking.UserId})">
+		<tr ng-repeat="ranking in PlayerRanking.filteredResults" class="item" ui-sref="profile({'playerId': ranking.UserId})">
 			<td>{{$index + 1}}</td>
 			<td><a>{{ranking.User.username}}</a></td>
 			<td>{{ranking.GameSystem.name}}</td>
@@ -38,9 +38,9 @@
 	  	    <th>Username</th>
 	  	    <th>Game System</th>
 			<th>Faction</th>
-			<th>Ranking</th>
+			<th>Ranking W/L/D</th>
 	  	</tr>
-		<tr ng-repeat="ranking in PlayerRanking.results | orderBy: ranking.pointValue" class="item" ui-sref="profile({'playerId': ranking.GameSystemRanking.UserId})">
+		<tr ng-repeat="ranking in PlayerRanking.filteredResults" class="item" ui-sref="profile({'playerId': ranking.GameSystemRanking.UserId})">
 			<td>{{$index + 1}}</td>
 			<td><a>{{ranking.GameSystemRanking.User.username}}</a></td>
 			<td>{{ranking.GameSystemRanking.GameSystem.name}}</td>

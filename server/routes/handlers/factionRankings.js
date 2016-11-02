@@ -4,7 +4,7 @@ let models = require('../../models');
 const Boom = require('boom');
 
 // Product Route Configs
-let fationRankings = {
+let factionRankings = {
 	search: function(request, reply) {
         models.FactionRanking.findAll({
 			where: {
@@ -21,7 +21,8 @@ let fationRankings = {
 					{ model: models.User, attributes: ['username'] }
 				] }
 			],
-			limit: request.payload.maxResults || 20
+			limit: request.payload.maxResults || 20,
+			order: [['totalWins', 'DESC']]
 		})
         .then(function(rankings) {
             reply(rankings).code(200);
@@ -30,4 +31,4 @@ let fationRankings = {
 };
 
 
-module.exports = fationRankings;
+module.exports = factionRankings;

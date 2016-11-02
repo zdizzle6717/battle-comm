@@ -1,7 +1,7 @@
 'use strict';
 
-PlayerRankingController.$inject = ['$rootScope', '$state', '$stateParams', 'RankingService', 'GameSystemService', 'AuthService'];
-function PlayerRankingController($rootScope, $state, $stateParams, RankingService, GameSystemService, AuthService) {
+PlayerRankingController.$inject = ['$rootScope', '$state', '$stateParams', '$filter', 'RankingService', 'GameSystemService', 'AuthService'];
+function PlayerRankingController($rootScope, $state, $stateParams, $filter, RankingService, GameSystemService, AuthService) {
     let controller = this;
 
 	controller.getFactionsAndSearch = getFactionsAndSearch;
@@ -41,6 +41,7 @@ function PlayerRankingController($rootScope, $state, $stateParams, RankingServic
 		}
 		RankingService.searchByGameSystem(config).then((response) => {
 			controller.results = response;
+			controller.filteredResults = sortResults(response);
 			controller.byGameSystem = true;
 			controller.byFaction = false;
 			if (response.length > 0) {
@@ -58,6 +59,7 @@ function PlayerRankingController($rootScope, $state, $stateParams, RankingServic
 		if (controller.FactionId) {
 			RankingService.searchByFaction(config).then((response) => {
 				controller.results = response;
+				controller.filteredResults = sortResults(response);
 				controller.byGameSystem = false;
 				controller.byFaction = true;
 				if (response.length > 0) {
@@ -68,6 +70,10 @@ function PlayerRankingController($rootScope, $state, $stateParams, RankingServic
 			})
 		}
 
+	}
+
+	function sortResults(results) {
+		return $filter('orderBy')(results, '-pointValue');
 	}
 
 	function getFactionsAndSearch() {

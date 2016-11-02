@@ -5,11 +5,15 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
     let controller = this;
 
     controller.readOnly = true;
+	controller.editingFaction = false;
+	controller.factionUpdate = {};
     controller.editGameSystem = editGameSystem;
     controller.saveGameSystem = saveGameSystem;
     controller.removeGameSystem = removeGameSystem;
 	controller.addFaction = addFaction;
+	controller.changeFaction = changeFaction;
 	controller.updateFaction = updateFaction;
+	controller.cancelFactionUpdate = cancelFactionUpdate;
     controller.showDeleteModal = showDeleteModal;
     controller.hideDeleteModal = hideDeleteModal;
 
@@ -97,12 +101,29 @@ function GameSystemController($rootScope, $state, $stateParams, GameSystemServic
 		})
 	}
 
-	function updateFaction(id, index) {
-		showAlert({
-			type: 'error',
-			message: 'Ask Zack about this...',
-			timeout: 1000
-		});
+	function changeFaction(faction) {
+		controller.factionUpdate = faction;
+		controller.editingFaction = true;
+	}
+
+
+	function updateFaction() {
+		let config = {
+			GameSystemId: controller.currentGameSystem.id,
+			name: controller.factionUpdate.name
+		}
+		FactionService.updateFaction(controller.factionUpdate.id, config).then(() => {
+			showAlert({
+				type: 'success',
+				message: 'The faction was successfully updated.',
+				timeout: 1000
+			});
+		})
+	}
+
+	function cancelFactionUpdate() {
+		controller.factionUpdate = {};
+		controller.editingFaction = false;
 	}
 
     function showDeleteModal(id) {

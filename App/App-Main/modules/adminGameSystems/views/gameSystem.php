@@ -56,9 +56,24 @@
 	<hr ng-if="!GameSystem.isNew">
 	<div class="full_width" ng-if="!GameSystem.isNew">
 		<h2 class="push-bottom">Factions for This Game System</h2>
-		<ul>
-			<li ng-repeat="faction in GameSystem.currentGameSystem.Factions"><h3>{{faction.name}} <span class="fa fa-edit" ng-click="GameSystem.updateFaction(faction.id, $index)"></span></h3></li>
-		</ul>
+		<div class="two_column_1">
+			<ul>
+				<li ng-repeat="faction in GameSystem.currentGameSystem.Factions"><h3>{{faction.name}} <span class="fa fa-edit" ng-click="GameSystem.changeFaction(faction)"></span></h3></li>
+			</ul>
+		</div>
+		<div class="two_column_1">
+			<form style="margin:0 auto;" name="factionUpdateForm" novalidate ng-if="GameSystem.editingFaction === true">
+				<div class="form-group">
+					<label for="name" class="sublabel required">Faction Name:</label>
+					<input id="name" name="name" ng-model="GameSystem.factionUpdate.name" type="text" class="formTextfield_Large" placeholder="Game System name..." required>
+				</div>
+				<div class="form-group">
+					<button class="button button-primary" ng-click="GameSystem.updateFaction()" ng-disabled="factionUpdateForm.$invalid"><span class="fa fa-plus"></span> Update Faction</button>
+					<button class="button button-danger" ng-click="GameSystem.cancelFactionUpdate()"><span class="fa fa-minus"></span> Cancel</button>
+				</div>
+			</form>
+		</div>
+
 		<h3 ng-if="GameSystem.currentGameSystem.Factions.length < 1">There are currently no factions associated with this game system.</h3>
 		<hr>
 		<form style="margin:0 auto;" name="factionForm" novalidate>

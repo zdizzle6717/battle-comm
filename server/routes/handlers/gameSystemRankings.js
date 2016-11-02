@@ -118,7 +118,8 @@ let gameSystemRankings = {
 				{ model: models.User, attributes: ['username', 'id'] },
 				{ model: models.GameSystem, attributes: ['name'] }
 			],
-			limit: request.payload.maxResults || 20
+			limit: request.payload.maxResults || 20,
+			order: [['totalWins', 'DESC']]
 		})
         .then(function(rankings) {
             reply(rankings).code(200);
