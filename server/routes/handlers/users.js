@@ -157,6 +157,21 @@ let users = {
 			systemAdmin: request.pre.user.systemAdmin
 		}).code(201);
 	},
+	changePassword: function(request, reply) {
+		models.User.find({
+                where: {
+                    id: request.params.id
+                }
+            }).then((user) => {
+				userFunctions.hashPassword(request.payload.newPassword, (err, hash) => {
+					user.updateAttributes({
+						password: hash
+					}).then((user) => {
+						reply(user).code(200);
+					})
+				})
+		});
+	},
     updatePartial: function(request, reply) {
         models.User.find({
                 where: {

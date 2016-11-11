@@ -101,6 +101,22 @@ function AuthService($rootScope, $q, $http, API_ROUTES) {
 			});
 	};
 
+	this.changePassword = function(credentials) {
+		let args = {
+			method: 'PUT',
+			url: API_ROUTES.users.changePassword + credentials.id,
+			data: {
+				username: credentials.username,
+				password: credentials.password,
+				newPassword: credentials.newPassword,
+			}
+		};
+
+		return $http(args).then(function(response) {
+			return response.data;
+		});
+	};
+
 	this.isAuthorized = function(accessLevel) {
 		if (accessLevel[0] === 'public') {
 			return true;

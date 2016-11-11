@@ -88,7 +88,7 @@
 	</div>
 	<h1 class="center push-top" style="text-transform: initial;"><a ui-sref="profile({playerId: Dashboard.currentUser.id})" style="color:black;text-decoration:none;">{{Dashboard.currentUser.username}}</a></h1>
 	<div class="center">
-		<p><a ui-sref="dashboard">Account Settings</a></p>
+		<p><a ui-sref="changePassword({'playerId': Dashboard.currentUser.id})">Change Password?</a></p>
 	</div>
 </div>
 <div class="full_width">

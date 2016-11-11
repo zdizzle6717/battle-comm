@@ -8,7 +8,7 @@
 			</div>
 			<div class="form-group">
 				<label class="required">Password</label>
-				<input type="password" ng-model="Login.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
+				<input type="password" ng-model="Login.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\!@#$%^&\*\_\-+=]).*$/" required/>
 			</div>
 			<div class="form-group text-right">
 				<a ng-href="#">Forgot password?</a>

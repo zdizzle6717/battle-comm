@@ -20,7 +20,7 @@ module.exports = [
             notes: 'Register a new user',
             validate: {
                 payload: {
-                    username: Joi.string().min(4).max(50).required(),
+                    username: Joi.string().min(8).max(50).required(),
                     email: Joi.string().email().required(),
                     password: Joi.string().required(),
 					firstName: Joi.string().optional(),
@@ -133,6 +133,33 @@ module.exports = [
             }
         },
         handler: users.updatePartial
+    },
+    {
+        method: 'PUT',
+        path: '/api/users/changePassword/{id}',
+        config: {
+            tags: ['api'],
+            description: 'Update User Password from Account Dashboard',
+            notes: 'Update User Password from Account Dashboard',
+			auth: {
+                strategy: 'jsonWebToken',
+                scope: ['subscriber']
+            },
+            validate: {
+                params: {
+                    id: Joi.number().required()
+                },
+                payload: {
+					username: Joi.string().required(),
+					password: Joi.string().required(),
+					newPassword: Joi.string().required()
+                }
+            },
+			pre: [{
+				method: userFunctions.verifyCredentials
+			}],
+	        handler: users.changePassword
+        }
     },
 	{
         method: 'POST',

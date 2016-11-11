@@ -12,6 +12,8 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Us
     controller.toggleEdit = toggleEdit;
     controller.savePlayer = savePlayer;
     controller.savePhoto = savePhoto;
+    controller.changePassword = changePassword;
+    controller.checkPasswords = checkPasswords;
 	controller.logout = logout;
 
     init();
@@ -116,6 +118,40 @@ function DashboardController($rootScope, $state, $stateParams, PlayerService, Us
 				message: 'Oops, something went wrong. Double check that all entries are valid.'
 			});
 		});;
+	}
+
+	function checkPasswords() {
+		if (controller.currentUser.newPassword !== controller.newPasswordRepeat) {
+			controller.invalidPassword = true;
+			return false;
+		} else {
+			controller.invalidPassword = false;
+			return true;
+		}
+	}
+
+	function changePassword() {
+		let credentials = {
+			id: controller.currentUser.id,
+			username: controller.currentUser.email,
+			password: controller.currentUser.password,
+			newPassword: controller.currentUser.newPassword
+		}
+
+		AuthService.changePassword(credentials).then((response) => {
+			showAlert({
+				type: 'success',
+				message: 'Your password was successfully changed. Please login with the new password.'
+			});
+			logout();
+		}).catch((response) => {
+			if (response.data.message === 'Incorrect password!') {
+				showAlert({
+	                type: 'error',
+	                message: 'Incorrect Password: Please re-enter your current password and try again.'
+	            });
+			}
+		})
 	}
 
 	function showAlert(config) {

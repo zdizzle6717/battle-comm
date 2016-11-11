@@ -21,6 +21,17 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
 			  accessLevel: ['subscriber']
 		  }
         })
+        .state('changePassword', {
+          url: "/change-password/:playerId",
+          template: require('./views/changePassword.php'),
+          controller: 'DashboardController as Dashboard',
+		  params: {
+			  playerId: ''
+		  },
+		  data: {
+			  accessLevel: ['subscriber']
+		  }
+        })
         .state('notifications', {
           url: "/notifications/:playerId",
           template: require('./views/notifications.php'),

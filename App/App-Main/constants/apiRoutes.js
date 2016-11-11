@@ -70,7 +70,8 @@ let routes = {
 	},
 	'users': {
 		'register': `http://52.26.195.10:${port}/api/users`,
-		'authenticate': `http://52.26.195.10:${port}/api/users/authenticate`
+		'authenticate': `http://52.26.195.10:${port}/api/users/authenticate`,
+		'changePassword': `http://52.26.195.10:${port}/api/users/changePassword/`
 	},
 	'venue': {
 		'assign': `http://52.26.195.10:${port}/api/venues/assignPoints`,

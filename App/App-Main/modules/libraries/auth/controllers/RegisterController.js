@@ -18,6 +18,13 @@ function RegisterController($rootScope, $state, AuthService) {
     ////////////////////////////
 
 	function init() {
+		if (AuthService.currentUser.rememberLogin) {
+			controller.credentials = AuthService.currentUser || {};
+		}
+		if (AuthService.currentUser.loginAuto) {
+			let credentials = AuthService.currentUser || {};
+			login(credentials);
+		}
 		if (AuthService.isAuthenticated) {
 			$state.go('dashboard', {'playerId': AuthService.currentUser.id});
 		}

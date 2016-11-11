@@ -25,11 +25,11 @@
 			<div class="form-group">
 				<div class="two_column_1">
 					<label class="required">Password</label>
-					<input type="password" ng-model="Register.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
+					<input type="password" ng-model="Register.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\!@#$%^&\*\_\-+=]).*$/" required/>
 				</div>
 				<div class="two_column_1">
 					<label class="required">Repeat Password</label>
-					<input type="password" ng-model="Register.passwordRepeat" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/" required/>
+					<input type="password" ng-model="Register.passwordRepeat" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\!@#$%^&\*\_\-+=]).*$/" required/>
 				</div>
 			</div>
 			<div class="form-group text-right">
@@ -47,7 +47,7 @@
 					<li>Minimum of 8 characters</li>
 					<li>At least one lowercase letter</li>
 					<li>At least one uppercase letter</li>
-					<li>At least one symbol/special character @#$%^&+=</li>
+					<li>At least one symbol/special character !@#$%^&_-+=</li>
 				</ul>
 			</div>
 		</form>
