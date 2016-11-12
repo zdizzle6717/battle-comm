@@ -15,6 +15,7 @@ mod.run(require('./run'));
 // Controllers
 mod.controller('LoginController', require('./controllers/LoginController'));
 mod.controller('RegisterController', require('./controllers/RegisterController'));
+mod.controller('SetNewPasswordController', require('./controllers/SetNewPasswordController'));
 
 // Services
 mod.service('AuthService', require('./services/AuthService'));

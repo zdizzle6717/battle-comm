@@ -3,7 +3,7 @@
 const jwt = require('jsonwebtoken');
 const env = require('../config/environmentVariables');
 
-function createToken(user) {
+function createUserToken(user) {
   let scopes = [];
   if (user.subscriber) {
     scopes.push('subscriber');
@@ -30,4 +30,4 @@ function createToken(user) {
   return jwt.sign({ id: user.id, username: user.username, scope: scopes }, env.secret, { algorithm: 'HS256', expiresIn: "4h" } );
 }
 
-module.exports = createToken;
+module.exports = createUserToken;

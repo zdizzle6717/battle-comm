@@ -13,8 +13,7 @@ function verifyUniqueUser(req, res) {
                     username: req.payload.username
                 }]
             }
-        })
-        .then(function(user) {
+        }).then(function(user) {
             if (user) {
                 if (user.username === req.payload.username) {
                     res(Boom.badRequest('Username taken'));
@@ -23,20 +22,10 @@ function verifyUniqueUser(req, res) {
                     res(Boom.badRequest('Email taken'));
                 }
             }
-
             res(req.payload);
-        })
-        .catch(function(response) {
+        }).catch(function(response) {
             console.log(response);
         });
-}
-
-function hashPassword(password, cb) {
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (error, hash) => {
-            return cb(err, hash)
-        });
-    });
 }
 
 function verifyCredentials(req, res) {
@@ -50,8 +39,7 @@ function verifyCredentials(req, res) {
                     username: req.payload.username
                 }]
             }
-        })
-        .then(function(user) {
+        }).then(function(user) {
             if (user) {
                 bcrypt.compare(password, user.password, (err, isValid) => {
                     if (isValid) {
@@ -63,14 +51,38 @@ function verifyCredentials(req, res) {
             } else {
                 res(Boom.badRequest('Incorrect username or email!'));
             }
-        })
-        .catch(function(response) {
+        }).catch(function(response) {
             console.log(response);
         });
+}
+
+function verifyUserExists(req, res) {
+    models.User.find({
+            where: {
+                email: req.payload.email
+            }
+        }).then((user) => {
+			if (user) {
+				res(user);
+			} else {
+				res(Boom.badRequest('User not found.'));
+			}
+		}).catch((response) => {
+			console.log(response)
+		})
+}
+
+function hashPassword(password, cb) {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (error, hash) => {
+            return cb(err, hash)
+        });
+    });
 }
 
 module.exports = {
     verifyUniqueUser,
     verifyCredentials,
+	verifyUserExists,
     hashPassword
 }

@@ -9,13 +9,17 @@ const nodemailer = require('nodemailer');
 const generator = require('xoauth2').createXOAuth2Generator(env.email.XOAuth2);
 const buildRPUpdateEmail = require('../../email-templates/rpUpdate');
 const buildRegistrationEmail = require('../../email-templates/registrationSuccess');
+const buildForgotPasswordEmail = require('../../email-templates/forgotPassword');
+const buildPasswordUpdatedEmail = require('../../email-templates/passwordUpdated');
 
-const createToken = require('../../utils/createToken');
+const createUserToken = require('../../utils/createUserToken');
+const createResetToken = require('../../utils/createResetToken');
+const verifyResetToken = require('../../utils/verifyResetToken');
 const userFunctions = require('../../utils/userFunctions');
 
 // listen for token updates
 // you probably want to store these to a db
-generator.on('token', function(token){
+generator.on('token', function(token) {
 });
 
 let transporter = nodemailer.createTransport(({
@@ -59,7 +63,6 @@ let users = {
                 else {
                     reply().code(404);
                 }
-
             });
     },
     getAll: function(request, reply) {
@@ -120,7 +123,7 @@ let users = {
 							reply('Somthing went wrong');
 						} else{
 							reply({
-								id_token: createToken(user),
+								id_token: createUserToken(user),
 								id: user.id,
 								firstName: user.firstName,
 								lastName: user.lastName,
@@ -143,7 +146,7 @@ let users = {
 	},
 	authenticate: function(request, reply) {
 		reply({
-			id_token: createToken(request.pre.user),
+			id_token: createUserToken(request.pre.user),
 			id: request.pre.user.id,
 			firstName: request.pre.user.firstName,
 			lastName: request.pre.user.lastName,
@@ -163,13 +166,97 @@ let users = {
                     id: request.params.id
                 }
             }).then((user) => {
-				userFunctions.hashPassword(request.payload.newPassword, (err, hash) => {
-					user.updateAttributes({
-						password: hash
-					}).then((user) => {
-						reply(user).code(200);
-					})
-				})
+				// Send forgot password e-mail
+				let passwordUpdatedConfig = {
+					from: env.email.user,
+					to: request.payload.username,
+					subject: `Battle-Comm: Password Updated`,
+					html: buildPasswordUpdatedEmail()
+				};
+
+				transporter.sendMail(passwordUpdatedConfig, function(error, info) {
+					if(error) {
+						console.log(error);
+						reply('Somthing went wrong');
+					} else {
+						userFunctions.hashPassword(request.payload.newPassword, (err, hash) => {
+							user.updateAttributes({
+								password: hash
+							}).then((user) => {
+								reply(user).code(200);
+							})
+						});
+					};
+				});
+		});
+	},
+	resetPassword: function(request, reply) {
+		let token = createResetToken(request.pre.user.email);
+
+		// Send forgot password e-mail
+		let forgotPasswordConfig = {
+			from: env.email.user,
+			to: request.pre.user.email,
+			subject: `Battle-Comm: Reset Password`,
+			html: buildForgotPasswordEmail({
+				token
+			})
+		};
+
+		transporter.sendMail(forgotPasswordConfig, function(error, info) {
+			if(error) {
+				console.log(error);
+				reply('Somthing went wrong');
+			} else{
+				console.log(token);
+				reply(token).code(200);
+			};
+		});
+
+	},
+	verifyResetToken: function(request, reply) {
+		let tokenResponse = verifyResetToken(request.params.token);
+		console.log(tokenResponse);
+		if (tokenResponse) {
+			reply(tokenResponse).code(200);
+		} else {
+			reply(Boom.badRequest('Invalid token'));
+		}
+	},
+	setNewPassword: function(request, reply) {
+		models.User.find({
+                where: {
+                    email: request.payload.email
+                }
+            }).then((user) => {
+				let tokenResponse = verifyResetToken(request.params.token);
+				if (tokenResponse) {
+					// Send forgot password e-mail
+					let passwordUpdatedConfig = {
+						from: env.email.user,
+						to: request.payload.email,
+						subject: `Battle-Comm: Password Updated`,
+						html: buildPasswordUpdatedEmail()
+					};
+
+					transporter.sendMail(passwordUpdatedConfig, function(error, info) {
+						if(error) {
+							console.log(error);
+							reply('Somthing went wrong');
+						} else {
+							userFunctions.hashPassword(request.payload.password, (err, hash) => {
+								user.updateAttributes({
+									password: hash
+								}).then((user) => {
+									reply(user).code(200);
+								})
+							});
+						};
+					});
+				} else {
+					reply(Boom.badRequest('Invalid token'));
+				}
+
 		});
 	},
     updatePartial: function(request, reply) {

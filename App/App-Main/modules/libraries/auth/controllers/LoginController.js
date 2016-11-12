@@ -7,6 +7,8 @@ function LoginController($rootScope, $state, AuthService) {
 
     controller.incorrectUsername = false;
     controller.incorrectPassword = false;
+	controller.resetPassword = resetPassword;
+	controller.showSuccessMessage = false;
 
     controller.login = login;
 
@@ -44,6 +46,18 @@ function LoginController($rootScope, $state, AuthService) {
 				return response;
             });
     }
+
+	function resetPassword(email) {
+		AuthService.resetPassword(email).then((response) => {
+			controller.showSuccessMessage = true;
+			controller.resetMessage = 'An e-mail was successfully sent to ' + controller.email
+		}).catch((response) => {
+			if (response.data.message = 'User not found.') {
+				controller.showSuccessMessage = true;
+				controller.resetMessage = 'No account was found with the provided e-mail. Please try again.'
+			}
+		})
+	}
 }
 
 module.exports = LoginController;

@@ -1,5 +1,5 @@
 <div class="full_width">
-	<div class="card side-by-side">
+	<div class="card">
 		<form name="accountUpdateForm" ng-submit="Dashboard.changePassword()" novalidate>
 			<h2 class="push-bottom-2x">CHANGE PASSWORD</h2>
 			<div class="form-group">

@@ -1,5 +1,5 @@
 <div class="full_width">
-	<div class="card side-by-side">
+	<div class="card">
 		<form name="loginForm" ng-submit="Register.register(Register.credentials)" novalidate>
 			<h2 class="push-bottom-2x">REGISTER</h2>
 			<div class="form-group">

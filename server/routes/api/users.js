@@ -20,9 +20,9 @@ module.exports = [
             notes: 'Register a new user',
             validate: {
                 payload: {
-                    username: Joi.string().min(8).max(50).required(),
+                    username: Joi.string().min(4).max(50).required(),
                     email: Joi.string().email().required(),
-                    password: Joi.string().required(),
+                    password: Joi.string().min(8).required(),
 					firstName: Joi.string().optional(),
 					lastName: Joi.string().optional()
                 }
@@ -45,12 +45,12 @@ module.exports = [
                 payload: Joi.alternatives().try(
                     Joi.object({
                         username: Joi.string().min(4).max(50).required(),
-                        password: Joi.string().required()
+                        password: Joi.string().min(8).required()
 
                     }),
                     Joi.object({
                         username: Joi.string().email().required(),
-                        password: Joi.string().required()
+                        password: Joi.string().min(8).required()
                     })
                 )
             }
@@ -151,7 +151,7 @@ module.exports = [
                 },
                 payload: {
 					username: Joi.string().required(),
-					password: Joi.string().required(),
+					password: Joi.string().min(8).required(),
 					newPassword: Joi.string().required()
                 }
             },
@@ -159,6 +159,59 @@ module.exports = [
 				method: userFunctions.verifyCredentials
 			}],
 	        handler: users.changePassword
+        }
+    },
+    {
+        method: 'POST',
+        path: '/api/users/resetPassword/',
+        config: {
+            tags: ['api'],
+            description: 'Send E-mail to Reset Password',
+            notes: 'Send E-mail to Reset Password',
+            validate: {
+                payload: {
+					email: Joi.string().required()
+                }
+            },
+			pre: [{
+				method: userFunctions.verifyUserExists,
+				assign: 'user'
+			}],
+	        handler: users.resetPassword
+        }
+    },
+    {
+        method: 'POST',
+        path: '/api/users/verifyResetToken/{token}',
+        config: {
+            tags: ['api'],
+            description: 'Verify Reset Token is Valid',
+            notes: 'Verify Reset Token is Valid',
+            validate: {
+				params: {
+                    token: Joi.string().required()
+                }
+            },
+	        handler: users.verifyResetToken
+        }
+    },
+    {
+        method: 'POST',
+        path: '/api/users/setNewPassword/{token}',
+        config: {
+            tags: ['api'],
+            description: 'Update Password After Forgot E-mail Password Confirmation',
+            notes: 'Update Password After Forgot E-mail Password Confirmation',
+            validate: {
+				params: {
+                    token: Joi.string().required()
+                },
+				payload: {
+					email: Joi.string().required(),
+					password: Joi.string().min(8).required()
+				}
+            },
+	        handler: users.setNewPassword
         }
     },
 	{

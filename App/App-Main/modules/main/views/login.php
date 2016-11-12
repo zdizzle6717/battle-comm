@@ -11,7 +11,7 @@
 				<input type="password" ng-model="Login.credentials.password" ng-minlength="8" ng-pattern="/^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\!@#$%^&\*\_\-+=]).*$/" required/>
 			</div>
 			<div class="form-group text-right">
-				<a ng-href="#">Forgot password?</a>
+				<a ui-sref="forgotPassword">Forgot password?</a>
 			</div>
 			<div class="form-group text-left">
 				<input type="checkbox" name="rememberLogin" ng-model="Login.credentials.rememberLogin" value="true"> Remember my information<br>

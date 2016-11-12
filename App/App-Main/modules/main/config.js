@@ -25,6 +25,19 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
           template: require('./views/register.php'),
           controller: 'RegisterController as Register'
         })
+		.state('forgotPassword', {
+          url: "/forgot-password",
+          template: require('./views/forgotPassword.php'),
+          controller: 'LoginController as Forgot'
+        })
+		.state('resetPassword', {
+          url: "/reset-password/{token}",
+          template: require('./views/resetPassword.php'),
+          controller: 'SetNewPasswordController as Reset',
+		  params: {
+			  token: ''
+		  }
+        })
 		.state('playerSearch', {
           url: "/player-search",
           template: require('./views/playerSearch.php'),

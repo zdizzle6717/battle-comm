@@ -117,6 +117,46 @@ function AuthService($rootScope, $q, $http, API_ROUTES) {
 		});
 	};
 
+	this.resetPassword = function(email) {
+		let args = {
+			method: 'POST',
+			url: API_ROUTES.users.resetPassword,
+			data: {
+				email: email
+			}
+		};
+
+		return $http(args).then(function(response) {
+			return response.data;
+		});
+	}
+
+	this.verifyResetToken = function(token) {
+		let args = {
+			method: 'POST',
+			url: API_ROUTES.users.verifyResetToken + token
+		};
+
+		return $http(args).then(function(response) {
+			return response.data;
+		});
+	}
+
+	this.setNewPassword = function(credentials, token) {
+		let args = {
+			method: 'POST',
+			url: API_ROUTES.users.setNewPassword + token,
+			data: {
+				email: credentials.email,
+				password: credentials.password
+			}
+		};
+
+		return $http(args).then(function(response) {
+			return response.data;
+		});
+	}
+
 	this.isAuthorized = function(accessLevel) {
 		if (accessLevel[0] === 'public') {
 			return true;
