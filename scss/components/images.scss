@@ -3,9 +3,14 @@
 	width: 220px;
 	height: 220px;
 
+	@media screen and (max-width: 480px) {
+		height: 100%;
+		width: 100%;
+	}
+
 	img {
-		width: 220px;
-		height: 220px;
+		width: 100%;
+		height: 100%;
 	}
 
 	.upload-overlay {
