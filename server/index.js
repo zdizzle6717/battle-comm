@@ -24,7 +24,11 @@ server.connection({
             origin: env.cors.origin
         }
     },
-	labels: ['api']
+	labels: ['api'],
+	tls: {
+		key: fs.readFileSync('ssl/www.battle-comm.net.key'),
+		cert: fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
+	}
 });
 server.connection({
     port: env.port.chat,

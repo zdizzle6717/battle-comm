@@ -4,80 +4,80 @@ let port = require('./port').api;
 
 let routes = {
 	'files': {
-		'create': `http://52.26.195.10:${port}/api/files/`
+		'create': `https://www.battle-comm.net:${port}/api/files/`
 	},
 	'friends': {
-		'create': `http://52.26.195.10:${port}/api/friends`,
-		'remove': `http://52.26.195.10:${port}/api/friends`
+		'create': `https://www.battle-comm.net:${port}/api/friends`,
+		'remove': `https://www.battle-comm.net:${port}/api/friends`
 	},
 	'factions': {
-		'create': `http://52.26.195.10:${port}/api/factions`,
-		'update': `http://52.26.195.10:${port}/api/factions/`
+		'create': `https://www.battle-comm.net:${port}/api/factions`,
+		'update': `https://www.battle-comm.net:${port}/api/factions/`
 	},
 	'gameSystems': {
-		'get': `http://52.26.195.10:${port}/api/gameSystems/`,
-		'getAll': `http://52.26.195.10:${port}/api/gameSystems`,
-		'create': `http://52.26.195.10:${port}/api/gameSystems`,
-		'update': `http://52.26.195.10:${port}/api/gameSystems/`,
-		'remove': `http://52.26.195.10:${port}/api/gameSystems/`
+		'get': `https://www.battle-comm.net:${port}/api/gameSystems/`,
+		'getAll': `https://www.battle-comm.net:${port}/api/gameSystems`,
+		'create': `https://www.battle-comm.net:${port}/api/gameSystems`,
+		'update': `https://www.battle-comm.net:${port}/api/gameSystems/`,
+		'remove': `https://www.battle-comm.net:${port}/api/gameSystems/`
 	},
 	'manufacturers': {
-		'get': `http://52.26.195.10:${port}/api/manufacturers/`,
-		'getAll': `http://52.26.195.10:${port}/api/manufacturers`,
-		'create': `http://52.26.195.10:${port}/api/manufacturers`,
-		'update': `http://52.26.195.10:${port}/api/manufacturers/`,
-		'remove': `http://52.26.195.10:${port}/api/manufacturers/`
+		'get': `https://www.battle-comm.net:${port}/api/manufacturers/`,
+		'getAll': `https://www.battle-comm.net:${port}/api/manufacturers`,
+		'create': `https://www.battle-comm.net:${port}/api/manufacturers`,
+		'update': `https://www.battle-comm.net:${port}/api/manufacturers/`,
+		'remove': `https://www.battle-comm.net:${port}/api/manufacturers/`
 	},
 	'news': {
-		'get': `http://52.26.195.10:${port}/api/newsPosts/`,
-		'getAll': `http://52.26.195.10:${port}/api/newsPosts`,
-		'create': `http://52.26.195.10:${port}/api/newsPosts`,
-		'update': `http://52.26.195.10:${port}/api/newsPosts/`,
-		'remove': `http://52.26.195.10:${port}/api/newsPosts/`
+		'get': `https://www.battle-comm.net:${port}/api/newsPosts/`,
+		'getAll': `https://www.battle-comm.net:${port}/api/newsPosts`,
+		'create': `https://www.battle-comm.net:${port}/api/newsPosts`,
+		'update': `https://www.battle-comm.net:${port}/api/newsPosts/`,
+		'remove': `https://www.battle-comm.net:${port}/api/newsPosts/`
 	},
 	'notifications': {
-		'create': `http://52.26.195.10:${port}/api/userNotifications`,
-		'update': `http://52.26.195.10:${port}/api/userNotifications/`,
-		'remove': `http://52.26.195.10:${port}/api/userNotifications/`
+		'create': `https://www.battle-comm.net:${port}/api/userNotifications`,
+		'update': `https://www.battle-comm.net:${port}/api/userNotifications/`,
+		'remove': `https://www.battle-comm.net:${port}/api/userNotifications/`
 	},
 	'orders': {
-		'get': `http://52.26.195.10:${port}/api/productOrders/`,
-		'getAll': `http://52.26.195.10:${port}/api/productOrders`,
-		'create': `http://52.26.195.10:${port}/api/productOrders`,
-		'update': `http://52.26.195.10:${port}/api/productOrders/`,
-		'remove': `http://52.26.195.10:${port}/api/productOrders/`
+		'get': `https://www.battle-comm.net:${port}/api/productOrders/`,
+		'getAll': `https://www.battle-comm.net:${port}/api/productOrders`,
+		'create': `https://www.battle-comm.net:${port}/api/productOrders`,
+		'update': `https://www.battle-comm.net:${port}/api/productOrders/`,
+		'remove': `https://www.battle-comm.net:${port}/api/productOrders/`
 	},
 	'players': {
-		'get': `http://52.26.195.10:${port}/api/users/`,
-		'getAll': `http://52.26.195.10:${port}/api/users`,
-		'update': `http://52.26.195.10:${port}/api/users/`,
-		'search': `http://52.26.195.10:${port}/api/search/users`
+		'get': `https://www.battle-comm.net:${port}/api/users/`,
+		'getAll': `https://www.battle-comm.net:${port}/api/users`,
+		'update': `https://www.battle-comm.net:${port}/api/users/`,
+		'search': `https://www.battle-comm.net:${port}/api/search/users`
 	},
 	'products': {
-		'get': `http://52.26.195.10:${port}/api/products/`,
-		'getAll': `http://52.26.195.10:${port}/api/products`,
-		'create': `http://52.26.195.10:${port}/api/products`,
-		'update': `http://52.26.195.10:${port}/api/products/`,
-		'remove': `http://52.26.195.10:${port}/api/products/`
+		'get': `https://www.battle-comm.net:${port}/api/products/`,
+		'getAll': `https://www.battle-comm.net:${port}/api/products`,
+		'create': `https://www.battle-comm.net:${port}/api/products`,
+		'update': `https://www.battle-comm.net:${port}/api/products/`,
+		'remove': `https://www.battle-comm.net:${port}/api/products/`
 	},
 	'rankings': {
-		'createOrUpdate': `http://52.26.195.10:${port}/api/gameSystemRankings`,
-		'searchByGameSystem': `http://52.26.195.10:${port}/api/search/gameSystemRankings`,
-		'searchByFaction': `http://52.26.195.10:${port}/api/search/factionRankings`,
+		'createOrUpdate': `https://www.battle-comm.net:${port}/api/gameSystemRankings`,
+		'searchByGameSystem': `https://www.battle-comm.net:${port}/api/search/gameSystemRankings`,
+		'searchByFaction': `https://www.battle-comm.net:${port}/api/search/factionRankings`,
 	},
 	'userPhotos': {
-		'create': `http://52.26.195.10:${port}/api/userPhotos`
+		'create': `https://www.battle-comm.net:${port}/api/userPhotos`
 	},
 	'users': {
-		'register': `http://52.26.195.10:${port}/api/users`,
-		'authenticate': `http://52.26.195.10:${port}/api/users/authenticate`,
-		'changePassword': `http://52.26.195.10:${port}/api/users/changePassword/`,
-		'resetPassword': `http://52.26.195.10:${port}/api/users/resetPassword/`,
-		'verifyResetToken': `http://52.26.195.10:${port}/api/users/verifyResetToken/`,
-		'setNewPassword': `http://52.26.195.10:${port}/api/users/setNewPassword/`,
+		'register': `https://www.battle-comm.net:${port}/api/users`,
+		'authenticate': `https://www.battle-comm.net:${port}/api/users/authenticate`,
+		'changePassword': `https://www.battle-comm.net:${port}/api/users/changePassword/`,
+		'resetPassword': `https://www.battle-comm.net:${port}/api/users/resetPassword/`,
+		'verifyResetToken': `https://www.battle-comm.net:${port}/api/users/verifyResetToken/`,
+		'setNewPassword': `https://www.battle-comm.net:${port}/api/users/setNewPassword/`,
 	},
 	'venue': {
-		'assign': `http://52.26.195.10:${port}/api/venues/assignPoints`,
+		'assign': `https://www.battle-comm.net:${port}/api/venues/assignPoints`,
 	}
 };
 

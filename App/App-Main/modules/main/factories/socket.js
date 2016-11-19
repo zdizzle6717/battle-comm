@@ -4,7 +4,7 @@ let serverPort = require('../../../constants/port').chat;
 
 socket.$inject = ['$rootScope'];
 function socket($rootScope) {
-    let socket = io.connect(`https://52.26.195.10:${serverPort}/`, {'secure': true});
+    let socket = io.connect(`https://www.battle-comm.net:${serverPort}/`, {'secure': true});
 
     return {
         on: function(eventName, callback) {
