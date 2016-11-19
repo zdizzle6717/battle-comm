@@ -13,7 +13,10 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('assignPoints', {
           url: "/admin/venue/assign-points",
           template: require('./views/assignPoints.php'),
-          controller: 'PointAssignmentController as Points'
+          controller: 'PointAssignmentController as Points',
+		  data: {
+			  accessLevel: ['venueAdmin', 'systemAdmin']
+		  }
         });
 
 }

@@ -47,3 +47,5 @@ uploads*
 # SCSS
 .sass-cache
 
+# SSL
+server/ssl*

@@ -13,12 +13,18 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('gameSystemList', {
           url: "/admin/gameSystems",
           template: require('./views/gameSystemList.php'),
-          controller: 'GameSystemListController as GameSystems'
+          controller: 'GameSystemListController as GameSystems',
+		  data: {
+			  accessLevel: ['systemAdmin']
+		  }
         })
         .state('gameSystem', {
           url: "/admin/gameSystems/:id",
           template: require('./views/gameSystem.php'),
-          controller: 'GameSystemController as GameSystem'
+          controller: 'GameSystemController as GameSystem',
+		  data: {
+			  accessLevel: ['systemAdmin']
+		  }
         });
 
 }

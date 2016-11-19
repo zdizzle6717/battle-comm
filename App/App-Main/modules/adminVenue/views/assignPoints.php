@@ -59,15 +59,15 @@
 				<div class="three_column_1">
 					<div class="three_column_1">
 						<label for="totalWins" class="sublabel">Wins:</label>
-						<input id="totalWins" name="totalWins" ng-model="player.totalWins" type="number" class="formTextfield_Large" placeholder="Total wins during the event/day...">
+						<input id="totalWins" name="totalWins" ng-model="player.totalWins" type="number" class="formTextfield_Large" value="0" placeholder="Total wins during the event/day...">
 					</div>
 					<div class="three_column_1">
 						<label for="totalDraws" class="sublabel">Draws:</label>
-						<input id="totalDraws" name="totalDraws" ng-model="player.totalDraws" type="number" class="formTextfield_Large" placeholder="Total draws during the event/day...">
+						<input id="totalDraws" name="totalDraws" ng-model="player.totalDraws" type="number" class="formTextfield_Large" value="0" placeholder="Total draws during the event/day...">
 					</div>
 					<div class="three_column_1">
 						<label for="totalLosses" class="sublabel">Losses:</label>
-						<input id="totalLosses" name="totalLosses" ng-model="player.totalLosses" type="number" class="formTextfield_Large" placeholder="Total losses during the event/day...">
+						<input id="totalLosses" name="totalLosses" ng-model="player.totalLosses" type="number" class="formTextfield_Large" value="0" placeholder="Total losses during the event/day...">
 					</div>
 				</div>
 			</div>

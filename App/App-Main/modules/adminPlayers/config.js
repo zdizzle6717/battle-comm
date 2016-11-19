@@ -13,12 +13,18 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('playerList', {
           url: "/admin/players/all-players",
           template: require('./views/playerList.php'),
-          controller: 'PlayerListController as Player'
+          controller: 'PlayerListController as Player',
+		  data: {
+			  accessLevel: ['systemAdmin']
+		  }
         })
         .state('player', {
           url: "/admin/players/:userId",
           template: require('./views/player.php'),
-          controller: 'PlayerEditController as Player'
+          controller: 'PlayerEditController as Player',
+		  data: {
+			  accessLevel: ['systemAdmin']
+		  }
         });
 
 }

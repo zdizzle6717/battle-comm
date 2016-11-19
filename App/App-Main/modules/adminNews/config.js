@@ -13,12 +13,18 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('newsList', {
           url: "/admin/news/all-posts",
           template: require('./views/newsList.php'),
-          controller: 'NewsListController as News'
+          controller: 'NewsListController as News',
+		  data: {
+			  accessLevel: ['newsAdmin', 'systemAdmin']
+		  }
         })
         .state('post', {
           url: "/admin/news/posts/:id",
           template: require('./views/post.php'),
-          controller: 'PostController as Post'
+          controller: 'PostController as Post',
+		  data: {
+			  accessLevel: ['newsAdmin', 'systemAdmin']
+		  }
         });
 
 }

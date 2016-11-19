@@ -6,6 +6,7 @@ const Hapi = require('hapi');
 const Boom = require('boom');
 const Inert = require('inert');
 const Vision = require('vision');
+const fs = require('fs');
 const HapiSwagger = require('hapi-swagger');
 const hapiUploader = require('hapi-uploader');
 const HapiAuthJwt = require('hapi-auth-jwt');
@@ -32,7 +33,11 @@ server.connection({
             origin: env.cors.origin
         }
     },
-	labels: ['chat']
+	labels: ['chat'],
+	tls: {
+		key: fs.readFileSync('ssl/www.battle-comm.net.key'),
+		cert: fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
+	}
 });
 
 

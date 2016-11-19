@@ -11,7 +11,10 @@ function PointAssignmentController($rootScope, $state, VenueService) {
 		{
 			fullName: '',
 			email: '',
-			pointsEarned: 0
+			pointsEarned: 0,
+			totalWins: 0,
+			totalLosses: 0,
+			totalDraws: 0
 		}
 	];
 
@@ -21,7 +24,10 @@ function PointAssignmentController($rootScope, $state, VenueService) {
 		controller.players.push({
 			fullName: '',
 			email: '',
-			pointsEarned: 0
+			pointsEarned: 0,
+			totalWins: 0,
+			totalLosses: 0,
+			totalDraws: 0
 		});
 	}
 

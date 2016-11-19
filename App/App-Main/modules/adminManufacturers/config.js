@@ -13,12 +13,18 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('manufacturerList', {
           url: "/admin/manufacturers",
           template: require('./views/manufacturerList.php'),
-          controller: 'ManufacturerListController as Manufacturers'
+          controller: 'ManufacturerListController as Manufacturers',
+		  data: {
+			  accessLevel: ['systemAdmin']
+		  }
         })
         .state('manufacturer', {
           url: "/admin/manufacturers/:id",
           template: require('./views/manufacturer.php'),
-          controller: 'ManufacturerController as Manufacturer'
+          controller: 'ManufacturerController as Manufacturer',
+		  data: {
+			  accessLevel: ['systemAdmin']
+		  }
         });
 
 }
