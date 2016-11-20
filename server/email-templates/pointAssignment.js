@@ -62,7 +62,7 @@ function buildTemplate(data) {
 			<h2 style="font-size:28px;text-align:center;">Total Event RP: ${totalEventRP} Reward Points</h2>
 
 			<div style="text-align:center; border-top:1px solid #cacaca; padding:20px 0 0;">
-				<img src="http://www.beta.battle-comm.net/images/BC_Web_Logo.png">
+				<img src="https://www.battle-comm.net/images/BC_Web_Logo.png">
 			</div>
 		</div>
 	`
