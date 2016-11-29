@@ -4,14 +4,14 @@ let port = require('./port').api;
 
 let routes = {
     news: {
-        get: `http://52.26.195.10:${port}/api/newsPosts/`,
-        getAll: `http://52.26.195.10:${port}/api/newsPosts`,
-        create: `http://52.26.195.10:${port}/api/newsPosts`,
-        update: `http://52.26.195.10:${port}/api/newsPosts/`,
-        remove: `http://52.26.195.10:${port}/api/newsPosts/`
+        get: `https://www.battle-comm.net:${port}/api/newsPosts/`,
+        getAll: `https://www.battle-comm.net:${port}/api/newsPosts`,
+        create: `https://www.battle-comm.net:${port}/api/newsPosts`,
+        update: `https://www.battle-comm.net:${port}/api/newsPosts/`,
+        remove: `https://www.battle-comm.net:${port}/api/newsPosts/`
     },
     files: {
-        create: `http://52.26.195.10:${port}/api/files/`
+        create: `https://www.battle-comm.net:${port}/api/files/`
     }
 };
 

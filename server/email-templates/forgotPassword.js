@@ -16,7 +16,7 @@ function buildTemplate(data) {
 			</div>
 
 			<div style="text-align:center;margin:20px 0;">
-				<a style="padding: 6px 12px;font-size: 20px;line-height: 1.42857143;border-radius: 3px;background: #278ECA;color: white;text-decoration: none;" href="http://www.beta.battle-comm.net/App/#/reset-password/${data.token}">Reset Password</a>
+				<a style="padding: 6px 12px;font-size: 20px;line-height: 1.42857143;border-radius: 3px;background: #278ECA;color: white;text-decoration: none;" href="https://www.battle-comm.net/App/#/reset-password/${data.token}">Reset Password</a>
 			</div>
 
 			<div style="text-align:center; border-top:1px solid #cacaca; padding:20px 0 0;">

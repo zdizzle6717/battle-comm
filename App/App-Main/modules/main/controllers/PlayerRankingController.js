@@ -1,7 +1,7 @@
 'use strict';
 
-PlayerRankingController.$inject = ['$rootScope', '$state', '$stateParams', '$filter', 'RankingService', 'GameSystemService', 'AuthService'];
-function PlayerRankingController($rootScope, $state, $stateParams, $filter, RankingService, GameSystemService, AuthService) {
+PlayerRankingController.$inject = ['$rootScope', '$state', '$stateParams', '$filter', 'RankingService', 'GameSystemService'];
+function PlayerRankingController($rootScope, $state, $stateParams, $filter, RankingService, GameSystemService) {
     let controller = this;
 
 	controller.getFactionsAndSearch = getFactionsAndSearch;

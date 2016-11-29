@@ -19,7 +19,7 @@ browserify("App/App-Main/app.js")
         presets: ["es2015"]
     })
     .bundle()
-    .pipe(fs.createWriteStream("Login/js/app.js"));
+    .pipe(fs.createWriteStream("App/js/app.js"));
 
 /* Compile JS for News */
 browserify("News/App-News/app.js")
