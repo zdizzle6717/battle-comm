@@ -37,9 +37,58 @@
 			stats, match up with local players, and compete at the national level.  You'll also have the opportunity to earn ranking, achievements,
 			and BC Reward Points to trade-in for related products!
 		</h4>
-		<h3 class="text-right"><a href="#supported-platforms-popup" class="open-popup-link">→Supported Platforms</a></h3>
-		<div id="supported-platforms-popup" class="supported-platforms-popup mfp-hide">
-		  <?php include '../Templates/includes/full-game-list.php'; ?>
+		<h3 class="text-right"><a href="#game-list-popup" class="open-popup-link">→Supported Platforms</a></h3>
+		<div id="game-list-popup" class="game-list-popup mfp-hide">
+			<div class="col-lg-6">
+  		    <h2>Full Game Systems List</h2>
+  		    <h4>Age of Sigmar<br>
+  		  	Armada<br>
+  		      Black Powder<br>
+  		      BoltAction<br>
+  		      Bushido<br>
+  		      Call of Cthulhu: The Card Game<br>
+  		      Chess<br>
+  		      D&amp;D Attack Wing<br>
+  		      DarkAge<br>
+  		      DeadZone<br>
+  		      Dreadball<br>
+  		      Drop Zone Commander<br>
+  		      Dystopian Legions<br>
+  		      Dystopian Wars<br>
+  		      Firestorm Armada<br>
+  		      Firestorm Planetfall<br>
+  		      Flames of War<br>
+  		      Game of Thrones the card game<br>
+  		      Hail Caeser<br>
+  		  	Halo Fleet Battles<br>
+  		      Heavy Gear<br>
+  		      Hero Clicks<br>
+  		      Horus Heresy<br>
+  		      Infinity<br>
+  		      Kings of War<br>
+  		      Magic The Gathering<br>
+  		      Malifaux<br>
+  		      NetRunner<br>
+  		      Pike & Shotte<br>
+  		      Relic Knights<br>
+  		      Robotech<br>
+  		      Saga<br>
+  		      Star Wars Imperial Assault<br>
+  		      Star Trek Attack Wing<br>
+  		      Star Wars the Card Game<br>
+  		      W40K Conquest<br>
+  		      The Lord of the Rings/The Hobbit<br>
+  		      Warhammer 40,000<br>
+  		      Warhammer: Invasion<br>
+  		      Warmachine<br>
+  		  	Hordes<br>
+  		      Warpath<br>
+  		      Warzone<br>
+  		      Wild West Exodus<br>
+  		  	Wrath of Kings<br>
+  		      X-Wing<br>
+  		    </h4>
+  		  </div>
 		</div>
 		<script>
 			$('.open-popup-link').magnificPopup({
