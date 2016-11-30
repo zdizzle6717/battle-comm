@@ -30,19 +30,20 @@ h1 {
 }
 
 h2 {
+	color: $white;
 	width: 100%;
 	float: left;
 	font-family: Titillium Semibold;
 	font-size: 1.6em;
 	font-weight: 400;
-	padding: 2px 5px;
+	padding: 3px 5px;
 	margin: 15px 0;
 	box-shadow: 0 0 2px 1px #929292;
 	display: table;
 	line-height: 1.7rem;
 	box-sizing: border-box;
 	border: 1px solid $darkblue;
-    background: rgba(13, 68, 101, 0.67);
+    background: #0f3052;
 
 	a {
 		float: right;
