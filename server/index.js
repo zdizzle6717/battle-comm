@@ -27,10 +27,11 @@ let apiConfig = {
 	labels: ['api']
 };
 if (env.name === 'production') {
-	apiConfig.tls.key = fs.readFileSync('ssl/www.battle-comm.net.key');
-	apiConfig.tls.cert = fs.readFileSync('ssl/www.battle-comm.net.chained.crt');
+	apiConfig.tls = {
+		'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
+		'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
+	}
 }
-apiConfig.port =
 server.connection(apiConfig);
 let chatConfig = {
     port: env.port.chat,
@@ -42,8 +43,10 @@ let chatConfig = {
 	labels: ['chat']
 };
 if (env.name === 'production') {
-	chatConfig.tls.key = fs.readFileSync('ssl/www.battle-comm.net.key');
-	chatConfig.tls.cert = fs.readFileSync('ssl/www.battle-comm.net.chained.crt');
+	chatConfig.tls = {
+		'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
+		'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
+	}
 }
 server.connection(chatConfig);
 
