@@ -14,7 +14,7 @@
     "url": "https://github.com/zdizzle6717/battle-comm.git"
   },
   "scripts": {
-	"build": "node build-global.js"  
+	"build": "node build-global.js"
   },
   "dependencies": {
     "angular": "^1.4.4",

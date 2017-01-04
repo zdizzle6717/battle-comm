@@ -51,5 +51,5 @@
 		</div>
 	<?php include ($pathToFile. "/Templates/parts/container-bottom.php"); ?>
 <?php include ($pathToFile. "/Templates/parts/footer.php"); ?>
-<script src="https://www.battle-comm.net:3001/socket.io/socket.io.js"></script>
+<script src="https://www.battle-comm.net:8081/socket.io/socket.io.js"></script>
 <script src="js/app.js"></script>
