@@ -1,27 +1,133 @@
-
-// Colors
-$primary: #187cb7;
-$secondary: #dddddd;
-$darkblue: #166d71;
-$danger: #ca3727;
-
+// Site Defaults
+$black: #1b1b1b;
 $white: #efefef;
 $white-transparent: rgba(255,255,255,0.75);
-$black: #1b1b1b;
+$primary: #d4d4d4;
 
-$success: #3c8c3c;
-$info: $primary;
-$error: #a02323;
+// Black
+$black-500: #1b1b1b;
+$black-100: lighten($black-500, 12%);
+$black-200: lighten($black-500, 9%);
+$black-300: lighten($black-500, 6%);
+$black-400: lighten($black-500, 3%);
+$black-600: darken($black-500, 3%);
+$black-700: darken($black-500, 6%);
+$black-800: darken($black-500, 9%);
+$black-900: darken($black-500, 12%);
+
+// White
+$white-500: #efefef;
+$white-100: lighten($white-500, 12%);
+$white-200: lighten($white-500, 9%);
+$white-300: lighten($white-500, 6%);
+$white-400: lighten($white-500, 3%);
+$white-600: darken($white-500, 3%);
+$white-700: darken($white-500, 6%);
+$white-800: darken($white-500, 9%);
+$white-900: darken($white-500, 12%);
+
+// Gray
+$gray-500: #d4d4d4;
+$gray-100: lighten($gray-500, 12%);
+$gray-200: lighten($gray-500, 9%);
+$gray-300: lighten($gray-500, 6%);
+$gray-400: lighten($gray-500, 3%);
+$gray-600: darken($gray-500, 3%);
+$gray-700: darken($gray-500, 6%);
+$gray-800: darken($gray-500, 9%);
+$gray-900: darken($gray-500, 12%);
+
+// Primary
+$primary-500: #1d5894;
+$primary-100: lighten($primary-500, 12%);
+$primary-200: lighten($primary-500, 9%);
+$primary-300: lighten($primary-500, 6%);
+$primary-400: lighten($primary-500, 3%);
+$primary-600: darken($primary-500, 3%);
+$primary-700: darken($primary-500, 6%);
+$primary-800: darken($primary-500, 9%);
+$primary-900: darken($primary-500, 12%);
+
+// Secondary
+$secondary-500: #dddddd;
+$secondary-100: lighten($secondary-500, 12%);
+$secondary-200: lighten($secondary-500, 9%);
+$secondary-300: lighten($secondary-500, 6%);
+$secondary-400: lighten($secondary-500, 3%);
+$secondary-600: darken($secondary-500, 3%);
+$secondary-700: darken($secondary-500, 6%);
+$secondary-800: darken($secondary-500, 9%);
+$secondary-900: darken($secondary-500, 12%);
+
+// Ternary
+$ternary-500: #dddddd;
+$ternary-100: lighten($ternary-500, 12%);
+$ternary-200: lighten($ternary-500, 9%);
+$ternary-300: lighten($ternary-500, 6%);
+$ternary-400: lighten($ternary-500, 3%);
+$ternary-600: darken($ternary-500, 3%);
+$ternary-700: darken($ternary-500, 6%);
+$ternary-800: darken($ternary-500, 9%);
+$ternary-900: darken($ternary-500, 12%);
+
+// Success
+$success-500: #3c8c3c;
+$success-100: lighten($success-500, 12%);
+$success-200: lighten($success-500, 9%);
+$success-300: lighten($success-500, 6%);
+$success-400: lighten($success-500, 3%);
+$success-600: darken($success-500, 3%);
+$success-700: darken($success-500, 6%);
+$success-800: darken($success-500, 9%);
+$success-900: darken($success-500, 12%);
+
+// Info
+$info-500: $primary;
+$info-100: lighten($info-500, 12%);
+$info-200: lighten($info-500, 9%);
+$info-300: lighten($info-500, 6%);
+$info-400: lighten($info-500, 3%);
+$info-600: darken($info-500, 3%);
+$info-700: darken($info-500, 6%);
+$info-800: darken($info-500, 9%);
+$info-900: darken($info-500, 12%);
+
+// Alert
+$alert-500: #ca3727;
+$alert-100: lighten($alert-500, 12%);
+$alert-200: lighten($alert-500, 9%);
+$alert-300: lighten($alert-500, 6%);
+$alert-400: lighten($alert-500, 3%);
+$alert-600: darken($alert-500, 3%);
+$alert-700: darken($alert-500, 6%);
+$alert-800: darken($alert-500, 9%);
+$alert-900: darken($alert-500, 12%);
+
+// Error
+$error-500: #a02323;
+$error-100: lighten($error-500, 12%);
+$error-200: lighten($error-500, 9%);
+$error-300: lighten($error-500, 6%);
+$error-400: lighten($error-500, 3%);
+$error-600: darken($error-500, 3%);
+$error-700: darken($error-500, 6%);
+$error-800: darken($error-500, 9%);
+$error-900: darken($error-500, 12%);
+
+// Palette
+$foundation-palette: (
+	black: $black-500,
+	white: $white-500,
+	gray: $gray-500,
+	primary: $primary-500,
+	secondary: $secondary-500,
+	ternary: $ternary-500,
+	success: $success-500,
+	info: $info-500,
+	alert: $alert-500,
+	error: $alert-500
+);
 
 // Shadows
 $box-shadow-1: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 $box-shadow-inset-1: 0 1px 3px 1px rgba(119, 120, 132, 0.25) inset;
-
-
-.red {
-	color: $danger
-}
-
-.blue {
-	color: $darkblue
-}
