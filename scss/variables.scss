@@ -17,6 +17,12 @@ $error: #a02323;
 $box-shadow-1: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 $box-shadow-inset-1: 0 1px 3px 1px rgba(119, 120, 132, 0.25) inset;
 
+$foundation-palette: (
+	$primary: #1d5894,
+	$secondary: #dddddd,
+	$darkblue: #166d71,
+	$danger: #ca3727
+);
 
 .red {
 	color: $danger

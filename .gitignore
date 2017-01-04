@@ -37,12 +37,11 @@ jspm_packages
 .node_repl_history
 
 # Database Connections and Credentials
-**/port.js
-**/js/app.js
+siteUrl.js
+port.js
 server/config*
 
 # Upload folders
-uploads*
 
 # SCSS
 .sass-cache
