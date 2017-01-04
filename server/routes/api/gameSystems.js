@@ -13,10 +13,6 @@ module.exports = [
             tags: ['api'],
             description: 'Get one game system by id',
             notes: 'Get one game system by id',
-			auth: {
-                strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
-            },
             validate: {
                 params: {
                     id: Joi.number().required()
@@ -31,11 +27,7 @@ module.exports = [
         config: {
             tags: ['api'],
             description: 'Get all gameSystems',
-            notes: 'Get all gameSystems',
-			auth: {
-                strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
-            },
+            notes: 'Get all gameSystems'
         },
         handler: gameSystems.getAll
     },

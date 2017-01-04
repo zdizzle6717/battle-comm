@@ -25,7 +25,7 @@ function run($rootScope, $state, AuthService, $http) {
 							let config = {
 								type: 'info',
 								message: 'Please register or login to continue.',
-								timeout: '3500'
+								timeout: '2000'
 							}
 							showAlert(config);
 							$state.go('login', {}, {reload:true});

@@ -32,51 +32,54 @@
     padding-bottom: 10px;
     font-size: 1.05em;
 }
-li.home {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_HOME.png') 0 no-repeat;
+li {
+	&.home,
+	&.news,
+	&.events,
+	&.dashboard,
+	&.players,
+	&.match,
+	&.ranking,
+	&.store,
+	&.login,
+	&.register {
+		width: 140px;
+	    height: 37px;
+	}
+
+	&.home {
+	    background: url('../images/Buttons/Btn_HOME.png') 0 no-repeat;
+	}
+	&.news {
+	    background: url('../images/Buttons/Btn_NEWS.png') 0 no-repeat;
+	}
+	&.events {
+	    background: url('../images/Buttons/Btn_EVENTS.png') 0 no-repeat;
+	}
+	&.dashboard {
+	    background: url('../images/Buttons/Btn_DASHBOARD.png') 0 no-repeat;
+	}
+	&.match {
+	    background: url('../images/Buttons/Btn_MATCH.png') 0 no-repeat;
+	}
+	&.ranking {
+	    background: url('../images/Buttons/Btn_RANKING.png') 0 no-repeat;
+	}
+	&.players {
+	    background: url('../images/Buttons/Btn_PLAYERS.png') 0 no-repeat;
+	}
+	&.store {
+	    background: url('../images/Buttons/Btn_STORE.png') 0 no-repeat;
+	}
+	&.login {
+	    background: url('../images/Buttons/Btn_LOGIN.png') 0 no-repeat;
+	}
+	&.register {
+	    background: url('../images/Buttons/Btn_REGISTER.png') 0 no-repeat;
+	}
 }
-li.news {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_NEWS.png') 0 no-repeat;
-}
-li.events {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_EVENTS.png') 0 no-repeat;
-}
-li.dashboard {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_DASHBOARD.png') 0 no-repeat;
-}
-li.match {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_MATCH.png') 0 no-repeat;
-}
-li.ranking {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_RANKING.png') 0 no-repeat;
-}
-li.store {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_STORE.png') 0 no-repeat;
-}
-li.login {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_LOGIN.png') 0 no-repeat;
-}
-li.registertab {
-    width: 140px;
-    height: 37px;
-    background: url('../images/Buttons/Btn_REGISTER.png') 0 no-repeat;
-}
+
+
 .topnav {
 	li {
 	    text-transform: uppercase;

@@ -221,10 +221,6 @@ module.exports = [
             tags: ['api'],
             description: 'Return User/Player search results',
             notes: 'Return User/Player search results',
-			auth: {
-                strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
-            },
 			validate: {
 				payload: {
                     maxResults: Joi.number().optional(),

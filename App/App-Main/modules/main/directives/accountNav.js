@@ -26,7 +26,7 @@ function accountNav($compile, $state, $rootScope, AuthService) {
 			if (AuthService.isAuthenticated) {
 				elem.html(template);
 			} else {
-				elem.html('');
+				elem.html('<div class="login-button"><a ui-sref="login">Login</a></div>');
 			}
 
 			$compile(elem.contents())(scope);

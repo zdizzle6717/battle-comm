@@ -41,10 +41,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, LoadingServic
 		.state('playerSearch', {
           url: "/player-search",
           template: require('./views/playerSearch.php'),
-          controller: 'PlayerSearchController as PlayerSearch',
-		  data: {
-			  accessLevel: ['subscriber']
-		  }
+          controller: 'PlayerSearchController as PlayerSearch'
         })
 		.state('playerRanking', {
           url: "/player-ranking",

@@ -17,32 +17,35 @@ let routes = require('./routes');
 
 // Create Server
 var server = new Hapi.Server();
-server.connection({
+let apiConfig = {
     port: env.port.api,
     routes: {
         cors: {
             origin: env.cors.origin
         }
     },
-	labels: ['api'],
-	tls: {
-		key: fs.readFileSync('ssl/www.battle-comm.net.key'),
-		cert: fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
-	}
-});
-server.connection({
+	labels: ['api']
+};
+if (env.name === 'production') {
+	apiConfig.tls.key = fs.readFileSync('ssl/www.battle-comm.net.key');
+	apiConfig.tls.cert = fs.readFileSync('ssl/www.battle-comm.net.chained.crt');
+}
+apiConfig.port =
+server.connection(apiConfig);
+let chatConfig = {
     port: env.port.chat,
     routes: {
         cors: {
             origin: env.cors.origin
         }
     },
-	labels: ['chat'],
-	tls: {
-		key: fs.readFileSync('ssl/www.battle-comm.net.key'),
-		cert: fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
-	}
-});
+	labels: ['chat']
+};
+if (env.name === 'production') {
+	chatConfig.tls.key = fs.readFileSync('ssl/www.battle-comm.net.key');
+	chatConfig.tls.cert = fs.readFileSync('ssl/www.battle-comm.net.chained.crt');
+}
+server.connection(chatConfig);
 
 
 // Socket.io

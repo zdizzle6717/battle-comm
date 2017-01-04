@@ -3,6 +3,7 @@
     <!-- HEADER -->
     <div class="nav placeholder center" id="returnhome"></div>
     <div class="nav row center">
+		<div class="login-button"><a href="/App/#/login">Login</a></div>
         <div class="mobilenav">
             <?php include ($pathToFile. "/Templates/includes/top-navigation-mobile.php"); ?>
         </div>
