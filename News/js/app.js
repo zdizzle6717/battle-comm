@@ -164,30 +164,44 @@ module.exports = config;
 },{"./views/news.php":14,"./views/post.php":15}],7:[function(require,module,exports){
 'use strict';
 
-var port = require('./port').api;
+var siteUrl = require('./envConfig').siteUrl;
+var port = require('./envConfig').port.api;
 
 var routes = {
     news: {
-        get: 'https://www.battle-comm.net:' + port + '/api/newsPosts/',
-        getAll: 'https://www.battle-comm.net:' + port + '/api/newsPosts',
-        create: 'https://www.battle-comm.net:' + port + '/api/newsPosts',
-        update: 'https://www.battle-comm.net:' + port + '/api/newsPosts/',
-        remove: 'https://www.battle-comm.net:' + port + '/api/newsPosts/'
+        get: siteUrl + ':' + port + '/api/newsPosts/',
+        getAll: siteUrl + ':' + port + '/api/newsPosts',
+        create: siteUrl + ':' + port + '/api/newsPosts',
+        update: siteUrl + ':' + port + '/api/newsPosts/',
+        remove: siteUrl + ':' + port + '/api/newsPosts/'
     },
     files: {
-        create: 'https://www.battle-comm.net:' + port + '/api/files/'
+        create: siteUrl + ':' + port + '/api/files/'
     }
 };
 
 module.exports = routes;
 
-},{"./port":8}],8:[function(require,module,exports){
+},{"./envConfig":8}],8:[function(require,module,exports){
 'use strict';
 
+// Production
 module.exports = {
-	'api': '8080',
-	'chat': '8081'
+	'port': {
+		'api': '8080',
+		'chat': '8081'
+	},
+	'siteUrl': 'https://www.battle-comm.net'
 };
+
+// Staging
+// module.exports = {
+// 	'port': {
+// 		'api': '3000',
+// 		'chat': '8081'
+// 	},
+// 	'siteUrl': 'https://www.staging.battle-comm.net'
+// };
 
 },{}],9:[function(require,module,exports){
 'use strict';

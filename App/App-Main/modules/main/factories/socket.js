@@ -1,10 +1,11 @@
 'use strict';
 
-let serverPort = require('../../../constants/port').chat;
+let siteUrl = require('../../../constants/envConfig').siteUrl;
+let port = require('../../../constants/envConfig').port.chat;
 
 socket.$inject = ['$rootScope'];
 function socket($rootScope) {
-    let socket = io.connect(`https://www.battle-comm.net:${serverPort}/`, {'secure': true});
+    let socket = io.connect(`${siteUrl}:${port}/`, {'secure': true});
 
     return {
         on: function(eventName, callback) {

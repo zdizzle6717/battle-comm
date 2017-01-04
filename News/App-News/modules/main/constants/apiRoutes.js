@@ -1,17 +1,18 @@
 'use strict';
 
-let port = require('./port').api;
+let siteUrl = require('./envConfig').siteUrl;
+let port = require('./envConfig').port.api;
 
 let routes = {
     news: {
-        get: `https://www.battle-comm.net:${port}/api/newsPosts/`,
-        getAll: `https://www.battle-comm.net:${port}/api/newsPosts`,
-        create: `https://www.battle-comm.net:${port}/api/newsPosts`,
-        update: `https://www.battle-comm.net:${port}/api/newsPosts/`,
-        remove: `https://www.battle-comm.net:${port}/api/newsPosts/`
+        get: `${siteUrl}:${port}/api/newsPosts/`,
+        getAll: `${siteUrl}:${port}/api/newsPosts`,
+        create: `${siteUrl}:${port}/api/newsPosts`,
+        update: `${siteUrl}:${port}/api/newsPosts/`,
+        remove: `${siteUrl}:${port}/api/newsPosts/`
     },
     files: {
-        create: `https://www.battle-comm.net:${port}/api/files/`
+        create: `${siteUrl}:${port}/api/files/`
     }
 };
 

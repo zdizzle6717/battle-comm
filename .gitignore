@@ -37,8 +37,7 @@ jspm_packages
 .node_repl_history
 
 # Database Connections and Credentials
-siteUrl.js
-port.js
+envConfig.js
 server/config*
 
 # Upload folders

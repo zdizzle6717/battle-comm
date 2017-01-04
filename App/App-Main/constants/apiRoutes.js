@@ -1,83 +1,84 @@
 'use strict';
 
-let port = require('./port').api;
+let siteUrl = require('./envConfig').siteUrl;
+let port = require('./envConfig').port.api;
 
 let routes = {
 	'files': {
-		'create': `https://www.battle-comm.net:${port}/api/files/`
+		'create': `${siteUrl}:${port}/api/files/`
 	},
 	'friends': {
-		'create': `https://www.battle-comm.net:${port}/api/friends`,
-		'remove': `https://www.battle-comm.net:${port}/api/friends`
+		'create': `${siteUrl}:${port}/api/friends`,
+		'remove': `${siteUrl}:${port}/api/friends`
 	},
 	'factions': {
-		'create': `https://www.battle-comm.net:${port}/api/factions`,
-		'update': `https://www.battle-comm.net:${port}/api/factions/`
+		'create': `${siteUrl}:${port}/api/factions`,
+		'update': `${siteUrl}:${port}/api/factions/`
 	},
 	'gameSystems': {
-		'get': `https://www.battle-comm.net:${port}/api/gameSystems/`,
-		'getAll': `https://www.battle-comm.net:${port}/api/gameSystems`,
-		'create': `https://www.battle-comm.net:${port}/api/gameSystems`,
-		'update': `https://www.battle-comm.net:${port}/api/gameSystems/`,
-		'remove': `https://www.battle-comm.net:${port}/api/gameSystems/`
+		'get': `${siteUrl}:${port}/api/gameSystems/`,
+		'getAll': `${siteUrl}:${port}/api/gameSystems`,
+		'create': `${siteUrl}:${port}/api/gameSystems`,
+		'update': `${siteUrl}:${port}/api/gameSystems/`,
+		'remove': `${siteUrl}:${port}/api/gameSystems/`
 	},
 	'manufacturers': {
-		'get': `https://www.battle-comm.net:${port}/api/manufacturers/`,
-		'getAll': `https://www.battle-comm.net:${port}/api/manufacturers`,
-		'create': `https://www.battle-comm.net:${port}/api/manufacturers`,
-		'update': `https://www.battle-comm.net:${port}/api/manufacturers/`,
-		'remove': `https://www.battle-comm.net:${port}/api/manufacturers/`
+		'get': `${siteUrl}:${port}/api/manufacturers/`,
+		'getAll': `${siteUrl}:${port}/api/manufacturers`,
+		'create': `${siteUrl}:${port}/api/manufacturers`,
+		'update': `${siteUrl}:${port}/api/manufacturers/`,
+		'remove': `${siteUrl}:${port}/api/manufacturers/`
 	},
 	'news': {
-		'get': `https://www.battle-comm.net:${port}/api/newsPosts/`,
-		'getAll': `https://www.battle-comm.net:${port}/api/newsPosts`,
-		'create': `https://www.battle-comm.net:${port}/api/newsPosts`,
-		'update': `https://www.battle-comm.net:${port}/api/newsPosts/`,
-		'remove': `https://www.battle-comm.net:${port}/api/newsPosts/`
+		'get': `${siteUrl}:${port}/api/newsPosts/`,
+		'getAll': `${siteUrl}:${port}/api/newsPosts`,
+		'create': `${siteUrl}:${port}/api/newsPosts`,
+		'update': `${siteUrl}:${port}/api/newsPosts/`,
+		'remove': `${siteUrl}:${port}/api/newsPosts/`
 	},
 	'notifications': {
-		'create': `https://www.battle-comm.net:${port}/api/userNotifications`,
-		'update': `https://www.battle-comm.net:${port}/api/userNotifications/`,
-		'remove': `https://www.battle-comm.net:${port}/api/userNotifications/`
+		'create': `${siteUrl}:${port}/api/userNotifications`,
+		'update': `${siteUrl}:${port}/api/userNotifications/`,
+		'remove': `${siteUrl}:${port}/api/userNotifications/`
 	},
 	'orders': {
-		'get': `https://www.battle-comm.net:${port}/api/productOrders/`,
-		'getAll': `https://www.battle-comm.net:${port}/api/productOrders`,
-		'create': `https://www.battle-comm.net:${port}/api/productOrders`,
-		'update': `https://www.battle-comm.net:${port}/api/productOrders/`,
-		'remove': `https://www.battle-comm.net:${port}/api/productOrders/`
+		'get': `${siteUrl}:${port}/api/productOrders/`,
+		'getAll': `${siteUrl}:${port}/api/productOrders`,
+		'create': `${siteUrl}:${port}/api/productOrders`,
+		'update': `${siteUrl}:${port}/api/productOrders/`,
+		'remove': `${siteUrl}:${port}/api/productOrders/`
 	},
 	'players': {
-		'get': `https://www.battle-comm.net:${port}/api/users/`,
-		'getAll': `https://www.battle-comm.net:${port}/api/users`,
-		'update': `https://www.battle-comm.net:${port}/api/users/`,
-		'search': `https://www.battle-comm.net:${port}/api/search/users`
+		'get': `${siteUrl}:${port}/api/users/`,
+		'getAll': `${siteUrl}:${port}/api/users`,
+		'update': `${siteUrl}:${port}/api/users/`,
+		'search': `${siteUrl}:${port}/api/search/users`
 	},
 	'products': {
-		'get': `https://www.battle-comm.net:${port}/api/products/`,
-		'getAll': `https://www.battle-comm.net:${port}/api/products`,
-		'create': `https://www.battle-comm.net:${port}/api/products`,
-		'update': `https://www.battle-comm.net:${port}/api/products/`,
-		'remove': `https://www.battle-comm.net:${port}/api/products/`
+		'get': `${siteUrl}:${port}/api/products/`,
+		'getAll': `${siteUrl}:${port}/api/products`,
+		'create': `${siteUrl}:${port}/api/products`,
+		'update': `${siteUrl}:${port}/api/products/`,
+		'remove': `${siteUrl}:${port}/api/products/`
 	},
 	'rankings': {
-		'createOrUpdate': `https://www.battle-comm.net:${port}/api/gameSystemRankings`,
-		'searchByGameSystem': `https://www.battle-comm.net:${port}/api/search/gameSystemRankings`,
-		'searchByFaction': `https://www.battle-comm.net:${port}/api/search/factionRankings`,
+		'createOrUpdate': `${siteUrl}:${port}/api/gameSystemRankings`,
+		'searchByGameSystem': `${siteUrl}:${port}/api/search/gameSystemRankings`,
+		'searchByFaction': `${siteUrl}:${port}/api/search/factionRankings`,
 	},
 	'userPhotos': {
-		'create': `https://www.battle-comm.net:${port}/api/userPhotos`
+		'create': `${siteUrl}:${port}/api/userPhotos`
 	},
 	'users': {
-		'register': `https://www.battle-comm.net:${port}/api/users`,
-		'authenticate': `https://www.battle-comm.net:${port}/api/users/authenticate`,
-		'changePassword': `https://www.battle-comm.net:${port}/api/users/changePassword/`,
-		'resetPassword': `https://www.battle-comm.net:${port}/api/users/resetPassword/`,
-		'verifyResetToken': `https://www.battle-comm.net:${port}/api/users/verifyResetToken/`,
-		'setNewPassword': `https://www.battle-comm.net:${port}/api/users/setNewPassword/`,
+		'register': `${siteUrl}:${port}/api/users`,
+		'authenticate': `${siteUrl}:${port}/api/users/authenticate`,
+		'changePassword': `${siteUrl}:${port}/api/users/changePassword/`,
+		'resetPassword': `${siteUrl}:${port}/api/users/resetPassword/`,
+		'verifyResetToken': `${siteUrl}:${port}/api/users/verifyResetToken/`,
+		'setNewPassword': `${siteUrl}:${port}/api/users/setNewPassword/`,
 	},
 	'venue': {
-		'assign': `https://www.battle-comm.net:${port}/api/venues/assignPoints`,
+		'assign': `${siteUrl}:${port}/api/venues/assignPoints`,
 	}
 };
 
