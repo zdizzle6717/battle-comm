@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="Scripts/jssor.slider.min.js"></script>
 	<script type="text/javascript" src="Scripts/custom-slider.js"></script>
 	<script type="text/javascript" src="Scripts/custom-slider2.js"></script>
+	<script type="text/javascript" src="Scripts/google-analytics.js"></script>
 </head>
 
 <?php include 'Templates/parts/header.php'; ?>

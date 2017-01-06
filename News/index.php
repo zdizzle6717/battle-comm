@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" media="screen, print" href="../styles/global.css">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="../Scripts/jquery.magnificant-popup.js"></script>
+	<script type="text/javascript" src="../Scripts/google-analytics.js"></script>
 </head>
 	<?php $pathToFile = $_SERVER['DOCUMENT_ROOT'];
     include ($pathToFile. "/Templates/parts/header.php"); ?>
