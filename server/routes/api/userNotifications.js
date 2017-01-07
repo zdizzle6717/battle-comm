@@ -15,7 +15,7 @@ module.exports = [
 			notes: 'Add a new userNotification',
 			auth: {
 				strategy: 'jsonWebToken',
-				scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			validate: {
 				payload: {
@@ -39,7 +39,7 @@ module.exports = [
 			notes: 'Update a user notification by id',
 			auth: {
 				strategy: 'jsonWebToken',
-				scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			validate: {
 				params: {
@@ -65,7 +65,7 @@ module.exports = [
 			notes: 'Delete a user notification by id',
 			auth: {
 				strategy: 'jsonWebToken',
-				scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			validate: {
 				params: {

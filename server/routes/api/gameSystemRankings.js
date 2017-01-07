@@ -16,7 +16,7 @@ module.exports = [
             notes: 'Create a new ranking with game system and faction',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber', 'systemAdmin']
+                scope: ['member', 'subscriber', 'systemAdmin']
             },
             validate: {
                 payload: {

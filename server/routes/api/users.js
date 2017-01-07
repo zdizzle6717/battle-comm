@@ -90,7 +90,7 @@ module.exports = [
             notes: 'Patch a User Login by id',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+                scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
             validate: {
                 params: {
@@ -103,6 +103,7 @@ module.exports = [
 					firstName: Joi.optional(),
 					lastName: Joi.optional(),
 					bio: Joi.optional(),
+					member: Joi.optional(),
 					subscriber: Joi.optional(),
 					tourneyAdmin: Joi.optional(),
 					eventAdmin: Joi.optional(),
@@ -143,7 +144,7 @@ module.exports = [
             notes: 'Update User Password from Account Dashboard',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber']
+                scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
             validate: {
                 params: {

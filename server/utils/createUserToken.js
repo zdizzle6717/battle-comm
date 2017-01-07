@@ -5,6 +5,9 @@ const env = require('../config/environmentVariables');
 
 function createUserToken(user) {
   let scopes = [];
+  if (user.member) {
+    scopes.push('member');
+  }
   if (user.subscriber) {
     scopes.push('subscriber');
   }

@@ -18,7 +18,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
 			  playerId: ''
 		  },
 		  data: {
-			  accessLevel: ['subscriber']
+			  accessLevel: ['member']
 		  }
         })
         .state('changePassword', {
@@ -29,7 +29,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
 			  playerId: ''
 		  },
 		  data: {
-			  accessLevel: ['subscriber']
+			  accessLevel: ['member']
 		  }
         })
         .state('notifications', {
@@ -40,7 +40,7 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
 			  playerId: ''
 		  },
 		  data: {
-			  accessLevel: ['subscriber']
+			  accessLevel: ['member']
 		  }
         });
 

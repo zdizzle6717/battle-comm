@@ -8,9 +8,13 @@ module.exports = function(sequelize, DataTypes) {
         password: DataTypes.STRING,
         firstName: DataTypes.STRING,
         lastName: DataTypes.STRING,
-		subscriber: {
+		member: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: true
+		},
+		subscriber: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
 		},
         tourneyAdmin: {
 			type: DataTypes.BOOLEAN,

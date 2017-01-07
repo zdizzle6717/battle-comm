@@ -21,7 +21,7 @@ module.exports = [
             notes: 'Upload a new file',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+                scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
         },
         handler: files.create

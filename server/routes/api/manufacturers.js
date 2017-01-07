@@ -15,7 +15,7 @@ module.exports = [
             notes: 'Get one manufacturer by id',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+                scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
             validate: {
                 params: {
@@ -34,7 +34,7 @@ module.exports = [
             notes: 'Get all manufacturers',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+                scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
         },
         handler: manufacturers.getAll

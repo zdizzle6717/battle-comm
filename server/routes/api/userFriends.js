@@ -17,7 +17,7 @@ module.exports = [
 			notes: 'Create a new user friend',
 			auth: {
 				strategy: 'jsonWebToken',
-				scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			validate: {
 				payload: {
@@ -37,7 +37,7 @@ module.exports = [
 			notes: 'Remove a friend association',
 			auth: {
 				strategy: 'jsonWebToken',
-				scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			validate: {
 				payload: {

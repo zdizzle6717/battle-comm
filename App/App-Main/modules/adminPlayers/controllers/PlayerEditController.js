@@ -48,7 +48,7 @@ function PlayerEditController($rootScope, $state, $stateParams, PlayerService, G
 			email: data.email,
 			username: data.username,
 			rewardPoints: data.rewardPoints,
-			subscriber: data.subscriber,
+			member: data.member,
 			tourneyAdmin: data.tourneyAdmin,
 			eventAdmin: data.eventAdmin,
 			venueAdmin: data.venueAdmin,

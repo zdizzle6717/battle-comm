@@ -16,7 +16,7 @@ module.exports = [
             notes: 'Create a new user photo',
 			auth: {
                 strategy: 'jsonWebToken',
-                scope: ['subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+                scope: ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
             },
             validate: {
                 payload: {

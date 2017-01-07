@@ -100,8 +100,8 @@
     </div>
     <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
-            <h3 class="panel-title">Subscriber?</h3>
-            <select name="subscriber" id="subscriber" ng-model="Player.currentPlayer.subscriber" ng-disabled="Player.readOnly"
+            <h3 class="panel-title">member?</h3>
+            <select name="member" id="member" ng-model="Player.currentPlayer.member" ng-disabled="Player.readOnly"
               ng-options="option.value as option.name for option in [{ name: 'No', value: false }, { name: 'Yes', value: true }]">
             </select><br>
         </div>
