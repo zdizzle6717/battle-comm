@@ -78,9 +78,6 @@ class TopNav extends React.Component {
 
 	    return (
 			<div className="nav">
-				<div className="home-link">
-					<Link key="home" to="/" activeClassName="active" onClick={this.closeMenu}>Sandbox Home</Link>
-				</div>
 				<div className="menu-toggle" onClick={this.toggleMenu}>
 					<i className="fa fa-bars"></i>
 				</div>
@@ -88,16 +85,19 @@ class TopNav extends React.Component {
 					<div className="menu-group" key="menu" onClick={this.closeMenu}>
 						<ul className="main-menu">
 							<li className="">
-								<Link key="providers" to="/providers" className="menu-link" activeClassName="active">Providers</Link>
+								<Link key="home" to="/" className="menu-link" activeClassName="active">Home</Link>
 							</li>
 							<li className="">
-								<Link key="contacts" to="/contacts" className="menu-link" activeClassName="active">Contacts</Link>
+								<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
 							</li>
 							<li className="">
-									<Link key="tabs" to="/tabs" className="menu-link" activeClassName="active">Tabs</Link>
-								</li>
+								<Link key="ranking" to="/ranking" className="menu-link" activeClassName="active">Ranking</Link>
+							</li>
 							<li className="">
-								<a href="http://localhost:4040/api/documentation" className="menu-link" target="_blank">Api Guide</a>
+								<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>
+							</li>
+							<li className="">
+								<Link key="store" to="/store" className="menu-link" activeClassName="active">Store</Link>
 							</li>
 						</ul>
 						<ul className="login-menu">
@@ -117,16 +117,19 @@ class TopNav extends React.Component {
 						<div className="mobile-menu-group" key="mobile-menu" onClick={this.closeMenu}>
 							<ul className="main-menu">
 								<li className="">
-									<Link key="providers" to="/providers" className="menu-link" activeClassName="active">Providers</Link>
+									<Link key="home" to="/" className="menu-link" activeClassName="active">Home</Link>
 								</li>
 								<li className="">
-									<Link key="contacts" to="/contacts" className="menu-link" activeClassName="active">Contacts</Link>
+									<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
 								</li>
 								<li className="">
-									<Link key="tabs" to="/tabs" className="menu-link" activeClassName="active">Tabs</Link>
+									<Link key="ranking" to="/ranking" className="menu-link" activeClassName="active">Ranking</Link>
 								</li>
 								<li className="">
-									<a href="http://localhost:4040/api/documentation" className="menu-link" target="_blank">Api Guide</a>
+									<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>
+								</li>
+								<li className="">
+									<Link key="store" to="/store" className="menu-link" activeClassName="active">Store</Link>
 								</li>
 							</ul>
 							<ul className="login-menu">
