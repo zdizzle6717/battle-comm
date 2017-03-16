@@ -1,14 +1,12 @@
 'use strict';
 
-import rolesConfig from '../../../constants/rolesConfig';
-
-const checkAuthorization = (accessControl, user) => {
+const checkAuthorization = (accessControl, user, roleConfig) => {
 	let userFlags = user.roleFlags || 0;
 	let accessFlags = 0;
 	accessControl.forEach((roleName) => {
-		rolesConfig.forEach((config) => {
-			if (config.name === roleName) {
-				accessFlags += config.roleFlags;
+		roleConfig.forEach((role) => {
+			if (role.name === roleName) {
+				accessFlags += role.roleFlags;
 			}
 		});
 	});

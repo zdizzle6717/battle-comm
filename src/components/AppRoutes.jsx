@@ -5,13 +5,16 @@ import {Router, browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {AlertActions} from '../library/alerts';
-import {LoaderActions} from '../library/loader'
-import {UserActions, checkAuthorization} from '../library/authentication';
+import store from '../store';
 import routes from '../routes';
 import authorizedRoutesConfig from '../constants/authorizedRoutesConfig';
-import store from '../store';
 import scrollTo from '../library/utilities/scrollTo';
+import {UserActions, checkAuthorization} from '../library/authentication';
+import {AlertActions} from '../library/alerts';
+import roleConfig from '../../roleConfig';
+import {googleAnalyticsKey} from '../../envVariables';
+import ReactGA from 'react-ga';
+ReactGA.initialize(googleAnalyticsKey);
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
@@ -33,8 +36,13 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class AppRoutes extends React.Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
+
+		this.state = {
+			authenticated: false,
+			currentUser: {}
+		}
 
 		this.onViewChange = this.onViewChange.bind(this);
 		this.showAlert = this.showAlert.bind(this);
@@ -61,7 +69,7 @@ class AppRoutes extends React.Component {
 			this.props.setRedirect(homeState);
 			authorizedRoutesConfig.forEach((route) => {
 				if (location.pathname.indexOf(route.path) !== -1) {
-					let accessGranted = checkAuthorization(route.accessControl, this.props.currentUser);
+					let accessGranted = checkAuthorization(route.accessControl, this.props.currentUser, roleConfig);
 					if (accessGranted) {
 						return;
 					} else {
@@ -71,6 +79,12 @@ class AppRoutes extends React.Component {
 				}
 			})
 		}
+	}
+
+	handleRouteUpdate() {
+		scrollTo(0, 0);
+		ReactGA.set({ 'page': window.location.pathname });
+		ReactGA.pageview(window.location.pathname);
 	}
 
 	componentWillUnmount() {
@@ -102,7 +116,7 @@ class AppRoutes extends React.Component {
 
 	render() {
 	    return (
-			<Router history={history} routes={routes} onUpdate={() => scrollTo(0, 150)}/>
+			<Router history={browserHistory} routes={routes} onUpdate={this.handleRouteUpdate}/>
 	    );
 	}
 }

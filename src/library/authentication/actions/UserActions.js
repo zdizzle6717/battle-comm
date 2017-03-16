@@ -3,7 +3,7 @@
 import AuthenticationConstants from '../constants/AuthenticationConstants';
 import UserConstants from '../constants/UserConstants';
 import RedirectConstants from '../constants/RedirectConstants';
-import rolesConfig from '../../../constants/rolesConfig';
+import roleConfig from '../../../../roleConfig';
 import UserService from '../services/UserService';
 
 const _initiateRequest = (type, data) => {
@@ -22,13 +22,13 @@ const _returnResponse = (type, data) => {
 
 const _configureUser = (user) => {
 	if (user) {
-		rolesConfig.forEach((role) => {
+		roleConfig.forEach((role) => {
 			if (role.roleFlags === user.roleFlags) {
 				user.roleConfig = role;
 			}
 		});
 		if (!user.roleConfig) {
-			throw new Error('Oops! Make sure that the rolesConfig on the UI and API have matching values.');
+			throw new Error('Oops! Make sure that the roleConfig on the UI and API have matching values.');
 		}
 		sessionStorage.setItem('user', JSON.stringify(user));
 		console.log('Auth credentials changed.');

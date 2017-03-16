@@ -3,7 +3,7 @@
 import UserConstants from '../constants/UserConstants';
 import AuthenticationConstants from '../constants/AuthenticationConstants';
 import RedirectConstants from '../constants/RedirectConstants';
-import rolesConfig from '../../../constants/rolesConfig';
+import roleConfig from '../../../../roleConfig';
 
 const user = (state = {}, action) => {
 	switch (action.type) {

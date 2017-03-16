@@ -24,14 +24,31 @@ if(typeof(Storage) !== "undefined" && typeof(window) !== 'undefined') {
 }
 
 
-// Create Store
+// Create Store - Redux Development (Chrome Only)
+// const store = createStore(
+// 	rootReducer,
+// 	preLoadedState,
+// 	composeEnhancers(applyMiddleware(
+// 		thunkMiddleware, // let's us dispatch functions
+// 		loggerMiddleware // middleware that logs actions (development only)
+// 	))
+// );
+
+// Create Store (Production)
 const store = createStore(
 	rootReducer,
 	preLoadedState,
-	composeEnhancers(applyMiddleware(
-		thunkMiddleware, // let's us dispatch functions
-		loggerMiddleware // middleware that logs actions (development only)
-	))
+
+	// Production
+	applyMiddleware(
+		thunkMiddleware
+	)
+
+	// Development - Redux Devtools (Chrome only)
+	// composeEnhancers(applyMiddleware(
+	// 	thunkMiddleware, // let's us dispatch functions
+	// 	loggerMiddleware // middleware that logs actions (development only)
+	// ))
 );
 
 export default store;

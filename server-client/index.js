@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import rootReducer from '../src/reducers';
 import routes from '../src/routes';
 import routeConfig from './routeConfig';
+import envVariables from '../envVariables';
 import NotFoundPage from '../src/components/pages/NotFoundPage';
 const loggerMiddleware = createLogger();
 
@@ -79,7 +80,12 @@ for (let i in routeConfig) {
 				const state = JSON.stringify(store.getState());
 
 				return res.render(routeView, {markup, state});
-			}).catch((err) => console.log(err));
+			}).catch((err) => {
+				console.warn(err);
+				let markup = '';
+				const state = JSON.stringify({});
+				return res.render('notFound', {markup, state})
+			});
         });
     });
 }
@@ -125,12 +131,17 @@ app.get('*', (req, res) => {
 			const state = JSON.stringify(store.getState());
 
 			return res.render('notFound', {markup, state});
-		}).catch((err) => next(err));
+		}).catch((err) => {
+			console.warn(err);
+			let markup = '';
+			const state = JSON.stringify({});
+			return res.render('notFound', {markup, state})
+		});
 	});
 });
 
 // Start the server
-const port = 8000;
+const port = envVariables.clientPort;
 server.listen(port, err => {
     if (err) {
         return console.error(err);

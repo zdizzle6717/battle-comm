@@ -10,10 +10,10 @@ import {Alerts} from '../library/alerts'
 import {Loader} from '../library/loader';
 import {UserActions} from '../library/authentication';
 import initInterceptors from '../interceptors';
-import {apiRoutes} from '../constants/apiBaseRoutes';
+import {baseApiRoute} from '../../envVariables';
 
 // Initialize global interceptors such as 401, 403
-initInterceptors(apiRoutes.dev, 300);
+initInterceptors(baseApiRoute, 300);
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({

@@ -2,23 +2,25 @@
 
 require('babel-core/register');
 
-const Hapi = require('hapi');
-const Boom = require('boom');
-const Inert = require('inert');
-const Vision = require('vision');
-const fs = require('fs');
-const HapiSwagger = require('hapi-swagger');
-const hapiUploader = require('hapi-uploader');
-const HapiAuthJwt = require('hapi-auth-jwt');
+import Hapi from 'hapi';
+import cluster from 'cluster';
+import os from 'os';
+import Boom from 'boom';
+import Inert from 'inert';
+import Vision from 'vision';
+import fs from 'fs';
+import HapiSwagger from 'hapi-swagger';
+import hapiUploader from 'hapi-uploader';
+import HapiAuthJwt from 'hapi-auth-jwt2';
+import models from './models';
+import env from '../envVariables';
 
-let models = require('./models');
-let env = require('./config/environmentVariables');
 let routes = require('./routes');
 
 // Create Server
 var server = new Hapi.Server();
 let apiConfig = {
-    port: env.port.api,
+    port: env.apiPort,
     routes: {
         cors: {
             origin: env.cors.origin
@@ -34,7 +36,7 @@ if (env.name === 'production') {
 }
 server.connection(apiConfig);
 let chatConfig = {
-    port: env.port.chat,
+    port: env.chatPort,
     routes: {
         cors: {
             origin: env.cors.origin
@@ -50,6 +52,17 @@ if (env.name === 'production') {
 }
 server.connection(chatConfig);
 
+const validateUser = (decodedToken, request, callback) => {
+	// Investigate ways to improve validation and allow access based on specific request and related user details
+	let error;
+	let credentials = {
+		'id': decodedToken.id,
+		'username': decodedToken.username,
+		'scope': decodedToken.scope
+	};
+
+	return callback(error, true, credentials);
+};
 
 // Socket.io
 // Register Socket.io chat Config
@@ -93,27 +106,14 @@ server.register([
     }
 );
 
-// server.register({
-//     register: hapiUploader,
-//     options: {
-//         upload: {
-//             path: './'
-//         }
-//     }
-// }, (err) => {
-//     if (err) {
-//         console.log('Failed loading plugin', err);
-//         process.exit(1)
-//     }
-// });
-
 // Register hapi-auth-jwt Plugin
 server.register(HapiAuthJwt, (err) => {
 	server.auth.strategy('jsonWebToken', 'jwt', {
 		key: env.secret,
 		verifyOptions: {
 			algorithms: ['HS256']
-		}
+		},
+		validateFunc: validateUser
 	});
 });
 
@@ -122,12 +122,32 @@ for (var route in routes) {
     server.select('api').route(routes[route]);
 }
 
-models.sequelize.sync().then(function() {
-    server.start((err) => {
-        if (err) {
-            throw err;
-        }
-        console.log('API server running at:', server.select('api').info.uri);
-        console.log('Chat server running at:', server.select('chat').info.uri);
-    });
-});
+if (false) {
+  let numWorkers = os.cpus().length;
+
+  console.log('Master cluster setting up ' + numWorkers + ' workers...');
+
+  for (let i = 0; i < numWorkers; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('online', function(worker) {
+    console.log('Worker ' + worker.process.pid + ' is online');
+  });
+
+  cluster.on('exit', function(worker, code, signal) {
+    console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+    console.log('Starting a new worker');
+    cluster.fork();
+  });
+} else {
+	models.sequelize.sync().then(function() {
+	    server.start((err) => {
+	        if (err) {
+	            throw err;
+	        }
+	        console.log('API server running at:', server.select('api').info.uri, 'with process id', process.pid);
+	        console.log('Chat server running at:', server.select('chat').info.uri, 'with process id', process.pid);
+	    });
+	});
+}
