@@ -1,5 +1,5 @@
 {
-  "name": "ui.sandbox.two",
+  "name": "battle-comm",
   "version": "1.0.0",
   "description": "This is a universal javascript app built with react on the server side and client site demonstrated with simple movie data",
   "main": "index.js",
