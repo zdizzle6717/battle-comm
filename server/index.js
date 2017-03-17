@@ -18,7 +18,7 @@ import env from '../envVariables';
 let routes = require('./routes');
 
 // Create Server
-var server = new Hapi.Server();
+let server = new Hapi.Server();
 let apiConfig = {
     port: env.apiPort,
     routes: {
@@ -118,7 +118,7 @@ server.register(HapiAuthJwt, (err) => {
 });
 
 // Api Routes
-for (var route in routes) {
+for (let route in routes) {
     server.select('api').route(routes[route]);
 }
 

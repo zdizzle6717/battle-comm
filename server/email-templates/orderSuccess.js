@@ -1,6 +1,5 @@
 'use strict';
 
-
 function buildTemplate(data) {
 	let productList = data.orderDetails.split(' || ');
 	let productArray = [];
@@ -79,4 +78,4 @@ function buildTemplate(data) {
 	`
 }
 
-module.exports = buildTemplate;
+export default buildTemplate;

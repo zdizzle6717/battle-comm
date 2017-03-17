@@ -1,19 +1,20 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
-const env = require('../config/environmentVariables');
+import jwt from 'jsonwebtoken';
+import env from '../../envVariables';
 
-function verifyResetToken(token) {
-	try {
-		var decoded = jwt.verify(token, env.secret);
-	} catch (error) {
-		return false;
-	}
-	if (!decoded) {
-		return false;
-	} else {
-		return decoded;
-	}
-}
+const verifyResetToken = (token) => {
+  let decoded;
+  try {
+    decoded = jwt.verify(token, env.secret);
+  } catch (error) {
+    return false;
+  }
+  if (!decoded) {
+    return false;
+  } else {
+    return decoded;
+  }
+};
 
 module.exports = verifyResetToken;

@@ -36,14 +36,12 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# SCSS
+.sass-cache
+
 # Database Connections and Credentials
 envConfig.js
 server/config*
-
-# Upload folders
-
-# SCSS
-.sass-cache
 
 # SSL
 server/ssl*

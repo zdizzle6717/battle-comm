@@ -1,11 +1,11 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
-const env = require('../config/environmentVariables');
+import jwt from 'jsonwebtoken';
+import env from '../../envVariables';
 
-function createResetToken(email) {
+const createResetToken = (email) => {
   // Sign the JWT
-  return jwt.sign({ email: email }, env.secret, { algorithm: 'HS256', expiresIn: "1d" } );
-}
+  return jwt.sign({ 'email': email }, env.secret, { 'algorithm': 'HS256', 'expiresIn': '1d' } );
+};
 
-module.exports = createResetToken;
+export default createResetToken;

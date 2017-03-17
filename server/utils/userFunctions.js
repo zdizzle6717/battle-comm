@@ -1,88 +1,88 @@
 'use strict';
 
-const Boom = require('boom');
-const bcrypt = require('bcrypt');
-const models = require('../models');
+import Boom from 'boom';
+import bcrypt from 'bcrypt';
+import models from '../models';
 
-function verifyUniqueUser(req, res) {
-    models.User.find({
-            where: {
-                $or: [{
-                    email: req.payload.email
-                }, {
-                    username: req.payload.username
-                }]
-            }
-        }).then(function(user) {
-            if (user) {
-                if (user.username === req.payload.username) {
-                    res(Boom.badRequest('Username taken'));
-                }
-                if (user.email === req.payload.email) {
-                    res(Boom.badRequest('Email taken'));
-                }
-            }
-            res(req.payload);
-        }).catch(function(response) {
-            console.log(response);
-        });
-}
+const verifyUniqueUser = (req, res) => {
+  models.User.find({
+    'where': {
+      '$or': [{
+        'email': req.payload.email
+      }, {
+        'username': req.payload.username
+      }]
+    }
+  }).then((user) => {
+    if (user) {
+      if (user.username === req.payload.username) {
+        res(Boom.badRequest('Username taken'));
+      }
+      if (user.email === req.payload.email) {
+        res(Boom.badRequest('Email taken'));
+      }
+    }
+    res(req.payload);
+  }).catch((response) => {
+    console.log(response);
+  });
+};
 
-function verifyCredentials(req, res) {
-    const password = req.payload.password;
+const verifyCredentials = (req, res) => {
+  const password = req.payload.password;
 
-    models.User.find({
-            where: {
-                $or: [{
-                    email: req.payload.username
-                }, {
-                    username: req.payload.username
-                }]
-            }
-        }).then(function(user) {
-            if (user) {
-                bcrypt.compare(password, user.password, (err, isValid) => {
-                    if (isValid) {
-                        res(user);
-                    } else {
-                        res(Boom.badRequest('Incorrect password!'));
-                    }
-                });
-            } else {
-                res(Boom.badRequest('Incorrect username or email!'));
-            }
-        }).catch(function(response) {
-            console.log(response);
-        });
-}
+  models.User.find({
+    'where': {
+      '$or': [{
+        'email': req.payload.username
+      }, {
+        'username': req.payload.username
+      }]
+    }
+  }).then((user) => {
+    if (user) {
+      bcrypt.compare(password, user.password, (err, isValid) => {
+        if (isValid) {
+          res(user);
+        } else {
+          res(Boom.badRequest('Incorrect password!'));
+        }
+      });
+    } else {
+      res(Boom.badRequest('Incorrect username or email!'));
+    }
+  }).catch((response) => {
+    console.log(response);
+  });
+};
 
-function verifyUserExists(req, res) {
-    models.User.find({
-            where: {
-                email: req.payload.email
-            }
-        }).then((user) => {
-			if (user) {
-				res(user);
-			} else {
-				res(Boom.badRequest('User not found.'));
-			}
-		}).catch((response) => {
-			console.log(response)
-		})
-}
+const verifyUserExists = (req, res) => {
+  models.User.find({
+    'where': {
+      'email': req.payload.email
+    }
+  }).then((user) => {
+    if (user) {
+      res(user);
+    } else {
+      res(Boom.badRequest('User not found.'));
+    }
+  }).catch((response) => {
+    console.log(response);
+  });
+};
 
-function hashPassword(password, cb) {
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (error, hash) => {
-            return cb(err, hash)
-        });
+const hashPassword = (password, cb) => {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(password, salt, (error, hash) => {
+      return cb(err, hash);
     });
-}
+  });
+};
 
-module.exports = {
-    verifyUniqueUser,
-    verifyCredentials,
-	verifyUserExists,
-    hashPassword
-}
+export {
+  verifyUniqueUser,
+  verifyCredentials,
+  verifyUserExists,
+  hashPassword
+};

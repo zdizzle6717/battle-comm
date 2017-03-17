@@ -29,7 +29,7 @@ module.exports = {
 			'documentationPage': false
 	},
 	'googleAnalyticsKey': 'UA-48987915-2',
-	'uploadPath': '/uploads/',
+	'uploadPath': '/dist/uploads/',
 	'serverUID': 501,
 	'serverGID': 20,
 	'secret': 'BC_SECRETS_SECRETS_ARE_NO_FUN',

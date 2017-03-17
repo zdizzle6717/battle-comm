@@ -3,9 +3,9 @@
 module.exports = [
     // Base Route
     {
-        method: 'GET',
-        path: '/api/test',
-        handler: function(req, res) {
+        'method': 'GET',
+        'path': '/api/test',
+        'handler': function(req, res) {
             res({
                 'api': 'Hello world!'
             });

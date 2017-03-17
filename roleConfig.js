@@ -7,28 +7,43 @@ module.exports = [
 		'homeState': '/',
 	},
 	{
-		'name': 'subscriber',
+		'name': 'member',
 		'roleFlags': 1,
 		'homeState': '/profile',
 	},
 	{
-		'name': 'artist',
-		'roleFlags': 2,
+		'name': 'subscriber',
+		'roleFlags': 3, // subscriber, member
 		'homeState': '/profile',
 	},
 	{
-		'name': 'recordStore',
-		'roleFlags': 4,
+		'name': 'tourneyAdmin',
+		'roleFlags': 5, // member, tourneyAdmin
 		'homeState': '/profile',
 	},
 	{
-		'name': 'recordLabel',
-		'roleFlags': 12,
+		'name': 'eventAdmin',
+		'roleFlags': 13, // member, tourneyAdmin, eventAdmin
 		'homeState': '/profile',
 	},
 	{
-		'name': 'siteAdmin',
-		'roleFlags': 15,
+		'name': 'newsContributor',
+		'roleFlags': 17, // member, newsContributor
+		'homeState': '/profile',
+	},
+	{
+		'name': 'venueAdmin',
+		'roleFlags': 45, // member, tourneyAdmin, eventAdmin, venueAdmin
 		'homeState': '/admin',
-	}
+	},
+	{
+		'name': 'clubAdmin',
+		'roleFlags': 65, // member, clubAdmin
+		'homeState': '/admin',
+	},
+	{
+		'name': 'systemAdmin',
+		'roleFlags': 127, // member, subscriber, tourneyAdmin, eventAdmin, newsContributor, venueAdmin, clubAdmin, systemAdmin
+		'homeState': '/admin',
+	},
 ];

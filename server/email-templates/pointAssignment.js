@@ -1,6 +1,5 @@
 'use strict';
 
-
 function buildTemplate(data) {
 	let playerList = data.players;
 	let playerTable = '';
@@ -68,4 +67,4 @@ function buildTemplate(data) {
 	`
 }
 
-module.exports = buildTemplate;
+export default buildTemplate;
