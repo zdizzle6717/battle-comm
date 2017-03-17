@@ -5287,24 +5287,36 @@ function(e, t) {
         roleFlags: 0,
         homeState: "/"
     }, {
-        name: "subscriber",
+        name: "member",
         roleFlags: 1,
         homeState: "/profile"
     }, {
-        name: "artist",
-        roleFlags: 2,
+        name: "subscriber",
+        roleFlags: 3,
         homeState: "/profile"
     }, {
-        name: "recordStore",
-        roleFlags: 4,
+        name: "tourneyAdmin",
+        roleFlags: 5,
         homeState: "/profile"
     }, {
-        name: "recordLabel",
-        roleFlags: 12,
+        name: "eventAdmin",
+        roleFlags: 13,
         homeState: "/profile"
     }, {
-        name: "siteAdmin",
-        roleFlags: 15,
+        name: "newsContributor",
+        roleFlags: 17,
+        homeState: "/profile"
+    }, {
+        name: "venueAdmin",
+        roleFlags: 45,
+        homeState: "/admin"
+    }, {
+        name: "clubAdmin",
+        roleFlags: 65,
+        homeState: "/admin"
+    }, {
+        name: "systemAdmin",
+        roleFlags: 127,
         homeState: "/admin"
     } ];
 }, /*!*************************!*\
@@ -5326,7 +5338,7 @@ function(e, t) {
             documentationPage: !1
         },
         googleAnalyticsKey: "UA-48987915-2",
-        uploadPath: "/uploads/",
+        uploadPath: "/dist/uploads/",
         serverUID: 501,
         serverGID: 20,
         secret: "BC_SECRETS_SECRETS_ARE_NO_FUN",

@@ -1,9 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var UserAchievement = sequelize.define('UserAchievement', {
-    title: DataTypes.STRING,
+    'title': DataTypes.STRING,
   }, {
-    classMethods: {
+    'classMethods': {
         associate: function(models) {
             UserAchievement.belongsTo(models.User);
         }

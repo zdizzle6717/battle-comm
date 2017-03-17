@@ -20,106 +20,106 @@ let routes = require('./routes');
 // Create Server
 let server = new Hapi.Server();
 let apiConfig = {
-    port: env.apiPort,
-    routes: {
-        cors: {
-            origin: env.cors.origin
-        }
-    },
-	labels: ['api']
+  'port': env.apiPort,
+  'routes': {
+    'cors': {
+      'origin': env.cors.origin
+    }
+  },
+  'labels': ['api']
 };
 if (env.name === 'production') {
-	apiConfig.tls = {
-		'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
-		'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
-	}
+  apiConfig.tls = {
+    'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
+    'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
+  }
 }
 server.connection(apiConfig);
 let chatConfig = {
-    port: env.chatPort,
-    routes: {
-        cors: {
-            origin: env.cors.origin
-        }
-    },
-	labels: ['chat']
+  'port': env.chatPort,
+  'routes': {
+    'cors': {
+      'origin': env.cors.origin
+    }
+  },
+  'labels': ['chat']
 };
 if (env.name === 'production') {
-	chatConfig.tls = {
-		'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
-		'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
-	}
+  chatConfig.tls = {
+    'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
+    'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
+  }
 }
 server.connection(chatConfig);
 
 const validateUser = (decodedToken, request, callback) => {
-	// Investigate ways to improve validation and allow access based on specific request and related user details
-	let error;
-	let credentials = {
-		'id': decodedToken.id,
-		'username': decodedToken.username,
-		'scope': decodedToken.scope
-	};
+  // Investigate ways to improve validation and allow access based on specific request and related user details
+  let error;
+  let credentials = {
+    'id': decodedToken.id,
+    'username': decodedToken.username,
+    'scope': decodedToken.scope
+  };
 
-	return callback(error, true, credentials);
+  return callback(error, true, credentials);
 };
 
 // Socket.io
 // Register Socket.io chat Config
 server.register(require('./chat'), function(err) {
-	if (err) {
-		throw err;
-	}
+  if (err) {
+    throw err;
+  }
 
 });
 
 
 // Documentation (Swagger) Config
 const options = {
-    info: {
-        'title': 'Hapi Stack API Documentation',
-        'version': '1.0.0',
-    },
-    basePath: '/api/',
-    pathPrefixSize: 2,
-    documentationPage: env.swagger.documentationPage
+  'info': {
+    'title': 'Hapi Stack API Documentation',
+    'version': '1.0.0',
+  },
+  'basePath': '/api/',
+  'pathPrefixSize': 2,
+  'documentationPage': env.swagger.documentationPage
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )
 server.register([
-        Inert,
-        Vision, {
-            register: HapiSwagger,
-            options: options
-        }
-    ], {
-        routes: {
-            prefix: '/api'
-        }
-    },
-    function(err) {
-        if (err) {
-            server.log(['error'], 'hapi-swagger load error: ' + err);
-        } else {
-            server.log(['start'], 'hapi-swagger interface loaded');
-        }
+    'Inert',
+    'Vision', {
+      'register': HapiSwagger,
+      'options': options
     }
+  ], {
+    'routes': {
+      'prefix': '/api'
+    }
+  },
+  function(err) {
+    if (err) {
+      server.log(['error'], 'hapi-swagger load error: ' + err);
+    } else {
+      server.log(['start'], 'hapi-swagger interface loaded');
+    }
+  }
 );
 
 // Register hapi-auth-jwt Plugin
 server.register(HapiAuthJwt, (err) => {
-	server.auth.strategy('jsonWebToken', 'jwt', {
-		key: env.secret,
-		verifyOptions: {
-			algorithms: ['HS256']
-		},
-		validateFunc: validateUser
-	});
+  server.auth.strategy('jsonWebToken', 'jwt', {
+    'key': env.secret,
+    'verifyOptions': {
+      'algorithms': ['HS256']
+    },
+    'validateFunc': validateUser
+  });
 });
 
 // Api Routes
 for (let route in routes) {
-    server.select('api').route(routes[route]);
+  server.select('api').route(routes[route]);
 }
 
 if (false) {
@@ -141,13 +141,13 @@ if (false) {
     cluster.fork();
   });
 } else {
-	models.sequelize.sync().then(function() {
-	    server.start((err) => {
-	        if (err) {
-	            throw err;
-	        }
-	        console.log('API server running at:', server.select('api').info.uri, 'with process id', process.pid);
-	        console.log('Chat server running at:', server.select('chat').info.uri, 'with process id', process.pid);
-	    });
-	});
+  models.sequelize.sync().then(function() {
+    server.start((err) => {
+      if (err) {
+        throw err;
+      }
+      console.log('API server running at:', server.select('api').info.uri, 'with process id', process.pid);
+      console.log('Chat server running at:', server.select('chat').info.uri, 'with process id', process.pid);
+    });
+  });
 }
