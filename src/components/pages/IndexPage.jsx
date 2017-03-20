@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import Animation from 'react-addons-css-transition-group';
 import {AlertActions} from '../../library/alerts';
 import isEmpty from '../../library/utilities/isEmpty';
+import ViewWrapper from '../ViewWrapper';
 
 const mapStateToProps = (state) => {
     return {
@@ -31,9 +32,11 @@ class IndexPage extends React.Component {
 
     render() {
 		return (
-			<div className="row">
-				Hello React
-			</div>
+			<ViewWrapper>
+				<div className="row">
+					Hello React
+				</div>
+			</ViewWrapper>
 	    );
 	}
 }

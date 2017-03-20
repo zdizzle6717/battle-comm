@@ -34,6 +34,15 @@ class Layout extends React.Component {
 	        <header>
 	            <TopNav></TopNav>
 	        </header>
+				<div className="site-background"></div>
+				<div className="logo-banner row center">
+			        <div className="logo">
+						<Link key="home" to="/" className=""><img src="/images/BC_Web_Logo.png" alt="BattleComm" /></Link>
+					</div>
+			        <div className="mobile-logo">
+						<Link key="home" to="/" className=""><img src="/images/BC_Web_Logo_mobile.png" alt="BattleComm" /></Link>
+			        </div>
+			    </div>
 				<Animation transitionName="view" transitionAppear={true} transitionAppearTimeout={250} transitionEnter={true} transitionEnterTimeout={250} transitionLeave={true} transitionLeaveTimeout={250} component='div' className='content-container'>
 					{React.cloneElement(this.props.children, { key: path })}
 				</Animation>
