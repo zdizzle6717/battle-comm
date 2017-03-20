@@ -1,13 +1,79 @@
 'use strict';
 
-import files from '../handlers/files';
+import handlers from '../handlers';
 import Joi from 'joi';
 
 module.exports = [
-  // File Upload
+  // Files
   {
     'method': 'POST',
-    'path': '/api/files/{path*}',
+    'path': '/api/files',
+    'handler': handlers.files.create,
+    'config': {
+      'tags': ['api'],
+      'description': 'Add file details',
+      'notes': 'Add file details',
+      'validate': {
+        'payload': {
+          'GameSystemId': Joi.optional(),
+          'ManufacturerId': Joi.optional(),
+          'NewsPostId': Joi.optional(),
+          'ProductId': Joi.optional(),
+          'UserId': Joi.optional(),
+          'UserAchievementId': Joi.optional(),
+          'identifier': Joi.string().valid('playerIcon').required(),
+          'locationUrl': Joi.optional(),
+          'label': Joi.optional(),
+          'name': Joi.string().required(),
+          'size': Joi.number().required(),
+          'type': Joi.string().required()
+        }
+      },
+			'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+      },
+      'cors': {
+        'origin': ['*']
+      }
+    }
+  },
+  {
+    'method': 'PUT',
+    'path': '/api/files/{id}',
+    'handler': handlers.files.update,
+    'config': {
+      'tags': ['api'],
+      'description': 'Update file details',
+      'notes': 'Update file details',
+      'validate': {
+        'params': {
+          'id': Joi.number().required()
+        },
+        'payload': {
+					'GameSystemId': Joi.optional(),
+          'ManufacturerId': Joi.optional(),
+          'NewsPostId': Joi.optional(),
+          'ProductId': Joi.optional(),
+          'UserId': Joi.optional(),
+          'UserAchievementId': Joi.optional(),
+          'identifier': Joi.string().valid('playerIcon').required(),
+          'locationUrl': Joi.optional(),
+          'label': Joi.optional(),
+          'name': Joi.string().required(),
+          'size': Joi.number().required(),
+          'type': Joi.string().required()
+        }
+      },
+      'cors': {
+        'origin': ['*']
+      }
+    }
+  },
+  {
+    'method': 'POST',
+    'path': '/api/files/add',
+    'handler': handlers.files.add,
     'config': {
       'payload': {
         'output': 'stream',
@@ -20,9 +86,42 @@ module.exports = [
       'notes': 'Upload a new file',
       'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+        'scope': ['contactAdmin', 'siteAdmin']
       },
-    },
-    'handler': files.create
+      'cors': {
+        'origin': ['*']
+      }
+    }
+  },
+  {
+    'method': 'GET',
+    'path': '/api/files',
+    'handler': handlers.files.getAll,
+    'config': {
+      'tags': ['api'],
+      'description': 'Get all files',
+      'notes': 'Get all files',
+      'cors': {
+        'origin': ['*']
+      }
+    }
+  },
+  {
+    'method': 'DELETE',
+    'path': '/api/files/{id}',
+    'handler': handlers.files.delete,
+    'config': {
+      'tags': ['api'],
+      'description': 'Delete an file by id',
+      'notes': 'Delete an file by id',
+      'validate': {
+        'params': {
+          'id': Joi.number().required()
+        }
+      },
+      'cors': {
+        'origin': ['*']
+      }
+    }
   }
 ];

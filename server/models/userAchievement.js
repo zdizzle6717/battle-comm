@@ -5,6 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     'classMethods': {
         associate: function(models) {
+						UserAchievement.hasOne(models.File);
             UserAchievement.belongsTo(models.User);
         }
     }

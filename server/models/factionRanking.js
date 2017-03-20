@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'getterMethods': {
       pointValue: function() {
-        return this.totalWins + (this.totalDraws * .5);
+        return this.totalWins + (this.totalDraws * 0.5);
       }
     }
   });

@@ -82,7 +82,9 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     'classMethods': {
       associate: function(models) {
+        User.hasMany(models.File);
         User.hasMany(models.ProductOrder);
+				User.hasMany(models.GameSystemRanking);
         User.hasMany(models.User, {
           'as': 'Friends',
           'joinTableName': 'userHasFriends'
@@ -95,7 +97,6 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.UserMessage);
         User.hasMany(models.UserAchievement);
         User.hasMany(models.UserPhoto);
-        User.hasMany(models.GameSystemRanking);
       }
     }
   });

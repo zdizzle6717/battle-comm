@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     'classMethods': {
       associate: function(models) {
+				Manufacturer.hasOne(models.File);
         Manufacturer.hasMany(models.GameSystem);
       }
     }

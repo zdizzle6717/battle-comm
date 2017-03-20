@@ -1,68 +1,196 @@
 'use strict';
 
-import fs from 'fs-extra';
+import models from '../../models';
+import fse from 'fs-extra';
 import env from '../../../envVariables.js';
+import Boom from 'boom';
 import im from 'imagemagick-stream';
+import moment from 'moment';
 
-// Product Route Configs
+// File Upload Route Configs
 let files = {
   create: (request, reply) => {
-    let data = request.payload;
-    let name = Date.now() + '-' + data.file.hapi.filename;
-    let path = __dirname + '/../../..' + env.uploadPath + request.params.path + '/' + name;
-    let successResponse = {
-      'filename': name,
-      'headers': data.file.hapi.headers,
-      'status': 200,
-      'statusText': 'File uploaded successfully!'
-    };
-
-    if (data.file) {
-      if (path.indexOf('playerIcon') === -1) {
-        fs.ensureFile(path, (err) => {
-          let file = fs.createWriteStream(path);
-          file.on('error', (err) => {
-            reply().code(404);
+    models.File.create({
+        'GameSystemId': request.payload.GameSystemId,
+        'ManufacturerId': request.payload.ManufacturerId,
+        'NewsPostId': request.payload.NewsPostId,
+        'ProductId': request.payload.ProductId,
+        'UserId': request.payload.UserId,
+        'UserAchievementId': request.payload.UserAchievementId,
+        'identifier': request.payload.identifier,
+        'locationUrl': request.payload.locationUrl,
+        'label': request.payload.label,
+        'name': request.payload.name,
+        'size': request.payload.size,
+        'type': request.payload.type
+      })
+      .then((file) => {
+        reply(file).code(200);
+      });
+  },
+  update: (request, reply) => {
+    models.File.find({
+      'where': {
+        'id': request.params.id
+      }
+    }).then((file) => {
+      if (file) {
+        file.updateAttributes({
+            'GameSystemId': request.payload.GameSystemId,
+            'ManufacturerId': request.payload.ManufacturerId,
+            'NewsPostId': request.payload.NewsPostId,
+            'ProductId': request.payload.ProductId,
+            'UserId': request.payload.UserId,
+            'UserAchievementId': request.payload.UserAchievementId,
+            'identifier': request.payload.identifier,
+            'locationUrl': request.payload.locationUrl,
+            'label': request.payload.label,
+            'name': request.payload.name,
+            'size': request.payload.size,
+            'type': request.payload.type
+          })
+          .then((file) => {
+            reply(file).code(200);
           });
-          data.file.pipe(file);
-          data.file.on('end', (err) => {
-            reply(JSON.stringify(successResponse));
-          });
-        });
       } else {
-        let thumbPath = __dirname + '/../../..' + env.uploadPath + request.params.path + '/thumbs/' + name;
-        fs.ensureFile(path, (err) => {
-          let file = fs.createWriteStream(path);
-          const resize = im().resize('100x100').quality(90);
-          file.on('error', (err) => {
-            reply().code(404);
-          });
-          data.file.pipe(file);
-          data.file.on('end', (err) => {
-            fs.ensureFile(thumbPath, (err) => {
-              let read = fs.createReadStream(path);
-              let thumb = fs.createWriteStream(thumbPath);
-              file.on('error', (err) => {
-                reply().code(404);
-              });
-              read.pipe(resize).pipe(thumb);
+        reply().code(404);
+      }
+    });
+  },
+  add: (request, reply) => {
+    let counter = 0;
+    let tick = 0;
+    let data = request.payload;
+    if (!data.path || !data.fileSize) {
+      reply(Boom.badRequest(`A 'path' and 'fileSize' attribute must be appended to the FormData object`));
+    } else if (data.file) {
+      let resizeArray;
+      if (data.identifier === 'playerIcon') {
+        resizeArray = [].concat(
+          [{
+            'name': `100-${data.file.hapi.filename}`,
+            'resize': im().resize('100x100').quality(100)
+          }], [{
+            'name': `300-${data.file.hapi.filename}`,
+            'resize': im().resize('300x300').quality(100)
+          }]
+        );
+      }
+
+      let filename = moment(Date.now()).format('MM-DD-YYYY') + '-' + data.file.hapi.filename;
+      let location = __dirname + '/../../..' + env.uploadPath + data.path;
+      let path = location + filename;
+
+      // Using ensureDir instead of ensureFile allow us to overwrite files if they already exist
+      fse.ensureDir(location, (err) => {
+        if (err) {
+          reply(Boom.notAcceptable('An error occured during ensureDir'));
+          return;
+        }
+
+        // Create the initial file to read from
+        let file = fse.createWriteStream(path);
+        data.file.pipe(file);
+        data.file.on('end', (err) => {
+          if (err) {
+            reply(Boom.notAcceptable('An error occured on file end (resizeArray loop)'));
+            return;
+          }
+
+          // TODO: Double check that type is correct
+          let successResponse = {
+            'file': {
+              'name': data.identifier === 'albumCover' ? data.file.hapi.filename : filename,
+              'size': data.fileSize,
+              'type': data.file.hapi.headers['content-type']
+            },
+            'filename': data.file.hapi.filename,
+            'headers': data.file.hapi.headers,
+            'status': 200,
+            'statusText': 'File uploaded successfully!'
+          };
+
+          if (resizeArray) {
+            resizeArray.forEach((resizeConfig) => {
+              let read = fse.createReadStream(path);
+              let resizePath = location + resizeConfig.name;
+              let write = fse.createWriteStream(resizePath);
+              read.pipe(resizeConfig.resize).pipe(write);
+
               read.on('end', (err) => {
+                if (err) {
+                  reply(Boom.notAcceptable('An error occured on file end (resizeArray loop)'));
+                  return;
+                }
+                // Set file folder permissions and owners/groups just for safe measure
+                fse.chownSync(location, env.serverUID, env.serverGID);
+                fse.chmodSync(location, '0775');
+                counter++;
+              });
+            });
+
+            // This continuously checks for all files to be created (since on 'end' happens async)
+            // TODO: Find a better way (RxJs???)
+            let waiter = setInterval(() => {
+              tick++;
+              if (counter >= resizeArray.length) {
+                clearInterval(waiter);
+                reply(JSON.stringify(successResponse)).code(200);
+              }
+              // Breakout if this takes more than 5 minutes
+              if (tick > 100 * 10 * 60 * 5) {
+                clearInterval(waiter);
+                reply(Boom.clientTimeout('Something when wrong while resizing and saving images'));
+              }
+            }, 100);
+          } else {
+            // Set file folder permissions and owners/groups just for safe measure
+            fse.chown(location, env.serverUID, env.serverGID, (err) => {
+              if (err) {
+                reply(Boom.notAcceptable('chown: ' + err));
+                return;
+              }
+              fse.chmod(location, '0775', (err) => {
+                if (err) {
+                  reply(Boom.notAcceptable('chown: ' + err));
+                  return;
+                }
+
                 reply(JSON.stringify(successResponse));
               });
             });
-          });
+          }
         });
-      }
+      });
     } else {
-      let errorResponse = {
-        'filename': data.file.hapi.filename,
-        'headers': data.file.hapi.headers,
-        'status': 400,
-        'statusText': 'There was an error uploading your file. Max sure the dimensions are 800px by 530px.'
-      };
-      reply(JSON.stringify(errorResponse));
+      reply(Boom.badRequest('There was an error uploading your file.'));
     }
+  },
+  getAll: (request, reply) => {
+    models.File.findAll({
+        'limit': 50
+      })
+      .then((files) => {
+        reply(files).code(200);
+      });
+  },
+  // TODO: Get file by Id, then delete file from folder based on sourceUrl
+  // Be carefull not to delete parent folder(s)
+  // fs.unlink()
+  delete: (request, reply) => {
+    models.File.destroy({
+        'where': {
+          'id': request.params.id
+        }
+      })
+      .then((file) => {
+        if (file) {
+          reply().code(200);
+        } else {
+          reply().code(404);
+        }
+      });
   }
 };
 
-export default files;
+module.exports = files;

@@ -12,6 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         GameSystem.hasMany(models.GameSystemRanking);
         GameSystem.belongsTo(models.Manufacturer);
         GameSystem.hasMany(models.Faction);
+        GameSystem.hasOne(models.File);
       }
     }
   });
