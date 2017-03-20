@@ -1,7 +1,7 @@
 'use strict';
 
-import userPhotos from '../handlers/userPhotos';
 import Joi from 'joi';
+import { userPhotos } from '../handlers';
 
 module.exports = [
   // User photos

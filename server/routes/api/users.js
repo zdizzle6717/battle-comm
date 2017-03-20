@@ -1,8 +1,8 @@
 'use strict';
 
-import users from '../handlers/users';
 import Joi from 'joi';
-import userFunctions from '../../utils/userFunctions';
+import { users } from '../handlers';
+import { verifyUniqueUser, verifyCredentials, verifyUserExists } from '../../utils/userFunctions';
 
 module.exports = [
   // User Logins
@@ -11,7 +11,7 @@ module.exports = [
     'path': '/api/users',
     'config': {
       'pre': [{
-        'method': userFunctions.verifyUniqueUser
+        'method': verifyUniqueUser
       }],
       'handler': users.create,
       'tags': ['api'],
@@ -33,7 +33,7 @@ module.exports = [
     'path': '/api/users/authenticate',
     'config': {
       'pre': [{
-        'method': userFunctions.verifyCredentials,
+        'method': verifyCredentials,
         'assign': 'user'
       }],
       'handler': users.authenticate,
@@ -132,7 +132,7 @@ module.exports = [
         }
       }
     },
-    ''handler'': users.updatePartial
+    'handler': users.updatePartial
   },
   {
     'method': 'PUT',
@@ -156,7 +156,7 @@ module.exports = [
         }
       },
       'pre': [{
-        'method': userFunctions.verifyCredentials
+        'method': verifyCredentials
       }],
       'handler': users.changePassword
     }
@@ -174,7 +174,7 @@ module.exports = [
         }
       },
       'pre': [{
-        'method': userFunctions.verifyUserExists,
+        'method': verifyUserExists,
         'assign': 'user'
       }],
       'handler': users.resetPassword

@@ -1,7 +1,7 @@
 'use strict';
 
-import productOrders from '../handlers/productOrders';
 import Joi from 'joi';
+import { productOrders } from '../handlers';
 
 module.exports = [
   // Product Orders

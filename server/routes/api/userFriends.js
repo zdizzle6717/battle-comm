@@ -1,7 +1,7 @@
 'use strict';
 
-import friends from '../handlers/userFriends';
 import Joi from 'joi';
+import { userFriends } from '../handlers';
 
 module.exports = [
 	// User Friends
@@ -9,7 +9,7 @@ module.exports = [
 		'method': 'POST',
 		'path': '/api/friends',
 		'config': {
-			'handler': friends.create,
+			'handler': userFriends.create,
 			'tags': ['api'],
 			'description': 'Create a new user friend',
 			'notes': 'Create a new user friend',
@@ -29,7 +29,7 @@ module.exports = [
 		'method': 'DELETE',
 		'path': '/api/friends',
 		'config': {
-			'handler': friends.remove,
+			'handler': userFriends.remove,
 			'tags': ['api'],
 			'description': 'Remove a friend association',
 			'notes': 'Remove a friend association',

@@ -1,8 +1,7 @@
 'use strict';
 
-import gameSystemRankings from '../handlers/gameSystemRankings';
 import Joi from 'joi';
-import models from '../../models';
+import { gameSystemRankings } from '../handlers';
 
 module.exports = [
   // Game System Rankings

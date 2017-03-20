@@ -1,8 +1,7 @@
 'use strict';
 
-import venues from '../handlers/venues';
 import Joi from 'joi';
-import models from '../../models';
+import { venues } from '../handlers';
 
 module.exports = [
   // Venues

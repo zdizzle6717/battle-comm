@@ -1,7 +1,7 @@
 'use strict';
 
-import userNotifications from '../handlers/userNotifications';
 import Joi from 'joi';
+import { userNotifications } from '../handlers';
 
 module.exports = [
 	// User Notifications

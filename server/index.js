@@ -5,12 +5,10 @@ require('babel-core/register');
 import Hapi from 'hapi';
 import cluster from 'cluster';
 import os from 'os';
-import Boom from 'boom';
 import Inert from 'inert';
 import Vision from 'vision';
 import fs from 'fs';
 import HapiSwagger from 'hapi-swagger';
-import hapiUploader from 'hapi-uploader';
 import HapiAuthJwt from 'hapi-auth-jwt2';
 import models from './models';
 import env from '../envVariables';
@@ -32,7 +30,7 @@ if (env.name === 'production') {
   apiConfig.tls = {
     'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
     'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
-  }
+  };
 }
 server.connection(apiConfig);
 let chatConfig = {
@@ -48,7 +46,7 @@ if (env.name === 'production') {
   chatConfig.tls = {
     'key': fs.readFileSync('ssl/www.battle-comm.net.key'),
     'cert': fs.readFileSync('ssl/www.battle-comm.net.chained.crt')
-  }
+  };
 }
 server.connection(chatConfig);
 
@@ -87,8 +85,8 @@ const options = {
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )
 server.register([
-    'Inert',
-    'Vision', {
+    Inert,
+    Vision, {
       'register': HapiSwagger,
       'options': options
     }
@@ -108,6 +106,10 @@ server.register([
 
 // Register hapi-auth-jwt Plugin
 server.register(HapiAuthJwt, (err) => {
+	if (err) {
+		console.log(err);
+		return;
+	}
   server.auth.strategy('jsonWebToken', 'jwt', {
     'key': env.secret,
     'verifyOptions': {

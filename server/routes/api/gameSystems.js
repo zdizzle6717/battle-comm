@@ -1,7 +1,7 @@
 'use strict';
 
 import Joi from 'joi';
-import gameSystems from '../handlers/gameSystems';
+import { gameSystems } from '../handlers';
 
 module.exports = [
   // Game Systems

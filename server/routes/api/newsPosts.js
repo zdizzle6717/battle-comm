@@ -1,8 +1,7 @@
 'use strict';
 
-import newsPosts from '../handlers/newsPosts';
 import Joi from 'joi';
-import models from '../../models';
+import { newsPosts } from '../handlers';
 
 module.exports = [
 	// News Posts

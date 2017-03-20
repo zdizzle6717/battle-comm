@@ -1,14 +1,14 @@
 'use strict';
 
-import handlers from '../handlers';
 import Joi from 'joi';
+import { files } from '../handlers';
 
 module.exports = [
   // Files
   {
     'method': 'POST',
     'path': '/api/files',
-    'handler': handlers.files.create,
+    'handler': files.create,
     'config': {
       'tags': ['api'],
       'description': 'Add file details',
@@ -41,7 +41,7 @@ module.exports = [
   {
     'method': 'PUT',
     'path': '/api/files/{id}',
-    'handler': handlers.files.update,
+    'handler': files.update,
     'config': {
       'tags': ['api'],
       'description': 'Update file details',
@@ -73,7 +73,7 @@ module.exports = [
   {
     'method': 'POST',
     'path': '/api/files/add',
-    'handler': handlers.files.add,
+    'handler': files.add,
     'config': {
       'payload': {
         'output': 'stream',
@@ -96,7 +96,7 @@ module.exports = [
   {
     'method': 'GET',
     'path': '/api/files',
-    'handler': handlers.files.getAll,
+    'handler': files.getAll,
     'config': {
       'tags': ['api'],
       'description': 'Get all files',
@@ -109,7 +109,7 @@ module.exports = [
   {
     'method': 'DELETE',
     'path': '/api/files/{id}',
-    'handler': handlers.files.delete,
+    'handler': files.delete,
     'config': {
       'tags': ['api'],
       'description': 'Delete an file by id',

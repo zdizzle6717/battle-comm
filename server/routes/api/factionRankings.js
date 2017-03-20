@@ -1,8 +1,7 @@
 'use strict';
 
-import factionRankings from '../handlers/factionRankings';
 import Joi from 'joi';
-import models from '../../models';
+import { factionRankings } from '../handlers';
 
 module.exports = [
   // Faction Rankings

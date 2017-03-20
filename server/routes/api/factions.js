@@ -1,8 +1,7 @@
 'use strict';
 
 import Joi from 'joi';
-import models from '../../models';
-import factions from '../handlers/factions';
+import { factions } from '../handlers';
 
 module.exports = [
   // Game Systems

@@ -1,17 +1,6 @@
 'use strict';
 
-module.exports = [
-    // Base Route
-    {
-        'method': 'GET',
-        'path': '/api/test',
-        'handler': function(req, res) {
-            res({
-                'api': 'Hello world!'
-            });
-        }
-    }
-]
+module.exports = []
 .concat(require('./api/factionRankings'))
 .concat(require('./api/factions'))
 .concat(require('./api/files'))
