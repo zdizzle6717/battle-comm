@@ -26,7 +26,10 @@ let products = {
   },
   create: (request, reply) => {
     models.Product.create({
-        SKU: request.payload.SKU,
+        'FactionId': request.payload.FactionId,
+        'GameSystemId': request.payload.GameSystemId,
+        'ManufacturerId': request.payload.ManufacturerId,
+        'SKU': request.payload.SKU,
         'name': request.payload.name,
         'price': request.payload.price,
         'description': request.payload.description,
@@ -41,16 +44,7 @@ let products = {
         'displayStatus': request.payload.displayStatus,
         'featured': request.payload.featured,
         'new': request.payload.new,
-        'onSale': request.payload.onSale,
-        'imgAlt': request.payload.imgAlt,
-        'imgOneFront': request.payload.imgOneFront,
-        'imgOneBack': request.payload.imgOneBack,
-        'imgTwoFront': request.payload.imgTwoFront,
-        'imgTwoBack': request.payload.imgTwoBack,
-        'imgThreeFront': request.payload.imgThreeFront,
-        'imgThreeBack': request.payload.imgThreeBack,
-        'imgFourFront': request.payload.imgFourFront,
-        'imgFourBack': request.payload.imgFourBack
+        'onSale': request.payload.onSale
       })
       .then((response) => {
         reply(response).code(200);
@@ -65,6 +59,9 @@ let products = {
       .then((response) => {
         if (response) {
           response.updateAttributes({
+            'FactionId': request.payload.FactionId,
+            'GameSystemId': request.payload.GameSystemId,
+            'ManufacturerId': request.payload.ManufacturerId,
             'SKU': request.payload.SKU,
             'name': request.payload.name,
             'price': request.payload.price,
@@ -80,16 +77,7 @@ let products = {
             'displayStatus': request.payload.displayStatus,
             'featured': request.payload.featured,
             'new': request.payload.new,
-            'onSale': request.payload.onSale,
-            'imgAlt': request.payload.imgAlt,
-            'imgOneFront': request.payload.imgOneFront,
-            'imgOneBack': request.payload.imgOneBack,
-            'imgTwoFront': request.payload.imgTwoFront,
-            'imgTwoBack': request.payload.imgTwoBack,
-            'imgThreeFront': request.payload.imgThreeFront,
-            'imgThreeBack': request.payload.imgThreeBack,
-            'imgFourFront': request.payload.imgFourFront,
-            'imgFourBack': request.payload.imgFourBack
+            'onSale': request.payload.onSale
           }).then((response) => {
             reply(response).code(200);
           });

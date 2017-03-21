@@ -46,7 +46,6 @@ let gameSystems = {
         'name': request.payload.name,
         'description': request.payload.description,
         'searchKey': request.payload.searchKey,
-        'photo': request.payload.photo,
         'url': request.payload.url
       })
       .then((response) => {
@@ -66,7 +65,6 @@ let gameSystems = {
             'name': request.payload.name,
             'description': request.payload.description,
             'searchKey': request.payload.searchKey,
-            'photo': request.payload.photo,
             'url': request.payload.url
           }).then((response) => {
             reply(response).code(200);

@@ -5,8 +5,6 @@ module.exports = function(sequelize, DataTypes) {
     'name': DataTypes.STRING,
     'price': DataTypes.INTEGER,
     'description': DataTypes.TEXT,
-    'manufacturerId': DataTypes.STRING,
-    'gameSystem': DataTypes.STRING,
     'color': DataTypes.STRING,
     'tags': DataTypes.STRING,
     'category': DataTypes.STRING,
@@ -16,20 +14,14 @@ module.exports = function(sequelize, DataTypes) {
     'displayStatus': DataTypes.BOOLEAN,
     'featured': DataTypes.BOOLEAN,
     'new': DataTypes.BOOLEAN,
-    'onSale': DataTypes.BOOLEAN,
-    'imgAlt': DataTypes.STRING,
-    'imgOneFront': DataTypes.STRING,
-    'imgOneBack': DataTypes.STRING,
-    'imgTwoFront': DataTypes.STRING,
-    'imgTwoBack': DataTypes.STRING,
-    'imgThreeFront': DataTypes.STRING,
-    'imgThreeBack': DataTypes.STRING,
-    'imgFourFront': DataTypes.STRING,
-    'imgFourBack': DataTypes.STRING,
+    'onSale': DataTypes.BOOLEAN
   }, {
     'classMethods': {
       associate: function(models) {
 				Product.hasMany(models.File);
+				Product.hasOne(models.Faction);
+				Product.hasOne(models.GameSystem);
+				Product.hasOne(models.Manufacturer);
       }
     }
   });

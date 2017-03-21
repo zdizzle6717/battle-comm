@@ -38,14 +38,13 @@ let newsPosts = {
     models.NewsPost.create({
         'UserId': request.payload.UserId,
         'title': request.payload.title,
-        'image': request.payload.image,
         'callout': request.payload.callout,
         'body': request.payload.body,
         'published': request.payload.published,
         'featured': request.payload.featured,
         'tags': request.payload.tags,
         'manufacturerId': request.payload.manufacturerId,
-        'gameSystem': request.payload.gameSystem,
+        'gameSystemId': request.payload.gameSystemId,
         'category': request.payload.category
       })
       .then((response) => {
@@ -63,14 +62,13 @@ let newsPosts = {
           newsPost.updateAttributes({
             'UserId': request.payload.UserId,
             'title': request.payload.title,
-            'image': request.payload.image,
             'callout': request.payload.callout,
             'body': request.payload.body,
             'published': request.payload.published,
             'featured': request.payload.featured,
             'tags': request.payload.tags,
             'manufacturerId': request.payload.manufacturerId,
-            'gameSystem': request.payload.gameSystem,
+            'gameSystemId': request.payload.gameSystemId,
             'category': request.payload.category
           }).then((response) => {
             reply(response).code(200);

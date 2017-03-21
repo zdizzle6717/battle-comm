@@ -51,12 +51,13 @@ module.exports = [
 			},
 			'validate': {
 				'payload': {
+					'ManufacturerId': Joi.optional(),
+					'GameSystemId': Joi.optional(),
+					'FactionId': Joi.optional(),
 					'SKU': Joi.string().required(),
 					'name': Joi.string().required(),
 					'price': Joi.number().required(),
 					'description': Joi.string().required(),
-					'manufacturerId': Joi.string().required(),
-					'gameSystem': Joi.string().required(),
 					'color': Joi.optional(),
 					'tags': Joi.string(),
 					'category': Joi.string(),
@@ -66,16 +67,7 @@ module.exports = [
 					'displayStatus': Joi.boolean().required(),
 					'featured': Joi.boolean().required(),
 					'new': Joi.boolean().required(),
-					'onSale': Joi.boolean().required(),
-					'imgAlt': Joi.string().required(),
-					'imgOneFront': Joi.string().required(),
-					'imgOneBack': Joi.string().required(),
-					'imgTwoFront': Joi.optional(),
-					'imgTwoBack': Joi.optional(),
-					'imgThreeFront': Joi.optional(),
-					'imgThreeBack': Joi.optional(),
-					'imgFourFront': Joi.optional(),
-					'imgFourBack': Joi.optional()
+					'onSale': Joi.boolean().required()
 				}
 			}
 		},
@@ -97,12 +89,13 @@ module.exports = [
 					'id': Joi.number().required()
 				},
 				'payload': {
+					'ManufacturerId': Joi.optional(),
+					'GameSystemId': Joi.optional(),
+					'FactionId': Joi.optional(),
 					'SKU': Joi.string().required(),
 					'name': Joi.string().required(),
 					'price': Joi.number().required(),
 					'description': Joi.string().required(),
-					'manufacturerId': Joi.string().required(),
-					'gameSystem': Joi.string().required(),
 					'color': Joi.optional(),
 					'tags': Joi.string(),
 					'category': Joi.string(),
@@ -112,16 +105,7 @@ module.exports = [
 					'displayStatus': Joi.boolean().required(),
 					'featured': Joi.boolean().required(),
 					'new': Joi.boolean().required(),
-					'onSale': Joi.boolean().required(),
-					'imgAlt': Joi.string().required(),
-					'imgOneFront': Joi.string().required(),
-					'imgOneBack': Joi.string().required(),
-					'imgTwoFront': Joi.optional(),
-					'imgTwoBack': Joi.optional(),
-					'imgThreeFront': Joi.optional(),
-					'imgThreeBack': Joi.optional(),
-					'imgFourFront': Joi.optional(),
-					'imgFourBack': Joi.optional()
+					'onSale': Joi.boolean().required()
 				}
 			}
 		},

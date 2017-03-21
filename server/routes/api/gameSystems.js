@@ -47,7 +47,6 @@ module.exports = [
           'name': Joi.string().required(),
           'description': Joi.optional(),
           'searchKey': Joi.string().required(),
-          'photo': Joi.optional(),
           'url': Joi.optional()
         }
       }
@@ -74,7 +73,6 @@ module.exports = [
           'name': Joi.string().required(),
           'description': Joi.optional(),
           'searchKey': Joi.string().required(),
-          'photo': Joi.optional(),
           'url': Joi.optional()
         }
       }

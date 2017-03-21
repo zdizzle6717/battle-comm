@@ -1,0 +1,23 @@
+Added Files reference to many tables
+
+Added reference to 'product', 'newsPost'
+Product.hasOne(models.GameSystem);
+Product.hasOne(models.Faction);
+Product.hasOne(models.Manufacturer);
+
+removed from 'product', 'newsPost'
+'manufacturerId', 'gameSystemId'
+
+removed from 'product'
+'imgAlt': DataTypes.STRING,
+'imgOneFront': DataTypes.STRING,
+'imgOneBack': DataTypes.STRING,
+'imgTwoFront': DataTypes.STRING,
+'imgTwoBack': DataTypes.STRING,
+'imgThreeFront': DataTypes.STRING,
+'imgThreeBack': DataTypes.STRING,
+'imgFourFront': DataTypes.STRING,
+'imgFourBack': DataTypes.STRING,
+
+removed from 'newsPost', 'gameSystem', 'manufacturer'
+'photo'

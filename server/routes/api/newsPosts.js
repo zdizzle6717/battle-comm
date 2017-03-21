@@ -45,14 +45,13 @@ module.exports = [
 				'payload': {
 					'UserId': Joi.number().required(),
 					'title': Joi.string().required(),
-					'image': Joi.string().required(),
 					'callout': Joi.string().required(),
 					'body': Joi.string().required(),
 					'published': Joi.boolean().required(),
 					'featured': Joi.boolean().required(),
 					'tags': Joi.optional(),
 					'manufacturerId': Joi.optional(),
-					'gameSystem': Joi.optional(),
+					'gameSystemId': Joi.optional(),
 					'category': Joi.string().required()
 				}
 			}
@@ -77,14 +76,13 @@ module.exports = [
 				'payload': {
 					'UserId': Joi.number().required(),
 					'title': Joi.string().required(),
-					'image': Joi.string().required(),
 					'callout': Joi.string().required(),
 					'body': Joi.string().required(),
 					'published': Joi.boolean().required(),
 					'featured': Joi.boolean().required(),
 					'tags': Joi.optional(),
 					'manufacturerId': Joi.optional(),
-					'gameSystem': Joi.optional(),
+					'gameSystemId': Joi.optional(),
 					'category': Joi.string().required()
 				}
 			}
