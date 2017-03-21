@@ -129,7 +129,7 @@ class ProductForm extends React.Component {
 		return `rpstore/${this.state.product.sku}/`;
 	}
 
-	hanldeSubmit() {
+	handleSubmit() {
 		let post = this.state.product;
 		let method = this.props.productId ? 'update' : 'create';
 		post.UserId = this.props.playerId;
@@ -185,7 +185,7 @@ class ProductForm extends React.Component {
 
 	render() {
 		<div>
-			<Form name="productForm" submitText={this.state.newProduct ? 'Create News Post' : 'Update News Post'} handleSubmit={this.hanldeSubmit}>
+			<Form name="productForm" submitText={this.state.newProduct ? 'Create News Post' : 'Update News Post'} handleSubmit={this.handleSubmit}>
 				<div className="row">
 					<div className="form-group small-12 medium-4 columns">
 						<label className="required">Name</label>
@@ -237,22 +237,58 @@ class ProductForm extends React.Component {
 				</div>
 				<div className="row">
 					<div className="form-group small-12 medium-4 columns">
-						<label className="required">Callout</label>
-						<TextArea type="text" name="callout" value={this.state.product.callout} rows="4" handleInputChange={this.handleInputChange} required={true} />
+						<label className="required">Stock Qty</label>
+						<Input type="number" name="stockQty" value={this.state.product.stockQty} handleInputChange={this.handleInputChange} required={true} />
 					</div>
 					<div className="form-group small-12 medium-4 columns">
-						<label className="required">Body</label>
-						<TextArea type="text" name="body" value={this.state.product.body} rows="7" handleInputChange={this.handleInputChange} required={true} />
+						<label className="required">Color</label>
+						<Input type="text" name="color" value={this.state.product.color} handleInputChange={this.handleInputChange} required={true} />
 					</div>
 					<div className="form-group small-12 medium-4 columns">
-						<label className="required">Tags</label>
-						<TextArea type="text" name="tags" value={this.state.product.tags} rows="4" handleInputChange={this.handleInputChange} required={true} />
+						<label className="required">Category</label>
+						<Input type="text" name="category" value={this.state.product.category} handleInputChange={this.handleInputChange} required={true} />
 					</div>
 				</div>
 				<div className="row">
 					<div className="form-group small-12 medium-4 columns">
-						<label className="required">News Post Photos</label>
-						<FileUpload name="postPhotos" value={this.state.product.Files} handleFileUpload={this.handleFileUpload} maxFiles={5} required={1} disabled={!this.state.product.sku}/>
+						<CheckBox name="inStock" value={this.state.product.inStock} handleInputChange={this.handleCheckBoxChange} label="In Stock?"/>
+					</div>
+					<div className="form-group small-12 medium-4 columns">
+						<CheckBox name="displayStatus" value={this.state.product.displayStatus} handleInputChange={this.handleCheckBoxChange} label="Display In Store?"/>
+					</div>
+					<div className="form-group small-12 medium-4 columns">
+						<label>Display Value</label>
+						<Select name="filterVal" value={this.state.product.filterVal} handleInputChange={this.handleInputChange}>
+							<option value="showIt">Show It</option>
+							<option value="hideIt">Hide It</option>
+						</Select>
+					</div>
+				</div>
+				<div className="row">
+					<div className="form-group small-12 medium-4 columns">
+						<CheckBox name="new" value={this.state.product.new} handleInputChange={this.handleCheckBoxChange} label="New Product?"/>
+					</div>
+					<div className="form-group small-12 medium-4 columns">
+						<CheckBox name="featured" value={this.state.product.featured} handleInputChange={this.handleCheckBoxChange} label="Featured Product?"/>
+					</div>
+					<div className="form-group small-12 medium-4 columns">
+						<CheckBox name="onSale" value={this.state.product.onSale} handleInputChange={this.handleCheckBoxChange} label="On Sale?"/>
+					</div>
+				</div>
+				<div className="row">
+					<div className="form-group small-12 medium-6 columns">
+						<label className="required">Description</label>
+						<TextArea type="text" name="description" value={this.state.product.description} rows="5" handleInputChange={this.handleInputChange} required={true} />
+					</div>
+					<div className="form-group small-12 medium-6 columns">
+						<label className="required">Tags</label>
+						<TextArea type="text" name="tags" value={this.state.product.tags} handleInputChange={this.handleInputChange} required={true} />
+					</div>
+				</div>
+				<div className="row">
+					<div className="form-group small-12 medium-4 columns">
+						<label className="required">Product Images</label>
+						<FileUpload name="productPhoto" value={this.state.product.Files} handleFileUpload={this.handleFileUpload} maxFiles={5} required={1} disabled={!this.state.product.sku}/>
 					</div>
 				</div>
 			</Form>

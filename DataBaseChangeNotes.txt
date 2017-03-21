@@ -1,5 +1,7 @@
 Added Files reference to many tables
 
+product add default 'filterVal'
+
 Added reference to 'product', 'newsPost'
 Product.hasOne(models.GameSystem);
 Product.hasOne(models.Faction);

@@ -59,7 +59,7 @@ class GameSystemRankingForm extends React.Component {
 		});
 	}
 
-	hanldeSubmit() {
+	handleSubmit() {
 		let newRanking = this.state.ranking;
 		newRanking.UserId = this.props.playerId;
 		GameSystemRankingService.createOrUpdate(newRanking).then((ranking) => {
@@ -88,7 +88,7 @@ class GameSystemRankingForm extends React.Component {
 
 	render() {
 		<div>
-			<Form name="rankingForm" submitText="Updated Player Ranking" handleSubmit={this.hanldeSubmit}>
+			<Form name="rankingForm" submitText="Updated Player Ranking" handleSubmit={this.handleSubmit}>
 				<div className="row">
 					<div className="form-group small-12 medium-6 columns">
 						<label className="required">Game System</label>

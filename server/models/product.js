@@ -10,7 +10,10 @@ module.exports = function(sequelize, DataTypes) {
     'category': DataTypes.STRING,
     'stockQty': DataTypes.INTEGER,
     'inStock': DataTypes.BOOLEAN,
-    'filterVal': DataTypes.STRING,
+    'filterVal': {
+			'type': DataTypes.STRING,
+			'defaultValue': 'showit'
+		},
     'displayStatus': DataTypes.BOOLEAN,
     'featured': DataTypes.BOOLEAN,
     'new': DataTypes.BOOLEAN,

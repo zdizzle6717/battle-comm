@@ -112,7 +112,7 @@ class NewsPostForm extends React.Component {
 		return `news/${year}/${this.state.newsPost.category}/`;
 	}
 
-	hanldeSubmit() {
+	handleSubmit() {
 		let post = this.state.newsPost;
 		let method = this.props.newsPostId ? 'update' : 'create';
 		post.UserId = this.props.playerId;
@@ -168,7 +168,7 @@ class NewsPostForm extends React.Component {
 
 	render() {
 		<div>
-			<Form name="newsPostForm" submitText={this.state.newNewsPost ? 'Create News Post' : 'Update News Post'} handleSubmit={this.hanldeSubmit}>
+			<Form name="newsPostForm" submitText={this.state.newNewsPost ? 'Create News Post' : 'Update News Post'} handleSubmit={this.handleSubmit}>
 				<div className="row">
 					<div className="form-group small-12 medium-4 columns">
 						<label className="required">Title</label>
