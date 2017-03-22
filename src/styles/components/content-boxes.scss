@@ -1,0 +1,79 @@
+$space-between: 3;
+
+.content-box-container {
+	display: block;
+	width: 90%;
+
+	@for $i from 1 through 6 {
+		.box-#{$i * 2} {
+			width: 100%;
+			display: flex;
+			margin-bottom: 50px;
+			max-width: percentage(($i/6) - (((6/$i) - 1) * $space-between * .01));
+			flex-direction: column;
+			box-sizing: border-box;
+			@if $i < 6 {
+				margin-left: percentage(.015);
+				margin-right: percentage(.015);
+			} @else {
+				margin: 0 0 50px 0;
+			}
+
+			&:first-child {
+				margin-left: 0px;
+			}
+
+			&:last-child {
+				margin-right: 0px;
+			}
+
+			.box-top,
+			.box-bottom {
+				height: 20px;
+				max-height: 20px;
+				display: flex;
+				flex-direction: row;
+			}
+
+			.box-top {
+				.box-corner-tl,
+				.box-corner-tr {
+					width: 20px;
+				}
+
+				.box-bar-top {
+					width: 100%;
+				}
+
+			}
+
+			.box-middle {
+				display: flex;
+				flex-direction: row;
+
+				.box-bar-left,
+				.box-bar-right {
+	    		width: 20px;
+				}
+
+				.box-content {
+					width: 100%;
+				}
+
+			}
+
+			.box-bottom {
+				.box-corner-bl,
+				.box-corner-br {
+					width: 20px;
+				}
+
+				.box-bar-bottom {
+					width: 100%;
+				}
+
+			}
+		}
+	}
+
+}
