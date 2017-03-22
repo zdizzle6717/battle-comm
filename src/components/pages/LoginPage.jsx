@@ -7,6 +7,7 @@ import {Link, browserHistory} from 'react-router';
 import {AlertActions} from '../../library/alerts';
 import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
+import ViewWrapper from '../ViewWrapper';
 
 const mapStateToProps = (state) => {
 	return {
@@ -103,29 +104,31 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-			<div className="row">
-				<h1 className="push-bottom-2x">Login</h1>
-				<hr />
-				<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
-					<Form name="loginForm" submitText="Login" handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 columns">
-								<label className="required">Username/Email</label>
-								<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+			<ViewWrapper>
+				<div className="row">
+					<h1 className="push-bottom-2x">Login</h1>
+					<hr />
+					<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
+						<Form name="loginForm" submitText="Login" handleSubmit={this.handleSubmit}>
+							<div className="row">
+								<div className="form-group small-12 columns">
+									<label className="required">Username/Email</label>
+									<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+								</div>
 							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 columns">
-								<label className="required">Password</label>
-								<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} />
+							<div className="row">
+								<div className="form-group small-12 columns">
+									<label className="required">Password</label>
+									<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} />
+								</div>
 							</div>
+						</Form>
+						<div className="form-group small-12">
+							Don't have an account? <Link key="register" to="/register" activeClassName="active" onClick={this.closeMenu}>Register/Sign Up</Link>
 						</div>
-					</Form>
-					<div className="form-group small-12">
-						Don't have an account? <Link key="register" to="/register" activeClassName="active" onClick={this.closeMenu}>Register/Sign Up</Link>
 					</div>
 				</div>
-			</div>
+			</ViewWrapper>
 		);
     }
 }

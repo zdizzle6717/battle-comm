@@ -7,6 +7,7 @@ import {Link, browserHistory} from 'react-router';
 import {AlertActions} from '../../library/alerts';
 import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
+import ViewWrapper from '../ViewWrapper';
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
@@ -96,48 +97,50 @@ class RegistrationPage extends React.Component {
 
     render() {
         return (
-			<div className="row">
-				<h1 className="push-bottom-2x">Register</h1>
-				<hr />
-				<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
-					<Form name="registrationForm" submitText="Register" handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 columns">
-								<label className="required">Username</label>
-								<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+			<ViewWrapper>
+				<div className="row">
+					<h1 className="push-bottom-2x">Register</h1>
+					<hr />
+					<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
+						<Form name="registrationForm" submitText="Register" handleSubmit={this.handleSubmit}>
+							<div className="row">
+								<div className="form-group small-12 columns">
+									<label className="required">Username</label>
+									<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+								</div>
 							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 columns">
-								<label className="required">Email</label>
-								<Input type="text" name="email" value={this.state.credentials.email || ''} handleInputChange={this.handleInputChange} validate="email" required={true} />
+							<div className="row">
+								<div className="form-group small-12 columns">
+									<label className="required">Email</label>
+									<Input type="text" name="email" value={this.state.credentials.email || ''} handleInputChange={this.handleInputChange} validate="email" required={true} />
+								</div>
 							</div>
-						</div>
-						<label className="required">User Role</label>
-						<Select name="role" value={this.state.credentials.role} handleInputChange={this.handleInputChange} required={true}>
-							<option value="">--Select--</option>
-							<option value="siteAdmin">Site Admin</option>
-							<option value="providerAdmin">Provider Admin</option>
-							<option value="contactAdmin">Contact Admin</option>
-						</Select>
-						<div className="row">
-							<div className="form-group small-12 columns">
-								<label className="required">Password</label>
-								<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} inputMatch={this.state.passwordRepeat}/>
+							<label className="required">User Role</label>
+							<Select name="role" value={this.state.credentials.role} handleInputChange={this.handleInputChange} required={true}>
+								<option value="">--Select--</option>
+								<option value="siteAdmin">Site Admin</option>
+								<option value="providerAdmin">Provider Admin</option>
+								<option value="contactAdmin">Contact Admin</option>
+							</Select>
+							<div className="row">
+								<div className="form-group small-12 columns">
+									<label className="required">Password</label>
+									<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} inputMatch={this.state.passwordRepeat}/>
+								</div>
 							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 columns">
-								<label className="required">Repeat Password</label>
-								<Input type="password" name="passwordRepeat" value={this.state.passwordRepeat || ''} handleInputChange={this.handleInputMatch} validate="password" required={true} inputMatch={this.state.credentials.password}/>
+							<div className="row">
+								<div className="form-group small-12 columns">
+									<label className="required">Repeat Password</label>
+									<Input type="password" name="passwordRepeat" value={this.state.passwordRepeat || ''} handleInputChange={this.handleInputMatch} validate="password" required={true} inputMatch={this.state.credentials.password}/>
+								</div>
 							</div>
+						</Form>
+						<div className="form-group small-12">
+							Already have an account? <Link key="login" to="/login" activeClassName="active" onClick={this.closeMenu}>Go to Login</Link>
 						</div>
-					</Form>
-					<div className="form-group small-12">
-						Already have an account? <Link key="login" to="/login" activeClassName="active" onClick={this.closeMenu}>Go to Login</Link>
 					</div>
 				</div>
-			</div>
+			</ViewWrapper>
 		);
     }
 }

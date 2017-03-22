@@ -6,23 +6,35 @@ export default [
 		'view': 'index'
 	},
 	{
+		'route': '/admin*',
+		'view': 'admin'
+	},
+	{
+		'route': '/forgot-password',
+		'view': 'forgotPassword'
+	},
+	{
 		'route': '/login',
 		'view': 'login'
+	},
+	{
+		'route': '/news*',
+		'view': 'news'
+	},
+	{
+		'route': '/password-reset',
+		'view': 'passwordReset'
+	},
+	{
+		'route': '/players*',
+		'view': 'players'
 	},
 	{
 		'route': '/register',
 		'view': 'register'
 	},
 	{
-		'route': '/contacts*',
-		'view': 'contacts'
-	},
-	{
-		'route': '/providers*',
-		'view': 'providers'
-	},
-	{
-		'route': '/tabs*',
-		'view': 'tabs'
+		'route': '/store*',
+		'view': 'store'
 	}
 ];
