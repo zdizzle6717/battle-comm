@@ -10,7 +10,7 @@ export default class EditGameSystemPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Game System Edit";
+        document.title = "Battle-Comm | Game System Edit";
     }
 
     render() {

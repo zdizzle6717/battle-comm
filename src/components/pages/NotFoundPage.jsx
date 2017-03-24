@@ -10,7 +10,7 @@ export default class NotFoundPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Page Not Found";
+        document.title = "Battle-Comm | Page Not Found";
     }
 
     render() {

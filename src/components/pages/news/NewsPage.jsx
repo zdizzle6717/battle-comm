@@ -10,7 +10,7 @@ export default class NewsPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | News";
+        document.title = "Battle-Comm | News";
     }
 
     render() {

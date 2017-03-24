@@ -10,7 +10,7 @@ export default class PasswordResetPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Password Reset";
+        document.title = "Battle-Comm | Password Reset";
     }
 
     render() {

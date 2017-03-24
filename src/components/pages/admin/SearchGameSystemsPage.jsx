@@ -10,7 +10,7 @@ export default class GameSystemListPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Game Systems";
+        document.title = "Battle-Comm | Game Systems";
     }
 
     render() {

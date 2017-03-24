@@ -16,7 +16,7 @@ export default class ViewWrapper extends React.Component {
 						<div className="box-12">
 							<div className="box-top">
 								<div className="box-corner-tl"></div>
-								<div className="box-bar-top"></div>
+								<div className="box-bar-top"><div className="bar"></div></div>
 								<div className="box-corner-tr"></div>
 							</div>
 							<div className="box-middle">
@@ -28,7 +28,7 @@ export default class ViewWrapper extends React.Component {
 							</div>
 							<div className="box-bottom">
 								<div className="box-corner-bl"></div>
-								<div className="box-bar-bottom"></div>
+								<div className="box-bar-bottom"><div className="bar"></div></div>
 								<div className="box-corner-br"></div>
 							</div>
 						</div>

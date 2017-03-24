@@ -10,7 +10,7 @@ export default class ProductPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Product";
+        document.title = "Battle-Comm | Product";
     }
 
     render() {

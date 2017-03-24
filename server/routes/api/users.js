@@ -223,8 +223,11 @@ module.exports = [
       'notes': 'Return User/Player search results',
       'validate': {
         'payload': {
-          'maxResults': Joi.number().optional(),
-          'query': Joi.string().required()
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
         }
       }
     },

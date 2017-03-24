@@ -10,7 +10,7 @@ export default class PlayerProfilePage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Profile";
+        document.title = "Battle-Comm | Player Profile";
     }
 
     render() {

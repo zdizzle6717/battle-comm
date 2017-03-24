@@ -10,7 +10,7 @@ export default class EditOrderPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Product Order Edit";
+        document.title = "Battle-Comm | Product Order Edit";
     }
 
     render() {

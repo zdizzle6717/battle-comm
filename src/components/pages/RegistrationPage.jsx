@@ -32,7 +32,7 @@ class RegistrationPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Register";
+        document.title = "Battle-Comm | Register";
     }
 
 	handleInputMatch(e) {

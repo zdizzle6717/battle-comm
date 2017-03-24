@@ -10,7 +10,7 @@ export default class PlayerDashboardPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Dashboard";
+        document.title = "Battle-Comm | Player Dashboard";
     }
 
     render() {

@@ -10,7 +10,7 @@ export default class StorePage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Store";
+        document.title = "Battle-Comm | Store";
     }
 
     render() {

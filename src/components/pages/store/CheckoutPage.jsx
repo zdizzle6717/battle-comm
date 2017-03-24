@@ -10,7 +10,7 @@ export default class CheckoutPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Checkout";
+        document.title = "Battle-Comm | Checkout";
     }
 
     render() {

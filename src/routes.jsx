@@ -19,6 +19,7 @@ import EditManufacturerPage from './components/pages/admin/EditManufacturerPage'
 import EditNewsPostPage from './components/pages/admin/EditNewsPostPage';
 import EditOrderPage from './components/pages/admin/EditOrderPage';
 import EditPlayerPage from './components/pages/admin/EditPlayerPage';
+import EditProductPage from './components/pages/admin/EditProductPage';
 import SearchGameSystemsPage from './components/pages/admin/SearchGameSystemsPage';
 import SearchManufacturersPage from './components/pages/admin/SearchManufacturersPage';
 import SearchNewsPostsPage from './components/pages/admin/SearchNewsPostsPage';
@@ -79,7 +80,7 @@ const routes = (
 			<IndexRoute component={SearchProductOrdersPage}/>
 			<Route path="order/create" component={EditOrderPage}/>
 			<Route path="order/edit/:orderId" component={EditOrderPage}/>
-			<Route path="products" component={ProductListPage}/>
+			<Route path="products" component={SearchProductOrdersPage}/>
 			<Route path="products/create" component={EditProductPage}/>
 			<Route path="products/edit/:productId" component={EditProductPage}/>
 		</Route>
@@ -94,7 +95,7 @@ const routes = (
 	</Route>
 	<Route path="players">
 		<IndexRoute component={PlayerSearchPage} />
-		<Route path="profile/:playerId">
+		<Route path="profile/:playerHandle">
 			<IndexRoute component={PlayerProfilePage} />
 			<Route path="ally-list" component={PlayerAllySearchPage} />
 		</Route>

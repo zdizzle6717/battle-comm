@@ -10,7 +10,7 @@ export default class EditManufacturerPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Manufacturer Edit";
+        document.title = "Battle-Comm | Manufacturer Edit";
     }
 
     render() {

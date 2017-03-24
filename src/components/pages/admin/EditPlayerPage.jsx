@@ -10,7 +10,7 @@ export default class EditPlayerPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Edit";
+        document.title = "Battle-Comm | Player Edit";
     }
 
     render() {

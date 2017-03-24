@@ -10,7 +10,7 @@ export default class PlayerRankingSearchPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Ranking Search";
+        document.title = "Battle-Comm | Player Ranking Search";
     }
 
     render() {

@@ -118,7 +118,7 @@ let users = {
                   console.log('Default image created.');
                 });
               });
-            })
+            });
           });
 
           // Send confirmation e-mail
@@ -149,12 +149,12 @@ let users = {
                 'clubAdmin': user.clubAdmin,
                 'systemAdmin': user.systemAdmin
               }).code(201);
-            };
+            }
           });
         })
         .catch((response) => {
           throw Boom.badRequest(response);
-        })
+        });
     });
   },
   authenticate: (request, reply) => {
@@ -198,9 +198,9 @@ let users = {
               'password': hash
             }).then((user) => {
               reply(user).code(200);
-            })
+            });
           });
-        };
+        }
       });
     });
   },
@@ -224,7 +224,7 @@ let users = {
       } else {
         console.log(token);
         reply(token).code(200);
-      };
+      }
     });
 
   },
@@ -263,9 +263,9 @@ let users = {
                 'password': hash
               }).then((user) => {
                 reply(user).code(200);
-              })
+              });
             });
-          };
+          }
         });
       } else {
         reply(Boom.badRequest('Invalid token'));
@@ -347,7 +347,7 @@ let users = {
                   reply('Somthing went wrong');
                 } else {
                   reply(response).code(200);
-                };
+                }
               });
             } else {
               reply(response).code(200);
@@ -375,33 +375,57 @@ let users = {
   //             }
   //         });
   // },
-  search: (request, reply) => {
-    models.User.findAll({
-        'where': {
-          '$or': [{
-              'firstName': {
-                '$ilike': '%' + request.payload.query + '%'
-              }
-            },
-            {
-              'lastName': {
-                '$ilike': '%' + request.payload.query + '%'
-              }
-            },
-            {
-              'username': {
-                '$ilike': '%' + request.payload.query + '%'
-              }
-            },
-          ]
+  'search': (request, reply) => {
+    let searchByConfig;
+    let pageSize = request.payload.pageSize || 20;
+    let searchQuery = request.payload.searchQuery || '';
+    let offset = (request.payload.pageNumber - 1) * pageSize;
+    if (searchQuery) {
+      searchByConfig = request.payload.searchBy ? {
+        [request.payload.searchBy]: {
+          '$like': '%' + searchQuery + '%'
+        }
+      } : {
+        '$or': [{
+            'username': {
+              '$like': '%' + searchQuery + '%'
+            }
+          },
+          {
+            'email': {
+              '$like': '%' + searchQuery + '%'
+            }
+          },
+          {
+            'lastName': {
+              '$like': '%' + searchQuery + '%'
+            }
+          }
+        ]
+      };
+    } else {
+      searchByConfig = {};
+    }
+    models.User.findAndCountAll({
+      'where': searchByConfig,
+      'offset': offset,
+      'limit': pageSize
+    }).then((response) => {
+      let count = response.count;
+      let results = response.rows;
+      let totalPages = Math.ceil(count === 0 ? 1 : (count / pageSize));
+
+      reply({
+        'pagination': {
+          'pageNumber': request.payload.pageNumber,
+          'pageSize': pageSize,
+          'totalPages': totalPages,
+          'totalResults': count
         },
-        'attributes': ['id', 'firstName', 'lastName', 'username', 'icon'],
-        'limit': request.payload.maxResults || 20
-      })
-      .then((products) => {
-        reply(products).code(200);
-      });
-  },
+        'results': results
+      }).code(200);
+    });
+  }
 };
 
 

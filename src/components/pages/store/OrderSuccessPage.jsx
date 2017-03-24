@@ -10,7 +10,7 @@ export default class OrderSuccessPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Order Success";
+        document.title = "Battle-Comm | Order Success";
     }
 
     render() {

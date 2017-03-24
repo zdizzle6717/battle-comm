@@ -10,7 +10,7 @@ export default class PlayerAllySearchPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Allys";
+        document.title = "Battle-Comm | Player Allys";
     }
 
     render() {

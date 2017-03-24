@@ -10,7 +10,7 @@ export default class ForgotPasswordPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Forgot your password?";
+        document.title = "Battle-Comm | Forgot your password?";
     }
 
     render() {

@@ -10,7 +10,7 @@ export default class AssignPointsPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | RP Assignment";
+        document.title = "Battle-Comm | RP Assignment";
     }
 
     render() {

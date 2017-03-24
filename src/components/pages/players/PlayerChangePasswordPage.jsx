@@ -10,7 +10,7 @@ export default class PlayerChangePasswordPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Password Change";
+        document.title = "Battle-Comm | Player Password Change";
     }
 
     render() {

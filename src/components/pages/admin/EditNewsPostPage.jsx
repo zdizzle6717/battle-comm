@@ -10,7 +10,7 @@ export default class EditNewsPostPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | News Post Edit";
+        document.title = "Battle-Comm | News Post Edit";
     }
 
     render() {

@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Login";
+        document.title = "Battle-Comm | Login";
     }
 
 	handleInputChange(e) {

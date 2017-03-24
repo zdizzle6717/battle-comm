@@ -11,7 +11,7 @@ export default class SearchNewsPostsPage
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Search News Posts";
+        document.title = "Battle-Comm | Search News Posts";
     }
 
     render() {

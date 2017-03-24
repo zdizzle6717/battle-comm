@@ -10,7 +10,7 @@ export default class PlayerNotificationsPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Player Notifications";
+        document.title = "Battle-Comm | Player Notifications";
     }
 
     render() {

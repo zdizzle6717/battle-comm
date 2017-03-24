@@ -10,7 +10,7 @@ export default class AdminDashboardPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Admin Dashboard";
+        document.title = "Battle-Comm | Admin Dashboard";
     }
 
     render() {

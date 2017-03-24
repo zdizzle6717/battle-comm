@@ -10,7 +10,7 @@ export default class CartPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Shopping Cart";
+        document.title = "Battle-Comm | Shopping Cart";
     }
 
     render() {

@@ -10,7 +10,7 @@ export default class SearchProductOrdersPage extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "Sandbox | Search Product Orders";
+        document.title = "Battle-Comm | Search Product Orders";
     }
 
     render() {
