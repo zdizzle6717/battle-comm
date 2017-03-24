@@ -2,11 +2,11 @@
 
 import React from 'react';
 import {bindActionCreators} from 'redux';
+import {Link, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';
 import {AlertActions} from '../../library/alerts';
-import {Link, browserHistory} from 'react-router';
 import {UserActions} from '../../library/authentication';
 
 const mapStateToProps = (state) => {
@@ -31,21 +31,21 @@ class TopNav extends React.Component {
 			'showMobileMenu': false
 		}
 
-		this.toggleMenu = this.toggleMenu.bind(this);
 		this.closeMenu = this.closeMenu.bind(this);
-		this.showAlert = this.showAlert.bind(this);
+		this.toggleMenu = this.toggleMenu.bind(this);
 		this.logout = this.logout.bind(this);
-	}
-
-	toggleMenu() {
-		this.setState({
-			'showMobileMenu': !this.state.showMobileMenu
-		});
+		this.showAlert = this.showAlert.bind(this);
 	}
 
 	closeMenu() {
 		this.setState({
 			'showMobileMenu': false
+		});
+	}
+
+	toggleMenu() {
+		this.setState({
+			'showMobileMenu': !this.state.showMobileMenu
 		});
 	}
 

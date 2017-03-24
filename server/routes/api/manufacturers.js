@@ -85,6 +85,25 @@ module.exports = [
     },
     'handler': manufacturers.update
   },
+	{
+    'method': 'POST',
+    'path': '/api/search/manufacturers',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return Manufacturer search results',
+      'notes': 'Return Manufacturer search results',
+      'validate': {
+        'payload': {
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': manufacturers.search
+  },
   {
     'method': 'DELETE',
     'path': '/api/manufacturers/{id}',

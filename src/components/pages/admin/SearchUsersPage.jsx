@@ -1,12 +1,13 @@
 'use strict';
 
 import React from 'react';
-import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import ViewWrapper from '../../ViewWrapper';
-import {PaginationControls} from '../../../library/pagination';
+import {Link} from 'react-router';
 import {UserActions} from '../../../library/authentication';
+import {PaginationControls} from '../../../library/pagination';
+import ViewWrapper from '../../ViewWrapper';
+
 
 const mapStateToProps = (state) => {
     return {'users': state.users}
@@ -23,25 +24,18 @@ class SearchUsersPage extends React.Component {
         super();
 
 		this.state = {
-			'searchQuery': '',
-			'pagination': {}
+			'pagination': {},
+			'searchQuery': ''
 		}
 
-		this.handleQueryChange = this.handleQueryChange.bind(this);
 		this.handlePageChange = this.handlePageChange.bind(this);
+		this.handleQueryChange = this.handleQueryChange.bind(this);
     }
 
     componentDidMount() {
         document.title = "Battle-Comm | Search Users";
 		this.handlePageChange(1);
     }
-
-	handleQueryChange(e) {
-		this.setState({
-			'searchQuery': e.target.value
-		})
-		console.log('Search ' + e.target.value);
-	}
 
 	handlePageChange(pageNumber, searchQuery = '') {
         this.props.searchUsers({'searchQuery': this.state.searchQuery, 'pageNumber': pageNumber, 'pageSize': 20}).then((pagination) => {
@@ -50,6 +44,12 @@ class SearchUsersPage extends React.Component {
 			});
         });
     }
+
+	handleQueryChange(e) {
+		this.setState({
+			'searchQuery': e.target.value
+		})
+	}
 
     render() {
         return (

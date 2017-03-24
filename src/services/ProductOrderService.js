@@ -27,6 +27,12 @@ export default {
 				return response.data;
 			});
 	},
+	search: (criteria) => {
+		return axios.post('/search/productOrders', criteria)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	remove: (id) => {
 		return axios.delete('/productOrders/' + id)
 			.then(function(response) {

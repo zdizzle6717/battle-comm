@@ -90,6 +90,25 @@ module.exports = [
 		'handler': newsPosts.update
 	},
 	{
+    'method': 'POST',
+    'path': '/api/search/newsPosts',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return News Post search results',
+      'notes': 'Return News Post search results',
+      'validate': {
+        'payload': {
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': newsPosts.search
+  },
+	{
 		'method': 'DELETE',
 		'path': '/api/newsPosts/{id}',
 		'config': {

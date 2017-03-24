@@ -79,6 +79,25 @@ module.exports = [
     },
     'handler': gameSystems.update
   },
+	{
+    'method': 'POST',
+    'path': '/api/search/gameSystems',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return Game System search results',
+      'notes': 'Return Game System search results',
+      'validate': {
+        'payload': {
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': gameSystems.search
+  },
   {
     'method': 'DELETE',
     'path': '/api/gameSystems/{id}',

@@ -54,6 +54,15 @@ export default {
 			});
 		};
 	},
+	search: (criteria) => {
+		return (dispatch) => {
+			dispatch(_initiateRequest(ProductOrderConstants.INITIATE_PRODUCT_ORDER_REQUEST));
+			return ProductOrderService.search(criteria).then((response) => {
+				dispatch(_returnResponse(ProductOrderConstants.GET_PRODUCT_ORDERS, response.results));
+				return response.pagination;
+			});
+		};
+	},
 	remove: (id) => {
 		return (dispatch) => {
 			dispatch(_initiateRequest(ProductOrderConstants.INITIATE_PRODUCT_ORDER_REQUEST, id));

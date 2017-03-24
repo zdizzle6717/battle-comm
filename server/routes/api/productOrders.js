@@ -103,6 +103,25 @@ module.exports = [
     },
     'handler': productOrders.update
   },
+	{
+    'method': 'POST',
+    'path': '/api/search/productOrders',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return Product Order search results',
+      'notes': 'Return Product Order search results',
+      'validate': {
+        'payload': {
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': productOrders.search
+  },
   {
     'method': 'DELETE',
     'path': '/api/productOrders/{id}',

@@ -13,5 +13,11 @@ export default {
 			.then(function(response) {
 				return response.data;
 			});
+	},
+	remove: (id) => {
+		return axios.delete('/files/' + id)
+			.then((response) => {
+				return response.data;
+			});
 	}
 };

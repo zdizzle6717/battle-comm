@@ -65,6 +65,52 @@ let manufacturers = {
         }
       });
   },
+	'search': (request, reply) => {
+    let searchByConfig;
+    let pageSize = request.payload.pageSize || 20;
+    let searchQuery = request.payload.searchQuery || '';
+    let offset = (request.payload.pageNumber - 1) * pageSize;
+    if (searchQuery) {
+      searchByConfig = request.payload.searchBy ? {
+        [request.payload.searchBy]: {
+          '$like': '%' + searchQuery + '%'
+        }
+      } : {
+        '$or': [{
+            'name': {
+              '$like': '%' + searchQuery + '%'
+            }
+          },
+          {
+            'description': {
+              '$like': '%' + searchQuery + '%'
+            }
+          }
+        ]
+      };
+    } else {
+      searchByConfig = {};
+    }
+    models.Manufacturer.findAndCountAll({
+      'where': searchByConfig,
+      'offset': offset,
+      'limit': pageSize
+    }).then((response) => {
+      let count = response.count;
+      let results = response.rows;
+      let totalPages = Math.ceil(count === 0 ? 1 : (count / pageSize));
+
+      reply({
+        'pagination': {
+          'pageNumber': request.payload.pageNumber,
+          'pageSize': pageSize,
+          'totalPages': totalPages,
+          'totalResults': count
+        },
+        'results': results
+      }).code(200);
+    });
+  },
   delete: (request, reply) => {
     models.Manufacturer.destroy({
         'where': {

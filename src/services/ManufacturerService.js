@@ -16,7 +16,7 @@ export default {
 			});
 	},
 	search: (criteria) => {
-		return axios.post('/manufacturers/search', criteria)
+		return axios.post('/search/manufacturers', criteria)
 			.then(function(response) {
 				return response.data;
 			});

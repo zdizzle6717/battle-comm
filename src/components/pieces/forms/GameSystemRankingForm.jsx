@@ -3,13 +3,13 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Form, Input, TextArea, Select} from '../../../library/validations';
-import {handlers} from '../../../library/utilities';
 import {AlertActions} from '../../../library/alerts';
+import {handlers} from '../../../library/utilities';
+import {Form, Input, TextArea, Select} from '../../../library/validations';
 import FactionActions from '../../../actions/FactionActions';
 import GameSystemActions from '../../../actions/GameSystemActions';
-import GameSystemService from '../../../services/GameSystemService';
 import GameSystemRankingService from '../../../services/GameSystemRankingService';
+import GameSystemService from '../../../services/GameSystemService';
 
 const mapStateToProps = (state) => {
 	return {
@@ -31,10 +31,10 @@ class GameSystemRankingForm extends React.Component {
 			'factions': []
 		}
 
-		this.showAlert = this.showAlert.bind(this);
 		this.handleGameSystemChange = this.handleGameSystemChange.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.showAlert = this.showAlert.bind(this);
 	}
 
 	componentDidMount() {
