@@ -10,6 +10,7 @@ import FormActions from '../actions/FormActions';
 import {addErrorMessage, removeErrorMessage, getInput, range} from '../utilities';
 
 // TODO: Drag & Drop functionality
+// TODO: Allow for single file as object, NOT array
 
 const mapStateToProps = (state) => {
 	return {
@@ -241,6 +242,11 @@ class FileUpload extends React.Component {
 		return files;
 	}
 
+	handleDeleteFile(file, index) {
+		this.handleRemoveFile(index);
+		this.props.handleDeleteFile(file.id);
+	}
+
 	updateErrorMessages(input, condition, key, text) {
 		let newErrorMessages = [], validity = true;
 		if (!condition) {
@@ -341,6 +347,7 @@ class FileUpload extends React.Component {
 		 									<th>File Name</th>
 		 									<th>Type</th>
 		 									<th>Size</th>
+		 									<th className="remove-file-header">Remove?</th>
 		 									<th className="remove-file-header">Delete?</th>
 		 								</tr>
 		 							</thead>
@@ -349,7 +356,11 @@ class FileUpload extends React.Component {
 											<td>{file.name}</td>
 											<td>{file.type}</td>
 											<td>{(file.size / Math.pow(1024, 2)).toFixed(2)}MB</td>
-											<td className="remove-file"><span className="fa fa-times" onClick={this.handleRemoveFile.bind(this, i)}></span></td>
+											<td className="remove-file"><span className="fa fa-minus" onClick={this.handleRemoveFile.bind(this, i)}></span></td>
+											{
+												file.id && this.props.handleDeleteFile &&
+												<td className="delete-file"><span className="fa fa-times" onClick={this.handleDeleteFile.bind(this, file, i)}></span></td>
+											}
 										</tr>)}
 									</tbody>
 		 						</table>
@@ -372,6 +383,7 @@ FileUpload.propTypes = {
 	'name': React.PropTypes.string.isRequired,
 	'fileName': React.PropTypes.string,
 	'handleFileUpload': React.PropTypes.func.isRequired,
+	'handleDeleteFile': React.PropTypes.func,
 	'accept': React.PropTypes.string,
 	'typeOfModel': React.PropTypes.string.isRequired,
 	'multiple': React.PropTypes.bool,
