@@ -10,6 +10,7 @@ import {loader} from '../library/loader';
 import {user, users, isAuthenticated, redirectRoute} from '../library/authentication';
 
 // App
+import {cartItems, cartTotal} from './cartItems';
 import {gameSystem, gameSystems} from './gameSystems';
 import {gameSystemRanking, gameSystemRankings} from './gameSystemRankings';
 import {faction, factions} from './factions';
@@ -37,6 +38,8 @@ export default combineReducers({
 	users,
 
 	// App
+	cartItems,
+	cartTotal,
 	gameSystem,
 	gameSystems,
 	gameSystemRanking,
