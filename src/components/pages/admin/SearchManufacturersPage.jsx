@@ -36,7 +36,7 @@ class SearchManufacturersPage extends React.Component {
 		this.handlePageChange(1);
     }
 
-	handlePageChange(pageNumber, searchQuery = '') {
+	handlePageChange(pageNumber) {
         this.props.searchManufacturers({'searchQuery': this.state.searchQuery, 'pageNumber': pageNumber, 'pageSize': 20}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
@@ -47,7 +47,7 @@ class SearchManufacturersPage extends React.Component {
 	handleQueryChange(e) {
 		this.setState({
 			'searchQuery': e.target.value
-		})
+		});
 	}
 
     render() {

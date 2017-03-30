@@ -110,7 +110,7 @@ const routes = (
 		<IndexRoute component={StorePage}/>
 		<Route path="cart" component={CartPage}/>
 		<Route path="checkout" component={CheckoutPage}/>
-		<Route path="product/:productId" component={ProductPage}/>
+		<Route path="products/:productId" component={ProductPage}/>
 		<Route path="order-success" component={OrderSuccessPage}/>
 	</Route>
     <Route path="*" component={NotFoundPage}/>

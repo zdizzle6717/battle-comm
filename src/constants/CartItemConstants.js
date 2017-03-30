@@ -3,8 +3,7 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
-	CREATE_CART_ITEM: null,
-	UPDATE_CART_ITEM: null,
+	ADD_CART_ITEM: null,
 	REMOVE_CART_ITEM: null,
 	UPDATE_CART_TOTAL: null
 });

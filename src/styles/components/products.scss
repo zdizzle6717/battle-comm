@@ -1,3 +1,11 @@
-.product-box {
-	
+.product-listing {
+
+	.product-box {
+		float: left;
+		border: 2px solid white;
+		box-sizing: border-box;
+		width: 100%;
+		max-width: 33.1333%;
+		margin-right: 2%;
+	}
 }
