@@ -23132,7 +23132,21 @@ function(e, t, n) {
                     onClick: this.toggleMenu
                 }, o.default.createElement("i", {
                     className: "fa fa-bars"
-                })), o.default.createElement(p.default, {
+                })), o.default.createElement("div", {
+                    className: "login-menu-mobile"
+                }, this.props.isAuthenticated ? o.default.createElement("div", {
+                    className: "login-link"
+                }, o.default.createElement("a", {
+                    className: "menu-link",
+                    onClick: this.logout
+                }, "Logout")) : o.default.createElement("div", {
+                    className: "login-link"
+                }, o.default.createElement(s.Link, {
+                    key: "login",
+                    to: "/login",
+                    className: "menu-link",
+                    activeClassName: "active"
+                }, "Login"))), o.default.createElement(p.default, {
                     transitionName: "slide-top",
                     className: "animation-wrapper",
                     transitionEnter: !0,
@@ -23146,35 +23160,35 @@ function(e, t, n) {
                 }, o.default.createElement("ul", {
                     className: "main-menu"
                 }, o.default.createElement("li", {
-                    className: ""
+                    className: "home"
                 }, o.default.createElement(s.Link, {
                     key: "home",
                     to: "/",
                     className: "menu-link",
                     activeClassName: "active"
                 }, "Home")), o.default.createElement("li", {
-                    className: ""
+                    className: "news"
                 }, o.default.createElement(s.Link, {
                     key: "news",
                     to: "/news",
                     className: "menu-link",
                     activeClassName: "active"
                 }, "News")), o.default.createElement("li", {
-                    className: ""
+                    className: "ranking"
                 }, o.default.createElement(s.Link, {
                     key: "ranking",
                     to: "/ranking",
                     className: "menu-link",
                     activeClassName: "active"
                 }, "Ranking")), o.default.createElement("li", {
-                    className: ""
+                    className: "players"
                 }, o.default.createElement(s.Link, {
                     key: "players",
                     to: "/players",
                     className: "menu-link",
                     activeClassName: "active"
                 }, "Players")), o.default.createElement("li", {
-                    className: ""
+                    className: "store"
                 }, o.default.createElement(s.Link, {
                     key: "store",
                     to: "/store",
@@ -23194,7 +23208,7 @@ function(e, t, n) {
                     to: "/login",
                     className: "menu-link",
                     activeClassName: "active"
-                }, "Login/Register")))), this.state.showMobileMenu && o.default.createElement("div", {
+                }, "Login")))), this.state.showMobileMenu && o.default.createElement("div", {
                     className: "mobile-menu-group",
                     key: "mobile-menu",
                     onClick: this.closeMenu
@@ -23249,7 +23263,7 @@ function(e, t, n) {
                     to: "/login",
                     className: "menu-link",
                     activeClassName: "active"
-                }, "Login/Register"))))), o.default.createElement("div", {
+                }, "Login"))))), o.default.createElement("div", {
                     className: e,
                     onClick: this.closeMenu
                 }));

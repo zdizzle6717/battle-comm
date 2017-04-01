@@ -81,22 +81,33 @@ class TopNav extends React.Component {
 				<div className="menu-toggle" onClick={this.toggleMenu}>
 					<i className="fa fa-bars"></i>
 				</div>
+				<div className="login-menu-mobile">
+					{
+						this.props.isAuthenticated ?
+						<div className="login-link">
+							<a className="menu-link" onClick={this.logout}>Logout</a>
+						</div> :
+						<div className="login-link">
+							<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
+						</div>
+					}
+				</div>
 				<Animation transitionName="slide-top" className="animation-wrapper" transitionEnter={true} transitionEnterTimeout={250} transitionLeave={true} transitionLeaveTimeout={250}>
 					<div className="menu-group" key="menu" onClick={this.closeMenu}>
 						<ul className="main-menu">
-							<li className="">
+							<li className="home">
 								<Link key="home" to="/" className="menu-link" activeClassName="active">Home</Link>
 							</li>
-							<li className="">
+							<li className="news">
 								<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
 							</li>
-							<li className="">
+							<li className="ranking">
 								<Link key="ranking" to="/ranking" className="menu-link" activeClassName="active">Ranking</Link>
 							</li>
-							<li className="">
+							<li className="players">
 								<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>
 							</li>
-							<li className="">
+							<li className="store">
 								<Link key="store" to="/store" className="menu-link" activeClassName="active">Store</Link>
 							</li>
 						</ul>
@@ -107,7 +118,7 @@ class TopNav extends React.Component {
 									<a className="menu-link" onClick={this.logout}>Logout</a>
 								</li> :
 								<li className="login-link">
-									<Link key="login" to="/login" className="menu-link" activeClassName="active">Login/Register</Link>
+									<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
 								</li>
 							}
 						</ul>
@@ -139,7 +150,7 @@ class TopNav extends React.Component {
 										<a className="menu-link" onClick={this.logout}>Logout</a>
 									</li> :
 									<li className="login-link">
-										<Link key="login" to="/login" className="menu-link" activeClassName="active">Login/Register</Link>
+										<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
 									</li>
 								}
 							</ul>
