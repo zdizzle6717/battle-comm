@@ -3,7 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {UserService} from '../../../library/authentication';
 import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';

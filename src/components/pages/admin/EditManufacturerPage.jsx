@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';
 import {Form, Input, TextArea, Select} from '../../../library/validations';

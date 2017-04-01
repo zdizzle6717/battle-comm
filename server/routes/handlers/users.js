@@ -34,10 +34,18 @@ let transporter = nodemailer.createTransport(({
 // Product Route Configs
 let users = {
   get: (request, reply) => {
+		let where = {};
+		if (request.params.id) {
+			where = {
+				'id': request.params.id
+			};
+		} else if (request.params.username) {
+			where = {
+				'username': request.params.username
+			};
+		}
     models.User.find({
-        'where': {
-          'id': request.params.id
-        },
+        'where': where,
         'attributes': {
           'exclude': ['password']
         },
@@ -408,8 +416,7 @@ let users = {
     }
     models.User.findAndCountAll({
       'where': searchByConfig,
-      'offset': offset,
-      'limit': pageSize
+      'offset': offset
     }).then((response) => {
       let count = response.count;
       let results = response.rows;

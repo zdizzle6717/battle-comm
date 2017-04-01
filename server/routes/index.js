@@ -1,15 +1,14 @@
 'use strict';
 
 module.exports = []
-.concat(require('./api/factionRankings'))
 .concat(require('./api/factions'))
 .concat(require('./api/files'))
-.concat(require('./api/gameSystemRankings'))
 .concat(require('./api/gameSystems'))
 .concat(require('./api/manufacturers'))
 .concat(require('./api/newsPosts'))
 .concat(require('./api/productOrders'))
 .concat(require('./api/products'))
+.concat(require('./api/rankings'))
 .concat(require('./api/users'))
 .concat(require('./api/userFriends'))
 .concat(require('./api/userNotifications'))

@@ -72,6 +72,21 @@ module.exports = [
   },
   {
     'method': 'GET',
+    'path': '/api/users/username/{username}',
+    'config': {
+      'tags': ['api'],
+      'description': 'Get one player by username',
+      'notes': 'Get one player by username',
+      'validate': {
+        'params': {
+          'username': Joi.string().required()
+        }
+      }
+    },
+    'handler': users.get
+  },
+  {
+    'method': 'GET',
     'path': '/api/users',
     'config': {
       'tags': ['api'],
@@ -223,7 +238,6 @@ module.exports = [
       'notes': 'Return User/Player search results',
       'validate': {
         'payload': {
-          'maxResults': Joi.optional(),
           'searchQuery': Joi.optional(),
 					'searchBy': Joi.optional(),
 					'pageNumber': Joi.number().required(),

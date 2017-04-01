@@ -51,7 +51,7 @@ class PlayerSearchPage extends React.Component {
 	}
 
 	handlePageChange(pageNumber) {
-        this.props.searchManufacturers({'searchQuery': this.state.searchQuery, 'searchBy': this.state.searchBy, 'pageNumber': pageNumber, 'pageSize': 20}).then((pagination) => {
+        this.props.searchPlayers({'searchQuery': this.state.searchQuery, 'searchBy': this.state.searchBy, 'pageNumber': pageNumber, 'pageSize': 20}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});

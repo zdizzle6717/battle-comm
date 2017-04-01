@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';

@@ -3,7 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, DatePicker} from '../../../library/validations';
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
 class AssignPointsPage extends React.Component {
 	constructor() {
 		super();
-		
+
 		this.state = {
 			'factions': [],
 			'players': [{}],

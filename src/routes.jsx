@@ -104,7 +104,7 @@ const routes = (
 			<Route path="change-password" component={PlayerChangePasswordPage} />
 			<Route path="notifications" component={PlayerNotificationsPage} />
 		</Route>
-		<Route path="ranking/search" component={PlayerRankingSearchPage} />
+		<Route path="ranking/search/:gameSystemId/:factionId" component={PlayerRankingSearchPage} />
 	</Route>
 	<Route path="store">
 		<IndexRoute component={StorePage}/>

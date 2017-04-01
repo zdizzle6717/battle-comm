@@ -99,11 +99,12 @@ let gameSystemRankings = {
     });
   },
   search: (request, reply) => {
-    models.GameSystemRanking.findAll({
+		let pageSize = request.payload.pageSize || 20;
+    let offset = (request.payload.pageNumber - 1) * pageSize;
+
+    models.GameSystemRanking.findAndCountAll({
         'where': {
-          '$and': [{
-            'GameSystemId': request.payload.GameSystemId
-          }]
+          'GameSystemId': request.payload.GameSystemId
         },
         'include': [{
             'model': models.User,
@@ -114,13 +115,25 @@ let gameSystemRankings = {
             'attributes': ['name']
           }
         ],
-        'limit': request.payload.maxResults || 20,
+        'offset': offset,
         'order': [
           ['totalWins', 'DESC']
         ]
       })
-      .then((rankings) => {
-        reply(rankings).code(200);
+      .then((response) => {
+				let count = response.count;
+	      let results = response.rows;
+	      let totalPages = Math.ceil(count === 0 ? 1 : (count / pageSize));
+
+				reply({
+	        'pagination': {
+	          'pageNumber': request.payload.pageNumber,
+	          'pageSize': pageSize,
+	          'totalPages': totalPages,
+	          'totalResults': count
+	        },
+	        'results': results
+	      }).code(200);
       });
   }
 };

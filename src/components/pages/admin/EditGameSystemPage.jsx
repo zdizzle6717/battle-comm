@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {bindActionCreators} from 'redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {connect} from 'react-redux';
 import {Form, Input, TextArea, Select} from '../../../library/validations';
 import {handlers, uploadFiles} from '../../../library/utilities';

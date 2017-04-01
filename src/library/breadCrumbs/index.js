@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
+import {browserHistory, Link} from 'react-router';
 
 export default class BreadCrumbs extends React.Component {
 	// TODO: This is garbage. Find a better solution.

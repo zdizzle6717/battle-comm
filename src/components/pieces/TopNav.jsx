@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {bindActionCreators} from 'redux';
-import {Link, browserHistory} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';

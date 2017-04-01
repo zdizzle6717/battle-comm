@@ -5,11 +5,11 @@ import models from '../../models';
 // Product Route Configs
 let factionRankings = {
   search: (request, reply) => {
-    models.FactionRanking.findAll({
+    let pageSize = request.payload.pageSize || 20;
+    let offset = (request.payload.pageNumber - 1) * pageSize;
+    models.FactionRanking.findAndCountAll({
         'where': {
-          '$and': [{
-            'FactionId': request.payload.FactionId
-          }]
+          'FactionId': request.payload.FactionId
         },
         'include': [{
             'model': models.Faction,
@@ -29,13 +29,25 @@ let factionRankings = {
             ]
           }
         ],
-        'limit': request.payload.maxResults || 20,
+				'offset': offset,
         'order': [
           ['totalWins', 'DESC']
         ]
       })
-      .then((rankings) => {
-        reply(rankings).code(200);
+      .then((response) => {
+				let count = response.count;
+	      let results = response.rows;
+	      let totalPages = Math.ceil(count === 0 ? 1 : (count / pageSize));
+
+				reply({
+	        'pagination': {
+	          'pageNumber': request.payload.pageNumber,
+	          'pageSize': pageSize,
+	          'totalPages': totalPages,
+	          'totalResults': count
+	        },
+	        'results': results
+	      }).code(200);
       });
   }
 };
