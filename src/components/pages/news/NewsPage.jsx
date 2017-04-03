@@ -17,10 +17,10 @@ export default class NewsPage extends React.Component {
         return (
             <ViewWrapper>
                 <div className="row">
-                    <h1>News</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
+					<div className="small-12 columns">
+						<h1>News</h1>
+						<hr />
+					</div>
                 </div>
             </ViewWrapper>
         );

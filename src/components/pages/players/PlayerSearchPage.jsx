@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import ViewWrapper from '../../ViewWrapper';
 import {UserActions} from '../../../library/authentication';
+import {PaginationControls} from '../../../library/pagination';
 
 const mapStateToProps = (state) => {
 	return {
@@ -75,20 +76,19 @@ class PlayerSearchPage extends React.Component {
             <ViewWrapper>
                 <div className="small-12 columns">
                     <h1>Player Search</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
                 </div>
-				<div className="form-group">
-					<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Enter search terms to filter results"/>
-					<select name="searchBy" onChange={this.handleSearchByChange}>
-						<option value='username'>Username</option>
-						<option value='firstName'>First Name</option>
-						<option value='lastName'>Last Name</option>
-					</select>
-					<button className="button" onClick={this.handlePageChange.bind(this, 1, this.state.searchQuery)}>Search!</button>
+				<div className="small-12 columns">
+					<div className="form-group">
+						<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Enter search terms to filter results"/>
+						<select name="searchBy" value={this.state.searchBy} onChange={this.handleSearchByChange}>
+							<option value='username'>Username</option>
+							<option value='firstName'>First Name</option>
+							<option value='lastName'>Last Name</option>
+						</select>
+						<button className="button" onClick={this.handlePageChange.bind(this, 1, this.state.searchQuery)}>Search!</button>
+					</div>
+					<hr/>
 				</div>
-				<hr/>
 				<div className="small-12 columns">
 					<table>
 						<thead>
@@ -101,7 +101,7 @@ class PlayerSearchPage extends React.Component {
 						</thead>
 						<tbody>
 							{
-								this.props.users.map((user, i) =>
+								this.props.players.map((user, i) =>
 									<tr key={i}>
 										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={`${this.getPlayerIcon(user)}`} /></Link>
 										</td>

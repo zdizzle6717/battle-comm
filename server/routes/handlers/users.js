@@ -15,7 +15,7 @@ import buildPasswordUpdatedEmail from '../../email-templates/passwordUpdated';
 import createUserToken from '../../utils/createUserToken';
 import createResetToken from '../../utils/createResetToken';
 import verifyResetToken from '../../utils/verifyResetToken';
-import userFunctions from '../../utils/userFunctions';
+import {hashPassword, getUserRoleFlags} from '../../utils/userFunctions';
 
 let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
 
@@ -86,14 +86,19 @@ let users = {
       });
   },
   getAll: (request, reply) => {
-    models.User.findAll()
+    models.User.findAll({
+			'include': [{
+				'model': models.File
+			}]
+		})
       .then((products) => {
         reply(products).code(200);
       });
   },
   create: (request, reply) => {
-    userFunctions.hashPassword(request.payload.password, (err, hash) => {
+    hashPassword(request.payload.password, (err, hash) => {
       models.User.create({
+					[request.payload.role]: true,
           'email': request.payload.email,
           'firstName': request.payload.firstName,
           'lastName': request.payload.lastName,
@@ -168,6 +173,7 @@ let users = {
   authenticate: (request, reply) => {
     reply({
       'id_token': createUserToken(request.pre.user),
+			'roleFlags': getUserRoleFlags(request.pre.user),
       'id': request.pre.user.id,
       'firstName': request.pre.user.firstName,
       'lastName': request.pre.user.lastName,
@@ -201,7 +207,7 @@ let users = {
           console.log(error);
           reply('Somthing went wrong');
         } else {
-          userFunctions.hashPassword(request.payload.newPassword, (err, hash) => {
+          hashPassword(request.payload.newPassword, (err, hash) => {
             user.updateAttributes({
               'password': hash
             }).then((user) => {
@@ -266,7 +272,7 @@ let users = {
             console.log(error);
             reply('Somthing went wrong');
           } else {
-            userFunctions.hashPassword(request.payload.password, (err, hash) => {
+            hashPassword(request.payload.password, (err, hash) => {
               user.updateAttributes({
                 'password': hash
               }).then((user) => {
@@ -416,7 +422,10 @@ let users = {
     }
     models.User.findAndCountAll({
       'where': searchByConfig,
-      'offset': offset
+      'offset': offset,
+			'include': [{
+				'model': models.File
+			}]
     }).then((response) => {
       let count = response.count;
       let results = response.rows;

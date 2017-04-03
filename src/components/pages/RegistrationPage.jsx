@@ -99,8 +99,10 @@ class RegistrationPage extends React.Component {
         return (
 			<ViewWrapper>
 				<div className="row">
-					<h1 className="push-bottom-2x">Register</h1>
-					<hr />
+					<div className="small-12 columns">
+						<h1 className="push-bottom-2x">Register</h1>
+						<hr />
+					</div>
 					<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
 						<Form name="registrationForm" submitText="Register" handleSubmit={this.handleSubmit}>
 							<div className="row">
@@ -118,9 +120,7 @@ class RegistrationPage extends React.Component {
 							<label className="required">User Role</label>
 							<Select name="role" value={this.state.credentials.role} handleInputChange={this.handleInputChange} required={true}>
 								<option value="">--Select--</option>
-								<option value="siteAdmin">Site Admin</option>
-								<option value="providerAdmin">Provider Admin</option>
-								<option value="contactAdmin">Contact Admin</option>
+								<option value="systemAdmin">Site Admin</option>
 							</Select>
 							<div className="row">
 								<div className="form-group small-12 columns">

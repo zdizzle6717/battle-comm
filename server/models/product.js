@@ -22,9 +22,9 @@ module.exports = function(sequelize, DataTypes) {
     'classMethods': {
       associate: function(models) {
 				Product.hasMany(models.File);
-				Product.hasOne(models.Faction);
-				Product.hasOne(models.GameSystem);
-				Product.hasOne(models.Manufacturer);
+				Product.belongsTo(models.Faction);
+				Product.belongsTo(models.GameSystem);
+				Product.belongsTo(models.Manufacturer);
       }
     }
   });

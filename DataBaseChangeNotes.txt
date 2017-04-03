@@ -1,16 +1,18 @@
 Added Files reference to many tables
 
+user set member default false
+
 product add default 'filterVal'
 
-Added reference to 'product', 'newsPost'
-Product.hasOne(models.GameSystem);
-Product.hasOne(models.Faction);
-Product.hasOne(models.Manufacturer);
+Added reference to 'product', 'newsPost':
+Product.belongsTo(models.GameSystem);
+Product.belongsTo(models.Faction);
+Product.belongsTo(models.Manufacturer);
 
-removed from 'product', 'newsPost'
+removed from 'product', 'newsPost':
 'manufacturerId', 'gameSystemId'
 
-removed from 'product'
+removed from 'product':
 'imgAlt': DataTypes.STRING,
 'imgOneFront': DataTypes.STRING,
 'imgOneBack': DataTypes.STRING,
@@ -21,5 +23,5 @@ removed from 'product'
 'imgFourFront': DataTypes.STRING,
 'imgFourBack': DataTypes.STRING,
 
-removed from 'newsPost', 'gameSystem', 'manufacturer'
+removed from 'newsPost', 'gameSystem', 'manufacturer':
 'photo'

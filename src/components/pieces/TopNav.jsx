@@ -102,7 +102,7 @@ class TopNav extends React.Component {
 								<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
 							</li>
 							<li className="ranking">
-								<Link key="ranking" to="/ranking" className="menu-link" activeClassName="active">Ranking</Link>
+								<Link key="ranking" to="/ranking/search/all" className="menu-link" activeClassName="active">Ranking</Link>
 							</li>
 							<li className="players">
 								<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>
@@ -134,7 +134,7 @@ class TopNav extends React.Component {
 									<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
 								</li>
 								<li className="">
-									<Link key="ranking" to="/ranking" className="menu-link" activeClassName="active">Ranking</Link>
+									<Link key="ranking" to="/ranking/search/all" className="menu-link" activeClassName="active">Ranking</Link>
 								</li>
 								<li className="">
 									<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>

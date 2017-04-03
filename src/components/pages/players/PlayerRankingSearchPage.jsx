@@ -7,6 +7,7 @@ import {browserHistory, Link} from 'react-router';
 import ViewWrapper from '../../ViewWrapper';
 import GameSystemActions from '../../../actions/GameSystemActions';
 import RankingService from '../../../services/RankingService';
+import {PaginationControls} from '../../../library/pagination';
 
 const mapStateToProps = (state) => {
 	return {
@@ -16,7 +17,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-	bindActionCreators({
+	return bindActionCreators({
 		'getGameSystems': GameSystemActions.getAll
 	}, dispatch);
 }
@@ -38,7 +39,6 @@ class PlayerRankingSearchPage extends React.Component {
 		this.handleFactionChange = this.handleFactionChange.bind(this);
 		this.handleGameSystemChange = this.handleGameSystemChange.bind(this);
 		this.handlePageChange = this.handlePageChange.bind(this);
-		this.handleQueryChange = this.handleQueryChange.bind(this);
 		this.handleOrderByChange = this.handleOrderByChange.bind(this);
 		this.showAlert = this.showAlert.bind(this);
     }
@@ -49,9 +49,8 @@ class PlayerRankingSearchPage extends React.Component {
 			this.showAlert('gameSystemNotFound');
 			// TODO: Return to previous page (Build a library for storing this?)
 			browserHistory.push('/');
-		} else {
-			this.props.getGameSystems();
 		}
+		this.props.getGameSystems();
 
 		if (this.props.params.gameSystemId === 'all') {
 			// TODO: Search all player ranking (might need a new endpoint)
@@ -149,7 +148,7 @@ class PlayerRankingSearchPage extends React.Component {
 							<select name="factionId" value={this.props.params.factionId || ''} onChange={this.handleFactionChange}>
 								<option value="">--Select--</option>
 								{
-									this.selectedGameSystem.Factions.map((faction, i) =>
+									this.state.selectedGameSystem.Factions.map((faction, i) =>
 										<option key={i} value={faction.id}>{faction.name}</option>
 									)
 								}

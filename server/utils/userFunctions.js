@@ -3,6 +3,7 @@
 import Boom from 'boom';
 import bcrypt from 'bcrypt';
 import models from '../models';
+import roleConfig from '../../roleconfig';
 
 const verifyUniqueUser = (req, res) => {
   models.User.find({
@@ -80,7 +81,19 @@ const hashPassword = (password, cb) => {
   });
 };
 
+const getUserRoleFlags = (user) => {
+  let userRoleFlags = 0;
+  roleConfig.forEach((role) => {
+    if (user[role.name]) {
+      userRoleFlags += role.roleFlags;
+    }
+  });
+
+  return userRoleFlags;
+};
+
 export {
+	getUserRoleFlags,
   verifyUniqueUser,
   verifyCredentials,
   verifyUserExists,

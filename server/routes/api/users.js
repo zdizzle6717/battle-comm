@@ -22,6 +22,7 @@ module.exports = [
           'username': Joi.string().min(4).max(50).required(),
           'email': Joi.string().email().required(),
           'password': Joi.string().min(8).required(),
+          'role': Joi.string().required(),
           'firstName': Joi.string().optional(),
           'lastName': Joi.string().optional()
         }

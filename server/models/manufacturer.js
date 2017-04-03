@@ -10,6 +10,8 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
 				Manufacturer.hasOne(models.File);
         Manufacturer.hasMany(models.GameSystem);
+        Manufacturer.hasMany(models.NewsPost);
+        Manufacturer.hasMany(models.Product);
       }
     }
   });

@@ -17,10 +17,12 @@ export default class AdminDashboardPage extends React.Component {
         return (
             <ViewWrapper>
                 <div className="row">
-                    <h1>Admin Dashboard</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
+					<div className="small-12 columns">
+						<h1>Admin Dashboard</h1>
+	                    <p>
+	                        <Link to="/">Go back to the main page</Link>
+	                    </p>
+					</div>
                 </div>
             </ViewWrapper>
         );

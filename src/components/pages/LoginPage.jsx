@@ -106,8 +106,10 @@ class LoginPage extends React.Component {
         return (
 			<ViewWrapper>
 				<div className="row">
-					<h1 className="push-bottom-2x">Login</h1>
-					<hr />
+					<div className="small-12 columns">
+						<h1 className="push-bottom-2x">Login</h1>
+						<hr />
+					</div>
 					<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
 						<Form name="loginForm" submitText="Login" handleSubmit={this.handleSubmit}>
 							<div className="row">

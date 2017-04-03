@@ -8,9 +8,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     'classMethods': {
       associate: function(models) {
+				GameSystem.belongsTo(models.Manufacturer);
+				GameSystem.hasMany(models.Faction);
         GameSystem.hasMany(models.GameSystemRanking);
-        GameSystem.belongsTo(models.Manufacturer);
-        GameSystem.hasMany(models.Faction);
+        GameSystem.hasMany(models.NewsPost);
+        GameSystem.hasMany(models.Product);
         GameSystem.hasOne(models.File);
       }
     }
