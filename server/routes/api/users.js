@@ -92,7 +92,11 @@ module.exports = [
     'config': {
       'tags': ['api'],
       'description': 'Get all players',
-      'notes': 'Get all players'
+      'notes': 'Get all players',
+			'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+      },
     },
     'handler': users.getAll
   },

@@ -31,6 +31,7 @@ import NewsPage from './components/pages/news/NewsPage';
 import NewsPostPage from './components/pages/news/NewsPostPage';
 
 // Players
+import PlayerAccountEditPage from './components/pages/players/PlayerAccountEditPage';
 import PlayerAllySearchPage from './components/pages/players/PlayerAllySearchPage';
 import PlayerChangePasswordPage from './components/pages/players/PlayerChangePasswordPage';
 import PlayerDashboardPage from './components/pages/players/PlayerDashboardPage';
@@ -53,7 +54,7 @@ const routes = (
 	<Route path="login" component={LoginPage}/>
     <Route path="register" component={RegistrationPage}/>
 	<Route path="forgot-password" component={ForgotPasswordPage}/>
-	<Route path="password-reset" component={PasswordResetPage}/>
+	<Route path="password-reset/:resetToken" component={PasswordResetPage}/>
 	<Route path="admin">
 		<IndexRoute component={AdminDashboardPage}/>
 		<Route path="game-systems">
@@ -97,11 +98,12 @@ const routes = (
 		<IndexRoute component={PlayerSearchPage} />
 		<Route path="profile/:playerHandle">
 			<IndexRoute component={PlayerProfilePage} />
-			<Route path="ally-list" component={PlayerAllySearchPage} />
+			<Route path="ally-search" component={PlayerAllySearchPage} />
 		</Route>
-		<Route path="dashboard/:playerId">
+		<Route path="dashboard">
 			<IndexRoute component={PlayerDashboardPage}/>
 			<Route path="change-password" component={PlayerChangePasswordPage} />
+			<Route path="account-edit" component={PlayerAccountEditPage} />
 			<Route path="notifications" component={PlayerNotificationsPage} />
 		</Route>
 	</Route>

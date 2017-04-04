@@ -112,9 +112,13 @@ header {
 					justify-content: flex-end;
 					position: absolute;
 					right: 0;
+					display: flex;
+					padding: 0;
+					margin: 0;
+					flex-direction: row;
+					align-items: center;
 				}
 
-				.login-menu,
 				.main-menu {
 					display: flex;
 					padding: 0;
@@ -186,8 +190,24 @@ header {
 				}
 
 				.login-menu {
-					li {
-						a {
+					.login-link {
+						padding: 0;
+						list-style-type: none;
+						height: 100%;
+						text-transform: uppercase;
+						position: relative;
+						min-width: 104px;
+						padding: 0;
+						border-radius: 0;
+						text-align: center;
+						list-style-type: none;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						transition: all 0.1s;
+						margin: 0 7px;
+						
+						.menu-link {
 							display: flex;
 							justify-content: center;
 							align-items: center;

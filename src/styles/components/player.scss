@@ -1,0 +1,42 @@
+.player-profile,
+.player-dashboard {
+	.editable {
+
+	}
+
+	.friend-list {
+		.icon-box {
+			.icon {
+
+			}
+			.name-label {
+
+			}
+		}
+	}
+}
+
+.player-profile {
+	.user-bio {
+
+	}
+	.social-links {
+		.fa {
+			font-size: 38px;
+		}
+	}
+
+	.profile-picture {
+		width: 220px;
+	}
+
+	.username {
+		text-transform: initial;
+		color: gold;
+		text-shadow: 1px 1px 5px $black;
+	}
+}
+
+.player-dashboard {
+
+}

@@ -172,6 +172,7 @@ let users = {
   },
   authenticate: (request, reply) => {
     reply({
+			'username': request.pre.user.username,
       'id_token': createUserToken(request.pre.user),
 			'roleFlags': getUserRoleFlags(request.pre.user),
       'id': request.pre.user.id,

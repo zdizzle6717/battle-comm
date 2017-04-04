@@ -17,10 +17,17 @@ export default class PlayerNotificationsPage extends React.Component {
         return (
             <ViewWrapper>
                 <div className="row">
-                    <h1>Player Notifications</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
+					<div className="small-12 columns">
+						<h1>Player Notifications</h1>
+					</div>
+                </div>
+                <div className="row">
+					<div className="small-12 medium-6 columns">
+						<h2>Notifications</h2>
+					</div>
+					<div className="small-12 medium-6 columns">
+						<h2>Messages</h2>
+					</div>
                 </div>
             </ViewWrapper>
         );

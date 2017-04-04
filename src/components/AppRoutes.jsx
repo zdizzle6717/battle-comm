@@ -55,6 +55,8 @@ class AppRoutes extends React.Component {
 		});
 	}
 
+	// TODO: Build a more specific regex
+	// TODO: Consider adding a getMe route to API and calling (to account for authenticated routes that don't have an API endpoint that would return a 401)
 	onViewChange(location) {
 		if (!this.props.isAuthenticated) {
 			authorizedRoutesConfig.forEach((route) => {

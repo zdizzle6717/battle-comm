@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';
 import {AlertActions} from '../../library/alerts';
 import {UserActions} from '../../library/authentication';
+import AccountMenu from './AccountMenu';
 
 const mapStateToProps = (state) => {
 	return {
@@ -84,9 +85,7 @@ class TopNav extends React.Component {
 				<div className="login-menu-mobile">
 					{
 						this.props.isAuthenticated ?
-						<div className="login-link">
-							<a className="menu-link" onClick={this.logout}>Logout</a>
-						</div> :
+						<AccountMenu logout={this.logout}></AccountMenu> :
 						<div className="login-link">
 							<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
 						</div>
@@ -114,9 +113,7 @@ class TopNav extends React.Component {
 						<ul className="login-menu">
 							{
 								this.props.isAuthenticated ?
-								<li className="login-link">
-									<a className="menu-link" onClick={this.logout}>Logout</a>
-								</li> :
+								<AccountMenu logout={this.logout}></AccountMenu> :
 								<li className="login-link">
 									<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
 								</li>
@@ -146,9 +143,7 @@ class TopNav extends React.Component {
 							<ul className="login-menu">
 								{
 									this.props.isAuthenticated ?
-									<li className="login-link">
-										<a className="menu-link" onClick={this.logout}>Logout</a>
-									</li> :
+									<AccountMenu logout={this.logout}></AccountMenu> :
 									<li className="login-link">
 										<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
 									</li>

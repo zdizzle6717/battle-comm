@@ -186,7 +186,7 @@ class Input extends React.Component {
 
 		return (
 			<div className="validate-error-element">
-				<input className={validationClasses} type={this.props.type} name={this.props.name} value={this.props.value} placeholder={this.props.placeholder} min={this.props.min} max={this.props.max} onChange={this.validateInput} onMouseDown={this.handleMouseDown} onFocus={this.handleFocus} onBlur={this.handleBlur} autoComplete={this.props.autoComplete} disabled={this.props.disabled}/>
+				<input className={validationClasses} type={this.props.type} name={this.props.name} value={this.props.value} placeholder={this.props.placeholder} min={this.props.min} max={this.props.max} minLength={this.props.minlength} maxLength={this.props.maxlength} onChange={this.validateInput} onMouseDown={this.handleMouseDown} onFocus={this.handleFocus} onBlur={this.handleBlur} autoComplete={this.props.autoComplete} disabled={this.props.disabled}/>
 				<div className="validate-errors">
 					{
 						this.state.errors.map((error, i) =>
@@ -205,6 +205,8 @@ Input.propTypes = {
 	'name': React.PropTypes.string.isRequired,
 	'placeholder': React.PropTypes.string,
 	'min': React.PropTypes.number,
+	'minlength': React.PropTypes.number,
+	'maxlength': React.PropTypes.number,
 	'max': React.PropTypes.number,
 	'validate': React.PropTypes.string,
 	'handleInputChange': React.PropTypes.func.isRequired,

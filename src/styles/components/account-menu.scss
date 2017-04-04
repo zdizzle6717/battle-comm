@@ -1,0 +1,87 @@
+.account-menu {
+	height: 37px;
+	width: 37px;
+	position: absolute;
+	right: 20px;
+	border-radius: 5px;
+	z-index: 10;
+	box-shadow: 0 0 2px 2px #FFF;
+	background: rgba(48,118,155,0.71);
+	border: 1px solid rgba(0,0,0,0.75);
+	z-index: 100;
+
+	&.active {
+		box-shadow: 0 0 2px 2px rgba(160,203,226,0.67);
+	}
+
+	img {
+		position: absolute;
+	}
+
+	.menu {
+		margin-top: 64px;
+		border-radius: 4px;
+		position: absolute;
+		box-shadow: 0 1px 3px 2px #1b1b1b;
+		padding: 4px;
+		background: url("https://www.battle-comm.net/styles/../images/Honeycomb_Default.png") repeat;
+		right: 0;
+		font-size: 1.1em;
+		border: 5px solid rgba(0,0,0,0.5);
+		z-index: 100;
+
+		h3 {
+			color: $white;
+			text-align: center;
+    	font-size: 1.8rem;
+		}
+
+		ul {
+			margin: 0;
+
+			li {
+				min-width: 144px;
+				width: 94%;
+				min-height: 37px;
+				line-height: 0.1em;
+				display: block;
+				background: none repeat scroll 0 0/100% 100% rgba(0,0,0,0.49);
+				position: relative;
+				font-size: 0.8em;
+				padding: 0;
+				border-radius: 2px;
+				box-shadow: 0 1px 3px 1px rgba(0,0,0,0.85);
+				margin: 1% 3% 5%;
+    		padding: 0 5%;
+				list-style-type: none;
+				color: #efefef;
+				font-weight: bold;
+				transition: all 250ms;
+
+				a {
+					display: flex;
+					width: 176px;
+					height: 37px;
+					position: relative;
+					text-align: left;
+					align-items: center;
+					color: #efefef;
+
+					.fa {
+						margin-right: 8px;
+					}
+				}
+			}
+		}
+	}
+
+	.click-away-backdrop {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 90;
+		cursor: default;
+	}
+}
