@@ -14,6 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
+        File.belongsTo(models.BannerSlide);
         File.belongsTo(models.GameSystem);
         File.belongsTo(models.Manufacturer);
         File.belongsTo(models.NewsPost);

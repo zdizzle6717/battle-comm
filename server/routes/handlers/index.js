@@ -1,5 +1,6 @@
 'use strict';
 
+import bannerSlides from './bannerSlides';
 import factionRankings from './factionRankings';
 import factions from './factions';
 import files from './files';
@@ -15,4 +16,4 @@ import userPhotos from './userPhotos';
 import users from './users';
 import venues from './venues';
 
-export { factionRankings, factions, files, gameSystemRankings, gameSystems, manufacturers, newsPosts, productOrders, products, userFriends, userNotifications, userPhotos, users, venues };
+export { bannerSlides, factionRankings, factions, files, gameSystemRankings, gameSystems, manufacturers, newsPosts, productOrders, products, userFriends, userNotifications, userPhotos, users, venues };

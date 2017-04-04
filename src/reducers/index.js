@@ -10,6 +10,7 @@ import {loader} from '../library/loader';
 import {user, users, isAuthenticated, redirectRoute} from '../library/authentication';
 
 // App
+import {bannerSlide, bannerSlides} from './bannerSlides';
 import {cartItems, cartTotal} from './cartItems';
 import {gameSystem, gameSystems} from './gameSystems';
 import {gameSystemRanking, gameSystemRankings} from './gameSystemRankings';
@@ -38,6 +39,8 @@ export default combineReducers({
 	users,
 
 	// App
+	bannerSlide,
+	bannerSlides,
 	cartItems,
 	cartTotal,
 	gameSystem,

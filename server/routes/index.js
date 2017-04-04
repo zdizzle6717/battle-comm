@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = []
+.concat(require('./api/bannerSlides'))
 .concat(require('./api/factions'))
 .concat(require('./api/files'))
 .concat(require('./api/gameSystems'))

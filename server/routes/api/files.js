@@ -21,7 +21,7 @@ module.exports = [
           'ProductId': Joi.optional(),
           'UserId': Joi.optional(),
           'UserAchievementId': Joi.optional(),
-          'identifier': Joi.string().valid('playerIcon', 'newsPostPhoto', 'gameSystemPhoto', 'manufacturerPhoto', 'productPhoto').required(),
+          'identifier': Joi.string().valid('playerIcon', 'newsPostPhoto', 'gameSystemPhoto', 'manufacturerPhoto', 'productPhoto', 'bannerImage').required(),
           'locationUrl': Joi.optional(),
           'label': Joi.optional(),
           'name': Joi.string().required(),
