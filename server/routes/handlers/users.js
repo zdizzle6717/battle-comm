@@ -96,6 +96,7 @@ let users = {
       });
   },
   create: (request, reply) => {
+		console.log(request.payload);
     hashPassword(request.payload.password, (err, hash) => {
       models.User.create({
 					[request.payload.role]: true,
@@ -106,6 +107,7 @@ let users = {
           'password': hash
         })
         .then((user) => {
+					console.log(user);
           let defaultPath = __dirname + '/../../..' + env.uploadPath + 'players/profile_image_default.png';
           let path = __dirname + '/../../..' + env.uploadPath + 'players/' + user.id + '/playerIcon/' + 'profile_image_default.png';
           let thumbPath = __dirname + '/../../..' + env.uploadPath + 'players/' + user.id + '/playerIcon/thumbs/' + 'profile_image_default.png';
@@ -154,6 +156,7 @@ let users = {
                 'lastName': user.lastName,
                 'icon': user.icon,
                 'member': user.member,
+								'roleFlags': getUserRoleFlags(user),
                 'subscriber': user.subscriber,
                 'tourneyAdmin': user.tourneyAdmin,
                 'eventAdmin': user.eventAdmin,
@@ -347,13 +350,13 @@ let users = {
             'totalPoints': request.payload.totalPoints,
             'eloRanking': request.payload.eloRanking,
             'accountActive': request.payload.accountActive
-          }).then((response) => {
+          }).then((user) => {
             if (sendEmail === true) {
               let customerMailConfig = {
                 'from': env.email.user,
-                'to': response.email,
-                'subject': `Reward Point Update: New Total of ${response.rewardPoints}`,
-                'html': buildRPUpdateEmail(response)
+                'to': user.email,
+                'subject': `Reward Point Update: New Total of ${user.rewardPoints}`,
+                'html': buildRPUpdateEmail(user)
               };
 
               transporter.sendMail(customerMailConfig, (error, info) => {
@@ -361,11 +364,11 @@ let users = {
                   console.log(error);
                   reply('Somthing went wrong');
                 } else {
-                  reply(response).code(200);
+                  reply(user).code(200);
                 }
               });
             } else {
-              reply(response).code(200);
+              reply(user).code(200);
             }
           });
         } else {
@@ -424,6 +427,7 @@ let users = {
     models.User.findAndCountAll({
       'where': searchByConfig,
       'offset': offset,
+			'limit': request.payload.pageSize,
 			'include': [{
 				'model': models.File
 			}]

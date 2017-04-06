@@ -11,6 +11,7 @@ import ViewWrapper from '../../ViewWrapper';
 import FileService from '../../../services/FileService';
 import ManufacturerActions from '../../../actions/ManufacturerActions';
 import NewsPostService from '../../../services/NewsPostService';
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
 	return {
@@ -192,9 +193,9 @@ class EditNewsPostPage extends React.Component {
 		<ViewWrapper>
 			<div className="small-12 columns">
 				<h1>News Post Edit</h1>
-				<p>
-					<Link to="/">Go back to the main page</Link>
-				</p>
+				<hr/>
+				<AdminMenu></AdminMenu>
+				<hr/>
 			</div>
 			<div className="row">
 				<div className="small-12 medium-8 large-9 columns">

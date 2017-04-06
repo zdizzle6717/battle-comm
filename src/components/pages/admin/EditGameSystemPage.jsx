@@ -13,6 +13,7 @@ import ManufacturerActions from '../../../actions/ManufacturerActions';
 import FactionService from '../../../services/FactionService';
 import FileService from '../../../services/FileService';
 import GameSystemService from '../../../services/GameSystemService';
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
 	return {
@@ -222,9 +223,9 @@ class EditGameSystemPage extends React.Component {
             <ViewWrapper>
                 <div className="small-12 columns">
                     <h1>Game System Edit</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
                 </div>
 				<div className="row">
 					<div className="small-12 medium-8 large-9 columns">

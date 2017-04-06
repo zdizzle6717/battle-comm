@@ -4,6 +4,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {AlertActions} from '../../../library/alerts';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
@@ -14,6 +15,12 @@ const mapStateToProps = (state) => {
 		'forms': state.forms,
 		'user': state.user
 	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'addAlert': AlertActions.addAlert
+	}, dispatch);
 }
 
 class PlayerDashboardPage extends React.Component {
@@ -35,6 +42,7 @@ class PlayerDashboardPage extends React.Component {
 		this.getCurrentPlayer = this.getCurrentPlayer.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.savePlayer = this.savePlayer.bind(this);
+		this.showAlert = this.showAlert.bind(this);
     }
 
     componentDidMount() {
@@ -49,7 +57,7 @@ class PlayerDashboardPage extends React.Component {
 
 	cancelEdit() {
 		let isEditing = this.state.isEditing;
-		for (prop in isEditing) {
+		for (let prop in isEditing) {
 			isEditing[prop] = false;
 		}
 		this.setState({
@@ -77,9 +85,32 @@ class PlayerDashboardPage extends React.Component {
 	}
 
 	savePlayer() {
-		PlayerService.update(this.state.currentUser).then((updatedUser) => {
-
+		PlayerService.update(this.state.currentUser.id, this.state.currentUser).then((updatedUser) => {
+			let isEditing = this.state.isEditing;
+			for (let prop in isEditing) {
+				isEditing[prop] = false;
+			}
+			this.setState({
+				'isEditing': isEditing
+			});
+			this.getCurrentPlayer();
+			this.showAlert('playerUpdate');
 		});
+	}
+
+	showAlert(selector) {
+		const alerts = {
+			'playerUpdate': () => {
+				this.props.addAlert({
+					'title': 'Profile Updated',
+					'message': `Your profile was successfully updated`,
+					'type': 'success',
+					'delay': 3000
+				});
+			}
+		}
+
+		return alerts[selector]();
 	}
 
 	toggleEdit(identifier) {
@@ -111,7 +142,7 @@ class PlayerDashboardPage extends React.Component {
 					<div className="row">
 						<div className="small-12 medium-6 columns">
 							<h2 className="no-shadow text-center">Player Bio</h2>
-							<div className="editable">
+							<div className={isEditing.bio ? 'editable active': 'editable'}>
 								{
 									isEditing.bio ?
 									<Form name="bioForm" handleSubmit={this.handleSubmit.bind(this, 'bio')}>
@@ -129,18 +160,14 @@ class PlayerDashboardPage extends React.Component {
 								{
 									isEditing.bio ?
 									<div className="action-group">
-										<div className="text-right">
-											<button className="cancel" onClick={this.cancelEdit}>
-												<span className="fa fa-check-square-o"></span>
-											</button>
-										</div>
-										<div className="text-right">
-											<button className="save" onClick={this.savePlayer} disabled={!bioFormIsValid}>
-												<span className="fa fa-check-square-o"></span>
-											</button>
-										</div>
+										<button className="cancel" onClick={this.cancelEdit}>
+											<span className="fa fa-times"></span>
+										</button>
+										<button className="save" onClick={this.savePlayer} disabled={!bioFormIsValid}>
+											<span className="fa fa-check"></span>
+										</button>
 									</div> :
-									<div className="text-right">
+									<div className="action-group">
 										<button className="edit" onClick={this.toggleEdit.bind(this, 'bio')}>
 											<span className="fa fa-edit"></span>
 										</button>
@@ -148,7 +175,7 @@ class PlayerDashboardPage extends React.Component {
 								}
 							</div>
 							<h2 className="push-top-2x text-center">Social Links</h2>
-							<div className="editable">
+							<div className={isEditing.links ? 'editable active': 'editable'}>
 								{
 									isEditing.links ?
 									<Form name="linksForm" handleSubmit={this.handleSubmit.bind(this, 'links')}>
@@ -189,50 +216,45 @@ class PlayerDashboardPage extends React.Component {
 								{
 									isEditing.links ?
 									<div className="action-group">
-										<div className="text-right">
-											<button className="cancel" onClick={this.cancelEdit}>
-												<span className="fa fa-check-square-o"></span>
-											</button>
-										</div>
-										<div className="text-right">
-											<button className="save" onClick={this.savePlayer} disabled={!linksFormIsValid}>
-												<span className="fa fa-check-square-o"></span>
-											</button>
-										</div>
+										<button className="cancel" onClick={this.cancelEdit}>
+											<span className="fa fa-times"></span>
+										</button>
+										<button className="save" onClick={this.savePlayer} disabled={!linksFormIsValid}>
+											<span className="fa fa-check"></span>
+										</button>
 									</div> :
-									<div className="text-right">
+									<div className="action-group">
 										<button className="edit" onClick={this.toggleEdit.bind(this, 'links')}>
 											<span className="fa fa-edit"></span>
 										</button>
 									</div>
 								}
 							</div>
-							<div className="row">
+							<div className="row push-top-2x">
 								<div className="small-12 columns">
-									<Link key="editAccountDetails" to="/players/dashboard/account-edit"><h3 className="text-center">Update Account Details</h3></Link>
+									<Link key="editAccountDetails" to="/players/dashboard/account-edit"><h3 className="button account-details text-center">Edit Account Details</h3></Link>
 								</div>
 							</div>
 						</div>
-						<div className="small-12 medium-6 columns">
-							<h2 className="no_shadow text-center">{ currentUser.firstName ? (currentUser.firstName + ' ' + currentUser.lastName) : 'Anonymous'} </h2>
+						<div className="small-12 medium-6 columns text-center">
+							<h2 className="no_shadow">{ currentUser.firstName ? (currentUser.firstName + ' ' + currentUser.lastName) : 'Anonymous'} </h2>
 							<div className="text-center">
 								<h3 className="gold-label">RP Stash: <span><strong>{currentUser.rewardPoints || 0}</strong> Points</span></h3>
 								<div className="flex-row-center push-top">
 									<div className="profile-picture">
 										<img src={`/uploads/players/${currentUser.id}/playerIcon/${currentUser.icon}`} alt={currentUser.username} className="shadow"/>
-										TODO: Add File upload
 									</div>
 								</div>
 							</div>
-							<h1 className="center push-top"><Link key="userProfile" to={`/players/profile/${currentUser.username}`}>{currentUser.username}</Link></h1>
-							<div className="center">
+							<h1 className="push-top"><Link key="userProfile" to={`/players/profile/${currentUser.username}`} className="username">{currentUser.username}</Link></h1>
+							<div className="">
 								<p><Link to={`/players/dashboard/change-password`}>Change Password?</Link></p>
 							</div>
 						</div>
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Allies <Link key="allyList" to={`/players/profile/${currentUser.username}/ally-search`}>View All</Link></h2>
+							<h2>Allies <Link key="allyList" to={`/players/profile/${currentUser.username}/ally-search`} className="right">View All</Link></h2>
 							<div className="friend-list">
 								{
 									currentUser.Friends.map((friend, i) =>
@@ -259,7 +281,7 @@ class PlayerDashboardPage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Player Ranking (<Link key="playerRanking" to="ranking/search/all">Leaderboards</Link>)</h2>
+							<h2>Player Ranking <Link key="playerRanking" to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							{
 								currentUser.GameSystemRankings.length < 1 &&
 								<h3 className="text-center">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h3>
@@ -294,7 +316,7 @@ class PlayerDashboardPage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Photostream</h2>
+							<h2>Photostream <div className="right"><a><span className="fa fa-upload"></span> Add Photo</a></div></h2>
 							TODO: Add file upload
 							TODO: Add popup component and list of player images
 							<div className="text-center">
@@ -308,4 +330,4 @@ class PlayerDashboardPage extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, null)(PlayerDashboardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerDashboardPage);

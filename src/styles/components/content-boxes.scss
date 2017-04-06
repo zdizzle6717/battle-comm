@@ -78,6 +78,7 @@ $space-between: 3;
 				.box-bar-left,
 				.box-bar-right {
 	    		width: 20px;
+					min-width: 20px;
 				}
 
 				.box-bar-left {
@@ -91,6 +92,7 @@ $space-between: 3;
 				.box-content {
 					width: 100%;
 					padding: 15px 0;
+					overflow: hidden;
 					background: url('../images/contentBox/BC_App_9tile_C.png') top left repeat;
 				}
 

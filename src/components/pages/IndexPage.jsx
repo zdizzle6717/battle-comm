@@ -89,7 +89,7 @@ class IndexPage extends React.Component {
 						current: 0, // index of current slide
 					    bgincrement: 20, // increment the bg position (parallax effect) when sliding
 					    autoplay: true, // slideshow on / off
-					    interval: 3000 // time between transitions
+					    interval: 4000 // time between transitions
 					});
 				});
 			});
@@ -114,26 +114,24 @@ class IndexPage extends React.Component {
                         <div className="box-middle">
                             <div className="box-bar-left"></div>
                             <div className="box-content">
-                                <h2 className="text-center">
-									<div className="slider-container">
-										<div id="da-slider" className="da-slider">
-											{
-												this.state.bannerSlides.map((slide, i) =>
-													<div key={i} className="da-slide">
-														<h2>{slide.title}</h2>
-														<p>{slide.text}</p>
-														<a href={slide.link} className="da-link">Read more</a>
-														<div className="da-img"><img src={slide.Files[0].locationUrl} alt="image01" /></div>
-													</div>
-												)
-											}
-											<nav className="da-arrows">
-												<span className="da-arrows-prev"></span>
-												<span className="da-arrows-next"></span>
-											</nav>
-										</div>
+								<div className="slider-container">
+									<div id="da-slider" className="da-slider">
+										{
+											this.state.bannerSlides.map((slide, i) =>
+												<div key={i} className="da-slide">
+													<h2>{slide.title}</h2>
+													<p>{slide.text}</p>
+													<a href={slide.link} className="da-link">Read more</a>
+													<div className="da-img"><img src={slide.Files[0].locationUrl} alt="image01" /></div>
+												</div>
+											)
+										}
+										<nav className="da-arrows">
+											<span className="da-arrows-prev"></span>
+											<span className="da-arrows-next"></span>
+										</nav>
 									</div>
-                                </h2>
+								</div>
                             </div>
                             <div className="box-bar-right"></div>
                         </div>

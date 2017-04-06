@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     'lastName': DataTypes.STRING,
     'member': {
       'type': DataTypes.BOOLEAN,
-      'defaultValue': true
+      'defaultValue': false
     },
     'subscriber': {
       'type': DataTypes.BOOLEAN,
@@ -61,7 +61,10 @@ module.exports = function(sequelize, DataTypes) {
     'youtube': DataTypes.STRING,
     'twitch': DataTypes.STRING,
     'website': DataTypes.STRING,
-    'rewardPoints': DataTypes.INTEGER,
+    'rewardPoints': {
+			'type': DataTypes.INTEGER,
+			'default': 0
+		},
     'visibility': DataTypes.STRING,
     'shareContact': DataTypes.STRING,
     'shareName': DataTypes.STRING,

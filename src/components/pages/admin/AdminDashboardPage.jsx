@@ -3,6 +3,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ViewWrapper from '../../ViewWrapper';
+import AdminMenu from '../../pieces/AdminMenu';
 
 export default class AdminDashboardPage extends React.Component {
     constructor() {
@@ -19,9 +20,9 @@ export default class AdminDashboardPage extends React.Component {
                 <div className="row">
 					<div className="small-12 columns">
 						<h1>Admin Dashboard</h1>
-	                    <p>
-	                        <Link to="/">Go back to the main page</Link>
-	                    </p>
+						<hr/>
+						<AdminMenu></AdminMenu>
+						<hr/>
 					</div>
                 </div>
             </ViewWrapper>

@@ -1,14 +1,9 @@
-Added Files reference to many tables
+Set user 'rewardPoints' default to 0
 
-user set member default false
+Added reference to 'bannerSlide'
+File.belongsTo(modles.BannerSlide)
 
-product add default 'filterVal'
-
-Added reference to 'product', 'newsPost':
-Product.belongsTo(models.GameSystem);
-Product.belongsTo(models.Faction);
-Product.belongsTo(models.Manufacturer);
-
+// TODO:
 removed from 'product', 'newsPost':
 'manufacturerId', 'gameSystemId'
 

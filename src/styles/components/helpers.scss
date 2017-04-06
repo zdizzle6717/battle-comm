@@ -20,6 +20,24 @@ p{
 	}
 }
 
+.right {
+	float: right;
+}
+.left {
+	float: left;
+}
+
+// Images
+.image-tiny {
+	max-width: 25px;
+}
+.image-mini {
+	max-width: 50px;
+}
+.image-small {
+	max-width: 150px;
+}
+
 // Collapse
 .collapse {
 	padding: 0 !important;

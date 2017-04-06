@@ -17,5 +17,5 @@ module.exports = function(sequelize, DataTypes) {
           }
       }
   });
-  return NewsPost;
+  return BannerSlide;
 };

@@ -7,6 +7,7 @@ import {Link} from 'react-router';
 import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
 import ManufacturerActions from '../../../actions/ManufacturerActions';
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
     return {'manufacturers': state.manufacturers}
@@ -55,6 +56,9 @@ class SearchManufacturersPage extends React.Component {
             <ViewWrapper>
 				<div className="small-12 columns">
 					<h1>Search Manufacturers</h1>
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">

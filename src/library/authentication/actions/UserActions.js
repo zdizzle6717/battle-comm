@@ -69,7 +69,7 @@ export default {
 			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST));
 			return UserService.create(data).then((user) => {
 				user = _configureUser(user);
-				dispatch(_returnResponse(UserConstants.CREATE_USER, user));
+				// dispatch(_returnResponse(UserConstants.CREATE_USER, user));
 				return user;
 			});
 		};

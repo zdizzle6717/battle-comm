@@ -13,5 +13,11 @@ export default {
 			.then((response) => {
 				return response.data;
 			});
-	}
+	},
+	update: (id, data) => {
+		return axios.patch('/users/' + id, data)
+			.then((response) => {
+				return response.data;
+			});
+	},
 };

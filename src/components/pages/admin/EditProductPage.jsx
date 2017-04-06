@@ -13,6 +13,7 @@ import GameSystemService from '../../../services/GameSystemService';
 import ManufacturerActions from '../../../actions/ManufacturerActions';
 import ManufacturerService from '../../../services/ManufacturerService';
 import ProductService from '../../../services/ProductService';
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
 	return {
@@ -207,9 +208,9 @@ class EditProductPage extends React.Component {
 		<ViewWrapper>
 			<div className="small-12 columns">
 				<h1>Product Edit</h1>
-				<p>
-					<Link to="/">Go back to the main page</Link>
-				</p>
+				<hr/>
+				<AdminMenu></AdminMenu>
+				<hr/>
 			</div>
 			<div className="row">
 				<div className="small-12 medium-8 large-9 columns">

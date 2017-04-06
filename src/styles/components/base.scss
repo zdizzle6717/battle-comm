@@ -15,6 +15,34 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'PT Sans';
 }
 
+h1 {
+	font-size: 2.5rem;
+}
+
+h2 {
+	color: $white;
+	font-size: 1.4rem;
+	line-height: 1.5rem;
+	font-weight: 400;
+	padding: 3px 5px;
+	margin: 15px 0;
+	box-shadow: 0 0 2px 1px #929292;
+	box-sizing: border-box;
+	border: 1px solid $secondary-500;
+	background: $primary-700;
+
+	a {
+		font-size: 1.2rem;
+		margin: 0 .3rem;
+		color: $secondary-300;
+		text-shadow: 1px 1px 1px $black;
+
+		.fa {
+			font-size: 1.1rem;
+		}
+	}
+}
+
 .view {
 	height: 100%;
 	padding: 0;

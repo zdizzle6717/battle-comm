@@ -9,6 +9,7 @@ import Animation from 'react-addons-css-transition-group';
 import {AlertActions} from '../../library/alerts';
 import {UserActions} from '../../library/authentication';
 import AccountMenu from './AccountMenu';
+import CartSummary from './CartSummary';
 
 const mapStateToProps = (state) => {
 	return {
@@ -84,6 +85,10 @@ class TopNav extends React.Component {
 				</div>
 				<div className="login-menu-mobile">
 					{
+						this.props.isAuthenticated &&
+						<CartSummary></CartSummary>
+					}
+					{
 						this.props.isAuthenticated ?
 						<AccountMenu logout={this.logout}></AccountMenu> :
 						<div className="login-link">
@@ -111,6 +116,10 @@ class TopNav extends React.Component {
 							</li>
 						</ul>
 						<ul className="login-menu">
+							{
+								this.props.isAuthenticated &&
+								<CartSummary></CartSummary>
+							}
 							{
 								this.props.isAuthenticated ?
 								<AccountMenu logout={this.logout}></AccountMenu> :
@@ -141,6 +150,10 @@ class TopNav extends React.Component {
 								</li>
 							</ul>
 							<ul className="login-menu">
+								{
+									this.props.isAuthenticated &&
+									<CartSummary></CartSummary>
+								}
 								{
 									this.props.isAuthenticated ?
 									<AccountMenu logout={this.logout}></AccountMenu> :

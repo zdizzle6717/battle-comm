@@ -8,6 +8,7 @@ import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, CheckBox} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
+import AdminMenu from '../../pieces/AdminMenu';
 
 export default class EditOrderPage extends React.Component {
     constructor() {
@@ -88,9 +89,9 @@ export default class EditOrderPage extends React.Component {
             <ViewWrapper>
                 <div className="small-12 columns">
                     <h1>Product Order Edit</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
                 </div>
 				<div className="row">
 					<div className="small-12 medium-8 large-9 columns">

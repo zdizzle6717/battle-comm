@@ -116,6 +116,7 @@ module.exports = [
           'id': Joi.number().required()
         },
         'payload': {
+          'id': Joi.optional(),
           'email': Joi.optional(),
           'rewardPoints': Joi.number(),
           'icon': Joi.optional(),
@@ -148,7 +149,26 @@ module.exports = [
           'totalLosses': Joi.optional(),
           'totalDraws': Joi.optional(),
           'totalPoints': Joi.optional(),
-          'eloRanking': Joi.optional()
+          'eloRanking': Joi.optional(),
+          'club': Joi.optional(),
+          'dob': Joi.optional(),
+          'youtube': Joi.optional(),
+          'visibility': Joi.optional(),
+          'shareContact': Joi.optional(),
+          'shareName': Joi.optional(),
+          'shareStatus': Joi.optional(),
+          'newsletter': Joi.optional(),
+          'marketing': Joi.optional(),
+          'sms': Joi.optional(),
+          'allowPlay': Joi.optional(),
+          'accountActive': Joi.optional(),
+          'createdAt': Joi.optional(),
+          'updatedAt': Joi.optional(),
+          'UserId': Joi.optional(),
+          'UserNotifications': Joi.optional(),
+          'UserPhotos': Joi.optional(),
+          'Friends': Joi.optional(),
+          'GameSystemRankings': Joi.optional(),
         }
       }
     },

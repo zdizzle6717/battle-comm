@@ -27,7 +27,7 @@ class PlayerSearchPage extends React.Component {
 		this.state = {
 			'pagination': {},
 			'searchQuery': '',
-			'searchBy': 'lastName'
+			'searchBy': 'username'
 		}
 
 		this.getPlayerIcon = this.getPlayerIcon.bind(this);
@@ -51,7 +51,10 @@ class PlayerSearchPage extends React.Component {
 		return fileName ? `/uploads/players/${user.id}/playerIcon/thumbs/${fileName}` : '/uploads/players/profile_image_default.png';
 	}
 
-	handlePageChange(pageNumber) {
+	handlePageChange(pageNumber, e) {
+		if (e && e.keyCode && e.keyCode !== 13) {
+			return;
+		}
         this.props.searchPlayers({'searchQuery': this.state.searchQuery, 'searchBy': this.state.searchBy, 'pageNumber': pageNumber, 'pageSize': 20}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
@@ -77,43 +80,46 @@ class PlayerSearchPage extends React.Component {
                 <div className="small-12 columns">
                     <h1>Player Search</h1>
                 </div>
-				<div className="small-12 columns">
-					<div className="form-group">
-						<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Enter search terms to filter results"/>
+				<div className="small-12 medium-6 large-8 columns">
+					<div className="form-group search-input">
+						<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Enter search terms to filter results" onKeyUp={this.handlePageChange.bind(this, 1)}/>
+						<span className="search-icon fa fa-search pointer" onClick={this.handlePageChange.bind(this, 1)}></span>
+					</div>
+				</div>
+				<div className="small-12 medium-6 large-4 columns">
+					<div className="form-group inline">
 						<select name="searchBy" value={this.state.searchBy} onChange={this.handleSearchByChange}>
 							<option value='username'>Username</option>
 							<option value='firstName'>First Name</option>
 							<option value='lastName'>Last Name</option>
 						</select>
-						<button className="button" onClick={this.handlePageChange.bind(this, 1, this.state.searchQuery)}>Search!</button>
+						<button className="button" onClick={this.handlePageChange.bind(this, 1)}>Search!</button>
 					</div>
-					<hr/>
 				</div>
+				<hr/>
 				<div className="small-12 columns">
-					<table>
+					<table className="stack hover text-center">
 						<thead>
 							<tr>
-								<th>Player Icon</th>
-								<th>Handle</th>
-								<th>Full Name</th>
-								<th>Go To Profile</th>
+								<th className="text-center">Handle</th>
+								<th className="text-center">Full Name</th>
+								<th className="text-center">Go To Profile</th>
+								<th className="text-center">Player Icon</th>
 							</tr>
 						</thead>
 						<tbody>
 							{
 								this.props.players.map((user, i) =>
 									<tr key={i}>
-										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={`${this.getPlayerIcon(user)}`} /></Link>
-										</td>
 										<td>{user.username}</td>
-										<td>{user.lastName}, {user.firstName}</td>
+										<td>{user.firstName && user.lastName ? user.lastName + ', ' + user.firstName : 'anonymous'}
+										</td>
 										<td>
 											<Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>
-												<span className="action">
-													<i className="tip-icon fa fa-eye"></i>
-												</span>
 												<span className="mobile-text">View</span>
 											</Link>
+										</td>
+										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={`${this.getPlayerIcon(user)}`} className="image-tiny"/></Link>
 										</td>
 									</tr>
 								)

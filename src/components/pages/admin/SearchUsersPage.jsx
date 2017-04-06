@@ -7,7 +7,7 @@ import {Link} from 'react-router';
 import {UserActions} from '../../../library/authentication';
 import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
-
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
     return {'users': state.users}
@@ -56,6 +56,9 @@ class SearchUsersPage extends React.Component {
             <ViewWrapper>
 				<div className="small-12 columns">
 					<h1>Search Users</h1>
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">

@@ -116,6 +116,7 @@ let gameSystemRankings = {
           }
         ],
         'offset': offset,
+				'limit': request.payload.pageSize,
         'order': [
           ['totalWins', 'DESC']
         ]

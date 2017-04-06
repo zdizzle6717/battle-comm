@@ -7,7 +7,7 @@ import {Link} from 'react-router';
 import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
 import ProductOrderActions from '../../../actions/ProductOrderActions';
-
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
     return {'productOrders': state.productOrders}
@@ -56,6 +56,9 @@ class SearchProductOrdersPage extends React.Component {
             <ViewWrapper>
 				<div className="small-12 columns">
 					<h1>Search Product Orders</h1>
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">

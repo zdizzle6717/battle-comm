@@ -1,0 +1,125 @@
+.mini-cart {
+	padding: 0;
+	list-style-type: none;
+	height: 100%;
+	text-transform: uppercase;
+	position: absolute;
+	min-width: 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.1s;
+	margin: 0 7px;
+	right: 74px;
+	z-index: 100;
+
+	.menu-link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 2px solid #124476;
+		font-size: 1.1rem;
+		height: 37px;
+		width: 37px;
+		border-radius: 4px;
+		color: $white;
+		background: rgba(18, 68, 118, 0.7);
+		box-shadow: 0 1px 1px 1px rgba(43, 43, 43, 0.71);
+	}
+
+	.cart-summary {
+		display: none;
+    background: url('/images/Honeycomb_Default.png') repeat;
+    border-top: 2px solid $white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.75);
+		position: fixed;
+		top: 57px;
+		right: 0px;
+		flex-direction: column;
+		color: $white;
+		padding: 15px;
+		width: 24rem;
+    height: calc(100% - 57px);
+    overflow: auto;
+
+		@include breakpoint (small only) {
+			width: 100%;
+		}
+
+		li {
+			a {
+				color: $white-500;
+				font-size: 1.5rem;
+				text-decoration: none;
+				padding: 1rem 1.4rem;
+				height: 100%;
+				line-height: 1;
+				display: flex;
+				align-items: center;
+				transition: all 300ms;
+
+				&.active,
+				&.hover {
+					border: none;
+					border-left: 4px solid $white;
+					text-decoration: none;
+				}
+			}
+		}
+
+		.header {
+			position: relative;
+
+			.fa {
+				position: absolute;
+		    top: 0px;
+		    right: 0px;
+		    font-size: 1.5rem;
+			}
+
+		}
+
+		.body {
+			flex: 1;
+		}
+
+		table {
+			thead {
+				color: $white
+			}
+		}
+
+		.footer {
+			border-top: 1px solid white;
+	    padding-top: 15px;
+	    text-align: center;
+	    margin-top: 25px;
+
+			.actions {
+				display: flex;
+		    flex-direction: row;
+		    justify-content: space-around;
+		    align-items: center;
+		    margin-top: 1rem;
+
+				.button {
+					justify-content: center;
+					min-width: 40%;
+
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+		}
+
+		&.show {
+			display: flex;
+		}
+	}
+
+}

@@ -2,17 +2,44 @@
 	position: relative;
 
 	input {
-		padding: .5rem 2.3rem .5rem .5rem;
 	}
 
 	.search-icon {
 		position: absolute;
 		right: 0;
 		top: 0;
-		height: 39px;
-		width: 39px;
+		height: 100%;
+    width: 2rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+}
+
+input,
+select,
+textarea {
+	box-shadow: 0 0 1px 1px rgba(10,10,10,0.1) inset;
+}
+
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea, select {
+	padding: .3rem 2.3rem .3rem .5rem;
+  height: 2.0375rem;
+}
+
+.form-group {
+	&.inline {
+		display: inline-flex;
+		width: 100%;
+
+		> input,
+		> select,
+		> button {
+			margin-right: 1.875rem;
+		}
+
+		:last-child {
+			margin-right: 0;
+		}
 	}
 }

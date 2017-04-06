@@ -14,6 +14,12 @@
 			}
 		}
 	}
+
+	.username {
+		text-transform: initial;
+		color: gold;
+		text-shadow: 1px 1px 5px $black;
+	}
 }
 
 .player-profile {
@@ -28,12 +34,6 @@
 
 	.profile-picture {
 		width: 220px;
-	}
-
-	.username {
-		text-transform: initial;
-		color: gold;
-		text-shadow: 1px 1px 5px $black;
 	}
 }
 

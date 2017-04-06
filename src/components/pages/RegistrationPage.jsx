@@ -51,10 +51,10 @@ class RegistrationPage extends React.Component {
 
 	handleSubmit(e) {
 		this.props.createUser(this.state.credentials).then((response) => {
-			let homeState = this.props.user.roleConfig.homeState;
 			this.showAlert('registrationSuccess');
-			browserHistory.push(homeState);
+			browserHistory.push('/login');
 		}).catch((error) => {
+			console.log(error);
 			if (error.message === 'Username taken') {
 				this.showAlert('invalidUsername');
 			}
@@ -69,7 +69,7 @@ class RegistrationPage extends React.Component {
 			'registrationSuccess': () => {
 				this.props.addAlert({
 					'title': 'Registration Success',
-					'message': 'You have successfully registered an account and were automatically logged in.',
+					'message': 'You have successfully registered an account. Please login to continue.',
 					'type': 'success',
 					'delay': 3000
 				});

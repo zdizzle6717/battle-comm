@@ -8,6 +8,7 @@ import IndexPage from './components/pages/IndexPage';
 import LoginPage from './components/pages/LoginPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import RegistrationPage from './components/pages/RegistrationPage';
+import SubscribePage from './components/pages/SubscribePage';
 import ForgotPasswordPage from './components/pages/ForgotPasswordPage';
 import PasswordResetPage from './components/pages/PasswordResetPage';
 
@@ -45,6 +46,7 @@ import CartPage from './components/pages/store/CartPage';
 import CheckoutPage from './components/pages/store/CheckoutPage';
 import OrderSuccessPage from './components/pages/store/OrderSuccessPage';
 import ProductPage from './components/pages/store/ProductPage';
+import RewardPointPurchasePage from './components/pages/store/RewardPointPurchasePage';
 import StorePage from './components/pages/store/StorePage';
 
 

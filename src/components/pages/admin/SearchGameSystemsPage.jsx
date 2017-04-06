@@ -7,6 +7,7 @@ import {Link} from 'react-router';
 import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
 import GameSystemActions from '../../../actions/GameSystemActions';
+import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
     return {'gameSystems': state.gameSystems}
@@ -14,7 +15,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        'searchGameSystems': GameSystems.search
+        'searchGameSystems': GameSystemActions.search
     }, dispatch)
 };
 
@@ -55,6 +56,9 @@ class SearchGameSystemsPage extends React.Component {
             <ViewWrapper>
 				<div className="small-12 columns">
 					<h1>Search Game Systems</h1>
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">
