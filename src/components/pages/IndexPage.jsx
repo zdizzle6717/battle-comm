@@ -189,7 +189,7 @@ class IndexPage extends React.Component {
 									</div>
 								</div>
 								<div className="small-12 columns">
-									<h2 className="text-right color-white" onClick={this.toggleModal.bind(this, 'showGameList')}><a>...and many more --></a></h2>
+									<h2 className="text-right" onClick={this.toggleModal.bind(this, 'showGameList')}><a className="underline color-white">...and many more --></a></h2>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>
@@ -217,7 +217,7 @@ class IndexPage extends React.Component {
 									<p className="indent">Find access to a worldwide community of dedicated table-top gamers and hobbyists as well as tools to promote your store, events, and gaming space to a worldwide community of dedicated table-top players. Earn system packs and a reward point vault for your future customers.</p>
 								</div>
 								<div className="small-12 columns text-center">
-									<Link to={`/news`} className="button small medium white center collapse">Read More</Link>
+									<Link to={`/news`} className="button medium center collapse">Read More</Link>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>
@@ -243,7 +243,7 @@ class IndexPage extends React.Component {
 									<p className="indent">Benefit from tools to help you organize, promote, and execute your gaming event with the ability to create game schedules on the fly, change matches as demands require, post results (and rewards) in real time, and track scoring and stats, all from a friendly, manageable online dashboard.</p>
 								</div>
 								<div className="small-12 columns text-center">
-									<Link to={`/news`} className="button small medium white center collapse">Read More</Link>
+									<Link to={`/news`} className="button medium center collapse">Read More</Link>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>

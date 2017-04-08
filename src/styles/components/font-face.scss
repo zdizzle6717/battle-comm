@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Mono Social Icons Font';
+    src: url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.eot');
+    src: url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'), url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.woff') format('woff'), url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.ttf') format('truetype'), url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
+    src: url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Titillium Thin Upright';
+    src: url('/fonts/Titillium/Titillium-ThinUpright.eot');
+    src: url('/fonts/Titillium/Titillium-ThinUpright.eot?#iefix') format('embedded-opentype'), url('/fonts/Titillium/Titillium-ThinUpright.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Titillium Regular Upright';
+    src: url('/fonts/Titillium/Titillium-RegularUpright.eot');
+    src: url('/fonts/Titillium/Titillium-RegularUpright.eot?#iefix') format('embedded-opentype'), url('/fonts/Titillium/Titillium-RegularUpright.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Titillium Semibold';
+    src: url('/fonts/Titillium/Titillium-Semibold.eot');
+    src: url('/fonts/Titillium/Titillium-Semibold.eot?#iefix') format('embedded-opentype'), url('/fonts/Titillium/Titillium-Semibold.ttf') format('truetype');
+}
+
+
+/* SOCIAL BUTTON LINKS */
+@font-face {
+    font-family: 'Mono Social Icons Font';
+    src: url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.eot');
+    src: url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'), url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.woff') format('woff'), url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.ttf') format('truetype'), url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
+    src: url('/fonts/MonoSocialIcons/MonoSocialIconsFont-1.10.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.si {
+	a {
+		&.si {
+			&:before {
+				font-family: 'Mono Social Icons Font';
+			}
+		}
+	}
+}
+
+a {
+	.si {
+		&:before {
+			content: attr(title);
+	    margin-right: 0.3em;
+	    font-size: 1.3rem;
+		}
+	}
+}

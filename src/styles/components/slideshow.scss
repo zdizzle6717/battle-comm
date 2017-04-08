@@ -9,8 +9,8 @@
 	overflow: hidden;
 	position: relative;
 	z-index: 10;
-	margin-top: -15px;
-  margin-bottom: -15px;
+	margin-top: -1.875rem;
+	margin-bottom: -1rem;
 
 	.da-slider {
 		width: 100%;
@@ -20,8 +20,8 @@
 		margin: 0;
 		overflow: hidden;
 		background: transparent url("../images/slideshow/waves.gif") repeat 0 0;
-		border-top: 8px solid #efc34a;
-		border-bottom: 8px solid #efc34a;
+		border-top: .5rem solid #efc34a;
+		border-bottom: .5rem solid #efc34a;
 		transition: background-position 1s ease-out 0.3s;
 	}
 
@@ -31,7 +31,6 @@
 		height: 100%;
 		top: 0;
 		left: 0;
-		font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 		text-align: left;
 
 		.da-img,
@@ -51,7 +50,6 @@
 			white-space: nowrap;
 			z-index: 10;
 			text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-			font-family: 'Economica', Arial, sans-serif;
 			font-weight: 700;
 			border: none;
 			background: none;
@@ -66,7 +64,6 @@
 			height: 80px;
 			overflow: hidden;
 			font-style: italic;
-			font-family: 'Economica', Arial, sans-serif;
 			font-weight: 400;
 			font-style: italic;
 		}

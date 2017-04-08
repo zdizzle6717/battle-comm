@@ -1,3 +1,46 @@
 table {
 	border-collapse: collapse;
+
+	tr {
+		td {
+			line-height: 2rem;
+		}
+		&:first-child {
+			th {
+				padding-bottom: .1rem;
+				border-bottom: 1px solid transparentize($black, .65);
+			}
+		}
+		&:nth-child(odd) {
+			background-color: transparentize($white, .85);
+		}
+	}
+
+	&.hover{
+		&:not(.unstriped) {
+			tr:nth-of-type(even) {
+				&:hover {
+				  background-color: transparentize($white, .75);
+				}
+			}
+		}
+
+		tr {
+			&:hover {
+				background-color: transparentize($white, .75);
+			}
+		}
+	}
+}
+
+@include breakpoint(medium down) {
+	table {
+		tr {
+			&:first-child {
+				th {
+					border-bottom: none;
+				}
+			}
+		}
+	}
 }

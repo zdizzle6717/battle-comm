@@ -173,6 +173,41 @@ $space-between: 3;
 
 }
 
+@include breakpoint(medium down) {
+	.content-box-container {
+		width: 94%;
+
+		@for $i from 1 through 6 {
+			@if $i == 2 {
+				.box-#{$i * 2} {
+					max-width: 100%;
+					margin-left: 0;
+					margin-right: 0;
+
+					&:first-child,
+					&:last-child {
+						max-width: 100%;
+						margin: 0 0 34px 0;
+					}
+				}
+			}
+			@if $i == 4 {
+				.box-#{$i * 2} {
+					max-width: 100%;
+					margin-left: 0;
+					margin-right: 0;
+
+					&:first-child,
+					&:last-child {
+						max-width: 100%;
+						margin: 0 0 34px 0;
+					}
+				}
+			}
+		}
+	}
+}
+
 @include breakpoint(small only) {
 	.content-box-container {
 		width: 96%;

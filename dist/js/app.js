@@ -18952,9 +18952,11 @@ function(e, t, n) {
                 }))), o.default.createElement("div", {
                     className: "small-12 columns"
                 }, o.default.createElement("h2", {
-                    className: "text-right color-white",
+                    className: "text-right",
                     onClick: this.toggleModal.bind(this, "showGameList")
-                }, o.default.createElement("a", null, "...and many more -->")))), o.default.createElement("div", {
+                }, o.default.createElement("a", {
+                    className: "underline color-white"
+                }, "...and many more -->")))), o.default.createElement("div", {
                     className: "box-bar-right"
                 })), o.default.createElement("div", {
                     className: "box-bottom"
@@ -18999,7 +19001,7 @@ function(e, t, n) {
                     className: "small-12 columns text-center"
                 }, o.default.createElement(s.Link, {
                     to: "/news",
-                    className: "button small medium white center collapse"
+                    className: "button medium center collapse"
                 }, "Read More"))), o.default.createElement("div", {
                     className: "box-bar-right"
                 })), o.default.createElement("div", {
@@ -19043,7 +19045,7 @@ function(e, t, n) {
                     className: "small-12 columns text-center"
                 }, o.default.createElement(s.Link, {
                     to: "/news",
-                    className: "button small medium white center collapse"
+                    className: "button medium center collapse"
                 }, "Read More"))), o.default.createElement("div", {
                     className: "box-bar-right"
                 })), o.default.createElement("div", {
@@ -23536,7 +23538,9 @@ function(e, t, n) {
                     className: "right"
                 }, o.default.createElement("span", {
                     className: "fa fa-list-ol"
-                }), " Leaderboards")), e.GameSystemRankings.length < 1 && o.default.createElement("h3", {
+                }), " Leaderboards")), o.default.createElement("div", {
+                    className: "small-12 columns"
+                }, e.GameSystemRankings.length < 1 && o.default.createElement("h3", {
                     className: "text-center"
                 }, "Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards."), e.GameSystemRankings.map(function(e, t) {
                     return o.default.createElement("div", {
@@ -23544,16 +23548,22 @@ function(e, t, n) {
                         className: "row"
                     }, o.default.createElement("h4", null, o.default.createElement(i.Link, {
                         key: "gameSystemRanking-" + t,
-                        to: "/ranking/search/" + e.GameSystem.id
+                        to: "/ranking/search/" + e.GameSystemId
                     }, e.GameSystem.name), ": ", e.totalWins, "/", e.totalLosses, "/", e.totalDraws), o.default.createElement("table", {
                         className: "search-results"
-                    }, o.default.createElement("tr", null, o.default.createElement("th", null, "Game System"), o.default.createElement("th", null, "Faction"), o.default.createElement("th", null, "Ranking W/L/D"), o.default.createElement("th", null, "Point Value")), e.FactionRankings.map(function(t, n) {
+                    }, o.default.createElement("tr", null, o.default.createElement("th", null, "Game System"), o.default.createElement("th", null, "Faction"), o.default.createElement("th", null, "Ranking W/L/D"), o.default.createElement("th", null, "Point Value")), e.FactionRankings.map(function(n, a) {
                         return o.default.createElement("tr", {
-                            key: n,
+                            key: a,
                             className: "item"
-                        }, o.default.createElement("td", null, e.GameSystem.name), o.default.createElement("td", null, t.Faction.name), o.default.createElement("td", null, t.totalWins, "/", t.totalLosses, "/", t.totalDraws), o.default.createElement("td", null, t.pointValue));
+                        }, o.default.createElement("td", null, o.default.createElement(i.Link, {
+                            key: "gameSystemRanking-" + t,
+                            to: "/ranking/search/" + e.GameSystemId
+                        }, e.GameSystem.name)), o.default.createElement("td", null, o.default.createElement(i.Link, {
+                            key: "gameSystemRanking-" + t,
+                            to: "/ranking/search/" + e.GameSystemId + "/" + n.FactionId
+                        }, n.Faction.name)), o.default.createElement("td", null, n.totalWins, "/", n.totalLosses, "/", n.totalDraws), o.default.createElement("td", null, n.pointValue));
                     })), o.default.createElement("hr", null));
-                }))), o.default.createElement("div", {
+                })))), o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -23815,8 +23825,9 @@ function(e, t, n) {
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
                 }, o.default.createElement("h2", null, "Allies ", o.default.createElement(i.Link, {
-                    key: "allySearch",
-                    to: "/players/profile/" + e.username + "/ally-search"
+                    key: "allyList",
+                    to: "/players/profile/" + e.username + "/ally-search",
+                    className: "right"
                 }, "View All")), o.default.createElement("div", {
                     className: "friend-list"
                 }, e.Friends.map(function(e, t) {
@@ -23842,10 +23853,15 @@ function(e, t, n) {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
-                }, o.default.createElement("h2", null, "Player Ranking (", o.default.createElement(i.Link, {
+                }, o.default.createElement("h2", null, "Player Ranking ", o.default.createElement(i.Link, {
                     key: "playerRanking",
-                    to: "ranking/search/all"
-                }, "Leaderboards"), ")"), e.GameSystemRankings.length < 1 && o.default.createElement("h3", {
+                    to: "ranking/search/all",
+                    className: "right"
+                }, o.default.createElement("span", {
+                    className: "fa fa-list-ol"
+                }), " Leaderboards")), o.default.createElement("div", {
+                    className: "small-12 columns"
+                }, e.GameSystemRankings.length < 1 && o.default.createElement("h3", {
                     className: "text-center"
                 }, e.username, " has not submitted any game results to the BC leaderboards"), e.GameSystemRankings.map(function(e, t) {
                     return o.default.createElement("div", {
@@ -23853,16 +23869,30 @@ function(e, t, n) {
                         className: "row"
                     }, o.default.createElement("h4", null, o.default.createElement(i.Link, {
                         key: "gameSystemRanking-" + t,
-                        to: "/ranking/search/" + e.GameSystem.id
+                        to: "/ranking/search/" + e.GameSystemId
                     }, e.GameSystem.name), ": ", e.totalWins, "/", e.totalLosses, "/", e.totalDraws), o.default.createElement("table", {
-                        className: "search-results"
-                    }, o.default.createElement("tr", null, o.default.createElement("th", null, "Game System"), o.default.createElement("th", null, "Faction"), o.default.createElement("th", null, "Ranking W/L/D"), o.default.createElement("th", null, "Point Value")), e.FactionRankings.map(function(t, n) {
+                        className: "search-results stack hover text-center"
+                    }, o.default.createElement("tr", null, o.default.createElement("th", {
+                        className: "text-center"
+                    }, "Game System"), o.default.createElement("th", {
+                        className: "text-center"
+                    }, "Faction"), o.default.createElement("th", {
+                        className: "text-center"
+                    }, "Ranking W/L/D"), o.default.createElement("th", {
+                        className: "text-center"
+                    }, "Point Value")), e.FactionRankings.map(function(n, a) {
                         return o.default.createElement("tr", {
-                            key: n,
+                            key: a,
                             className: "item"
-                        }, o.default.createElement("td", null, e.GameSystem.name), o.default.createElement("td", null, t.Faction.name), o.default.createElement("td", null, t.totalWins, "/", t.totalLosses, "/", t.totalDraws), o.default.createElement("td", null, t.pointValue));
+                        }, o.default.createElement("td", null, o.default.createElement(i.Link, {
+                            key: "gameSystemRanking-" + t,
+                            to: "/ranking/search/" + e.GameSystemId
+                        }, e.GameSystem.name)), o.default.createElement("td", null, o.default.createElement(i.Link, {
+                            key: "gameSystemRanking-" + t,
+                            to: "/ranking/search/" + e.GameSystemId + "/" + n.FactionId
+                        }, n.Faction.name)), o.default.createElement("td", null, n.totalWins, "/", n.totalLosses, "/", n.totalDraws), o.default.createElement("td", null, n.pointValue));
                     })), o.default.createElement("hr", null));
-                }))), o.default.createElement("div", {
+                })))), o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -24052,7 +24082,7 @@ function(e, t, n) {
                     className: "small-12 columns"
                 }, this.state.results.length > 0 && "all" !== this.props.params.gameSystemId ? o.default.createElement("table", {
                     className: "stack hover text-center"
-                }, o.default.createElement("thead", null, o.default.createElement("tr", null, o.default.createElement("th", {
+                }, o.default.createElement("tr", null, o.default.createElement("th", {
                     className: "text-center"
                 }, "Username"), o.default.createElement("th", {
                     className: "text-center"
@@ -24064,7 +24094,7 @@ function(e, t, n) {
                     className: "text-center"
                 }, "Point Value"), o.default.createElement("th", {
                     className: "text-center"
-                }, "View Profile"))), o.default.createElement("tbody", null, this.state.results.map(function(t, n) {
+                }, "View Profile")), this.state.results.map(function(t, n) {
                     return o.default.createElement("tr", {
                         key: n
                     }, o.default.createElement("td", null, o.default.createElement(u.Link, {
@@ -24082,7 +24112,7 @@ function(e, t, n) {
                     })), o.default.createElement("span", {
                         className: "mobile-text"
                     }, " View"))));
-                }))) : o.default.createElement("h3", null, "No results found with the selected options. Choose a ", o.default.createElement("strong", null, "Game System"), " and/or ", o.default.createElement("strong", null, "Faction"), " to display new ranking search results."), o.default.createElement("hr", null), o.default.createElement("div", {
+                })) : o.default.createElement("h3", null, "No results found with the selected options. Choose a ", o.default.createElement("strong", null, "Game System"), " and/or ", o.default.createElement("strong", null, "Faction"), " to display new ranking search results."), o.default.createElement("hr", null), o.default.createElement("div", {
                     className: "small-12 columns"
                 }, o.default.createElement(h.PaginationControls, {
                     pageNumber: this.state.pagination.pageNumber,
@@ -24240,7 +24270,7 @@ function(e, t, n) {
                     className: "small-12 columns"
                 }, o.default.createElement("table", {
                     className: "stack hover text-center"
-                }, o.default.createElement("thead", null, o.default.createElement("tr", null, o.default.createElement("th", {
+                }, o.default.createElement("tr", null, o.default.createElement("th", {
                     className: "text-center"
                 }, "Handle"), o.default.createElement("th", {
                     className: "text-center"
@@ -24248,7 +24278,7 @@ function(e, t, n) {
                     className: "text-center"
                 }, "Go To Profile"), o.default.createElement("th", {
                     className: "text-center"
-                }, "Player Icon"))), o.default.createElement("tbody", null, this.props.players.map(function(t, n) {
+                }, "Player Icon")), this.props.players.map(function(t, n) {
                     return o.default.createElement("tr", {
                         key: n
                     }, o.default.createElement("td", null, t.username), o.default.createElement("td", null, t.firstName && t.lastName ? t.lastName + ", " + t.firstName : "anonymous"), o.default.createElement("td", null, o.default.createElement(u.Link, {
@@ -24265,7 +24295,7 @@ function(e, t, n) {
                         src: "" + e.getPlayerIcon(t),
                         className: "image-tiny"
                     }))));
-                }))), o.default.createElement("hr", null), o.default.createElement("div", {
+                })), o.default.createElement("hr", null), o.default.createElement("div", {
                     className: "small-12 columns"
                 }, o.default.createElement(p.PaginationControls, {
                     pageNumber: this.state.pagination.pageNumber,

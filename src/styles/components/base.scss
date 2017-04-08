@@ -1,7 +1,9 @@
 // Base Styles that overwrite foundation imported stylesheet
 
 html, body {
-  font-family: 'PT Sans', sans-serif;
+  // font-family: 'PT Sans', sans-serif;
+	font-family: Titillium Regular Upright;
+	font-weight: 400;
   color: #4a4a4a;
 	background: $white;
 	-webkit-font-smoothing: antialiased;
@@ -9,14 +11,19 @@ html, body {
 
 body {
 	background: url('../images/BC_Web_tilebg.png') repeat #090d1c;
+	text-rendering: optimizeLegibility;
+	font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'PT Sans';
+    // font-family: 'PT Sans';
+		font-family: Titillium Regular Upright;
+		letter-spacing: .1rem;
 }
 
 h1 {
 	font-size: 2.5rem;
+	line-height: 2rem;
 }
 
 h2 {
@@ -127,6 +134,11 @@ fieldset {
 .twitter-widget {
 	height: 427px;
 	overflow: auto;
+
+	iframe {
+		width: 100% !important;
+    min-width: 0 !important;
+	}
 }
 
 

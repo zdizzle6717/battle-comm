@@ -5,12 +5,41 @@
 	}
 
 	.friend-list {
-		.icon-box {
-			.icon {
+		display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
+		.icon-box {
+			position: relative;
+
+			&:hover {
+				.name-label {
+					color: $white-500;
+					background: transparentize($black, .25);
+				}
+			}
+			.icon {
+				width: 90px;
+				height: 90px;
+				box-shadow: $shadow-1;
 			}
 			.name-label {
-
+				position: absolute;
+		    width: 100%;
+		    left: 0;
+		    bottom: 0;
+		    background: transparentize($black, .5);
+		    text-align: center;
+		    color: $white-900;
+		    padding: 2px;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    font-weight: 800;
+		    font-size: .8rem;
+		    line-height: 17px;
+				transition: background 150ms, color 150ms;
 			}
 		}
 	}

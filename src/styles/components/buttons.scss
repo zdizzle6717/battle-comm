@@ -33,6 +33,18 @@
 		background: transparentize(lighten($primary-500, 3%), .1);
 		outline: none;
 	}
+
+	&.small {
+		font-size: .8rem;
+		max-width: 7rem;
+	}
+	&.medium {
+		max-width: 14rem;
+	}
+	&.large {
+		max-width: 20rem;
+	}
+
 	@each $name, $color in $foundation-palette {
 		&.#{$name} {
 			background: $color;

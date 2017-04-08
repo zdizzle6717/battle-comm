@@ -145,7 +145,7 @@ export default class PlayerProfilePage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Allies <Link key="allySearch" to={`/players/profile/${player.username}/ally-search`}>View All</Link></h2>
+							<h2>Allies <Link key="allyList" to={`/players/profile/${player.username}/ally-search`} className="right">View All</Link></h2>
 							<div className="friend-list">
 								{
 									player.Friends.map((friend, i) =>
@@ -172,37 +172,39 @@ export default class PlayerProfilePage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Player Ranking (<Link key="playerRanking" to="ranking/search/all">Leaderboards</Link>)</h2>
-							{
-								player.GameSystemRankings.length < 1 &&
-								<h3 className="text-center">{player.username} has not submitted any game results to the BC leaderboards</h3>
-							}
-							{
-								player.GameSystemRankings.map((gameRanking, i) =>
-								<div key={i} className="row">
-									<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystem.id}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
-									<table className="search-results">
-										<tr>
-											<th>Game System</th>
-											<th>Faction</th>
-											<th>Ranking W/L/D</th>
-											<th>Point Value</th>
-										</tr>
-										{
-											gameRanking.FactionRankings.map((factionRanking, j) =>
-												<tr key={j} className="item">
-													<td>{gameRanking.GameSystem.name}</td>
-													<td>{factionRanking.Faction.name}</td>
-													<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
-													<td>{factionRanking.pointValue}</td>
-												</tr>
-											)
-										}
-									</table>
-									<hr />
-								</div>
-								)
-							}
+							<h2>Player Ranking <Link key="playerRanking" to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<div className="small-12 columns">
+								{
+									player.GameSystemRankings.length < 1 &&
+									<h3 className="text-center">{player.username} has not submitted any game results to the BC leaderboards</h3>
+								}
+								{
+									player.GameSystemRankings.map((gameRanking, i) =>
+									<div key={i} className="row">
+										<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
+										<table className="search-results stack hover text-center">
+											<tr>
+												<th className="text-center">Game System</th>
+												<th className="text-center">Faction</th>
+												<th className="text-center">Ranking W/L/D</th>
+												<th className="text-center">Point Value</th>
+											</tr>
+											{
+												gameRanking.FactionRankings.map((factionRanking, j) =>
+													<tr key={j} className="item">
+														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link></td>
+														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`}>{factionRanking.Faction.name}</Link></td>
+														<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
+														<td>{factionRanking.pointValue}</td>
+													</tr>
+												)
+											}
+										</table>
+										<hr />
+									</div>
+									)
+								}
+							</div>
 						</div>
 					</div>
 					<div className="row">
