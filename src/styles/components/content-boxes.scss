@@ -10,7 +10,7 @@ $space-between: 3;
 		.box-#{$i * 2} {
 			width: 100%;
 			display: flex;
-			margin-bottom: 50px;
+			margin-bottom: 3.125rem;
 			float: left;
 			// TODO: Fix this
 			max-width: percentage(($i/6) - ($space-between * .01));
@@ -20,16 +20,16 @@ $space-between: 3;
 				margin-left: percentage(.015);
 				margin-right: percentage(.015);
 			} @else {
-				margin: 0 0 50px 0;
+				margin: 0 0 3.125rem 0;
 			}
 
 			&:first-child {
-				margin-left: 0px;
+				margin-left: 0;
 				max-width: percentage(($i/6) - ($space-between * .01)/2);
 			}
 
 			&:last-child {
-				margin-right: 0px;
+				margin-right: 0;
 				max-width: percentage(($i/6) - .015);
 			}
 
@@ -39,22 +39,10 @@ $space-between: 3;
 				}
 			}
 
-			@include breakpoint(small only) {
-				max-width: 100%;
-				margin-left: 0;
-				margin-right: 0;
-
-				&:first-child,
-				&:last-child {
-					max-width: 100%;
-					margin: 0 0 34px 0;
-				}
-			}
-
 			.box-top,
 			.box-bottom {
-				height: 24px;
-				max-height: 24px;
+				height: 1.5rem;
+				max-height: 1.5rem;
 				display: flex;
 				flex-direction: row;
 			}
@@ -62,8 +50,8 @@ $space-between: 3;
 			.box-top {
 				.box-corner-tl,
 				.box-corner-tr {
-					height: 24px;
-					width: 40px;
+					height: 1.5rem;
+					width: 2.5rem;
 					z-index: 1;
 				}
 
@@ -78,29 +66,32 @@ $space-between: 3;
 				.box-bar-top {
 					position: relative;
 					width: 100%;
-    			margin: 0 -18px;
+    			margin: 0 -1.125rem;
 
 					.bar {
 						position: absolute;
 						background: url('../images/contentBox/BC_Web_WindowU.png') 0 repeat-x;
 						width: 100%;
-						height: 24px;
-						top: 4px;
+						height: 1.5rem;
+						top: 0.25rem;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
 
 						.title {
 							&.small {
-								max-height: 92px;
-								position: absolute;
-								top: -1.75rem;
-								left: 4%;
-								max-width: 92%;
+								max-width: 90%;
+								margin-left: 5%;
+								margin-bottom: 2%;
 							}
 
 							&.large {
-								max-height: 97px;
-    						position: absolute;
-					    	top: -2.25rem;
-					    	left: 4%;
+								max-width: 50%;
+    						margin-left: 3%;
+
+								@include breakpoint(small only) {
+									max-width: 90%;
+								}
 							}
 						}
 					}
@@ -114,8 +105,8 @@ $space-between: 3;
 
 				.box-bar-left,
 				.box-bar-right {
-	    		width: 20px;
-					min-width: 20px;
+	    		width: 1.25rem;
+					min-width: 1.25rem;
 				}
 
 				.box-bar-left {
@@ -129,8 +120,8 @@ $space-between: 3;
 				.box-content {
 					width: 100%;
 					padding: 1.875rem 0 1rem 0;
-					margin-left: -1px;
-					margin-right: -1px;
+					margin-left: -0.0625rem;
+					margin-right: -0.0625rem;
 					overflow: hidden;
 					background: url('../images/contentBox/BC_App_9tile_C.png') top left repeat;
 				}
@@ -140,8 +131,8 @@ $space-between: 3;
 			.box-bottom {
 				.box-corner-bl,
 				.box-corner-br {
-					height: 24px;
-					width: 40px;
+					height: 1.5rem;
+					width: 2.5rem;
 					z-index: 1;
 				}
 
@@ -156,14 +147,14 @@ $space-between: 3;
 				.box-bar-bottom {
 					position: relative;
 					width: 100%;
-					margin: 0 -18px;
+					margin: 0 -1.125rem;
 
 					.bar {
 						position: absolute;
 						background: url('../images/contentBox/BC_Web_WindowB.png') 0 repeat-x;
 						width: 100%;
-						height: 24px;
-						bottom: 4px;
+						height: 1.5rem;
+						bottom: 0.25rem;
 					}
 				}
 
@@ -175,7 +166,7 @@ $space-between: 3;
 
 @include breakpoint(medium down) {
 	.content-box-container {
-		width: 94%;
+		width: 97.5%;
 
 		@for $i from 1 through 6 {
 			@if $i == 2 {
@@ -187,7 +178,7 @@ $space-between: 3;
 					&:first-child,
 					&:last-child {
 						max-width: 100%;
-						margin: 0 0 34px 0;
+						margin: 0 0 2.125rem 0;
 					}
 				}
 			}
@@ -200,7 +191,7 @@ $space-between: 3;
 					&:first-child,
 					&:last-child {
 						max-width: 100%;
-						margin: 0 0 34px 0;
+						margin: 0 0 2.125rem 0;
 					}
 				}
 			}
@@ -210,7 +201,7 @@ $space-between: 3;
 
 @include breakpoint(small only) {
 	.content-box-container {
-		width: 96%;
+		width: 99%;
 
 		@for $i from 1 through 6 {
 			.box-#{$i * 2} {
@@ -221,8 +212,72 @@ $space-between: 3;
 				&:first-child,
 				&:last-child {
 					max-width: 100%;
-					margin: 0 0 34px 0;
+					margin: 0 0 2.125rem 0;
 				}
+
+				.box-top,
+				.box-bottom {
+					height: .6875rem;
+					max-height: .6875rem;
+				}
+
+				.box-top {
+					.box-corner-tl,
+					.box-corner-tr {
+						height: .6875rem;
+						max-height: .6875rem;
+						width: 1.25rem;
+						background-size: 100%;
+					}
+
+					.box-bar-top {
+	    			margin: 0 -0.5625rem;
+
+						.bar {
+							height: .75rem;
+							top: 0;
+							background-size: .65%;
+						}
+					}
+				}
+
+				.box-middle {
+
+					.box-bar-left,
+					.box-bar-right {
+		    		width: 0.625rem;
+						min-width: 0.625rem;
+						background-size: 100%;
+					}
+
+					.box-content {
+						padding: 1.875rem 0 1rem 0;
+						margin-left: 0;
+						margin-right: 0;
+						background: url('../images/contentBox/BC_App_9tile_C.png') top left repeat;
+					}
+				}
+
+				.box-bottom {
+					.box-corner-bl,
+					.box-corner-br {
+						height: .6875rem;
+						max-height: .6875rem;
+						width: 1.25rem;
+						background-size: 100%;
+					}
+
+					.box-bar-bottom {
+						margin: 0 -0.5625rem;
+
+						.bar {
+							height: .75rem;
+							top: -.1875rem;
+							background-size: .65%;
+						}
+					}
+				}
+
 			}
 		}
 	}

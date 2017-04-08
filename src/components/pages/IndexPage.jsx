@@ -175,16 +175,16 @@ class IndexPage extends React.Component {
                             <div className="box-bar-left"></div>
                             <div className="box-content">
 								<div className="row">
-									<div className="small-12 medium-3 columns">
+									<div className="small-12 medium-3 columns text-center">
 										<img src="/images/logos/dropzone-commander.png" />
 									</div>
-									<div className="small-12 medium-3 columns">
+									<div className="small-12 medium-3 columns text-center">
 										<img src="/images/logos/magic-the-gathering.png" />
 									</div>
-									<div className="small-12 medium-3 columns">
+									<div className="small-12 medium-3 columns text-center">
 										<img src="/images/logos/x-wing-fantasy-flight.png" />
 									</div>
-									<div className="small-12 medium-3 columns">
+									<div className="small-12 medium-3 columns text-center">
 										<img src="/images/logos/warhammer-40k.png" />
 									</div>
 								</div>

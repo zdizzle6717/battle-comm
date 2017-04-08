@@ -8,7 +8,7 @@ table {
 		&:first-child {
 			th {
 				padding-bottom: .1rem;
-				border-bottom: 1px solid transparentize($black, .65);
+				border-bottom: 1px solid transparentize($black, .85);
 			}
 		}
 		&:nth-child(odd) {

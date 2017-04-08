@@ -242,6 +242,28 @@ header {
 		}
 	}
 }
+
+.logo-banner {
+	position: relative;
+	top: -0.625rem;
+	min-height: 200px;
+	width: 100%;
+	min-width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	background: url(../images/BC_Web_NavBar.png) no-repeat scroll center center/1192px transparent;
+
+	.logo {
+		margin-top: 4.3125rem;
+	}
+
+	.mobile-logo {
+		display: none;
+	}
+}
+
 // Media Query
 @media screen and (max-width: 1020px) {
 	header {
@@ -307,6 +329,19 @@ header {
 					display: none;
 				}
 			}
+		}
+	}
+}
+@include breakpoint (small only) {
+	.logo-banner {
+		top: -2.625rem;
+
+		.logo {
+			margin-top: 6.25rem;
+		}
+
+		.mobile-logo {
+			display: none;
 		}
 	}
 }

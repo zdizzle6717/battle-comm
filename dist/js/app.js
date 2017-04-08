@@ -18934,19 +18934,19 @@ function(e, t, n) {
                 }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
-                    className: "small-12 medium-3 columns"
+                    className: "small-12 medium-3 columns text-center"
                 }, o.default.createElement("img", {
                     src: "/images/logos/dropzone-commander.png"
                 })), o.default.createElement("div", {
-                    className: "small-12 medium-3 columns"
+                    className: "small-12 medium-3 columns text-center"
                 }, o.default.createElement("img", {
                     src: "/images/logos/magic-the-gathering.png"
                 })), o.default.createElement("div", {
-                    className: "small-12 medium-3 columns"
+                    className: "small-12 medium-3 columns text-center"
                 }, o.default.createElement("img", {
                     src: "/images/logos/x-wing-fantasy-flight.png"
                 })), o.default.createElement("div", {
-                    className: "small-12 medium-3 columns"
+                    className: "small-12 medium-3 columns text-center"
                 }, o.default.createElement("img", {
                     src: "/images/logos/warhammer-40k.png"
                 }))), o.default.createElement("div", {
@@ -23557,10 +23557,12 @@ function(e, t, n) {
                             className: "item"
                         }, o.default.createElement("td", null, o.default.createElement(i.Link, {
                             key: "gameSystemRanking-" + t,
-                            to: "/ranking/search/" + e.GameSystemId
+                            to: "/ranking/search/" + e.GameSystemId,
+                            className: "color-black"
                         }, e.GameSystem.name)), o.default.createElement("td", null, o.default.createElement(i.Link, {
                             key: "gameSystemRanking-" + t,
-                            to: "/ranking/search/" + e.GameSystemId + "/" + n.FactionId
+                            to: "/ranking/search/" + e.GameSystemId + "/" + n.FactionId,
+                            className: "color-black"
                         }, n.Faction.name)), o.default.createElement("td", null, n.totalWins, "/", n.totalLosses, "/", n.totalDraws), o.default.createElement("td", null, n.pointValue));
                     })), o.default.createElement("hr", null));
                 })))), o.default.createElement("div", {
@@ -23886,10 +23888,12 @@ function(e, t, n) {
                             className: "item"
                         }, o.default.createElement("td", null, o.default.createElement(i.Link, {
                             key: "gameSystemRanking-" + t,
-                            to: "/ranking/search/" + e.GameSystemId
+                            to: "/ranking/search/" + e.GameSystemId,
+                            className: "color-black"
                         }, e.GameSystem.name)), o.default.createElement("td", null, o.default.createElement(i.Link, {
                             key: "gameSystemRanking-" + t,
-                            to: "/ranking/search/" + e.GameSystemId + "/" + n.FactionId
+                            to: "/ranking/search/" + e.GameSystemId + "/" + n.FactionId,
+                            className: "color-black"
                         }, n.Faction.name)), o.default.createElement("td", null, n.totalWins, "/", n.totalLosses, "/", n.totalDraws), o.default.createElement("td", null, n.pointValue));
                     })), o.default.createElement("hr", null));
                 })))), o.default.createElement("div", {

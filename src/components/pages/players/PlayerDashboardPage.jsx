@@ -301,8 +301,8 @@ class PlayerDashboardPage extends React.Component {
 											{
 												gameRanking.FactionRankings.map((factionRanking, j) =>
 													<tr key={j} className="item">
-														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link></td>
-														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`}>{factionRanking.Faction.name}</Link></td>
+														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
 														<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
 														<td>{factionRanking.pointValue}</td>
 													</tr>

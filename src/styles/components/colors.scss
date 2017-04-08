@@ -3,4 +3,16 @@
 	.color-#{$name} {
 		color: $color;
 	}
+
+	a {
+		&.color-#{$name} {
+			color: $color;
+
+			&:hover {
+				color: $color;
+				text-decoration: underline;
+			}
+		}
+	}
+
 }
