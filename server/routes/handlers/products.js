@@ -39,12 +39,12 @@ let products = {
         'tags': request.payload.tags,
         'category': request.payload.category,
         'stockQty': request.payload.stockQty,
-        'inStock': request.payload.inStock,
+        'isInStock': request.payload.isInStock,
         'filterVal': request.payload.filterVal,
-        'displayStatus': request.payload.displayStatus,
-        'featured': request.payload.featured,
-        'new': request.payload.new,
-        'onSale': request.payload.onSale
+        'isDisplayed': request.payload.isDisplayed,
+        'isFeatured': request.payload.isFeatured,
+        'isNew': request.payload.isNew,
+        'isOnSale': request.payload.isOnSale
       })
       .then((response) => {
         reply(response).code(200);
@@ -72,12 +72,12 @@ let products = {
             'tags': request.payload.tags,
             'category': request.payload.category,
             'stockQty': request.payload.stockQty,
-            'inStock': request.payload.inStock,
+            'isInStock': request.payload.isInStock,
             'filterVal': request.payload.filterVal,
-            'displayStatus': request.payload.displayStatus,
-            'featured': request.payload.featured,
-            'new': request.payload.new,
-            'onSale': request.payload.onSale
+            'isDisplayed': request.payload.isDisplayed,
+            'isFeatured': request.payload.isFeatured,
+            'isNew': request.payload.isNew,
+            'isOnSale': request.payload.isOnSale
           }).then((response) => {
             reply(response).code(200);
           });

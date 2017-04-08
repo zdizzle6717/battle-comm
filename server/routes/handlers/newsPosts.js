@@ -86,27 +86,27 @@ let newsPosts = {
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
-          '$like': '%' + searchQuery + '%'
+          '$iLike': '%' + searchQuery + '%'
         }
       } : {
         '$or': [{
             'title': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'tags': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'body': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'category': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           }
         ]

@@ -34,7 +34,10 @@ let gameSystems = {
           {
             'model': models.Faction
           }
-        ]
+        ],
+				'order': [
+					['name', 'ASC']
+				]
       })
       .then((response) => {
         reply(response).code(200);
@@ -82,17 +85,17 @@ let gameSystems = {
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
-          '$like': '%' + searchQuery + '%'
+          '$iLike': '%' + searchQuery + '%'
         }
       } : {
         '$or': [{
             'name': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'description': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           }
         ]

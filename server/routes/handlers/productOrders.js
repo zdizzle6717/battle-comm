@@ -122,27 +122,27 @@ let productOrders = {
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
-          '$like': '%' + searchQuery + '%'
+          '$iLike': '%' + searchQuery + '%'
         }
       } : {
         '$or': [{
             'customerFullName': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'customerEmail': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'shippingCity': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'shippingStreet': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           }
         ]

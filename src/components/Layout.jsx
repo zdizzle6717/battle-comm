@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Animation from 'react-addons-css-transition-group';
 import TopNav from './pieces/TopNav';
+import Footer from './pieces/Footer';
 import {Alerts} from '../library/alerts'
 import {Loader} from '../library/loader';
 import {UserActions} from '../library/authentication';
@@ -48,7 +49,7 @@ class Layout extends React.Component {
 				</Animation>
 				<Alerts></Alerts>
 				<Loader></Loader>
-	        <footer>This is the footer.</footer>
+	        <Footer></Footer>
 	      </div>
 	    );
     }

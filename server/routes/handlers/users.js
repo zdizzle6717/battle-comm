@@ -401,22 +401,22 @@ let users = {
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
-          '$like': '%' + searchQuery + '%'
+          '$iLike': '%' + searchQuery + '%'
         }
       } : {
         '$or': [{
             'username': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'email': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'lastName': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           }
         ]

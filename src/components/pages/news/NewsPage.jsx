@@ -37,14 +37,25 @@ export default class NewsPage extends React.Component {
 					<div className="small-12 columns">
 						{
 							this.state.newsPosts.map((post, i) =>
-								<div className="news-posts">
-									<h3>{post.title}</h3>
-									<h4>Author: {post.User.username} | {formatJSONDate(post.updated_at)}</h4>
-									<div className="summary">
-										<img src="/uploads/news/missing.jpg" />
-										{post.summary} <Link to={`/news/post/${post.id}`}>...</Link>
+								<div key={i} className="news-post">
+									<h3><Link to={`/news/post/${post.id}`} className="underline">{post.title}</Link></h3>
+									<div className="row">
+										<div className="small-6 medium-3 columns"><strong>Author:</strong> {post.User.firstName} {post.User.lastName}</div>
+										<div className="small-6 medium-3 columns"><strong>Date:</strong> {formatJSONDate(post.updated_at)}</div>
+										<div className="small-6 medium-3 columns"><strong>Category:</strong> {post.category}</div>
 									</div>
-									<Link to={`/news/post/${post.id}`}>Read More</Link>
+									<div className="summary push-top">
+										<img src="/uploads/news/missing.jpg" />
+										{post.callout} <Link to={`/news/post/${post.id}`}>...</Link>
+									</div>
+									<div className="row push-top">
+										<div className="small-12 columns"><strong>Tags:</strong> {post.tags}</div>
+									</div>
+									<div className="row">
+										<div className="small-12 columns text-right">
+											<Link to={`/news/post/${post.id}`} className="button small white right collapse">Read More</Link>
+										</div>
+									</div>
 								</div>
 							)
 						}

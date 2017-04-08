@@ -11,13 +11,15 @@ export default class NewsPostPage extends React.Component {
         super();
 
 		this.state = {
-			'post': {}
+			'post': {
+				'User': {}
+			}
 		}
     }
 
     componentDidMount() {
         document.title = "Battle-Comm | News Post";
-		NewsPostService.get(this.props.postId).then((post) => {
+		NewsPostService.get(this.props.params.postId).then((post) => {
 			this.setState({
 				'post': post
 			})
@@ -25,22 +27,34 @@ export default class NewsPostPage extends React.Component {
     }
 
     render() {
+		let post = this.state.post;
         return (
             <ViewWrapper>
                 <div className="row">
 					<div className="small-12 columns">
-						<h1>News Post</h1>
+						<h1>{post.title}</h1>
 						<hr />
 					</div>
                 </div>
 				<div className="row">
 					<div className="small-12 columns">
-						<div className="news-posts">
-							<h3>{post.title}</h3>
-							<h4>Author: {post.User.username} | {formatJSONDate(post.updated_at)}</h4>
-							<div className="summary">
+						<div className="news-post">
+							<div className="row">
+								<div className="small-6 medium-3 columns"><strong>Author:</strong> {post.User.firstName} {post.User.lastName}</div>
+								<div className="small-6 medium-3 columns"><strong>Date:</strong> {formatJSONDate(post.updated_at)}</div>
+								<div className="small-6 medium-3 columns"><strong>Category:</strong> {post.category}</div>
+							</div>
+							<div className="summary push-top">
 								<img src="/uploads/news/missing.jpg" />
-								{post.summary}
+								{post.body}
+							</div>
+							<div className="row push-top">
+								<div className="small-12 columns"><strong>Tags:</strong> {post.tags}</div>
+							</div>
+							<div className="row">
+								<div className="small-12 columns text-right">
+									<Link to={`/news`} className="button small medium white right collapse">Back to News List</Link>
+								</div>
 							</div>
 						</div>
 					</div>

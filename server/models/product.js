@@ -9,15 +9,15 @@ module.exports = function(sequelize, DataTypes) {
     'tags': DataTypes.STRING,
     'category': DataTypes.STRING,
     'stockQty': DataTypes.INTEGER,
-    'inStock': DataTypes.BOOLEAN,
     'filterVal': {
 			'type': DataTypes.STRING,
 			'defaultValue': 'showit'
 		},
-    'displayStatus': DataTypes.BOOLEAN,
-    'featured': DataTypes.BOOLEAN,
-    'new': DataTypes.BOOLEAN,
-    'onSale': DataTypes.BOOLEAN
+		'isInStock': DataTypes.BOOLEAN,
+    'isDisplayed': DataTypes.BOOLEAN,
+    'isFeatured': DataTypes.BOOLEAN,
+    'isNew': DataTypes.BOOLEAN,
+    'isOnSale': DataTypes.BOOLEAN
   }, {
     'classMethods': {
       associate: function(models) {

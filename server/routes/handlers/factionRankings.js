@@ -9,7 +9,7 @@ let factionRankings = {
     let offset = (request.payload.pageNumber - 1) * pageSize;
     models.FactionRanking.findAndCountAll({
         'where': {
-          'FactionId': request.payload.FactionId
+          'FactionId': request.params.id
         },
         'include': [{
             'model': models.Faction,

@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
+		'getGameSystem': GameSystemActions.get,
 		'getGameSystems': GameSystemActions.getAll
 	}, dispatch);
 }
@@ -56,7 +57,7 @@ class PlayerRankingSearchPage extends React.Component {
 			// TODO: Search all player ranking (might need a new endpoint)
 			// OR: Don't search, display select options for gameSystem/Faction
 		} else {
-			GameSystemService.get(this.props.params.gameSystemId).then((gameSystem) => {
+			this.props.getGameSystem(this.props.params.gameSystemId).then((gameSystem) => {
 				this.setState({
 					'selectedGameSystem': gameSystem
 				});
@@ -66,13 +67,15 @@ class PlayerRankingSearchPage extends React.Component {
     }
 
 	handleFactionChange(e) {
+		e.preventDefault();
 		let factionId = e.target.value;
-		browserHistory.push(`/players/ranking/search/${this.props.params.gameSystemId}/${factionId}`);
+		browserHistory.push(`/ranking/search/${this.props.params.gameSystemId}/${factionId}`);
 	}
 
 	handleGameSystemChange(e) {
+		e.preventDefault();
 		let gameSystemId = e.target.value;
-		let goToUrl = this.props.params.factionId ? `/players/ranking/search/${gameSystemId}/${this.props.params.factionId}` : `/players/ranking/search/${gameSystemId}`;
+		let goToUrl = `/ranking/search/${gameSystemId}`;
 		browserHistory.push(goToUrl);
 	}
 
@@ -126,13 +129,12 @@ class PlayerRankingSearchPage extends React.Component {
             <ViewWrapper>
 				<div className="small-12 columns">
 					<h1>Player Ranking Search</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
 				</div>
+				<hr/>
 				<div className="row">
 					<div className="small-12 medium-6 columns">
 						<div className="form-group">
+							<label>Game System</label>
 							<select name="gameSystemId" value={this.props.params.gameSystemId || ''} onChange={this.handleGameSystemChange}>
 								<option value="">--Select--</option>
 								{
@@ -145,8 +147,9 @@ class PlayerRankingSearchPage extends React.Component {
 					</div>
 					<div className="small-12 medium-6 columns">
 						<div className="form-group">
+							<label>Faction</label>
 							<select name="factionId" value={this.props.params.factionId || ''} onChange={this.handleFactionChange}>
-								<option value="">--Select--</option>
+								<option value="">All Factions</option>
 								{
 									this.state.selectedGameSystem.Factions.map((faction, i) =>
 										<option key={i} value={faction.id}>{faction.name}</option>
@@ -160,32 +163,32 @@ class PlayerRankingSearchPage extends React.Component {
 				<div className="small-12 columns">
 					{
 						this.state.results.length > 0 && this.props.params.gameSystemId !== 'all' ?
-						<table>
+						<table className="stack hover text-center">
 							<thead>
 								<tr>
-									<th>Username</th>
-									<th>Total Wins</th>
-									<th>Total Draws</th>
-									<th>Total Losses</th>
-									<th>Point Value</th>
-									<th>View Profile</th>
+									<th className="text-center">Username</th>
+									<th className="text-center">Total Wins</th>
+									<th className="text-center">Total Draws</th>
+									<th className="text-center">Total Losses</th>
+									<th className="text-center">Point Value</th>
+									<th className="text-center">View Profile</th>
 								</tr>
 							</thead>
 							<tbody>
 								{
 									this.state.results.map((results, i) =>
 										<tr key={i}>
-											<td>{results.User.username}</td>
+											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>{this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}</Link></td>
 											<td>{results.totalWins}</td>
 											<td>{results.totalDraws}</td>
 											<td>{results.totalLosses}</td>
 											<td>{results.pointValue}</td>
 											<td>
-												<Link className="action-item" key="playerProfile" to={`/players/profile/${results.User.username}`}>
+												<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-eye"></i>
 													</span>
-													<span className="mobile-text">View</span>
+													<span className="mobile-text"> View</span>
 												</Link>
 											</td>
 										</tr>

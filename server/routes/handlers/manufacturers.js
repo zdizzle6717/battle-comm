@@ -73,17 +73,17 @@ let manufacturers = {
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
-          '$like': '%' + searchQuery + '%'
+          '$iLike': '%' + searchQuery + '%'
         }
       } : {
         '$or': [{
             'name': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           },
           {
             'description': {
-              '$like': '%' + searchQuery + '%'
+              '$iLike': '%' + searchQuery + '%'
             }
           }
         ]

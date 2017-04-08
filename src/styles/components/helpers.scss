@@ -11,6 +11,21 @@
 	font-weight: 700 !important;
 }
 
+.underline {
+	text-decoration: underline;
+}
+
+a {
+	&.underline {
+		text-decoration: underline;
+	}
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+
 p{
 	&.indent {
 		&:before {
@@ -22,6 +37,9 @@ p{
 
 .right {
 	float: right;
+}
+.center {
+	margin: 0 auto;
 }
 .left {
 	float: left;
@@ -40,11 +58,11 @@ p{
 
 // Collapse
 .collapse {
-	padding: 0 !important;
+	padding: 0;
 }
 
 .collapse-margin {
-	margin: 0 !important;
+	margin: 0;
 }
 
 // Miscellaneous
@@ -68,6 +86,10 @@ p{
 	.collapse-small {
 		padding: 0;
 	}
+}
+
+.column-filler {
+	min-height: 1px;
 }
 
 // Margins

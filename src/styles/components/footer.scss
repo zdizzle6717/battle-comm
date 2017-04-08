@@ -1,12 +1,119 @@
 footer {
-	width: 100%;
-    margin: auto 0;
-	margin-top: 3.3rem;
-    padding: .5rem;
-    text-align: center;
-	background: $gray;
-	color: $black;
-    bottom: 0;
+	color: $white;
+	text-shadow: $shadow-3;
 	position: relative;
+	width: 100%;
+	margin-top: 3.3rem;
+	bottom: 0;
 	z-index: 80;
+
+	h4 {
+		font-size: 1.2rem;
+	}
+
+	.contact-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 16px;
+
+		h4 {
+			line-height: 1.2rem;
+		}
+	}
+
+	.social-links {
+		font-size: 3.6rem;
+		display: flex;
+		justify-content: space-around;
+		max-width: 54%;
+		margin: 0 auto;
+
+		a {
+			color: $white;
+
+			.fa {
+				text-shadow: $shadow-3;
+			}
+
+			.fa-facebook-square {
+				&:hover {
+					color: #3B5998;
+				}
+			}
+			.fa-twitter-square {
+				&:hover {
+					color: #55acee;
+				}
+			}
+			.fa-instagram {
+				&:hover {
+					color: #ff8e2a;
+				}
+			}
+		}
+	}
+
+	.sub-footer {
+    min-height: 194px;
+    width: 1182px;
+    margin-top: 15px;
+    background: url('/images/BC_Footer_Full.png') no-repeat scroll center top/1192px auto transparent;
+
+		> div {
+			padding-top: .3rem;
+		}
+	}
+
+	.site-footer {
+		width: 100%;
+		float: left;
+		height: 49px;
+		background: url('/images/BC_Web_FooterBar.png') repeat-x;
+		position: relative;
+		padding: 5px 0;
+
+		.copyright {
+			padding: .4rem;
+			font-size: 0.8em;
+			line-height: 1rem;
+			color: $white;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+
+			a {
+				color: white;
+				text-decoration: underline;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+
+		.statement-links {
+			display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    align-items: center;
+		}
+	}
+}
+
+@media only screen and (max-width: 1192px) {
+	footer {
+		.contact-info {
+			padding-top: 0;
+		}
+
+		.sub-footer {
+		    min-height: 194px;
+		    display: table;
+		    width: 100%;
+		    background: url('/images/Footer_Tile.png') repeat scroll center top/auto transparent;
+		    padding-bottom: 10px;
+		}
+	}
 }

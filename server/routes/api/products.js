@@ -62,12 +62,12 @@ module.exports = [
 					'tags': Joi.string(),
 					'category': Joi.string(),
 					'stockQty': Joi.number().required(),
-					'inStock': Joi.boolean().required(),
+					'isInStock': Joi.boolean().required(),
 					'filterVal': Joi.optional(),
-					'displayStatus': Joi.boolean().required(),
-					'featured': Joi.boolean().required(),
-					'new': Joi.boolean().required(),
-					'onSale': Joi.boolean().required()
+					'isDisplayed': Joi.boolean().required(),
+					'isFeatured': Joi.boolean().required(),
+					'isNew': Joi.boolean().required(),
+					'isOnSale': Joi.boolean().required()
 				}
 			}
 		},
@@ -100,12 +100,12 @@ module.exports = [
 					'tags': Joi.string(),
 					'category': Joi.string(),
 					'stockQty': Joi.number().required(),
-					'inStock': Joi.boolean().required(),
+					'isInStock': Joi.boolean().required(),
 					'filterVal': Joi.optional(),
-					'displayStatus': Joi.boolean().required(),
-					'featured': Joi.boolean().required(),
-					'new': Joi.boolean().required(),
-					'onSale': Joi.boolean().required()
+					'isDisplayed': Joi.boolean().required(),
+					'isFeatured': Joi.boolean().required(),
+					'isNew': Joi.boolean().required(),
+					'isOnSale': Joi.boolean().required()
 				}
 			}
 		},

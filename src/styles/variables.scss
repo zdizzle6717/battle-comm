@@ -59,7 +59,7 @@ $secondary-800: darken($secondary-500, 9%);
 $secondary-900: darken($secondary-500, 12%);
 
 // Success
-$success-500: #158c45;
+$success-500: #106c35;
 $success-100: lighten($success-500, 12%);
 $success-200: lighten($success-500, 9%);
 $success-300: lighten($success-500, 6%);
@@ -70,7 +70,7 @@ $success-800: darken($success-500, 9%);
 $success-900: darken($success-500, 12%);
 
 // Alert
-$alert-500: #6b0c19;
+$alert-500: #720505;
 $alert-100: lighten($alert-500, 12%);
 $alert-200: lighten($alert-500, 9%);
 $alert-300: lighten($alert-500, 6%);
@@ -98,12 +98,14 @@ $foundation-palette: (
 	success: $success-500,
 	info: $info-500,
 	alert: $alert-500,
-	error: $alert-500
+	error: $alert-500,
+	white: $white-500
 );
 
 // Shadows
 $shadow-1: -1px -1px 1px rgba(0,0,0,0.05), 0 1px 2px rgba(0, 0, 0, 0.25);
 $shadow-2: -1px -1px 1px rgba(0,0,0,0.15), 0 1px 3px rgba(0, 0, 0, 0.68);
-$shadow-3: 0 2px 5px rgba(0,0,0,0.5);
+$shadow-3: -1px -1px 1px rgba(0,0,0,0.15), 0 2px 5px rgba(0,0,0,0.5);
+$shadow-4: -1px -1px 1px rgba(0,0,0,0.15), 0 2px 5px rgba(0,0,0,0.75);
 
 // Spacing

@@ -34,12 +34,20 @@ h2 {
 	a {
 		font-size: 1.2rem;
 		margin: 0 .3rem;
-		color: $secondary-300;
+		color: $secondary-100;
 		text-shadow: 1px 1px 1px $black;
 
 		.fa {
 			font-size: 1.1rem;
 		}
+	}
+}
+
+a {
+	color: $secondary-500;
+
+	&:hover {
+		color: $secondary-400;
 	}
 }
 
@@ -115,6 +123,11 @@ fieldset {
     margin: .5rem 0 1.5rem;
 }
 
+// Home page
+.twitter-widget {
+	height: 427px;
+	overflow: auto;
+}
 
 
 // Helpers

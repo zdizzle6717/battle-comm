@@ -4,6 +4,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {AlertActions} from '../../../library/alerts';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
@@ -11,8 +12,15 @@ import PlayerService from '../../../services/PlayerService';
 
 const mapStateToProps = (state) => {
 	return {
-		'forms': state.forms
+		'forms': state.forms,
+		'user': state.user
 	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'addAlert': AlertActions.addAlert
+	}, dispatch);
 }
 
 class PlayerAccountEditPage extends React.Component {
@@ -36,7 +44,7 @@ class PlayerAccountEditPage extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Player Account";
-		if (!this.props.currentUser.id) {
+		if (!this.props.user.id) {
 			browserHistory.push('/');
 		} else {
 			this.getCurrentPlayer();
@@ -45,7 +53,7 @@ class PlayerAccountEditPage extends React.Component {
 
 	cancelEdit() {
 		let isEditing = this.state.isEditing;
-		for (prop in isEditing) {
+		for (let prop in isEditing) {
 			isEditing[prop] = false;
 		}
 		this.setState({
@@ -55,7 +63,7 @@ class PlayerAccountEditPage extends React.Component {
 	}
 
 	getCurrentPlayer() {
-		PlayerService.getById(this.props.currentUser.id).then((currentUser) => {
+		PlayerService.getById(this.props.user.id).then((currentUser) => {
 			this.setState({
 				'currentUser': currentUser
 			})
@@ -73,8 +81,16 @@ class PlayerAccountEditPage extends React.Component {
 	}
 
 	savePlayer() {
-		PlayerService.update(this.state.currentUser).then((updatedUser) => {
-
+		PlayerService.update(this.state.currentUser.id, this.state.currentUser).then((updatedUser) => {
+			let isEditing = this.state.isEditing;
+			for (let prop in isEditing) {
+				isEditing[prop] = false;
+			}
+			this.setState({
+				'isEditing': isEditing
+			});
+			this.getCurrentPlayer();
+			this.showAlert('playerUpdated');
 		});
 	}
 
@@ -90,8 +106,24 @@ class PlayerAccountEditPage extends React.Component {
 		this.getCurrentPlayer();
 	}
 
+	showAlert(selector) {
+		const alerts = {
+			'playerUpdated': () => {
+				this.props.addAlert({
+					'title': 'Profile Updated',
+					'message': `Your profile was successfully updated`,
+					'type': 'success',
+					'delay': 3000
+				});
+			}
+		}
+
+		return alerts[selector]();
+	}
+
     render() {
 		let currentUser = this.state.currentUser;
+		let isEditing = this.state.isEditing;
 		let contactFormIsValid = getFormErrorCount(this.props.forms, 'contactForm') < 1;
 		let shippingFormIsValid = getFormErrorCount(this.props.forms, 'shippingForm') < 1;
 
@@ -99,29 +131,29 @@ class PlayerAccountEditPage extends React.Component {
             <ViewWrapper>
 				<div className="row">
 					<div className="small-12 medium-6 columns">
-						<h2 class="text-center">Contact Information</h2>
-						<div class="editable">
+						<h2 className="text-center">Contact Information</h2>
+						<div className={isEditing.contact ? 'editable active' : 'editable'}>
 							{
-								this.state.isEditing.contact ?
-								<Form name="contactForm" handleSubmit={this.handleSubmit.bind(this, 'contact')}>
-									<div class="form-group inline">
-										<label class="title bold">First Name:</label>
+								isEditing.contact ?
+								<Form name="contactForm" handleSubmit={this.handleSubmit.bind(this, 'contact')} submitButton={false}>
+									<div className="form-group inline">
+										<label className="title bold">First Name:</label>
 										<Input name="firstName" type="text" id="firstName" value={currentUser.firstName} handleInputChange={this.handleInputChange}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">Last Name:</label>
+									<div className="form-group inline">
+										<label className="title bold">Last Name:</label>
 										<Input name="lastName" type="text" id="lastName" value={currentUser.lastName} handleInputChange={this.handleInputChange}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">E-mail:</label>
+									<div className="form-group inline">
+										<label className="title bold">E-mail:</label>
 										<Input name="email" type="email" id="email" value={currentUser.email} handleInputChange={this.handleInputChange} disabled={true}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">Phone:</label>
+									<div className="form-group inline">
+										<label className="title bold">Phone:</label>
 										<Input name="mainPhone" type="text" id="mainPhone" value={currentUser.mainPhone} handleInputChange={this.handleInputChange} validate={'foreignPhone'} />
 									</div>
 								</Form> :
-								<div class="user-contact">
+								<div className="user-contact">
 									<ul>
 										<li>First Name: {currentUser.firstName}</li>
 										<li>Last Name: {currentUser.lastName}</li>
@@ -131,20 +163,16 @@ class PlayerAccountEditPage extends React.Component {
 								</div>
 							}
 							{
-								this.state.isEditing.contact ?
+								isEditing.contact ?
 								<div className="action-group">
-									<div className="text-right">
-										<button className="cancel" onClick={this.cancelEdit}>
-											<span className="fa fa-check-square-o"></span>
-										</button>
-									</div>
-									<div className="text-right">
-										<button className="save" onClick={this.savePlayer} disabled={!contactFormIsValid}>
-											<span className="fa fa-check-square-o"></span>
-										</button>
-									</div>
+									<button className="cancel" onClick={this.cancelEdit}>
+										<span className="fa fa-times"></span>
+									</button>
+									<button className="save" onClick={this.savePlayer} disabled={!contactFormIsValid}>
+										<span className="fa fa-check"></span>
+									</button>
 								</div> :
-								<div className="text-right">
+								<div className="action-group">
 									<button className="edit" onClick={this.toggleEdit.bind(this, 'contact')}>
 										<span className="fa fa-edit"></span>
 									</button>
@@ -153,33 +181,33 @@ class PlayerAccountEditPage extends React.Component {
 						</div>
 					</div>
 					<div className="small-12 medium-6 columns">
-						<h2 class="text-center">Shipping Address</h2>
-						<div class="editable">
+						<h2 className="text-center">Shipping Address</h2>
+						<div className={isEditing.shipping ? 'editable active' : 'editable'}>
 							{
-								this.state.isEditing.shipping ?
-								<Form name="shippingForm" handleSubmit={this.handleSubmit.bind(this, 'shipping')}>
-									<div class="form-group inline">
-										<label class="title bold">Address:</label>
+								isEditing.shipping ?
+								<Form name="shippingForm" handleSubmit={this.handleSubmit.bind(this, 'shipping')} submitButton={false}>
+									<div className="form-group inline">
+										<label className="title bold">Address:</label>
 										<Input name="streetAddress" type="text" id="streetAddress" value={currentUser.streetAddress} maxlength="50" handleInputChange={this.handleInputChange}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">Apt/Suite:</label>
+									<div className="form-group inline">
+										<label className="title bold">Apt/Suite:</label>
 										<Input name="aptSuite" type="text" id="aptSuite" value={currentUser.aptSuite} maxlength="10" handleInputChange={this.handleInputChange}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">City:</label>
+									<div className="form-group inline">
+										<label className="title bold">City:</label>
 										<Input name="city" type="text" id="city" value={currentUser.city} maxlength="50" handleInputChange={this.handleInputChange}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">State:</label>
+									<div className="form-group inline">
+										<label className="title bold">State:</label>
 										<Input name="state" type="text" id="state" value={currentUser.state} maxlength="50" handleInputChange={this.handleInputChange}/>
 									</div>
-									<div class="form-group inline">
-										<label class="title bold">Zip:</label>
+									<div className="form-group inline">
+										<label className="title bold">Zip:</label>
 										<Input name="zip" type="text" id="zip" value={currentUser.zip} minlength="5" maxlength="12" handleInputChange={this.handleInputChange}/>
 									</div>
 								</Form> :
-								<div class="user-shipping">
+								<div className="user-shipping">
 									<ul>
 										<li>Address: {currentUser.streetAddress}</li>
 										<li>Apt/Suite: {currentUser.aptSuite}</li>
@@ -190,20 +218,16 @@ class PlayerAccountEditPage extends React.Component {
 								</div>
 							}
 							{
-								this.state.isEditing.shipping ?
+								isEditing.shipping ?
 								<div className="action-group">
-									<div className="text-right">
-										<button className="cancel" onClick={this.cancelEdit}>
-											<span className="fa fa-check-square-o"></span>
-										</button>
-									</div>
-									<div className="text-right">
-										<button className="save" onClick={this.savePlayer} disabled={!shippingFormIsValid}>
-											<span className="fa fa-check-square-o"></span>
-										</button>
-									</div>
+									<button className="cancel" onClick={this.cancelEdit}>
+										<span className="fa fa-times"></span>
+									</button>
+									<button className="save" onClick={this.savePlayer} disabled={!shippingFormIsValid}>
+										<span className="fa fa-check"></span>
+									</button>
 								</div> :
-								<div className="text-right">
+								<div className="action-group">
 									<button className="edit" onClick={this.toggleEdit.bind(this, 'shipping')}>
 										<span className="fa fa-edit"></span>
 									</button>
@@ -217,4 +241,4 @@ class PlayerAccountEditPage extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, null)(PlayerAccountEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerAccountEditPage);

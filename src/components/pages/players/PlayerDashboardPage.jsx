@@ -94,13 +94,13 @@ class PlayerDashboardPage extends React.Component {
 				'isEditing': isEditing
 			});
 			this.getCurrentPlayer();
-			this.showAlert('playerUpdate');
+			this.showAlert('playerUpdated');
 		});
 	}
 
 	showAlert(selector) {
 		const alerts = {
-			'playerUpdate': () => {
+			'playerUpdated': () => {
 				this.props.addAlert({
 					'title': 'Profile Updated',
 					'message': `Your profile was successfully updated`,
@@ -145,7 +145,7 @@ class PlayerDashboardPage extends React.Component {
 							<div className={isEditing.bio ? 'editable active': 'editable'}>
 								{
 									isEditing.bio ?
-									<Form name="bioForm" handleSubmit={this.handleSubmit.bind(this, 'bio')}>
+									<Form name="bioForm" handleSubmit={this.handleSubmit.bind(this, 'bio')} submitButton={false}>
 										<div className="form-group inline">
 											<label className="title bold">Bio:</label>
 											<TextArea name="bio" id="bio" rows={4} value={currentUser.bio} maxlength="500"  handleInputChange={this.handleInputChange} />
@@ -178,7 +178,7 @@ class PlayerDashboardPage extends React.Component {
 							<div className={isEditing.links ? 'editable active': 'editable'}>
 								{
 									isEditing.links ?
-									<Form name="linksForm" handleSubmit={this.handleSubmit.bind(this, 'links')}>
+									<Form name="linksForm" handleSubmit={this.handleSubmit.bind(this, 'links')} submitButton={false}>
 										<div className="form-group inline">
 											<label className="title bold">Facebook:</label>
 											<Input name="facebook" type="url" id="facebook" placeholder="http://..." value={currentUser.facebook} handleInputChange={this.handleInputChange} />
