@@ -1,18 +1,39 @@
 table {
 	border-collapse: collapse;
 
-	tr {
-		td {
-			line-height: 2rem;
-		}
-		&:first-child {
-			th {
-				padding-bottom: .1rem;
-				border-bottom: 1px solid transparentize($black, .85);
+	thead, tbody {
+		background: transparent;
+		border: none;
+	}
+
+	thead {
+		tr {
+			&:first-child {
+				th {
+					background-color: transparentize($white, .85);
+					padding: inherit;
+					padding-bottom: .1rem;
+					border-bottom: 1px solid transparentize($black, .85);
+				}
 			}
 		}
-		&:nth-child(odd) {
-			background-color: transparentize($white, .85);
+	}
+
+	tbody {
+		td {
+			padding: inherit;
+		}
+
+		tr {
+			td {
+				line-height: 2rem;
+			}
+			&:nth-child(odd) {
+				background-color: transparent;
+			}
+			&:nth-child(even) {
+				background-color: transparentize($white, .85);
+			}
 		}
 	}
 
@@ -25,20 +46,26 @@ table {
 			}
 		}
 
-		tr {
-			&:hover {
-				background-color: transparentize($white, .75);
+		tbody,
+		thead {
+			tr {
+				&:hover {
+					background-color: transparentize($white, .75);
+				}
 			}
 		}
+
 	}
 }
 
 @include breakpoint(medium down) {
 	table {
-		tr {
-			&:first-child {
-				th {
-					border-bottom: none;
+		thead {
+			tr {
+				&:first-child {
+					th {
+						border-bottom: none;
+					}
 				}
 			}
 		}

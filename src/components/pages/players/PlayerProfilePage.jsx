@@ -183,22 +183,26 @@ export default class PlayerProfilePage extends React.Component {
 									<div key={i} className="row">
 										<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
 										<table className="search-results stack hover text-center">
-											<tr>
-												<th className="text-center">Game System</th>
-												<th className="text-center">Faction</th>
-												<th className="text-center">Ranking W/L/D</th>
-												<th className="text-center">Point Value</th>
-											</tr>
-											{
-												gameRanking.FactionRankings.map((factionRanking, j) =>
-													<tr key={j} className="item">
-														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
-														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
-														<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
-														<td>{factionRanking.pointValue}</td>
-													</tr>
-												)
-											}
+											<thead>
+												<tr>
+													<th className="text-center">Game System</th>
+													<th className="text-center">Faction</th>
+													<th className="text-center">Ranking W/L/D</th>
+													<th className="text-center">Point Value</th>
+												</tr>
+											</thead>
+											<tbody>
+												{
+													gameRanking.FactionRankings.map((factionRanking, j) =>
+														<tr key={j} className="item">
+															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
+															<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
+															<td>{factionRanking.pointValue}</td>
+														</tr>
+													)
+												}
+											</tbody>
 										</table>
 										<hr />
 									</div>

@@ -86,7 +86,7 @@ module.exports = [
       'notes': 'Upload a new file',
       'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['contactAdmin', 'siteAdmin']
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
       'cors': {
         'origin': ['*']

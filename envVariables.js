@@ -26,7 +26,7 @@ module.exports = {
 	// },
 
 	'swagger': {
-			'documentationPage': false
+			'documentationPage': true
 	},
 	'googleAnalyticsKey': 'UA-48987915-2',
 	'uploadPath': '/dist/uploads/',

@@ -6,9 +6,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
-import {handlers} from '../../../library/utilities';
+import {handlers, uploadFiles} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
 import PlayerService from '../../../services/PlayerService';
+import FileService from '../../../services/FileService';
 
 const mapStateToProps = (state) => {
 	return {
@@ -29,9 +30,11 @@ class PlayerDashboardPage extends React.Component {
 
 		this.state = {
 			'currentUser': {
+				'Files': [],
 				'Friends': [],
 				'GameSystemRankings': []
 			},
+			'fileUpload': [],
 			'isEditing': {
 				'bio': false,
 				'links': false
@@ -40,9 +43,13 @@ class PlayerDashboardPage extends React.Component {
 
 		this.cancelEdit = this.cancelEdit.bind(this);
 		this.getCurrentPlayer = this.getCurrentPlayer.bind(this);
+		this.getPlayerIcon = this.getPlayerIcon.bind(this);
+		this.handlePhotoStreamUpload = this.handlePhotoStreamUpload.bind(this);
+		this.handlePlayerIconUpload = this.handlePlayerIconUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.savePlayer = this.savePlayer.bind(this);
 		this.showAlert = this.showAlert.bind(this);
+		this.uploadFiles = this.uploadFiles.bind(this);
     }
 
     componentDidMount() {
@@ -67,9 +74,73 @@ class PlayerDashboardPage extends React.Component {
 	}
 
 	getCurrentPlayer() {
-		PlayerService.getById(this.props.user.id).then((currentUser) => {
+		return PlayerService.getById(this.props.user.id).then((currentUser) => {
 			this.setState({
 				'currentUser': currentUser
+			});
+		});
+	}
+
+	getPlayerIcon() {
+		let fileName;
+		this.state.currentUser.Files.forEach((file, i) => {
+			if (file.identifier === 'playerIcon') {
+				fileName = file.name;
+			}
+		});
+		return fileName ? `/uploads/players/${this.state.currentUser.id}/playerIcon/${fileName}` : '/uploads/players/defaults/profile-icon-default.png';
+	}
+
+	handleDeleteFile(fileId) {
+		FileService.remove(fileId).then(() => {
+			this.showAlert('fileRemoved');
+		});
+	}
+
+	handlePlayerIconUpload(files) {
+		// TODO: Make sure that only first file gets uploaded
+		this.uploadFiles([files[0]], 'playerIcon').then((responses) => {
+			let file = {
+				'name': responses[0].data.file.name,
+				'size': responses[0].data.file.size,
+				'type': responses[0].data.file.type,
+				'identifier': 'playerIcon',
+				'UserId': this.state.currentUser.id
+			};
+			let fileName, iconFile;
+			this.state.currentUser.Files.forEach((file, i) => {
+				if (file.identifier === 'playerIcon') {
+					iconFile = file;
+					iconFile.UserId = this.state.currentUser.id;
+				}
+			});
+			let method = iconFile ? 'update': 'create';
+			FileService[method]((iconFile ? iconFile.id : file), (iconFile ? file : null)).then((file) => {
+				console.log(file);
+				this.getCurrentPlayer().then(() => {
+					// TODO: Reset File Upload input so user isn't blocked from uploading new file
+					this.setState({
+						'fileUpload': []
+					});
+					this.showAlert('uploadSuccess');
+				});
+			});
+		});
+	}
+
+	handlePhotoStreamUpload(files) {
+		// TODO: Configure this and decide whether to keep UserPhotos database model
+		this.uploadFiles(files, 'photoStream').then((responses) => {
+			responses = responses.map((response, i) => {
+				response = {
+					'name': response.data.file.name,
+					'size': response.data.file.size,
+					'type': response.data.file.type
+				};
+				return response;
+			});
+			this.getCurrentPlayer().then(() => {
+				this.showAlert('uploadSuccess');
 			});
 		});
 	}
@@ -107,6 +178,14 @@ class PlayerDashboardPage extends React.Component {
 					'type': 'success',
 					'delay': 3000
 				});
+			},
+			'uploadSuccess': () => {
+				this.props.addAlert({
+					'title': 'Upload Success',
+					'message': 'New files were successfully updated',
+					'type': 'success',
+					'delay': 3000
+				});
 			}
 		}
 
@@ -123,6 +202,13 @@ class PlayerDashboardPage extends React.Component {
 			'isEditing': isEditing
 		});
 		this.getCurrentPlayer();
+	}
+
+	uploadFiles(files, identifier) {
+		let directoryPath = `players/${this.state.currentUser.id}/${identifier}/`;
+		return uploadFiles(files, '/files/add', directoryPath, {
+			'identifier': identifier
+		});
 	}
 
     render() {
@@ -143,20 +229,11 @@ class PlayerDashboardPage extends React.Component {
 						<div className="small-12 medium-6 columns">
 							<h2 className="no-shadow text-center">Player Bio</h2>
 							<div className={isEditing.bio ? 'editable active': 'editable'}>
-								{
-									isEditing.bio ?
-									<Form name="bioForm" handleSubmit={this.handleSubmit.bind(this, 'bio')} submitButton={false}>
-										<div className="form-group inline">
-											<label className="title bold">Bio:</label>
-											<TextArea name="bio" id="bio" rows={4} value={currentUser.bio} maxlength="500"  handleInputChange={this.handleInputChange} />
-										</div>
-									</Form> :
-									<div>
-										<label className="title">Bio:</label>
-										<p className="user-bio">{currentUser.bio}
-										</p>
+								<Form name="bioForm" handleSubmit={this.handleSubmit.bind(this, 'bio')} submitButton={false}>
+									<div className="form-group">
+										<TextArea name="bio" id="bio" rows="4" value={currentUser.bio} maxlength="500"  handleInputChange={this.handleInputChange} disabled={!isEditing.bio}/>
 									</div>
-								}
+								</Form>
 								{
 									isEditing.bio ?
 									<div className="action-group">
@@ -176,43 +253,50 @@ class PlayerDashboardPage extends React.Component {
 							</div>
 							<h2 className="push-top-2x text-center">Social Links</h2>
 							<div className={isEditing.links ? 'editable active': 'editable'}>
-								{
-									isEditing.links ?
-									<Form name="linksForm" handleSubmit={this.handleSubmit.bind(this, 'links')} submitButton={false}>
-										<div className="form-group inline">
-											<label className="title bold">Facebook:</label>
-											<Input name="facebook" type="url" id="facebook" placeholder="http://..." value={currentUser.facebook} handleInputChange={this.handleInputChange} />
-										</div>
-										<div className="form-group inline">
-											<label className="title bold">Twitter:</label>
-											<Input name="twitter" type="url" id="twitter" placeholder="http://..." value={currentUser.twitter} handleInputChange={this.handleInputChange} />
-										</div>
-										<div className="form-group inline">
-											<label className="title bold">Instagram:</label>
-											<Input name="instagram" type="url" id="instagram" placeholder="http://..." value={currentUser.instagram} handleInputChange={this.handleInputChange} />
-										</div>
-										<div className="form-group inline">
-											<label className="title bold">Twitch:</label>
-											<Input name="twitch" type="url" id="twitch" placeholder="http://..." value={currentUser.twitch} handleInputChange={this.handleInputChange} />
-										</div>
-										<div className="form-group inline">
-											<label className="title bold">Google +:</label>
-											<Input name="googlePlus" type="url" id="googlePlus" placeholder="http://..." value={currentUser.googlePlus} handleInputChange={this.handleInputChange} />
-										</div>
-										<div className="form-group inline">
-											<label className="title bold">Website:</label>
-											<Input name="website" type="url" id="website" placeholder="http://..." value={currentUser.website} handleInputChange={this.handleInputChange} />
-										</div>
-									</Form> :
-									<ul className="list user-social">
-										<li className="">Facebook: <a href={currentUser.facebook} target="_blank">{currentUser.facebook}</a></li>
-										<li className="">Twitter:<a href={currentUser.twitter} target="_blank"> {currentUser.twitter}</a></li>
-										<li className="">Instagram: <a href={currentUser.instagram} target="_blank">{currentUser.instagram}</a></li>
-										<li className="">Twitch: <a href={currentUser.twitch} target="_blank">{currentUser.twitch}</a></li>
-										<li className="">Google +: <a href={currentUser.googlePlus} target="_blank">{currentUser.googlePlus}</a></li>
-										<li className="">Custom Url: <a href={currentUser.website} target="_blank">{currentUser.website}</a></li>
-									</ul>
-								}
+								<Form name="linksForm" handleSubmit={this.handleSubmit.bind(this, 'links')} submitButton={false}>
+									<div className="form-group">
+										<label className="title bold">Facebook</label>
+										{
+											(isEditing.links || currentUser.facebook) &&
+											<Input name="facebook" type="url" id="facebook" placeholder="https://..." value={currentUser.facebook} handleInputChange={this.handleInputChange} disabled={!isEditing.links}/>
+										}
+									</div>
+									<div className="form-group">
+										<label className="title bold">Twitter</label>
+											{
+												(isEditing.links || currentUser.twitter) &&
+												<Input name="twitter" type="url" id="twitter" placeholder="https://..." value={currentUser.twitter} handleInputChange={this.handleInputChange} disabled={!isEditing.links}/>
+											}
+									</div>
+									<div className="form-group">
+										<label className="title bold">Instagram</label>
+											{
+												(isEditing.links || currentUser.instagram) &&
+												<Input name="instagram" type="url" id="instagram" placeholder="https://..." value={currentUser.instagram} handleInputChange={this.handleInputChange} disabled={!isEditing.links}/>
+											}
+									</div>
+									<div className="form-group">
+										<label className="title bold">Twitch</label>
+											{
+												(isEditing.links || currentUser.twitch) &&
+												<Input name="twitch" type="url" id="twitch" placeholder="https://..." value={currentUser.twitch} handleInputChange={this.handleInputChange} disabled={!isEditing.links}/>
+											}
+									</div>
+									<div className="form-group">
+										<label className="title bold">Google +</label>
+											{
+												(isEditing.links || currentUser.googlePlus) &&
+												<Input name="googlePlus" type="url" id="googlePlus" placeholder="https://..." value={currentUser.googlePlus} handleInputChange={this.handleInputChange} disabled={!isEditing.links}/>
+											}
+									</div>
+									<div className="form-group">
+										<label className="title bold">Website</label>
+											{
+												(isEditing.links || currentUser.website) &&
+												<Input name="website" type="url" id="website" placeholder="https://..." value={currentUser.website} handleInputChange={this.handleInputChange} disabled={!isEditing.links}/>
+											}
+									</div>
+								</Form>
 								{
 									isEditing.links ?
 									<div className="action-group">
@@ -242,7 +326,10 @@ class PlayerDashboardPage extends React.Component {
 								<h3 className="gold-label">RP Stash: <span><strong>{currentUser.rewardPoints || 0}</strong> Points</span></h3>
 								<div className="flex-row-center push-top">
 									<div className="profile-picture">
-										<img src={`/uploads/players/${currentUser.id}/playerIcon/${currentUser.icon}`} alt={currentUser.username} className="shadow"/>
+										<img src={this.getPlayerIcon()} alt={currentUser.username} className="shadow"/>
+										<Form name="playerIconForm" submitButton={false}>
+											<FileUpload name="playerIcon" value={this.state.fileUpload} handleFileUpload={this.handlePlayerIconUpload} accept="image/*" maxFiles={10} hideFileList={true}/>
+										</Form>
 									</div>
 								</div>
 							</div>
@@ -292,22 +379,26 @@ class PlayerDashboardPage extends React.Component {
 									<div key={i} className="row">
 										<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
 										<table className="search-results">
-											<tr>
-												<th>Game System</th>
-												<th>Faction</th>
-												<th>Ranking W/L/D</th>
-												<th>Point Value</th>
-											</tr>
-											{
-												gameRanking.FactionRankings.map((factionRanking, j) =>
-													<tr key={j} className="item">
-														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
-														<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
-														<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
-														<td>{factionRanking.pointValue}</td>
-													</tr>
-												)
-											}
+											<thead>
+												<tr>
+													<th>Game System</th>
+													<th>Faction</th>
+													<th>Ranking W/L/D</th>
+													<th>Point Value</th>
+												</tr>
+											</thead>
+											<tbody>
+												{
+													gameRanking.FactionRankings.map((factionRanking, j) =>
+														<tr key={j} className="item">
+															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
+															<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
+															<td>{factionRanking.pointValue}</td>
+														</tr>
+													)
+												}
+											</tbody>
 										</table>
 										<hr />
 									</div>

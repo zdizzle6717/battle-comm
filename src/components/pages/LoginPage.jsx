@@ -9,6 +9,8 @@ import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
 import ViewWrapper from '../ViewWrapper';
 
+// TODO: Verify authentication error catching
+
 const mapStateToProps = (state) => {
 	return {
 		'user': state.user,
@@ -62,6 +64,7 @@ class LoginPage extends React.Component {
 				browserHistory.push(homeState);
 			}
 		}).catch((error) => {
+			console.log(error);
 			if (error.message === 'Incorrect password!') {
 				this.showAlert('incorrectPassword');
 			}

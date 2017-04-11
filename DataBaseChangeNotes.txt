@@ -1,11 +1,4 @@
-Set user 'rewardPoints' default to 0
-
-Added reference to 'bannerSlide'
-File.belongsTo(modles.BannerSlide)
-
 // TODO:
-removed from 'product', 'newsPost':
-'manufacturerId', 'gameSystemId'
 
 rename columns on product
 'isInStock': DataTypes.BOOLEAN,
@@ -14,7 +7,7 @@ rename columns on product
 'isNew': DataTypes.BOOLEAN,
 'isOnSale': DataTypes.BOOLEAN
 
-removed from 'product':
+removed from 'product' and all other tables:
 'imgAlt': DataTypes.STRING,
 'imgOneFront': DataTypes.STRING,
 'imgOneBack': DataTypes.STRING,

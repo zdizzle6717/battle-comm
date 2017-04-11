@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var BannerSlide = sequelize.define('BannerSlide', {
+    'actionText': DataTypes.STRING,
     'title': DataTypes.STRING,
     'text': DataTypes.TEXT,
     'link': DataTypes.STRING,

@@ -109,7 +109,7 @@ var options = {
   },
   'basePath': '/api/',
   'pathPrefixSize': 2,
-  'documentationPage': _envVariables2.default.swagger.documentationPage
+  'documentationPage': _envVariables2.default.name === 'producttion' ? false : true
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )

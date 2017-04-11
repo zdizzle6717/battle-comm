@@ -80,7 +80,7 @@ const options = {
   },
   'basePath': '/api/',
   'pathPrefixSize': 2,
-  'documentationPage': env.swagger.documentationPage
+  'documentationPage': env.name === 'producttion' ? false : true
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )

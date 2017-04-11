@@ -119,6 +119,7 @@ let productOrders = {
     let pageSize = request.payload.pageSize || 20;
     let searchQuery = request.payload.searchQuery || '';
     let offset = (request.payload.pageNumber - 1) * pageSize;
+		let orderBy = request.payload.orderBy ? [request.payload.orderBy, 'DESC'] : undefined;
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
@@ -153,7 +154,8 @@ let productOrders = {
     models.ProductOrder.findAndCountAll({
       'where': searchByConfig,
       'offset': offset,
-      'limit': pageSize
+      'limit': pageSize,
+			'order': orderBy ? [orderBy] : []
     }).then((response) => {
       let count = response.count;
       let results = response.rows;

@@ -6,7 +6,7 @@
 		text-align: center;
 		color: $primary-500;
 		font-weight: bold;
-    	margin-top: 5px;
+		margin-top: 5px;
 	}
 
 	.controls-list {
@@ -19,16 +19,16 @@
 		.page-button {
 			display: inline-flex;
 			justify-content: center;
-		    align-items: center;
+			align-items: center;
 			transition: all 500ms;
-		    outline: none;
+			outline: none;
 			margin: 0 3px;
-		    cursor: pointer;
+			cursor: pointer;
 			border: 3px solid $primary-500;
-    		border-radius: 15px;
-		    height: 30px;
-		    width: 30px;
-		    background: $primary-500;
+			border-radius: 15px;
+			height: 30px;
+			width: 30px;
+			background: $primary-500;
 			color: $white-500;
 
 			&:nth-child(1),
@@ -60,7 +60,7 @@
 
 			&.active {
 				color: $primary-500;
-				background: $white-500;
+				background: transparent;
 			}
 		}
 	}

@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import Animation from 'react-addons-css-transition-group';
 import $ from 'jquery';
+import { Timeline } from 'react-twitter-widgets'
 import initSlider from '../../scripts/jquery.cslider.js';
 import {AlertActions} from '../../library/alerts';
 import isEmpty from '../../library/utilities/isEmpty';
@@ -35,35 +36,12 @@ class IndexPage extends React.Component {
         this.state = {
 			'bannerSlides': [
 				{
-					'title': 'Easy management',
-					'text': 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
-					'link': '#',
+					'title': 'Play, Compete, Earn',
+					'text': 'Battle-Comm is your new source for connection with the table-top gaming community. Play table-top at participating game shops, compete in tournaments, earn Reward Points, and exchange them for new merch.',
+					'link': '/login',
+					'actionText': 'Sign Up',
 					'Files': [{
-						'locationUrl': '/images/2.png'
-					}]
-				},
-				{
-					'title': 'Revolution',
-					'text': 'A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.',
-					'link': '#',
-					'Files': [{
-						'locationUrl': '/images/3.png'
-					}]
-				},
-				{
-					'title': 'Warm welcome',
-					'text': 'When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.',
-					'link': '#',
-					'Files': [{
-						'locationUrl': '/images/1.png'
-					}]
-				},
-				{
-					'title': 'Quality Control',
-					'text': 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.',
-					'link': '#',
-					'Files': [{
-						'locationUrl': '/images/4.png'
+						'locationUrl': '/images/branding/logo.png'
 					}]
 				}
 			],
@@ -73,10 +51,6 @@ class IndexPage extends React.Component {
 
 	componentDidMount() {
 		// TODO: Uncomment setState once real slides are added
-
-		// Inititialize twitter widget
-		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-
 		document.title = "Battle-Comm";
 		this.props.getGameSystems();
 		this.props.getSlides().then((slides) => {
@@ -123,7 +97,7 @@ class IndexPage extends React.Component {
 
     render() {
         return (
-            <div className="content-view">
+            <div className="content-view home-page">
                 <div className="content-box-container">
                     <div className="box-12">
                         <div className="box-top">
@@ -141,7 +115,7 @@ class IndexPage extends React.Component {
 												<div key={i} className="da-slide">
 													<h2>{slide.title}</h2>
 													<p>{slide.text}</p>
-													<a href={slide.link} className="da-link">Read more</a>
+													<a href={slide.link} className="da-link">{slide.actionText}</a>
 													<div className="da-img"><img src={slide.Files[0].locationUrl} alt="image01" /></div>
 												</div>
 											)
@@ -266,7 +240,17 @@ class IndexPage extends React.Component {
                             <div className="box-bar-left"></div>
                             <div className="box-content">
 								<div className="small-12 columns twitter-widget">
-									<a className="twitter-timeline"  href="https://twitter.com/Battle_Comm" data-widget-id="599391375306543104">Tweets by @Battle_Comm</a>
+									<Timeline
+									    dataSource={{
+									      sourceType: 'profile',
+									      screenName: 'battle_comm'
+									    }}
+									    options={{
+									      username: 'battle_comm',
+									      height: '420',
+										  theme: 'dark'
+									    }}
+									/>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>
@@ -286,7 +270,7 @@ class IndexPage extends React.Component {
                         <div className="box-middle">
                             <div className="box-bar-left"></div>
                             <div className="box-content">
-								<div className="small-12 columns">
+								<div className="small-12 columns featured-video">
 									<Iframe url="https://player.vimeo.com/video/22439234" width="100%" height="420px" position="relative"></Iframe>
 								</div>
                             </div>

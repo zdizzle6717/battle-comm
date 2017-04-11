@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import FormActions from '../actions/FormActions';
 import {addErrorMessage, removeErrorMessage, getInput} from '../utilities';
 
+//TODO: Make sure input gets set to dirty on first character change/user input
+
 const mapStateToProps = (state) => {
 	return {
 		'forms': state.forms

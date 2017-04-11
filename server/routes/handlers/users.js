@@ -74,7 +74,10 @@ let users = {
                 }]
               }
             ]
-          }
+          },
+					{
+						'model': models.File
+					}
         ],
       })
       .then((response) => {

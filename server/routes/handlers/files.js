@@ -77,7 +77,7 @@ let files = {
         );
       }
 
-      let filename = moment(Date.now()).format('MM-DD-YYYY') + '-' + data.file.hapi.filename;
+      let filename = data.file.hapi.filename;
       let location = __dirname + '/../../..' + env.uploadPath + data.path;
       let path = location + filename;
 

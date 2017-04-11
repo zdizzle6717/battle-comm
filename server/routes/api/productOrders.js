@@ -114,6 +114,7 @@ module.exports = [
         'payload': {
           'maxResults': Joi.optional(),
           'searchQuery': Joi.optional(),
+					'orderBy': Joi.optional(),
 					'searchBy': Joi.optional(),
 					'pageNumber': Joi.number().required(),
 					'pageSize': Joi.optional()

@@ -67,7 +67,60 @@
 }
 
 .player-dashboard {
+	.profile-picture {
+		position: relative;
+		max-width: 220px;
+		max-height: 220px;
+		margin: 0 auto;
+
+		.upload-container {
+			margin: 0;
+			position: absolute;
+			top: 0px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+
+			.file-upload {
+				height: 100%;
+				padding: 0;
+				margin: 0;
+				border: none;
+				color: transparent;
+
+				label {
+					color: transparent;
+					transition: background 200ms ease;
+
+					&:hover {
+						background: rgba(0, 0, 0, 0.1);
+
+						&:after {
+							font-family: 'FontAwesome';
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							content: '\f055';
+							color: $white;
+							font-size: 4rem;
+							position: absolute;
+							top: 0;
+							left: 0;
+							bottom: 0;
+							right: 0;
+							text-shadow: $shadow-1;
+							transition: text-shadow 100ms;
+
+							&:active {
+								text-shadow: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	.account-details {
-		margin: 0 .65rem 1rem;
+		margin-bottom: 1rem;
 	}
 }

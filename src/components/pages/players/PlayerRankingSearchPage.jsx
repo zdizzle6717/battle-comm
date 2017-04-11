@@ -164,33 +164,34 @@ class PlayerRankingSearchPage extends React.Component {
 					{
 						this.state.results.length > 0 && this.props.params.gameSystemId !== 'all' ?
 						<table className="stack hover text-center">
-							<tr>
-								<th className="text-center">Username</th>
-								<th className="text-center">Total Wins</th>
-								<th className="text-center">Total Draws</th>
-								<th className="text-center">Total Losses</th>
-								<th className="text-center">Point Value</th>
-								<th className="text-center">View Profile</th>
-							</tr>
-							{
-								this.state.results.map((results, i) =>
-									<tr key={i}>
-										<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>{this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}</Link></td>
-										<td>{results.totalWins}</td>
-										<td>{results.totalDraws}</td>
-										<td>{results.totalLosses}</td>
-										<td>{results.pointValue}</td>
-										<td>
-											<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>
-												<span className="action">
-													<i className="tip-icon fa fa-eye"></i>
-												</span>
-												<span className="mobile-text"> View</span>
-											</Link>
-										</td>
-									</tr>
-								)
-							}
+							<thead>
+								<tr>
+									<th className="text-center">Username</th>
+									<th className="text-center">Total Wins</th>
+									<th className="text-center">Total Draws</th>
+									<th className="text-center">Total Losses</th>
+									<th className="text-center">Point Value</th>
+									<th className="text-center">View Profile</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									this.state.results.map((results, i) =>
+										<tr key={i}>
+											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>{this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}</Link></td>
+											<td>{results.totalWins}</td>
+											<td>{results.totalDraws}</td>
+											<td>{results.totalLosses}</td>
+											<td>{results.pointValue}</td>
+											<td>
+												<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>
+													<span className="mobile-text">View</span>
+												</Link>
+											</td>
+										</tr>
+									)
+								}
+							</tbody>
 						</table> :
 						<h3>No results found with the selected options. Choose a <strong>Game System</strong> and/or <strong>Faction</strong> to display new ranking search results.</h3>
 					}

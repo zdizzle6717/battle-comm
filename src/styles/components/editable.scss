@@ -1,5 +1,21 @@
 .editable {
 	padding: .65rem;
+	border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(212,212,212,0.27);
+
+	input,
+	textarea {
+		&:disabled {
+			box-shadow: none;
+			border: none;
+			background: transparent;
+			margin-bottom: .25rem;
+
+			&::placeholder {
+				color: transparent;
+			}
+		}
+	}
 
 	&.active {
     box-shadow: 0 0 1px 2px rgba(128, 128, 128, 0.31) inset;

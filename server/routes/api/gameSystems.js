@@ -91,6 +91,7 @@ module.exports = [
           'maxResults': Joi.optional(),
           'searchQuery': Joi.optional(),
 					'searchBy': Joi.optional(),
+					'orderBy': Joi.string().required(),
 					'pageNumber': Joi.number().required(),
 					'pageSize': Joi.optional()
         }

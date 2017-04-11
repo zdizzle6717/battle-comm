@@ -9,7 +9,7 @@ export default {
 			});
 	},
 	update: (id, data) => {
-		return axios.post('/files/' + id, data)
+		return axios.put('/files/' + id, data)
 			.then(function(response) {
 				return response.data;
 			});

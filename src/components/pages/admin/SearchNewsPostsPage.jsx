@@ -28,7 +28,10 @@ class SearchNewsPostsPage extends React.Component {
 			'searchQuery': ''
 		}
 
+		this.handleFilterReset = this.handleFilterReset.bind(this);
+		this.handleOrderChange = this.handleOrderChange.bind(this);
 		this.handlePageChange = this.handlePageChange.bind(this);
+		this.handlePageSizeChange = this.handlePageSizeChange.bind(this);
 		this.handleQueryChange = this.handleQueryChange.bind(this);
     }
 
@@ -37,18 +40,51 @@ class SearchNewsPostsPage extends React.Component {
 		this.handlePageChange(1);
     }
 
-	handlePageChange(pageNumber, searchQuery = '') {
-        this.props.searchNewsPosts({'searchQuery': this.state.searchQuery, 'pageNumber': pageNumber, 'pageSize': 20}).then((pagination) => {
+	handleFilterReset() {
+		this.setState({
+			'pageSize': 20,
+			'orderBy': 'updatedAt',
+			'searchQuery': ''
+		}, () => {
+			this.handlePageChange(1);
+		});
+	}
+
+	handleOrderChange(e) {
+		this.setState({
+			'orderBy': e.target.value
+		}, () => {
+			this.handlePageChange(1);
+		});
+	}
+
+	handlePageChange(pageNumber = 1) {
+        this.props.searchNewsPosts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});
         });
     }
 
+	handlePageSizeChange(e) {
+		this.setState({
+			'pageSize': e.target.value
+		}, () => {
+			this.handlePageChange(1);
+		});
+	}
+
 	handleQueryChange(e) {
+		if (timer) {
+			clearTimeout(timer);
+		}
 		this.setState({
 			'searchQuery': e.target.value
-		})
+		}, () => {
+			timer = setTimeout(() => {
+				this.handlePageChange(1);
+			}, 500);
+		});
 	}
 
     render() {
@@ -62,7 +98,48 @@ class SearchNewsPostsPage extends React.Component {
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">
-						Filter Controls
+						<div className="panel">
+							<div className="panel-title">
+								Search Filter
+							</div>
+							<div className="panel-content">
+								<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Begin typing to filter results"/>
+							</div>
+						</div>
+						<div className="panel">
+							<div className="panel-title">
+								Order By
+							</div>
+							<div className="panel-content">
+								<select name="orderBy" onChange={this.handleOrderChange} value={this.state.orderBy}>
+									<option value="createdAt">Created Date</option>
+									<option value="updatedAt">Last Updated</option>
+									<option value="author">Author</option>
+									<option value="title">Title</option>
+								</select>
+							</div>
+						</div>
+						<div className="panel">
+							<div className="panel-title">
+								Items Per Page
+							</div>
+							<div className="panel-content">
+								<select name="pageSize" onChange={this.handlePageSizeChange} value={this.state.pageSize}>
+									<option value="10">10</option>
+									<option value="20">20</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+								</select>
+							</div>
+						</div>
+						<div className="panel">
+							<div className="panel-title">
+								Reset Search Filters
+							</div>
+							<div className="panel-content">
+								<button className="button error" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+							</div>
+						</div>
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
 						<div className="form-group">
@@ -85,7 +162,7 @@ class SearchNewsPostsPage extends React.Component {
 										<tr key={i}>
 											<td>{newsPost.title}</td>
 											<td>{newsPost.Author.lastName + ', ' + newsPost.Auther.firstName}</td>
-											<td>{newsPost.updated_at}</td>
+											<td>{newsPost.updatedAt}</td>
 											<td>
 												<Link className="action-item" key="editNewsPost" to={`/admin/newsPosts/edit/${newsPost.id}`}>
 													<span className="action">

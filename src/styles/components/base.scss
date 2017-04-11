@@ -44,6 +44,10 @@ h2 {
 		color: $secondary-100;
 		text-shadow: 1px 1px 1px $black;
 
+		&:hover {
+			color: lighten($secondary-100, 6%);
+		}
+
 		.fa {
 			font-size: 1.1rem;
 		}
@@ -110,16 +114,18 @@ fieldset {
 }
 
 // Home page
-.twitter-widget {
-	height: 427px;
-	overflow: auto;
+.home-page {
+	.twitter-widget,
+	.featured-video {
+		height: 420px;
+		overflow: hidden;
 
-	iframe {
-		width: 100% !important;
-    min-width: 0 !important;
+		iframe {
+			width: 100% !important;
+	    min-width: 0 !important;
+		}
 	}
 }
-
 
 // Helpers
 .hidden {
