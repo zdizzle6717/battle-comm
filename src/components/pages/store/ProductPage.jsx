@@ -30,7 +30,7 @@ export default class ProductPage extends React.Component {
     render() {
 		let product = this.state.product;
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/title/Store.png" headerAlt="Store">
                 <div className="row">
 					<div className="small-12 columns">
 						<h1>Product {product.name}</h1>

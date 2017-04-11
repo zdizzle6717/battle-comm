@@ -100,7 +100,7 @@ let files = {
           // TODO: Double check that type is correct
           let successResponse = {
             'file': {
-              'name': data.identifier === 'albumCover' ? data.file.hapi.filename : filename,
+              'name': filename,
               'size': data.fileSize,
               'type': data.file.hapi.headers['content-type']
             },

@@ -19,6 +19,7 @@ export default class PlayerProfilePage extends React.Component {
         super();
 
 		this.state = {
+			'activeModal': none,
 			'player': {
 				'Friends': [],
 				'GameSystemRankings': []
@@ -32,6 +33,10 @@ export default class PlayerProfilePage extends React.Component {
 		this.showAlert = this.showAlert.bind(this);
     }
 
+	addFriend() {
+		console.log(`Add user with id, ${this.state.player.id}, as a friend.`);
+	}
+
     componentDidMount() {
         document.title = "Battle-Comm | Player Profile";
 		if (!this.props.params.playerHandle) {
@@ -43,11 +48,27 @@ export default class PlayerProfilePage extends React.Component {
 				})
 			});
 		}
-
     }
 
-	addFriend() {
-		console.log(`Add user with id, ${this.state.player.id}, as a friend.`);
+	getPlayerIcon() {
+		let fileName;
+		this.state.currentUser.Files.some((file) => {
+			if (file.identifier === 'playerIcon') {
+				fileName = file.name;
+				return true;
+			}
+		});
+		return fileName ? `/uploads/players/${this.state.player.id}/playerIcon/${fileName}` : '/uploads/players/defaults/profile-icon-default.png';
+	}
+
+	getPlayerPhotoStream() {
+		let photos = [];
+		this.state.player.forEach((file) => {
+			if (file.identifier === 'photoStream') {
+				photos.push(file);
+			}
+		});
+		return photos;
 	}
 
 	removeFriend() {
@@ -69,9 +90,16 @@ export default class PlayerProfilePage extends React.Component {
 		return alerts[selector]();
 	}
 
+	toggleModal(name) {
+		this.setState({
+			'activeModal': this.state.activeModal === 'none' ? name : 'none'
+		})
+	}
+
     render() {
 		let player = this.state.player;
 		let isSamePlayer = this.state.player.id === this.props.currentUser;
+		this.getPlayerPhotoStream();
 
         return (
             <ViewWrapper>
@@ -125,7 +153,7 @@ export default class PlayerProfilePage extends React.Component {
 							}
 							<div className="text-center">
 								<br/>
-								<img src={`/uploads/players/${player.id}/playerIcon/${player.icon}`} alt="" className="profile-picture shadow"/>
+								<img src={this.getPlayerIcon()} alt={player.username} className="shadow"/>
 							</div>
 							<h1 className="username text-center">
 								<span className="glyphicon glyphicon-user"></span> {player.username}
@@ -214,10 +242,21 @@ export default class PlayerProfilePage extends React.Component {
 					<div className="row">
 						<div className="small-12 columns">
 							<h2>Photostream</h2>
-							TODO: Add popup component and list of player images
-							<div className="text-center">
-								<h5>{player.username} has not uploaded any photos to their photostream</h5>
-							</div>
+								<div className="text-center">
+									{
+										this.state.photoStream.length > 0 ?
+										<div className="photo-stream">
+											{
+												this.getPlayerPhotoStream().map((photo, i) =>
+													<Modal key={i} name={`photoStream-${i}`} title={`${player.username}'s Photo Stream'`} modalIsOpen={this.state.activeModal === `photoStream-${i}`} handleClose={this.toggleModal.bind(this, `photoStream-${i}`)} showClose={true} showFooter={false}>
+														<img src={`/players/${player.id}/photoStream/${photo.name}`}/>
+													</Modal>
+												)
+											}
+										</div> :
+										<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
+									}
+								</div>
 						</div>
 					</div>
 				</div>

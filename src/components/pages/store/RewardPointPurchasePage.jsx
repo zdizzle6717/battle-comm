@@ -17,7 +17,7 @@ export default class RewardPointPurchasePage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/title/Store.png" headerAlt="Store">
                 <div className="row">
                     <h1>Purchase RP</h1>
                     <p>

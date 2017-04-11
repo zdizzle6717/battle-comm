@@ -16,7 +16,12 @@ export default class ViewWrapper extends React.Component {
 						<div className="box-12">
 							<div className="box-top">
 								<div className="box-corner-tl"></div>
-								<div className="box-bar-top"><div className="bar"></div></div>
+								<div className="box-bar-top"><div className="bar">
+									{
+										this.props.headerImage &&
+										<div className="title small"><img src={this.props.headerImage} alt={this.props.headerAlt} /></div>
+									}
+								</div></div>
 								<div className="box-corner-tr"></div>
 							</div>
 							<div className="box-middle">
@@ -40,7 +45,9 @@ export default class ViewWrapper extends React.Component {
 }
 
 ViewWrapper.propTypes = {
-	'container': React.PropTypes.string
+	'container': React.PropTypes.string,
+	'headerImage': React.PropTypes.string,
+	'headerAlt': React.PropTypes.string
 }
 
 ViewWrapper.defaultProps = {

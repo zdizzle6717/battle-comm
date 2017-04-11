@@ -4,7 +4,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import axios from 'axios';
 import {AlertActions} from '../../../library/alerts';
+import Modal from '../../../library/Modal';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers, uploadFiles} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
@@ -29,21 +31,25 @@ class PlayerDashboardPage extends React.Component {
         super();
 
 		this.state = {
+			'activeModal': 'none',
 			'currentUser': {
 				'Files': [],
 				'Friends': [],
 				'GameSystemRankings': []
 			},
-			'fileUpload': [],
+			'fileUploadIcon': [],
+			'fileUploadPhotoStream': [],
 			'isEditing': {
 				'bio': false,
 				'links': false
-			}
+			},
+			'photoStream': []
 		};
 
 		this.cancelEdit = this.cancelEdit.bind(this);
 		this.getCurrentPlayer = this.getCurrentPlayer.bind(this);
 		this.getPlayerIcon = this.getPlayerIcon.bind(this);
+		this.getPlayerPhotoStream = this.getPlayerPhotoStream.bind(this);
 		this.handlePhotoStreamUpload = this.handlePhotoStreamUpload.bind(this);
 		this.handlePlayerIconUpload = this.handlePlayerIconUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -58,7 +64,9 @@ class PlayerDashboardPage extends React.Component {
 		if (!this.props.user.id) {
 			browserHistory.push('/');
 		} else {
-			this.getCurrentPlayer();
+			this.getCurrentPlayer().then(() => {
+				this.getPlayerPhotoStream();
+			});
 		}
     }
 
@@ -73,6 +81,16 @@ class PlayerDashboardPage extends React.Component {
 		this.getCurrentPlayer();
 	}
 
+	deletePhoto(id, index) {
+		this.handleDeleteFile(id).then(() => {
+			let photos = this.state.photoStream;
+			photos.splice(index, 1);
+			this.setState({
+				'photoStream': photos
+			});
+		});
+	}
+
 	getCurrentPlayer() {
 		return PlayerService.getById(this.props.user.id).then((currentUser) => {
 			this.setState({
@@ -83,16 +101,29 @@ class PlayerDashboardPage extends React.Component {
 
 	getPlayerIcon() {
 		let fileName;
-		this.state.currentUser.Files.forEach((file, i) => {
+		this.state.currentUser.Files.some((file) => {
 			if (file.identifier === 'playerIcon') {
 				fileName = file.name;
+				return true;
 			}
 		});
 		return fileName ? `/uploads/players/${this.state.currentUser.id}/playerIcon/${fileName}` : '/uploads/players/defaults/profile-icon-default.png';
 	}
 
+	getPlayerPhotoStream() {
+		let photos = [];
+		this.state.currentUser.Files.forEach((file) => {
+			if (file.identifier === 'photoStream') {
+				photos.push(file);
+			}
+		});
+		this.setState({
+			'photoStream': photos
+		});
+	}
+
 	handleDeleteFile(fileId) {
-		FileService.remove(fileId).then(() => {
+		return FileService.remove(fileId).then(() => {
 			this.showAlert('fileRemoved');
 		});
 	}
@@ -105,13 +136,13 @@ class PlayerDashboardPage extends React.Component {
 				'size': responses[0].data.file.size,
 				'type': responses[0].data.file.type,
 				'identifier': 'playerIcon',
-				'UserId': this.state.currentUser.id
+				'UserId': this.state.currentUser.id,
+				'locationUrl': `/players/${this.state.currentUser.id}/playerIcon/${response[0].data.file.name}`
 			};
 			let fileName, iconFile;
-			this.state.currentUser.Files.forEach((file, i) => {
+			this.state.currentUser.Files.forEach((file) => {
 				if (file.identifier === 'playerIcon') {
 					iconFile = file;
-					iconFile.UserId = this.state.currentUser.id;
 				}
 			});
 			let method = iconFile ? 'update': 'create';
@@ -120,7 +151,7 @@ class PlayerDashboardPage extends React.Component {
 				this.getCurrentPlayer().then(() => {
 					// TODO: Reset File Upload input so user isn't blocked from uploading new file
 					this.setState({
-						'fileUpload': []
+						'fileUploadIcon': []
 					});
 					this.showAlert('uploadSuccess');
 				});
@@ -129,17 +160,30 @@ class PlayerDashboardPage extends React.Component {
 	}
 
 	handlePhotoStreamUpload(files) {
-		// TODO: Configure this and decide whether to keep UserPhotos database model
+		// TODO: Decide whether to keep UserPhotos database model
 		this.uploadFiles(files, 'photoStream').then((responses) => {
-			responses = responses.map((response, i) => {
-				response = {
+			let promises = [];
+			responses.forEach((response, i) => {
+				let file = {
 					'name': response.data.file.name,
 					'size': response.data.file.size,
-					'type': response.data.file.type
+					'type': response.data.file.type,
+					'identifier': 'photoStream',
+					'UserId': this.state.currentUser.id,
+					'locationUrl': `/players/${this.state.currentUser.id}/photoStream/${response.data.file.name}`
 				};
-				return response;
+				promises.push(FileService.create(file));
 			});
-			this.getCurrentPlayer().then(() => {
+			axios.all(promises).then((files) => {
+				let photos;
+				files.forEach((file) => {
+					photos = this.state.photoStream;
+					photos.push(file);
+				});
+				this.setState({
+					'fileUploadPhotoStream': [],
+					'photoStream': photos
+				});
 				this.showAlert('uploadSuccess');
 			});
 		});
@@ -179,10 +223,18 @@ class PlayerDashboardPage extends React.Component {
 					'delay': 3000
 				});
 			},
+			'fileRemoved': () => {
+				this.props.addAlert({
+					'title': 'Photo Deleted',
+					'message': 'A photo was successfully deleted from Photo Stream.',
+					'type': 'success',
+					'delay': 3000
+				});
+			},
 			'uploadSuccess': () => {
 				this.props.addAlert({
 					'title': 'Upload Success',
-					'message': 'New files were successfully updated',
+					'message': 'New files were successfully uploaded',
 					'type': 'success',
 					'delay': 3000
 				});
@@ -202,6 +254,14 @@ class PlayerDashboardPage extends React.Component {
 			'isEditing': isEditing
 		});
 		this.getCurrentPlayer();
+	}
+
+	toggleModal(name, e) {
+		// TODO: Arrow on first and last photo causes activeModal to set to nonexistant modal
+		if (e) { e.preventDefault() };
+		this.setState({
+			'activeModal': this.state.activeModal !== name ? name : 'none'
+		})
 	}
 
 	uploadFiles(files, identifier) {
@@ -328,7 +388,7 @@ class PlayerDashboardPage extends React.Component {
 									<div className="profile-picture">
 										<img src={this.getPlayerIcon()} alt={currentUser.username} className="shadow"/>
 										<Form name="playerIconForm" submitButton={false}>
-											<FileUpload name="playerIcon" value={this.state.fileUpload} handleFileUpload={this.handlePlayerIconUpload} accept="image/*" maxFiles={10} hideFileList={true}/>
+											<FileUpload name="playerIcon" value={this.state.fileUploadIcon} handleFileUpload={this.handlePlayerIconUpload} accept="image/*" maxFiles={10} hideFileList={true}/>
 										</Form>
 									</div>
 								</div>
@@ -409,11 +469,32 @@ class PlayerDashboardPage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Photostream <div className="right"><a><span className="fa fa-upload"></span> Add Photo</a></div></h2>
-							TODO: Add file upload
-							TODO: Add popup component and list of player images
+							<h2>Photo Stream</h2>
+							<Form name="photoStreamUploadForm" submitButton={false}>
+								<FileUpload name="photoStream" value={this.state.fileUploadPhotoStream} handleFileUpload={this.handlePhotoStreamUpload} accept="image/*" maxFiles={50} hideFileList={true}/>
+							</Form>
+							<hr/>
 							<div className="text-center">
-								<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
+								{
+									this.state.photoStream.length > 0 ?
+									<div className="photo-stream">
+										{
+											this.state.photoStream.map((photo, i) =>
+												<div key={i} className="photo-box">
+													<a onClick={this.toggleModal.bind(this, `photoStream-${i}`)}><img src={`/uploads/players/${this.state.currentUser.id}/photoStream/${photo.name}`}/></a>
+														<Modal name={`photoStream-${i}`} title={`${this.state.currentUser.username}'s Photo Stream`} modalIsOpen={this.state.activeModal === `photoStream-${i}`} handleClose={this.toggleModal.bind(this, `photoStream-${i}`)} showClose={true} showCancel={false} confirmText="Delete?" handleSubmit={this.deletePhoto.bind(this, photo.id, i)}>
+															<img src={`/uploads/players/${this.state.currentUser.id}/photoStream/${photo.name}`}/>
+															<div className="actions">
+																<span className="fa fa-arrow-left" onClick={this.toggleModal.bind(this, `photoStream-${i - 1}`)}></span>
+																<span className="fa fa-arrow-right" onClick={this.toggleModal.bind(this, `photoStream-${i + 1}`)}></span>
+																</div>
+														</Modal>
+												</div>
+											)
+										}
+									</div> :
+									<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
+								}
 							</div>
 						</div>
 					</div>

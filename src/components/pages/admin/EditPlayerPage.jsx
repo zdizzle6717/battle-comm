@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {browserHistory, Link} from 'react-router';
 import {UserService} from '../../../library/authentication';
 import {AlertActions} from '../../../library/alerts';
-import {handlers, uploadFiles} from '../../../library/utilities';
+import {handlers} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, CheckBox} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';

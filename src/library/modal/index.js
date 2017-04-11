@@ -42,10 +42,13 @@ export default class Modal extends React.Component {
 									{
 										this.props.showFooter &&
 										<div className="panel-footer text-right">
-											<button type="button collapse" className="button alert" onClick={this.props.handleClose}>Cancel</button>
+											{
+												this.props.showCancel &&
+												<button type="button collapse" className="button close-modal" onClick={this.props.handleClose}>{this.props.cancelText || 'Cancel'}</button>
+											}
 											{
 												this.props.handleSubmit &&
-												<button type="button collapse" className="button success" onClick={this.props.handleSubmit}>Submit</button>
+												<button type="button collapse" className="button confirm-modal" onClick={this.props.handleSubmit}>{this.props.confirmText || 'Submit'}</button>
 											}
 										</div>
 									}
@@ -61,10 +64,13 @@ export default class Modal extends React.Component {
 }
 
 Modal.propTypes = {
+	'cancelText': React.PropTypes.string,
+	'confirmText': React.PropTypes.string,
 	'handleClose': React.PropTypes.func.isRequired,
 	'handleSubmit': React.PropTypes.func,
 	'modalIsOpen': React.PropTypes.bool.isRequired,
 	'name': React.PropTypes.string.isRequired,
+	'showCancel': React.PropTypes.bool,
 	'showClose': React.PropTypes.bool,
 	'showFooter': React.PropTypes.bool,
 	'showTitle': React.PropTypes.bool,
@@ -73,6 +79,7 @@ Modal.propTypes = {
 }
 
 Modal.defaultProps = {
+	'showCancel': true,
 	'showClose': false,
 	'showFooter': true,
 	'showTitle': true,

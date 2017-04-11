@@ -4,7 +4,7 @@ import React from 'react';
 import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';
-import {Form, Input, TextArea, Select} from '../../../library/validations';
+import {Form, Input, TextArea, Select, FileUpload} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import FileService from '../../../services/FileService';
 import ManufacturerService from '../../../services/ManufacturerService';

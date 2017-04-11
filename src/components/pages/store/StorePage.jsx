@@ -48,7 +48,7 @@ class StorePage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/title/Store.png" headerAlt="Store">
                 <div className="row">
 					<div className="small-12 columns">
 						<h1>Store</h1>

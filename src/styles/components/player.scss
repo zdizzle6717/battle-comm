@@ -1,5 +1,11 @@
 .player-profile,
 .player-dashboard {
+	.username {
+		text-transform: initial;
+		color: gold;
+		text-shadow: 1px 1px 5px $black;
+	}
+
 	.editable {
 
 	}
@@ -44,10 +50,57 @@
 		}
 	}
 
-	.username {
-		text-transform: initial;
-		color: gold;
-		text-shadow: 1px 1px 5px $black;
+	.photo-stream {
+		display: flex;
+    flex-wrap: wrap;
+
+		.photo-box {
+			flex: 1;
+			max-width: 300px;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		.panel-content {
+			.actions {
+				.fa-arrow-left,
+				.fa-arrow-right {
+					text-shadow: $shadow-3;
+				}
+
+				.fa-arrow-left {
+					position: absolute;
+					left: 1rem;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+				.fa-arrow-right {
+					position: absolute;
+					right: 1rem;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		.panel-footer {
+			.button {
+				border: none;
+				box-shadow: none;
+				color: $alert-500;
+				background: transparent;
+
+				&:hover {
+					background: transparent;
+				}
+			}
+		}
 	}
 }
 

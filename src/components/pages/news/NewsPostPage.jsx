@@ -29,7 +29,7 @@ export default class NewsPostPage extends React.Component {
     render() {
 		let post = this.state.post;
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/News.png" alt="News">
                 <div className="row">
 					<div className="small-12 columns">
 						<h1>{post.title}</h1>

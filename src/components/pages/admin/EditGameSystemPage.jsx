@@ -4,7 +4,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {browserHistory, Link} from 'react-router';
 import {connect} from 'react-redux';
-import {Form, Input, TextArea, Select} from '../../../library/validations';
+import {Form, Input, TextArea, Select, fileUpload} from '../../../library/validations';
 import {handlers, uploadFiles} from '../../../library/utilities';
 import {AlertActions} from '../../../library/alerts';
 import ViewWrapper from '../../ViewWrapper';

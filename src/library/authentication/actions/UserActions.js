@@ -28,6 +28,7 @@ const _configureUser = (user) => {
 			}
 		});
 		if (!user.roleConfig) {
+			console.log('Oops! Make sure that the roleConfig on the UI and API have matching values.');
 			throw new Error('Oops! Make sure that the roleConfig on the UI and API have matching values.');
 		}
 		sessionStorage.setItem('user', JSON.stringify(user));

@@ -7,12 +7,14 @@ import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../library/alerts';
 import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
-import ViewWrapper from '../ViewWrapper';
+import Modal from '../../library/Modal';
+import GameSystemActions from '../../actions/GameSystemActions';
 
 // TODO: Verify authentication error catching
 
 const mapStateToProps = (state) => {
 	return {
+		'gameSystems': state.gameSystems,
 		'user': state.user,
 		'redirectRoute': state.redirectRoute
 	}
@@ -22,7 +24,9 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
 		'authenticate': UserActions.authenticate,
-		'setRedirect': UserActions.setRedirect
+		'getGameSystems': GameSystemActions.getAll,
+		'setRedirect': UserActions.setRedirect,
+		'showGameList': false
     }, dispatch);
 };
 
@@ -41,6 +45,7 @@ class LoginPage extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Login";
+		this.props.getGameSystems();
     }
 
 	handleInputChange(e) {
@@ -105,35 +110,89 @@ class LoginPage extends React.Component {
 		return alerts[selector]();
 	}
 
+	toggleModal(property, e) {
+		if (e) {
+			e.preventDefault();
+		}
+		this.setState({
+			[property]: !this.state[property]
+		});
+	}
+
     render() {
         return (
-			<ViewWrapper>
-				<div className="row">
-					<div className="small-12 columns">
-						<h1 className="push-bottom-2x">Login</h1>
-						<hr />
-					</div>
-					<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
-						<Form name="loginForm" submitText="Login" handleSubmit={this.handleSubmit}>
-							<div className="row">
-								<div className="form-group small-12 columns">
-									<label className="required">Username/Email</label>
-									<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
-								</div>
+			<div className="content-view home-page">
+                <div className="content-box-container">
+					<div className="box-6">
+                        <div className="box-top">
+                            <div className="box-corner-tl"></div>
+                            <div className="box-bar-top">
+								<div className="bar"><div className="title small"><img src="images/Titles/Login.png" alt="" /></div></div>
 							</div>
-							<div className="row">
-								<div className="form-group small-12 columns">
-									<label className="required">Password</label>
-									<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} />
+                            <div className="box-corner-tr"></div>
+                        </div>
+                        <div className="box-middle">
+                            <div className="box-bar-left"></div>
+                            <div className="box-content">
+								<Form name="loginForm" submitText="Login" handleSubmit={this.handleSubmit}>
+									<div className="row">
+										<div className="form-group small-12 columns">
+											<label className="required">Username/Email</label>
+											<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="form-group small-12 columns">
+											<label className="required">Password</label>
+											<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} />
+										</div>
+									</div>
+								</Form>
+								<div className="form-group small-12">
+									Don't have an account? <Link key="register" to="/register" activeClassName="active" onClick={this.closeMenu}>Register/Sign Up</Link>
 								</div>
-							</div>
-						</Form>
-						<div className="form-group small-12">
-							Don't have an account? <Link key="register" to="/register" activeClassName="active" onClick={this.closeMenu}>Register/Sign Up</Link>
-						</div>
-					</div>
+                            </div>
+                            <div className="box-bar-right"></div>
+                        </div>
+                        <div className="box-bottom">
+                            <div className="box-corner-bl"></div>
+                            <div className="box-bar-bottom"><div className="bar"></div></div>
+                            <div className="box-corner-br"></div>
+                        </div>
+                    </div>
+                    <div className="box-6">
+                        <div className="box-top">
+                            <div className="box-corner-tl"></div>
+                            <div className="box-bar-top"><div className="bar">
+								<div className="bar"><div className="title small"><img src="images/Titles/Register.png" alt="" /></div></div>
+                            </div></div>
+                            <div className="box-corner-tr"></div>
+                        </div>
+                        <div className="box-middle">
+                            <div className="box-bar-left"></div>
+                            <div className="box-content">
+								<h4><a onClick={this.toggleModal.bind(this, 'showGameList')}>Supported Game Systems</a></h4>
+								<Link to="/register" className="button">Sign Up</Link>
+                            </div>
+                            <div className="box-bar-right"></div>
+                        </div>
+                        <div className="box-bottom">
+                            <div className="box-corner-bl"></div>
+                            <div className="box-bar-bottom"><div className="bar"></div></div>
+                            <div className="box-corner-br"></div>
+                        </div>
+                    </div>
 				</div>
-			</ViewWrapper>
+				<Modal name="gameListModal" title="Supported Game Systems" modalIsOpen={this.state.showGameList} handleClose={this.toggleModal.bind(this, 'showGameList')} showClose={true} showFooter={false}>
+					<ul>
+						{
+							this.props.gameSystems.map((gameSystem, i) =>
+								<li key={i}>{gameSystem.name}</li>
+							)
+						}
+					</ul>
+				</Modal>
+			</div>
 		);
     }
 }

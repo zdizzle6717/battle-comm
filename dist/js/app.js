@@ -39,7 +39,7 @@ function(e, t, n) {
             default: e
         };
     }
-    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! react-dom */ 33), i = n(/*! react-redux */ 7), s = n(/*! ./components/AppRoutes */ 342), u = _interopRequireDefault(s), l = n(/*! ./store */ 81), c = _interopRequireDefault(l);
+    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! react-dom */ 33), i = n(/*! react-redux */ 7), s = n(/*! ./components/AppRoutes */ 342), u = _interopRequireDefault(s), l = n(/*! ./store */ 83), c = _interopRequireDefault(l);
     window.onload = function() {
         (0, o.render)(r.default.createElement(i.Provider, {
             store: c.default
@@ -1673,7 +1673,7 @@ function(e, t, n) {
             hooks.relativeTimeRounding = getSetRelativeTimeRounding, hooks.relativeTimeThreshold = getSetRelativeTimeThreshold, 
             hooks.calendarFormat = getCalendarFormat, hooks.prototype = We, hooks;
         });
-    }).call(t, n(/*! ./../webpack/buildin/module.js */ 76)(e));
+    }).call(t, n(/*! ./../webpack/buildin/module.js */ 77)(e));
 }, /*!**************************!*\
   !*** ./~/react/react.js ***!
   \**************************/
@@ -1744,7 +1744,7 @@ function(e, t, n) {
             return a.createRoutes;
         }
     });
-    var r = n(/*! ./PropTypes */ 105);
+    var r = n(/*! ./PropTypes */ 107);
     Object.defineProperty(t, "locationShape", {
         enumerable: !0,
         get: function get() {
@@ -1763,7 +1763,7 @@ function(e, t, n) {
             return o.formatPattern;
         }
     });
-    var i = n(/*! ./Router */ 572), s = _interopRequireDefault(i), u = n(/*! ./Link */ 300), l = _interopRequireDefault(u), c = n(/*! ./IndexLink */ 566), d = _interopRequireDefault(c), p = n(/*! ./withRouter */ 585), f = _interopRequireDefault(p), m = n(/*! ./IndexRedirect */ 567), h = _interopRequireDefault(m), M = n(/*! ./IndexRoute */ 568), _ = _interopRequireDefault(M), y = n(/*! ./Redirect */ 301), b = _interopRequireDefault(y), g = n(/*! ./Route */ 570), v = _interopRequireDefault(g), A = n(/*! ./History */ 565), E = _interopRequireDefault(A), T = n(/*! ./Lifecycle */ 569), L = _interopRequireDefault(T), O = n(/*! ./RouteContext */ 571), C = _interopRequireDefault(O), w = n(/*! ./useRoutes */ 584), S = _interopRequireDefault(w), k = n(/*! ./RouterContext */ 73), N = _interopRequireDefault(k), D = n(/*! ./RoutingContext */ 573), P = _interopRequireDefault(D), z = _interopRequireDefault(r), R = n(/*! ./match */ 582), q = _interopRequireDefault(R), x = n(/*! ./useRouterHistory */ 306), I = _interopRequireDefault(x), W = n(/*! ./applyRouterMiddleware */ 575), Y = _interopRequireDefault(W), j = n(/*! ./browserHistory */ 576), B = _interopRequireDefault(j), F = n(/*! ./hashHistory */ 580), H = _interopRequireDefault(F), U = n(/*! ./createMemoryHistory */ 303), X = _interopRequireDefault(U);
+    var i = n(/*! ./Router */ 572), s = _interopRequireDefault(i), u = n(/*! ./Link */ 300), l = _interopRequireDefault(u), c = n(/*! ./IndexLink */ 566), d = _interopRequireDefault(c), p = n(/*! ./withRouter */ 585), f = _interopRequireDefault(p), m = n(/*! ./IndexRedirect */ 567), h = _interopRequireDefault(m), M = n(/*! ./IndexRoute */ 568), _ = _interopRequireDefault(M), y = n(/*! ./Redirect */ 301), b = _interopRequireDefault(y), g = n(/*! ./Route */ 570), v = _interopRequireDefault(g), A = n(/*! ./History */ 565), E = _interopRequireDefault(A), T = n(/*! ./Lifecycle */ 569), L = _interopRequireDefault(T), O = n(/*! ./RouteContext */ 571), C = _interopRequireDefault(O), w = n(/*! ./useRoutes */ 584), S = _interopRequireDefault(w), k = n(/*! ./RouterContext */ 74), N = _interopRequireDefault(k), D = n(/*! ./RoutingContext */ 573), P = _interopRequireDefault(D), z = _interopRequireDefault(r), R = n(/*! ./match */ 582), q = _interopRequireDefault(R), x = n(/*! ./useRouterHistory */ 306), I = _interopRequireDefault(x), W = n(/*! ./applyRouterMiddleware */ 575), Y = _interopRequireDefault(W), j = n(/*! ./browserHistory */ 576), B = _interopRequireDefault(j), F = n(/*! ./hashHistory */ 580), H = _interopRequireDefault(F), U = n(/*! ./createMemoryHistory */ 303), X = _interopRequireDefault(U);
     t.Router = s.default, t.Link = l.default, t.IndexLink = d.default, t.withRouter = f.default, 
     t.IndexRedirect = h.default, t.IndexRoute = _.default, t.Redirect = b.default, t.Route = v.default, 
     t.History = E.default, t.Lifecycle = L.default, t.RouteContext = C.default, t.useRoutes = S.default, 
@@ -1862,7 +1862,12 @@ function(e, t, n) {
                     className: "box-bar-top"
                 }, o.default.createElement("div", {
                     className: "bar"
-                })), o.default.createElement("div", {
+                }, this.props.headerImage && o.default.createElement("div", {
+                    className: "title small"
+                }, o.default.createElement("img", {
+                    src: this.props.headerImage,
+                    alt: this.props.headerAlt
+                })))), o.default.createElement("div", {
                     className: "box-corner-tr"
                 })), o.default.createElement("div", {
                     className: "box-middle"
@@ -1887,7 +1892,9 @@ function(e, t, n) {
         } ]), ViewWrapper;
     }(o.default.Component);
     t.default = i, i.propTypes = {
-        container: o.default.PropTypes.string
+        container: o.default.PropTypes.string,
+        headerImage: o.default.PropTypes.string,
+        headerAlt: o.default.PropTypes.string
     }, i.defaultProps = {
         container: "default"
     };
@@ -2123,6 +2130,11 @@ function(e, t, n) {
         }
     };
     e.exports = a;
+}, /*!**************************!*\
+  !*** ./~/axios/index.js ***!
+  \**************************/
+function(e, t, n) {
+    e.exports = n(/*! ./lib/axios */ 321);
 }, /*!***********************************************!*\
   !*** ./~/react/lib/ReactComponentTreeHook.js ***!
   \***********************************************/
@@ -2308,11 +2320,6 @@ function(e, t, n) {
         getRegisteredIDs: i
     };
     e.exports = v;
-}, /*!**************************!*\
-  !*** ./~/axios/index.js ***!
-  \**************************/
-function(e, t, n) {
-    e.exports = n(/*! ./lib/axios */ 321);
 }, /*!*********************************************!*\
   !*** ./src/components/pieces/AdminMenu.jsx ***!
   \*********************************************/
@@ -2355,7 +2362,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../../roleConfig */ 77), u = _interopRequireDefault(s), l = n(/*! ../../library/authentication/components/AccessControl */ 124), c = _interopRequireDefault(l), d = (0, 
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../../roleConfig */ 78), u = _interopRequireDefault(s), l = n(/*! ../../library/authentication/components/AccessControl */ 124), c = _interopRequireDefault(l), d = (0, 
     c.default)(u.default), p = function(e) {
         function AdminMenu() {
             return _classCallCheck(this, AdminMenu), _possibleConstructorReturn(this, (AdminMenu.__proto__ || Object.getPrototypeOf(AdminMenu)).call(this));
@@ -2495,7 +2502,7 @@ function(e, t, n) {
             n && "function" == typeof t ? e[r] = a(t, n) : e[r] = t;
         }), e;
     }
-    var a = n(/*! ./helpers/bind */ 112), r = Object.prototype.toString;
+    var a = n(/*! ./helpers/bind */ 114), r = Object.prototype.toString;
     e.exports = {
         isArray: isArray,
         isArrayBuffer: isArrayBuffer,
@@ -2602,7 +2609,7 @@ function(e, t, n) {
         m.isBatchingUpdates ? void 0 : l(!1, "ReactUpdates.asap: Can't enqueue an asap callback in a context whereupdates are not being batched."), 
         p.enqueue(e, t), f = !0;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./CallbackQueue */ 265), o = n(/*! ./PooledClass */ 40), i = n(/*! ./ReactFeatureFlags */ 273), s = n(/*! ./ReactReconciler */ 41), u = n(/*! ./Transaction */ 70), l = n(/*! fbjs/lib/invariant */ 3), c = [], d = 0, p = r.getPooled(), f = !1, m = null, h = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./CallbackQueue */ 265), o = n(/*! ./PooledClass */ 40), i = n(/*! ./ReactFeatureFlags */ 273), s = n(/*! ./ReactReconciler */ 41), u = n(/*! ./Transaction */ 71), l = n(/*! fbjs/lib/invariant */ 3), c = [], d = 0, p = r.getPooled(), f = !1, m = null, h = {
         initialize: function() {
             this.dirtyComponentsLength = c.length;
         },
@@ -2704,7 +2711,7 @@ function(e, t, n) {
   \******************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactChildren */ 597), o = n(/*! ./ReactComponent */ 107), i = n(/*! ./ReactPureComponent */ 602), s = n(/*! ./ReactClass */ 598), u = n(/*! ./ReactDOMFactories */ 599), l = n(/*! ./ReactElement */ 43), c = n(/*! ./ReactPropTypes */ 600), d = n(/*! ./ReactVersion */ 606), p = n(/*! ./onlyChild */ 313), f = n(/*! fbjs/lib/warning */ 4), m = l.createElement, h = l.createFactory, M = l.cloneElement, _ = n(/*! ./canDefineProperty */ 75), y = n(/*! ./ReactElementValidator */ 309), b = !1;
+    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactChildren */ 597), o = n(/*! ./ReactComponent */ 109), i = n(/*! ./ReactPureComponent */ 602), s = n(/*! ./ReactClass */ 598), u = n(/*! ./ReactDOMFactories */ 599), l = n(/*! ./ReactElement */ 43), c = n(/*! ./ReactPropTypes */ 600), d = n(/*! ./ReactVersion */ 606), p = n(/*! ./onlyChild */ 313), f = n(/*! fbjs/lib/warning */ 4), m = l.createElement, h = l.createFactory, M = l.cloneElement, _ = n(/*! ./canDefineProperty */ 76), y = n(/*! ./ReactElementValidator */ 309), b = !1;
     m = y.createElement, h = y.createFactory, M = y.cloneElement;
     var g = a, v = !1;
     g = function() {
@@ -2917,7 +2924,7 @@ function(e, t, n) {
   \******************************/
 function(e, t, n) {
     "use strict";
-    e.exports = n(/*! ./lib/ReactDOM */ 93);
+    e.exports = n(/*! ./lib/ReactDOM */ 95);
 }, /*!****************************************!*\
   !*** ./~/react-dom/lib/DOMProperty.js ***!
   \****************************************/
@@ -3189,7 +3196,7 @@ function(e, t, n) {
             configurable: !0
         });
     }
-    var a, r, o = n(/*! object-assign */ 10), i = n(/*! ./ReactCurrentOwner */ 31), s = n(/*! fbjs/lib/warning */ 4), u = n(/*! ./canDefineProperty */ 75), l = Object.prototype.hasOwnProperty, c = n(/*! ./ReactElementSymbol */ 308), d = {
+    var a, r, o = n(/*! object-assign */ 10), i = n(/*! ./ReactCurrentOwner */ 31), s = n(/*! fbjs/lib/warning */ 4), u = n(/*! ./canDefineProperty */ 76), l = Object.prototype.hasOwnProperty, c = n(/*! ./ReactElementSymbol */ 308), d = {
         key: !0,
         ref: !0,
         __self: !0,
@@ -3841,7 +3848,7 @@ function(e, t, n) {
         n.exports = cloneDeep;
     }).call(t, function() {
         return this;
-    }(), n(/*! ./../webpack/buildin/module.js */ 76)(e));
+    }(), n(/*! ./../webpack/buildin/module.js */ 77)(e));
 }, /*!***********************************!*\
   !*** ./~/lodash.isequal/index.js ***!
   \***********************************/
@@ -4295,7 +4302,7 @@ function(e, t, n) {
         n.exports = isEqual;
     }).call(t, function() {
         return this;
-    }(), n(/*! ./../webpack/buildin/module.js */ 76)(e));
+    }(), n(/*! ./../webpack/buildin/module.js */ 77)(e));
 }, /*!******************************!*\
   !*** ./~/process/browser.js ***!
   \******************************/
@@ -4619,7 +4626,7 @@ function(e, t, n) {
             toString: toString
         };
     }
-    var a = n(/*! ./DOMNamespaces */ 88), r = n(/*! ./setInnerHTML */ 72), o = n(/*! ./createMicrosoftUnsafeLocalFunction */ 96), i = n(/*! ./setTextContent */ 289), s = 1, u = 11, l = "undefined" != typeof document && "number" == typeof document.documentMode || "undefined" != typeof navigator && "string" == typeof navigator.userAgent && /\bEdge\/\d/.test(navigator.userAgent), c = o(function(e, t, n) {
+    var a = n(/*! ./DOMNamespaces */ 90), r = n(/*! ./setInnerHTML */ 73), o = n(/*! ./createMicrosoftUnsafeLocalFunction */ 98), i = n(/*! ./setTextContent */ 289), s = 1, u = 11, l = "undefined" != typeof document && "number" == typeof document.documentMode || "undefined" != typeof navigator && "string" == typeof navigator.userAgent && /\bEdge\/\d/.test(navigator.userAgent), c = o(function(e, t, n) {
         t.node.nodeType === u || t.node.nodeType === s && "object" === t.node.nodeName.toLowerCase() && (null == t.node.namespaceURI || t.node.namespaceURI === a.html) ? (insertTreeChildren(t), 
         e.insertBefore(t.node, n)) : (e.insertBefore(t.node, n), insertTreeChildren(t));
     });
@@ -4652,7 +4659,7 @@ function(e, t, n) {
             return !1;
         }
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./EventPluginRegistry */ 59)), r = n(/*! ./EventPluginUtils */ 89), o = n(/*! ./ReactErrorUtils */ 94), i = n(/*! ./accumulateInto */ 281), s = n(/*! ./forEachAccumulated */ 283), u = n(/*! fbjs/lib/invariant */ 3), l = {}, c = null, d = function(e, t) {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./EventPluginRegistry */ 60)), r = n(/*! ./EventPluginUtils */ 91), o = n(/*! ./ReactErrorUtils */ 96), i = n(/*! ./accumulateInto */ 281), s = n(/*! ./forEachAccumulated */ 283), u = n(/*! fbjs/lib/invariant */ 3), l = {}, c = null, d = function(e, t) {
         e && (r.executeDispatchesInOrder(e, t), e.isPersistent() || e.constructor.release(e));
     }, p = function(e) {
         return d(e, !0);
@@ -4764,7 +4771,7 @@ function(e, t, n) {
     function accumulateDirectDispatches(e) {
         i(e, accumulateDirectDispatchesSingle);
     }
-    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPluginUtils */ 89), o = n(/*! ./accumulateInto */ 281), i = n(/*! ./forEachAccumulated */ 283), s = n(/*! fbjs/lib/warning */ 4), u = a.getListener, l = {
+    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPluginUtils */ 91), o = n(/*! ./accumulateInto */ 281), i = n(/*! ./forEachAccumulated */ 283), s = n(/*! fbjs/lib/warning */ 4), u = a.getListener, l = {
         accumulateTwoPhaseDispatches: accumulateTwoPhaseDispatches,
         accumulateTwoPhaseDispatchesSkipTarget: accumulateTwoPhaseDispatchesSkipTarget,
         accumulateDirectDispatches: accumulateDirectDispatches,
@@ -4964,6 +4971,75 @@ function(e, t, n) {
     i.propTypes = {
         ready: o.default.PropTypes.func.isRequired
     }, t.default = i;
+}, /*!******************************************!*\
+  !*** ./src/actions/GameSystemActions.js ***!
+  \******************************************/
+function(e, t, n) {
+    "use strict";
+    function _interopRequireDefault(e) {
+        return e && e.__esModule ? e : {
+            default: e
+        };
+    }
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    });
+    var a = n(/*! ../constants/GameSystemConstants */ 118), r = _interopRequireDefault(a), o = n(/*! ../services/GameSystemService */ 65), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+        return {
+            type: e,
+            data: t
+        };
+    }, u = function _returnResponse(e, t) {
+        return {
+            type: e,
+            data: t,
+            receivedAt: Date.now()
+        };
+    };
+    t.default = {
+        get: function get(e) {
+            return function(t) {
+                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST, e)), i.default.get(e).then(function(e) {
+                    return t(u(r.default.GET_GAME_SYSTEM, e)), e;
+                });
+            };
+        },
+        getAll: function getAll() {
+            return function(e) {
+                return e(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.getAll().then(function(t) {
+                    return e(u(r.default.GET_GAME_SYSTEMS, t)), t;
+                });
+            };
+        },
+        search: function search(e) {
+            return function(t) {
+                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.search(e).then(function(e) {
+                    return t(u(r.default.GET_GAME_SYSTEMS, e.results)), e.pagination;
+                });
+            };
+        },
+        create: function create(e) {
+            return function(t) {
+                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.create(e).then(function(e) {
+                    return t(u(r.default.CREATE_GAME_SYSTEM, e)), e;
+                });
+            };
+        },
+        update: function update(e, t) {
+            return function(n) {
+                return n(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.update(e, t).then(function(e) {
+                    return n(u(r.default.UPDATE_GAME_SYSTEM, e)), e;
+                });
+            };
+        },
+        remove: function remove(e) {
+            return function(t) {
+                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST, e)), i.default.remove(e).then(function(n) {
+                    return t(u(r.default.REMOVE_GAME_SYSTEM, e)), n;
+                });
+            };
+        }
+    };
 }, /*!*************************************!*\
   !*** ./src/services/FileService.js ***!
   \*************************************/
@@ -4972,7 +5048,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19);
+    var a = n(/*! axios */ 18);
     t.default = {
         create: function create(e) {
             return a.post("/files", e).then(function(e) {
@@ -5080,7 +5156,7 @@ function(e, t, n) {
         return Object.prototype.hasOwnProperty.call(e, m) || (e[m] = p++, c[e[m]] = {}), 
         c[e[m]];
     }
-    var a, r = n(/*! object-assign */ 10), o = n(/*! ./EventPluginRegistry */ 59), i = n(/*! ./ReactEventEmitterMixin */ 509), s = n(/*! ./ViewportMetrics */ 280), u = n(/*! ./getVendorPrefixedEventName */ 286), l = n(/*! ./isEventSupported */ 100), c = {}, d = !1, p = 0, f = {
+    var a, r = n(/*! object-assign */ 10), o = n(/*! ./EventPluginRegistry */ 60), i = n(/*! ./ReactEventEmitterMixin */ 509), s = n(/*! ./ViewportMetrics */ 280), u = n(/*! ./getVendorPrefixedEventName */ 286), l = n(/*! ./isEventSupported */ 102), c = {}, d = !1, p = 0, f = {
         topAbort: "abort",
         topAnimationEnd: u("animationend") || "animationend",
         topAnimationIteration: u("animationiteration") || "animationiteration",
@@ -5195,7 +5271,7 @@ function(e, t, n) {
     function SyntheticUIEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticEvent */ 30), r = n(/*! ./getEventTarget */ 99), o = {
+    var a = n(/*! ./SyntheticEvent */ 30), r = n(/*! ./getEventTarget */ 101), o = {
         view: function(e) {
             if (e.view) return e.view;
             var t = r(e);
@@ -5208,75 +5284,6 @@ function(e, t, n) {
         }
     };
     a.augmentClass(SyntheticUIEvent, o), e.exports = SyntheticUIEvent;
-}, /*!******************************************!*\
-  !*** ./src/actions/GameSystemActions.js ***!
-  \******************************************/
-function(e, t, n) {
-    "use strict";
-    function _interopRequireDefault(e) {
-        return e && e.__esModule ? e : {
-            default: e
-        };
-    }
-    Object.defineProperty(t, "__esModule", {
-        value: !0
-    });
-    var a = n(/*! ../constants/GameSystemConstants */ 117), r = _interopRequireDefault(a), o = n(/*! ../services/GameSystemService */ 64), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
-        return {
-            type: e,
-            data: t
-        };
-    }, u = function _returnResponse(e, t) {
-        return {
-            type: e,
-            data: t,
-            receivedAt: Date.now()
-        };
-    };
-    t.default = {
-        get: function get(e) {
-            return function(t) {
-                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST, e)), i.default.get(e).then(function(e) {
-                    return t(u(r.default.GET_GAME_SYSTEM, e)), e;
-                });
-            };
-        },
-        getAll: function getAll() {
-            return function(e) {
-                return e(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.getAll().then(function(t) {
-                    return e(u(r.default.GET_GAME_SYSTEMS, t)), t;
-                });
-            };
-        },
-        search: function search(e) {
-            return function(t) {
-                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.search(e).then(function(e) {
-                    return t(u(r.default.GET_GAME_SYSTEMS, e.results)), e.pagination;
-                });
-            };
-        },
-        create: function create(e) {
-            return function(t) {
-                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.create(e).then(function(e) {
-                    return t(u(r.default.CREATE_GAME_SYSTEM, e)), e;
-                });
-            };
-        },
-        update: function update(e, t) {
-            return function(n) {
-                return n(s(r.default.INITIATE_GAME_SYSTEM_REQUEST)), i.default.update(e, t).then(function(e) {
-                    return n(u(r.default.UPDATE_GAME_SYSTEM, e)), e;
-                });
-            };
-        },
-        remove: function remove(e) {
-            return function(t) {
-                return t(s(r.default.INITIATE_GAME_SYSTEM_REQUEST, e)), i.default.remove(e).then(function(n) {
-                    return t(u(r.default.REMOVE_GAME_SYSTEM, e)), n;
-                });
-            };
-        }
-    };
 }, /*!********************************************!*\
   !*** ./src/actions/ManufacturerActions.js ***!
   \********************************************/
@@ -5290,7 +5297,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/ManufacturerConstants */ 118), r = _interopRequireDefault(a), o = n(/*! ../services/ManufacturerService */ 79), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/ManufacturerConstants */ 119), r = _interopRequireDefault(a), o = n(/*! ../services/ManufacturerService */ 81), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -5346,6 +5353,124 @@ function(e, t, n) {
             };
         }
     };
+}, /*!************************************!*\
+  !*** ./src/library/Modal/index.js ***!
+  \************************************/
+function(e, t, n) {
+    "use strict";
+    function _interopRequireDefault(e) {
+        return e && e.__esModule ? e : {
+            default: e
+        };
+    }
+    function _classCallCheck(e, t) {
+        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+    }
+    function _possibleConstructorReturn(e, t) {
+        if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+        return !t || "object" != typeof t && "function" != typeof t ? e : t;
+    }
+    function _inherits(e, t) {
+        if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + typeof t);
+        e.prototype = Object.create(t && t.prototype, {
+            constructor: {
+                value: e,
+                enumerable: !1,
+                writable: !0,
+                configurable: !0
+            }
+        }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+    }
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    });
+    var a = function() {
+        function defineProperties(e, t) {
+            for (var n = 0; n < t.length; n++) {
+                var a = t[n];
+                a.enumerable = a.enumerable || !1, a.configurable = !0, "value" in a && (a.writable = !0), 
+                Object.defineProperty(e, a.key, a);
+            }
+        }
+        return function(e, t, n) {
+            return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
+        };
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! classnames */ 16), s = _interopRequireDefault(i), u = n(/*! react-addons-css-transition-group */ 39), l = _interopRequireDefault(u), c = function(e) {
+        function Modal(e, t) {
+            return _classCallCheck(this, Modal), _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, e, t));
+        }
+        return _inherits(Modal, e), a(Modal, [ {
+            key: "render",
+            value: function render() {
+                var e = (0, s.default)({
+                    "modal-container": !0,
+                    show: this.props.modalIsOpen
+                }), t = (0, s.default)({
+                    "modal-backdrop": !0,
+                    show: this.props.modalIsOpen
+                });
+                return o.default.createElement("div", {
+                    className: e,
+                    key: this.props.name
+                }, o.default.createElement(l.default, {
+                    transitionName: this.props.transitionName,
+                    className: "modal-animation-wrapper",
+                    transitionAppear: !0,
+                    transitionAppearTimeout: 250,
+                    transitionEnter: !0,
+                    transitionEnterTimeout: 250,
+                    transitionLeave: !0,
+                    transitionLeaveTimeout: 250
+                }, this.props.modalIsOpen && o.default.createElement("div", {
+                    className: "modal"
+                }, o.default.createElement("div", {
+                    className: "modal-content"
+                }, o.default.createElement("div", {
+                    className: "panel"
+                }, this.props.showClose && o.default.createElement("span", {
+                    className: "fa fa-close",
+                    onClick: this.props.handleClose
+                }), this.props.showTitle && o.default.createElement("div", {
+                    className: "panel-title primary"
+                }, this.props.title), o.default.createElement("div", {
+                    className: "panel-content"
+                }, this.props.children), this.props.showFooter && o.default.createElement("div", {
+                    className: "panel-footer text-right"
+                }, this.props.showCancel && o.default.createElement("button", {
+                    type: "button collapse",
+                    className: "button close-modal",
+                    onClick: this.props.handleClose
+                }, this.props.cancelText || "Cancel"), this.props.handleSubmit && o.default.createElement("button", {
+                    type: "button collapse",
+                    className: "button confirm-modal",
+                    onClick: this.props.handleSubmit
+                }, this.props.confirmText || "Submit")))))), o.default.createElement("div", {
+                    className: t,
+                    onClick: this.props.handleClose
+                }));
+            }
+        } ]), Modal;
+    }(o.default.Component);
+    t.default = c, c.propTypes = {
+        cancelText: o.default.PropTypes.string,
+        confirmText: o.default.PropTypes.string,
+        handleClose: o.default.PropTypes.func.isRequired,
+        handleSubmit: o.default.PropTypes.func,
+        modalIsOpen: o.default.PropTypes.bool.isRequired,
+        name: o.default.PropTypes.string.isRequired,
+        showCancel: o.default.PropTypes.bool,
+        showClose: o.default.PropTypes.bool,
+        showFooter: o.default.PropTypes.bool,
+        showTitle: o.default.PropTypes.bool,
+        title: o.default.PropTypes.string,
+        transitionName: o.default.PropTypes.string
+    }, c.defaultProps = {
+        showCancel: !0,
+        showClose: !1,
+        showFooter: !0,
+        showTitle: !0,
+        transitionName: "fade"
+    };
 }, /*!*******************************************!*\
   !*** ./src/services/GameSystemService.js ***!
   \*******************************************/
@@ -5359,7 +5484,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/gameSystems/" + e).then(function(e) {
@@ -5405,7 +5530,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/newsPosts/" + e).then(function(e) {
@@ -5446,7 +5571,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19);
+    var a = n(/*! axios */ 18);
     t.default = {
         getById: function getById(e) {
             return a.get("/users/" + e).then(function(e) {
@@ -5581,7 +5706,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! query-string */ 479), s = n(/*! ./runTransitionHook */ 85), u = _interopRequireDefault(s), l = n(/*! ./PathUtils */ 38), c = n(/*! ./deprecate */ 84), d = _interopRequireDefault(c), p = "$searchBase", f = i.parse;
+    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! query-string */ 479), s = n(/*! ./runTransitionHook */ 87), u = _interopRequireDefault(s), l = n(/*! ./PathUtils */ 38), c = n(/*! ./deprecate */ 86), d = _interopRequireDefault(c), p = "$searchBase", f = i.parse;
     t.default = useQueries, e.exports = t.default;
 }, /*!************************************************!*\
   !*** ./~/react-dom/lib/SyntheticMouseEvent.js ***!
@@ -5591,7 +5716,7 @@ function(e, t, n) {
     function SyntheticMouseEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 61), r = n(/*! ./ViewportMetrics */ 280), o = n(/*! ./getEventModifierState */ 98), i = {
+    var a = n(/*! ./SyntheticUIEvent */ 62), r = n(/*! ./ViewportMetrics */ 280), o = n(/*! ./getEventModifierState */ 100), i = {
         screenX: null,
         screenY: null,
         clientX: null,
@@ -5725,7 +5850,7 @@ function(e, t) {
   \*****************************************/
 function(e, t, n) {
     "use strict";
-    var a, r = n(/*! fbjs/lib/ExecutionEnvironment */ 13), o = n(/*! ./DOMNamespaces */ 88), i = /^[ \r\n\t\f]/, s = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/, u = n(/*! ./createMicrosoftUnsafeLocalFunction */ 96), l = u(function(e, t) {
+    var a, r = n(/*! fbjs/lib/ExecutionEnvironment */ 13), o = n(/*! ./DOMNamespaces */ 90), i = /^[ \r\n\t\f]/, s = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/, u = n(/*! ./createMicrosoftUnsafeLocalFunction */ 98), l = u(function(e, t) {
         if (e.namespaceURI !== o.svg || "innerHTML" in e) e.innerHTML = t; else {
             a = a || document.createElement("div"), a.innerHTML = "<svg>" + t + "</svg>";
             for (var n = a.firstChild; n.firstChild; ) e.appendChild(n.firstChild);
@@ -5763,7 +5888,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, o = n(/*! invariant */ 17), i = _interopRequireDefault(o), s = n(/*! react */ 2), u = _interopRequireDefault(s), l = n(/*! ./deprecateObjectProperties */ 74), c = _interopRequireDefault(l), d = n(/*! ./getRouteParams */ 579), p = _interopRequireDefault(d), f = n(/*! ./RouteUtils */ 35), m = n(/*! ./routerWarning */ 15), h = _interopRequireDefault(m), M = u.default.PropTypes, _ = M.array, y = M.func, b = M.object, g = u.default.createClass({
+    }, o = n(/*! invariant */ 17), i = _interopRequireDefault(o), s = n(/*! react */ 2), u = _interopRequireDefault(s), l = n(/*! ./deprecateObjectProperties */ 75), c = _interopRequireDefault(l), d = n(/*! ./getRouteParams */ 579), p = _interopRequireDefault(d), f = n(/*! ./RouteUtils */ 35), m = n(/*! ./routerWarning */ 15), h = _interopRequireDefault(m), M = u.default.PropTypes, _ = M.array, y = M.func, b = M.object, g = u.default.createClass({
         displayName: "RouterContext",
         propTypes: {
             history: b,
@@ -5932,6 +6057,54 @@ function(e, t) {
         roleFlags: 255,
         homeState: "/admin"
     } ];
+}, /*!************************************!*\
+  !*** ./src/actions/CartActions.js ***!
+  \************************************/
+function(e, t, n) {
+    "use strict";
+    function _interopRequireDefault(e) {
+        return e && e.__esModule ? e : {
+            default: e
+        };
+    }
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    });
+    var a = n(/*! ../constants/CartItemConstants */ 116), r = _interopRequireDefault(a);
+    t.default = {
+        add: function add(e, t) {
+            var n = {
+                product: e,
+                cartQty: t
+            };
+            return function(e) {
+                e({
+                    type: r.default.ADD_CART_ITEM,
+                    data: n
+                });
+            };
+        },
+        remove: function remove(e, t) {
+            var n = {
+                id: e,
+                cartQty: t
+            };
+            return function(e) {
+                e({
+                    type: r.default.REMOVE_CART_ITEM,
+                    data: n
+                });
+            };
+        },
+        updateTotal: function updateTotal(e) {
+            return function(t) {
+                t({
+                    type: r.default.UPDATE_CART_TOTAL,
+                    data: e
+                });
+            };
+        }
+    };
 }, /*!*************************************!*\
   !*** ./src/library/loader/index.js ***!
   \*************************************/
@@ -5960,7 +6133,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/manufacturers/" + e).then(function(e) {
@@ -6006,7 +6179,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/products/" + e).then(function(e) {
@@ -6217,7 +6390,7 @@ function(e, t, n) {
             payload: n
         });
     }
-    var a = n(/*! ./DOMLazyTree */ 52), r = n(/*! ./Danger */ 485), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInstrumentation */ 24), s = n(/*! ./createMicrosoftUnsafeLocalFunction */ 96), u = n(/*! ./setInnerHTML */ 72), l = n(/*! ./setTextContent */ 289), c = s(function(e, t, n) {
+    var a = n(/*! ./DOMLazyTree */ 52), r = n(/*! ./Danger */ 485), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInstrumentation */ 24), s = n(/*! ./createMicrosoftUnsafeLocalFunction */ 98), u = n(/*! ./setInnerHTML */ 73), l = n(/*! ./setTextContent */ 289), c = s(function(e, t, n) {
         e.insertBefore(t, n);
     }), d = r.dangerouslyReplaceNodeWithMarkup;
     d = function(e, t, n) {
@@ -6350,7 +6523,7 @@ function(e, t, n) {
     function hasDispatches(e) {
         return !!e._dispatchListeners;
     }
-    var a, r, o, i = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactErrorUtils */ 94)), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = {
+    var a, r, o, i = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactErrorUtils */ 96)), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = {
         injectComponentTree: function(e) {
             a = e, u(e && e.getNodeFromInstance && e.getInstanceFromNode, "EventPluginUtils.injection.injectComponentTree(...): Injected module is missing getNodeFromInstance or getInstanceFromNode.");
         },
@@ -6984,7 +7157,7 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0, t.router = t.routes = t.route = t.components = t.component = t.location = t.history = t.falsy = t.locationShape = t.routerShape = void 0;
-    var a = n(/*! react */ 2), r = n(/*! ./deprecateObjectProperties */ 74), o = _interopRequireDefault(r), i = n(/*! ./InternalPropTypes */ 42), s = _interopRequireWildcard(i), u = n(/*! ./routerWarning */ 15), l = _interopRequireDefault(u), c = a.PropTypes.func, d = a.PropTypes.object, p = a.PropTypes.shape, f = a.PropTypes.string, m = t.routerShape = p({
+    var a = n(/*! react */ 2), r = n(/*! ./deprecateObjectProperties */ 75), o = _interopRequireDefault(r), i = n(/*! ./InternalPropTypes */ 42), s = _interopRequireWildcard(i), u = n(/*! ./routerWarning */ 15), l = _interopRequireDefault(u), c = a.PropTypes.func, d = a.PropTypes.object, p = a.PropTypes.shape, f = a.PropTypes.string, m = t.routerShape = p({
         push: c.isRequired,
         replace: c.isRequired,
         go: c.isRequired,
@@ -7151,7 +7324,7 @@ function(e, t, n) {
     function ReactComponent(e, t, n) {
         this.props = e, this.context = t, this.refs = o, this.updater = n || a;
     }
-    var a = (n(/*! ./reactProdInvariant */ 44), n(/*! ./ReactNoopUpdateQueue */ 108)), r = n(/*! ./canDefineProperty */ 75), o = n(/*! fbjs/lib/emptyObject */ 46), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! fbjs/lib/warning */ 4);
+    var a = (n(/*! ./reactProdInvariant */ 44), n(/*! ./ReactNoopUpdateQueue */ 110)), r = n(/*! ./canDefineProperty */ 76), o = n(/*! fbjs/lib/emptyObject */ 46), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! fbjs/lib/warning */ 4);
     ReactComponent.prototype.isReactComponent = {}, ReactComponent.prototype.setState = function(e, t) {
         "object" != typeof e && "function" != typeof e && null != e ? i(!1, "setState(...): takes an object of state variables to update or a function which returns an object of state variables.") : void 0, 
         this.updater.enqueueSetState(this, e), t && this.updater.enqueueCallback(this, t, "setState");
@@ -7234,7 +7407,7 @@ function(e, t) {
   \*************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./../utils */ 21), r = n(/*! ./../core/settle */ 326), o = n(/*! ./../helpers/buildURL */ 330), i = n(/*! ./../helpers/parseHeaders */ 336), s = n(/*! ./../helpers/isURLSameOrigin */ 334), u = n(/*! ../core/createError */ 111), l = "undefined" != typeof window && window.btoa || n(/*! ./../helpers/btoa */ 329);
+    var a = n(/*! ./../utils */ 21), r = n(/*! ./../core/settle */ 326), o = n(/*! ./../helpers/buildURL */ 330), i = n(/*! ./../helpers/parseHeaders */ 336), s = n(/*! ./../helpers/isURLSameOrigin */ 334), u = n(/*! ../core/createError */ 113), l = "undefined" != typeof window && window.btoa || n(/*! ./../helpers/btoa */ 329);
     e.exports = function xhrAdapter(e) {
         return new Promise(function dispatchXhrRequest(t, c) {
             var d = e.data, p = e.headers;
@@ -7299,54 +7472,6 @@ function(e, t) {
             for (var n = new Array(arguments.length), a = 0; a < n.length; a++) n[a] = arguments[a];
             return e.apply(t, n);
         };
-    };
-}, /*!************************************!*\
-  !*** ./src/actions/CartActions.js ***!
-  \************************************/
-function(e, t, n) {
-    "use strict";
-    function _interopRequireDefault(e) {
-        return e && e.__esModule ? e : {
-            default: e
-        };
-    }
-    Object.defineProperty(t, "__esModule", {
-        value: !0
-    });
-    var a = n(/*! ../constants/CartItemConstants */ 115), r = _interopRequireDefault(a);
-    t.default = {
-        add: function add(e, t) {
-            var n = {
-                product: e,
-                cartQty: t
-            };
-            return function(e) {
-                e({
-                    type: r.default.ADD_CART_ITEM,
-                    data: n
-                });
-            };
-        },
-        remove: function remove(e, t) {
-            var n = {
-                id: e,
-                cartQty: t
-            };
-            return function(e) {
-                e({
-                    type: r.default.REMOVE_CART_ITEM,
-                    data: n
-                });
-            };
-        },
-        updateTotal: function updateTotal(e) {
-            return function(t) {
-                t({
-                    type: r.default.UPDATE_CART_TOTAL,
-                    data: e
-                });
-            };
-        }
     };
 }, /*!***********************************************!*\
   !*** ./src/constants/BannerSlideConstants.js ***!
@@ -7504,120 +7629,6 @@ function(e, t, n) {
         REMOVE_PRODUCT_ORDER: null,
         FILTER_PRODUCT_ORDERS: null
     });
-}, /*!************************************!*\
-  !*** ./src/library/Modal/index.js ***!
-  \************************************/
-function(e, t, n) {
-    "use strict";
-    function _interopRequireDefault(e) {
-        return e && e.__esModule ? e : {
-            default: e
-        };
-    }
-    function _classCallCheck(e, t) {
-        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
-    }
-    function _possibleConstructorReturn(e, t) {
-        if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-        return !t || "object" != typeof t && "function" != typeof t ? e : t;
-    }
-    function _inherits(e, t) {
-        if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-        e.prototype = Object.create(t && t.prototype, {
-            constructor: {
-                value: e,
-                enumerable: !1,
-                writable: !0,
-                configurable: !0
-            }
-        }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
-    }
-    Object.defineProperty(t, "__esModule", {
-        value: !0
-    });
-    var a = function() {
-        function defineProperties(e, t) {
-            for (var n = 0; n < t.length; n++) {
-                var a = t[n];
-                a.enumerable = a.enumerable || !1, a.configurable = !0, "value" in a && (a.writable = !0), 
-                Object.defineProperty(e, a.key, a);
-            }
-        }
-        return function(e, t, n) {
-            return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
-        };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! classnames */ 16), s = _interopRequireDefault(i), u = n(/*! react-addons-css-transition-group */ 39), l = _interopRequireDefault(u), c = function(e) {
-        function Modal(e, t) {
-            return _classCallCheck(this, Modal), _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, e, t));
-        }
-        return _inherits(Modal, e), a(Modal, [ {
-            key: "render",
-            value: function render() {
-                var e = (0, s.default)({
-                    "modal-container": !0,
-                    show: this.props.modalIsOpen
-                }), t = (0, s.default)({
-                    "modal-backdrop": !0,
-                    show: this.props.modalIsOpen
-                });
-                return o.default.createElement("div", {
-                    className: e,
-                    key: this.props.name
-                }, o.default.createElement(l.default, {
-                    transitionName: this.props.transitionName,
-                    className: "modal-animation-wrapper",
-                    transitionAppear: !0,
-                    transitionAppearTimeout: 250,
-                    transitionEnter: !0,
-                    transitionEnterTimeout: 250,
-                    transitionLeave: !0,
-                    transitionLeaveTimeout: 250
-                }, this.props.modalIsOpen && o.default.createElement("div", {
-                    className: "modal"
-                }, o.default.createElement("div", {
-                    className: "modal-content"
-                }, o.default.createElement("div", {
-                    className: "panel"
-                }, this.props.showClose && o.default.createElement("span", {
-                    className: "fa fa-close",
-                    onClick: this.props.handleClose
-                }), this.props.showTitle && o.default.createElement("div", {
-                    className: "panel-title primary"
-                }, this.props.title), o.default.createElement("div", {
-                    className: "panel-content"
-                }, this.props.children), this.props.showFooter && o.default.createElement("div", {
-                    className: "panel-footer text-right"
-                }, o.default.createElement("button", {
-                    type: "button collapse",
-                    className: "button alert",
-                    onClick: this.props.handleClose
-                }, "Cancel"), this.props.handleSubmit && o.default.createElement("button", {
-                    type: "button collapse",
-                    className: "button success",
-                    onClick: this.props.handleSubmit
-                }, "Submit")))))), o.default.createElement("div", {
-                    className: t,
-                    onClick: this.props.handleClose
-                }));
-            }
-        } ]), Modal;
-    }(o.default.Component);
-    t.default = c, c.propTypes = {
-        handleClose: o.default.PropTypes.func.isRequired,
-        handleSubmit: o.default.PropTypes.func,
-        modalIsOpen: o.default.PropTypes.bool.isRequired,
-        name: o.default.PropTypes.string.isRequired,
-        showClose: o.default.PropTypes.bool,
-        showFooter: o.default.PropTypes.bool,
-        showTitle: o.default.PropTypes.bool,
-        title: o.default.PropTypes.string,
-        transitionName: o.default.PropTypes.string
-    }, c.defaultProps = {
-        showClose: !1,
-        showFooter: !0,
-        showTitle: !0,
-        transitionName: "fade"
-    };
 }, /*!****************************************************!*\
   !*** ./src/library/alerts/actions/AlertActions.js ***!
   \****************************************************/
@@ -7961,7 +7972,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/factions/" + e).then(function(e) {
@@ -8116,7 +8127,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! invariant */ 17), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 67), s = n(/*! ./DOMUtils */ 83), u = n(/*! ./createHistory */ 142), l = _interopRequireDefault(u);
+    }, r = n(/*! invariant */ 17), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 68), s = n(/*! ./DOMUtils */ 85), u = n(/*! ./createHistory */ 142), l = _interopRequireDefault(u);
     t.default = createDOMHistory, e.exports = t.default;
 }, /*!********************************************!*\
   !*** ./~/history/lib/createHashHistory.js ***!
@@ -8245,7 +8256,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! invariant */ 17), s = _interopRequireDefault(i), u = n(/*! ./Actions */ 47), l = n(/*! ./PathUtils */ 38), c = n(/*! ./ExecutionEnvironment */ 67), d = n(/*! ./DOMUtils */ 83), p = n(/*! ./DOMStateStorage */ 139), f = n(/*! ./createDOMHistory */ 140), m = _interopRequireDefault(f), h = "_k";
+    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! invariant */ 17), s = _interopRequireDefault(i), u = n(/*! ./Actions */ 47), l = n(/*! ./PathUtils */ 38), c = n(/*! ./ExecutionEnvironment */ 68), d = n(/*! ./DOMUtils */ 85), p = n(/*! ./DOMStateStorage */ 139), f = n(/*! ./createDOMHistory */ 140), m = _interopRequireDefault(f), h = "_k";
     t.default = createHashHistory, e.exports = t.default;
 }, /*!****************************************!*\
   !*** ./~/history/lib/createHistory.js ***!
@@ -8401,7 +8412,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! deep-equal */ 443), s = _interopRequireDefault(i), u = n(/*! ./PathUtils */ 38), l = n(/*! ./AsyncUtils */ 462), c = n(/*! ./Actions */ 47), d = n(/*! ./createLocation */ 464), p = _interopRequireDefault(d), f = n(/*! ./runTransitionHook */ 85), m = _interopRequireDefault(f), h = n(/*! ./deprecate */ 84), M = _interopRequireDefault(h), _ = 6;
+    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! deep-equal */ 443), s = _interopRequireDefault(i), u = n(/*! ./PathUtils */ 38), l = n(/*! ./AsyncUtils */ 462), c = n(/*! ./Actions */ 47), d = n(/*! ./createLocation */ 464), p = _interopRequireDefault(d), f = n(/*! ./runTransitionHook */ 87), m = _interopRequireDefault(f), h = n(/*! ./deprecate */ 86), M = _interopRequireDefault(h), _ = 6;
     t.default = createHistory, e.exports = t.default;
 }, /*!**************************************!*\
   !*** ./~/history/lib/useBasename.js ***!
@@ -8493,7 +8504,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 67), s = n(/*! ./PathUtils */ 38), u = n(/*! ./runTransitionHook */ 85), l = _interopRequireDefault(u), c = n(/*! ./deprecate */ 84), d = _interopRequireDefault(c);
+    }, r = n(/*! warning */ 29), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 68), s = n(/*! ./PathUtils */ 38), u = n(/*! ./runTransitionHook */ 87), l = _interopRequireDefault(u), c = n(/*! ./deprecate */ 86), d = _interopRequireDefault(c);
     t.default = useBasename, e.exports = t.default;
 }, /*!********************************************!*\
   !*** ./~/hoist-non-react-statics/index.js ***!
@@ -17437,7 +17448,7 @@ function(e, t, n) {
             l.debugTool.onEndLifeCycleTimer(t, n);
         }
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! react/lib/React */ 28), o = n(/*! ./ReactComponentEnvironment */ 92), i = n(/*! react/lib/ReactCurrentOwner */ 31), s = n(/*! ./ReactErrorUtils */ 94), u = n(/*! ./ReactInstanceMap */ 55), l = n(/*! ./ReactInstrumentation */ 24), c = n(/*! ./ReactNodeTypes */ 277), d = n(/*! ./ReactReconciler */ 41), p = n(/*! ./checkReactTypeSpec */ 539), f = n(/*! fbjs/lib/emptyObject */ 46), m = n(/*! fbjs/lib/invariant */ 3), h = n(/*! fbjs/lib/shallowEqual */ 82), M = n(/*! ./shouldUpdateReactComponent */ 101), _ = n(/*! fbjs/lib/warning */ 4), y = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! react/lib/React */ 28), o = n(/*! ./ReactComponentEnvironment */ 94), i = n(/*! react/lib/ReactCurrentOwner */ 31), s = n(/*! ./ReactErrorUtils */ 96), u = n(/*! ./ReactInstanceMap */ 55), l = n(/*! ./ReactInstrumentation */ 24), c = n(/*! ./ReactNodeTypes */ 277), d = n(/*! ./ReactReconciler */ 41), p = n(/*! ./checkReactTypeSpec */ 539), f = n(/*! fbjs/lib/emptyObject */ 46), m = n(/*! fbjs/lib/invariant */ 3), h = n(/*! fbjs/lib/shallowEqual */ 84), M = n(/*! ./shouldUpdateReactComponent */ 103), _ = n(/*! fbjs/lib/warning */ 4), y = {
         ImpureClass: 0,
         PureClass: 1,
         StatelessFunctional: 2
@@ -17742,7 +17753,7 @@ function(e, t, n) {
         return this._rootNodeID && (this._wrapperState.pendingUpdate = !0), i.asap(updateOptionsIfPendingUpdateAndMounted, this), 
         n;
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./LinkedValueUtils */ 91), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 25), s = n(/*! fbjs/lib/warning */ 4), u = !1, l = !1, c = [ "value", "defaultValue" ], d = {
+    var a = n(/*! object-assign */ 10), r = n(/*! ./LinkedValueUtils */ 93), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 25), s = n(/*! fbjs/lib/warning */ 4), u = !1, l = !1, c = [ "value", "defaultValue" ], d = {
         getHostProps: function(e, t) {
             return a({}, t, {
                 onChange: e._wrapperState.onChange,
@@ -17875,7 +17886,7 @@ function(e, t, n) {
             performance.clearMarks(n), performance.clearMeasures(i);
         }
     }
-    var a = n(/*! ./ReactInvalidSetStateWarningHook */ 513), r = n(/*! ./ReactHostOperationHistoryHook */ 511), o = n(/*! react/lib/ReactComponentTreeHook */ 18), i = n(/*! fbjs/lib/ExecutionEnvironment */ 13), s = n(/*! fbjs/lib/performanceNow */ 461), u = n(/*! fbjs/lib/warning */ 4), l = [], c = {}, d = !1, p = [], f = [], m = 0, h = [], M = 0, _ = null, y = 0, b = 0, g = null, v = !1, A = 0, E = "undefined" != typeof performance && "function" == typeof performance.mark && "function" == typeof performance.clearMarks && "function" == typeof performance.measure && "function" == typeof performance.clearMeasures, T = {
+    var a = n(/*! ./ReactInvalidSetStateWarningHook */ 513), r = n(/*! ./ReactHostOperationHistoryHook */ 511), o = n(/*! react/lib/ReactComponentTreeHook */ 19), i = n(/*! fbjs/lib/ExecutionEnvironment */ 13), s = n(/*! fbjs/lib/performanceNow */ 461), u = n(/*! fbjs/lib/warning */ 4), l = [], c = {}, d = !1, p = [], f = [], m = 0, h = [], M = 0, _ = null, y = 0, b = 0, g = null, v = !1, A = 0, E = "undefined" != typeof performance && "function" == typeof performance.mark && "function" == typeof performance.clearMarks && "function" == typeof performance.measure && "function" == typeof performance.clearMeasures, T = {
         addHook: function(e) {
             l.push(e);
         },
@@ -17955,7 +17966,7 @@ function(e, t, n) {
     function ReactDefaultBatchingStrategyTransaction() {
         this.reinitializeTransaction();
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactUpdates */ 25), o = n(/*! ./Transaction */ 70), i = n(/*! fbjs/lib/emptyFunction */ 23), s = {
+    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactUpdates */ 25), o = n(/*! ./Transaction */ 71), i = n(/*! fbjs/lib/emptyFunction */ 23), s = {
         initialize: i,
         close: function() {
             d.isBatchingUpdates = !1;
@@ -18138,7 +18149,7 @@ function(e, t, n) {
         var t = getHostRootInstanceInContainer(e);
         return t ? t._hostContainerInfo._topLevelWrapper : null;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./DOMLazyTree */ 52)), r = n(/*! ./DOMProperty */ 34), o = n(/*! react/lib/React */ 28), i = n(/*! ./ReactBrowserEventEmitter */ 60), s = n(/*! react/lib/ReactCurrentOwner */ 31), u = n(/*! ./ReactDOMComponentTree */ 11), l = n(/*! ./ReactDOMContainerInfo */ 494), c = n(/*! ./ReactDOMFeatureFlags */ 496), d = n(/*! ./ReactFeatureFlags */ 273), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactInstrumentation */ 24), m = n(/*! ./ReactMarkupChecksum */ 514), h = n(/*! ./ReactReconciler */ 41), M = n(/*! ./ReactUpdateQueue */ 95), _ = n(/*! ./ReactUpdates */ 25), y = n(/*! fbjs/lib/emptyObject */ 46), b = n(/*! ./instantiateReactComponent */ 287), g = n(/*! fbjs/lib/invariant */ 3), v = n(/*! ./setInnerHTML */ 72), A = n(/*! ./shouldUpdateReactComponent */ 101), E = n(/*! fbjs/lib/warning */ 4), T = r.ID_ATTRIBUTE_NAME, L = r.ROOT_ATTRIBUTE_NAME, O = 1, C = 9, w = 11, S = {}, k = 1, N = function() {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./DOMLazyTree */ 52)), r = n(/*! ./DOMProperty */ 34), o = n(/*! react/lib/React */ 28), i = n(/*! ./ReactBrowserEventEmitter */ 61), s = n(/*! react/lib/ReactCurrentOwner */ 31), u = n(/*! ./ReactDOMComponentTree */ 11), l = n(/*! ./ReactDOMContainerInfo */ 494), c = n(/*! ./ReactDOMFeatureFlags */ 496), d = n(/*! ./ReactFeatureFlags */ 273), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactInstrumentation */ 24), m = n(/*! ./ReactMarkupChecksum */ 514), h = n(/*! ./ReactReconciler */ 41), M = n(/*! ./ReactUpdateQueue */ 97), _ = n(/*! ./ReactUpdates */ 25), y = n(/*! fbjs/lib/emptyObject */ 46), b = n(/*! ./instantiateReactComponent */ 287), g = n(/*! fbjs/lib/invariant */ 3), v = n(/*! ./setInnerHTML */ 73), A = n(/*! ./shouldUpdateReactComponent */ 103), E = n(/*! fbjs/lib/warning */ 4), T = r.ID_ATTRIBUTE_NAME, L = r.ROOT_ATTRIBUTE_NAME, O = 1, C = 9, w = 11, S = {}, k = 1, N = function() {
         this.rootID = k++;
     };
     N.prototype.isReactComponent = {}, N.displayName = "TopLevelWrapper", N.prototype.render = function() {
@@ -18278,7 +18289,7 @@ function(e, t, n) {
         this.reinitializeTransaction(), this.renderToStaticMarkup = !1, this.reactMountReady = r.getPooled(null), 
         this.useCreateElement = e;
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./CallbackQueue */ 265), o = n(/*! ./PooledClass */ 40), i = n(/*! ./ReactBrowserEventEmitter */ 60), s = n(/*! ./ReactInputSelection */ 275), u = n(/*! ./ReactInstrumentation */ 24), l = n(/*! ./Transaction */ 70), c = n(/*! ./ReactUpdateQueue */ 95), d = {
+    var a = n(/*! object-assign */ 10), r = n(/*! ./CallbackQueue */ 265), o = n(/*! ./PooledClass */ 40), i = n(/*! ./ReactBrowserEventEmitter */ 61), s = n(/*! ./ReactInputSelection */ 275), u = n(/*! ./ReactInstrumentation */ 24), l = n(/*! ./Transaction */ 71), c = n(/*! ./ReactUpdateQueue */ 97), d = {
         initialize: s.getSelectionInformation,
         close: s.restoreSelection
     }, p = {
@@ -18489,7 +18500,7 @@ function(e, t) {
   \*******************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! fbjs/lib/ExecutionEnvironment */ 13), r = n(/*! ./escapeTextContentForBrowser */ 71), o = n(/*! ./setInnerHTML */ 72), i = function(e, t) {
+    var a = n(/*! fbjs/lib/ExecutionEnvironment */ 13), r = n(/*! ./escapeTextContentForBrowser */ 72), o = n(/*! ./setInnerHTML */ 73), i = function(e, t) {
         if (t) {
             var n = e.firstChild;
             if (n && n === e.lastChild && 3 === n.nodeType) return void (n.nodeValue = t);
@@ -18547,7 +18558,7 @@ function(e, t, n) {
     function traverseAllChildren(e, t, n) {
         return null == e ? 0 : traverseAllChildrenImpl(e, "", t, n);
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! react/lib/ReactCurrentOwner */ 31)), r = n(/*! ./ReactElementSymbol */ 508), o = n(/*! ./getIteratorFn */ 543), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! ./KeyEscapeUtils */ 90), u = n(/*! fbjs/lib/warning */ 4), l = ".", c = ":", d = !1;
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! react/lib/ReactCurrentOwner */ 31)), r = n(/*! ./ReactElementSymbol */ 508), o = n(/*! ./getIteratorFn */ 543), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! ./KeyEscapeUtils */ 92), u = n(/*! fbjs/lib/warning */ 4), l = ".", c = ":", d = !1;
     e.exports = traverseAllChildren;
 }, /*!**********************************************!*\
   !*** ./~/react-ga/src/utils/console/warn.js ***!
@@ -18773,7 +18784,7 @@ function(e, t, n) {
         (0, r.default)(e) || (0, i.default)(n + "() in " + t + " must return a plain object. Instead received " + e + ".");
     }
     t.__esModule = !0, t.default = verifyPlainObject;
-    var a = n(/*! lodash/isPlainObject */ 86), r = _interopRequireDefault(a), o = n(/*! ./warning */ 103), i = _interopRequireDefault(o);
+    var a = n(/*! lodash/isPlainObject */ 88), r = _interopRequireDefault(a), o = n(/*! ./warning */ 105), i = _interopRequireDefault(o);
 }, /*!*********************************************!*\
   !*** ./~/react-router-redux/lib/actions.js ***!
   \*********************************************/
@@ -18932,7 +18943,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./routerWarning */ 15), s = _interopRequireDefault(i), u = n(/*! invariant */ 17), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 105), d = o.default.PropTypes, p = d.bool, f = d.object, m = d.string, h = d.func, M = d.oneOfType, _ = o.default.createClass({
+    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./routerWarning */ 15), s = _interopRequireDefault(i), u = n(/*! invariant */ 17), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 107), d = o.default.PropTypes, p = d.bool, f = d.object, m = d.string, h = d.func, M = d.oneOfType, _ = o.default.createClass({
         displayName: "Link",
         contextTypes: {
             router: c.routerShape
@@ -19066,7 +19077,7 @@ function(e, t, n) {
         return e;
     };
     t.createRouterObject = createRouterObject, t.createRoutingHistory = createRoutingHistory;
-    var r = n(/*! ./deprecateObjectProperties */ 74), o = _interopRequireDefault(r);
+    var r = n(/*! ./deprecateObjectProperties */ 75), o = _interopRequireDefault(r);
 }, /*!***************************************************!*\
   !*** ./~/react-router/lib/createMemoryHistory.js ***!
   \***************************************************/
@@ -19084,7 +19095,7 @@ function(e, t, n) {
         return a.__v2_compatible__ = !0, a;
     }
     t.__esModule = !0, t.default = createMemoryHistory;
-    var a = n(/*! history/lib/useQueries */ 68), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 143), i = _interopRequireDefault(o), s = n(/*! history/lib/createMemoryHistory */ 465), u = _interopRequireDefault(s);
+    var a = n(/*! history/lib/useQueries */ 69), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 143), i = _interopRequireDefault(o), s = n(/*! history/lib/createMemoryHistory */ 465), u = _interopRequireDefault(s);
     e.exports = t.default;
 }, /*!***************************************************!*\
   !*** ./~/react-router/lib/createRouterHistory.js ***!
@@ -19138,7 +19149,7 @@ function(e, t, n) {
         return e;
     };
     t.default = makeStateWithLocation;
-    var r = n(/*! ./deprecateObjectProperties */ 74), o = n(/*! ./routerWarning */ 15), i = _interopRequireDefault(o);
+    var r = n(/*! ./deprecateObjectProperties */ 75), o = n(/*! ./routerWarning */ 15), i = _interopRequireDefault(o);
     e.exports = t.default;
 }, /*!************************************************!*\
   !*** ./~/react-router/lib/useRouterHistory.js ***!
@@ -19157,12 +19168,12 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0, t.default = useRouterHistory;
-    var a = n(/*! history/lib/useQueries */ 68), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 143), i = _interopRequireDefault(o);
+    var a = n(/*! history/lib/useQueries */ 69), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 143), i = _interopRequireDefault(o);
     e.exports = t.default;
 }, /*!***************************************!*\
   !*** ./~/react/lib/KeyEscapeUtils.js ***!
   \***************************************/
-90, /*!*******************************************!*\
+92, /*!*******************************************!*\
   !*** ./~/react/lib/ReactElementSymbol.js ***!
   \*******************************************/
 function(e, t) {
@@ -19224,7 +19235,7 @@ function(e, t, n) {
             t.propTypes && i(t.propTypes, e.props, "prop", n, e, null), "function" == typeof t.getDefaultProps && l(t.getDefaultProps.isReactClassApproved, "getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
         }
     }
-    var a = n(/*! ./ReactCurrentOwner */ 31), r = n(/*! ./ReactComponentTreeHook */ 18), o = n(/*! ./ReactElement */ 43), i = n(/*! ./checkReactTypeSpec */ 607), s = n(/*! ./canDefineProperty */ 75), u = n(/*! ./getIteratorFn */ 311), l = n(/*! fbjs/lib/warning */ 4), c = {}, d = {
+    var a = n(/*! ./ReactCurrentOwner */ 31), r = n(/*! ./ReactComponentTreeHook */ 19), o = n(/*! ./ReactElement */ 43), i = n(/*! ./checkReactTypeSpec */ 607), s = n(/*! ./canDefineProperty */ 76), u = n(/*! ./getIteratorFn */ 311), l = n(/*! fbjs/lib/warning */ 4), c = {}, d = {
         createElement: function(e, t, n) {
             var a = "string" == typeof e || "function" == typeof e;
             if (!a && "function" != typeof e && "string" != typeof e) {
@@ -19465,7 +19476,7 @@ function(e, t, n) {
         }, a[i.default] = observable, a;
     }
     t.__esModule = !0, t.ActionTypes = void 0, t.default = createStore;
-    var a = n(/*! lodash/isPlainObject */ 86), r = _interopRequireDefault(a), o = n(/*! symbol-observable */ 618), i = _interopRequireDefault(o), s = t.ActionTypes = {
+    var a = n(/*! lodash/isPlainObject */ 88), r = _interopRequireDefault(a), o = n(/*! symbol-observable */ 618), i = _interopRequireDefault(o), s = t.ActionTypes = {
         INIT: "@@redux/INIT"
     };
 }, /*!**************************************!*\
@@ -19787,7 +19798,7 @@ function(e, t, n) {
         var t = new o(e), n = r(o.prototype.request, t);
         return a.extend(n, o.prototype, t), a.extend(n, t), n;
     }
-    var a = n(/*! ./utils */ 21), r = n(/*! ./helpers/bind */ 112), o = n(/*! ./core/Axios */ 322), i = createInstance();
+    var a = n(/*! ./utils */ 21), r = n(/*! ./helpers/bind */ 114), o = n(/*! ./core/Axios */ 322), i = createInstance();
     i.Axios = o, i.create = function create(e) {
         return createInstance(e);
     }, i.all = function all(e) {
@@ -19871,7 +19882,7 @@ function(e, t, n) {
             var o;
             /*! ../adapters/xhr */
             /*! ../adapters/http */
-            return "function" == typeof e.adapter ? o = e.adapter : "undefined" != typeof XMLHttpRequest ? o = n(110) : "undefined" != typeof t && (o = n(110)), 
+            return "function" == typeof e.adapter ? o = e.adapter : "undefined" != typeof XMLHttpRequest ? o = n(112) : "undefined" != typeof t && (o = n(112)), 
             Promise.resolve(e).then(o).then(function onFulfilled(t) {
                 return t.data = r(t.data, t.headers, e.transformResponse), t;
             }, function onRejected(t) {
@@ -19893,7 +19904,7 @@ function(e, t) {
   \************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./createError */ 111);
+    var a = n(/*! ./createError */ 113);
     e.exports = function settle(e, t, n) {
         var r = n.config.validateStatus;
         n.status && r && !r(n.status) ? t(a("Request failed with status code " + n.status, n.config, null, n)) : e(n);
@@ -20118,7 +20129,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/BannerSlideConstants */ 114), r = _interopRequireDefault(a), o = n(/*! ../services/BannerSlideService */ 438), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/BannerSlideConstants */ 115), r = _interopRequireDefault(a), o = n(/*! ../services/BannerSlideService */ 438), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -20180,7 +20191,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/FactionConstants */ 116), r = _interopRequireDefault(a), o = n(/*! ../services/FactionService */ 135), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/FactionConstants */ 117), r = _interopRequireDefault(a), o = n(/*! ../services/FactionService */ 135), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -20249,7 +20260,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/NewsPostConstants */ 119), r = _interopRequireDefault(a), o = n(/*! ../services/NewsPostService */ 65), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/NewsPostConstants */ 120), r = _interopRequireDefault(a), o = n(/*! ../services/NewsPostService */ 66), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -20318,7 +20329,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/ProductOrderConstants */ 120), r = _interopRequireDefault(a), o = n(/*! ../services/ProductOrderService */ 439), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/ProductOrderConstants */ 121), r = _interopRequireDefault(a), o = n(/*! ../services/ProductOrderService */ 439), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -20416,7 +20427,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! react-router-redux */ 298), u = n(/*! redux */ 6), l = n(/*! react-redux */ 7), c = n(/*! ../store */ 81), d = _interopRequireDefault(c), p = n(/*! ../routes */ 436), f = _interopRequireDefault(p), m = n(/*! ../constants/authorizedRoutesConfig */ 391), h = _interopRequireDefault(m), M = n(/*! ../library/utilities/scrollTo */ 131), _ = _interopRequireDefault(M), y = n(/*! ../library/authentication */ 26), b = n(/*! ../library/alerts */ 14), g = n(/*! ../../roleConfig */ 77), v = _interopRequireDefault(g), A = n(/*! ../../envVariables */ 109), E = n(/*! react-ga */ 548), T = _interopRequireDefault(E);
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! react-router-redux */ 298), u = n(/*! redux */ 6), l = n(/*! react-redux */ 7), c = n(/*! ../store */ 83), d = _interopRequireDefault(c), p = n(/*! ../routes */ 436), f = _interopRequireDefault(p), m = n(/*! ../constants/authorizedRoutesConfig */ 391), h = _interopRequireDefault(m), M = n(/*! ../library/utilities/scrollTo */ 131), _ = _interopRequireDefault(M), y = n(/*! ../library/authentication */ 26), b = n(/*! ../library/alerts */ 14), g = n(/*! ../../roleConfig */ 78), v = _interopRequireDefault(g), A = n(/*! ../../envVariables */ 111), E = n(/*! react-ga */ 548), T = _interopRequireDefault(E);
     T.default.initialize(A.googleAnalyticsKey);
     var L = (0, s.syncHistoryWithStore)(i.browserHistory, d.default), O = void 0, C = function mapStateToProps(e) {
         return {
@@ -20553,7 +20564,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! react-addons-css-transition-group */ 39), c = _interopRequireDefault(l), d = n(/*! ./pieces/TopNav */ 383), p = _interopRequireDefault(d), f = n(/*! ./pieces/Footer */ 382), m = _interopRequireDefault(f), h = n(/*! ../library/alerts */ 14), M = n(/*! ../library/loader */ 78), _ = n(/*! ../library/authentication */ 26), y = n(/*! ../interceptors */ 392), b = _interopRequireDefault(y), g = n(/*! ../../envVariables */ 109);
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! react-addons-css-transition-group */ 39), c = _interopRequireDefault(l), d = n(/*! ./pieces/TopNav */ 383), p = _interopRequireDefault(d), f = n(/*! ./pieces/Footer */ 382), m = _interopRequireDefault(f), h = n(/*! ../library/alerts */ 14), M = n(/*! ../library/loader */ 80), _ = n(/*! ../library/authentication */ 26), y = n(/*! ../interceptors */ 392), b = _interopRequireDefault(y), g = n(/*! ../../envVariables */ 111);
     (0, b.default)(g.baseApiRoute, 300);
     var v = function mapDispatchToProps(e) {
         return (0, s.bindActionCreators)({
@@ -20722,7 +20733,7 @@ function(e, t, n) {
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-router */ 5), u = n(/*! react-redux */ 7), l = n(/*! react-addons-css-transition-group */ 39), c = (_interopRequireDefault(l), 
     n(/*! jquery */ 466)), d = _interopRequireDefault(c), p = n(/*! react-twitter-widgets */ 592), f = n(/*! ../../scripts/jquery.cslider.js */ 437), m = _interopRequireDefault(f), h = (n(/*! ../../library/alerts */ 14), 
     n(/*! ../../library/utilities/isEmpty */ 130)), M = (_interopRequireDefault(h), 
-    n(/*! ../../library/iframe */ 399)), _ = _interopRequireDefault(M), y = n(/*! ../../actions/BannerSlideActions */ 338), b = _interopRequireDefault(y), g = n(/*! ../../actions/GameSystemActions */ 62), v = _interopRequireDefault(g), A = n(/*! ../../library/Modal */ 121), E = _interopRequireDefault(A), T = function mapStateToProps(e) {
+    n(/*! ../../library/iframe */ 399)), _ = _interopRequireDefault(M), y = n(/*! ../../actions/BannerSlideActions */ 338), b = _interopRequireDefault(y), g = n(/*! ../../actions/GameSystemActions */ 58), v = _interopRequireDefault(g), A = n(/*! ../../library/Modal */ 64), E = _interopRequireDefault(A), T = function mapStateToProps(e) {
         return {
             bannerSlides: e.bannerSlides,
             gameSystems: e.gameSystems
@@ -21098,6 +21109,14 @@ function(e, t, n) {
             default: e
         };
     }
+    function _defineProperty(e, t, n) {
+        return t in e ? Object.defineProperty(e, t, {
+            value: n,
+            enumerable: !0,
+            configurable: !0,
+            writable: !0
+        }) : e[t] = n, e;
+    }
     function _classCallCheck(e, t) {
         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
     }
@@ -21130,18 +21149,21 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../library/alerts */ 14), c = n(/*! ../../library/validations */ 22), d = n(/*! ../../library/authentication */ 26), p = n(/*! ../ViewWrapper */ 8), f = _interopRequireDefault(p), m = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../library/alerts */ 14), c = n(/*! ../../library/validations */ 22), d = n(/*! ../../library/authentication */ 26), p = n(/*! ../../library/Modal */ 64), f = _interopRequireDefault(p), m = n(/*! ../../actions/GameSystemActions */ 58), h = _interopRequireDefault(m), M = function mapStateToProps(e) {
         return {
+            gameSystems: e.gameSystems,
             user: e.user,
             redirectRoute: e.redirectRoute
         };
-    }, h = function mapDispatchToProps(e) {
+    }, _ = function mapDispatchToProps(e) {
         return (0, i.bindActionCreators)({
             addAlert: l.AlertActions.addAlert,
             authenticate: d.UserActions.authenticate,
-            setRedirect: d.UserActions.setRedirect
+            getGameSystems: h.default.getAll,
+            setRedirect: d.UserActions.setRedirect,
+            showGameList: !1
         }, e);
-    }, M = function(e) {
+    }, y = function(e) {
         function LoginPage() {
             _classCallCheck(this, LoginPage);
             var e = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this));
@@ -21153,7 +21175,7 @@ function(e, t, n) {
         return _inherits(LoginPage, e), a(LoginPage, [ {
             key: "componentDidMount",
             value: function componentDidMount() {
-                document.title = "Battle-Comm | Login";
+                document.title = "Battle-Comm | Login", this.props.getGameSystems();
             }
         }, {
             key: "handleInputChange",
@@ -21210,16 +21232,40 @@ function(e, t, n) {
                 return n[e]();
             }
         }, {
+            key: "toggleModal",
+            value: function toggleModal(e, t) {
+                t && t.preventDefault(), this.setState(_defineProperty({}, e, !this.state[e]));
+            }
+        }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(f.default, null, o.default.createElement("div", {
-                    className: "row"
+                return o.default.createElement("div", {
+                    className: "content-view home-page"
                 }, o.default.createElement("div", {
-                    className: "small-12 columns"
-                }, o.default.createElement("h1", {
-                    className: "push-bottom-2x"
-                }, "Login"), o.default.createElement("hr", null)), o.default.createElement("div", {
-                    className: "small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns"
+                    className: "content-box-container"
+                }, o.default.createElement("div", {
+                    className: "box-6"
+                }, o.default.createElement("div", {
+                    className: "box-top"
+                }, o.default.createElement("div", {
+                    className: "box-corner-tl"
+                }), o.default.createElement("div", {
+                    className: "box-bar-top"
+                }, o.default.createElement("div", {
+                    className: "bar"
+                }, o.default.createElement("div", {
+                    className: "title small"
+                }, o.default.createElement("img", {
+                    src: "images/Titles/Login.png",
+                    alt: ""
+                })))), o.default.createElement("div", {
+                    className: "box-corner-tr"
+                })), o.default.createElement("div", {
+                    className: "box-middle"
+                }, o.default.createElement("div", {
+                    className: "box-bar-left"
+                }), o.default.createElement("div", {
+                    className: "box-content"
                 }, o.default.createElement(c.Form, {
                     name: "loginForm",
                     submitText: "Login",
@@ -21257,11 +21303,76 @@ function(e, t, n) {
                     to: "/register",
                     activeClassName: "active",
                     onClick: this.closeMenu
-                }, "Register/Sign Up")))));
+                }, "Register/Sign Up"))), o.default.createElement("div", {
+                    className: "box-bar-right"
+                })), o.default.createElement("div", {
+                    className: "box-bottom"
+                }, o.default.createElement("div", {
+                    className: "box-corner-bl"
+                }), o.default.createElement("div", {
+                    className: "box-bar-bottom"
+                }, o.default.createElement("div", {
+                    className: "bar"
+                })), o.default.createElement("div", {
+                    className: "box-corner-br"
+                }))), o.default.createElement("div", {
+                    className: "box-6"
+                }, o.default.createElement("div", {
+                    className: "box-top"
+                }, o.default.createElement("div", {
+                    className: "box-corner-tl"
+                }), o.default.createElement("div", {
+                    className: "box-bar-top"
+                }, o.default.createElement("div", {
+                    className: "bar"
+                }, o.default.createElement("div", {
+                    className: "bar"
+                }, o.default.createElement("div", {
+                    className: "title small"
+                }, o.default.createElement("img", {
+                    src: "images/Titles/Register.png",
+                    alt: ""
+                }))))), o.default.createElement("div", {
+                    className: "box-corner-tr"
+                })), o.default.createElement("div", {
+                    className: "box-middle"
+                }, o.default.createElement("div", {
+                    className: "box-bar-left"
+                }), o.default.createElement("div", {
+                    className: "box-content"
+                }, o.default.createElement("h4", null, o.default.createElement("a", {
+                    onClick: this.toggleModal.bind(this, "showGameList")
+                }, "Supported Game Systems")), o.default.createElement(u.Link, {
+                    to: "/register",
+                    className: "button"
+                }, "Sign Up")), o.default.createElement("div", {
+                    className: "box-bar-right"
+                })), o.default.createElement("div", {
+                    className: "box-bottom"
+                }, o.default.createElement("div", {
+                    className: "box-corner-bl"
+                }), o.default.createElement("div", {
+                    className: "box-bar-bottom"
+                }, o.default.createElement("div", {
+                    className: "bar"
+                })), o.default.createElement("div", {
+                    className: "box-corner-br"
+                })))), o.default.createElement(f.default, {
+                    name: "gameListModal",
+                    title: "Supported Game Systems",
+                    modalIsOpen: this.state.showGameList,
+                    handleClose: this.toggleModal.bind(this, "showGameList"),
+                    showClose: !0,
+                    showFooter: !1
+                }, o.default.createElement("ul", null, this.props.gameSystems.map(function(e, t) {
+                    return o.default.createElement("li", {
+                        key: t
+                    }, e.name);
+                }))));
             }
         } ]), LoginPage;
     }(o.default.Component);
-    t.default = (0, s.connect)(m, h)(M);
+    t.default = (0, s.connect)(M, _)(y);
 }, /*!***********************************************!*\
   !*** ./src/components/pages/NotFoundPage.jsx ***!
   \***********************************************/
@@ -21769,7 +21880,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/validations */ 22), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../actions/GameSystemActions */ 62), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 64), _ = _interopRequireDefault(M), y = n(/*! ../../../services/VenueService */ 441), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 20), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/validations */ 22), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../actions/GameSystemActions */ 58), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 65), _ = _interopRequireDefault(M), y = n(/*! ../../../services/VenueService */ 441), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 20), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
         return {
             gameSystems: e.gameSystems,
             user: e.user
@@ -22116,7 +22227,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-router */ 5), u = n(/*! react-redux */ 7), l = n(/*! ../../../library/validations */ 22), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/alerts */ 14), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../actions/FactionActions */ 339), h = (_interopRequireDefault(m), 
-    n(/*! ../../../actions/ManufacturerActions */ 63)), M = _interopRequireDefault(h), _ = n(/*! ../../../services/FactionService */ 135), y = _interopRequireDefault(_), b = n(/*! ../../../services/FileService */ 58), g = _interopRequireDefault(b), v = n(/*! ../../../services/GameSystemService */ 64), A = _interopRequireDefault(v), E = n(/*! ../../pieces/AdminMenu */ 20), T = _interopRequireDefault(E), L = function mapStateToProps(e) {
+    n(/*! ../../../actions/ManufacturerActions */ 63)), M = _interopRequireDefault(h), _ = n(/*! ../../../services/FactionService */ 135), y = _interopRequireDefault(_), b = n(/*! ../../../services/FileService */ 59), g = _interopRequireDefault(b), v = n(/*! ../../../services/GameSystemService */ 65), A = _interopRequireDefault(v), E = n(/*! ../../pieces/AdminMenu */ 20), T = _interopRequireDefault(E), L = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers
         };
@@ -22453,7 +22564,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = (n(/*! ../../../library/alerts */ 14), 
-    n(/*! ../../../library/utilities */ 27)), u = n(/*! ../../../library/validations */ 22), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../services/FileService */ 58), p = _interopRequireDefault(d), f = n(/*! ../../../services/ManufacturerService */ 79), m = _interopRequireDefault(f), h = n(/*! ../../pieces/AdminMenu */ 20), M = _interopRequireDefault(h), _ = function(e) {
+    n(/*! ../../../library/utilities */ 27)), u = n(/*! ../../../library/validations */ 22), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../services/FileService */ 59), p = _interopRequireDefault(d), f = n(/*! ../../../services/ManufacturerService */ 81), m = _interopRequireDefault(f), h = n(/*! ../../pieces/AdminMenu */ 20), M = _interopRequireDefault(h), _ = function(e) {
         function EditManufacturerPage() {
             _classCallCheck(this, EditManufacturerPage);
             var e = _possibleConstructorReturn(this, (EditManufacturerPage.__proto__ || Object.getPrototypeOf(EditManufacturerPage)).call(this));
@@ -22619,7 +22730,7 @@ function(e, t, n) {
                     handleInputChange: this.handleInputChange
                 })), o.default.createElement("div", {
                     className: "form-group small-12 medium-3 columns"
-                }, o.default.createElement("label", null, "Related Photo"), o.default.createElement(FileUpload, {
+                }, o.default.createElement("label", null, "Related Photo"), o.default.createElement(u.FileUpload, {
                     name: "gameSystemPhoto",
                     value: this.state.manufacturer.File,
                     handleFileUpload: this.handleFileUpload,
@@ -22683,7 +22794,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/validations */ 22), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 58), h = _interopRequireDefault(m), M = n(/*! ../../../actions/ManufacturerActions */ 63), _ = _interopRequireDefault(M), y = n(/*! ../../../services/NewsPostService */ 65), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 20), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/validations */ 22), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 59), h = _interopRequireDefault(m), M = n(/*! ../../../actions/ManufacturerActions */ 63), _ = _interopRequireDefault(M), y = n(/*! ../../../services/NewsPostService */ 66), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 20), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers,
             user: e.user
@@ -22955,7 +23066,7 @@ function(e, t, n) {
                     className: "form-group small-12 medium-4 columns"
                 }, o.default.createElement("label", {
                     className: "required"
-                }, "News Post Photos"), o.default.createElement(FileUpload, {
+                }, "News Post Photos"), o.default.createElement(d.FileUpload, {
                     name: "postPhotos",
                     value: this.state.newsPost.Files,
                     handleFileUpload: this.handleFileUpload,
@@ -23288,7 +23399,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/validations */ 22), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 58), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 64), _ = _interopRequireDefault(M), y = n(/*! ../../../actions/ManufacturerActions */ 63), b = _interopRequireDefault(y), g = n(/*! ../../../services/ManufacturerService */ 79), v = _interopRequireDefault(g), A = n(/*! ../../../services/ProductService */ 80), E = _interopRequireDefault(A), T = n(/*! ../../pieces/AdminMenu */ 20), L = _interopRequireDefault(T), O = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../../library/validations */ 22), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 59), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 65), _ = _interopRequireDefault(M), y = n(/*! ../../../actions/ManufacturerActions */ 63), b = _interopRequireDefault(y), g = n(/*! ../../../services/ManufacturerService */ 81), v = _interopRequireDefault(g), A = n(/*! ../../../services/ProductService */ 82), E = _interopRequireDefault(A), T = n(/*! ../../pieces/AdminMenu */ 20), L = _interopRequireDefault(T), O = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers
         };
@@ -23645,7 +23756,7 @@ function(e, t, n) {
                     className: "form-group small-12 medium-4 columns"
                 }, o.default.createElement("label", {
                     className: "required"
-                }, "Product Images"), o.default.createElement(FileUpload, {
+                }, "Product Images"), o.default.createElement(d.FileUpload, {
                     name: "productPhoto",
                     value: this.state.product.Files,
                     handleFileUpload: this.handleFileUpload,
@@ -23702,7 +23813,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/pagination */ 36), c = n(/*! ../../ViewWrapper */ 8), d = _interopRequireDefault(c), p = n(/*! ../../../actions/GameSystemActions */ 62), f = _interopRequireDefault(p), m = n(/*! ../../pieces/AdminMenu */ 20), h = _interopRequireDefault(m), M = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/pagination */ 36), c = n(/*! ../../ViewWrapper */ 8), d = _interopRequireDefault(c), p = n(/*! ../../../actions/GameSystemActions */ 58), f = _interopRequireDefault(p), m = n(/*! ../../pieces/AdminMenu */ 20), h = _interopRequireDefault(m), M = function mapStateToProps(e) {
         return {
             gameSystems: e.gameSystems
         };
@@ -24865,7 +24976,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 65), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 27), p = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 66), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 27), p = function(e) {
         function NewsPage() {
             _classCallCheck(this, NewsPage);
             var e = _possibleConstructorReturn(this, (NewsPage.__proto__ || Object.getPrototypeOf(NewsPage)).call(this));
@@ -24886,7 +24997,10 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                return o.default.createElement(u.default, {
+                    headerImage: "/images/Titles/News.png",
+                    alt: "News"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -24974,7 +25088,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 65), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 27), p = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 66), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 27), p = function(e) {
         function NewsPostPage() {
             _classCallCheck(this, NewsPostPage);
             var e = _possibleConstructorReturn(this, (NewsPostPage.__proto__ || Object.getPrototypeOf(NewsPostPage)).call(this));
@@ -24998,7 +25112,10 @@ function(e, t, n) {
             key: "render",
             value: function render() {
                 var e = this.state.post;
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                return o.default.createElement(u.default, {
+                    headerImage: "/images/Titles/News.png",
+                    alt: "News"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -25079,7 +25196,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = (n(/*! react-router */ 5), 
-    n(/*! redux */ 6)), s = n(/*! react-redux */ 7), u = n(/*! ../../../library/alerts */ 14), l = n(/*! ../../../library/validations */ 22), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../ViewWrapper */ 8), p = _interopRequireDefault(d), f = n(/*! ../../../services/PlayerService */ 66), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
+    n(/*! redux */ 6)), s = n(/*! react-redux */ 7), u = n(/*! ../../../library/alerts */ 14), l = n(/*! ../../../library/validations */ 22), c = n(/*! ../../../library/utilities */ 27), d = n(/*! ../../ViewWrapper */ 8), p = _interopRequireDefault(d), f = n(/*! ../../../services/PlayerService */ 67), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
         return {
             forms: e.forms,
             user: e.user
@@ -25389,7 +25506,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = (n(/*! redux */ 6), 
-    n(/*! react-redux */ 7)), s = n(/*! react-router */ 5), u = n(/*! ../../ViewWrapper */ 8), l = _interopRequireDefault(u), c = n(/*! ../../../services/PlayerService */ 66), d = _interopRequireDefault(c), p = void 0, f = function mapStateToProps(e) {
+    n(/*! react-redux */ 7)), s = n(/*! react-router */ 5), u = n(/*! ../../ViewWrapper */ 8), l = _interopRequireDefault(u), c = n(/*! ../../../services/PlayerService */ 67), d = _interopRequireDefault(c), p = void 0, f = function mapStateToProps(e) {
         return {
             currentUser: e.user
         };
@@ -25606,40 +25723,46 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! ../../../library/alerts */ 14), c = n(/*! ../../../library/validations */ 22), d = n(/*! ../../../library/utilities */ 27), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/PlayerService */ 66), h = _interopRequireDefault(m), M = n(/*! ../../../services/FileService */ 58), _ = _interopRequireDefault(M), y = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! axios */ 18), c = _interopRequireDefault(l), d = n(/*! ../../../library/alerts */ 14), p = n(/*! ../../../library/Modal */ 64), f = _interopRequireDefault(p), m = n(/*! ../../../library/validations */ 22), h = n(/*! ../../../library/utilities */ 27), M = n(/*! ../../ViewWrapper */ 8), _ = _interopRequireDefault(M), y = n(/*! ../../../services/PlayerService */ 67), b = _interopRequireDefault(y), g = n(/*! ../../../services/FileService */ 59), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
         return {
             forms: e.forms,
             user: e.user
         };
-    }, b = function mapDispatchToProps(e) {
+    }, E = function mapDispatchToProps(e) {
         return (0, s.bindActionCreators)({
-            addAlert: l.AlertActions.addAlert
+            addAlert: d.AlertActions.addAlert
         }, e);
-    }, g = function(e) {
+    }, T = function(e) {
         function PlayerDashboardPage() {
             _classCallCheck(this, PlayerDashboardPage);
             var e = _possibleConstructorReturn(this, (PlayerDashboardPage.__proto__ || Object.getPrototypeOf(PlayerDashboardPage)).call(this));
             return e.state = {
+                activeModal: "none",
                 currentUser: {
                     Files: [],
                     Friends: [],
                     GameSystemRankings: []
                 },
-                fileUpload: [],
+                fileUploadIcon: [],
+                fileUploadPhotoStream: [],
                 isEditing: {
                     bio: !1,
                     links: !1
-                }
+                },
+                photoStream: []
             }, e.cancelEdit = e.cancelEdit.bind(e), e.getCurrentPlayer = e.getCurrentPlayer.bind(e), 
-            e.getPlayerIcon = e.getPlayerIcon.bind(e), e.handlePhotoStreamUpload = e.handlePhotoStreamUpload.bind(e), 
-            e.handlePlayerIconUpload = e.handlePlayerIconUpload.bind(e), e.handleInputChange = e.handleInputChange.bind(e), 
-            e.savePlayer = e.savePlayer.bind(e), e.showAlert = e.showAlert.bind(e), e.uploadFiles = e.uploadFiles.bind(e), 
-            e;
+            e.getPlayerIcon = e.getPlayerIcon.bind(e), e.getPlayerPhotoStream = e.getPlayerPhotoStream.bind(e), 
+            e.handlePhotoStreamUpload = e.handlePhotoStreamUpload.bind(e), e.handlePlayerIconUpload = e.handlePlayerIconUpload.bind(e), 
+            e.handleInputChange = e.handleInputChange.bind(e), e.savePlayer = e.savePlayer.bind(e), 
+            e.showAlert = e.showAlert.bind(e), e.uploadFiles = e.uploadFiles.bind(e), e;
         }
         return _inherits(PlayerDashboardPage, e), a(PlayerDashboardPage, [ {
             key: "componentDidMount",
             value: function componentDidMount() {
-                document.title = "Battle-Comm | Player Dashboard", this.props.user.id ? this.getCurrentPlayer() : browserHistory.push("/");
+                var e = this;
+                document.title = "Battle-Comm | Player Dashboard", this.props.user.id ? this.getCurrentPlayer().then(function() {
+                    e.getPlayerPhotoStream();
+                }) : browserHistory.push("/");
             }
         }, {
             key: "cancelEdit",
@@ -25651,10 +25774,21 @@ function(e, t, n) {
                 }), this.getCurrentPlayer();
             }
         }, {
+            key: "deletePhoto",
+            value: function deletePhoto(e, t) {
+                var n = this;
+                this.handleDeleteFile(e).then(function() {
+                    var e = n.state.photoStream;
+                    e.splice(t, 1), n.setState({
+                        photoStream: e
+                    });
+                });
+            }
+        }, {
             key: "getCurrentPlayer",
             value: function getCurrentPlayer() {
                 var e = this;
-                return h.default.getById(this.props.user.id).then(function(t) {
+                return b.default.getById(this.props.user.id).then(function(t) {
                     e.setState({
                         currentUser: t
                     });
@@ -25664,15 +25798,25 @@ function(e, t, n) {
             key: "getPlayerIcon",
             value: function getPlayerIcon() {
                 var e = void 0;
-                return this.state.currentUser.Files.forEach(function(t, n) {
-                    "playerIcon" === t.identifier && (e = t.name);
+                return this.state.currentUser.Files.some(function(t) {
+                    if ("playerIcon" === t.identifier) return e = t.name, !0;
                 }), e ? "/uploads/players/" + this.state.currentUser.id + "/playerIcon/" + e : "/uploads/players/defaults/profile-icon-default.png";
+            }
+        }, {
+            key: "getPlayerPhotoStream",
+            value: function getPlayerPhotoStream() {
+                var e = [];
+                this.state.currentUser.Files.forEach(function(t) {
+                    "photoStream" === t.identifier && e.push(t);
+                }), this.setState({
+                    photoStream: e
+                });
             }
         }, {
             key: "handleDeleteFile",
             value: function handleDeleteFile(e) {
                 var t = this;
-                _.default.remove(e).then(function() {
+                return v.default.remove(e).then(function() {
                     t.showAlert("fileRemoved");
                 });
             }
@@ -25686,16 +25830,17 @@ function(e, t, n) {
                         size: e[0].data.file.size,
                         type: e[0].data.file.type,
                         identifier: "playerIcon",
-                        UserId: t.state.currentUser.id
+                        UserId: t.state.currentUser.id,
+                        locationUrl: "/players/" + t.state.currentUser.id + "/playerIcon/" + response[0].data.file.name
                     }, a = void 0;
-                    t.state.currentUser.Files.forEach(function(e, n) {
-                        "playerIcon" === e.identifier && (a = e, a.UserId = t.state.currentUser.id);
+                    t.state.currentUser.Files.forEach(function(e) {
+                        "playerIcon" === e.identifier && (a = e);
                     });
                     var r = a ? "update" : "create";
-                    _.default[r](a ? a.id : n, a ? n : null).then(function(e) {
+                    v.default[r](a ? a.id : n, a ? n : null).then(function(e) {
                         console.log(e), t.getCurrentPlayer().then(function() {
                             t.setState({
-                                fileUpload: []
+                                fileUploadIcon: []
                             }), t.showAlert("uploadSuccess");
                         });
                     });
@@ -25706,14 +25851,25 @@ function(e, t, n) {
             value: function handlePhotoStreamUpload(e) {
                 var t = this;
                 this.uploadFiles(e, "photoStream").then(function(e) {
-                    e = e.map(function(e, t) {
-                        return e = {
+                    var n = [];
+                    e.forEach(function(e, a) {
+                        var r = {
                             name: e.data.file.name,
                             size: e.data.file.size,
-                            type: e.data.file.type
+                            type: e.data.file.type,
+                            identifier: "photoStream",
+                            UserId: t.state.currentUser.id,
+                            locationUrl: "/players/" + t.state.currentUser.id + "/photoStream/" + e.data.file.name
                         };
-                    }), t.getCurrentPlayer().then(function() {
-                        t.showAlert("uploadSuccess");
+                        n.push(v.default.create(r));
+                    }), c.default.all(n).then(function(e) {
+                        var n = void 0;
+                        e.forEach(function(e) {
+                            n = t.state.photoStream, n.push(e);
+                        }), t.setState({
+                            fileUploadPhotoStream: [],
+                            photoStream: n
+                        }), t.showAlert("uploadSuccess");
                     });
                 });
             }
@@ -25721,7 +25877,7 @@ function(e, t, n) {
             key: "handleInputChange",
             value: function handleInputChange(e) {
                 this.setState({
-                    currentUser: d.handlers.updateInput(e, this.state.currentUser)
+                    currentUser: h.handlers.updateInput(e, this.state.currentUser)
                 });
             }
         }, {
@@ -25731,7 +25887,7 @@ function(e, t, n) {
             key: "savePlayer",
             value: function savePlayer() {
                 var e = this;
-                h.default.update(this.state.currentUser.id, this.state.currentUser).then(function(t) {
+                b.default.update(this.state.currentUser.id, this.state.currentUser).then(function(t) {
                     var n = e.state.isEditing;
                     for (var a in n) n[a] = !1;
                     e.setState({
@@ -25751,10 +25907,18 @@ function(e, t, n) {
                             delay: 3e3
                         });
                     },
+                    fileRemoved: function fileRemoved() {
+                        t.props.addAlert({
+                            title: "Photo Deleted",
+                            message: "A photo was successfully deleted from Photo Stream.",
+                            type: "success",
+                            delay: 3e3
+                        });
+                    },
                     uploadSuccess: function uploadSuccess() {
                         t.props.addAlert({
                             title: "Upload Success",
-                            message: "New files were successfully updated",
+                            message: "New files were successfully uploaded",
                             type: "success",
                             delay: 3e3
                         });
@@ -25772,19 +25936,26 @@ function(e, t, n) {
                 }), this.getCurrentPlayer();
             }
         }, {
+            key: "toggleModal",
+            value: function toggleModal(e, t) {
+                t && t.preventDefault(), this.setState({
+                    activeModal: this.state.activeModal !== e ? e : "none"
+                });
+            }
+        }, {
             key: "uploadFiles",
             value: function uploadFiles(e, t) {
                 var n = "players/" + this.state.currentUser.id + "/" + t + "/";
-                return (0, d.uploadFiles)(e, "/files/add", n, {
+                return (0, h.uploadFiles)(e, "/files/add", n, {
                     identifier: t
                 });
             }
         }, {
             key: "render",
             value: function render() {
-                var e = this.state.currentUser, t = this.state.isEditing, n = (0, c.getFormErrorCount)(this.props.forms, "bioForm") < 1, a = (0, 
-                c.getFormErrorCount)(this.props.forms, "linksForm") < 1;
-                return o.default.createElement(f.default, null, o.default.createElement("div", {
+                var e = this, t = this.state.currentUser, n = this.state.isEditing, a = (0, m.getFormErrorCount)(this.props.forms, "bioForm") < 1, r = (0, 
+                m.getFormErrorCount)(this.props.forms, "linksForm") < 1;
+                return o.default.createElement(_.default, null, o.default.createElement("div", {
                     className: "player-dashboard"
                 }, o.default.createElement("div", {
                     className: "row"
@@ -25797,22 +25968,22 @@ function(e, t, n) {
                 }, o.default.createElement("h2", {
                     className: "no-shadow text-center"
                 }, "Player Bio"), o.default.createElement("div", {
-                    className: t.bio ? "editable active" : "editable"
-                }, o.default.createElement(c.Form, {
+                    className: n.bio ? "editable active" : "editable"
+                }, o.default.createElement(m.Form, {
                     name: "bioForm",
                     handleSubmit: this.handleSubmit.bind(this, "bio"),
                     submitButton: !1
                 }, o.default.createElement("div", {
                     className: "form-group"
-                }, o.default.createElement(c.TextArea, {
+                }, o.default.createElement(m.TextArea, {
                     name: "bio",
                     id: "bio",
                     rows: "4",
-                    value: e.bio,
+                    value: t.bio,
                     maxlength: "500",
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.bio
-                }))), t.bio ? o.default.createElement("div", {
+                    disabled: !n.bio
+                }))), n.bio ? o.default.createElement("div", {
                     className: "action-group"
                 }, o.default.createElement("button", {
                     className: "cancel",
@@ -25822,7 +25993,7 @@ function(e, t, n) {
                 })), o.default.createElement("button", {
                     className: "save",
                     onClick: this.savePlayer,
-                    disabled: !n
+                    disabled: !a
                 }, o.default.createElement("span", {
                     className: "fa fa-check"
                 }))) : o.default.createElement("div", {
@@ -25835,8 +26006,8 @@ function(e, t, n) {
                 })))), o.default.createElement("h2", {
                     className: "push-top-2x text-center"
                 }, "Social Links"), o.default.createElement("div", {
-                    className: t.links ? "editable active" : "editable"
-                }, o.default.createElement(c.Form, {
+                    className: n.links ? "editable active" : "editable"
+                }, o.default.createElement(m.Form, {
                     name: "linksForm",
                     handleSubmit: this.handleSubmit.bind(this, "links"),
                     submitButton: !1
@@ -25844,75 +26015,75 @@ function(e, t, n) {
                     className: "form-group"
                 }, o.default.createElement("label", {
                     className: "title bold"
-                }, "Facebook"), (t.links || e.facebook) && o.default.createElement(c.Input, {
+                }, "Facebook"), (n.links || t.facebook) && o.default.createElement(m.Input, {
                     name: "facebook",
                     type: "url",
                     id: "facebook",
                     placeholder: "https://...",
-                    value: e.facebook,
+                    value: t.facebook,
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.links
+                    disabled: !n.links
                 })), o.default.createElement("div", {
                     className: "form-group"
                 }, o.default.createElement("label", {
                     className: "title bold"
-                }, "Twitter"), (t.links || e.twitter) && o.default.createElement(c.Input, {
+                }, "Twitter"), (n.links || t.twitter) && o.default.createElement(m.Input, {
                     name: "twitter",
                     type: "url",
                     id: "twitter",
                     placeholder: "https://...",
-                    value: e.twitter,
+                    value: t.twitter,
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.links
+                    disabled: !n.links
                 })), o.default.createElement("div", {
                     className: "form-group"
                 }, o.default.createElement("label", {
                     className: "title bold"
-                }, "Instagram"), (t.links || e.instagram) && o.default.createElement(c.Input, {
+                }, "Instagram"), (n.links || t.instagram) && o.default.createElement(m.Input, {
                     name: "instagram",
                     type: "url",
                     id: "instagram",
                     placeholder: "https://...",
-                    value: e.instagram,
+                    value: t.instagram,
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.links
+                    disabled: !n.links
                 })), o.default.createElement("div", {
                     className: "form-group"
                 }, o.default.createElement("label", {
                     className: "title bold"
-                }, "Twitch"), (t.links || e.twitch) && o.default.createElement(c.Input, {
+                }, "Twitch"), (n.links || t.twitch) && o.default.createElement(m.Input, {
                     name: "twitch",
                     type: "url",
                     id: "twitch",
                     placeholder: "https://...",
-                    value: e.twitch,
+                    value: t.twitch,
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.links
+                    disabled: !n.links
                 })), o.default.createElement("div", {
                     className: "form-group"
                 }, o.default.createElement("label", {
                     className: "title bold"
-                }, "Google +"), (t.links || e.googlePlus) && o.default.createElement(c.Input, {
+                }, "Google +"), (n.links || t.googlePlus) && o.default.createElement(m.Input, {
                     name: "googlePlus",
                     type: "url",
                     id: "googlePlus",
                     placeholder: "https://...",
-                    value: e.googlePlus,
+                    value: t.googlePlus,
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.links
+                    disabled: !n.links
                 })), o.default.createElement("div", {
                     className: "form-group"
                 }, o.default.createElement("label", {
                     className: "title bold"
-                }, "Website"), (t.links || e.website) && o.default.createElement(c.Input, {
+                }, "Website"), (n.links || t.website) && o.default.createElement(m.Input, {
                     name: "website",
                     type: "url",
                     id: "website",
                     placeholder: "https://...",
-                    value: e.website,
+                    value: t.website,
                     handleInputChange: this.handleInputChange,
-                    disabled: !t.links
-                }))), t.links ? o.default.createElement("div", {
+                    disabled: !n.links
+                }))), n.links ? o.default.createElement("div", {
                     className: "action-group"
                 }, o.default.createElement("button", {
                     className: "cancel",
@@ -25922,7 +26093,7 @@ function(e, t, n) {
                 })), o.default.createElement("button", {
                     className: "save",
                     onClick: this.savePlayer,
-                    disabled: !a
+                    disabled: !r
                 }, o.default.createElement("span", {
                     className: "fa fa-check"
                 }))) : o.default.createElement("div", {
@@ -25945,24 +26116,24 @@ function(e, t, n) {
                     className: "small-12 medium-6 columns text-center"
                 }, o.default.createElement("h2", {
                     className: "no_shadow"
-                }, e.firstName ? e.firstName + " " + e.lastName : "Anonymous", " "), o.default.createElement("div", {
+                }, t.firstName ? t.firstName + " " + t.lastName : "Anonymous", " "), o.default.createElement("div", {
                     className: "text-center"
                 }, o.default.createElement("h3", {
                     className: "gold-label"
-                }, "RP Stash: ", o.default.createElement("span", null, o.default.createElement("strong", null, e.rewardPoints || 0), " Points")), o.default.createElement("div", {
+                }, "RP Stash: ", o.default.createElement("span", null, o.default.createElement("strong", null, t.rewardPoints || 0), " Points")), o.default.createElement("div", {
                     className: "flex-row-center push-top"
                 }, o.default.createElement("div", {
                     className: "profile-picture"
                 }, o.default.createElement("img", {
                     src: this.getPlayerIcon(),
-                    alt: e.username,
+                    alt: t.username,
                     className: "shadow"
-                }), o.default.createElement(c.Form, {
+                }), o.default.createElement(m.Form, {
                     name: "playerIconForm",
                     submitButton: !1
-                }, o.default.createElement(c.FileUpload, {
+                }, o.default.createElement(m.FileUpload, {
                     name: "playerIcon",
-                    value: this.state.fileUpload,
+                    value: this.state.fileUploadIcon,
                     handleFileUpload: this.handlePlayerIconUpload,
                     accept: "image/*",
                     maxFiles: 10,
@@ -25971,9 +26142,9 @@ function(e, t, n) {
                     className: "push-top"
                 }, o.default.createElement(i.Link, {
                     key: "userProfile",
-                    to: "/players/profile/" + e.username,
+                    to: "/players/profile/" + t.username,
                     className: "username"
-                }, e.username)), o.default.createElement("div", {
+                }, t.username)), o.default.createElement("div", {
                     className: ""
                 }, o.default.createElement("p", null, o.default.createElement(i.Link, {
                     to: "/players/dashboard/change-password"
@@ -25983,11 +26154,11 @@ function(e, t, n) {
                     className: "small-12 columns"
                 }, o.default.createElement("h2", null, "Allies ", o.default.createElement(i.Link, {
                     key: "allyList",
-                    to: "/players/profile/" + e.username + "/ally-search",
+                    to: "/players/profile/" + t.username + "/ally-search",
                     className: "right"
                 }, "View All")), o.default.createElement("div", {
                     className: "friend-list"
-                }, e.Friends.map(function(e, t) {
+                }, t.Friends.map(function(e, t) {
                     return o.default.createElement("span", {
                         className: "icon-box"
                     }, o.default.createElement(i.Link, {
@@ -26000,7 +26171,7 @@ function(e, t, n) {
                     }), o.default.createElement("span", {
                         className: "name-label"
                     }, e.firstName, " ", e.lastName)));
-                })), e.Friends.length < 1 && o.default.createElement("h5", {
+                })), t.Friends.length < 1 && o.default.createElement("h5", {
                     className: "text-center"
                 }, "Search by player profile and click 'Add Ally' to send a ally request."))), o.default.createElement("div", {
                     className: "row"
@@ -26020,9 +26191,9 @@ function(e, t, n) {
                     className: "fa fa-list-ol"
                 }), " Leaderboards")), o.default.createElement("div", {
                     className: "small-12 columns"
-                }, e.GameSystemRankings.length < 1 && o.default.createElement("h3", {
+                }, t.GameSystemRankings.length < 1 && o.default.createElement("h3", {
                     className: "text-center"
-                }, "Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards."), e.GameSystemRankings.map(function(e, t) {
+                }, "Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards."), t.GameSystemRankings.map(function(e, t) {
                     return o.default.createElement("div", {
                         key: t,
                         className: "row"
@@ -26049,17 +26220,53 @@ function(e, t, n) {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
-                }, o.default.createElement("h2", null, "Photostream ", o.default.createElement("div", {
-                    className: "right"
-                }, o.default.createElement("a", null, o.default.createElement("span", {
-                    className: "fa fa-upload"
-                }), " Add Photo"))), "TODO: Add file upload TODO: Add popup component and list of player images", o.default.createElement("div", {
+                }, o.default.createElement("h2", null, "Photo Stream"), o.default.createElement(m.Form, {
+                    name: "photoStreamUploadForm",
+                    submitButton: !1
+                }, o.default.createElement(m.FileUpload, {
+                    name: "photoStream",
+                    value: this.state.fileUploadPhotoStream,
+                    handleFileUpload: this.handlePhotoStreamUpload,
+                    accept: "image/*",
+                    maxFiles: 50,
+                    hideFileList: !0
+                })), o.default.createElement("hr", null), o.default.createElement("div", {
                     className: "text-center"
-                }, o.default.createElement("h5", null, "Upload photos from you dashboard to share your table-top experience with friends."))))));
+                }, this.state.photoStream.length > 0 ? o.default.createElement("div", {
+                    className: "photo-stream"
+                }, this.state.photoStream.map(function(t, n) {
+                    return o.default.createElement("div", {
+                        key: n,
+                        className: "photo-box"
+                    }, o.default.createElement("a", {
+                        onClick: e.toggleModal.bind(e, "photoStream-" + n)
+                    }, o.default.createElement("img", {
+                        src: "/uploads/players/" + e.state.currentUser.id + "/photoStream/" + t.name
+                    })), o.default.createElement(f.default, {
+                        name: "photoStream-" + n,
+                        title: e.state.currentUser.username + "'s Photo Stream",
+                        modalIsOpen: e.state.activeModal === "photoStream-" + n,
+                        handleClose: e.toggleModal.bind(e, "photoStream-" + n),
+                        showClose: !0,
+                        showCancel: !1,
+                        confirmText: "Delete?",
+                        handleSubmit: e.deletePhoto.bind(e, t.id, n)
+                    }, o.default.createElement("img", {
+                        src: "/uploads/players/" + e.state.currentUser.id + "/photoStream/" + t.name
+                    }), o.default.createElement("div", {
+                        className: "actions"
+                    }, o.default.createElement("span", {
+                        className: "fa fa-arrow-left",
+                        onClick: e.toggleModal.bind(e, "photoStream-" + (n - 1))
+                    }), o.default.createElement("span", {
+                        className: "fa fa-arrow-right",
+                        onClick: e.toggleModal.bind(e, "photoStream-" + (n + 1))
+                    }))));
+                })) : o.default.createElement("h5", null, "Upload photos from you dashboard to share your table-top experience with friends."))))));
             }
         } ]), PlayerDashboardPage;
     }(o.default.Component);
-    t.default = (0, u.connect)(y, b)(g);
+    t.default = (0, u.connect)(A, E)(T);
 }, /*!******************************************************************!*\
   !*** ./src/components/pages/players/PlayerNotificationsPage.jsx ***!
   \******************************************************************/
@@ -26172,11 +26379,12 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/PlayerService */ 66), c = _interopRequireDefault(l), d = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/PlayerService */ 67), c = _interopRequireDefault(l), d = function(e) {
         function PlayerProfilePage() {
             _classCallCheck(this, PlayerProfilePage);
             var e = _possibleConstructorReturn(this, (PlayerProfilePage.__proto__ || Object.getPrototypeOf(PlayerProfilePage)).call(this));
             return e.state = {
+                activeModal: none,
                 player: {
                     Friends: [],
                     GameSystemRankings: []
@@ -26186,6 +26394,11 @@ function(e, t, n) {
             e;
         }
         return _inherits(PlayerProfilePage, e), a(PlayerProfilePage, [ {
+            key: "addFriend",
+            value: function addFriend() {
+                console.log("Add user with id, " + this.state.player.id + ", as a friend.");
+            }
+        }, {
             key: "componentDidMount",
             value: function componentDidMount() {
                 var e = this;
@@ -26196,9 +26409,20 @@ function(e, t, n) {
                 }) : i.browserHistory.push("/players/dashboard");
             }
         }, {
-            key: "addFriend",
-            value: function addFriend() {
-                console.log("Add user with id, " + this.state.player.id + ", as a friend.");
+            key: "getPlayerIcon",
+            value: function getPlayerIcon() {
+                var e = void 0;
+                return this.state.currentUser.Files.some(function(t) {
+                    if ("playerIcon" === t.identifier) return e = t.name, !0;
+                }), e ? "/uploads/players/" + this.state.player.id + "/playerIcon/" + e : "/uploads/players/defaults/profile-icon-default.png";
+            }
+        }, {
+            key: "getPlayerPhotoStream",
+            value: function getPlayerPhotoStream() {
+                var e = [];
+                return this.state.player.forEach(function(t) {
+                    "photoStream" === t.identifier && e.push(t);
+                }), e;
             }
         }, {
             key: "removeFriend",
@@ -26221,10 +26445,17 @@ function(e, t, n) {
                 return n[e]();
             }
         }, {
+            key: "toggleModal",
+            value: function toggleModal(e) {
+                this.setState({
+                    activeModal: "none" === this.state.activeModal ? e : "none"
+                });
+            }
+        }, {
             key: "render",
             value: function render() {
-                var e = this.state.player, t = this.state.player.id === this.props.currentUser;
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                var e = this, t = this.state.player, n = this.state.player.id === this.props.currentUser;
+                return this.getPlayerPhotoStream(), o.default.createElement(u.default, null, o.default.createElement("div", {
                     className: "player-profile"
                 }, o.default.createElement("div", {
                     className: "row"
@@ -26234,65 +26465,65 @@ function(e, t, n) {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 medium-6 columns"
-                }, o.default.createElement("h2", null, "Player Info"), e.bio ? o.default.createElement("h3", {
+                }, o.default.createElement("h2", null, "Player Info"), t.bio ? o.default.createElement("h3", {
                     className: "user-bio push-bottom-2x"
-                }, e.bio) : o.default.createElement("h3", {
+                }, t.bio) : o.default.createElement("h3", {
                     className: "user-bio push-bottom-2x"
                 }, "This player has not yet updaed their bio."), o.default.createElement("div", {
                     className: "social-links push-bottom text-center"
-                }, e.facebook && o.default.createElement("a", {
-                    href: e.facebook,
+                }, t.facebook && o.default.createElement("a", {
+                    href: t.facebook,
                     className: "push-right push-left",
                     target: "_blank"
                 }, o.default.createElement("span", {
                     className: "fa fa-facebook"
-                })), e.twitter && o.default.createElement("a", {
-                    href: e.twitter,
+                })), t.twitter && o.default.createElement("a", {
+                    href: t.twitter,
                     className: "push-right push-left",
                     target: "_blank"
                 }, o.default.createElement("span", {
                     className: "fa fa-twitter"
-                })), e.instagram && o.default.createElement("a", {
-                    href: e.instagram,
+                })), t.instagram && o.default.createElement("a", {
+                    href: t.instagram,
                     className: "push-right push-left",
                     target: "_blank"
                 }, o.default.createElement("span", {
                     className: "fa fa-instagram"
-                })), e.twitch && o.default.createElement("a", {
-                    href: e.twitch,
+                })), t.twitch && o.default.createElement("a", {
+                    href: t.twitch,
                     className: "push-right push-left",
                     target: "_blank"
                 }, o.default.createElement("span", {
                     className: "fa fa-twitch"
-                })), e.googlePlus && o.default.createElement("a", {
-                    href: e.googlePlus,
+                })), t.googlePlus && o.default.createElement("a", {
+                    href: t.googlePlus,
                     className: "push-right push-left",
                     target: "_blank"
                 }, o.default.createElement("span", {
                     className: "fa fa-google-plus"
-                })), e.website && o.default.createElement("a", {
-                    href: e.website,
+                })), t.website && o.default.createElement("a", {
+                    href: t.website,
                     className: "push-right push-left",
                     target: "_blank"
                 }, o.default.createElement("span", {
                     className: "fa fa-globe"
                 })))), o.default.createElement("div", {
                     className: "small-12 medium-6 columns"
-                }, e.firstName ? o.default.createElement("h2", {
+                }, t.firstName ? o.default.createElement("h2", {
                     className: "text-center"
-                }, e.firstName, " ", e.lastName) : o.default.createElement("h2", {
+                }, t.firstName, " ", t.lastName) : o.default.createElement("h2", {
                     className: "text-center"
                 }, "Anonymous"), o.default.createElement("div", {
                     className: "text-center"
                 }, o.default.createElement("br", null), o.default.createElement("img", {
-                    src: "/uploads/players/" + e.id + "/playerIcon/" + e.icon,
-                    alt: "",
-                    className: "profile-picture shadow"
+                    src: this.getPlayerIcon(),
+                    alt: t.username,
+                    className: "shadow"
                 })), o.default.createElement("h1", {
                     className: "username text-center"
                 }, o.default.createElement("span", {
                     className: "glyphicon glyphicon-user"
-                }), " ", e.username), !t && o.default.createElement("div", {
+                }), " ", t.username), !n && o.default.createElement("div", {
                     className: "text-center"
                 }, this.state.alreadyFriends ? o.default.createElement("p", null, o.default.createElement("a", {
                     onClick: this.removeFriend
@@ -26308,11 +26539,11 @@ function(e, t, n) {
                     className: "small-12 columns"
                 }, o.default.createElement("h2", null, "Allies ", o.default.createElement(i.Link, {
                     key: "allyList",
-                    to: "/players/profile/" + e.username + "/ally-search",
+                    to: "/players/profile/" + t.username + "/ally-search",
                     className: "right"
                 }, "View All")), o.default.createElement("div", {
                     className: "friend-list"
-                }, e.Friends.map(function(e, t) {
+                }, t.Friends.map(function(e, t) {
                     return o.default.createElement(i.Link, {
                         key: t,
                         to: "/players/profile/" + e.username,
@@ -26323,7 +26554,7 @@ function(e, t, n) {
                     }), o.default.createElement("span", {
                         className: "name-label"
                     }, e.firstName, " ", e.lastName));
-                })), e.Friends.length < 1 && o.default.createElement("div", {
+                })), t.Friends.length < 1 && o.default.createElement("div", {
                     className: "text-center"
                 }, o.default.createElement("h5", null, "Send an ally request to welcome this player to Battle-Comm!")))), o.default.createElement("div", {
                     className: "row"
@@ -26343,9 +26574,9 @@ function(e, t, n) {
                     className: "fa fa-list-ol"
                 }), " Leaderboards")), o.default.createElement("div", {
                     className: "small-12 columns"
-                }, e.GameSystemRankings.length < 1 && o.default.createElement("h3", {
+                }, t.GameSystemRankings.length < 1 && o.default.createElement("h3", {
                     className: "text-center"
-                }, e.username, " has not submitted any game results to the BC leaderboards"), e.GameSystemRankings.map(function(e, t) {
+                }, t.username, " has not submitted any game results to the BC leaderboards"), t.GameSystemRankings.map(function(e, t) {
                     return o.default.createElement("div", {
                         key: t,
                         className: "row"
@@ -26380,9 +26611,23 @@ function(e, t, n) {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
-                }, o.default.createElement("h2", null, "Photostream"), "TODO: Add popup component and list of player images", o.default.createElement("div", {
+                }, o.default.createElement("h2", null, "Photostream"), o.default.createElement("div", {
                     className: "text-center"
-                }, o.default.createElement("h5", null, e.username, " has not uploaded any photos to their photostream"))))));
+                }, this.state.photoStream.length > 0 ? o.default.createElement("div", {
+                    className: "photo-stream"
+                }, this.getPlayerPhotoStream().map(function(n, a) {
+                    return o.default.createElement(Modal, {
+                        key: a,
+                        name: "photoStream-" + a,
+                        title: t.username + "'s Photo Stream'",
+                        modalIsOpen: e.state.activeModal === "photoStream-" + a,
+                        handleClose: e.toggleModal.bind(e, "photoStream-" + a),
+                        showClose: !0,
+                        showFooter: !1
+                    }, o.default.createElement("img", {
+                        src: "/players/" + t.id + "/photoStream/" + n.name
+                    }));
+                })) : o.default.createElement("h5", null, "Upload photos from you dashboard to share your table-top experience with friends."))))));
             }
         } ]), PlayerProfilePage;
     }(o.default.Component);
@@ -26429,7 +26674,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/GameSystemActions */ 62), p = _interopRequireDefault(d), f = n(/*! ../../../services/RankingService */ 440), m = _interopRequireDefault(f), h = n(/*! ../../../library/pagination */ 36), M = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/GameSystemActions */ 58), p = _interopRequireDefault(d), f = n(/*! ../../../services/RankingService */ 440), m = _interopRequireDefault(f), h = n(/*! ../../../library/pagination */ 36), M = function mapStateToProps(e) {
         return {
             factions: e.factions,
             gameSystems: e.gameSystems
@@ -26836,7 +27081,18 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 79), p = _interopRequireDefault(d), f = function mapStateToProps(e) {
+        return {
+            cartTotal: e.cartTotal,
+            cartItems: e.cartItems
+        };
+    }, m = function mapDispatchToProps(e) {
+        return (0, s.bindActionCreators)({
+            updateOrderTotal: p.default.updateTotal,
+            addItem: p.default.add,
+            removeItem: p.default.remove
+        }, e);
+    }, h = function(e) {
         function CartPage() {
             return _classCallCheck(this, CartPage), _possibleConstructorReturn(this, (CartPage.__proto__ || Object.getPrototypeOf(CartPage)).call(this));
         }
@@ -26848,15 +27104,37 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                var e = this;
+                return o.default.createElement(c.default, {
+                    headerImage: "/images/title/Store.png",
+                    headerAlt: "Store"
+                }, o.default.createElement("div", {
                     className: "row"
-                }, o.default.createElement("h1", null, "Shopping Cart"), o.default.createElement("p", null, o.default.createElement(i.Link, {
-                    to: "/"
-                }, "Go back to the main page"))));
+                }, o.default.createElement("div", {
+                    className: "small-12 columns"
+                }, o.default.createElement("h1", null, "Shopping Cart")), o.default.createElement("hr", null), o.default.createElement("div", {
+                    className: "row"
+                }, o.default.createElement("div", {
+                    className: "small-12 columns"
+                }, o.default.createElement("table", null, o.default.createElement("thead", null, o.default.createElement("tr", null, o.default.createElement("th", null, "SKU"), o.default.createElement("th", null, "Name"), o.default.createElement("th", null, "Price"), o.default.createElement("th", null, "Qty"), o.default.createElement("th", null, "Subtotal"), o.default.createElement("th", null, "Remove?"))), o.default.createElement("tbody", null, this.props.cartItems.map(function(t, n) {
+                    return o.default.createElement("tr", {
+                        key: n,
+                        className: "item-row"
+                    }, o.default.createElement("td", null, t.merchItem.sku), o.default.createElement("td", null, t.merchItem.title), o.default.createElement("td", null, "$", t.merchItem.price, "RP"), o.default.createElement("td", null, "(", t.cartQty, ")"), o.default.createElement("td", null, (t.cartQty * t.merchItem.price).toFixed(2)), o.default.createElement("td", {
+                        onClick: e.removeItem.bind(e, t, t.cartQty)
+                    }, o.default.createElement("span", {
+                        className: "fa fa-minus"
+                    })));
+                }))), o.default.createElement("hr", null), o.default.createElement("div", {
+                    className: "small-12 columns text-right"
+                }, "Order Total: ", this.props.cartTotal), o.default.createElement(i.Link, {
+                    to: "store/checkout",
+                    className: "button"
+                }, "Go to Checkout")))));
             }
         } ]), CartPage;
     }(o.default.Component);
-    t.default = l;
+    t.default = (0, u.connect)(f, m)(h);
 }, /*!*****************************************************!*\
   !*** ./src/components/pages/store/CheckoutPage.jsx ***!
   \*****************************************************/
@@ -26911,7 +27189,10 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                return o.default.createElement(u.default, {
+                    headerImage: "/images/title/Store.png",
+                    headerAlt: "Store"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("h1", null, "Checkout"), o.default.createElement("p", null, o.default.createElement(i.Link, {
                     to: "/"
@@ -26974,7 +27255,10 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                return o.default.createElement(u.default, {
+                    headerImage: "/images/title/Store.png",
+                    headerAlt: "Store"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("h1", null, "Order Success"), o.default.createElement("p", null, o.default.createElement(i.Link, {
                     to: "/"
@@ -27025,7 +27309,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/ProductService */ 80), c = _interopRequireDefault(l), d = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/ProductService */ 82), c = _interopRequireDefault(l), d = function(e) {
         function ProductPage() {
             _classCallCheck(this, ProductPage);
             var e = _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this));
@@ -27047,7 +27331,10 @@ function(e, t, n) {
             key: "render",
             value: function render() {
                 var e = this.state.product;
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                return o.default.createElement(u.default, {
+                    headerImage: "/images/title/Store.png",
+                    headerAlt: "Store"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -27117,7 +27404,10 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(u.default, null, o.default.createElement("div", {
+                return o.default.createElement(u.default, {
+                    headerImage: "/images/title/Store.png",
+                    headerAlt: "Store"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("h1", null, "Purchase RP"), o.default.createElement("p", null, o.default.createElement(i.Link, {
                     to: "/"
@@ -27168,7 +27458,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 113), p = _interopRequireDefault(d), f = n(/*! ../../../services/ProductService */ 80), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 79), p = _interopRequireDefault(d), f = n(/*! ../../../services/ProductService */ 82), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
         return {};
     }, M = function mapDispatchToProps(e) {
         return (0, i.bindActionCreators)({
@@ -27205,7 +27495,10 @@ function(e, t, n) {
             key: "render",
             value: function render() {
                 var e = this;
-                return o.default.createElement(c.default, null, o.default.createElement("div", {
+                return o.default.createElement(c.default, {
+                    headerImage: "/images/title/Store.png",
+                    headerAlt: "Store"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -27404,7 +27697,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! react-addons-css-transition-group */ 39), c = (_interopRequireDefault(l), 
-    n(/*! ../../actions/CartActions */ 113)), d = _interopRequireDefault(c), p = function mapStateToProps(e) {
+    n(/*! ../../actions/CartActions */ 79)), d = _interopRequireDefault(c), p = function mapStateToProps(e) {
         return {
             cartTotal: e.cartTotal,
             cartItems: e.cartItems
@@ -27550,7 +27843,7 @@ function(e, t, n) {
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! classnames */ 16), s = (_interopRequireDefault(i), 
     n(/*! react-addons-css-transition-group */ 39)), u = (_interopRequireDefault(s), 
-    n(/*! ../../library/Modal */ 121)), l = _interopRequireDefault(u), c = function(e) {
+    n(/*! ../../library/Modal */ 64)), l = _interopRequireDefault(u), c = function(e) {
         function Footer() {
             _classCallCheck(this, Footer);
             var e = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this));
@@ -28067,7 +28360,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! react-router */ 5), r = n(/*! axios */ 19), o = _interopRequireDefault(r), i = n(/*! ./library/alerts */ 14), s = n(/*! ./library/loader */ 78), u = n(/*! ./library/authentication */ 26), l = n(/*! ./store */ 81), c = _interopRequireDefault(l), d = void 0, p = 0, f = 350, m = function initInterceptors() {
+    var a = n(/*! react-router */ 5), r = n(/*! axios */ 18), o = _interopRequireDefault(r), i = n(/*! ./library/alerts */ 14), s = n(/*! ./library/loader */ 80), u = n(/*! ./library/authentication */ 26), l = n(/*! ./store */ 83), c = _interopRequireDefault(l), d = void 0, p = 0, f = 350, m = function initInterceptors() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "http://localhost:8000/api/", t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : f;
         o.default.defaults.baseURL = e, o.default.interceptors.request.use(function(e) {
             var n = c.default.getState().user.id_token;
@@ -28272,7 +28565,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/AuthenticationConstants */ 125), r = _interopRequireDefault(a), o = n(/*! ../constants/UserConstants */ 127), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 126), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 77), c = _interopRequireDefault(l), d = n(/*! ../services/UserService */ 398), p = _interopRequireDefault(d), f = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/AuthenticationConstants */ 125), r = _interopRequireDefault(a), o = n(/*! ../constants/UserConstants */ 127), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 126), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 78), c = _interopRequireDefault(l), d = n(/*! ../services/UserService */ 398), p = _interopRequireDefault(d), f = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -28287,7 +28580,8 @@ function(e, t, n) {
         if (e) {
             if (c.default.forEach(function(t) {
                 t.roleFlags === e.roleFlags && (e.roleConfig = t);
-            }), !e.roleConfig) throw new Error("Oops! Make sure that the roleConfig on the UI and API have matching values.");
+            }), !e.roleConfig) throw console.log("Oops! Make sure that the roleConfig on the UI and API have matching values."), 
+            new Error("Oops! Make sure that the roleConfig on the UI and API have matching values.");
             return sessionStorage.setItem("user", JSON.stringify(e)), console.log("Auth credentials changed."), 
             e;
         }
@@ -28401,7 +28695,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.redirectRoute = t.isAuthenticated = t.users = t.user = void 0;
-    var a = n(/*! ../constants/UserConstants */ 127), r = _interopRequireDefault(a), o = n(/*! ../constants/AuthenticationConstants */ 125), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 126), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 77), c = (_interopRequireDefault(l), 
+    var a = n(/*! ../constants/UserConstants */ 127), r = _interopRequireDefault(a), o = n(/*! ../constants/AuthenticationConstants */ 125), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 126), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 78), c = (_interopRequireDefault(l), 
     function user() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
@@ -28463,7 +28757,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19);
+    var a = n(/*! axios */ 18);
     t.default = {
         authenticate: function authenticate(e) {
             var t = {
@@ -28922,7 +29216,7 @@ function(e, t, n) {
             o.push(r.default.post(t, i, s));
         }), r.default.all(o);
     };
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
 }, /*!********************************************************!*\
   !*** ./src/library/validations/components/CheckBox.js ***!
   \********************************************************/
@@ -30826,7 +31120,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.bannerSlides = t.bannerSlide = void 0;
-    var a = n(/*! ../constants/BannerSlideConstants */ 114), r = _interopRequireDefault(a), o = function bannerSlide() {
+    var a = n(/*! ../constants/BannerSlideConstants */ 115), r = _interopRequireDefault(a), o = function bannerSlide() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
           case r.default.GET_BANNER_SLIDE:
@@ -30881,7 +31175,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.cartTotal = t.cartItems = void 0;
-    var a = n(/*! ../constants/CartItemConstants */ 115), r = _interopRequireDefault(a), o = function calculateTotal(e) {
+    var a = n(/*! ../constants/CartItemConstants */ 116), r = _interopRequireDefault(a), o = function calculateTotal(e) {
         var t = 0;
         return e.forEach(function(e) {
             t += parseInt(e.cartQty, 10) * parseInt(e.merchItem.price, 10);
@@ -30993,7 +31287,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.factions = t.faction = void 0;
-    var a = n(/*! ../constants/FactionConstants */ 116), r = _interopRequireDefault(a), o = function faction() {
+    var a = n(/*! ../constants/FactionConstants */ 117), r = _interopRequireDefault(a), o = function faction() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
           case r.default.GET_FACTION:
@@ -31103,7 +31397,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.gameSystems = t.gameSystem = void 0;
-    var a = n(/*! ../constants/GameSystemConstants */ 117), r = _interopRequireDefault(a), o = function gameSystem() {
+    var a = n(/*! ../constants/GameSystemConstants */ 118), r = _interopRequireDefault(a), o = function gameSystem() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
           case r.default.GET_GAME_SYSTEM:
@@ -31146,7 +31440,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! redux */ 6), r = n(/*! react-router-redux */ 298), o = n(/*! ../library/alerts */ 14), i = n(/*! ../library/validations */ 22), s = n(/*! ../library/loader */ 78), u = n(/*! ../library/authentication */ 26), l = n(/*! ./bannerSlides */ 421), c = n(/*! ./cartItems */ 422), d = n(/*! ./gameSystems */ 426), p = n(/*! ./gameSystemRankings */ 425), f = n(/*! ./factions */ 424), m = n(/*! ./factionRankings */ 423), h = n(/*! ./newsPosts */ 429), M = n(/*! ./manufacturers */ 428), _ = n(/*! ./products */ 431), y = n(/*! ./productOrders */ 430), b = n(/*! ./userAchievements */ 432), g = n(/*! ./userMessages */ 433), v = n(/*! ./userNotifications */ 434), A = n(/*! ./userPhotos */ 435);
+    var a = n(/*! redux */ 6), r = n(/*! react-router-redux */ 298), o = n(/*! ../library/alerts */ 14), i = n(/*! ../library/validations */ 22), s = n(/*! ../library/loader */ 80), u = n(/*! ../library/authentication */ 26), l = n(/*! ./bannerSlides */ 421), c = n(/*! ./cartItems */ 422), d = n(/*! ./gameSystems */ 426), p = n(/*! ./gameSystemRankings */ 425), f = n(/*! ./factions */ 424), m = n(/*! ./factionRankings */ 423), h = n(/*! ./newsPosts */ 429), M = n(/*! ./manufacturers */ 428), _ = n(/*! ./products */ 431), y = n(/*! ./productOrders */ 430), b = n(/*! ./userAchievements */ 432), g = n(/*! ./userMessages */ 433), v = n(/*! ./userNotifications */ 434), A = n(/*! ./userPhotos */ 435);
     t.default = (0, a.combineReducers)({
         routing: r.routerReducer,
         alerts: o.alerts,
@@ -31205,7 +31499,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.manufacturers = t.manufacturer = void 0;
-    var a = n(/*! ../constants/ManufacturerConstants */ 118), r = _interopRequireDefault(a), o = function manufacturer() {
+    var a = n(/*! ../constants/ManufacturerConstants */ 119), r = _interopRequireDefault(a), o = function manufacturer() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
           case r.default.GET_MANUFACTURER:
@@ -31260,7 +31554,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.newsPosts = t.newsPost = void 0;
-    var a = n(/*! ../constants/NewsPostConstants */ 119), r = _interopRequireDefault(a), o = function newsPost() {
+    var a = n(/*! ../constants/NewsPostConstants */ 120), r = _interopRequireDefault(a), o = function newsPost() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
           case r.default.GET_NEWS_POST:
@@ -31315,7 +31609,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.productOrders = t.productOrder = void 0;
-    var a = n(/*! ../constants/ProductOrderConstants */ 120), r = _interopRequireDefault(a), o = function productOrder() {
+    var a = n(/*! ../constants/ProductOrderConstants */ 121), r = _interopRequireDefault(a), o = function productOrder() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
           case r.default.GET_PRODUCT_ORDER:
@@ -31896,7 +32190,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/bannerSlides/" + e).then(function(e) {
@@ -31937,7 +32231,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         get: function get(e) {
             return r.default.get("/productOrders/" + e).then(function(e) {
@@ -31983,7 +32277,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         searchByFaction: function searchByFaction(e, t) {
             return r.default.post("search/factionRankings/" + e, t).then(function(e) {
@@ -32019,7 +32313,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! axios */ 19), r = _interopRequireDefault(a);
+    var a = n(/*! axios */ 18), r = _interopRequireDefault(a);
     t.default = {
         submitPointAssignment: function submitPointAssignment(e) {
             return r.default.post("/venues/assignPoints", e).then(function(e) {
@@ -32731,7 +33025,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! invariant */ 17), o = _interopRequireDefault(r), i = n(/*! ./Actions */ 47), s = n(/*! ./PathUtils */ 38), u = n(/*! ./ExecutionEnvironment */ 67), l = n(/*! ./DOMUtils */ 83), c = n(/*! ./DOMStateStorage */ 139), d = n(/*! ./createDOMHistory */ 140), p = _interopRequireDefault(d);
+    }, r = n(/*! invariant */ 17), o = _interopRequireDefault(r), i = n(/*! ./Actions */ 47), s = n(/*! ./PathUtils */ 38), u = n(/*! ./ExecutionEnvironment */ 68), l = n(/*! ./DOMUtils */ 85), c = n(/*! ./DOMStateStorage */ 139), d = n(/*! ./createDOMHistory */ 140), p = _interopRequireDefault(d);
     t.default = createBrowserHistory, e.exports = t.default;
 }, /*!*****************************************!*\
   !*** ./~/history/lib/createLocation.js ***!
@@ -36724,7 +37018,7 @@ function(e, t, n) {
             }
         }
     }
-    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPropagators */ 54), o = n(/*! fbjs/lib/ExecutionEnvironment */ 13), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 25), u = n(/*! ./SyntheticEvent */ 30), l = n(/*! ./getEventTarget */ 99), c = n(/*! ./isEventSupported */ 100), d = n(/*! ./isTextInputElement */ 288), p = {
+    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPropagators */ 54), o = n(/*! fbjs/lib/ExecutionEnvironment */ 13), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 25), u = n(/*! ./SyntheticEvent */ 30), l = n(/*! ./getEventTarget */ 101), c = n(/*! ./isEventSupported */ 102), d = n(/*! ./isTextInputElement */ 288), p = {
         change: {
             phasedRegistrationNames: {
                 bubbled: "onChange",
@@ -36788,7 +37082,7 @@ function(e, t) {
   \**************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./EventPropagators */ 54), r = n(/*! ./ReactDOMComponentTree */ 11), o = n(/*! ./SyntheticMouseEvent */ 69), i = {
+    var a = n(/*! ./EventPropagators */ 54), r = n(/*! ./ReactDOMComponentTree */ 11), o = n(/*! ./SyntheticMouseEvent */ 70), i = {
         mouseEnter: {
             registrationName: "onMouseEnter",
             dependencies: [ "topMouseOut", "topMouseOver" ]
@@ -37102,10 +37396,10 @@ function(e, t, n) {
         "use strict";
         function instantiateChild(e, t, r, s) {
             var u = void 0 === e[r];
-            a || (a = n(/*! react/lib/ReactComponentTreeHook */ 18)), u || l(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", i.unescape(r), a.getStackAddendumByID(s)), 
+            a || (a = n(/*! react/lib/ReactComponentTreeHook */ 19)), u || l(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", i.unescape(r), a.getStackAddendumByID(s)), 
             null != t && u && (e[r] = o(t, !0));
         }
-        var a, r = n(/*! ./ReactReconciler */ 41), o = n(/*! ./instantiateReactComponent */ 287), i = n(/*! ./KeyEscapeUtils */ 90), s = n(/*! ./shouldUpdateReactComponent */ 101), u = n(/*! ./traverseAllChildren */ 290), l = n(/*! fbjs/lib/warning */ 4);
+        var a, r = n(/*! ./ReactReconciler */ 41), o = n(/*! ./instantiateReactComponent */ 287), i = n(/*! ./KeyEscapeUtils */ 92), s = n(/*! ./shouldUpdateReactComponent */ 103), u = n(/*! ./traverseAllChildren */ 290), l = n(/*! fbjs/lib/warning */ 4);
         "undefined" != typeof t && t.env, 1;
         var c = {
             instantiateChildren: function(e, t, n, a) {
@@ -37147,7 +37441,7 @@ function(e, t, n) {
   \*************************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./DOMChildrenOperations */ 87), r = n(/*! ./ReactDOMIDOperations */ 497), o = {
+    var a = n(/*! ./DOMChildrenOperations */ 89), r = n(/*! ./ReactDOMIDOperations */ 497), o = {
         processChildrenUpdates: r.dangerouslyProcessChildrenUpdates,
         replaceNodeWithMarkup: a.dangerouslyReplaceNodeWithMarkup
     };
@@ -37275,7 +37569,7 @@ function(e, t, n) {
         this._rootNodeID = 0, this._domID = 0, this._hostContainerInfo = null, this._wrapperState = null, 
         this._topLevelWrapper = null, this._flags = 0, this._ancestorInfo = null, Y.call(this, null);
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./AutoFocusUtils */ 481), o = n(/*! ./CSSPropertyOperations */ 483), i = n(/*! ./DOMLazyTree */ 52), s = n(/*! ./DOMNamespaces */ 88), u = n(/*! ./DOMProperty */ 34), l = n(/*! ./DOMPropertyOperations */ 266), c = n(/*! ./EventPluginHub */ 53), d = n(/*! ./EventPluginRegistry */ 59), p = n(/*! ./ReactBrowserEventEmitter */ 60), f = n(/*! ./ReactDOMComponentFlags */ 268), m = n(/*! ./ReactDOMComponentTree */ 11), h = n(/*! ./ReactDOMInput */ 498), M = n(/*! ./ReactDOMOption */ 501), _ = n(/*! ./ReactDOMSelect */ 269), y = n(/*! ./ReactDOMTextarea */ 504), b = n(/*! ./ReactInstrumentation */ 24), g = n(/*! ./ReactMultiChild */ 515), v = n(/*! ./ReactServerRenderingTransaction */ 520), A = n(/*! fbjs/lib/emptyFunction */ 23), E = n(/*! ./escapeTextContentForBrowser */ 71), T = n(/*! fbjs/lib/invariant */ 3), L = n(/*! ./isEventSupported */ 100), O = n(/*! fbjs/lib/shallowEqual */ 82), C = n(/*! ./validateDOMNesting */ 102), w = n(/*! fbjs/lib/warning */ 4), S = f, k = c.deleteListener, N = m.getNodeFromInstance, D = p.listenTo, P = d.registrationNameModules, z = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./AutoFocusUtils */ 481), o = n(/*! ./CSSPropertyOperations */ 483), i = n(/*! ./DOMLazyTree */ 52), s = n(/*! ./DOMNamespaces */ 90), u = n(/*! ./DOMProperty */ 34), l = n(/*! ./DOMPropertyOperations */ 266), c = n(/*! ./EventPluginHub */ 53), d = n(/*! ./EventPluginRegistry */ 60), p = n(/*! ./ReactBrowserEventEmitter */ 61), f = n(/*! ./ReactDOMComponentFlags */ 268), m = n(/*! ./ReactDOMComponentTree */ 11), h = n(/*! ./ReactDOMInput */ 498), M = n(/*! ./ReactDOMOption */ 501), _ = n(/*! ./ReactDOMSelect */ 269), y = n(/*! ./ReactDOMTextarea */ 504), b = n(/*! ./ReactInstrumentation */ 24), g = n(/*! ./ReactMultiChild */ 515), v = n(/*! ./ReactServerRenderingTransaction */ 520), A = n(/*! fbjs/lib/emptyFunction */ 23), E = n(/*! ./escapeTextContentForBrowser */ 72), T = n(/*! fbjs/lib/invariant */ 3), L = n(/*! ./isEventSupported */ 102), O = n(/*! fbjs/lib/shallowEqual */ 84), C = n(/*! ./validateDOMNesting */ 104), w = n(/*! fbjs/lib/warning */ 4), S = f, k = c.deleteListener, N = m.getNodeFromInstance, D = p.listenTo, P = d.registrationNameModules, z = {
         string: !0,
         number: !0
     }, R = "style", q = "__html", x = {
@@ -37558,7 +37852,7 @@ function(e, t, n) {
         };
         return n._ancestorInfo = t ? a.updatedAncestorInfo(null, n._tag, null) : null, n;
     }
-    var a = n(/*! ./validateDOMNesting */ 102), r = 9;
+    var a = n(/*! ./validateDOMNesting */ 104), r = 9;
     e.exports = ReactDOMContainerInfo;
 }, /*!***************************************************!*\
   !*** ./~/react-dom/lib/ReactDOMEmptyComponent.js ***!
@@ -37603,7 +37897,7 @@ function(e, t) {
   \*************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./DOMChildrenOperations */ 87), r = n(/*! ./ReactDOMComponentTree */ 11), o = {
+    var a = n(/*! ./DOMChildrenOperations */ 89), r = n(/*! ./ReactDOMComponentTree */ 11), o = {
         dangerouslyProcessChildrenUpdates: function(e, t) {
             var n = r.getNodeFromInstance(e);
             a.processUpdates(n, t);
@@ -37639,7 +37933,7 @@ function(e, t, n) {
         }
         return n;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMPropertyOperations */ 266), o = n(/*! ./LinkedValueUtils */ 91), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 25), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! fbjs/lib/warning */ 4), c = !1, d = !1, p = !1, f = !1, m = !1, h = !1, M = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMPropertyOperations */ 266), o = n(/*! ./LinkedValueUtils */ 93), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 25), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! fbjs/lib/warning */ 4), c = !1, d = !1, p = !1, f = !1, m = !1, h = !1, M = {
         getHostProps: function(e, t) {
             var n = o.getValue(t), r = o.getChecked(t), i = a({
                 type: void 0,
@@ -37741,7 +38035,7 @@ function(e, t, n) {
     function handleElement(e, t) {
         null != t && "string" == typeof t.type && (t.type.indexOf("-") >= 0 || t.props.is || warnInvalidARIAProps(e, t));
     }
-    var a = n(/*! ./DOMProperty */ 34), r = n(/*! react/lib/ReactComponentTreeHook */ 18), o = n(/*! fbjs/lib/warning */ 4), i = {}, s = new RegExp("^(aria)-[" + a.ATTRIBUTE_NAME_CHAR + "]*$"), u = {
+    var a = n(/*! ./DOMProperty */ 34), r = n(/*! react/lib/ReactComponentTreeHook */ 19), o = n(/*! fbjs/lib/warning */ 4), i = {}, s = new RegExp("^(aria)-[" + a.ATTRIBUTE_NAME_CHAR + "]*$"), u = {
         onBeforeMountComponent: function(e, t) {
             handleElement(e, t);
         },
@@ -37759,7 +38053,7 @@ function(e, t, n) {
         null != t && ("input" !== t.type && "textarea" !== t.type && "select" !== t.type || null == t.props || null !== t.props.value || o || (r(!1, "`value` prop on `%s` should not be null. Consider using the empty string to clear the component or `undefined` for uncontrolled components.%s", t.type, a.getStackAddendumByID(e)), 
         o = !0));
     }
-    var a = n(/*! react/lib/ReactComponentTreeHook */ 18), r = n(/*! fbjs/lib/warning */ 4), o = !1, i = {
+    var a = n(/*! react/lib/ReactComponentTreeHook */ 19), r = n(/*! fbjs/lib/warning */ 4), o = !1, i = {
         onBeforeMountComponent: function(e, t) {
             handleElement(e, t);
         },
@@ -37887,7 +38181,7 @@ function(e, t, n) {
   \**************************************************/
 function(e, t, n) {
     "use strict";
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMChildrenOperations */ 87), o = n(/*! ./DOMLazyTree */ 52), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./escapeTextContentForBrowser */ 71), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! ./validateDOMNesting */ 102), c = function(e) {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMChildrenOperations */ 89), o = n(/*! ./DOMLazyTree */ 52), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./escapeTextContentForBrowser */ 72), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! ./validateDOMNesting */ 104), c = function(e) {
         this._currentElement = e, this._stringText = "" + e, this._hostNode = null, this._hostParent = null, 
         this._domID = 0, this._mountIndex = 0, this._closingComment = null, this._commentNodes = null;
     };
@@ -37944,7 +38238,7 @@ function(e, t, n) {
         var t = this._currentElement.props, n = r.executeOnChange(t, e);
         return i.asap(forceUpdateIfMounted, this), n;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./LinkedValueUtils */ 91), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 25), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = !1, c = !1, d = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./LinkedValueUtils */ 93), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 25), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = !1, c = !1, d = {
         getHostProps: function(e, t) {
             null != t.dangerouslySetInnerHTML ? s(!1, "`dangerouslySetInnerHTML` does not make sense on <textarea>.") : void 0;
             var n = a({}, t, {
@@ -38046,7 +38340,7 @@ function(e, t, n) {
     function handleElement(e, t) {
         null != t && "string" == typeof t.type && (t.type.indexOf("-") >= 0 || t.props.is || c(e, t));
     }
-    var a = n(/*! ./DOMProperty */ 34), r = n(/*! ./EventPluginRegistry */ 59), o = n(/*! react/lib/ReactComponentTreeHook */ 18), i = n(/*! fbjs/lib/warning */ 4), s = {
+    var a = n(/*! ./DOMProperty */ 34), r = n(/*! ./EventPluginRegistry */ 60), o = n(/*! react/lib/ReactComponentTreeHook */ 19), i = n(/*! fbjs/lib/warning */ 4), s = {
         children: !0,
         dangerouslySetInnerHTML: !0,
         key: !0,
@@ -38153,7 +38447,7 @@ function(e, t, n) {
         var t = c(window);
         e(t);
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! fbjs/lib/EventListener */ 136), o = n(/*! fbjs/lib/ExecutionEnvironment */ 13), i = n(/*! ./PooledClass */ 40), s = n(/*! ./ReactDOMComponentTree */ 11), u = n(/*! ./ReactUpdates */ 25), l = n(/*! ./getEventTarget */ 99), c = n(/*! fbjs/lib/getUnboundedScrollPosition */ 454);
+    var a = n(/*! object-assign */ 10), r = n(/*! fbjs/lib/EventListener */ 136), o = n(/*! fbjs/lib/ExecutionEnvironment */ 13), i = n(/*! ./PooledClass */ 40), s = n(/*! ./ReactDOMComponentTree */ 11), u = n(/*! ./ReactUpdates */ 25), l = n(/*! ./getEventTarget */ 101), c = n(/*! fbjs/lib/getUnboundedScrollPosition */ 454);
     a(TopLevelCallbackBookKeeping.prototype, {
         destructor: function() {
             this.topLevelType = null, this.nativeEvent = null, this.ancestors.length = 0;
@@ -38216,7 +38510,7 @@ function(e, t) {
   \*******************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./DOMProperty */ 34), r = n(/*! ./EventPluginHub */ 53), o = n(/*! ./EventPluginUtils */ 89), i = n(/*! ./ReactComponentEnvironment */ 92), s = n(/*! ./ReactEmptyComponent */ 272), u = n(/*! ./ReactBrowserEventEmitter */ 60), l = n(/*! ./ReactHostComponent */ 274), c = n(/*! ./ReactUpdates */ 25), d = {
+    var a = n(/*! ./DOMProperty */ 34), r = n(/*! ./EventPluginHub */ 53), o = n(/*! ./EventPluginUtils */ 91), i = n(/*! ./ReactComponentEnvironment */ 94), s = n(/*! ./ReactEmptyComponent */ 272), u = n(/*! ./ReactBrowserEventEmitter */ 61), l = n(/*! ./ReactHostComponent */ 274), c = n(/*! ./ReactUpdates */ 25), d = {
         Component: i.injection,
         DOMProperty: a.injection,
         EmptyComponent: s.injection,
@@ -38326,7 +38620,7 @@ function(e, t, n) {
     function processQueue(e, t) {
         a.processChildrenUpdates(e, t);
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactComponentEnvironment */ 92)), r = n(/*! ./ReactInstanceMap */ 55), o = n(/*! ./ReactInstrumentation */ 24), i = n(/*! react/lib/ReactCurrentOwner */ 31), s = n(/*! ./ReactReconciler */ 41), u = n(/*! ./ReactChildReconciler */ 491), l = n(/*! fbjs/lib/emptyFunction */ 23), c = n(/*! ./flattenChildren */ 541), d = n(/*! fbjs/lib/invariant */ 3), p = l, f = function(e) {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactComponentEnvironment */ 94)), r = n(/*! ./ReactInstanceMap */ 55), o = n(/*! ./ReactInstrumentation */ 24), i = n(/*! react/lib/ReactCurrentOwner */ 31), s = n(/*! ./ReactReconciler */ 41), u = n(/*! ./ReactChildReconciler */ 491), l = n(/*! fbjs/lib/emptyFunction */ 23), c = n(/*! ./flattenChildren */ 541), d = n(/*! fbjs/lib/invariant */ 3), p = l, f = function(e) {
         if (!e._debugID) {
             var t;
             (t = r.get(e)) && (e = t);
@@ -38725,7 +39019,7 @@ function(e, t, n) {
         this.reinitializeTransaction(), this.renderToStaticMarkup = e, this.useCreateElement = !1, 
         this.updateQueue = new s(this);
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./PooledClass */ 40), o = n(/*! ./Transaction */ 70), i = n(/*! ./ReactInstrumentation */ 24), s = n(/*! ./ReactServerUpdateQueue */ 521), u = [];
+    var a = n(/*! object-assign */ 10), r = n(/*! ./PooledClass */ 40), o = n(/*! ./Transaction */ 71), i = n(/*! ./ReactInstrumentation */ 24), s = n(/*! ./ReactServerUpdateQueue */ 521), u = [];
     u.push({
         initialize: i.debugTool.onBeginFlush,
         close: i.debugTool.onEndFlush
@@ -38760,7 +39054,7 @@ function(e, t, n) {
         var n = e.constructor;
         r(!1, "%s(...): Can only update a mounting component. This usually means you called %s() outside componentWillMount() on the server. This is a no-op. Please check the code for the %s component.", t, t, n && (n.displayName || n.name) || "ReactClass");
     }
-    var a = n(/*! ./ReactUpdateQueue */ 95), r = n(/*! fbjs/lib/warning */ 4), o = function() {
+    var a = n(/*! ./ReactUpdateQueue */ 97), r = n(/*! fbjs/lib/warning */ 4), o = function() {
         function ReactServerUpdateQueue(e) {
             _classCallCheck(this, ReactServerUpdateQueue), this.transaction = e;
         }
@@ -38883,7 +39177,7 @@ function(e, t, n) {
             a(r, n), v.isDOMComponent(t) ? v.simulateNativeEventOnDOMComponent(e, t, r) : t.tagName && v.simulateNativeEventOnNode(e, t, r);
         };
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./EventConstants */ 488), o = n(/*! ./EventPluginHub */ 53), i = n(/*! ./EventPluginRegistry */ 59), s = n(/*! ./EventPropagators */ 54), u = n(/*! react/lib/React */ 28), l = n(/*! ./ReactDOM */ 93), c = n(/*! ./ReactDOMComponentTree */ 11), d = n(/*! ./ReactBrowserEventEmitter */ 60), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactUpdates */ 25), m = n(/*! ./SyntheticEvent */ 30), h = n(/*! ./ReactShallowRenderer */ 522), M = n(/*! ./findDOMNode */ 282), _ = n(/*! fbjs/lib/invariant */ 3), y = n(/*! fbjs/lib/warning */ 4), b = r.topLevelTypes, g = !1, v = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./EventConstants */ 488), o = n(/*! ./EventPluginHub */ 53), i = n(/*! ./EventPluginRegistry */ 60), s = n(/*! ./EventPropagators */ 54), u = n(/*! react/lib/React */ 28), l = n(/*! ./ReactDOM */ 95), c = n(/*! ./ReactDOMComponentTree */ 11), d = n(/*! ./ReactBrowserEventEmitter */ 61), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactUpdates */ 25), m = n(/*! ./SyntheticEvent */ 30), h = n(/*! ./ReactShallowRenderer */ 522), M = n(/*! ./findDOMNode */ 282), _ = n(/*! fbjs/lib/invariant */ 3), y = n(/*! fbjs/lib/warning */ 4), b = r.topLevelTypes, g = !1, v = {
         renderIntoDocument: function(e) {
             var t = document.createElement("div");
             return l.render(e, t);
@@ -39310,7 +39604,7 @@ function(e, t, n) {
         }
         return null;
     }
-    var a = n(/*! ./EventPropagators */ 54), r = n(/*! fbjs/lib/ExecutionEnvironment */ 13), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInputSelection */ 275), s = n(/*! ./SyntheticEvent */ 30), u = n(/*! fbjs/lib/getActiveElement */ 138), l = n(/*! ./isTextInputElement */ 288), c = n(/*! fbjs/lib/shallowEqual */ 82), d = r.canUseDOM && "documentMode" in document && document.documentMode <= 11, p = {
+    var a = n(/*! ./EventPropagators */ 54), r = n(/*! fbjs/lib/ExecutionEnvironment */ 13), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInputSelection */ 275), s = n(/*! ./SyntheticEvent */ 30), u = n(/*! fbjs/lib/getActiveElement */ 138), l = n(/*! ./isTextInputElement */ 288), c = n(/*! fbjs/lib/shallowEqual */ 84), d = r.canUseDOM && "documentMode" in document && document.documentMode <= 11, p = {
         select: {
             phasedRegistrationNames: {
                 bubbled: "onSelect",
@@ -39365,7 +39659,7 @@ function(e, t, n) {
     function isInteractive(e) {
         return "button" === e || "input" === e || "select" === e || "textarea" === e;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! fbjs/lib/EventListener */ 136)), r = n(/*! ./EventPropagators */ 54), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./SyntheticAnimationEvent */ 528), s = n(/*! ./SyntheticClipboardEvent */ 529), u = n(/*! ./SyntheticEvent */ 30), l = n(/*! ./SyntheticFocusEvent */ 532), c = n(/*! ./SyntheticKeyboardEvent */ 534), d = n(/*! ./SyntheticMouseEvent */ 69), p = n(/*! ./SyntheticDragEvent */ 531), f = n(/*! ./SyntheticTouchEvent */ 535), m = n(/*! ./SyntheticTransitionEvent */ 536), h = n(/*! ./SyntheticUIEvent */ 61), M = n(/*! ./SyntheticWheelEvent */ 537), _ = n(/*! fbjs/lib/emptyFunction */ 23), y = n(/*! ./getEventCharCode */ 97), b = n(/*! fbjs/lib/invariant */ 3), g = {}, v = {};
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! fbjs/lib/EventListener */ 136)), r = n(/*! ./EventPropagators */ 54), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./SyntheticAnimationEvent */ 528), s = n(/*! ./SyntheticClipboardEvent */ 529), u = n(/*! ./SyntheticEvent */ 30), l = n(/*! ./SyntheticFocusEvent */ 532), c = n(/*! ./SyntheticKeyboardEvent */ 534), d = n(/*! ./SyntheticMouseEvent */ 70), p = n(/*! ./SyntheticDragEvent */ 531), f = n(/*! ./SyntheticTouchEvent */ 535), m = n(/*! ./SyntheticTransitionEvent */ 536), h = n(/*! ./SyntheticUIEvent */ 62), M = n(/*! ./SyntheticWheelEvent */ 537), _ = n(/*! fbjs/lib/emptyFunction */ 23), y = n(/*! ./getEventCharCode */ 99), b = n(/*! fbjs/lib/invariant */ 3), g = {}, v = {};
     [ "abort", "animationEnd", "animationIteration", "animationStart", "blur", "canPlay", "canPlayThrough", "click", "contextMenu", "copy", "cut", "doubleClick", "drag", "dragEnd", "dragEnter", "dragExit", "dragLeave", "dragOver", "dragStart", "drop", "durationChange", "emptied", "encrypted", "ended", "error", "focus", "input", "invalid", "keyDown", "keyPress", "keyUp", "load", "loadedData", "loadedMetadata", "loadStart", "mouseDown", "mouseMove", "mouseOut", "mouseOver", "mouseUp", "paste", "pause", "play", "playing", "progress", "rateChange", "reset", "scroll", "seeked", "seeking", "stalled", "submit", "suspend", "timeUpdate", "touchCancel", "touchEnd", "touchMove", "touchStart", "transitionEnd", "volumeChange", "waiting", "wheel" ].forEach(function(e) {
         var t = e[0].toUpperCase() + e.slice(1), n = "on" + t, a = "top" + t, r = {
             phasedRegistrationNames: {
@@ -39547,7 +39841,7 @@ function(e, t, n) {
     function SyntheticDragEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticMouseEvent */ 69), r = {
+    var a = n(/*! ./SyntheticMouseEvent */ 70), r = {
         dataTransfer: null
     };
     a.augmentClass(SyntheticDragEvent, r), e.exports = SyntheticDragEvent;
@@ -39559,7 +39853,7 @@ function(e, t, n) {
     function SyntheticFocusEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 61), r = {
+    var a = n(/*! ./SyntheticUIEvent */ 62), r = {
         relatedTarget: null
     };
     a.augmentClass(SyntheticFocusEvent, r), e.exports = SyntheticFocusEvent;
@@ -39583,7 +39877,7 @@ function(e, t, n) {
     function SyntheticKeyboardEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 61), r = n(/*! ./getEventCharCode */ 97), o = n(/*! ./getEventKey */ 542), i = n(/*! ./getEventModifierState */ 98), s = {
+    var a = n(/*! ./SyntheticUIEvent */ 62), r = n(/*! ./getEventCharCode */ 99), o = n(/*! ./getEventKey */ 542), i = n(/*! ./getEventModifierState */ 100), s = {
         key: o,
         location: null,
         ctrlKey: null,
@@ -39612,7 +39906,7 @@ function(e, t, n) {
     function SyntheticTouchEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 61), r = n(/*! ./getEventModifierState */ 98), o = {
+    var a = n(/*! ./SyntheticUIEvent */ 62), r = n(/*! ./getEventModifierState */ 100), o = {
         touches: null,
         targetTouches: null,
         changedTouches: null,
@@ -39645,7 +39939,7 @@ function(e, t, n) {
     function SyntheticWheelEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticMouseEvent */ 69), r = {
+    var a = n(/*! ./SyntheticMouseEvent */ 70), r = {
         deltaX: function(e) {
             return "deltaX" in e ? e.deltaX : "wheelDeltaX" in e ? -e.wheelDeltaX : 0;
         },
@@ -39690,7 +39984,7 @@ function(e, t, n) {
                 m instanceof Error && !(m.message in u)) {
                     u[m.message] = !0;
                     var h = "";
-                    a || (a = n(/*! react/lib/ReactComponentTreeHook */ 18)), null !== p ? h = a.getStackAddendumByID(p) : null !== d && (h = a.getCurrentStackAddendum(d)), 
+                    a || (a = n(/*! react/lib/ReactComponentTreeHook */ 19)), null !== p ? h = a.getStackAddendumByID(p) : null !== d && (h = a.getCurrentStackAddendum(d)), 
                     s(!1, "Failed %s type: %s%s", l, m.message, h);
                 }
             }
@@ -39736,7 +40030,7 @@ function(e, t, n) {
         function flattenSingleChildIntoContext(e, t, o, s) {
             if (e && "object" == typeof e) {
                 var u = e, l = void 0 === u[o];
-                a || (a = n(/*! react/lib/ReactComponentTreeHook */ 18)), l || i(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", r.unescape(o), a.getStackAddendumByID(s)), 
+                a || (a = n(/*! react/lib/ReactComponentTreeHook */ 19)), l || i(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", r.unescape(o), a.getStackAddendumByID(s)), 
                 l && null != t && (u[o] = t);
             }
         }
@@ -39747,7 +40041,7 @@ function(e, t, n) {
                 return flattenSingleChildIntoContext(e, n, a, t);
             }, n), n;
         }
-        var a, r = n(/*! ./KeyEscapeUtils */ 90), o = n(/*! ./traverseAllChildren */ 290), i = n(/*! fbjs/lib/warning */ 4);
+        var a, r = n(/*! ./KeyEscapeUtils */ 92), o = n(/*! ./traverseAllChildren */ 290), i = n(/*! fbjs/lib/warning */ 4);
         "undefined" != typeof t && t.env, 1, e.exports = flattenChildren;
     }).call(t, n(/*! ./../../process/browser.js */ 50));
 }, /*!****************************************!*\
@@ -39766,7 +40060,7 @@ function(e, t, n) {
         }
         return "keydown" === e.type || "keyup" === e.type ? o[e.keyCode] || "Unidentified" : "";
     }
-    var a = n(/*! ./getEventCharCode */ 97), r = {
+    var a = n(/*! ./getEventCharCode */ 99), r = {
         Esc: "Escape",
         Spacebar: " ",
         Left: "ArrowLeft",
@@ -39857,7 +40151,7 @@ function(e, t, n) {
     function quoteAttributeValueForBrowser(e) {
         return '"' + a(e) + '"';
     }
-    var a = n(/*! ./escapeTextContentForBrowser */ 71);
+    var a = n(/*! ./escapeTextContentForBrowser */ 72);
     e.exports = quoteAttributeValueForBrowser;
 }, /*!*******************************************************!*\
   !*** ./~/react-dom/lib/renderSubtreeIntoContainer.js ***!
@@ -40092,7 +40386,7 @@ function(e, t, n) {
         l || (l = !0, (0, u.default)("<Provider> does not support changing `store` on the fly. It is most likely that you see this error because you updated to Redux 2.x and React Redux 2.x which no longer hot reload reducers automatically. See https://github.com/reactjs/react-redux/releases/tag/v2.0.0 for the migration instructions."));
     }
     t.__esModule = !0, t.default = void 0;
-    var a = n(/*! react */ 2), r = n(/*! prop-types */ 262), o = _interopRequireDefault(r), i = n(/*! ../utils/PropTypes */ 295), s = n(/*! ../utils/warning */ 103), u = _interopRequireDefault(s), l = !1, c = function(e) {
+    var a = n(/*! react */ 2), r = n(/*! prop-types */ 262), o = _interopRequireDefault(r), i = n(/*! ../utils/PropTypes */ 295), s = n(/*! ../utils/warning */ 105), u = _interopRequireDefault(s), l = !1, c = function(e) {
         function Provider(t, n) {
             _classCallCheck(this, Provider);
             var a = _possibleConstructorReturn(this, e.call(this, t, n));
@@ -40332,7 +40626,7 @@ function(e, t, n) {
         verify(e, "mapStateToProps", a), verify(t, "mapDispatchToProps", a), verify(n, "mergeProps", a);
     }
     t.__esModule = !0, t.default = verifySubselectors;
-    var a = n(/*! ../utils/warning */ 103), r = _interopRequireDefault(a);
+    var a = n(/*! ../utils/warning */ 105), r = _interopRequireDefault(a);
 }, /*!*************************************************!*\
   !*** ./~/react-redux/lib/utils/Subscription.js ***!
   \*************************************************/
@@ -40704,7 +40998,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! history/lib/createHashHistory */ 141), o = _interopRequireDefault(r), i = n(/*! history/lib/useQueries */ 68), s = _interopRequireDefault(i), u = n(/*! invariant */ 17), l = _interopRequireDefault(u), c = n(/*! react */ 2), d = _interopRequireDefault(c), p = n(/*! ./createTransitionManager */ 106), f = _interopRequireDefault(p), m = n(/*! ./InternalPropTypes */ 42), h = n(/*! ./RouterContext */ 73), M = _interopRequireDefault(h), _ = n(/*! ./RouteUtils */ 35), y = n(/*! ./RouterUtils */ 302), b = n(/*! ./routerWarning */ 15), g = _interopRequireDefault(b), v = d.default.PropTypes, A = v.func, E = v.object, T = d.default.createClass({
+    }, r = n(/*! history/lib/createHashHistory */ 141), o = _interopRequireDefault(r), i = n(/*! history/lib/useQueries */ 69), s = _interopRequireDefault(i), u = n(/*! invariant */ 17), l = _interopRequireDefault(u), c = n(/*! react */ 2), d = _interopRequireDefault(c), p = n(/*! ./createTransitionManager */ 108), f = _interopRequireDefault(p), m = n(/*! ./InternalPropTypes */ 42), h = n(/*! ./RouterContext */ 74), M = _interopRequireDefault(h), _ = n(/*! ./RouteUtils */ 35), y = n(/*! ./RouterUtils */ 302), b = n(/*! ./routerWarning */ 15), g = _interopRequireDefault(b), v = d.default.PropTypes, A = v.func, E = v.object, T = d.default.createClass({
         displayName: "Router",
         propTypes: {
             history: E,
@@ -40804,7 +41098,7 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0;
-    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! ./RouterContext */ 73), i = _interopRequireDefault(o), s = n(/*! ./routerWarning */ 15), u = _interopRequireDefault(s), l = r.default.createClass({
+    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! ./RouterContext */ 74), i = _interopRequireDefault(o), s = n(/*! ./routerWarning */ 15), u = _interopRequireDefault(s), l = r.default.createClass({
         displayName: "RoutingContext",
         componentWillMount: function componentWillMount() {
             (0, u.default)(!1, "`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from 'react-router'`. http://tiny.cc/router-routercontext");
@@ -40877,7 +41171,7 @@ function(e, t, n) {
     }
     t.__esModule = !0, t.runEnterHooks = runEnterHooks, t.runChangeHooks = runChangeHooks, 
     t.runLeaveHooks = runLeaveHooks;
-    var a = n(/*! ./AsyncUtils */ 104), r = n(/*! ./routerWarning */ 15), o = _interopRequireDefault(r);
+    var a = n(/*! ./AsyncUtils */ 106), r = n(/*! ./routerWarning */ 15), o = _interopRequireDefault(r);
 }, /*!*****************************************************!*\
   !*** ./~/react-router/lib/applyRouterMiddleware.js ***!
   \*****************************************************/
@@ -40895,7 +41189,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./RouterContext */ 73), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 15), l = _interopRequireDefault(u);
+    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./RouterContext */ 74), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 15), l = _interopRequireDefault(u);
     t.default = function() {
         for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
         t.forEach(function(e, t) {
@@ -40990,7 +41284,7 @@ function(e, t, n) {
         }, t);
     }
     t.__esModule = !0;
-    var a = n(/*! ./AsyncUtils */ 104), r = n(/*! ./makeStateWithLocation */ 305), o = _interopRequireDefault(r);
+    var a = n(/*! ./AsyncUtils */ 106), r = n(/*! ./makeStateWithLocation */ 305), o = _interopRequireDefault(r);
     t.default = getComponents, e.exports = t.default;
 }, /*!**********************************************!*\
   !*** ./~/react-router/lib/getRouteParams.js ***!
@@ -41117,7 +41411,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! history/lib/Actions */ 47), o = n(/*! invariant */ 17), i = _interopRequireDefault(o), s = n(/*! ./createMemoryHistory */ 303), u = _interopRequireDefault(s), l = n(/*! ./createTransitionManager */ 106), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 35), p = n(/*! ./RouterUtils */ 302);
+    }, r = n(/*! history/lib/Actions */ 47), o = n(/*! invariant */ 17), i = _interopRequireDefault(o), s = n(/*! ./createMemoryHistory */ 303), u = _interopRequireDefault(s), l = n(/*! ./createTransitionManager */ 108), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 35), p = n(/*! ./RouterUtils */ 302);
     t.default = match, e.exports = t.default;
 }, /*!*******************************************!*\
   !*** ./~/react-router/lib/matchRoutes.js ***!
@@ -41239,7 +41533,7 @@ function(e, t, n) {
         return e && "function" == typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e;
     };
     t.default = matchRoutes;
-    var o = n(/*! ./AsyncUtils */ 104), i = n(/*! ./makeStateWithLocation */ 305), s = _interopRequireDefault(i), u = n(/*! ./PatternUtils */ 56), l = n(/*! ./routerWarning */ 15), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 35);
+    var o = n(/*! ./AsyncUtils */ 106), i = n(/*! ./makeStateWithLocation */ 305), s = _interopRequireDefault(i), u = n(/*! ./PatternUtils */ 56), l = n(/*! ./routerWarning */ 15), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 35);
     e.exports = t.default;
 }, /*!*****************************************!*\
   !*** ./~/react-router/lib/useRoutes.js ***!
@@ -41271,7 +41565,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! history/lib/useQueries */ 68), o = _interopRequireDefault(r), i = n(/*! ./createTransitionManager */ 106), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 15), l = _interopRequireDefault(u);
+    }, r = n(/*! history/lib/useQueries */ 69), o = _interopRequireDefault(r), i = n(/*! ./createTransitionManager */ 108), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 15), l = _interopRequireDefault(u);
     t.default = useRoutes, e.exports = t.default;
 }, /*!******************************************!*\
   !*** ./~/react-router/lib/withRouter.js ***!
@@ -41320,7 +41614,7 @@ function(e, t, n) {
         return e;
     };
     t.default = withRouter;
-    var r = n(/*! invariant */ 17), o = _interopRequireDefault(r), i = n(/*! react */ 2), s = _interopRequireDefault(i), u = n(/*! hoist-non-react-statics */ 144), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 105);
+    var r = n(/*! invariant */ 17), o = _interopRequireDefault(r), i = n(/*! react */ 2), s = _interopRequireDefault(i), u = n(/*! hoist-non-react-statics */ 144), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 107);
     e.exports = t.default;
 }, /*!***********************************************************!*\
   !*** ./~/react-twitter-widgets/dist/components/Follow.js ***!
@@ -41824,7 +42118,7 @@ function(e, t, n) {
   \***************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! react-dom/lib/ReactDOM */ 93);
+    var a = n(/*! react-dom/lib/ReactDOM */ 95);
     t.getReactDOM = function() {
         return a;
     };
@@ -42143,7 +42437,7 @@ function(e, t, n) {
             e[a] = bindAutoBindMethod(e, r);
         }
     }
-    var a = (n(/*! ./reactProdInvariant */ 44), n(/*! object-assign */ 10)), r = n(/*! ./ReactComponent */ 107), o = n(/*! ./ReactElement */ 43), i = n(/*! ./ReactPropTypeLocationNames */ 310), s = n(/*! ./ReactNoopUpdateQueue */ 108), u = n(/*! fbjs/lib/emptyObject */ 46), l = n(/*! fbjs/lib/invariant */ 3), c = n(/*! fbjs/lib/warning */ 4), d = "mixins", p = [], f = {
+    var a = (n(/*! ./reactProdInvariant */ 44), n(/*! object-assign */ 10)), r = n(/*! ./ReactComponent */ 109), o = n(/*! ./ReactElement */ 43), i = n(/*! ./ReactPropTypeLocationNames */ 310), s = n(/*! ./ReactNoopUpdateQueue */ 110), u = n(/*! fbjs/lib/emptyObject */ 46), l = n(/*! fbjs/lib/invariant */ 3), c = n(/*! fbjs/lib/warning */ 4), d = "mixins", p = [], f = {
         mixins: "DEFINE_MANY",
         statics: "DEFINE_MANY",
         propTypes: "DEFINE_MANY",
@@ -42382,7 +42676,7 @@ function(e, t, n) {
         this.props = e, this.context = t, this.refs = i, this.updater = n || o;
     }
     function ComponentDummy() {}
-    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactComponent */ 107), o = n(/*! ./ReactNoopUpdateQueue */ 108), i = n(/*! fbjs/lib/emptyObject */ 46);
+    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactComponent */ 109), o = n(/*! ./ReactNoopUpdateQueue */ 110), i = n(/*! fbjs/lib/emptyObject */ 46);
     ComponentDummy.prototype = r.prototype, ReactPureComponent.prototype = new ComponentDummy(), 
     ReactPureComponent.prototype.constructor = ReactPureComponent, a(ReactPureComponent.prototype, r.prototype), 
     ReactPureComponent.prototype.isPureReactComponent = !0, e.exports = ReactPureComponent;
@@ -42579,7 +42873,7 @@ function(e, t, n) {
                 m instanceof Error && !(m.message in u)) {
                     u[m.message] = !0;
                     var h = "";
-                    a || (a = n(/*! ./ReactComponentTreeHook */ 18)), null !== p ? h = a.getStackAddendumByID(p) : null !== d && (h = a.getCurrentStackAddendum(d)), 
+                    a || (a = n(/*! ./ReactComponentTreeHook */ 19)), null !== p ? h = a.getStackAddendumByID(p) : null !== d && (h = a.getCurrentStackAddendum(d)), 
                     s(!1, "Failed %s type: %s%s", l, m.message, h);
                 }
             }
@@ -42598,7 +42892,7 @@ function(e, t, n) {
         function flattenSingleChildIntoContext(e, t, o, s) {
             if (e && "object" == typeof e) {
                 var u = e, l = void 0 === u[o];
-                a || (a = n(/*! ./ReactComponentTreeHook */ 18)), l || i(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", r.unescape(o), a.getStackAddendumByID(s)), 
+                a || (a = n(/*! ./ReactComponentTreeHook */ 19)), l || i(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", r.unescape(o), a.getStackAddendumByID(s)), 
                 l && null != t && (u[o] = t);
             }
         }
@@ -43016,7 +43310,7 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0, t.default = combineReducers;
-    var a = n(/*! ./createStore */ 317), r = n(/*! lodash/isPlainObject */ 86), o = _interopRequireDefault(r), i = n(/*! ./utils/warning */ 318), s = _interopRequireDefault(i);
+    var a = n(/*! ./createStore */ 317), r = n(/*! lodash/isPlainObject */ 88), o = _interopRequireDefault(r), i = n(/*! ./utils/warning */ 318), s = _interopRequireDefault(i);
 }, /*!**************************************!*\
   !*** ./~/strict-uri-encode/index.js ***!
   \**************************************/
@@ -43052,7 +43346,7 @@ function(e, t, n) {
         t.default = s;
     }).call(t, function() {
         return this;
-    }(), n(/*! ./../../webpack/buildin/module.js */ 76)(e));
+    }(), n(/*! ./../../webpack/buildin/module.js */ 77)(e));
 }, /*!*********************************************!*\
   !*** ./~/symbol-observable/lib/ponyfill.js ***!
   \*********************************************/
