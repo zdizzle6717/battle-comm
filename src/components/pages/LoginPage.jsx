@@ -25,8 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 		'addAlert': AlertActions.addAlert,
 		'authenticate': UserActions.authenticate,
 		'getGameSystems': GameSystemActions.getAll,
-		'setRedirect': UserActions.setRedirect,
-		'showGameList': false
+		'setRedirect': UserActions.setRedirect
     }, dispatch);
 };
 
@@ -35,7 +34,8 @@ class LoginPage extends React.Component {
         super();
 
         this.state = {
-            'credentials': {}
+            'credentials': {},
+			'showGameList': false
         }
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -148,8 +148,8 @@ class LoginPage extends React.Component {
 										</div>
 									</div>
 								</Form>
-								<div className="form-group small-12">
-									Don't have an account? <Link key="register" to="/register" activeClassName="active" onClick={this.closeMenu}>Register/Sign Up</Link>
+								<div className="form-group small-12 columns text-right">
+									<Link key="forgotPassword" to="/forgot-password" activeClassName="active" onClick={this.closeMenu}>Forgot your password? </Link>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>
@@ -171,8 +171,15 @@ class LoginPage extends React.Component {
                         <div className="box-middle">
                             <div className="box-bar-left"></div>
                             <div className="box-content">
-								<h4><a onClick={this.toggleModal.bind(this, 'showGameList')}>Supported Game Systems</a></h4>
-								<Link to="/register" className="button">Sign Up</Link>
+								<div className="small-12 columns">
+									<h5>WELCOME TO BATTLE-COMM...the portal to find all levels of friendly, local, table-top gaming. With a long running list of supported table-top
+		 gaming systems, Battle-comm is a community of individuals making connections through competition.<br/><br/>  Schedule a tournament, record
+		 stats, match up with local players, and compete at the national level.  You will also have the opportunity to earn ranking, achievements,
+		 and BC Reward Points to trade-in for related products!
+	 </h5>
+									<h5 className="text-right push-bottom"><a onClick={this.toggleModal.bind(this, 'showGameList')}>→Supported Game Systems</a></h5>
+									<Link to="/register" className="button">Sign Up</Link>
+								</div>
                             </div>
                             <div className="box-bar-right"></div>
                         </div>

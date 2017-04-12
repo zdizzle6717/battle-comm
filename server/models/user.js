@@ -99,7 +99,7 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.UserNotification);
         User.hasMany(models.UserMessage);
         User.hasMany(models.UserAchievement);
-        User.hasMany(models.UserPhoto);
+        User.hasOne(models.UserPhoto);
       }
     }
   });

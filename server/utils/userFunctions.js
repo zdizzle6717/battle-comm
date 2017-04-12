@@ -39,7 +39,10 @@ const verifyCredentials = (req, res) => {
       }, {
         'username': req.payload.username
       }]
-    }
+    },
+		'include': [{
+			'model': models.UserPhoto
+		}]
   }).then((user) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, isValid) => {

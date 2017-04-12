@@ -19,13 +19,14 @@ export default class PlayerProfilePage extends React.Component {
         super();
 
 		this.state = {
-			'activeModal': none,
+			'activeModal': 'none',
+			'alreadyFriends': false,
+			'photoStream': [],
 			'player': {
 				'Friends': [],
-				'GameSystemRankings': []
-			},
-			'alreadyFriends': false
-
+				'GameSystemRankings': [],
+				'Files': []
+			}
 		}
 
 		this.addFriend = this.addFriend.bind(this);
@@ -50,20 +51,14 @@ export default class PlayerProfilePage extends React.Component {
 		}
     }
 
-	getPlayerIcon() {
-		let fileName;
-		this.state.currentUser.Files.some((file) => {
-			if (file.identifier === 'playerIcon') {
-				fileName = file.name;
-				return true;
-			}
-		});
-		return fileName ? `/uploads/players/${this.state.player.id}/playerIcon/${fileName}` : '/uploads/players/defaults/profile-icon-default.png';
+	getPlayerIcon(player) {
+		let userPhoto = player.UserPhoto;
+		return userPhoto ? `/uploads/players/${player.id}/playerIcon/300-${player.UserPhoto.name}` : '/uploads/players/defaults/profile-icon-default.png';
 	}
 
 	getPlayerPhotoStream() {
 		let photos = [];
-		this.state.player.forEach((file) => {
+		this.state.player.Files.forEach((file) => {
 			if (file.identifier === 'photoStream') {
 				photos.push(file);
 			}
@@ -90,10 +85,11 @@ export default class PlayerProfilePage extends React.Component {
 		return alerts[selector]();
 	}
 
-	toggleModal(name) {
+	toggleModal(name, e) {
+		if (e) { e.preventDefault() };
 		this.setState({
-			'activeModal': this.state.activeModal === 'none' ? name : 'none'
-		})
+			'activeModal': this.state.activeModal !== name ? name : 'none'
+		});
 	}
 
     render() {
@@ -153,7 +149,7 @@ export default class PlayerProfilePage extends React.Component {
 							}
 							<div className="text-center">
 								<br/>
-								<img src={this.getPlayerIcon()} alt={player.username} className="shadow"/>
+								<img src={this.getPlayerIcon.call(this, player)} alt={player.username} className="shadow"/>
 							</div>
 							<h1 className="username text-center">
 								<span className="glyphicon glyphicon-user"></span> {player.username}
@@ -178,7 +174,7 @@ export default class PlayerProfilePage extends React.Component {
 								{
 									player.Friends.map((friend, i) =>
 										<Link key={i} to={`/players/profile/${friend.username}`} className="icon-box">
-											<img className="icon" src={`/uploads/players/${friend.id}/playerIcon/thumbs/${friend.icon}`} />
+											<img className="icon" src={this.getPlayerIcon.call(this, player)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
 										</Link>
 									)

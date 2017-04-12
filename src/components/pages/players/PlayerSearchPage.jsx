@@ -30,7 +30,6 @@ class PlayerSearchPage extends React.Component {
 			'searchBy': 'username'
 		}
 
-		this.getPlayerIcon = this.getPlayerIcon.bind(this);
 		this.handlePageChange = this.handlePageChange.bind(this);
 		this.handleQueryChange = this.handleQueryChange.bind(this);
 		this.handleSearchByChange = this.handleSearchByChange.bind(this);
@@ -41,14 +40,9 @@ class PlayerSearchPage extends React.Component {
 		this.handlePageChange(1);
     }
 
-	getPlayerIcon(user) {
-		let fileName;
-		user.Files.forEach((file) => {
-			if (file.identifier === 'playerIcon') {
-				fileName = file.name;
-			}
-		});
-		return fileName ? `/uploads/players/${user.id}/playerIcon/thumbs/${fileName}` : '/uploads/players/profile_image_default.png';
+	getPlayerIcon(player) {
+		let userPhoto = player.UserPhoto;
+		return userPhoto ? `/uploads/players/${player.id}/playerIcon/300-${player.UserPhoto.name}` : '/uploads/players/defaults/300-profile-icon-default.png';
 	}
 
 	handlePageChange(pageNumber, e) {
@@ -124,7 +118,7 @@ class PlayerSearchPage extends React.Component {
 												<span className="mobile-text">View</span>
 											</Link>
 										</td>
-										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={`${this.getPlayerIcon(user)}`} className="image-tiny"/></Link>
+										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={this.getPlayerIcon.call(this, user)} className="image-tiny"/></Link>
 										</td>
 									</tr>
 								)

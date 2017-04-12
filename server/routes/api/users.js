@@ -169,7 +169,8 @@ module.exports = [
           'UserPhotos': Joi.optional(),
           'Friends': Joi.optional(),
           'GameSystemRankings': Joi.optional(),
-					'Files': Joi.optional()
+					'Files': Joi.optional(),
+					'UserPhoto': Joi.optional()
         }
       }
     },

@@ -22,7 +22,7 @@ module.exports = [
           'UserId': Joi.optional(),
           'UserAchievementId': Joi.optional(),
           'identifier': Joi.string().valid('playerIcon', 'photoStream', 'newsPostPhoto', 'gameSystemPhoto', 'manufacturerPhoto', 'productPhoto', 'bannerImage').required(),
-          'locationUrl': Joi.optional(),
+          'locationUrl': Joi.required(),
           'label': Joi.optional(),
           'name': Joi.string().required(),
           'size': Joi.number().required(),
@@ -112,12 +112,16 @@ module.exports = [
     'handler': files.delete,
     'config': {
       'tags': ['api'],
-      'description': 'Delete an file by id',
-      'notes': 'Delete an file by id',
+      'description': 'Delete a file by id',
+      'notes': 'Delete a file by id',
       'validate': {
         'params': {
           'id': Joi.number().required()
         }
+      },
+			'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
       'cors': {
         'origin': ['*']

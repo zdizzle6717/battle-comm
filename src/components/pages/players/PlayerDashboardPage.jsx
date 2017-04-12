@@ -12,6 +12,7 @@ import {handlers, uploadFiles} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
 import PlayerService from '../../../services/PlayerService';
 import FileService from '../../../services/FileService';
+import UserPhotoService from '../../../services/UserPhotoService';
 
 const mapStateToProps = (state) => {
 	return {
@@ -47,8 +48,8 @@ class PlayerDashboardPage extends React.Component {
 		};
 
 		this.cancelEdit = this.cancelEdit.bind(this);
+		this.createUserPhoto = this.createUserPhoto.bind(this);
 		this.getCurrentPlayer = this.getCurrentPlayer.bind(this);
-		this.getPlayerIcon = this.getPlayerIcon.bind(this);
 		this.getPlayerPhotoStream = this.getPlayerPhotoStream.bind(this);
 		this.handlePhotoStreamUpload = this.handlePhotoStreamUpload.bind(this);
 		this.handlePlayerIconUpload = this.handlePlayerIconUpload.bind(this);
@@ -81,6 +82,36 @@ class PlayerDashboardPage extends React.Component {
 		this.getCurrentPlayer();
 	}
 
+	createUserPhoto(files) {
+		this.uploadFiles([files[0]], 'playerIcon').then((responses) => {
+			let file = {
+				'name': responses[0].data.file.name,
+				'size': responses[0].data.file.size,
+				'type': responses[0].data.file.type,
+				'UserId': this.state.currentUser.id,
+				'identifier': 'playerIcon',
+				'locationUrl': `/players/${this.state.currentUser.id}/playerIcon/${responses[0].data.file.name}`
+			};
+			let fileName, iconFile;
+			this.state.currentUser.Files.forEach((file) => {
+				if (file.identifier === 'playerIcon') {
+					iconFile = file;
+				}
+			});
+			let method = iconFile ? 'update': 'create';
+			UserPhotoService[method]((iconFile ? iconFile.id : file), (iconFile ? file : null)).then((file) => {
+				console.log(file);
+				this.getCurrentPlayer().then(() => {
+					// TODO: Reset File Upload input so user isn't blocked from uploading new file
+					this.setState({
+						'fileUploadIcon': []
+					});
+					this.showAlert('uploadSuccess');
+				});
+			});
+		});
+	}
+
 	deletePhoto(id, index) {
 		this.handleDeleteFile(id).then(() => {
 			let photos = this.state.photoStream;
@@ -99,15 +130,9 @@ class PlayerDashboardPage extends React.Component {
 		});
 	}
 
-	getPlayerIcon() {
-		let fileName;
-		this.state.currentUser.Files.some((file) => {
-			if (file.identifier === 'playerIcon') {
-				fileName = file.name;
-				return true;
-			}
-		});
-		return fileName ? `/uploads/players/${this.state.currentUser.id}/playerIcon/${fileName}` : '/uploads/players/defaults/profile-icon-default.png';
+	getPlayerIcon(player) {
+		let userPhoto = player.UserPhoto;
+		return userPhoto ? `/uploads/players/${player.id}/playerIcon/300-${player.UserPhoto.name}` : '/uploads/players/defaults/profile-icon-default.png';
 	}
 
 	getPlayerPhotoStream() {
@@ -130,37 +155,18 @@ class PlayerDashboardPage extends React.Component {
 
 	handlePlayerIconUpload(files) {
 		// TODO: Make sure that only first file gets uploaded
-		this.uploadFiles([files[0]], 'playerIcon').then((responses) => {
-			let file = {
-				'name': responses[0].data.file.name,
-				'size': responses[0].data.file.size,
-				'type': responses[0].data.file.type,
-				'identifier': 'playerIcon',
-				'UserId': this.state.currentUser.id,
-				'locationUrl': `/players/${this.state.currentUser.id}/playerIcon/${response[0].data.file.name}`
-			};
-			let fileName, iconFile;
-			this.state.currentUser.Files.forEach((file) => {
-				if (file.identifier === 'playerIcon') {
-					iconFile = file;
-				}
-			});
-			let method = iconFile ? 'update': 'create';
-			FileService[method]((iconFile ? iconFile.id : file), (iconFile ? file : null)).then((file) => {
-				console.log(file);
-				this.getCurrentPlayer().then(() => {
-					// TODO: Reset File Upload input so user isn't blocked from uploading new file
-					this.setState({
-						'fileUploadIcon': []
-					});
-					this.showAlert('uploadSuccess');
-				});
-			});
-		});
+		// TODO: Added file size and image dimensions check to server, handle on UI
+		// TODO: Update user props so icon updates in header
+		if (this.state.currentUser.UserPhoto) {
+			UserPhotoService.remove(this.state.currentUser.UserPhoto.id).then(() => {
+				this.createUserPhoto(files);
+			})
+		} else {
+			this.createUserPhoto(files);
+		}
 	}
 
 	handlePhotoStreamUpload(files) {
-		// TODO: Decide whether to keep UserPhotos database model
 		this.uploadFiles(files, 'photoStream').then((responses) => {
 			let promises = [];
 			responses.forEach((response, i) => {
@@ -261,7 +267,7 @@ class PlayerDashboardPage extends React.Component {
 		if (e) { e.preventDefault() };
 		this.setState({
 			'activeModal': this.state.activeModal !== name ? name : 'none'
-		})
+		});
 	}
 
 	uploadFiles(files, identifier) {
@@ -386,7 +392,7 @@ class PlayerDashboardPage extends React.Component {
 								<h3 className="gold-label">RP Stash: <span><strong>{currentUser.rewardPoints || 0}</strong> Points</span></h3>
 								<div className="flex-row-center push-top">
 									<div className="profile-picture">
-										<img src={this.getPlayerIcon()} alt={currentUser.username} className="shadow"/>
+										<img src={this.getPlayerIcon.call(this, currentUser)} alt={currentUser.username} className="shadow"/>
 										<Form name="playerIconForm" submitButton={false}>
 											<FileUpload name="playerIcon" value={this.state.fileUploadIcon} handleFileUpload={this.handlePlayerIconUpload} accept="image/*" maxFiles={10} hideFileList={true}/>
 										</Form>
@@ -407,7 +413,7 @@ class PlayerDashboardPage extends React.Component {
 									currentUser.Friends.map((friend, i) =>
 									<span className="icon-box">
 										<Link key={i} to={`/players/profile/${friend.username}`} className="icon-box">
-											<img className="icon" src={`/uploads/players/${friend.id}/playerIcon/thumbs/${friend.icon}`} />
+											<img className="icon" src={this.getPlayerIcon.call(this, friend)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
 										</Link>
 									</span>

@@ -11,6 +11,8 @@ const mapStateToProps = (state) => {
 	return {
 		'user': state.user
 	}
+
+	this.getPlayerIcon = this.getPlayerIcon.bind(this);
 }
 
 class AccountMenu extends React.Component {
@@ -24,6 +26,11 @@ class AccountMenu extends React.Component {
 		this.toggleMenu = this.toggleMenu.bind(this);
 	}
 
+	getPlayerIcon() {
+		let userPhoto = this.props.user.UserPhoto;
+		return userPhoto ? `/uploads/players/${this.props.user.id}/playerIcon/300-${this.props.user.UserPhoto.name}` : '/uploads/players/defaults/300-profile-icon-default.png';
+	}
+
 	toggleMenu() {
 		this.setState({
 			'showMenu': !this.state.showMenu
@@ -33,7 +40,7 @@ class AccountMenu extends React.Component {
 	render() {
 		return (
 			<div className="account-menu pointer">
-				<img src={`/uploads/players/${this.props.user.id}/playerIcon/thumbs/profile_image_default.png`} onClick={this.toggleMenu} />
+				<img src={this.getPlayerIcon()} onClick={this.toggleMenu} />
 				{
 					this.state.showMenu &&
 					<div className="menu">

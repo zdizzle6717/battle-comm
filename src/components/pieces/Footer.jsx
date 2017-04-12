@@ -41,13 +41,13 @@ export default class Footer extends React.Component {
 					<div className="small-12 large-4 columns">
 						<img src="/images/Titles/Follow_Us.png" alt="" />
 					    <div className="social-links">
-					        <a href="https://www.facebook.com/battlecomm">
+					        <a href="https://www.facebook.com/battlecomm" target="_blank">
 					            <span className="fa fa-facebook-square"></span>
 					        </a>
-					        <a href="https://twitter.com/Battle_Comm">
+					        <a href="https://twitter.com/Battle_Comm" target="_blank">
 					            <span className="fa fa-twitter-square"></span>
 					        </a>
-					        <a href="https://instagram.com/Battle_Comm">
+					        <a href="https://instagram.com/Battle_Comm" target="_blank">
 					            <span className="fa fa-instagram"></span>
 					        </a>
 					    </div>

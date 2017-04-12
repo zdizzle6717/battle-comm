@@ -115,7 +115,10 @@
 	}
 
 	.profile-picture {
-		width: 220px;
+		position: relative;
+		max-width: 220px;
+		max-height: 220px;
+		margin: 0 auto;
 	}
 }
 

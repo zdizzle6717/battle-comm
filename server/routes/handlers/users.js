@@ -192,7 +192,8 @@ let users = {
       'newsContributor': request.pre.user.newsContributor,
       'venueAdmin': request.pre.user.venueAdmin,
       'clubAdmin': request.pre.user.clubAdmin,
-      'systemAdmin': request.pre.user.systemAdmin
+      'systemAdmin': request.pre.user.systemAdmin,
+			'UserPhoto': request.pre.user.UserPhoto
     }).code(201);
   },
   changePassword: (request, reply) => {
@@ -433,6 +434,8 @@ let users = {
 			'limit': request.payload.pageSize,
 			'include': [{
 				'model': models.File
+			}, {
+				'model': models.UserPhoto
 			}]
     }).then((response) => {
       let count = response.count;
