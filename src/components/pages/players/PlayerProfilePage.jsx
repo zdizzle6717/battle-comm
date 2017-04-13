@@ -183,7 +183,7 @@ export default class PlayerProfilePage extends React.Component {
 							{
 								player.Friends.length < 1 &&
 								<div className="text-center">
-									<h5>Send an ally request to welcome this player to Battle-Comm!</h5>
+									<h6>Send an ally request to welcome this player to Battle-Comm!</h6>
 								</div>
 							}
 						</div>

@@ -67,10 +67,10 @@ let manufacturers = {
   },
 	'search': (request, reply) => {
     let searchByConfig;
-    let pageSize = request.payload.pageSize || 20;
+    let pageSize = parseInt(request.payload.pageSize, 10) || 20;
     let searchQuery = request.payload.searchQuery || '';
     let offset = (request.payload.pageNumber - 1) * pageSize;
-		let orderBy = request.payload.orderBy ? [request.payload.orderBy, 'DESC'] : undefined;
+		let orderBy = request.payload.orderBy ? (request.payload.orderBy === 'updatedAt' || request.payload.orderBy === 'createdAt' ? [request.payload.orderBy, 'DESC'] : [request.payload.orderBy, 'ASC']) : undefined;
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
         [request.payload.searchBy]: {
@@ -94,9 +94,9 @@ let manufacturers = {
     }
     models.Manufacturer.findAndCountAll({
       'where': searchByConfig,
+			'order': orderBy ? [orderBy] : [],
       'offset': offset,
-      'limit': pageSize,
-			'order': orderBy ? [orderBy] : []
+      'limit': pageSize
     }).then((response) => {
       let count = response.count;
       let results = response.rows;

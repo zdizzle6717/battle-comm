@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {PaginationControls} from '../../../library/pagination';
+import {formatJSONDate} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
 import ProductOrderActions from '../../../actions/ProductOrderActions';
 import AdminMenu from '../../pieces/AdminMenu';
@@ -19,12 +20,16 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 };
 
+let timer;
+
 class SearchProductOrdersPage extends React.Component {
     constructor() {
         super();
 
 		this.state = {
 			'pagination': {},
+			'pageSize': 20,
+			'orderBy': 'updatedAt',
 			'searchQuery': ''
 		}
 
@@ -98,16 +103,16 @@ class SearchProductOrdersPage extends React.Component {
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Search Filter
 							</div>
 							<div className="panel-content">
 								<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Begin typing to filter results"/>
 							</div>
 						</div>
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Order By
 							</div>
 							<div className="panel-content">
@@ -119,8 +124,8 @@ class SearchProductOrdersPage extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Items Per Page
 							</div>
 							<div className="panel-content">
@@ -132,30 +137,25 @@ class SearchProductOrdersPage extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Reset Search Filters
 							</div>
 							<div className="panel-content">
-								<button className="button error" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+								<button className="button black center" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
 							</div>
 						</div>
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
-						<div className="form-group">
-							<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Enter search terms to filter results"/>
-							<button className="button" onClick={this.handlePageChange.bind(this, 1, this.state.searchQuery)}>Search!</button>
-						</div>
-						<hr/>
-						<table>
+						<table className="stack hover text-center">
 							<thead>
 								<tr>
-									<th>Id</th>
-									<th>Order Date</th>
-									<th>Email</th>
-									<th>Phone</th>
-									<th>Total (RP)</th>
-									<th>View/Edit</th>
+									<th className="text-center">Id</th>
+									<th className="text-center">Order Date</th>
+									<th className="text-center">Email</th>
+									<th className="text-center">Phone</th>
+									<th className="text-center">Total (RP)</th>
+									<th className="text-center">View/Edit</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -163,8 +163,8 @@ class SearchProductOrdersPage extends React.Component {
 									this.props.productOrders.map((productOrder, i) =>
 										<tr key={i}>
 											<td>{productOrder.id}</td>
-											<td>{productOrder.updatedAt}</td>
-											<td>{productOrder.createdAt}</td>
+											<td>{formatJSONDate(productOrder.updatedAt)}</td>
+											<td>{formatJSONDate(productOrder.createdAt)}</td>
 											<td>{productOrder.customerEmail}</td>
 											<td>{productOrder.customerPhone}</td>
 											<td>{productOrder.orderTotal}</td>

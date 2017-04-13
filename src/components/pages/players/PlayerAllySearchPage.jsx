@@ -97,7 +97,7 @@ class PlayerAllySearchPage extends React.Component {
 				</div>
 				<hr/>
 				<div className="small-12 columns">
-					<table>
+					<table className="stack hover text-center">
 						<thead>
 							<tr>
 								<th>Player Icon</th>

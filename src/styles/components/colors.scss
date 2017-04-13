@@ -1,15 +1,15 @@
 // Background Colors
 @each $name, $color in $foundation-palette {
 	.color-#{$name} {
-		color: $color;
+		color: $color !important;
 	}
 
 	a {
 		&.color-#{$name} {
-			color: $color;
+			color: $color !important;
 
 			&:hover {
-				color: $color;
+				color: $color !important;
 				text-decoration: underline;
 			}
 		}

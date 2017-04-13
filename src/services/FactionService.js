@@ -15,12 +15,6 @@ export default {
 				return response.data;
 			});
 	},
-	search: (criteria) => {
-		return axios.post('/factions/search', criteria)
-			.then(function(response) {
-				return response.data;
-			});
-	},
 	create: (data) => {
 		return axios.post('/factions', data)
 			.then(function(response) {

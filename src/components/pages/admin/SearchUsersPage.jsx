@@ -19,12 +19,16 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 };
 
+let timer;
+
 class SearchUsersPage extends React.Component {
     constructor() {
         super();
 
 		this.state = {
 			'pagination': {},
+			'pageSize': 20,
+			'orderBy': 'updatedAt',
 			'searchQuery': ''
 		}
 
@@ -59,7 +63,7 @@ class SearchUsersPage extends React.Component {
 	}
 
 	handlePageChange(pageNumber = 1) {
-        this.props.searchNewsPosts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize}).then((pagination) => {
+        this.props.searchUsers({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});
@@ -98,16 +102,16 @@ class SearchUsersPage extends React.Component {
 				</div>
                 <div className="row">
 					<div className="small-12 medium-4 large-3 columns">
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Search Filter
 							</div>
 							<div className="panel-content">
 								<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Begin typing to filter results"/>
 							</div>
 						</div>
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Order By
 							</div>
 							<div className="panel-content">
@@ -119,8 +123,8 @@ class SearchUsersPage extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Items Per Page
 							</div>
 							<div className="panel-content">
@@ -132,28 +136,23 @@ class SearchUsersPage extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="panel">
-							<div className="panel-title">
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Reset Search Filters
 							</div>
 							<div className="panel-content">
-								<button className="button error" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+								<button className="button black center" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
 							</div>
 						</div>
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
-						<div className="form-group">
-							<input name="searchQuery" type="text" onChange={this.handleQueryChange} value={this.state.searchQuery} placeholder="Enter search terms to filter results"/>
-							<button className="button" onClick={this.handlePageChange.bind(this, 1, this.state.searchQuery)}>Search!</button>
-						</div>
-						<hr/>
-						<table>
+						<table className="stack hover text-center">
 							<thead>
 								<tr>
-									<th>Handle</th>
-									<th>Full Name</th>
-									<th>E-mail</th>
-									<th>View/Edit</th>
+									<th className="text-center">Handle</th>
+									<th className="text-center">Full Name</th>
+									<th className="text-center">E-mail</th>
+									<th className="text-center">View/Edit</th>
 								</tr>
 							</thead>
 							<tbody>

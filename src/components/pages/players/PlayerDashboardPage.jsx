@@ -422,7 +422,7 @@ class PlayerDashboardPage extends React.Component {
 							</div>
 							{
 								currentUser.Friends.length < 1 &&
-								<h5 className="text-center">Search by player profile and click 'Add Ally' to send a ally request.</h5>
+								<h4 className="text-center">Search by player profile and click 'Add Ally' to send a ally request.</h4>
 							}
 						</div>
 					</div>

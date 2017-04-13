@@ -11,6 +11,8 @@ import Modal from '../../library/Modal';
 import GameSystemActions from '../../actions/GameSystemActions';
 
 // TODO: Verify authentication error catching
+// TODO: Add 'remember my login' checkboxes
+// TODO: Add 'log me in automatically' checkboxes
 
 const mapStateToProps = (state) => {
 	return {
@@ -172,11 +174,7 @@ class LoginPage extends React.Component {
                             <div className="box-bar-left"></div>
                             <div className="box-content">
 								<div className="small-12 columns">
-									<h5>WELCOME TO BATTLE-COMM...the portal to find all levels of friendly, local, table-top gaming. With a long running list of supported table-top
-		 gaming systems, Battle-comm is a community of individuals making connections through competition.<br/><br/>  Schedule a tournament, record
-		 stats, match up with local players, and compete at the national level.  You will also have the opportunity to earn ranking, achievements,
-		 and BC Reward Points to trade-in for related products!
-	 </h5>
+									<h6>WELCOME TO BATTLE-COMM...the portal to find all levels of friendly, local, table-top gaming. With a long running list of supported table-top gaming systems, Battle-comm is a community of individuals making connections through competition.<br/><br/>  Schedule a tournament, record stats, match up with local players, and compete at the national level.  You will also have the opportunity to earn ranking, achievements, and BC Reward Points to trade-in for related products!</h6>
 									<h5 className="text-right push-bottom"><a onClick={this.toggleModal.bind(this, 'showGameList')}>→Supported Game Systems</a></h5>
 									<Link to="/register" className="button">Sign Up</Link>
 								</div>

@@ -20,6 +20,10 @@
 	background: transparentize($primary-500, .1);
 	box-shadow: 0 1px 1px 1px rgba(43,43,43,0.58);
 
+	.fa {
+		margin-right: .5rem;
+	}
+
 	&:active {
 		box-shadow: $shadow-1;
 	}
@@ -49,7 +53,7 @@
 		&.#{$name} {
 			background: $color;
 			color: $white;
-			border: 2px solid #{$color}-600;
+			border: 2px solid darken($color, 3%);
 
 			&.small {
 				max-width: 7rem;

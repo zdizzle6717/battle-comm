@@ -109,25 +109,45 @@ module.exports = [
 				}
 			}
 		},
-		handler: products.update
+		'handler': products.update
 	},
 	{
-		method: 'DELETE',
-		path: '/api/products/{id}',
-		config: {
-			tags: ['api'],
-			description: 'Delete a product by id',
-			notes: 'Delete a product by id',
-			auth: {
-				strategy: 'jsonWebToken',
-				scope: ['systemAdmin']
+    'method': 'POST',
+    'path': '/api/search/products',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return Manufacturer search results',
+      'notes': 'Return Manufacturer search results',
+      'validate': {
+        'payload': {
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'orderBy': Joi.string().required(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': products.search
+  },
+	{
+		'method': 'DELETE',
+		'path': '/api/products/{id}',
+		'config': {
+			'tags': ['api'],
+			'description': 'Delete a product by id',
+			'notes': 'Delete a product by id',
+			'auth': {
+				'strategy': 'jsonWebToken',
+				'scope': ['systemAdmin']
 			},
-			validate: {
-				params: {
-					id: Joi.number().required()
+			'validate': {
+				'params': {
+					'id': Joi.number().required()
 				}
 			}
 		},
-		handler: products.delete
+		'handler': products.delete
 	}
 ];

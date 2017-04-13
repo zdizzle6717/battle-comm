@@ -16,7 +16,7 @@ export default {
 			});
 	},
 	search: (criteria) => {
-		return axios.post('/gameSystems/search', criteria)
+		return axios.post('/search/gameSystems', criteria)
 			.then(function(response) {
 				return response.data;
 			});

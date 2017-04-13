@@ -102,6 +102,7 @@ $space-between: 3;
 			.box-middle {
 				display: flex;
 				flex-direction: row;
+				flex: 1;
 
 				.box-bar-left,
 				.box-bar-right {
