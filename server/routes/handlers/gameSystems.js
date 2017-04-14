@@ -14,7 +14,10 @@ let gameSystems = {
           },
           {
             'model': models.Faction
-          }
+          },
+					{
+						'model': models.File
+					}
         ]
       })
       .then((response) => {

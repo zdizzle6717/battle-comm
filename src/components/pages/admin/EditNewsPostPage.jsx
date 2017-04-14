@@ -132,7 +132,7 @@ class EditNewsPostPage extends React.Component {
 					FileService.create({
 						'NewsPostId': newsPost.id,
 						'identifier': 'newsPostPhoto',
-						'locationUrl': `${directoryPath}/${file[i].name}`,
+						'locationUrl': `/${directoryPath}/`,
 						'name': file[i].name,
 						'size': file[i].size,
 						'type': file[i].type

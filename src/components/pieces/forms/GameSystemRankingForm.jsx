@@ -4,6 +4,7 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {AlertActions} from '../../../library/alerts';
 import {handlers} from '../../../library/utilities';
 import {Form, Input, TextArea, Select} from '../../../library/validations';
@@ -134,8 +135,8 @@ class GameSystemRankingForm extends React.Component {
 }
 
 GameSystemRankingForm.propTypes = {
-	'playerId': React.PropTypes.number,
-	'playerName': React.PropTypes.string
+	'playerId': PropTypes.number,
+	'playerName': PropTypes.string
 }
 
 GameSystemRankingForm.defaultProps = {

@@ -19,7 +19,7 @@ import EditGameSystemPage from './components/pages/admin/EditGameSystemPage';
 import EditManufacturerPage from './components/pages/admin/EditManufacturerPage';
 import EditNewsPostPage from './components/pages/admin/EditNewsPostPage';
 import EditOrderPage from './components/pages/admin/EditOrderPage';
-import EditPlayerPage from './components/pages/admin/EditPlayerPage';
+import EditUserPage from './components/pages/admin/EditUserPage';
 import EditProductPage from './components/pages/admin/EditProductPage';
 import SearchGameSystemsPage from './components/pages/admin/SearchGameSystemsPage';
 import SearchManufacturersPage from './components/pages/admin/SearchManufacturersPage';
@@ -74,10 +74,10 @@ const routes = (
 			<Route path="create" component={EditNewsPostPage}/>
 			<Route path="edit/:postId" component={EditNewsPostPage}/>
 		</Route>
-		<Route path="players">
+		<Route path="users">
 			<IndexRoute component={SearchUsersPage}/>
-			<Route path="create" component={EditPlayerPage}/>
-			<Route path="edit/:playerId" component={EditPlayerPage}/>
+			<Route path="create" component={EditUserPage}/>
+			<Route path="edit/:userId" component={EditUserPage}/>
 		</Route>
 		<Route path="store">
 			<IndexRoute component={SearchProductOrdersPage}/>

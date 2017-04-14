@@ -4,7 +4,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {browserHistory, Link} from 'react-router';
 import {connect} from 'react-redux';
-import {Form, Input, TextArea, Select, fileUpload} from '../../../library/validations';
+import {Form, Input, TextArea, Select, FileUpload} from '../../../library/validations';
 import {handlers, uploadFiles} from '../../../library/utilities';
 import {AlertActions} from '../../../library/alerts';
 import ViewWrapper from '../../ViewWrapper';
@@ -35,9 +35,10 @@ class EditGameSystemPage extends React.Component {
 		this.state = {
 			'faction': {},
 			'gameSystem': {
-				'factions': [],
+				'Factions': [],
 				'File': {}
 			},
+			'gameSystemFiles': [],
 			'manufacturers': [],
 			'newFilesUploaded': false,
 			'newGameSystem': false
@@ -105,6 +106,7 @@ class EditGameSystemPage extends React.Component {
 			gameSystem.File = responses[0];
 			this.setState({
 				'gameSystem': gameSystem,
+				'gameSystemFiles': responses,
 				'newFilesUploaded': true
 			});
 			this.showAlert('uploadSuccess');
@@ -125,7 +127,7 @@ class EditGameSystemPage extends React.Component {
 				FileService.create({
 					'GameSystemId': gameSystem.id,
 					'identifier': 'gameSystemPhoto',
-					'locationUrl': `gameSystems/${this.state.gameSystem.File.name}`,
+					'locationUrl': `/gameSystems/`,
 					'name': this.state.gameSystem.File.name,
 					'size': this.state.gameSystem.File.size,
 					'type': this.state.gameSystem.File.type
@@ -250,7 +252,7 @@ class EditGameSystemPage extends React.Component {
 							<div className="row">
 								<div className="form-group small-12 medium-4 columns">
 									<label>Related Photo</label>
-									<FileUpload name="gameSystemPhoto" value={this.state.gameSystem.File} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={1} />
+									<FileUpload name="gameSystemPhoto" value={this.state.gameSystemFiles} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} maxFiles={1} />
 								</div>
 								<div className="form-group small-12 medium-4 columns">
 									<label>Url to Related Webpage</label>

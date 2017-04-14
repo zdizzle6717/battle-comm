@@ -19,8 +19,8 @@ module.exports = [
 			'validate': {
 				'payload': {
 					'UserId': Joi.number().required(),
-					'type': Joi.string().required(),
-					'status': Joi.string(),
+					'type': Joi.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newMessage'),
+					'status': Joi.optional(),
 					'fromId': Joi.number().required(),
 					'fromUsername': Joi.string().required(),
 					'fromName': Joi.string().required()
@@ -46,7 +46,7 @@ module.exports = [
 				},
 				'payload': {
 					'UserId': Joi.number().required(),
-					'type': Joi.string().required(),
+					'type': Joi.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newMessage'),
 					'status': Joi.string().required(),
 					'fromId': Joi.number().required(),
 					'fromName': Joi.string().required()
@@ -55,6 +55,27 @@ module.exports = [
 		},
 		'handler': userNotifications.update
 	},
+	{
+    'method': 'POST',
+    'path': '/api/search/userNotifications',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return user notification search results',
+      'notes': 'Return user notification search results',
+      'validate': {
+        'payload': {
+					'UserId': Joi.number().required(),
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'orderBy': Joi.string().required(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': userNotifications.search
+  },
 	{
 		'method': 'DELETE',
 		'path': '/api/userNotifications/{id}',

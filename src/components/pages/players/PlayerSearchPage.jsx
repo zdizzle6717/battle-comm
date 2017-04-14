@@ -27,7 +27,8 @@ class PlayerSearchPage extends React.Component {
 		this.state = {
 			'pagination': {},
 			'searchQuery': '',
-			'searchBy': 'username'
+			'searchBy': 'username',
+			'orderBy': 'username'
 		}
 
 		this.handlePageChange = this.handlePageChange.bind(this);
@@ -49,7 +50,7 @@ class PlayerSearchPage extends React.Component {
 		if (e && e.keyCode && e.keyCode !== 13) {
 			return;
 		}
-        this.props.searchPlayers({'searchQuery': this.state.searchQuery, 'searchBy': this.state.searchBy, 'pageNumber': pageNumber, 'pageSize': 10}).then((pagination) => {
+        this.props.searchPlayers({'searchQuery': this.state.searchQuery, 'searchBy': this.state.searchBy, 'pageNumber': pageNumber, 'orderBy': this.state.orderBy, 'pageSize': 10}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});

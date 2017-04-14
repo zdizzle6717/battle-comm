@@ -115,7 +115,7 @@ let products = {
     }
     models.Product.findAndCountAll({
       'where': searchByConfig,
-			'order': orderBy ? [orderBy] : []
+			'order': orderBy ? [orderBy] : [],
       'offset': offset,
       'limit': pageSize
     }).then((response) => {

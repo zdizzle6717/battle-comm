@@ -90,7 +90,7 @@ class PlayerDashboardPage extends React.Component {
 				'type': responses[0].data.file.type,
 				'UserId': this.state.currentUser.id,
 				'identifier': 'playerIcon',
-				'locationUrl': `/players/${this.state.currentUser.id}/playerIcon/${responses[0].data.file.name}`
+				'locationUrl': `/players/${this.state.currentUser.id}/playerIcon/`
 			};
 			let fileName, iconFile;
 			this.state.currentUser.Files.forEach((file) => {
@@ -160,7 +160,7 @@ class PlayerDashboardPage extends React.Component {
 		if (this.state.currentUser.UserPhoto) {
 			UserPhotoService.remove(this.state.currentUser.UserPhoto.id).then(() => {
 				this.createUserPhoto(files);
-			})
+			});
 		} else {
 			this.createUserPhoto(files);
 		}
@@ -176,7 +176,7 @@ class PlayerDashboardPage extends React.Component {
 					'type': response.data.file.type,
 					'identifier': 'photoStream',
 					'UserId': this.state.currentUser.id,
-					'locationUrl': `/players/${this.state.currentUser.id}/photoStream/${response.data.file.name}`
+					'locationUrl': `/players/${this.state.currentUser.id}/photoStream/`
 				};
 				promises.push(FileService.create(file));
 			});

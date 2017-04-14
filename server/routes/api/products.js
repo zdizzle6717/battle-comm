@@ -116,8 +116,8 @@ module.exports = [
     'path': '/api/search/products',
     'config': {
       'tags': ['api'],
-      'description': 'Return Manufacturer search results',
-      'notes': 'Return Manufacturer search results',
+      'description': 'Return product search results',
+      'notes': 'Return product search results',
       'validate': {
         'payload': {
           'maxResults': Joi.optional(),

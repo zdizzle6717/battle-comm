@@ -3,12 +3,6 @@
 import axios from 'axios';
 
 export default {
-	get: (id) => {
-		return axios.get('/userNotifications/' + id)
-			.then(function(response) {
-				return response.data;
-			});
-	},
 	getAll: () => {
 		return axios.get('/userNotifications')
 			.then(function(response) {

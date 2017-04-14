@@ -3,6 +3,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';
+import PropTypes from 'prop-types';
 
 export default class Modal extends React.Component {
 	constructor(props, context) {
@@ -64,18 +65,18 @@ export default class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-	'cancelText': React.PropTypes.string,
-	'confirmText': React.PropTypes.string,
-	'handleClose': React.PropTypes.func.isRequired,
-	'handleSubmit': React.PropTypes.func,
-	'modalIsOpen': React.PropTypes.bool.isRequired,
-	'name': React.PropTypes.string.isRequired,
-	'showCancel': React.PropTypes.bool,
-	'showClose': React.PropTypes.bool,
-	'showFooter': React.PropTypes.bool,
-	'showTitle': React.PropTypes.bool,
-	'title': React.PropTypes.string,
-	'transitionName': React.PropTypes.string
+	'cancelText': PropTypes.string,
+	'confirmText': PropTypes.string,
+	'handleClose': PropTypes.func.isRequired,
+	'handleSubmit': PropTypes.func,
+	'modalIsOpen': PropTypes.bool.isRequired,
+	'name': PropTypes.string.isRequired,
+	'showCancel': PropTypes.bool,
+	'showClose': PropTypes.bool,
+	'showFooter': PropTypes.bool,
+	'showTitle': PropTypes.bool,
+	'title': PropTypes.string,
+	'transitionName': PropTypes.string
 }
 
 Modal.defaultProps = {

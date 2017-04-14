@@ -3,7 +3,8 @@
 import models from '../../models';
 import Boom from 'boom';
 import fse from 'fs-extra';
-import env from '../../../envVariables.js';
+import env from '../../../envVariables';
+import imageConfig from '../../constants/imageConfig';
 
 // Product Route Configs
 let userPhotos = {
@@ -46,29 +47,48 @@ let userPhotos = {
     });
   },
 	delete: (request, reply) => {
-		// TODO: Delete resized versions of user photo
+		// TODO: Double check that this is safe and will not delete directories
     models.UserPhoto.find({
       'where': {
         'id': request.params.id
       }
     }).then((userPhoto) => {
-      if (!userPhoto.locationUrl || userPhoto.locationUrl.slice(-1) === '/' || userPhoto.locationUrl.indexOf('.') < 0) {
-        reply(Boom.notAcceptable('UserPhoto object is missing a proper locationUrl property'));
+			if (!userPhoto.locationUrl || !userPhoto.name) {
+				reply(Boom.notAcceptable('UserPhoto object is missing a proper locationUrl property or file name'));
+			}
+			let fileName = userPhoto.name;
+			let locationPath = __dirname + '/../../..' + env.uploadPath + userPhoto.locationUrl;
+			let locationUrl = locationPath + fileName;
+      if (locationUrl.slice(-1) === '/' || locationUrl.indexOf('.') < 0) {
+        reply(Boom.notAcceptable('UserPhoto object is missing a proper locationUrl property or file name'));
       } else {
-				let locationUrl = __dirname + '/../../..' + env.uploadPath + userPhoto.locationUrl;
+				// Delete files
         models.UserPhoto.destroy({
             'where': {
               'id': request.params.id
             }
           })
           .then((userPhoto) => {
+						// TODO: use imageConfig constant to clean this up and delete b
             if (userPhoto) {
 							fse.unlink(locationUrl, (err) => {
 								if (err) {
 									reply(Boom.badRequest('Error deleting user photo file.'));
-									return;
+								} else {
+									fse.unlink(`${locationPath}/${imageConfig.playerIcon.size.small}-${fileName}`, (err) => {
+										if (err) {
+											reply(Boom.badRequest('Error deleting user photo file.'));
+										} else {
+											fse.unlink(`${locationPath}/${imageConfig.playerIcon.size.medium}-${fileName}`, (err) => {
+												if (err) {
+													reply(Boom.badRequest('Error deleting user photo file.'));
+													return;
+												}
+												reply().code(200);
+											});
+										}
+									});
 								}
-								reply().code(200);
 							});
             } else {
               reply().code(404);

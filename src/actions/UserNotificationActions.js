@@ -18,24 +18,6 @@ const _returnResponse = (type, data) => {
 };
 
 export default {
-	get: (id) => {
-		return (dispatch) => {
-			dispatch(_initiateRequest(UserNotificationConstants.INITIATE_USER_NOTIFICATION_REQUEST, id));
-			return UserNotificationService.get(id).then((userNotification) => {
-				dispatch(_returnResponse(UserNotificationConstants.GET_USER_NOTIFICATION, userNotification));
-				return userNotification;
-			});
-		};
-	},
-	getAll: () => {
-		return (dispatch) => {
-			dispatch(_initiateRequest(UserNotificationConstants.INITIATE_USER_NOTIFICATION_REQUEST));
-			return UserNotificationService.getAll().then((userNotifications) => {
-				dispatch(_returnResponse(UserNotificationConstants.GET_USER_NOTIFICATIONS, userNotifications));
-				return userNotifications;
-			});
-		};
-	},
 	search: (criteria) => {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserNotificationConstants.INITIATE_USER_NOTIFICATION_REQUEST));

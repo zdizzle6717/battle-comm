@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import {UserActions} from '../../library/authentication';
 
 const mapStateToProps = (state) => {
@@ -67,7 +68,7 @@ class AccountMenu extends React.Component {
 }
 
 AccountMenu.propTypes = {
-	'logout': React.PropTypes.func
+	'logout': PropTypes.func
 }
 
 export default connect(mapStateToProps, null)(AccountMenu);

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class ViewWrapper extends React.Component {
 	constructor() {
@@ -45,9 +46,9 @@ export default class ViewWrapper extends React.Component {
 }
 
 ViewWrapper.propTypes = {
-	'container': React.PropTypes.string,
-	'headerImage': React.PropTypes.string,
-	'headerAlt': React.PropTypes.string
+	'container': PropTypes.string,
+	'headerImage': PropTypes.string,
+	'headerAlt': PropTypes.string
 }
 
 ViewWrapper.defaultProps = {

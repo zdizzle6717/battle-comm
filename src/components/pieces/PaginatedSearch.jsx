@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {PaginationControls} from '../../library/pagination';
 import {uncamel} from '../../libary/utilities';
 
@@ -57,9 +58,9 @@ export default class PaginatedSearch extends React.Component {
 }
 
 PaginatedSearch.propTypes = {
-	'propertyList': React.PropTypes.array,
-	'data': React.PropTypes.object,
-	'linkColumns': React.PropTypes.array
+	'propertyList': PropTypes.array,
+	'data': PropTypes.object,
+	'linkColumns': PropTypes.array
 };
 
 PaginatedSearch.defaultProps = {

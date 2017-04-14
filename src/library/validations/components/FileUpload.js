@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import accepts from 'attr-accept';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import FormActions from '../actions/FormActions';
 import {addErrorMessage, removeErrorMessage, getInput, range} from '../utilities';
 
@@ -383,20 +384,20 @@ class FileUpload extends React.Component {
 }
 
 FileUpload.propTypes = {
-	'name': React.PropTypes.string.isRequired,
-	'fileName': React.PropTypes.string,
-	'handleFileUpload': React.PropTypes.func.isRequired,
-	'handleDeleteFile': React.PropTypes.func,
-	'hideFileList': React.PropTypes.bool,
-	'accept': React.PropTypes.string,
-	'typeOfModel': React.PropTypes.string.isRequired,
-	'multiple': React.PropTypes.bool,
-	'maxFiles': React.PropTypes.number,
-	'minSize': React.PropTypes.number,
-	'maxSize': React.PropTypes.number,
-	'preserveState': React.PropTypes.bool,
-	'required': React.PropTypes.number,
-	'disabled': React.PropTypes.bool
+	'name': PropTypes.string.isRequired,
+	'fileName': PropTypes.string,
+	'handleFileUpload': PropTypes.func.isRequired,
+	'handleDeleteFile': PropTypes.func,
+	'hideFileList': PropTypes.bool,
+	'accept': PropTypes.string,
+	'typeOfModel': PropTypes.string.isRequired,
+	'multiple': PropTypes.bool,
+	'maxFiles': PropTypes.number,
+	'minSize': PropTypes.number,
+	'maxSize': PropTypes.number,
+	'preserveState': PropTypes.bool,
+	'required': PropTypes.number,
+	'disabled': PropTypes.bool
 }
 
 FileUpload.defaultProps = {

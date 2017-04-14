@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Link } from 'react-router';
 import Animation from 'react-addons-css-transition-group';
+import PropTypes from 'prop-types';
 import CartActions from '../../actions/CartActions';
 
 const mapStateToProps = (state) => {
@@ -112,7 +113,7 @@ class CartSummary extends React.Component {
 }
 
 CartSummary.propTypes = {
-	// 'cartItems': React.PropTypes.shape({
+	// 'cartItems': PropTypes.shape({
 	//
 	// })
 }

@@ -83,7 +83,7 @@ export default class EditManufacturerPage extends React.Component {
 				FileService.create({
 					'ManufacturerId': manufacturer.id,
 					'identifier': 'manufacturerPhoto',
-					'locationUrl': `manufacturers/${this.state.manufacturer.File.name}`,
+					'locationUrl': `/manufacturers/`,
 					'name': this.state.manufacturer.File.name,
 					'size': this.state.manufacturer.File.size,
 					'type': this.state.manufacturer.File.type

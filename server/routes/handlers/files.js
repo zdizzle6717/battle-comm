@@ -3,9 +3,11 @@
 import models from '../../models';
 import fse from 'fs-extra';
 import env from '../../../envVariables.js';
+import imageConfig from '../../constants/imageConfig';
 import Boom from 'boom';
 import im from 'imagemagick-stream';
-// import moment from 'moment';
+
+// TODO: Figure out why imagemagick-stream is not properly resizing images
 
 // File Upload Route Configs
 let files = {
@@ -65,14 +67,15 @@ let files = {
       reply(Boom.badRequest(`A 'path' and 'fileSize' attribute must be appended to the FormData object`));
     } else if (data.file) {
       let resizeArray;
+			// TODO: Use imageConfig constant to set all image resizes
       if (data.identifier === 'playerIcon') {
         resizeArray = [].concat(
           [{
-            'name': `100-${data.file.hapi.filename}`,
-            'resize': im().resize('100x100').quality(100)
+            'name': `${imageConfig.playerIcon.size.small}-${data.file.hapi.filename}`,
+            'resize': im().resize(`${imageConfig.playerIcon.size.small}x${imageConfig.playerIcon.size.small}`).quality(100)
           }], [{
-            'name': `300-${data.file.hapi.filename}`,
-            'resize': im().resize('300x300').quality(100)
+            'name': `${imageConfig.playerIcon.size.medium}-${data.file.hapi.filename}`,
+            'resize': im().resize(`${imageConfig.playerIcon.size.medium}x${imageConfig.playerIcon.size.medium}`).quality(100)
           }]
         );
       }
@@ -174,19 +177,23 @@ let files = {
         reply(files).code(200);
       });
   },
-  // TODO: Get file by Id, then delete file from folder based on sourceUrl
-  // Be carefull not to delete parent folder(s)
-  // fs.unlink()
 	delete: (request, reply) => {
+		// TODO: Double check that this is safe and will not delete directories
     models.File.find({
       'where': {
         'id': request.params.id
       }
     }).then((file) => {
-      if (!file.locationUrl || file.locationUrl.slice(-1) === '/' || file.locationUrl.indexOf('.') < 0) {
-        reply(Boom.notAcceptable('File object is missing a proper locationUrl property'));
+			if (!file.locationUrl || !file.name) {
+				reply(Boom.notAcceptable('File object is missing a proper locationUrl property or name property'));
+			}
+			let fileName = file.name;
+			let locationPath = __dirname + '/../../..' + env.uploadPath + file.locationUrl;
+			let locationUrl = locationPath + fileName;
+      if (locationUrl.slice(-1) === '/' || locationUrl.indexOf('.') < 0) {
+        reply(Boom.notAcceptable('File object is missing a proper locationUrl property or file name'));
       } else {
-				let locationUrl = __dirname + '/../../..' + env.uploadPath + file.locationUrl;
+				let locationUrl = __dirname + '/../../..' + env.uploadPath + file.locationUrl + file.name;
         models.File.destroy({
             'where': {
               'id': request.params.id
@@ -196,7 +203,7 @@ let files = {
             if (file) {
 							fse.unlink(locationUrl, (err) => {
 								if (err) {
-									reply(Boom.badRequest('Error deleting file.'));
+									reply(Boom.badRequest('Error deleting  file.'));
 									return;
 								}
 								reply().code(200);

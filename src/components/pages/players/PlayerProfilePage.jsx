@@ -2,19 +2,29 @@
 
 import React from 'react';
 import {browserHistory, Link} from 'react-router';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {AlertActions} from '../../../library/alerts';
 import ViewWrapper from '../../ViewWrapper';
 import PlayerService from '../../../services/PlayerService';
+import UserFriendService from '../../../services/UserFriendService';
+import UserNotificationService from '../../../services/UserNotificationService';
 
 // TODO: Add function to check if players are already friends
 
 const mapStateToProps = (state) => {
 	return {
-		'currentUser': state.user,
-		'isAuthenticated': state.isAuthenticated
+		'currentUser': state.user
 	}
 }
 
-export default class PlayerProfilePage extends React.Component {
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'addAlert': AlertActions.addAlert
+	}, dispatch);
+}
+
+class PlayerProfilePage extends React.Component {
     constructor() {
         super();
 
@@ -35,7 +45,16 @@ export default class PlayerProfilePage extends React.Component {
     }
 
 	addFriend() {
-		console.log(`Add user with id, ${this.state.player.id}, as a friend.`);
+		let currentUser = this.props.currentUser;
+		UserNotificationService.create({
+			'UserId': this.state.player.id,
+			'type': 'allyRequestReceived',
+			'fromId': currentUser.id,
+			'fromUsername': currentUser.username,
+			'fromName': currentUser.firstName && currentUser.lastName ? currentUser.firstName + ' ' + currentUser.lastName : 'anonymous'
+		}).then(() => {
+			this.showAlert('allyRequestSent');
+		});
 	}
 
     componentDidMount() {
@@ -44,9 +63,13 @@ export default class PlayerProfilePage extends React.Component {
 			browserHistory.push(`/players/dashboard`);
 		} else {
 			PlayerService.getByUsername(this.props.params.playerHandle).then((player) => {
+				let alreadyFriends = player.Friends.some((friend) => {
+					return friend.id === this.props.currentUser.id;
+				});
 				this.setState({
+					'alreadyFriends': alreadyFriends,
 					'player': player
-				})
+				});
 			});
 		}
     }
@@ -67,16 +90,40 @@ export default class PlayerProfilePage extends React.Component {
 	}
 
 	removeFriend() {
-		console.log(`Remove user with id, ${this.state.player.id}, from friends list.`);
+		UserFriendService.remove({
+			'UserId': this.props.currentUser.id,
+			'InviteeId': this.state.player.id
+		}).then(() => {
+			this.setState({
+				'alreadyFriends': false
+			})
+			this.showAlert('allianceBroken');
+		});
 	}
 
 	showAlert(selector) {
 		const alerts = {
+			'allianceBroken': () => {
+				this.props.addAlert({
+					'title': 'Alliance Broken',
+					'message': `You have broken your alliance with ${this.state.player.username}.`,
+					'type': 'info',
+					'delay': 3000
+				});
+			},
+			'allyRequestSent': () => {
+				this.props.addAlert({
+					'title': 'Ally Request Sent',
+					'message': `An ally request has been sent to ${this.state.player.username}.`,
+					'type': 'success',
+					'delay': 3000
+				});
+			},
 			'playerNotFound': () => {
 				this.props.addAlert({
 					'title': 'Player Not Found',
 					'message': `No player found. Redirecting to you dashboard.`,
-					'type': 'success',
+					'type': 'error',
 					'delay': 3000
 				});
 			}
@@ -159,12 +206,11 @@ export default class PlayerProfilePage extends React.Component {
 								<div className="text-center">
 									{
 										this.state.alreadyFriends ?
-										<p><a onClick={this.removeFriend}><i className="fa fa-minus"></i> Remove Alliance</a></p> :
+										<p><a onClick={this.removeFriend}><i className="fa fa-minus"></i> Break Alliance</a></p> :
 										<p><a onClick={this.addFriend}><i className="fa fa-plus"></i> Send Ally Request</a></p>
 									}
 								</div>
 							}
-
 						</div>
 					</div>
 					<div className="row">
@@ -260,3 +306,5 @@ export default class PlayerProfilePage extends React.Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerProfilePage);

@@ -4,8 +4,6 @@ import UserNotificationConstants from '../constants/UserNotificationConstants';
 
 const userNotification = (state = {}, action) => {
 	switch (action.type) {
-		case UserNotificationConstants.GET_USER_NOTIFICATION:
-			return Object.assign({}, state, action.data);
 		case UserNotificationConstants.CREATE_USER_NOTIFICATION:
 			return Object.assign({}, state, action.data);
 		case UserNotificationConstants.UPDATE_USER_NOTIFICATION:

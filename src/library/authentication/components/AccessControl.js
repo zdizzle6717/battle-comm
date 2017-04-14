@@ -3,6 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import checkAuthorization from '../utilities/checkAuthorization';
 
 export default function(roleConfig) {
@@ -46,9 +47,9 @@ export default function(roleConfig) {
 	}
 
 	AccessControl.propTypes = {
-		'access': React.PropTypes.array,
-		'customClasses': React.PropTypes.string,
-		'publicOnly': React.PropTypes.bool
+		'access': PropTypes.array,
+		'customClasses': PropTypes.string,
+		'publicOnly': PropTypes.bool
 	}
 
 	AccessControl.defaultProps = {

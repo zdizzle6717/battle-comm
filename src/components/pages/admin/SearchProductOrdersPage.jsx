@@ -169,7 +169,7 @@ class SearchProductOrdersPage extends React.Component {
 											<td>{productOrder.customerPhone}</td>
 											<td>{productOrder.orderTotal}</td>
 											<td>
-												<Link className="action-item" key="editProductOrder" to={`/admin/productOrders/edit/${productOrder.id}`}>
+												<Link className="action-item" key="editProductOrder" to={`/admin/product-orders/edit/${productOrder.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>

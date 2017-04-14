@@ -147,7 +147,7 @@ class EditProductPage extends React.Component {
 					FileService.create({
 						'ProductId': product.id,
 						'identifier': 'productPhoto',
-						'locationUrl': `${directoryPath}/${file[i].name}`,
+						'locationUrl': `/${directoryPath}/`,
 						'name': file[i].name,
 						'size': file[i].size,
 						'type': file[i].type

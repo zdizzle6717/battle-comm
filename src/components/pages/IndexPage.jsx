@@ -29,6 +29,8 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 };
 
+// TODO: Check that banner slide upload is properly configured
+
 class IndexPage extends React.Component {
     constructor() {
         super();
@@ -41,7 +43,8 @@ class IndexPage extends React.Component {
 					'link': '/login',
 					'actionText': 'Sign Up',
 					'Files': [{
-						'locationUrl': '/images/branding/logo.png'
+						'locationUrl': '/images/branding/',
+						'name': 'logo.png'
 					}]
 				}
 			],
@@ -64,7 +67,6 @@ class IndexPage extends React.Component {
 				return a.priority - b.priority;
 			});
 			this.setState({
-				'bannerSlides': this.state.bannerSlides
 				// 'bannerSlides': pageSlides
 			}, () => {
 				initSlider($);
@@ -116,7 +118,7 @@ class IndexPage extends React.Component {
 													<h2>{slide.title}</h2>
 													<p>{slide.text}</p>
 													<a href={slide.link} className="da-link">{slide.actionText}</a>
-													<div className="da-img"><img src={slide.Files[0].locationUrl} alt="image01" /></div>
+													<div className="da-img"><img src={`/uploads/${slide.Files[0].locationUrl}${slide.Files[0].name}`} alt="image01" /></div>
 												</div>
 											)
 										}
