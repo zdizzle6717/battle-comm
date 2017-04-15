@@ -51,8 +51,13 @@ class RegistrationPage extends React.Component {
 
 	handleSubmit(e) {
 		this.props.createUser(this.state.credentials).then((response) => {
-			this.showAlert('registrationSuccess');
-			browserHistory.push('/login');
+			if (this.state.credentials.role === 'member') {
+				this.showAlert('registrationSuccess');
+				browserHistory.push('/login');
+			} else {
+				this.showAlert('registrationPending');
+				browserHistory.push('/login');
+			}
 		}).catch((error) => {
 			console.log(error);
 			if (error.message === 'Username taken') {
@@ -66,6 +71,14 @@ class RegistrationPage extends React.Component {
 
 	showAlert(selector) {
 		const alerts = {
+			'registrationPending': () => {
+				this.props.addAlert({
+					'title': 'Registration Pending',
+					'message': 'Please check your e-mail for further instructions and account activation.',
+					'type': 'success',
+					'delay': 3000
+				});
+			},
 			'registrationSuccess': () => {
 				this.props.addAlert({
 					'title': 'Registration Success',
@@ -97,46 +110,76 @@ class RegistrationPage extends React.Component {
 
     render() {
         return (
-			<ViewWrapper>
+			<ViewWrapper headerImage="/images/Titles/Register.png" alt="Register">
 				<div className="row">
 					<div className="small-12 columns">
-						<h1 className="push-bottom-2x">Register</h1>
-						<hr />
-					</div>
-					<div className="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns">
-						<Form name="registrationForm" submitText="Register" handleSubmit={this.handleSubmit}>
+						<h2>Sign Up to Create a Player Profile</h2>
+						<div className="container ice">
+							<Form name="registrationForm" submitText="Register" handleSubmit={this.handleSubmit}>
+								<div className="row">
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Email</label>
+										<Input type="text" name="email" value={this.state.credentials.email || ''} handleInputChange={this.handleInputChange} validate="email" required={true} />
+									</div>
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Username</label>
+										<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">First Name</label>
+										<Input type="text" name="firstName" value={this.state.credentials.firstName || ''} handleInputChange={this.handleInputChange} validate="name" required={true} />
+									</div>
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Last Name</label>
+										<Input type="text" name="lastName" value={this.state.credentials.lastName || ''} handleInputChange={this.handleInputChange} validate="name" required={true} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Password</label>
+										<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} inputMatch={this.state.passwordRepeat}/>
+									</div>
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Repeat Password</label>
+										<Input type="password" name="passwordRepeat" value={this.state.passwordRepeat || ''} handleInputChange={this.handleInputMatch} validate="password" required={true} inputMatch={this.state.credentials.password}/>
+									</div>
+								</div>
+								<div className="row">
+									<div className="small-12 medium-6 columns right">
+										<label className="required">User Role</label>
+										<Select name="role" value={this.state.credentials.role} handleInputChange={this.handleInputChange} required={true}>
+											<option value="">--Select--</option>
+											<option value="member">Member</option>
+											<option value="subscriber">Subscriber</option>
+											<option value="tourneyAdmin">Tournament Admin</option>
+											<option value="eventAdmin">Event Admin</option>
+											<option value="newsContributor">News Contributor</option>
+											<option value="venueAdmin">Venue Admin</option>
+											<option value="clubAdmin">Club Admin</option>
+											<option value="systemAdmin">Site Admin</option>
+										</Select>
+									</div>
+								</div>
+							</Form>
 							<div className="row">
 								<div className="form-group small-12 columns">
-									<label className="required">Username</label>
-									<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+									Already have an account? <Link key="login" to="/login" activeClassName="active" onClick={this.closeMenu}>Go to Login</Link>
 								</div>
 							</div>
 							<div className="row">
-								<div className="form-group small-12 columns">
-									<label className="required">Email</label>
-									<Input type="text" name="email" value={this.state.credentials.email || ''} handleInputChange={this.handleInputChange} validate="email" required={true} />
+								<div className="small-12 columns text-center">
+									<h5 className="required">Password Requirements</h5>
+									<ul className="no-bullets">
+										<li>Minimum of 8 characters</li>
+										<li>At least one lowercase letter</li>
+										<li>At least one uppercase letter</li>
+										<li>Minimum of 8 characters</li>
+										<li>At least one symbol/special character !@#$%^&_-+=,./?</li>
+									</ul>
 								</div>
 							</div>
-							<label className="required">User Role</label>
-							<Select name="role" value={this.state.credentials.role} handleInputChange={this.handleInputChange} required={true}>
-								<option value="">--Select--</option>
-								<option value="systemAdmin">Site Admin</option>
-							</Select>
-							<div className="row">
-								<div className="form-group small-12 columns">
-									<label className="required">Password</label>
-									<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} inputMatch={this.state.passwordRepeat}/>
-								</div>
-							</div>
-							<div className="row">
-								<div className="form-group small-12 columns">
-									<label className="required">Repeat Password</label>
-									<Input type="password" name="passwordRepeat" value={this.state.passwordRepeat || ''} handleInputChange={this.handleInputMatch} validate="password" required={true} inputMatch={this.state.credentials.password}/>
-								</div>
-							</div>
-						</Form>
-						<div className="form-group small-12">
-							Already have an account? <Link key="login" to="/login" activeClassName="active" onClick={this.closeMenu}>Go to Login</Link>
 						</div>
 					</div>
 				</div>

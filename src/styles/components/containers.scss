@@ -1,0 +1,10 @@
+.container {
+	&.ice {
+		padding: .75rem;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    border: 1px solid #eee;
+    background-color: rgba(255,255,246,0.5);
+    color: $black;
+    border-radius: 5px;
+	}
+}

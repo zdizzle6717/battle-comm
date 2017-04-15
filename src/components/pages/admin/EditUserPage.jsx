@@ -62,6 +62,10 @@ export default class EditUserPage extends React.Component {
 		});
 	}
 
+
+	// TODO: Add server error alert
+	// Reward Point Email Failed.
+	// Account Activation Email Failed.
 	showAlert(selector) {
 		const alerts = {
 			'userCreated': () => {

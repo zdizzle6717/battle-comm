@@ -27,12 +27,6 @@ export default class NewsPage extends React.Component {
     render() {
         return (
             <ViewWrapper headerImage="/images/Titles/News.png" alt="News">
-                <div className="row">
-					<div className="small-12 columns">
-						<h1>News</h1>
-						<hr />
-					</div>
-                </div>
 				<div className="row">
 					<div className="small-12 columns">
 						{

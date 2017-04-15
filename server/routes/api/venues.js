@@ -30,7 +30,7 @@ module.exports = [
             'email': Joi.string().required(),
             'pointsEarned': Joi.number().required(),
             'gameSystem': Joi.string().required(),
-            'faction': Joi.string().required(),
+            'faction': Joi.optional(),
             'totalWins': Joi.number().optional(),
             'totalDraws': Joi.number().optional(),
             'totalLosses': Joi.number().optional(),

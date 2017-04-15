@@ -176,15 +176,15 @@ class PlayerRankingSearchPage extends React.Component {
 							</thead>
 							<tbody>
 								{
-									this.state.results.map((results, i) =>
+									this.state.results.filter(result => result.User).map((ranking, i) =>
 										<tr key={i}>
-											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>{this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}</Link></td>
-											<td>{results.totalWins}</td>
-											<td>{results.totalDraws}</td>
-											<td>{results.totalLosses}</td>
-											<td>{results.pointValue}</td>
+											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>{this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}</Link></td>
+											<td>{ranking.totalWins}</td>
+											<td>{ranking.totalDraws}</td>
+											<td>{ranking.totalLosses}</td>
+											<td>{ranking.pointValue}</td>
 											<td>
-												<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? results.GameSystemRanking.User.username : results.User.username}`}>
+												<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>
 													<span className="mobile-text">View</span>
 												</Link>
 											</td>

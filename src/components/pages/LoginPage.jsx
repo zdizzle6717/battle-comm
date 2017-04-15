@@ -72,6 +72,9 @@ class LoginPage extends React.Component {
 			}
 		}).catch((error) => {
 			console.log(error);
+			if (error.message === 'Account not activated.') {
+				this.showAlert('accountNotActivated');
+			}
 			if (error.message === 'Incorrect password!') {
 				this.showAlert('incorrectPassword');
 			}
@@ -83,6 +86,14 @@ class LoginPage extends React.Component {
 
 	showAlert(selector) {
 		const alerts = {
+			'accountNotActivated': () => {
+				this.props.addAlert({
+					'title': 'Account Not Activated',
+					'message': 'Your account has not been activated. Please check your e-mail or contact support.',
+					'type': 'error',
+					'delay': 3000
+				});
+			},
 			'loginSuccess': () => {
 				this.props.addAlert({
 					'title': 'Login Success',
@@ -150,7 +161,7 @@ class LoginPage extends React.Component {
 										</div>
 									</div>
 								</Form>
-								<div className="form-group small-12 columns text-right">
+								<div className="form-group small-12 columns text-right push-top">
 									<Link key="forgotPassword" to="/forgot-password" activeClassName="active" onClick={this.closeMenu}>Forgot your password? </Link>
 								</div>
                             </div>

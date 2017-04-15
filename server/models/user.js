@@ -73,15 +73,18 @@ module.exports = function(sequelize, DataTypes) {
     'marketing': DataTypes.STRING,
     'sms': DataTypes.STRING,
     'allowPlay': DataTypes.STRING,
-    'icon': {
-      'type': DataTypes.STRING,
-      'defaultValue': 'profile_image_default.png'
-    },
     'eloRanking': {
       'type': DataTypes.INTEGER,
       'defaultValue': 0
     },
-    'accountActive': DataTypes.STRING
+    'accountActivated': {
+			'type': DataTypes.BOOLEAN,
+			'defaultValue': false
+		},
+    'accountBlocked': {
+			'type': DataTypes.BOOLEAN,
+			'defaultValue': false
+		}
   }, {
     'classMethods': {
       associate: function(models) {

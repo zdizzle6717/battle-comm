@@ -43,7 +43,7 @@ class IndexPage extends React.Component {
 					'link': '/login',
 					'actionText': 'Sign Up',
 					'Files': [{
-						'locationUrl': '/images/branding/',
+						'locationUrl': '/banner/',
 						'name': 'logo.png'
 					}]
 				}
@@ -118,7 +118,7 @@ class IndexPage extends React.Component {
 													<h2>{slide.title}</h2>
 													<p>{slide.text}</p>
 													<a href={slide.link} className="da-link">{slide.actionText}</a>
-													<div className="da-img"><img src={`/uploads/${slide.Files[0].locationUrl}${slide.Files[0].name}`} alt="image01" /></div>
+													<div className="da-img"><img src={`/uploads${slide.Files[0].locationUrl}${slide.Files[0].name}`} alt="image01" /></div>
 												</div>
 											)
 										}

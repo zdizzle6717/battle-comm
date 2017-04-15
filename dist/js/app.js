@@ -39,7 +39,7 @@ function(e, t, n) {
             default: e
         };
     }
-    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! react-dom */ 34), i = n(/*! react-redux */ 7), s = n(/*! ./components/AppRoutes */ 347), u = _interopRequireDefault(s), l = n(/*! ./store */ 83), c = _interopRequireDefault(l);
+    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! react-dom */ 34), i = n(/*! react-redux */ 7), s = n(/*! ./components/AppRoutes */ 347), u = _interopRequireDefault(s), l = n(/*! ./store */ 84), c = _interopRequireDefault(l);
     window.onload = function() {
         (0, o.render)(r.default.createElement(i.Provider, {
             store: c.default
@@ -1673,7 +1673,7 @@ function(e, t, n) {
             hooks.relativeTimeRounding = getSetRelativeTimeRounding, hooks.relativeTimeThreshold = getSetRelativeTimeThreshold, 
             hooks.calendarFormat = getCalendarFormat, hooks.prototype = We, hooks;
         });
-    }).call(t, n(/*! ./../webpack/buildin/module.js */ 78)(e));
+    }).call(t, n(/*! ./../webpack/buildin/module.js */ 79)(e));
 }, /*!**************************!*\
   !*** ./~/react/react.js ***!
   \**************************/
@@ -1744,7 +1744,7 @@ function(e, t, n) {
             return a.createRoutes;
         }
     });
-    var r = n(/*! ./PropTypes */ 107);
+    var r = n(/*! ./PropTypes */ 108);
     Object.defineProperty(t, "locationShape", {
         enumerable: !0,
         get: function get() {
@@ -1763,7 +1763,7 @@ function(e, t, n) {
             return o.formatPattern;
         }
     });
-    var i = n(/*! ./Router */ 580), s = _interopRequireDefault(i), u = n(/*! ./Link */ 304), l = _interopRequireDefault(u), c = n(/*! ./IndexLink */ 574), d = _interopRequireDefault(c), p = n(/*! ./withRouter */ 593), f = _interopRequireDefault(p), m = n(/*! ./IndexRedirect */ 575), h = _interopRequireDefault(m), M = n(/*! ./IndexRoute */ 576), _ = _interopRequireDefault(M), y = n(/*! ./Redirect */ 305), b = _interopRequireDefault(y), g = n(/*! ./Route */ 578), v = _interopRequireDefault(g), A = n(/*! ./History */ 573), E = _interopRequireDefault(A), T = n(/*! ./Lifecycle */ 577), L = _interopRequireDefault(T), O = n(/*! ./RouteContext */ 579), C = _interopRequireDefault(O), w = n(/*! ./useRoutes */ 592), S = _interopRequireDefault(w), N = n(/*! ./RouterContext */ 75), k = _interopRequireDefault(N), D = n(/*! ./RoutingContext */ 581), P = _interopRequireDefault(D), z = _interopRequireDefault(r), R = n(/*! ./match */ 590), q = _interopRequireDefault(R), x = n(/*! ./useRouterHistory */ 310), I = _interopRequireDefault(x), W = n(/*! ./applyRouterMiddleware */ 583), Y = _interopRequireDefault(W), j = n(/*! ./browserHistory */ 584), B = _interopRequireDefault(j), F = n(/*! ./hashHistory */ 588), H = _interopRequireDefault(F), U = n(/*! ./createMemoryHistory */ 307), X = _interopRequireDefault(U);
+    var i = n(/*! ./Router */ 580), s = _interopRequireDefault(i), u = n(/*! ./Link */ 304), l = _interopRequireDefault(u), c = n(/*! ./IndexLink */ 574), d = _interopRequireDefault(c), p = n(/*! ./withRouter */ 593), f = _interopRequireDefault(p), m = n(/*! ./IndexRedirect */ 575), h = _interopRequireDefault(m), M = n(/*! ./IndexRoute */ 576), _ = _interopRequireDefault(M), y = n(/*! ./Redirect */ 305), b = _interopRequireDefault(y), g = n(/*! ./Route */ 578), v = _interopRequireDefault(g), A = n(/*! ./History */ 573), E = _interopRequireDefault(A), T = n(/*! ./Lifecycle */ 577), L = _interopRequireDefault(T), O = n(/*! ./RouteContext */ 579), C = _interopRequireDefault(O), w = n(/*! ./useRoutes */ 592), S = _interopRequireDefault(w), N = n(/*! ./RouterContext */ 76), k = _interopRequireDefault(N), D = n(/*! ./RoutingContext */ 581), P = _interopRequireDefault(D), z = _interopRequireDefault(r), R = n(/*! ./match */ 590), q = _interopRequireDefault(R), x = n(/*! ./useRouterHistory */ 310), I = _interopRequireDefault(x), W = n(/*! ./applyRouterMiddleware */ 583), Y = _interopRequireDefault(W), j = n(/*! ./browserHistory */ 584), B = _interopRequireDefault(j), F = n(/*! ./hashHistory */ 588), H = _interopRequireDefault(F), U = n(/*! ./createMemoryHistory */ 307), X = _interopRequireDefault(U);
     t.Router = s.default, t.Link = l.default, t.IndexLink = d.default, t.withRouter = f.default, 
     t.IndexRedirect = h.default, t.IndexRoute = _.default, t.Redirect = b.default, t.Route = v.default, 
     t.History = E.default, t.Lifecycle = L.default, t.RouteContext = C.default, t.useRoutes = S.default, 
@@ -1863,7 +1863,7 @@ function(e, t, n) {
                 }, o.default.createElement("div", {
                     className: "bar"
                 }, this.props.headerImage && o.default.createElement("div", {
-                    className: "title small"
+                    className: "title large"
                 }, o.default.createElement("img", {
                     src: this.props.headerImage,
                     alt: this.props.headerAlt
@@ -1896,7 +1896,8 @@ function(e, t, n) {
         headerImage: s.default.string,
         headerAlt: s.default.string
     }, u.defaultProps = {
-        container: "default"
+        container: "default",
+        headerAlt: "Battle-Comm"
     };
 }, /*!***********************************************!*\
   !*** ./~/react-dom/lib/reactProdInvariant.js ***!
@@ -2392,7 +2393,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../../roleConfig */ 111), u = _interopRequireDefault(s), l = n(/*! ../../library/authentication/components/AccessControl */ 126), c = _interopRequireDefault(l), d = (0, 
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../../roleConfig */ 64), u = _interopRequireDefault(s), l = n(/*! ../../library/authentication/components/AccessControl */ 126), c = _interopRequireDefault(l), d = (0, 
     c.default)(u.default), p = function(e) {
         function AdminMenu() {
             return _classCallCheck(this, AdminMenu), _possibleConstructorReturn(this, (AdminMenu.__proto__ || Object.getPrototypeOf(AdminMenu)).call(this));
@@ -2451,7 +2452,7 @@ function(e, t, n) {
                     className: "fa fa-shopping-bag"
                 }, " "), " Store")), o.default.createElement(d, {
                     customClasses: "menu-item",
-                    access: [ "systemAdmin" ]
+                    access: [ "venueAdmin" ]
                 }, o.default.createElement(i.Link, {
                     to: "/admin/venue",
                     className: "button"
@@ -2639,7 +2640,7 @@ function(e, t, n) {
         m.isBatchingUpdates ? void 0 : l(!1, "ReactUpdates.asap: Can't enqueue an asap callback in a context whereupdates are not being batched."), 
         p.enqueue(e, t), f = !0;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./CallbackQueue */ 269), o = n(/*! ./PooledClass */ 42), i = n(/*! ./ReactFeatureFlags */ 277), s = n(/*! ./ReactReconciler */ 43), u = n(/*! ./Transaction */ 72), l = n(/*! fbjs/lib/invariant */ 3), c = [], d = 0, p = r.getPooled(), f = !1, m = null, h = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./CallbackQueue */ 269), o = n(/*! ./PooledClass */ 42), i = n(/*! ./ReactFeatureFlags */ 277), s = n(/*! ./ReactReconciler */ 43), u = n(/*! ./Transaction */ 73), l = n(/*! fbjs/lib/invariant */ 3), c = [], d = 0, p = r.getPooled(), f = !1, m = null, h = {
         initialize: function() {
             this.dirtyComponentsLength = c.length;
         },
@@ -2703,7 +2704,7 @@ function(e, t, n) {
   \******************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactChildren */ 605), o = n(/*! ./ReactComponent */ 109), i = n(/*! ./ReactPureComponent */ 610), s = n(/*! ./ReactClass */ 606), u = n(/*! ./ReactDOMFactories */ 607), l = n(/*! ./ReactElement */ 45), c = n(/*! ./ReactPropTypes */ 608), d = n(/*! ./ReactVersion */ 614), p = n(/*! ./onlyChild */ 317), f = n(/*! fbjs/lib/warning */ 4), m = l.createElement, h = l.createFactory, M = l.cloneElement, _ = n(/*! ./canDefineProperty */ 77), y = n(/*! ./ReactElementValidator */ 313), b = !1;
+    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactChildren */ 605), o = n(/*! ./ReactComponent */ 110), i = n(/*! ./ReactPureComponent */ 610), s = n(/*! ./ReactClass */ 606), u = n(/*! ./ReactDOMFactories */ 607), l = n(/*! ./ReactElement */ 45), c = n(/*! ./ReactPropTypes */ 608), d = n(/*! ./ReactVersion */ 614), p = n(/*! ./onlyChild */ 317), f = n(/*! fbjs/lib/warning */ 4), m = l.createElement, h = l.createFactory, M = l.cloneElement, _ = n(/*! ./canDefineProperty */ 78), y = n(/*! ./ReactElementValidator */ 313), b = !1;
     m = y.createElement, h = y.createFactory, M = y.cloneElement;
     var g = a, v = !1;
     g = function() {
@@ -2933,7 +2934,7 @@ function(e, t, n) {
   \******************************/
 function(e, t, n) {
     "use strict";
-    e.exports = n(/*! ./lib/ReactDOM */ 95);
+    e.exports = n(/*! ./lib/ReactDOM */ 96);
 }, /*!****************************************!*\
   !*** ./~/react-dom/lib/DOMProperty.js ***!
   \****************************************/
@@ -3212,7 +3213,7 @@ function(e, t, n) {
             configurable: !0
         });
     }
-    var a, r, o = n(/*! object-assign */ 10), i = n(/*! ./ReactCurrentOwner */ 32), s = n(/*! fbjs/lib/warning */ 4), u = n(/*! ./canDefineProperty */ 77), l = Object.prototype.hasOwnProperty, c = n(/*! ./ReactElementSymbol */ 312), d = {
+    var a, r, o = n(/*! object-assign */ 10), i = n(/*! ./ReactCurrentOwner */ 32), s = n(/*! fbjs/lib/warning */ 4), u = n(/*! ./canDefineProperty */ 78), l = Object.prototype.hasOwnProperty, c = n(/*! ./ReactElementSymbol */ 312), d = {
         key: !0,
         ref: !0,
         __self: !0,
@@ -3857,7 +3858,7 @@ function(e, t, n) {
         n.exports = cloneDeep;
     }).call(t, function() {
         return this;
-    }(), n(/*! ./../webpack/buildin/module.js */ 78)(e));
+    }(), n(/*! ./../webpack/buildin/module.js */ 79)(e));
 }, /*!***********************************!*\
   !*** ./~/lodash.isequal/index.js ***!
   \***********************************/
@@ -4311,7 +4312,7 @@ function(e, t, n) {
         n.exports = isEqual;
     }).call(t, function() {
         return this;
-    }(), n(/*! ./../webpack/buildin/module.js */ 78)(e));
+    }(), n(/*! ./../webpack/buildin/module.js */ 79)(e));
 }, /*!******************************!*\
   !*** ./~/process/browser.js ***!
   \******************************/
@@ -4433,7 +4434,7 @@ function(e, t, n) {
             toString: toString
         };
     }
-    var a = n(/*! ./DOMNamespaces */ 90), r = n(/*! ./setInnerHTML */ 74), o = n(/*! ./createMicrosoftUnsafeLocalFunction */ 98), i = n(/*! ./setTextContent */ 293), s = 1, u = 11, l = "undefined" != typeof document && "number" == typeof document.documentMode || "undefined" != typeof navigator && "string" == typeof navigator.userAgent && /\bEdge\/\d/.test(navigator.userAgent), c = o(function(e, t, n) {
+    var a = n(/*! ./DOMNamespaces */ 91), r = n(/*! ./setInnerHTML */ 75), o = n(/*! ./createMicrosoftUnsafeLocalFunction */ 99), i = n(/*! ./setTextContent */ 293), s = 1, u = 11, l = "undefined" != typeof document && "number" == typeof document.documentMode || "undefined" != typeof navigator && "string" == typeof navigator.userAgent && /\bEdge\/\d/.test(navigator.userAgent), c = o(function(e, t, n) {
         t.node.nodeType === u || t.node.nodeType === s && "object" === t.node.nodeName.toLowerCase() && (null == t.node.namespaceURI || t.node.namespaceURI === a.html) ? (insertTreeChildren(t), 
         e.insertBefore(t.node, n)) : (e.insertBefore(t.node, n), insertTreeChildren(t));
     });
@@ -4466,7 +4467,7 @@ function(e, t, n) {
             return !1;
         }
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./EventPluginRegistry */ 61)), r = n(/*! ./EventPluginUtils */ 91), o = n(/*! ./ReactErrorUtils */ 96), i = n(/*! ./accumulateInto */ 285), s = n(/*! ./forEachAccumulated */ 287), u = n(/*! fbjs/lib/invariant */ 3), l = {}, c = null, d = function(e, t) {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./EventPluginRegistry */ 61)), r = n(/*! ./EventPluginUtils */ 92), o = n(/*! ./ReactErrorUtils */ 97), i = n(/*! ./accumulateInto */ 285), s = n(/*! ./forEachAccumulated */ 287), u = n(/*! fbjs/lib/invariant */ 3), l = {}, c = null, d = function(e, t) {
         e && (r.executeDispatchesInOrder(e, t), e.isPersistent() || e.constructor.release(e));
     }, p = function(e) {
         return d(e, !0);
@@ -4578,7 +4579,7 @@ function(e, t, n) {
     function accumulateDirectDispatches(e) {
         i(e, accumulateDirectDispatchesSingle);
     }
-    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPluginUtils */ 91), o = n(/*! ./accumulateInto */ 285), i = n(/*! ./forEachAccumulated */ 287), s = n(/*! fbjs/lib/warning */ 4), u = a.getListener, l = {
+    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPluginUtils */ 92), o = n(/*! ./accumulateInto */ 285), i = n(/*! ./forEachAccumulated */ 287), s = n(/*! fbjs/lib/warning */ 4), u = a.getListener, l = {
         accumulateTwoPhaseDispatches: accumulateTwoPhaseDispatches,
         accumulateTwoPhaseDispatchesSkipTarget: accumulateTwoPhaseDispatchesSkipTarget,
         accumulateDirectDispatches: accumulateDirectDispatches,
@@ -4791,7 +4792,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/GameSystemConstants */ 119), r = _interopRequireDefault(a), o = n(/*! ../services/GameSystemService */ 66), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/GameSystemConstants */ 119), r = _interopRequireDefault(a), o = n(/*! ../services/GameSystemService */ 67), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -4973,7 +4974,7 @@ function(e, t, n) {
         return Object.prototype.hasOwnProperty.call(e, m) || (e[m] = p++, c[e[m]] = {}), 
         c[e[m]];
     }
-    var a, r = n(/*! object-assign */ 10), o = n(/*! ./EventPluginRegistry */ 61), i = n(/*! ./ReactEventEmitterMixin */ 517), s = n(/*! ./ViewportMetrics */ 284), u = n(/*! ./getVendorPrefixedEventName */ 290), l = n(/*! ./isEventSupported */ 102), c = {}, d = !1, p = 0, f = {
+    var a, r = n(/*! object-assign */ 10), o = n(/*! ./EventPluginRegistry */ 61), i = n(/*! ./ReactEventEmitterMixin */ 517), s = n(/*! ./ViewportMetrics */ 284), u = n(/*! ./getVendorPrefixedEventName */ 290), l = n(/*! ./isEventSupported */ 103), c = {}, d = !1, p = 0, f = {
         topAbort: "abort",
         topAnimationEnd: u("animationend") || "animationend",
         topAnimationIteration: u("animationiteration") || "animationiteration",
@@ -5088,7 +5089,7 @@ function(e, t, n) {
     function SyntheticUIEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticEvent */ 31), r = n(/*! ./getEventTarget */ 101), o = {
+    var a = n(/*! ./SyntheticEvent */ 31), r = n(/*! ./getEventTarget */ 102), o = {
         view: function(e) {
             if (e.view) return e.view;
             var t = r(e);
@@ -5101,6 +5102,57 @@ function(e, t, n) {
         }
     };
     a.augmentClass(SyntheticUIEvent, o), e.exports = SyntheticUIEvent;
+}, /*!***********************!*\
+  !*** ./roleConfig.js ***!
+  \***********************/
+function(e, t) {
+    "use strict";
+    e.exports = [ {
+        name: "public",
+        bit: 0,
+        roleFlags: 0,
+        homeState: "/"
+    }, {
+        name: "member",
+        bit: 1,
+        roleFlags: 1,
+        homeState: "/players/dashboard"
+    }, {
+        name: "subscriber",
+        bit: 2,
+        roleFlags: 3,
+        homeState: "/players/dashboard"
+    }, {
+        name: "tourneyAdmin",
+        bit: 4,
+        roleFlags: 5,
+        homeState: "/players/dashboard"
+    }, {
+        name: "eventAdmin",
+        bit: 8,
+        roleFlags: 13,
+        homeState: "/players/dashboard"
+    }, {
+        name: "newsContributor",
+        bit: 16,
+        roleFlags: 17,
+        homeState: "/players/dashboard"
+    }, {
+        name: "venueAdmin",
+        bit: 32,
+        roleFlags: 45,
+        homeState: "/admin"
+    }, {
+        name: "clubAdmin",
+        bit: 64,
+        roleFlags: 65,
+        homeState: "/admin"
+    }, {
+        name: "systemAdmin",
+        bit: 128,
+        roleFlags: 255,
+        homeState: "/admin"
+    } ];
 }, /*!********************************************!*\
   !*** ./src/actions/ManufacturerActions.js ***!
   \********************************************/
@@ -5114,7 +5166,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/ManufacturerConstants */ 120), r = _interopRequireDefault(a), o = n(/*! ../services/ManufacturerService */ 81), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/ManufacturerConstants */ 120), r = _interopRequireDefault(a), o = n(/*! ../services/ManufacturerService */ 82), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -5523,7 +5575,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! query-string */ 487), s = n(/*! ./runTransitionHook */ 87), u = _interopRequireDefault(s), l = n(/*! ./PathUtils */ 40), c = n(/*! ./deprecate */ 86), d = _interopRequireDefault(c), p = "$searchBase", f = i.parse;
+    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! query-string */ 487), s = n(/*! ./runTransitionHook */ 88), u = _interopRequireDefault(s), l = n(/*! ./PathUtils */ 40), c = n(/*! ./deprecate */ 87), d = _interopRequireDefault(c), p = "$searchBase", f = i.parse;
     t.default = useQueries, e.exports = t.default;
 }, /*!************************************************!*\
   !*** ./~/react-dom/lib/SyntheticMouseEvent.js ***!
@@ -5533,7 +5585,7 @@ function(e, t, n) {
     function SyntheticMouseEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 63), r = n(/*! ./ViewportMetrics */ 284), o = n(/*! ./getEventModifierState */ 100), i = {
+    var a = n(/*! ./SyntheticUIEvent */ 63), r = n(/*! ./ViewportMetrics */ 284), o = n(/*! ./getEventModifierState */ 101), i = {
         screenX: null,
         screenY: null,
         clientX: null,
@@ -5667,7 +5719,7 @@ function(e, t) {
   \*****************************************/
 function(e, t, n) {
     "use strict";
-    var a, r = n(/*! fbjs/lib/ExecutionEnvironment */ 16), o = n(/*! ./DOMNamespaces */ 90), i = /^[ \r\n\t\f]/, s = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/, u = n(/*! ./createMicrosoftUnsafeLocalFunction */ 98), l = u(function(e, t) {
+    var a, r = n(/*! fbjs/lib/ExecutionEnvironment */ 16), o = n(/*! ./DOMNamespaces */ 91), i = /^[ \r\n\t\f]/, s = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/, u = n(/*! ./createMicrosoftUnsafeLocalFunction */ 99), l = u(function(e, t) {
         if (e.namespaceURI !== o.svg || "innerHTML" in e) e.innerHTML = t; else {
             a = a || document.createElement("div"), a.innerHTML = "<svg>" + t + "</svg>";
             for (var n = a.firstChild; n.firstChild; ) e.appendChild(n.firstChild);
@@ -5705,7 +5757,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, o = n(/*! invariant */ 19), i = _interopRequireDefault(o), s = n(/*! react */ 2), u = _interopRequireDefault(s), l = n(/*! ./deprecateObjectProperties */ 76), c = _interopRequireDefault(l), d = n(/*! ./getRouteParams */ 587), p = _interopRequireDefault(d), f = n(/*! ./RouteUtils */ 36), m = n(/*! ./routerWarning */ 17), h = _interopRequireDefault(m), M = u.default.PropTypes, _ = M.array, y = M.func, b = M.object, g = u.default.createClass({
+    }, o = n(/*! invariant */ 19), i = _interopRequireDefault(o), s = n(/*! react */ 2), u = _interopRequireDefault(s), l = n(/*! ./deprecateObjectProperties */ 77), c = _interopRequireDefault(l), d = n(/*! ./getRouteParams */ 587), p = _interopRequireDefault(d), f = n(/*! ./RouteUtils */ 36), m = n(/*! ./routerWarning */ 17), h = _interopRequireDefault(m), M = u.default.PropTypes, _ = M.array, y = M.func, b = M.object, g = u.default.createClass({
         displayName: "RouterContext",
         propTypes: {
             history: b,
@@ -6156,7 +6208,7 @@ function(e, t, n) {
             payload: n
         });
     }
-    var a = n(/*! ./DOMLazyTree */ 52), r = n(/*! ./Danger */ 493), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInstrumentation */ 26), s = n(/*! ./createMicrosoftUnsafeLocalFunction */ 98), u = n(/*! ./setInnerHTML */ 74), l = n(/*! ./setTextContent */ 293), c = s(function(e, t, n) {
+    var a = n(/*! ./DOMLazyTree */ 52), r = n(/*! ./Danger */ 493), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInstrumentation */ 26), s = n(/*! ./createMicrosoftUnsafeLocalFunction */ 99), u = n(/*! ./setInnerHTML */ 75), l = n(/*! ./setTextContent */ 293), c = s(function(e, t, n) {
         e.insertBefore(t, n);
     }), d = r.dangerouslyReplaceNodeWithMarkup;
     d = function(e, t, n) {
@@ -6289,7 +6341,7 @@ function(e, t, n) {
     function hasDispatches(e) {
         return !!e._dispatchListeners;
     }
-    var a, r, o, i = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactErrorUtils */ 96)), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = {
+    var a, r, o, i = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactErrorUtils */ 97)), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = {
         injectComponentTree: function(e) {
             a = e, u(e && e.getNodeFromInstance && e.getInstanceFromNode, "EventPluginUtils.injection.injectComponentTree(...): Injected module is missing getNodeFromInstance or getInstanceFromNode.");
         },
@@ -6923,7 +6975,7 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0, t.router = t.routes = t.route = t.components = t.component = t.location = t.history = t.falsy = t.locationShape = t.routerShape = void 0;
-    var a = n(/*! react */ 2), r = n(/*! ./deprecateObjectProperties */ 76), o = _interopRequireDefault(r), i = n(/*! ./InternalPropTypes */ 44), s = _interopRequireWildcard(i), u = n(/*! ./routerWarning */ 17), l = _interopRequireDefault(u), c = a.PropTypes.func, d = a.PropTypes.object, p = a.PropTypes.shape, f = a.PropTypes.string, m = t.routerShape = p({
+    var a = n(/*! react */ 2), r = n(/*! ./deprecateObjectProperties */ 77), o = _interopRequireDefault(r), i = n(/*! ./InternalPropTypes */ 44), s = _interopRequireWildcard(i), u = n(/*! ./routerWarning */ 17), l = _interopRequireDefault(u), c = a.PropTypes.func, d = a.PropTypes.object, p = a.PropTypes.shape, f = a.PropTypes.string, m = t.routerShape = p({
         push: c.isRequired,
         replace: c.isRequired,
         go: c.isRequired,
@@ -7090,7 +7142,7 @@ function(e, t, n) {
     function ReactComponent(e, t, n) {
         this.props = e, this.context = t, this.refs = o, this.updater = n || a;
     }
-    var a = (n(/*! ./reactProdInvariant */ 46), n(/*! ./ReactNoopUpdateQueue */ 110)), r = n(/*! ./canDefineProperty */ 77), o = n(/*! fbjs/lib/emptyObject */ 39), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! fbjs/lib/warning */ 4);
+    var a = (n(/*! ./reactProdInvariant */ 46), n(/*! ./ReactNoopUpdateQueue */ 111)), r = n(/*! ./canDefineProperty */ 78), o = n(/*! fbjs/lib/emptyObject */ 39), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! fbjs/lib/warning */ 4);
     ReactComponent.prototype.isReactComponent = {}, ReactComponent.prototype.setState = function(e, t) {
         "object" != typeof e && "function" != typeof e && null != e ? i(!1, "setState(...): takes an object of state variables to update or a function which returns an object of state variables.") : void 0, 
         this.updater.enqueueSetState(this, e), t && this.updater.enqueueCallback(this, t, "setState");
@@ -7134,57 +7186,6 @@ function(e, t, n) {
         }
     };
     e.exports = r;
-}, /*!***********************!*\
-  !*** ./roleConfig.js ***!
-  \***********************/
-function(e, t) {
-    "use strict";
-    e.exports = [ {
-        name: "public",
-        bit: 0,
-        roleFlags: 0,
-        homeState: "/"
-    }, {
-        name: "member",
-        bit: 1,
-        roleFlags: 1,
-        homeState: "/profile"
-    }, {
-        name: "subscriber",
-        bit: 2,
-        roleFlags: 3,
-        homeState: "/profile"
-    }, {
-        name: "tourneyAdmin",
-        bit: 4,
-        roleFlags: 5,
-        homeState: "/profile"
-    }, {
-        name: "eventAdmin",
-        bit: 8,
-        roleFlags: 13,
-        homeState: "/profile"
-    }, {
-        name: "newsContributor",
-        bit: 16,
-        roleFlags: 17,
-        homeState: "/profile"
-    }, {
-        name: "venueAdmin",
-        bit: 32,
-        roleFlags: 45,
-        homeState: "/admin"
-    }, {
-        name: "clubAdmin",
-        bit: 64,
-        roleFlags: 65,
-        homeState: "/admin"
-    }, {
-        name: "systemAdmin",
-        bit: 128,
-        roleFlags: 255,
-        homeState: "/admin"
-    } ];
 }, /*!*************************!*\
   !*** ./envVariables.js ***!
   \*************************/
@@ -7599,9 +7600,9 @@ function(e, t, n) {
             }, {
                 key: "render",
                 value: function render() {
-                    return o.default.createElement("span", {
+                    return this.state.authorized && !this.props.publicOnly || !this.state.authorized && this.props.publicOnly ? o.default.createElement("span", {
                         className: this.props.customClasses ? "access-control " + this.props.customClasses : "access-control"
-                    }, this.state.authorized && !this.props.publicOnly && this.props.children, !this.state.authorized && this.props.publicOnly && this.props.children);
+                    }, this.props.children) : null;
                 }
             } ]), AccessControl;
         }(o.default.Component);
@@ -8030,7 +8031,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! invariant */ 19), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 69), s = n(/*! ./DOMUtils */ 85), u = n(/*! ./createHistory */ 146), l = _interopRequireDefault(u);
+    }, r = n(/*! invariant */ 19), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 70), s = n(/*! ./DOMUtils */ 86), u = n(/*! ./createHistory */ 146), l = _interopRequireDefault(u);
     t.default = createDOMHistory, e.exports = t.default;
 }, /*!********************************************!*\
   !*** ./~/history/lib/createHashHistory.js ***!
@@ -8159,7 +8160,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! invariant */ 19), s = _interopRequireDefault(i), u = n(/*! ./Actions */ 48), l = n(/*! ./PathUtils */ 40), c = n(/*! ./ExecutionEnvironment */ 69), d = n(/*! ./DOMUtils */ 85), p = n(/*! ./DOMStateStorage */ 143), f = n(/*! ./createDOMHistory */ 144), m = _interopRequireDefault(f), h = "_k";
+    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! invariant */ 19), s = _interopRequireDefault(i), u = n(/*! ./Actions */ 48), l = n(/*! ./PathUtils */ 40), c = n(/*! ./ExecutionEnvironment */ 70), d = n(/*! ./DOMUtils */ 86), p = n(/*! ./DOMStateStorage */ 143), f = n(/*! ./createDOMHistory */ 144), m = _interopRequireDefault(f), h = "_k";
     t.default = createHashHistory, e.exports = t.default;
 }, /*!****************************************!*\
   !*** ./~/history/lib/createHistory.js ***!
@@ -8315,7 +8316,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! deep-equal */ 451), s = _interopRequireDefault(i), u = n(/*! ./PathUtils */ 40), l = n(/*! ./AsyncUtils */ 470), c = n(/*! ./Actions */ 48), d = n(/*! ./createLocation */ 472), p = _interopRequireDefault(d), f = n(/*! ./runTransitionHook */ 87), m = _interopRequireDefault(f), h = n(/*! ./deprecate */ 86), M = _interopRequireDefault(h), _ = 6;
+    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! deep-equal */ 451), s = _interopRequireDefault(i), u = n(/*! ./PathUtils */ 40), l = n(/*! ./AsyncUtils */ 470), c = n(/*! ./Actions */ 48), d = n(/*! ./createLocation */ 472), p = _interopRequireDefault(d), f = n(/*! ./runTransitionHook */ 88), m = _interopRequireDefault(f), h = n(/*! ./deprecate */ 87), M = _interopRequireDefault(h), _ = 6;
     t.default = createHistory, e.exports = t.default;
 }, /*!**************************************!*\
   !*** ./~/history/lib/useBasename.js ***!
@@ -8407,7 +8408,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 69), s = n(/*! ./PathUtils */ 40), u = n(/*! ./runTransitionHook */ 87), l = _interopRequireDefault(u), c = n(/*! ./deprecate */ 86), d = _interopRequireDefault(c);
+    }, r = n(/*! warning */ 30), o = _interopRequireDefault(r), i = n(/*! ./ExecutionEnvironment */ 70), s = n(/*! ./PathUtils */ 40), u = n(/*! ./runTransitionHook */ 88), l = _interopRequireDefault(u), c = n(/*! ./deprecate */ 87), d = _interopRequireDefault(c);
     t.default = useBasename, e.exports = t.default;
 }, /*!********************************************!*\
   !*** ./~/hoist-non-react-statics/index.js ***!
@@ -17543,7 +17544,7 @@ function(e, t, n) {
             l.debugTool.onEndLifeCycleTimer(t, n);
         }
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! react/lib/React */ 28), o = n(/*! ./ReactComponentEnvironment */ 94), i = n(/*! react/lib/ReactCurrentOwner */ 32), s = n(/*! ./ReactErrorUtils */ 96), u = n(/*! ./ReactInstanceMap */ 55), l = n(/*! ./ReactInstrumentation */ 26), c = n(/*! ./ReactNodeTypes */ 281), d = n(/*! ./ReactReconciler */ 43), p = n(/*! ./checkReactTypeSpec */ 547), f = n(/*! fbjs/lib/emptyObject */ 39), m = n(/*! fbjs/lib/invariant */ 3), h = n(/*! fbjs/lib/shallowEqual */ 84), M = n(/*! ./shouldUpdateReactComponent */ 103), _ = n(/*! fbjs/lib/warning */ 4), y = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! react/lib/React */ 28), o = n(/*! ./ReactComponentEnvironment */ 95), i = n(/*! react/lib/ReactCurrentOwner */ 32), s = n(/*! ./ReactErrorUtils */ 97), u = n(/*! ./ReactInstanceMap */ 55), l = n(/*! ./ReactInstrumentation */ 26), c = n(/*! ./ReactNodeTypes */ 281), d = n(/*! ./ReactReconciler */ 43), p = n(/*! ./checkReactTypeSpec */ 547), f = n(/*! fbjs/lib/emptyObject */ 39), m = n(/*! fbjs/lib/invariant */ 3), h = n(/*! fbjs/lib/shallowEqual */ 85), M = n(/*! ./shouldUpdateReactComponent */ 104), _ = n(/*! fbjs/lib/warning */ 4), y = {
         ImpureClass: 0,
         PureClass: 1,
         StatelessFunctional: 2
@@ -17848,7 +17849,7 @@ function(e, t, n) {
         return this._rootNodeID && (this._wrapperState.pendingUpdate = !0), i.asap(updateOptionsIfPendingUpdateAndMounted, this), 
         n;
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./LinkedValueUtils */ 93), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 27), s = n(/*! fbjs/lib/warning */ 4), u = !1, l = !1, c = [ "value", "defaultValue" ], d = {
+    var a = n(/*! object-assign */ 10), r = n(/*! ./LinkedValueUtils */ 94), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 27), s = n(/*! fbjs/lib/warning */ 4), u = !1, l = !1, c = [ "value", "defaultValue" ], d = {
         getHostProps: function(e, t) {
             return a({}, t, {
                 onChange: e._wrapperState.onChange,
@@ -18061,7 +18062,7 @@ function(e, t, n) {
     function ReactDefaultBatchingStrategyTransaction() {
         this.reinitializeTransaction();
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactUpdates */ 27), o = n(/*! ./Transaction */ 72), i = n(/*! fbjs/lib/emptyFunction */ 25), s = {
+    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactUpdates */ 27), o = n(/*! ./Transaction */ 73), i = n(/*! fbjs/lib/emptyFunction */ 25), s = {
         initialize: i,
         close: function() {
             d.isBatchingUpdates = !1;
@@ -18244,7 +18245,7 @@ function(e, t, n) {
         var t = getHostRootInstanceInContainer(e);
         return t ? t._hostContainerInfo._topLevelWrapper : null;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./DOMLazyTree */ 52)), r = n(/*! ./DOMProperty */ 35), o = n(/*! react/lib/React */ 28), i = n(/*! ./ReactBrowserEventEmitter */ 62), s = n(/*! react/lib/ReactCurrentOwner */ 32), u = n(/*! ./ReactDOMComponentTree */ 11), l = n(/*! ./ReactDOMContainerInfo */ 502), c = n(/*! ./ReactDOMFeatureFlags */ 504), d = n(/*! ./ReactFeatureFlags */ 277), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactInstrumentation */ 26), m = n(/*! ./ReactMarkupChecksum */ 522), h = n(/*! ./ReactReconciler */ 43), M = n(/*! ./ReactUpdateQueue */ 97), _ = n(/*! ./ReactUpdates */ 27), y = n(/*! fbjs/lib/emptyObject */ 39), b = n(/*! ./instantiateReactComponent */ 291), g = n(/*! fbjs/lib/invariant */ 3), v = n(/*! ./setInnerHTML */ 74), A = n(/*! ./shouldUpdateReactComponent */ 103), E = n(/*! fbjs/lib/warning */ 4), T = r.ID_ATTRIBUTE_NAME, L = r.ROOT_ATTRIBUTE_NAME, O = 1, C = 9, w = 11, S = {}, N = 1, k = function() {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./DOMLazyTree */ 52)), r = n(/*! ./DOMProperty */ 35), o = n(/*! react/lib/React */ 28), i = n(/*! ./ReactBrowserEventEmitter */ 62), s = n(/*! react/lib/ReactCurrentOwner */ 32), u = n(/*! ./ReactDOMComponentTree */ 11), l = n(/*! ./ReactDOMContainerInfo */ 502), c = n(/*! ./ReactDOMFeatureFlags */ 504), d = n(/*! ./ReactFeatureFlags */ 277), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactInstrumentation */ 26), m = n(/*! ./ReactMarkupChecksum */ 522), h = n(/*! ./ReactReconciler */ 43), M = n(/*! ./ReactUpdateQueue */ 98), _ = n(/*! ./ReactUpdates */ 27), y = n(/*! fbjs/lib/emptyObject */ 39), b = n(/*! ./instantiateReactComponent */ 291), g = n(/*! fbjs/lib/invariant */ 3), v = n(/*! ./setInnerHTML */ 75), A = n(/*! ./shouldUpdateReactComponent */ 104), E = n(/*! fbjs/lib/warning */ 4), T = r.ID_ATTRIBUTE_NAME, L = r.ROOT_ATTRIBUTE_NAME, O = 1, C = 9, w = 11, S = {}, N = 1, k = function() {
         this.rootID = N++;
     };
     k.prototype.isReactComponent = {}, k.displayName = "TopLevelWrapper", k.prototype.render = function() {
@@ -18384,7 +18385,7 @@ function(e, t, n) {
         this.reinitializeTransaction(), this.renderToStaticMarkup = !1, this.reactMountReady = r.getPooled(null), 
         this.useCreateElement = e;
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./CallbackQueue */ 269), o = n(/*! ./PooledClass */ 42), i = n(/*! ./ReactBrowserEventEmitter */ 62), s = n(/*! ./ReactInputSelection */ 279), u = n(/*! ./ReactInstrumentation */ 26), l = n(/*! ./Transaction */ 72), c = n(/*! ./ReactUpdateQueue */ 97), d = {
+    var a = n(/*! object-assign */ 10), r = n(/*! ./CallbackQueue */ 269), o = n(/*! ./PooledClass */ 42), i = n(/*! ./ReactBrowserEventEmitter */ 62), s = n(/*! ./ReactInputSelection */ 279), u = n(/*! ./ReactInstrumentation */ 26), l = n(/*! ./Transaction */ 73), c = n(/*! ./ReactUpdateQueue */ 98), d = {
         initialize: s.getSelectionInformation,
         close: s.restoreSelection
     }, p = {
@@ -18595,7 +18596,7 @@ function(e, t) {
   \*******************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! fbjs/lib/ExecutionEnvironment */ 16), r = n(/*! ./escapeTextContentForBrowser */ 73), o = n(/*! ./setInnerHTML */ 74), i = function(e, t) {
+    var a = n(/*! fbjs/lib/ExecutionEnvironment */ 16), r = n(/*! ./escapeTextContentForBrowser */ 74), o = n(/*! ./setInnerHTML */ 75), i = function(e, t) {
         if (t) {
             var n = e.firstChild;
             if (n && n === e.lastChild && 3 === n.nodeType) return void (n.nodeValue = t);
@@ -18653,7 +18654,7 @@ function(e, t, n) {
     function traverseAllChildren(e, t, n) {
         return null == e ? 0 : traverseAllChildrenImpl(e, "", t, n);
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! react/lib/ReactCurrentOwner */ 32)), r = n(/*! ./ReactElementSymbol */ 516), o = n(/*! ./getIteratorFn */ 551), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! ./KeyEscapeUtils */ 92), u = n(/*! fbjs/lib/warning */ 4), l = ".", c = ":", d = !1;
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! react/lib/ReactCurrentOwner */ 32)), r = n(/*! ./ReactElementSymbol */ 516), o = n(/*! ./getIteratorFn */ 551), i = n(/*! fbjs/lib/invariant */ 3), s = n(/*! ./KeyEscapeUtils */ 93), u = n(/*! fbjs/lib/warning */ 4), l = ".", c = ":", d = !1;
     e.exports = traverseAllChildren;
 }, /*!**********************************************!*\
   !*** ./~/react-ga/src/utils/console/warn.js ***!
@@ -18879,7 +18880,7 @@ function(e, t, n) {
         (0, r.default)(e) || (0, i.default)(n + "() in " + t + " must return a plain object. Instead received " + e + ".");
     }
     t.__esModule = !0, t.default = verifyPlainObject;
-    var a = n(/*! lodash/isPlainObject */ 88), r = _interopRequireDefault(a), o = n(/*! ./warning */ 105), i = _interopRequireDefault(o);
+    var a = n(/*! lodash/isPlainObject */ 89), r = _interopRequireDefault(a), o = n(/*! ./warning */ 106), i = _interopRequireDefault(o);
 }, /*!*********************************************!*\
   !*** ./~/react-router-redux/lib/actions.js ***!
   \*********************************************/
@@ -19038,7 +19039,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./routerWarning */ 17), s = _interopRequireDefault(i), u = n(/*! invariant */ 19), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 107), d = o.default.PropTypes, p = d.bool, f = d.object, m = d.string, h = d.func, M = d.oneOfType, _ = o.default.createClass({
+    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./routerWarning */ 17), s = _interopRequireDefault(i), u = n(/*! invariant */ 19), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 108), d = o.default.PropTypes, p = d.bool, f = d.object, m = d.string, h = d.func, M = d.oneOfType, _ = o.default.createClass({
         displayName: "Link",
         contextTypes: {
             router: c.routerShape
@@ -19172,7 +19173,7 @@ function(e, t, n) {
         return e;
     };
     t.createRouterObject = createRouterObject, t.createRoutingHistory = createRoutingHistory;
-    var r = n(/*! ./deprecateObjectProperties */ 76), o = _interopRequireDefault(r);
+    var r = n(/*! ./deprecateObjectProperties */ 77), o = _interopRequireDefault(r);
 }, /*!***************************************************!*\
   !*** ./~/react-router/lib/createMemoryHistory.js ***!
   \***************************************************/
@@ -19190,7 +19191,7 @@ function(e, t, n) {
         return a.__v2_compatible__ = !0, a;
     }
     t.__esModule = !0, t.default = createMemoryHistory;
-    var a = n(/*! history/lib/useQueries */ 70), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 147), i = _interopRequireDefault(o), s = n(/*! history/lib/createMemoryHistory */ 473), u = _interopRequireDefault(s);
+    var a = n(/*! history/lib/useQueries */ 71), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 147), i = _interopRequireDefault(o), s = n(/*! history/lib/createMemoryHistory */ 473), u = _interopRequireDefault(s);
     e.exports = t.default;
 }, /*!***************************************************!*\
   !*** ./~/react-router/lib/createRouterHistory.js ***!
@@ -19244,7 +19245,7 @@ function(e, t, n) {
         return e;
     };
     t.default = makeStateWithLocation;
-    var r = n(/*! ./deprecateObjectProperties */ 76), o = n(/*! ./routerWarning */ 17), i = _interopRequireDefault(o);
+    var r = n(/*! ./deprecateObjectProperties */ 77), o = n(/*! ./routerWarning */ 17), i = _interopRequireDefault(o);
     e.exports = t.default;
 }, /*!************************************************!*\
   !*** ./~/react-router/lib/useRouterHistory.js ***!
@@ -19263,12 +19264,12 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0, t.default = useRouterHistory;
-    var a = n(/*! history/lib/useQueries */ 70), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 147), i = _interopRequireDefault(o);
+    var a = n(/*! history/lib/useQueries */ 71), r = _interopRequireDefault(a), o = n(/*! history/lib/useBasename */ 147), i = _interopRequireDefault(o);
     e.exports = t.default;
 }, /*!***************************************!*\
   !*** ./~/react/lib/KeyEscapeUtils.js ***!
   \***************************************/
-92, /*!*******************************************!*\
+93, /*!*******************************************!*\
   !*** ./~/react/lib/ReactElementSymbol.js ***!
   \*******************************************/
 function(e, t) {
@@ -19330,7 +19331,7 @@ function(e, t, n) {
             t.propTypes && i(t.propTypes, e.props, "prop", n, e, null), "function" == typeof t.getDefaultProps && l(t.getDefaultProps.isReactClassApproved, "getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
         }
     }
-    var a = n(/*! ./ReactCurrentOwner */ 32), r = n(/*! ./ReactComponentTreeHook */ 21), o = n(/*! ./ReactElement */ 45), i = n(/*! ./checkReactTypeSpec */ 615), s = n(/*! ./canDefineProperty */ 77), u = n(/*! ./getIteratorFn */ 315), l = n(/*! fbjs/lib/warning */ 4), c = {}, d = {
+    var a = n(/*! ./ReactCurrentOwner */ 32), r = n(/*! ./ReactComponentTreeHook */ 21), o = n(/*! ./ReactElement */ 45), i = n(/*! ./checkReactTypeSpec */ 615), s = n(/*! ./canDefineProperty */ 78), u = n(/*! ./getIteratorFn */ 315), l = n(/*! fbjs/lib/warning */ 4), c = {}, d = {
         createElement: function(e, t, n) {
             var a = "string" == typeof e || "function" == typeof e;
             if (!a && "function" != typeof e && "string" != typeof e) {
@@ -19571,7 +19572,7 @@ function(e, t, n) {
         }, a[i.default] = observable, a;
     }
     t.__esModule = !0, t.ActionTypes = void 0, t.default = createStore;
-    var a = n(/*! lodash/isPlainObject */ 88), r = _interopRequireDefault(a), o = n(/*! symbol-observable */ 626), i = _interopRequireDefault(o), s = t.ActionTypes = {
+    var a = n(/*! lodash/isPlainObject */ 89), r = _interopRequireDefault(a), o = n(/*! symbol-observable */ 626), i = _interopRequireDefault(o), s = t.ActionTypes = {
         INIT: "@@redux/INIT"
     };
 }, /*!**************************************!*\
@@ -20355,7 +20356,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/NewsPostConstants */ 121), r = _interopRequireDefault(a), o = n(/*! ../services/NewsPostService */ 67), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/NewsPostConstants */ 121), r = _interopRequireDefault(a), o = n(/*! ../services/NewsPostService */ 68), i = _interopRequireDefault(o), s = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -20645,15 +20646,15 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! react-addons-css-transition-group */ 41), c = _interopRequireDefault(l), d = n(/*! react-router-redux */ 302), p = n(/*! ../library/alerts */ 15), f = n(/*! ../library/loader */ 80), m = n(/*! ../library/authentication */ 29), h = n(/*! ../interceptors */ 396), M = _interopRequireDefault(h), _ = n(/*! ../constants/authorizedRoutesConfig */ 395), y = _interopRequireDefault(_), b = n(/*! ../../envVariables */ 112), g = n(/*! ../store */ 83), v = _interopRequireDefault(g), A = n(/*! ./pieces/TopNav */ 388), E = _interopRequireDefault(A), T = n(/*! ./pieces/Footer */ 387), L = _interopRequireDefault(T), O = n(/*! ./ViewWrapper */ 8);
-    _interopRequireDefault(O);
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! react-addons-css-transition-group */ 41), c = _interopRequireDefault(l), d = n(/*! react-router-redux */ 302), p = n(/*! ../library/alerts */ 15), f = n(/*! ../library/loader */ 81), m = n(/*! ../library/authentication */ 29), h = n(/*! ../interceptors */ 396), M = _interopRequireDefault(h), _ = n(/*! ../constants/authorizedRoutesConfig */ 395), y = _interopRequireDefault(_), b = n(/*! ../../envVariables */ 112), g = n(/*! ../../roleConfig */ 64), v = _interopRequireDefault(g), A = n(/*! ../store */ 84), E = _interopRequireDefault(A), T = n(/*! ./pieces/TopNav */ 388), L = _interopRequireDefault(T), O = n(/*! ./pieces/Footer */ 387), C = _interopRequireDefault(O), w = n(/*! ./ViewWrapper */ 8);
+    _interopRequireDefault(w);
     (0, M.default)(b.baseApiRoute, 300);
-    var C = void 0, w = function mapStateToProps(e) {
+    var S = void 0, N = function mapStateToProps(e) {
         return {
             currentUser: e.user,
             isAuthenticated: e.isAuthenticated
         };
-    }, S = function mapDispatchToProps(e) {
+    }, k = function mapDispatchToProps(e) {
         return (0, s.bindActionCreators)({
             addAlert: p.AlertActions.addAlert,
             showLoader: f.LoaderActions.showLoader,
@@ -20661,7 +20662,7 @@ function(e, t, n) {
             setRedirect: m.UserActions.setRedirect,
             setUser: m.UserActions.setUser
         }, e);
-    }, N = function(e) {
+    }, D = function(e) {
         function Layout() {
             _classCallCheck(this, Layout);
             var e = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this));
@@ -20672,15 +20673,15 @@ function(e, t, n) {
         return _inherits(Layout, e), a(Layout, [ {
             key: "componentDidMount",
             value: function componentDidMount() {
-                var e = this, t = (0, d.syncHistoryWithStore)(i.browserHistory, v.default);
-                C = t.listen(function(t) {
+                var e = this, t = (0, d.syncHistoryWithStore)(i.browserHistory, E.default);
+                S = t.listen(function(t) {
                     e.onViewChange(t);
                 });
             }
         }, {
             key: "componentWillUnmount",
             value: function componentWillUnmount() {
-                C();
+                S();
             }
         }, {
             key: "onViewChange",
@@ -20688,16 +20689,16 @@ function(e, t, n) {
                 var t = this, n = e.pathname, a = void 0, r = void 0;
                 if (this.state.waitingForInitialAuthCheck && this.props.showLoader(), this.props.isAuthenticated) {
                     var o = this.props.currentUser.roleConfig ? this.props.currentUser.roleConfig.homeState : "/";
-                    this.props.setRedirect(o), a = (0, m.authorizedRoute)(y.default, n), a && (r = (0, 
-                    m.checkAuthorization)(a.accessControl, this.props.currentUser, roleConfig), r || (this.showAlert("notAuthorized"), 
-                    i.browserHistory.push("/")));
+                    this.props.setRedirect(o), a = (0, m.authorizedRoute)(y.default, n), a ? (r = (0, 
+                    m.checkAuthorization)(a.accessControl, this.props.currentUser, v.default), r || (this.showAlert("notAuthorized"), 
+                    i.browserHistory.push("/players/dashboard"))) : r = !0;
                 } else a = (0, m.authorizedRoute)(y.default, n), a ? (this.showAlert("notAuthenticated"), 
                 this.props.setRedirect(e.pathname), i.browserHistory.push("/login")) : r = !0;
-                this.state.waitingForInitialAuthCheck && r && this.setState({
+                this.state.waitingForInitialAuthCheck && r ? this.setState({
                     waitingForInitialAuthCheck: !1
                 }, function() {
                     t.props.hideLoader();
-                });
+                }) : (console.log("Hide loader"), this.props.hideLoader());
             }
         }, {
             key: "showAlert",
@@ -20707,7 +20708,7 @@ function(e, t, n) {
                         t.props.addAlert({
                             title: "Not Authenticated",
                             message: "Please login or register to continue.",
-                            type: "info",
+                            type: "error",
                             delay: 3e3
                         });
                     },
@@ -20726,7 +20727,7 @@ function(e, t, n) {
             key: "render",
             value: function render() {
                 var e = this.props.location.pathname;
-                return o.default.createElement("div", null, o.default.createElement("header", null, o.default.createElement(E.default, null)), o.default.createElement("div", {
+                return o.default.createElement("div", null, o.default.createElement("header", null, o.default.createElement(L.default, null)), o.default.createElement("div", {
                     className: "site-background"
                 }), o.default.createElement("div", {
                     className: "logo-banner row center"
@@ -20748,7 +20749,9 @@ function(e, t, n) {
                 }, o.default.createElement("img", {
                     src: "/images/BC_Web_Logo_mobile.png",
                     alt: "BattleComm"
-                })))), this.state.waitingForInitialAuthCheck ? o.default.createElement("div", null) : o.default.createElement(c.default, {
+                })))), this.state.waitingForInitialAuthCheck ? o.default.createElement("div", {
+                    className: "content-container"
+                }) : o.default.createElement(c.default, {
                     transitionName: "view",
                     transitionAppear: !0,
                     transitionAppearTimeout: 250,
@@ -20760,11 +20763,11 @@ function(e, t, n) {
                     className: "content-container"
                 }, o.default.cloneElement(this.props.children, {
                     key: e
-                })), o.default.createElement(p.Alerts, null), o.default.createElement(f.Loader, null), o.default.createElement(L.default, null));
+                })), o.default.createElement(p.Alerts, null), o.default.createElement(f.Loader, null), o.default.createElement(C.default, null));
             }
         } ]), Layout;
     }(o.default.Component);
-    t.default = (0, u.connect)(w, S)(N);
+    t.default = (0, u.connect)(N, k)(D);
 }, /*!*****************************************************!*\
   !*** ./src/components/pages/ForgotPasswordPage.jsx ***!
   \*****************************************************/
@@ -20881,7 +20884,7 @@ function(e, t, n) {
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-router */ 5), u = n(/*! react-redux */ 7), l = n(/*! react-addons-css-transition-group */ 41), c = (_interopRequireDefault(l), 
     n(/*! jquery */ 474)), d = _interopRequireDefault(c), p = n(/*! react-twitter-widgets */ 600), f = n(/*! ../../scripts/jquery.cslider.js */ 442), m = _interopRequireDefault(f), h = (n(/*! ../../library/alerts */ 15), 
     n(/*! ../../library/utilities/isEmpty */ 132)), M = (_interopRequireDefault(h), 
-    n(/*! ../../library/iframe */ 404)), _ = _interopRequireDefault(M), y = n(/*! ../../actions/BannerSlideActions */ 342), b = _interopRequireDefault(y), g = n(/*! ../../actions/GameSystemActions */ 58), v = _interopRequireDefault(g), A = n(/*! ../../library/Modal */ 65), E = _interopRequireDefault(A), T = function mapStateToProps(e) {
+    n(/*! ../../library/iframe */ 404)), _ = _interopRequireDefault(M), y = n(/*! ../../actions/BannerSlideActions */ 342), b = _interopRequireDefault(y), g = n(/*! ../../actions/GameSystemActions */ 58), v = _interopRequireDefault(g), A = n(/*! ../../library/Modal */ 66), E = _interopRequireDefault(A), T = function mapStateToProps(e) {
         return {
             bannerSlides: e.bannerSlides,
             gameSystems: e.gameSystems
@@ -20902,7 +20905,7 @@ function(e, t, n) {
                     link: "/login",
                     actionText: "Sign Up",
                     Files: [ {
-                        locationUrl: "/images/branding/",
+                        locationUrl: "/banner/",
                         name: "logo.png"
                     } ]
                 } ],
@@ -20976,7 +20979,7 @@ function(e, t, n) {
                     }, e.actionText), o.default.createElement("div", {
                         className: "da-img"
                     }, o.default.createElement("img", {
-                        src: "/uploads/" + e.Files[0].locationUrl + e.Files[0].name,
+                        src: "/uploads" + e.Files[0].locationUrl + e.Files[0].name,
                         alt: "image01"
                     })));
                 }), o.default.createElement("nav", {
@@ -21296,7 +21299,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../library/alerts */ 15), c = n(/*! ../../library/validations */ 24), d = n(/*! ../../library/authentication */ 29), p = n(/*! ../../library/Modal */ 65), f = _interopRequireDefault(p), m = n(/*! ../../actions/GameSystemActions */ 58), h = _interopRequireDefault(m), M = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../library/alerts */ 15), c = n(/*! ../../library/validations */ 24), d = n(/*! ../../library/authentication */ 29), p = n(/*! ../../library/Modal */ 66), f = _interopRequireDefault(p), m = n(/*! ../../actions/GameSystemActions */ 58), h = _interopRequireDefault(m), M = function mapStateToProps(e) {
         return {
             gameSystems: e.gameSystems,
             user: e.user,
@@ -21343,14 +21346,22 @@ function(e, t, n) {
                         t.props.setRedirect(!1), u.browserHistory.push(n);
                     } else u.browserHistory.push(e);
                 }).catch(function(e) {
-                    console.log(e), "Incorrect password!" === e.message && t.showAlert("incorrectPassword"), 
-                    "Incorrect username or email!" === e.message && t.showAlert("incorrectUsername");
+                    console.log(e), "Account not activated." === e.message && t.showAlert("accountNotActivated"), 
+                    "Incorrect password!" === e.message && t.showAlert("incorrectPassword"), "Incorrect username or email!" === e.message && t.showAlert("incorrectUsername");
                 });
             }
         }, {
             key: "showAlert",
             value: function showAlert(e) {
                 var t = this, n = {
+                    accountNotActivated: function accountNotActivated() {
+                        t.props.addAlert({
+                            title: "Account Not Activated",
+                            message: "Your account has not been activated. Please check your e-mail or contact support.",
+                            type: "error",
+                            delay: 3e3
+                        });
+                    },
                     loginSuccess: function loginSuccess() {
                         t.props.addAlert({
                             title: "Login Success",
@@ -21444,7 +21455,7 @@ function(e, t, n) {
                     validate: "password",
                     required: !0
                 })))), o.default.createElement("div", {
-                    className: "form-group small-12 columns text-right"
+                    className: "form-group small-12 columns text-right push-top"
                 }, o.default.createElement(u.Link, {
                     key: "forgotPassword",
                     to: "/forgot-password",
@@ -21732,7 +21743,8 @@ function(e, t, n) {
             value: function handleSubmit(e) {
                 var t = this;
                 this.props.createUser(this.state.credentials).then(function(e) {
-                    t.showAlert("registrationSuccess"), u.browserHistory.push("/login");
+                    "member" === t.state.credentials.role ? (t.showAlert("registrationSuccess"), u.browserHistory.push("/login")) : (t.showAlert("registrationPending"), 
+                    u.browserHistory.push("/login"));
                 }).catch(function(e) {
                     console.log(e), "Username taken" === e.message && t.showAlert("invalidUsername"), 
                     "Email taken" === e.message && t.showAlert("invalidEmail");
@@ -21742,6 +21754,14 @@ function(e, t, n) {
             key: "showAlert",
             value: function showAlert(e) {
                 var t = this, n = {
+                    registrationPending: function registrationPending() {
+                        t.props.addAlert({
+                            title: "Registration Pending",
+                            message: "Please check your e-mail for further instructions and account activation.",
+                            type: "success",
+                            delay: 3e3
+                        });
+                    },
                     registrationSuccess: function registrationSuccess() {
                         t.props.addAlert({
                             title: "Registration Success",
@@ -21772,14 +21792,15 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                return o.default.createElement(f.default, null, o.default.createElement("div", {
+                return o.default.createElement(f.default, {
+                    headerImage: "/images/Titles/Register.png",
+                    alt: "Register"
+                }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
-                }, o.default.createElement("h1", {
-                    className: "push-bottom-2x"
-                }, "Register"), o.default.createElement("hr", null)), o.default.createElement("div", {
-                    className: "small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns"
+                }, o.default.createElement("h2", null, "Sign Up to Create a Player Profile"), o.default.createElement("div", {
+                    className: "container ice"
                 }, o.default.createElement(c.Form, {
                     name: "registrationForm",
                     submitText: "Register",
@@ -21787,7 +21808,18 @@ function(e, t, n) {
                 }, o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
-                    className: "form-group small-12 columns"
+                    className: "form-group small-12 medium-6 columns"
+                }, o.default.createElement("label", {
+                    className: "required"
+                }, "Email"), o.default.createElement(c.Input, {
+                    type: "text",
+                    name: "email",
+                    value: this.state.credentials.email || "",
+                    handleInputChange: this.handleInputChange,
+                    validate: "email",
+                    required: !0
+                })), o.default.createElement("div", {
+                    className: "form-group small-12 medium-6 columns"
                 }, o.default.createElement("label", {
                     className: "required"
                 }, "Username"), o.default.createElement(c.Input, {
@@ -21800,31 +21832,31 @@ function(e, t, n) {
                 }))), o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
-                    className: "form-group small-12 columns"
+                    className: "form-group small-12 medium-6 columns"
                 }, o.default.createElement("label", {
                     className: "required"
-                }, "Email"), o.default.createElement(c.Input, {
+                }, "First Name"), o.default.createElement(c.Input, {
                     type: "text",
-                    name: "email",
-                    value: this.state.credentials.email || "",
+                    name: "firstName",
+                    value: this.state.credentials.firstName || "",
                     handleInputChange: this.handleInputChange,
-                    validate: "email",
+                    validate: "name",
                     required: !0
-                }))), o.default.createElement("label", {
+                })), o.default.createElement("div", {
+                    className: "form-group small-12 medium-6 columns"
+                }, o.default.createElement("label", {
                     className: "required"
-                }, "User Role"), o.default.createElement(c.Select, {
-                    name: "role",
-                    value: this.state.credentials.role,
+                }, "Last Name"), o.default.createElement(c.Input, {
+                    type: "text",
+                    name: "lastName",
+                    value: this.state.credentials.lastName || "",
                     handleInputChange: this.handleInputChange,
+                    validate: "name",
                     required: !0
-                }, o.default.createElement("option", {
-                    value: ""
-                }, "--Select--"), o.default.createElement("option", {
-                    value: "systemAdmin"
-                }, "Site Admin")), o.default.createElement("div", {
+                }))), o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
-                    className: "form-group small-12 columns"
+                    className: "form-group small-12 medium-6 columns"
                 }, o.default.createElement("label", {
                     className: "required"
                 }, "Password"), o.default.createElement(c.Input, {
@@ -21835,10 +21867,8 @@ function(e, t, n) {
                     validate: "password",
                     required: !0,
                     inputMatch: this.state.passwordRepeat
-                }))), o.default.createElement("div", {
-                    className: "row"
-                }, o.default.createElement("div", {
-                    className: "form-group small-12 columns"
+                })), o.default.createElement("div", {
+                    className: "form-group small-12 medium-6 columns"
                 }, o.default.createElement("label", {
                     className: "required"
                 }, "Repeat Password"), o.default.createElement(c.Input, {
@@ -21849,14 +21879,53 @@ function(e, t, n) {
                     validate: "password",
                     required: !0,
                     inputMatch: this.state.credentials.password
-                })))), o.default.createElement("div", {
-                    className: "form-group small-12"
+                }))), o.default.createElement("div", {
+                    className: "row"
+                }, o.default.createElement("div", {
+                    className: "small-12 medium-6 columns right"
+                }, o.default.createElement("label", {
+                    className: "required"
+                }, "User Role"), o.default.createElement(c.Select, {
+                    name: "role",
+                    value: this.state.credentials.role,
+                    handleInputChange: this.handleInputChange,
+                    required: !0
+                }, o.default.createElement("option", {
+                    value: ""
+                }, "--Select--"), o.default.createElement("option", {
+                    value: "member"
+                }, "Member"), o.default.createElement("option", {
+                    value: "subscriber"
+                }, "Subscriber"), o.default.createElement("option", {
+                    value: "tourneyAdmin"
+                }, "Tournament Admin"), o.default.createElement("option", {
+                    value: "eventAdmin"
+                }, "Event Admin"), o.default.createElement("option", {
+                    value: "newsContributor"
+                }, "News Contributor"), o.default.createElement("option", {
+                    value: "venueAdmin"
+                }, "Venue Admin"), o.default.createElement("option", {
+                    value: "clubAdmin"
+                }, "Club Admin"), o.default.createElement("option", {
+                    value: "systemAdmin"
+                }, "Site Admin"))))), o.default.createElement("div", {
+                    className: "row"
+                }, o.default.createElement("div", {
+                    className: "form-group small-12 columns"
                 }, "Already have an account? ", o.default.createElement(u.Link, {
                     key: "login",
                     to: "/login",
                     activeClassName: "active",
                     onClick: this.closeMenu
-                }, "Go to Login")))));
+                }, "Go to Login"))), o.default.createElement("div", {
+                    className: "row"
+                }, o.default.createElement("div", {
+                    className: "small-12 columns text-center"
+                }, o.default.createElement("h5", {
+                    className: "required"
+                }, "Password Requirements"), o.default.createElement("ul", {
+                    className: "no-bullets"
+                }, o.default.createElement("li", null, "Minimum of 8 characters"), o.default.createElement("li", null, "At least one lowercase letter"), o.default.createElement("li", null, "At least one uppercase letter"), o.default.createElement("li", null, "Minimum of 8 characters"), o.default.createElement("li", null, "At least one symbol/special character !@#$%^&_-+=,./?"))))))));
             }
         } ]), RegistrationPage;
     }(o.default.Component);
@@ -22031,8 +22100,9 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/validations */ 24), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../actions/GameSystemActions */ 58), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 66), _ = _interopRequireDefault(M), y = n(/*! ../../../services/VenueService */ 447), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 22), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/validations */ 24), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../actions/GameSystemActions */ 58), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 67), _ = _interopRequireDefault(M), y = n(/*! ../../../services/VenueService */ 447), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 22), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
         return {
+            forms: e.forms,
             gameSystems: e.gameSystems,
             user: e.user
         };
@@ -22047,9 +22117,10 @@ function(e, t, n) {
             var e = _possibleConstructorReturn(this, (AssignPointsPage.__proto__ || Object.getPrototypeOf(AssignPointsPage)).call(this));
             return e.state = {
                 factions: [ [] ],
+                selectedGameSystems: [ "" ],
                 players: [ {
-                    FactionId: "",
-                    GameSystemId: ""
+                    faction: "",
+                    gameSystem: ""
                 } ],
                 venueEvent: {
                     eventDate: ""
@@ -22069,13 +22140,14 @@ function(e, t, n) {
         }, {
             key: "addPlayer",
             value: function addPlayer() {
-                var e = this.state.players, t = this.state.factions;
-                t[e.length] = [], e[e.length] = {
-                    FactionId: "",
-                    GameSystemId: ""
+                var e = this.state.players, t = this.state.factions, n = this.state.selectedGameSystems;
+                t[e.length] = [], n[e.length] = "", e[e.length] = {
+                    faction: "",
+                    gameSystem: ""
                 }, this.setState({
                     factions: t,
-                    players: e
+                    players: e,
+                    selectedGameSystems: n
                 });
             }
         }, {
@@ -22089,10 +22161,13 @@ function(e, t, n) {
             key: "handleGameSystemChange",
             value: function handleGameSystemChange(e, t) {
                 var n = this, a = this.state.players;
-                a[e].GameSystemId = t.target.value, a[e].FactionId = "", _.default.get(t.target.value).then(function(t) {
-                    factions[e] = t.Factions, n.setState({
+                a[e].faction = "";
+                var r = this.state.factions, o = this.state.selectedGameSystems;
+                o[e] = t.target.value, _.default.get(t.target.value).then(function(t) {
+                    r[e] = t.Factions, a[e].gameSystem = t.name, n.setState({
                         players: a,
-                        factions: factions
+                        factions: r,
+                        selectedGameSystems: o
                     });
                 });
             }
@@ -22112,17 +22187,18 @@ function(e, t, n) {
                     players: this.state.players
                 };
                 b.default.submitPointAssignment(t).then(function() {
-                    e.addAlert("pointsSubmitted"), u.browserHistory.push("/admin");
+                    e.showAlert("pointsSubmitted"), u.browserHistory.push("/admin");
                 });
             }
         }, {
             key: "removePlayer",
             value: function removePlayer(e, t) {
                 t.preventDefault();
-                var n = this.state.players, a = this.state.factions;
-                n.splice(e, 1), a.splice(e, 1), this.setState({
+                var n = this.state.players, a = this.state.factions, r = this.state.selectedGameSystems;
+                n.splice(e, 1), a.splice(e, 1), r.splice(e, 1), this.setState({
                     players: n,
-                    factions: a
+                    factions: a,
+                    selectedGameSystems: r
                 });
             }
         }, {
@@ -22143,7 +22219,8 @@ function(e, t, n) {
         }, {
             key: "render",
             value: function render() {
-                var e = this;
+                var e = this, t = (0, d.getFormErrorCount)(this.props.forms, "venueEventForm") < 1, n = (0, 
+                d.getFormErrorCount)(this.props.forms, "venueEventPlayersForm") < 1;
                 return o.default.createElement(f.default, null, o.default.createElement("div", {
                     className: "small-12 columns"
                 }, o.default.createElement("h1", null, "Reward Point Assignment"), o.default.createElement("hr", null), o.default.createElement(v.default, null), o.default.createElement("hr", null)), o.default.createElement("div", {
@@ -22193,7 +22270,7 @@ function(e, t, n) {
                 }, o.default.createElement("label", {
                     className: "required"
                 }, "Event Date"), o.default.createElement(d.DatePicker, {
-                    name: "venueAdmin",
+                    name: "eventDate",
                     value: this.state.venueEvent.eventDate,
                     handleInputChange: this.handleEventInputChange,
                     required: !0
@@ -22203,12 +22280,13 @@ function(e, t, n) {
                     className: "required"
                 }, "Return Email"), o.default.createElement(d.Input, {
                     type: "text",
-                    name: "eventName",
-                    value: this.state.venueEvent.eventName,
+                    name: "returnEmail",
+                    value: this.state.venueEvent.returnEmail,
                     handleInputChange: this.handleEventInputChange,
+                    validate: "email",
                     required: !0
                 })))), o.default.createElement("h2", null, "Players"), o.default.createElement(d.Form, {
-                    name: "venueEventForm",
+                    name: "venueEventPlayersForm",
                     submitText: "Submit Point Assignment",
                     submitButton: !1
                 }, this.state.players.map(function(t, n) {
@@ -22235,6 +22313,7 @@ function(e, t, n) {
                         name: "email",
                         value: e.state.players[n].email,
                         handleInputChange: e.handlePlayerInputChange.bind(e, n),
+                        validate: "email",
                         required: !0
                     })), o.default.createElement("div", {
                         className: "form-group small-12 medium-4 columns"
@@ -22253,8 +22332,8 @@ function(e, t, n) {
                     }, o.default.createElement("label", {
                         className: "required"
                     }, "Game System"), o.default.createElement(d.Select, {
-                        name: "GameSystemId",
-                        value: e.state.players[n].GameSystemId,
+                        name: "selectedGameSystems",
+                        value: e.state.selectedGameSystems[n].gameSystem,
                         handleInputChange: e.handleGameSystemChange.bind(e, n),
                         required: !0
                     }, o.default.createElement("option", {
@@ -22269,16 +22348,15 @@ function(e, t, n) {
                     }, o.default.createElement("label", {
                         className: "required"
                     }, "Faction"), o.default.createElement(d.Select, {
-                        name: "FactionId",
-                        value: e.state.players[n].FactionId,
-                        handleInputChange: e.handlePlayerInputChange.bind(e, n),
-                        required: !0
+                        name: "faction",
+                        value: e.state.players[n].faction,
+                        handleInputChange: e.handlePlayerInputChange.bind(e, n)
                     }, o.default.createElement("option", {
                         value: ""
                     }, "--Select--"), e.state.factions[n].map(function(e, t) {
                         return o.default.createElement("option", {
                             key: t,
-                            value: e.id
+                            value: e.name
                         }, e.name);
                     })))), o.default.createElement("div", {
                         className: "row"
@@ -22287,7 +22365,7 @@ function(e, t, n) {
                     }, o.default.createElement("label", {
                         className: "required"
                     }, "Total Wins"), o.default.createElement(d.Input, {
-                        type: "text",
+                        type: "number",
                         name: "totalWins",
                         value: e.state.players[n].totalWins,
                         handleInputChange: e.handlePlayerInputChange.bind(e, n),
@@ -22297,7 +22375,7 @@ function(e, t, n) {
                     }, o.default.createElement("label", {
                         className: "required"
                     }, "Total Draws"), o.default.createElement(d.Input, {
-                        type: "text",
+                        type: "number",
                         name: "totalDraws",
                         value: e.state.players[n].totalDraws,
                         handleInputChange: e.handlePlayerInputChange.bind(e, n),
@@ -22328,8 +22406,9 @@ function(e, t, n) {
                 }), " Add Player")), o.default.createElement("div", {
                     className: "form-group text-right"
                 }, o.default.createElement("button", {
-                    className: "button",
-                    onClick: this.handleSubmit
+                    className: "button right",
+                    onClick: this.handleSubmit,
+                    disabled: !t || !n
                 }, "Submit Point Assignment")))));
             }
         } ]), AssignPointsPage;
@@ -22378,7 +22457,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-router */ 5), u = n(/*! react-redux */ 7), l = n(/*! ../../../library/validations */ 24), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/alerts */ 15), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../actions/FactionActions */ 343), h = (_interopRequireDefault(m), 
-    n(/*! ../../../actions/ManufacturerActions */ 64)), M = _interopRequireDefault(h), _ = n(/*! ../../../services/FactionService */ 137), y = _interopRequireDefault(_), b = n(/*! ../../../services/FileService */ 59), g = _interopRequireDefault(b), v = n(/*! ../../../services/GameSystemService */ 66), A = _interopRequireDefault(v), E = n(/*! ../../pieces/AdminMenu */ 22), T = _interopRequireDefault(E), L = function mapStateToProps(e) {
+    n(/*! ../../../actions/ManufacturerActions */ 65)), M = _interopRequireDefault(h), _ = n(/*! ../../../services/FactionService */ 137), y = _interopRequireDefault(_), b = n(/*! ../../../services/FileService */ 59), g = _interopRequireDefault(b), v = n(/*! ../../../services/GameSystemService */ 67), A = _interopRequireDefault(v), E = n(/*! ../../pieces/AdminMenu */ 22), T = _interopRequireDefault(E), L = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers
         };
@@ -22717,7 +22796,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = (n(/*! ../../../library/alerts */ 15), 
-    n(/*! ../../../library/utilities */ 20)), u = n(/*! ../../../library/validations */ 24), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../services/FileService */ 59), p = _interopRequireDefault(d), f = n(/*! ../../../services/ManufacturerService */ 81), m = _interopRequireDefault(f), h = n(/*! ../../pieces/AdminMenu */ 22), M = _interopRequireDefault(h), _ = function(e) {
+    n(/*! ../../../library/utilities */ 20)), u = n(/*! ../../../library/validations */ 24), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../services/FileService */ 59), p = _interopRequireDefault(d), f = n(/*! ../../../services/ManufacturerService */ 82), m = _interopRequireDefault(f), h = n(/*! ../../pieces/AdminMenu */ 22), M = _interopRequireDefault(h), _ = function(e) {
         function EditManufacturerPage() {
             _classCallCheck(this, EditManufacturerPage);
             var e = _possibleConstructorReturn(this, (EditManufacturerPage.__proto__ || Object.getPrototypeOf(EditManufacturerPage)).call(this));
@@ -22947,7 +23026,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/validations */ 24), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 59), h = _interopRequireDefault(m), M = n(/*! ../../../actions/ManufacturerActions */ 64), _ = _interopRequireDefault(M), y = n(/*! ../../../services/NewsPostService */ 67), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 22), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/validations */ 24), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 59), h = _interopRequireDefault(m), M = n(/*! ../../../actions/ManufacturerActions */ 65), _ = _interopRequireDefault(M), y = n(/*! ../../../services/NewsPostService */ 68), b = _interopRequireDefault(y), g = n(/*! ../../pieces/AdminMenu */ 22), v = _interopRequireDefault(g), A = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers,
             user: e.user
@@ -23413,7 +23492,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/validations */ 24), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 59), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 66), _ = _interopRequireDefault(M), y = n(/*! ../../../actions/ManufacturerActions */ 64), b = _interopRequireDefault(y), g = n(/*! ../../../services/ManufacturerService */ 81), v = _interopRequireDefault(g), A = n(/*! ../../../services/ProductService */ 82), E = _interopRequireDefault(A), T = n(/*! ../../pieces/AdminMenu */ 22), L = _interopRequireDefault(T), O = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../../library/validations */ 24), p = n(/*! ../../ViewWrapper */ 8), f = _interopRequireDefault(p), m = n(/*! ../../../services/FileService */ 59), h = _interopRequireDefault(m), M = n(/*! ../../../services/GameSystemService */ 67), _ = _interopRequireDefault(M), y = n(/*! ../../../actions/ManufacturerActions */ 65), b = _interopRequireDefault(y), g = n(/*! ../../../services/ManufacturerService */ 82), v = _interopRequireDefault(g), A = n(/*! ../../../services/ProductService */ 83), E = _interopRequireDefault(A), T = n(/*! ../../pieces/AdminMenu */ 22), L = _interopRequireDefault(T), O = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers
         };
@@ -24199,7 +24278,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/pagination */ 37), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../ViewWrapper */ 8), p = _interopRequireDefault(d), f = n(/*! ../../../actions/ManufacturerActions */ 64), m = _interopRequireDefault(f), h = n(/*! ../../pieces/AdminMenu */ 22), M = _interopRequireDefault(h), _ = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../../library/pagination */ 37), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../ViewWrapper */ 8), p = _interopRequireDefault(d), f = n(/*! ../../../actions/ManufacturerActions */ 65), m = _interopRequireDefault(f), h = n(/*! ../../pieces/AdminMenu */ 22), M = _interopRequireDefault(h), _ = function mapStateToProps(e) {
         return {
             manufacturers: e.manufacturers
         };
@@ -25140,7 +25219,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 67), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 20), p = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 68), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 20), p = function(e) {
         function NewsPage() {
             _classCallCheck(this, NewsPage);
             var e = _possibleConstructorReturn(this, (NewsPage.__proto__ || Object.getPrototypeOf(NewsPage)).call(this));
@@ -25165,10 +25244,6 @@ function(e, t, n) {
                     headerImage: "/images/Titles/News.png",
                     alt: "News"
                 }, o.default.createElement("div", {
-                    className: "row"
-                }, o.default.createElement("div", {
-                    className: "small-12 columns"
-                }, o.default.createElement("h1", null, "News"), o.default.createElement("hr", null))), o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -25252,7 +25327,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 67), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 20), p = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/NewsPostService */ 68), c = _interopRequireDefault(l), d = n(/*! ../../../library/utilities */ 20), p = function(e) {
         function NewsPostPage() {
             _classCallCheck(this, NewsPostPage);
             var e = _possibleConstructorReturn(this, (NewsPostPage.__proto__ || Object.getPrototypeOf(NewsPostPage)).call(this));
@@ -25280,10 +25355,6 @@ function(e, t, n) {
                     headerImage: "/images/Titles/News.png",
                     alt: "News"
                 }, o.default.createElement("div", {
-                    className: "row"
-                }, o.default.createElement("div", {
-                    className: "small-12 columns"
-                }, o.default.createElement("h1", null, e.title), o.default.createElement("hr", null))), o.default.createElement("div", {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 columns"
@@ -25360,7 +25431,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = (n(/*! react-router */ 5), 
-    n(/*! redux */ 6)), s = n(/*! react-redux */ 7), u = n(/*! ../../../library/alerts */ 15), l = n(/*! ../../../library/validations */ 24), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../ViewWrapper */ 8), p = _interopRequireDefault(d), f = n(/*! ../../../services/PlayerService */ 68), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
+    n(/*! redux */ 6)), s = n(/*! react-redux */ 7), u = n(/*! ../../../library/alerts */ 15), l = n(/*! ../../../library/validations */ 24), c = n(/*! ../../../library/utilities */ 20), d = n(/*! ../../ViewWrapper */ 8), p = _interopRequireDefault(d), f = n(/*! ../../../services/PlayerService */ 69), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
         return {
             forms: e.forms,
             user: e.user
@@ -25514,7 +25585,9 @@ function(e, t, n) {
                     validate: "foreignPhone"
                 }))) : o.default.createElement("div", {
                     className: "user-contact"
-                }, o.default.createElement("ul", null, o.default.createElement("li", null, "First Name: ", e.firstName), o.default.createElement("li", null, "Last Name: ", e.lastName), o.default.createElement("li", null, "E-mail: ", e.email), o.default.createElement("li", null, "Phone: ", e.mainPhone))), t.contact ? o.default.createElement("div", {
+                }, o.default.createElement("ul", {
+                    className: "no-bullets"
+                }, o.default.createElement("li", null, "First Name: ", e.firstName), o.default.createElement("li", null, "Last Name: ", e.lastName), o.default.createElement("li", null, "E-mail: ", e.email), o.default.createElement("li", null, "Phone: ", e.mainPhone))), t.contact ? o.default.createElement("div", {
                     className: "action-group"
                 }, o.default.createElement("button", {
                     className: "cancel",
@@ -25602,7 +25675,9 @@ function(e, t, n) {
                     handleInputChange: this.handleInputChange
                 }))) : o.default.createElement("div", {
                     className: "user-shipping"
-                }, o.default.createElement("ul", null, o.default.createElement("li", null, "Address: ", e.streetAddress), o.default.createElement("li", null, "Apt/Suite: ", e.aptSuite), o.default.createElement("li", null, "City: ", e.city), o.default.createElement("li", null, "State: ", e.state), o.default.createElement("li", null, "Zip: ", e.zip))), t.shipping ? o.default.createElement("div", {
+                }, o.default.createElement("ul", {
+                    className: "no-bullets"
+                }, o.default.createElement("li", null, "Address: ", e.streetAddress), o.default.createElement("li", null, "Apt/Suite: ", e.aptSuite), o.default.createElement("li", null, "City: ", e.city), o.default.createElement("li", null, "State: ", e.state), o.default.createElement("li", null, "Zip: ", e.zip))), t.shipping ? o.default.createElement("div", {
                     className: "action-group"
                 }, o.default.createElement("button", {
                     className: "cancel",
@@ -25670,7 +25745,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = (n(/*! redux */ 6), 
-    n(/*! react-redux */ 7)), s = n(/*! react-router */ 5), u = n(/*! ../../ViewWrapper */ 8), l = _interopRequireDefault(u), c = n(/*! ../../../services/PlayerService */ 68), d = _interopRequireDefault(c), p = void 0, f = function mapStateToProps(e) {
+    n(/*! react-redux */ 7)), s = n(/*! react-router */ 5), u = n(/*! ../../ViewWrapper */ 8), l = _interopRequireDefault(u), c = n(/*! ../../../services/PlayerService */ 69), d = _interopRequireDefault(c), p = void 0, f = function mapStateToProps(e) {
         return {
             currentUser: e.user
         };
@@ -25889,7 +25964,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! axios */ 14), c = _interopRequireDefault(l), d = n(/*! ../../../library/alerts */ 15), p = n(/*! ../../../library/Modal */ 65), f = _interopRequireDefault(p), m = n(/*! ../../../library/validations */ 24), h = n(/*! ../../../library/utilities */ 20), M = n(/*! ../../ViewWrapper */ 8), _ = _interopRequireDefault(M), y = n(/*! ../../../services/PlayerService */ 68), b = _interopRequireDefault(y), g = n(/*! ../../../services/FileService */ 59), v = _interopRequireDefault(g), A = n(/*! ../../../services/UserPhotoService */ 446), E = _interopRequireDefault(A), T = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! axios */ 14), c = _interopRequireDefault(l), d = n(/*! ../../../library/alerts */ 15), p = n(/*! ../../../library/Modal */ 66), f = _interopRequireDefault(p), m = n(/*! ../../../library/validations */ 24), h = n(/*! ../../../library/utilities */ 20), M = n(/*! ../../ViewWrapper */ 8), _ = _interopRequireDefault(M), y = n(/*! ../../../services/PlayerService */ 69), b = _interopRequireDefault(y), g = n(/*! ../../../services/FileService */ 59), v = _interopRequireDefault(g), A = n(/*! ../../../services/UserPhotoService */ 446), E = _interopRequireDefault(A), T = function mapStateToProps(e) {
         return {
             forms: e.forms,
             user: e.user
@@ -26645,7 +26720,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../ViewWrapper */ 8), d = _interopRequireDefault(c), p = n(/*! ../../../services/PlayerService */ 68), f = _interopRequireDefault(p), m = n(/*! ../../../services/UserFriendService */ 138), h = _interopRequireDefault(m), M = n(/*! ../../../services/UserNotificationService */ 139), _ = _interopRequireDefault(M), y = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! ../../../library/alerts */ 15), c = n(/*! ../../ViewWrapper */ 8), d = _interopRequireDefault(c), p = n(/*! ../../../services/PlayerService */ 69), f = _interopRequireDefault(p), m = n(/*! ../../../services/UserFriendService */ 138), h = _interopRequireDefault(m), M = n(/*! ../../../services/UserNotificationService */ 139), _ = _interopRequireDefault(M), y = function mapStateToProps(e) {
         return {
             currentUser: e.user
         };
@@ -27134,7 +27209,9 @@ function(e, t, n) {
                     className: "text-center"
                 }, "Point Value"), o.default.createElement("th", {
                     className: "text-center"
-                }, "View Profile"))), o.default.createElement("tbody", null, this.state.results.map(function(t, n) {
+                }, "View Profile"))), o.default.createElement("tbody", null, this.state.results.filter(function(e) {
+                    return e.User;
+                }).map(function(t, n) {
                     return o.default.createElement("tr", {
                         key: n
                     }, o.default.createElement("td", null, o.default.createElement(u.Link, {
@@ -27391,7 +27468,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 79), p = _interopRequireDefault(d), f = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! redux */ 6), u = n(/*! react-redux */ 7), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 80), p = _interopRequireDefault(d), f = function mapStateToProps(e) {
         return {
             cartTotal: e.cartTotal,
             cartItems: e.cartItems
@@ -27619,7 +27696,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/ProductService */ 82), c = _interopRequireDefault(l), d = function(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! react-router */ 5), s = n(/*! ../../ViewWrapper */ 8), u = _interopRequireDefault(s), l = n(/*! ../../../services/ProductService */ 83), c = _interopRequireDefault(l), d = function(e) {
         function ProductPage() {
             _classCallCheck(this, ProductPage);
             var e = _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this));
@@ -27768,7 +27845,7 @@ function(e, t, n) {
         return function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
-    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 79), p = _interopRequireDefault(d), f = n(/*! ../../../services/ProductService */ 82), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
+    }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! ../../ViewWrapper */ 8), c = _interopRequireDefault(l), d = n(/*! ../../../actions/CartActions */ 80), p = _interopRequireDefault(d), f = n(/*! ../../../services/ProductService */ 83), m = _interopRequireDefault(f), h = function mapStateToProps(e) {
         return {};
     }, M = function mapDispatchToProps(e) {
         return (0, i.bindActionCreators)({
@@ -27899,12 +27976,12 @@ function(e, t, n) {
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = (n(/*! redux */ 6), 
     n(/*! react-redux */ 7)), s = n(/*! react-router */ 5), u = n(/*! classnames */ 18), l = (_interopRequireDefault(u), 
-    n(/*! prop-types */ 13)), c = _interopRequireDefault(l), d = (n(/*! ../../library/authentication */ 29), 
-    function mapStateToProps(e) {
+    n(/*! prop-types */ 13)), c = _interopRequireDefault(l), d = n(/*! ../../library/authentication */ 29), p = n(/*! ../../../roleConfig */ 64), f = _interopRequireDefault(p), m = (0, 
+    d.AccessControl)(f.default), h = function mapStateToProps(e) {
         return {
             user: e.user
         };
-    }), p = function(e) {
+    }, M = function(e) {
         function AccountMenu() {
             _classCallCheck(this, AccountMenu);
             var e = _possibleConstructorReturn(this, (AccountMenu.__proto__ || Object.getPrototypeOf(AccountMenu)).call(this));
@@ -27955,11 +28032,13 @@ function(e, t, n) {
                     to: "/players/dashboard/notifications"
                 }, o.default.createElement("span", {
                     className: "fa fa-envelope"
-                }), "Notifications")), o.default.createElement("li", null, o.default.createElement(s.Link, {
+                }), "Notifications")), o.default.createElement(m, {
+                    access: [ "tourneyAdmin", "eventAdmin", "venueAdmin", "newsContributor" ]
+                }, o.default.createElement("li", null, o.default.createElement(s.Link, {
                     to: "/admin"
                 }, o.default.createElement("span", {
                     className: "fa fa-indent"
-                }), "Admin")), o.default.createElement("li", {
+                }), "Admin"))), o.default.createElement("li", {
                     onClick: this.props.logout
                 }, o.default.createElement("a", null, "Logout")))), this.state.showMenu && o.default.createElement("div", {
                     className: "click-away-backdrop",
@@ -27968,9 +28047,9 @@ function(e, t, n) {
             }
         } ]), AccountMenu;
     }(o.default.Component);
-    p.propTypes = {
+    M.propTypes = {
         logout: c.default.func
-    }, t.default = (0, i.connect)(d, null)(p);
+    }, t.default = (0, i.connect)(h, null)(M);
 }, /*!***********************************************!*\
   !*** ./src/components/pieces/CartSummary.jsx ***!
   \***********************************************/
@@ -28014,7 +28093,7 @@ function(e, t, n) {
             return t && defineProperties(e.prototype, t), n && defineProperties(e, n), e;
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! redux */ 6), s = n(/*! react-redux */ 7), u = n(/*! react-router */ 5), l = n(/*! react-addons-css-transition-group */ 41), c = (_interopRequireDefault(l), 
-    n(/*! prop-types */ 13)), d = (_interopRequireDefault(c), n(/*! ../../actions/CartActions */ 79)), p = _interopRequireDefault(d), f = function mapStateToProps(e) {
+    n(/*! prop-types */ 13)), d = (_interopRequireDefault(c), n(/*! ../../actions/CartActions */ 80)), p = _interopRequireDefault(d), f = function mapStateToProps(e) {
         return {
             cartTotal: e.cartTotal,
             cartItems: e.cartItems
@@ -28160,7 +28239,7 @@ function(e, t, n) {
         };
     }(), r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! classnames */ 18), s = (_interopRequireDefault(i), 
     n(/*! react-addons-css-transition-group */ 41)), u = (_interopRequireDefault(s), 
-    n(/*! ../../library/Modal */ 65)), l = _interopRequireDefault(u), c = function(e) {
+    n(/*! ../../library/Modal */ 66)), l = _interopRequireDefault(u), c = function(e) {
         function Footer() {
             _classCallCheck(this, Footer);
             var e = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this));
@@ -28668,6 +28747,10 @@ function(e, t) {
         name: "playerDashboard",
         path: "/players/dashboard**",
         accessControl: [ "member" ]
+    }, {
+        name: "store",
+        path: "/store",
+        accessControl: [ "subscriber" ]
     } ];
 }, /*!*****************************!*\
   !*** ./src/interceptors.js ***!
@@ -28682,7 +28765,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! react-router */ 5), r = n(/*! axios */ 14), o = _interopRequireDefault(r), i = n(/*! ./library/alerts */ 15), s = n(/*! ./library/loader */ 80), u = n(/*! ./library/authentication */ 29), l = n(/*! ./store */ 83), c = _interopRequireDefault(l), d = void 0, p = 0, f = 350, m = function initInterceptors() {
+    var a = n(/*! react-router */ 5), r = n(/*! axios */ 14), o = _interopRequireDefault(r), i = n(/*! ./library/alerts */ 15), s = n(/*! ./library/loader */ 81), u = n(/*! ./library/authentication */ 29), l = n(/*! ./store */ 84), c = _interopRequireDefault(l), d = void 0, p = 0, f = 350, m = function initInterceptors() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "http://localhost:8000/api/", t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : f;
         o.default.defaults.baseURL = e, o.default.interceptors.request.use(function(e) {
             var n = c.default.getState().user.id_token;
@@ -28887,7 +28970,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! ../constants/AuthenticationConstants */ 127), r = _interopRequireDefault(a), o = n(/*! ../constants/UserConstants */ 129), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 128), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 111), c = _interopRequireDefault(l), d = n(/*! ../services/UserService */ 402), p = _interopRequireDefault(d), f = function _initiateRequest(e, t) {
+    var a = n(/*! ../constants/AuthenticationConstants */ 127), r = _interopRequireDefault(a), o = n(/*! ../constants/UserConstants */ 129), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 128), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 64), c = _interopRequireDefault(l), d = n(/*! ../services/UserService */ 402), p = _interopRequireDefault(d), f = function _initiateRequest(e, t) {
         return {
             type: e,
             data: t
@@ -29017,7 +29100,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     }), t.redirectRoute = t.isAuthenticated = t.users = t.user = void 0;
-    var a = n(/*! ../constants/UserConstants */ 129), r = _interopRequireDefault(a), o = n(/*! ../constants/AuthenticationConstants */ 127), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 128), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 111), c = (_interopRequireDefault(l), 
+    var a = n(/*! ../constants/UserConstants */ 129), r = _interopRequireDefault(a), o = n(/*! ../constants/AuthenticationConstants */ 127), i = _interopRequireDefault(o), s = n(/*! ../constants/RedirectConstants */ 128), u = _interopRequireDefault(s), l = n(/*! ../../../../roleConfig */ 64), c = (_interopRequireDefault(l), 
     function user() {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments[1];
         switch (t.type) {
@@ -29118,8 +29201,8 @@ function(e, t) {
         function findRoute(e) {
             return e.forEach(function(e) {
                 if (t.includes(e.path)) {
-                    if (e.hasOwnProperty("children")) return findRoute(e.children);
                     if (t === e.path) return n = e;
+                    if (e.hasOwnProperty("children")) return findRoute(e.children);
                 } else {
                     if ("**" === e.path.slice(-2) && t.includes(e.path.substring(0, e.path.length - 2))) return n = e;
                     if (e.path.includes("*")) return matchToParams(e, t);
@@ -30523,7 +30606,7 @@ function(e, t, n) {
                 }, o.default.createElement("div", {
                     className: "form-group small-12 columns text-right"
                 }, o.default.createElement("button", {
-                    className: "button info",
+                    className: "button right info",
                     onClick: this.handleSubmit,
                     disabled: void 0 !== this.props.validity ? !this.props.validity : !e
                 }, this.props.submitText)))) : o.default.createElement("div", {
@@ -30535,7 +30618,7 @@ function(e, t, n) {
                 }, o.default.createElement("div", {
                     className: "form-group small-12 columns text-right"
                 }, o.default.createElement("button", {
-                    className: "button info",
+                    className: "button right info",
                     onClick: this.handleSubmit,
                     disabled: void 0 !== this.props.validity ? !this.props.validity : !e
                 }, this.props.submitText)))));
@@ -31803,7 +31886,7 @@ function(e, t, n) {
     Object.defineProperty(t, "__esModule", {
         value: !0
     });
-    var a = n(/*! redux */ 6), r = n(/*! react-router-redux */ 302), o = n(/*! ../library/alerts */ 15), i = n(/*! ../library/validations */ 24), s = n(/*! ../library/loader */ 80), u = n(/*! ../library/authentication */ 29), l = n(/*! ./bannerSlides */ 426), c = n(/*! ./cartItems */ 427), d = n(/*! ./gameSystems */ 431), p = n(/*! ./gameSystemRankings */ 430), f = n(/*! ./factions */ 429), m = n(/*! ./factionRankings */ 428), h = n(/*! ./newsPosts */ 434), M = n(/*! ./manufacturers */ 433), _ = n(/*! ./products */ 436), y = n(/*! ./productOrders */ 435), b = n(/*! ./userAchievements */ 437), g = n(/*! ./userMessages */ 438), v = n(/*! ./userNotifications */ 439), A = n(/*! ./userPhotos */ 440);
+    var a = n(/*! redux */ 6), r = n(/*! react-router-redux */ 302), o = n(/*! ../library/alerts */ 15), i = n(/*! ../library/validations */ 24), s = n(/*! ../library/loader */ 81), u = n(/*! ../library/authentication */ 29), l = n(/*! ./bannerSlides */ 426), c = n(/*! ./cartItems */ 427), d = n(/*! ./gameSystems */ 431), p = n(/*! ./gameSystemRankings */ 430), f = n(/*! ./factions */ 429), m = n(/*! ./factionRankings */ 428), h = n(/*! ./newsPosts */ 434), M = n(/*! ./manufacturers */ 433), _ = n(/*! ./products */ 436), y = n(/*! ./productOrders */ 435), b = n(/*! ./userAchievements */ 437), g = n(/*! ./userMessages */ 438), v = n(/*! ./userNotifications */ 439), A = n(/*! ./userPhotos */ 440);
     t.default = (0, a.combineReducers)({
         routing: r.routerReducer,
         alerts: o.alerts,
@@ -33596,7 +33679,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! invariant */ 19), o = _interopRequireDefault(r), i = n(/*! ./Actions */ 48), s = n(/*! ./PathUtils */ 40), u = n(/*! ./ExecutionEnvironment */ 69), l = n(/*! ./DOMUtils */ 85), c = n(/*! ./DOMStateStorage */ 143), d = n(/*! ./createDOMHistory */ 144), p = _interopRequireDefault(d);
+    }, r = n(/*! invariant */ 19), o = _interopRequireDefault(r), i = n(/*! ./Actions */ 48), s = n(/*! ./PathUtils */ 40), u = n(/*! ./ExecutionEnvironment */ 70), l = n(/*! ./DOMUtils */ 86), c = n(/*! ./DOMStateStorage */ 143), d = n(/*! ./createDOMHistory */ 144), p = _interopRequireDefault(d);
     t.default = createBrowserHistory, e.exports = t.default;
 }, /*!*****************************************!*\
   !*** ./~/history/lib/createLocation.js ***!
@@ -37589,7 +37672,7 @@ function(e, t, n) {
             }
         }
     }
-    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPropagators */ 54), o = n(/*! fbjs/lib/ExecutionEnvironment */ 16), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 27), u = n(/*! ./SyntheticEvent */ 31), l = n(/*! ./getEventTarget */ 101), c = n(/*! ./isEventSupported */ 102), d = n(/*! ./isTextInputElement */ 292), p = {
+    var a = n(/*! ./EventPluginHub */ 53), r = n(/*! ./EventPropagators */ 54), o = n(/*! fbjs/lib/ExecutionEnvironment */ 16), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 27), u = n(/*! ./SyntheticEvent */ 31), l = n(/*! ./getEventTarget */ 102), c = n(/*! ./isEventSupported */ 103), d = n(/*! ./isTextInputElement */ 292), p = {
         change: {
             phasedRegistrationNames: {
                 bubbled: "onChange",
@@ -37653,7 +37736,7 @@ function(e, t) {
   \**************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./EventPropagators */ 54), r = n(/*! ./ReactDOMComponentTree */ 11), o = n(/*! ./SyntheticMouseEvent */ 71), i = {
+    var a = n(/*! ./EventPropagators */ 54), r = n(/*! ./ReactDOMComponentTree */ 11), o = n(/*! ./SyntheticMouseEvent */ 72), i = {
         mouseEnter: {
             registrationName: "onMouseEnter",
             dependencies: [ "topMouseOut", "topMouseOver" ]
@@ -37970,7 +38053,7 @@ function(e, t, n) {
             a || (a = n(/*! react/lib/ReactComponentTreeHook */ 21)), u || l(!1, "flattenChildren(...): Encountered two children with the same key, `%s`. Child keys must be unique; when two children share a key, only the first child will be used.%s", i.unescape(r), a.getStackAddendumByID(s)), 
             null != t && u && (e[r] = o(t, !0));
         }
-        var a, r = n(/*! ./ReactReconciler */ 43), o = n(/*! ./instantiateReactComponent */ 291), i = n(/*! ./KeyEscapeUtils */ 92), s = n(/*! ./shouldUpdateReactComponent */ 103), u = n(/*! ./traverseAllChildren */ 294), l = n(/*! fbjs/lib/warning */ 4);
+        var a, r = n(/*! ./ReactReconciler */ 43), o = n(/*! ./instantiateReactComponent */ 291), i = n(/*! ./KeyEscapeUtils */ 93), s = n(/*! ./shouldUpdateReactComponent */ 104), u = n(/*! ./traverseAllChildren */ 294), l = n(/*! fbjs/lib/warning */ 4);
         "undefined" != typeof t && t.env, 1;
         var c = {
             instantiateChildren: function(e, t, n, a) {
@@ -38012,7 +38095,7 @@ function(e, t, n) {
   \*************************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./DOMChildrenOperations */ 89), r = n(/*! ./ReactDOMIDOperations */ 505), o = {
+    var a = n(/*! ./DOMChildrenOperations */ 90), r = n(/*! ./ReactDOMIDOperations */ 505), o = {
         processChildrenUpdates: r.dangerouslyProcessChildrenUpdates,
         replaceNodeWithMarkup: a.dangerouslyReplaceNodeWithMarkup
     };
@@ -38140,7 +38223,7 @@ function(e, t, n) {
         this._rootNodeID = 0, this._domID = 0, this._hostContainerInfo = null, this._wrapperState = null, 
         this._topLevelWrapper = null, this._flags = 0, this._ancestorInfo = null, Y.call(this, null);
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./AutoFocusUtils */ 489), o = n(/*! ./CSSPropertyOperations */ 491), i = n(/*! ./DOMLazyTree */ 52), s = n(/*! ./DOMNamespaces */ 90), u = n(/*! ./DOMProperty */ 35), l = n(/*! ./DOMPropertyOperations */ 270), c = n(/*! ./EventPluginHub */ 53), d = n(/*! ./EventPluginRegistry */ 61), p = n(/*! ./ReactBrowserEventEmitter */ 62), f = n(/*! ./ReactDOMComponentFlags */ 272), m = n(/*! ./ReactDOMComponentTree */ 11), h = n(/*! ./ReactDOMInput */ 506), M = n(/*! ./ReactDOMOption */ 509), _ = n(/*! ./ReactDOMSelect */ 273), y = n(/*! ./ReactDOMTextarea */ 512), b = n(/*! ./ReactInstrumentation */ 26), g = n(/*! ./ReactMultiChild */ 523), v = n(/*! ./ReactServerRenderingTransaction */ 528), A = n(/*! fbjs/lib/emptyFunction */ 25), E = n(/*! ./escapeTextContentForBrowser */ 73), T = n(/*! fbjs/lib/invariant */ 3), L = n(/*! ./isEventSupported */ 102), O = n(/*! fbjs/lib/shallowEqual */ 84), C = n(/*! ./validateDOMNesting */ 104), w = n(/*! fbjs/lib/warning */ 4), S = f, N = c.deleteListener, k = m.getNodeFromInstance, D = p.listenTo, P = d.registrationNameModules, z = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./AutoFocusUtils */ 489), o = n(/*! ./CSSPropertyOperations */ 491), i = n(/*! ./DOMLazyTree */ 52), s = n(/*! ./DOMNamespaces */ 91), u = n(/*! ./DOMProperty */ 35), l = n(/*! ./DOMPropertyOperations */ 270), c = n(/*! ./EventPluginHub */ 53), d = n(/*! ./EventPluginRegistry */ 61), p = n(/*! ./ReactBrowserEventEmitter */ 62), f = n(/*! ./ReactDOMComponentFlags */ 272), m = n(/*! ./ReactDOMComponentTree */ 11), h = n(/*! ./ReactDOMInput */ 506), M = n(/*! ./ReactDOMOption */ 509), _ = n(/*! ./ReactDOMSelect */ 273), y = n(/*! ./ReactDOMTextarea */ 512), b = n(/*! ./ReactInstrumentation */ 26), g = n(/*! ./ReactMultiChild */ 523), v = n(/*! ./ReactServerRenderingTransaction */ 528), A = n(/*! fbjs/lib/emptyFunction */ 25), E = n(/*! ./escapeTextContentForBrowser */ 74), T = n(/*! fbjs/lib/invariant */ 3), L = n(/*! ./isEventSupported */ 103), O = n(/*! fbjs/lib/shallowEqual */ 85), C = n(/*! ./validateDOMNesting */ 105), w = n(/*! fbjs/lib/warning */ 4), S = f, N = c.deleteListener, k = m.getNodeFromInstance, D = p.listenTo, P = d.registrationNameModules, z = {
         string: !0,
         number: !0
     }, R = "style", q = "__html", x = {
@@ -38423,7 +38506,7 @@ function(e, t, n) {
         };
         return n._ancestorInfo = t ? a.updatedAncestorInfo(null, n._tag, null) : null, n;
     }
-    var a = n(/*! ./validateDOMNesting */ 104), r = 9;
+    var a = n(/*! ./validateDOMNesting */ 105), r = 9;
     e.exports = ReactDOMContainerInfo;
 }, /*!***************************************************!*\
   !*** ./~/react-dom/lib/ReactDOMEmptyComponent.js ***!
@@ -38468,7 +38551,7 @@ function(e, t) {
   \*************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./DOMChildrenOperations */ 89), r = n(/*! ./ReactDOMComponentTree */ 11), o = {
+    var a = n(/*! ./DOMChildrenOperations */ 90), r = n(/*! ./ReactDOMComponentTree */ 11), o = {
         dangerouslyProcessChildrenUpdates: function(e, t) {
             var n = r.getNodeFromInstance(e);
             a.processUpdates(n, t);
@@ -38504,7 +38587,7 @@ function(e, t, n) {
         }
         return n;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMPropertyOperations */ 270), o = n(/*! ./LinkedValueUtils */ 93), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 27), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! fbjs/lib/warning */ 4), c = !1, d = !1, p = !1, f = !1, m = !1, h = !1, M = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMPropertyOperations */ 270), o = n(/*! ./LinkedValueUtils */ 94), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./ReactUpdates */ 27), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! fbjs/lib/warning */ 4), c = !1, d = !1, p = !1, f = !1, m = !1, h = !1, M = {
         getHostProps: function(e, t) {
             var n = o.getValue(t), r = o.getChecked(t), i = a({
                 type: void 0,
@@ -38752,7 +38835,7 @@ function(e, t, n) {
   \**************************************************/
 function(e, t, n) {
     "use strict";
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMChildrenOperations */ 89), o = n(/*! ./DOMLazyTree */ 52), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./escapeTextContentForBrowser */ 73), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! ./validateDOMNesting */ 104), c = function(e) {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./DOMChildrenOperations */ 90), o = n(/*! ./DOMLazyTree */ 52), i = n(/*! ./ReactDOMComponentTree */ 11), s = n(/*! ./escapeTextContentForBrowser */ 74), u = n(/*! fbjs/lib/invariant */ 3), l = n(/*! ./validateDOMNesting */ 105), c = function(e) {
         this._currentElement = e, this._stringText = "" + e, this._hostNode = null, this._hostParent = null, 
         this._domID = 0, this._mountIndex = 0, this._closingComment = null, this._commentNodes = null;
     };
@@ -38809,7 +38892,7 @@ function(e, t, n) {
         var t = this._currentElement.props, n = r.executeOnChange(t, e);
         return i.asap(forceUpdateIfMounted, this), n;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./LinkedValueUtils */ 93), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 27), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = !1, c = !1, d = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./LinkedValueUtils */ 94), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactUpdates */ 27), s = n(/*! fbjs/lib/invariant */ 3), u = n(/*! fbjs/lib/warning */ 4), l = !1, c = !1, d = {
         getHostProps: function(e, t) {
             null != t.dangerouslySetInnerHTML ? s(!1, "`dangerouslySetInnerHTML` does not make sense on <textarea>.") : void 0;
             var n = a({}, t, {
@@ -39018,7 +39101,7 @@ function(e, t, n) {
         var t = c(window);
         e(t);
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! fbjs/lib/EventListener */ 140), o = n(/*! fbjs/lib/ExecutionEnvironment */ 16), i = n(/*! ./PooledClass */ 42), s = n(/*! ./ReactDOMComponentTree */ 11), u = n(/*! ./ReactUpdates */ 27), l = n(/*! ./getEventTarget */ 101), c = n(/*! fbjs/lib/getUnboundedScrollPosition */ 462);
+    var a = n(/*! object-assign */ 10), r = n(/*! fbjs/lib/EventListener */ 140), o = n(/*! fbjs/lib/ExecutionEnvironment */ 16), i = n(/*! ./PooledClass */ 42), s = n(/*! ./ReactDOMComponentTree */ 11), u = n(/*! ./ReactUpdates */ 27), l = n(/*! ./getEventTarget */ 102), c = n(/*! fbjs/lib/getUnboundedScrollPosition */ 462);
     a(TopLevelCallbackBookKeeping.prototype, {
         destructor: function() {
             this.topLevelType = null, this.nativeEvent = null, this.ancestors.length = 0;
@@ -39081,7 +39164,7 @@ function(e, t) {
   \*******************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! ./DOMProperty */ 35), r = n(/*! ./EventPluginHub */ 53), o = n(/*! ./EventPluginUtils */ 91), i = n(/*! ./ReactComponentEnvironment */ 94), s = n(/*! ./ReactEmptyComponent */ 276), u = n(/*! ./ReactBrowserEventEmitter */ 62), l = n(/*! ./ReactHostComponent */ 278), c = n(/*! ./ReactUpdates */ 27), d = {
+    var a = n(/*! ./DOMProperty */ 35), r = n(/*! ./EventPluginHub */ 53), o = n(/*! ./EventPluginUtils */ 92), i = n(/*! ./ReactComponentEnvironment */ 95), s = n(/*! ./ReactEmptyComponent */ 276), u = n(/*! ./ReactBrowserEventEmitter */ 62), l = n(/*! ./ReactHostComponent */ 278), c = n(/*! ./ReactUpdates */ 27), d = {
         Component: i.injection,
         DOMProperty: a.injection,
         EmptyComponent: s.injection,
@@ -39191,7 +39274,7 @@ function(e, t, n) {
     function processQueue(e, t) {
         a.processChildrenUpdates(e, t);
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactComponentEnvironment */ 94)), r = n(/*! ./ReactInstanceMap */ 55), o = n(/*! ./ReactInstrumentation */ 26), i = n(/*! react/lib/ReactCurrentOwner */ 32), s = n(/*! ./ReactReconciler */ 43), u = n(/*! ./ReactChildReconciler */ 499), l = n(/*! fbjs/lib/emptyFunction */ 25), c = n(/*! ./flattenChildren */ 549), d = n(/*! fbjs/lib/invariant */ 3), p = l, f = function(e) {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! ./ReactComponentEnvironment */ 95)), r = n(/*! ./ReactInstanceMap */ 55), o = n(/*! ./ReactInstrumentation */ 26), i = n(/*! react/lib/ReactCurrentOwner */ 32), s = n(/*! ./ReactReconciler */ 43), u = n(/*! ./ReactChildReconciler */ 499), l = n(/*! fbjs/lib/emptyFunction */ 25), c = n(/*! ./flattenChildren */ 549), d = n(/*! fbjs/lib/invariant */ 3), p = l, f = function(e) {
         if (!e._debugID) {
             var t;
             (t = r.get(e)) && (e = t);
@@ -39590,7 +39673,7 @@ function(e, t, n) {
         this.reinitializeTransaction(), this.renderToStaticMarkup = e, this.useCreateElement = !1, 
         this.updateQueue = new s(this);
     }
-    var a = n(/*! object-assign */ 10), r = n(/*! ./PooledClass */ 42), o = n(/*! ./Transaction */ 72), i = n(/*! ./ReactInstrumentation */ 26), s = n(/*! ./ReactServerUpdateQueue */ 529), u = [];
+    var a = n(/*! object-assign */ 10), r = n(/*! ./PooledClass */ 42), o = n(/*! ./Transaction */ 73), i = n(/*! ./ReactInstrumentation */ 26), s = n(/*! ./ReactServerUpdateQueue */ 529), u = [];
     u.push({
         initialize: i.debugTool.onBeginFlush,
         close: i.debugTool.onEndFlush
@@ -39625,7 +39708,7 @@ function(e, t, n) {
         var n = e.constructor;
         r(!1, "%s(...): Can only update a mounting component. This usually means you called %s() outside componentWillMount() on the server. This is a no-op. Please check the code for the %s component.", t, t, n && (n.displayName || n.name) || "ReactClass");
     }
-    var a = n(/*! ./ReactUpdateQueue */ 97), r = n(/*! fbjs/lib/warning */ 4), o = function() {
+    var a = n(/*! ./ReactUpdateQueue */ 98), r = n(/*! fbjs/lib/warning */ 4), o = function() {
         function ReactServerUpdateQueue(e) {
             _classCallCheck(this, ReactServerUpdateQueue), this.transaction = e;
         }
@@ -39750,7 +39833,7 @@ function(e, t, n) {
             a(r, n), v.isDOMComponent(t) ? v.simulateNativeEventOnDOMComponent(e, t, r) : t.tagName && v.simulateNativeEventOnNode(e, t, r);
         };
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./EventConstants */ 496), o = n(/*! ./EventPluginHub */ 53), i = n(/*! ./EventPluginRegistry */ 61), s = n(/*! ./EventPropagators */ 54), u = n(/*! react/lib/React */ 28), l = n(/*! ./ReactDOM */ 95), c = n(/*! ./ReactDOMComponentTree */ 11), d = n(/*! ./ReactBrowserEventEmitter */ 62), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactUpdates */ 27), m = n(/*! ./SyntheticEvent */ 31), h = n(/*! ./ReactShallowRenderer */ 530), M = n(/*! ./findDOMNode */ 286), _ = n(/*! fbjs/lib/invariant */ 3), y = n(/*! fbjs/lib/warning */ 4), b = r.topLevelTypes, g = !1, v = {
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! object-assign */ 10)), r = n(/*! ./EventConstants */ 496), o = n(/*! ./EventPluginHub */ 53), i = n(/*! ./EventPluginRegistry */ 61), s = n(/*! ./EventPropagators */ 54), u = n(/*! react/lib/React */ 28), l = n(/*! ./ReactDOM */ 96), c = n(/*! ./ReactDOMComponentTree */ 11), d = n(/*! ./ReactBrowserEventEmitter */ 62), p = n(/*! ./ReactInstanceMap */ 55), f = n(/*! ./ReactUpdates */ 27), m = n(/*! ./SyntheticEvent */ 31), h = n(/*! ./ReactShallowRenderer */ 530), M = n(/*! ./findDOMNode */ 286), _ = n(/*! fbjs/lib/invariant */ 3), y = n(/*! fbjs/lib/warning */ 4), b = r.topLevelTypes, g = !1, v = {
         renderIntoDocument: function(e) {
             var t = document.createElement("div");
             return l.render(e, t);
@@ -40177,7 +40260,7 @@ function(e, t, n) {
         }
         return null;
     }
-    var a = n(/*! ./EventPropagators */ 54), r = n(/*! fbjs/lib/ExecutionEnvironment */ 16), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInputSelection */ 279), s = n(/*! ./SyntheticEvent */ 31), u = n(/*! fbjs/lib/getActiveElement */ 142), l = n(/*! ./isTextInputElement */ 292), c = n(/*! fbjs/lib/shallowEqual */ 84), d = r.canUseDOM && "documentMode" in document && document.documentMode <= 11, p = {
+    var a = n(/*! ./EventPropagators */ 54), r = n(/*! fbjs/lib/ExecutionEnvironment */ 16), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./ReactInputSelection */ 279), s = n(/*! ./SyntheticEvent */ 31), u = n(/*! fbjs/lib/getActiveElement */ 142), l = n(/*! ./isTextInputElement */ 292), c = n(/*! fbjs/lib/shallowEqual */ 85), d = r.canUseDOM && "documentMode" in document && document.documentMode <= 11, p = {
         select: {
             phasedRegistrationNames: {
                 bubbled: "onSelect",
@@ -40232,7 +40315,7 @@ function(e, t, n) {
     function isInteractive(e) {
         return "button" === e || "input" === e || "select" === e || "textarea" === e;
     }
-    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! fbjs/lib/EventListener */ 140)), r = n(/*! ./EventPropagators */ 54), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./SyntheticAnimationEvent */ 536), s = n(/*! ./SyntheticClipboardEvent */ 537), u = n(/*! ./SyntheticEvent */ 31), l = n(/*! ./SyntheticFocusEvent */ 540), c = n(/*! ./SyntheticKeyboardEvent */ 542), d = n(/*! ./SyntheticMouseEvent */ 71), p = n(/*! ./SyntheticDragEvent */ 539), f = n(/*! ./SyntheticTouchEvent */ 543), m = n(/*! ./SyntheticTransitionEvent */ 544), h = n(/*! ./SyntheticUIEvent */ 63), M = n(/*! ./SyntheticWheelEvent */ 545), _ = n(/*! fbjs/lib/emptyFunction */ 25), y = n(/*! ./getEventCharCode */ 99), b = n(/*! fbjs/lib/invariant */ 3), g = {}, v = {};
+    var a = (n(/*! ./reactProdInvariant */ 9), n(/*! fbjs/lib/EventListener */ 140)), r = n(/*! ./EventPropagators */ 54), o = n(/*! ./ReactDOMComponentTree */ 11), i = n(/*! ./SyntheticAnimationEvent */ 536), s = n(/*! ./SyntheticClipboardEvent */ 537), u = n(/*! ./SyntheticEvent */ 31), l = n(/*! ./SyntheticFocusEvent */ 540), c = n(/*! ./SyntheticKeyboardEvent */ 542), d = n(/*! ./SyntheticMouseEvent */ 72), p = n(/*! ./SyntheticDragEvent */ 539), f = n(/*! ./SyntheticTouchEvent */ 543), m = n(/*! ./SyntheticTransitionEvent */ 544), h = n(/*! ./SyntheticUIEvent */ 63), M = n(/*! ./SyntheticWheelEvent */ 545), _ = n(/*! fbjs/lib/emptyFunction */ 25), y = n(/*! ./getEventCharCode */ 100), b = n(/*! fbjs/lib/invariant */ 3), g = {}, v = {};
     [ "abort", "animationEnd", "animationIteration", "animationStart", "blur", "canPlay", "canPlayThrough", "click", "contextMenu", "copy", "cut", "doubleClick", "drag", "dragEnd", "dragEnter", "dragExit", "dragLeave", "dragOver", "dragStart", "drop", "durationChange", "emptied", "encrypted", "ended", "error", "focus", "input", "invalid", "keyDown", "keyPress", "keyUp", "load", "loadedData", "loadedMetadata", "loadStart", "mouseDown", "mouseMove", "mouseOut", "mouseOver", "mouseUp", "paste", "pause", "play", "playing", "progress", "rateChange", "reset", "scroll", "seeked", "seeking", "stalled", "submit", "suspend", "timeUpdate", "touchCancel", "touchEnd", "touchMove", "touchStart", "transitionEnd", "volumeChange", "waiting", "wheel" ].forEach(function(e) {
         var t = e[0].toUpperCase() + e.slice(1), n = "on" + t, a = "top" + t, r = {
             phasedRegistrationNames: {
@@ -40414,7 +40497,7 @@ function(e, t, n) {
     function SyntheticDragEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticMouseEvent */ 71), r = {
+    var a = n(/*! ./SyntheticMouseEvent */ 72), r = {
         dataTransfer: null
     };
     a.augmentClass(SyntheticDragEvent, r), e.exports = SyntheticDragEvent;
@@ -40450,7 +40533,7 @@ function(e, t, n) {
     function SyntheticKeyboardEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 63), r = n(/*! ./getEventCharCode */ 99), o = n(/*! ./getEventKey */ 550), i = n(/*! ./getEventModifierState */ 100), s = {
+    var a = n(/*! ./SyntheticUIEvent */ 63), r = n(/*! ./getEventCharCode */ 100), o = n(/*! ./getEventKey */ 550), i = n(/*! ./getEventModifierState */ 101), s = {
         key: o,
         location: null,
         ctrlKey: null,
@@ -40479,7 +40562,7 @@ function(e, t, n) {
     function SyntheticTouchEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticUIEvent */ 63), r = n(/*! ./getEventModifierState */ 100), o = {
+    var a = n(/*! ./SyntheticUIEvent */ 63), r = n(/*! ./getEventModifierState */ 101), o = {
         touches: null,
         targetTouches: null,
         changedTouches: null,
@@ -40512,7 +40595,7 @@ function(e, t, n) {
     function SyntheticWheelEvent(e, t, n, r) {
         return a.call(this, e, t, n, r);
     }
-    var a = n(/*! ./SyntheticMouseEvent */ 71), r = {
+    var a = n(/*! ./SyntheticMouseEvent */ 72), r = {
         deltaX: function(e) {
             return "deltaX" in e ? e.deltaX : "wheelDeltaX" in e ? -e.wheelDeltaX : 0;
         },
@@ -40614,7 +40697,7 @@ function(e, t, n) {
                 return flattenSingleChildIntoContext(e, n, a, t);
             }, n), n;
         }
-        var a, r = n(/*! ./KeyEscapeUtils */ 92), o = n(/*! ./traverseAllChildren */ 294), i = n(/*! fbjs/lib/warning */ 4);
+        var a, r = n(/*! ./KeyEscapeUtils */ 93), o = n(/*! ./traverseAllChildren */ 294), i = n(/*! fbjs/lib/warning */ 4);
         "undefined" != typeof t && t.env, 1, e.exports = flattenChildren;
     }).call(t, n(/*! ./../../process/browser.js */ 51));
 }, /*!****************************************!*\
@@ -40633,7 +40716,7 @@ function(e, t, n) {
         }
         return "keydown" === e.type || "keyup" === e.type ? o[e.keyCode] || "Unidentified" : "";
     }
-    var a = n(/*! ./getEventCharCode */ 99), r = {
+    var a = n(/*! ./getEventCharCode */ 100), r = {
         Esc: "Escape",
         Spacebar: " ",
         Left: "ArrowLeft",
@@ -40724,7 +40807,7 @@ function(e, t, n) {
     function quoteAttributeValueForBrowser(e) {
         return '"' + a(e) + '"';
     }
-    var a = n(/*! ./escapeTextContentForBrowser */ 73);
+    var a = n(/*! ./escapeTextContentForBrowser */ 74);
     e.exports = quoteAttributeValueForBrowser;
 }, /*!*******************************************************!*\
   !*** ./~/react-dom/lib/renderSubtreeIntoContainer.js ***!
@@ -40959,7 +41042,7 @@ function(e, t, n) {
         l || (l = !0, (0, u.default)("<Provider> does not support changing `store` on the fly. It is most likely that you see this error because you updated to Redux 2.x and React Redux 2.x which no longer hot reload reducers automatically. See https://github.com/reactjs/react-redux/releases/tag/v2.0.0 for the migration instructions."));
     }
     t.__esModule = !0, t.default = void 0;
-    var a = n(/*! react */ 2), r = n(/*! prop-types */ 13), o = _interopRequireDefault(r), i = n(/*! ../utils/PropTypes */ 299), s = n(/*! ../utils/warning */ 105), u = _interopRequireDefault(s), l = !1, c = function(e) {
+    var a = n(/*! react */ 2), r = n(/*! prop-types */ 13), o = _interopRequireDefault(r), i = n(/*! ../utils/PropTypes */ 299), s = n(/*! ../utils/warning */ 106), u = _interopRequireDefault(s), l = !1, c = function(e) {
         function Provider(t, n) {
             _classCallCheck(this, Provider);
             var a = _possibleConstructorReturn(this, e.call(this, t, n));
@@ -41199,7 +41282,7 @@ function(e, t, n) {
         verify(e, "mapStateToProps", a), verify(t, "mapDispatchToProps", a), verify(n, "mergeProps", a);
     }
     t.__esModule = !0, t.default = verifySubselectors;
-    var a = n(/*! ../utils/warning */ 105), r = _interopRequireDefault(a);
+    var a = n(/*! ../utils/warning */ 106), r = _interopRequireDefault(a);
 }, /*!*************************************************!*\
   !*** ./~/react-redux/lib/utils/Subscription.js ***!
   \*************************************************/
@@ -41571,7 +41654,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! history/lib/createHashHistory */ 145), o = _interopRequireDefault(r), i = n(/*! history/lib/useQueries */ 70), s = _interopRequireDefault(i), u = n(/*! invariant */ 19), l = _interopRequireDefault(u), c = n(/*! react */ 2), d = _interopRequireDefault(c), p = n(/*! ./createTransitionManager */ 108), f = _interopRequireDefault(p), m = n(/*! ./InternalPropTypes */ 44), h = n(/*! ./RouterContext */ 75), M = _interopRequireDefault(h), _ = n(/*! ./RouteUtils */ 36), y = n(/*! ./RouterUtils */ 306), b = n(/*! ./routerWarning */ 17), g = _interopRequireDefault(b), v = d.default.PropTypes, A = v.func, E = v.object, T = d.default.createClass({
+    }, r = n(/*! history/lib/createHashHistory */ 145), o = _interopRequireDefault(r), i = n(/*! history/lib/useQueries */ 71), s = _interopRequireDefault(i), u = n(/*! invariant */ 19), l = _interopRequireDefault(u), c = n(/*! react */ 2), d = _interopRequireDefault(c), p = n(/*! ./createTransitionManager */ 109), f = _interopRequireDefault(p), m = n(/*! ./InternalPropTypes */ 44), h = n(/*! ./RouterContext */ 76), M = _interopRequireDefault(h), _ = n(/*! ./RouteUtils */ 36), y = n(/*! ./RouterUtils */ 306), b = n(/*! ./routerWarning */ 17), g = _interopRequireDefault(b), v = d.default.PropTypes, A = v.func, E = v.object, T = d.default.createClass({
         displayName: "Router",
         propTypes: {
             history: E,
@@ -41671,7 +41754,7 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0;
-    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! ./RouterContext */ 75), i = _interopRequireDefault(o), s = n(/*! ./routerWarning */ 17), u = _interopRequireDefault(s), l = r.default.createClass({
+    var a = n(/*! react */ 2), r = _interopRequireDefault(a), o = n(/*! ./RouterContext */ 76), i = _interopRequireDefault(o), s = n(/*! ./routerWarning */ 17), u = _interopRequireDefault(s), l = r.default.createClass({
         displayName: "RoutingContext",
         componentWillMount: function componentWillMount() {
             (0, u.default)(!1, "`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from 'react-router'`. http://tiny.cc/router-routercontext");
@@ -41744,7 +41827,7 @@ function(e, t, n) {
     }
     t.__esModule = !0, t.runEnterHooks = runEnterHooks, t.runChangeHooks = runChangeHooks, 
     t.runLeaveHooks = runLeaveHooks;
-    var a = n(/*! ./AsyncUtils */ 106), r = n(/*! ./routerWarning */ 17), o = _interopRequireDefault(r);
+    var a = n(/*! ./AsyncUtils */ 107), r = n(/*! ./routerWarning */ 17), o = _interopRequireDefault(r);
 }, /*!*****************************************************!*\
   !*** ./~/react-router/lib/applyRouterMiddleware.js ***!
   \*****************************************************/
@@ -41762,7 +41845,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./RouterContext */ 75), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 17), l = _interopRequireDefault(u);
+    }, r = n(/*! react */ 2), o = _interopRequireDefault(r), i = n(/*! ./RouterContext */ 76), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 17), l = _interopRequireDefault(u);
     t.default = function() {
         for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
         t.forEach(function(e, t) {
@@ -41857,7 +41940,7 @@ function(e, t, n) {
         }, t);
     }
     t.__esModule = !0;
-    var a = n(/*! ./AsyncUtils */ 106), r = n(/*! ./makeStateWithLocation */ 309), o = _interopRequireDefault(r);
+    var a = n(/*! ./AsyncUtils */ 107), r = n(/*! ./makeStateWithLocation */ 309), o = _interopRequireDefault(r);
     t.default = getComponents, e.exports = t.default;
 }, /*!**********************************************!*\
   !*** ./~/react-router/lib/getRouteParams.js ***!
@@ -41984,7 +42067,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! history/lib/Actions */ 48), o = n(/*! invariant */ 19), i = _interopRequireDefault(o), s = n(/*! ./createMemoryHistory */ 307), u = _interopRequireDefault(s), l = n(/*! ./createTransitionManager */ 108), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 36), p = n(/*! ./RouterUtils */ 306);
+    }, r = n(/*! history/lib/Actions */ 48), o = n(/*! invariant */ 19), i = _interopRequireDefault(o), s = n(/*! ./createMemoryHistory */ 307), u = _interopRequireDefault(s), l = n(/*! ./createTransitionManager */ 109), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 36), p = n(/*! ./RouterUtils */ 306);
     t.default = match, e.exports = t.default;
 }, /*!*******************************************!*\
   !*** ./~/react-router/lib/matchRoutes.js ***!
@@ -42106,7 +42189,7 @@ function(e, t, n) {
         return e && "function" == typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e;
     };
     t.default = matchRoutes;
-    var o = n(/*! ./AsyncUtils */ 106), i = n(/*! ./makeStateWithLocation */ 309), s = _interopRequireDefault(i), u = n(/*! ./PatternUtils */ 56), l = n(/*! ./routerWarning */ 17), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 36);
+    var o = n(/*! ./AsyncUtils */ 107), i = n(/*! ./makeStateWithLocation */ 309), s = _interopRequireDefault(i), u = n(/*! ./PatternUtils */ 56), l = n(/*! ./routerWarning */ 17), c = _interopRequireDefault(l), d = n(/*! ./RouteUtils */ 36);
     e.exports = t.default;
 }, /*!*****************************************!*\
   !*** ./~/react-router/lib/useRoutes.js ***!
@@ -42138,7 +42221,7 @@ function(e, t, n) {
             for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (e[a] = n[a]);
         }
         return e;
-    }, r = n(/*! history/lib/useQueries */ 70), o = _interopRequireDefault(r), i = n(/*! ./createTransitionManager */ 108), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 17), l = _interopRequireDefault(u);
+    }, r = n(/*! history/lib/useQueries */ 71), o = _interopRequireDefault(r), i = n(/*! ./createTransitionManager */ 109), s = _interopRequireDefault(i), u = n(/*! ./routerWarning */ 17), l = _interopRequireDefault(u);
     t.default = useRoutes, e.exports = t.default;
 }, /*!******************************************!*\
   !*** ./~/react-router/lib/withRouter.js ***!
@@ -42187,7 +42270,7 @@ function(e, t, n) {
         return e;
     };
     t.default = withRouter;
-    var r = n(/*! invariant */ 19), o = _interopRequireDefault(r), i = n(/*! react */ 2), s = _interopRequireDefault(i), u = n(/*! hoist-non-react-statics */ 148), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 107);
+    var r = n(/*! invariant */ 19), o = _interopRequireDefault(r), i = n(/*! react */ 2), s = _interopRequireDefault(i), u = n(/*! hoist-non-react-statics */ 148), l = _interopRequireDefault(u), c = n(/*! ./PropTypes */ 108);
     e.exports = t.default;
 }, /*!***********************************************************!*\
   !*** ./~/react-twitter-widgets/dist/components/Follow.js ***!
@@ -42691,7 +42774,7 @@ function(e, t, n) {
   \***************************************************/
 function(e, t, n) {
     "use strict";
-    var a = n(/*! react-dom/lib/ReactDOM */ 95);
+    var a = n(/*! react-dom/lib/ReactDOM */ 96);
     t.getReactDOM = function() {
         return a;
     };
@@ -43010,7 +43093,7 @@ function(e, t, n) {
             e[a] = bindAutoBindMethod(e, r);
         }
     }
-    var a = (n(/*! ./reactProdInvariant */ 46), n(/*! object-assign */ 10)), r = n(/*! ./ReactComponent */ 109), o = n(/*! ./ReactElement */ 45), i = n(/*! ./ReactPropTypeLocationNames */ 314), s = n(/*! ./ReactNoopUpdateQueue */ 110), u = n(/*! fbjs/lib/emptyObject */ 39), l = n(/*! fbjs/lib/invariant */ 3), c = n(/*! fbjs/lib/warning */ 4), d = "mixins", p = [], f = {
+    var a = (n(/*! ./reactProdInvariant */ 46), n(/*! object-assign */ 10)), r = n(/*! ./ReactComponent */ 110), o = n(/*! ./ReactElement */ 45), i = n(/*! ./ReactPropTypeLocationNames */ 314), s = n(/*! ./ReactNoopUpdateQueue */ 111), u = n(/*! fbjs/lib/emptyObject */ 39), l = n(/*! fbjs/lib/invariant */ 3), c = n(/*! fbjs/lib/warning */ 4), d = "mixins", p = [], f = {
         mixins: "DEFINE_MANY",
         statics: "DEFINE_MANY",
         propTypes: "DEFINE_MANY",
@@ -43249,7 +43332,7 @@ function(e, t, n) {
         this.props = e, this.context = t, this.refs = i, this.updater = n || o;
     }
     function ComponentDummy() {}
-    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactComponent */ 109), o = n(/*! ./ReactNoopUpdateQueue */ 110), i = n(/*! fbjs/lib/emptyObject */ 39);
+    var a = n(/*! object-assign */ 10), r = n(/*! ./ReactComponent */ 110), o = n(/*! ./ReactNoopUpdateQueue */ 111), i = n(/*! fbjs/lib/emptyObject */ 39);
     ComponentDummy.prototype = r.prototype, ReactPureComponent.prototype = new ComponentDummy(), 
     ReactPureComponent.prototype.constructor = ReactPureComponent, a(ReactPureComponent.prototype, r.prototype), 
     ReactPureComponent.prototype.isPureReactComponent = !0, e.exports = ReactPureComponent;
@@ -43883,7 +43966,7 @@ function(e, t, n) {
         };
     }
     t.__esModule = !0, t.default = combineReducers;
-    var a = n(/*! ./createStore */ 321), r = n(/*! lodash/isPlainObject */ 88), o = _interopRequireDefault(r), i = n(/*! ./utils/warning */ 322), s = _interopRequireDefault(i);
+    var a = n(/*! ./createStore */ 321), r = n(/*! lodash/isPlainObject */ 89), o = _interopRequireDefault(r), i = n(/*! ./utils/warning */ 322), s = _interopRequireDefault(i);
 }, /*!**************************************!*\
   !*** ./~/strict-uri-encode/index.js ***!
   \**************************************/
@@ -43919,7 +44002,7 @@ function(e, t, n) {
         t.default = s;
     }).call(t, function() {
         return this;
-    }(), n(/*! ./../../webpack/buildin/module.js */ 78)(e));
+    }(), n(/*! ./../../webpack/buildin/module.js */ 79)(e));
 }, /*!*********************************************!*\
   !*** ./~/symbol-observable/lib/ponyfill.js ***!
   \*********************************************/

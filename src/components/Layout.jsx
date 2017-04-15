@@ -14,6 +14,7 @@ import {UserActions, checkAuthorization, authorizedRoute} from '../library/authe
 import initInterceptors from '../interceptors';
 import authorizedRoutesConfig from '../constants/authorizedRoutesConfig';
 import {baseApiRoute} from '../../envVariables';
+import roleConfig from '../../roleConfig';
 import store from '../store';
 import TopNav from './pieces/TopNav';
 import Footer from './pieces/Footer';
@@ -75,7 +76,7 @@ class Layout extends React.Component {
 		}
 		if (!this.props.isAuthenticated) {
 			// Check for restriction on destination route
-			restrictedRoute = authorizedRoute(authorizedRoutesConfig, destination)
+			restrictedRoute = authorizedRoute(authorizedRoutesConfig, destination);
 			if (restrictedRoute) {
 				this.showAlert('notAuthenticated');
 				this.props.setRedirect(location.pathname);
@@ -91,8 +92,10 @@ class Layout extends React.Component {
 				accessGranted = checkAuthorization(restrictedRoute.accessControl, this.props.currentUser, roleConfig);
 				if (!accessGranted) {
 					this.showAlert('notAuthorized');
-					browserHistory.push('/');
+					browserHistory.push('/players/dashboard');
 				}
+			} else {
+				accessGranted = true;
 			}
 		}
 		if (this.state.waitingForInitialAuthCheck && accessGranted) {
@@ -101,6 +104,9 @@ class Layout extends React.Component {
 			}, () => {
 				this.props.hideLoader();
 			});
+		} else {
+			console.log('Hide loader')
+			this.props.hideLoader();
 		}
 		return;
 	}
@@ -111,7 +117,7 @@ class Layout extends React.Component {
 				this.props.addAlert({
 					'title': 'Not Authenticated',
 					'message': 'Please login or register to continue.',
-					'type': 'info',
+					'type': 'error',
 					'delay': 3000
 				});
 			},
@@ -150,7 +156,7 @@ class Layout extends React.Component {
 					<Animation transitionName="view" transitionAppear={true} transitionAppearTimeout={250} transitionEnter={true} transitionEnterTimeout={250} transitionLeave={true} transitionLeaveTimeout={250} component='div' className='content-container'>
 						{React.cloneElement(this.props.children, { key: path })}
 					</Animation> :
-					<div></div>
+					<div className="content-container"></div>
 				}
 				<Alerts></Alerts>
 				<Loader></Loader>

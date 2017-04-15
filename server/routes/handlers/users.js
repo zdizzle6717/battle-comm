@@ -2,13 +2,11 @@
 
 import env from '../../../envVariables';
 import models from '../../models';
-import fs from 'fs-extra';
 import Boom from 'boom';
-import im from 'imagemagick-stream';
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
 import buildRPUpdateEmail from '../../email-templates/rpUpdate';
-import buildRegistrationEmail from '../../email-templates/registrationSuccess';
+import buildRegistrationEmail from '../../email-templates/buildRegistrationEmail';
 import buildForgotPasswordEmail from '../../email-templates/forgotPassword';
 import buildPasswordUpdatedEmail from '../../email-templates/passwordUpdated';
 
@@ -16,12 +14,12 @@ import createUserToken from '../../utils/createUserToken';
 import createResetToken from '../../utils/createResetToken';
 import verifyResetToken from '../../utils/verifyResetToken';
 import {hashPassword, getUserRoleFlags} from '../../utils/userFunctions';
+import roleConfig from '../../../roleConfig';
 
 let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
 
-
 // listen for token updates
-// you probably want to store these to a db
+// consider storying these to a db
 generator.on('token', (token) => {});
 
 let transporter = nodemailer.createTransport(({
@@ -58,7 +56,7 @@ let users = {
           {
             'model': models.User,
             'as': 'Friends',
-            'attributes': ['id', 'firstName', 'lastName', 'username', 'icon']
+            'attributes': ['id', 'firstName', 'lastName', 'username']
           },
           {
             'model': models.GameSystemRanking,
@@ -99,52 +97,30 @@ let users = {
       });
   },
   create: (request, reply) => {
-		console.log(request.payload);
     hashPassword(request.payload.password, (err, hash) => {
-      models.User.create({
-					[request.payload.role]: true,
-          'email': request.payload.email,
-          'firstName': request.payload.firstName,
-          'lastName': request.payload.lastName,
-          'username': request.payload.username,
-          'password': hash
-        })
+			let userConfig = {
+        'email': request.payload.email,
+        'firstName': request.payload.firstName,
+        'lastName': request.payload.lastName,
+        'username': request.payload.username,
+        'password': hash,
+				'accountActivated': request.payload.role === 'member'
+      };
+			roleConfig.forEach((role) => {
+				if (role.name !== 'public') {
+					userConfig[role.name] = false;
+				}
+			});
+			userConfig[request.payload.role] = true;
+      models.User.create(userConfig)
         .then((user) => {
-					console.log(user);
-          let defaultPath = __dirname + '/../../..' + env.uploadPath + 'players/profile_image_default.png';
-          let path = __dirname + '/../../..' + env.uploadPath + 'players/' + user.id + '/playerIcon/' + 'profile_image_default.png';
-          let thumbPath = __dirname + '/../../..' + env.uploadPath + 'players/' + user.id + '/playerIcon/thumbs/' + 'profile_image_default.png';
-
-          // Create default image in folder
-          fs.ensureFile(path, (err) => {
-            let read1 = fs.createReadStream(defaultPath);
-            let file = fs.createWriteStream(path);
-            const resize = im().resize('100x100').quality(90);
-            file.on('error', (err) => {
-              console.log('Icon upload error' + err);
-            });
-            read1.pipe(file);
-            read1.on('end', (err) => {
-              fs.ensureFile(thumbPath, (err) => {
-                let read2 = fs.createReadStream(defaultPath);
-                let thumb = fs.createWriteStream(thumbPath);
-                file.on('error', (err) => {
-                  console.log('Thumb upload error.' + err);
-                });
-                read2.pipe(resize).pipe(thumb);
-                read2.on('end', (err) => {
-                  console.log('Default image created.');
-                });
-              });
-            });
-          });
-
+					user = user.get({'plain': true});
           // Send confirmation e-mail
           let customerMailConfig = {
             'from': env.email.user,
             'to': user.email,
             'subject': `Welcome to Battle-Comm!`,
-            'html': buildRegistrationEmail(user)
+            'html': buildRegistrationEmail(request.payload.role, user)
           };
 
           transporter.sendMail(customerMailConfig, (error, info) => {
@@ -152,12 +128,22 @@ let users = {
               console.log(error);
               reply('Somthing went wrong');
             } else {
-              reply({
+							if (!user.member) {
+								customerMailConfig.to = env.email.user;
+								customerMailConfig.subject = 'Account Activation Requested';
+								transporter.sendMail(customerMailConfig, (error, info) => {
+									if (error) {
+										console.log(error);
+			              reply('Somthing went wrong');
+									}
+								});
+							}
+							reply({
                 'id_token': createUserToken(user),
                 'id': user.id,
                 'firstName': user.firstName,
                 'lastName': user.lastName,
-                'icon': user.icon,
+								'accountActivated': user.accountActivated,
                 'member': user.member,
 								'roleFlags': getUserRoleFlags(user),
                 'subscriber': user.subscriber,
@@ -184,7 +170,6 @@ let users = {
       'id': request.pre.user.id,
       'firstName': request.pre.user.firstName,
       'lastName': request.pre.user.lastName,
-      'icon': request.pre.user.icon,
       'member': request.pre.user.member,
       'subscriber': request.pre.user.subscriber,
       'tourneyAdmin': request.pre.user.tourneyAdmin,
@@ -193,6 +178,7 @@ let users = {
       'venueAdmin': request.pre.user.venueAdmin,
       'clubAdmin': request.pre.user.clubAdmin,
       'systemAdmin': request.pre.user.systemAdmin,
+			'accountActivated': request.pre.user.accountActivated,
 			'UserPhoto': request.pre.user.UserPhoto
     }).code(201);
   },
@@ -303,10 +289,13 @@ let users = {
       })
       .then((user) => {
         if (user) {
-          let sendEmail = false;
+          let sendRPEmail, sendActivationEmail;
           if (request.payload.rewardPoints && request.payload.rewardPoints !== user.rewardPoints) {
-            sendEmail = true;
+            sendRPEmail = true;
           }
+					if (!user.accountActivated && request.payload.accountActivated) {
+						sendActivationEmail = true;
+					}
           user.updateAttributes({
             // 'email': request.payload.email,
             // 'password': request.payload.password,
@@ -347,33 +336,46 @@ let users = {
             'marketing': request.payload.marketing,
             'sms': request.payload.sms,
             'allowPlay': request.payload.allowPlay,
-            'icon': request.payload.icon,
             'totalWins': request.payload.totalWins,
             'totalLoss': request.payload.totalLoss,
             'totalDraw': request.payload.totalDraw,
             'totalPoints': request.payload.totalPoints,
             'eloRanking': request.payload.eloRanking,
-            'accountActive': request.payload.accountActive
+            'accountActivated': request.payload.accountActivated,
+            'accountBlocked': request.payload.accountBlocked
           }).then((user) => {
-            if (sendEmail === true) {
-              let customerMailConfig = {
+						user = user.get({plain: true});
+            if (sendRPEmail) {
+              let rpMailConfig = {
                 'from': env.email.user,
                 'to': user.email,
                 'subject': `Reward Point Update: New Total of ${user.rewardPoints}`,
                 'html': buildRPUpdateEmail(user)
               };
 
-              transporter.sendMail(customerMailConfig, (error, info) => {
+              transporter.sendMail(rpMailConfig, (error, info) => {
                 if (error) {
                   console.log(error);
-                  reply('Somthing went wrong');
-                } else {
-                  reply(user).code(200);
+                  reply(Boom.badRequest('Reward Point Email Failed.'));
                 }
               });
-            } else {
-              reply(user).code(200);
             }
+            if (sendActivationEmail) {
+              let activationMailConfig = {
+                'from': env.email.user,
+                'to': user.email,
+                'subject': `Battle-Comm: Account Activated`,
+                'html': buildAccountActivatedEmail(user)
+              };
+
+              transporter.sendMail(activationMailConfig, (error, info) => {
+                if (error) {
+                  console.log(error);
+                  reply(Boom.badRequest('Account Activation Email Failed.'));
+                }
+              });
+            }
+						reply(user).code(200);
           });
         } else {
           reply().code(404);

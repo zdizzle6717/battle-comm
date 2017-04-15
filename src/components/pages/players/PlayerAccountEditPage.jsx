@@ -154,7 +154,7 @@ class PlayerAccountEditPage extends React.Component {
 									</div>
 								</Form> :
 								<div className="user-contact">
-									<ul>
+									<ul className="no-bullets">
 										<li>First Name: {currentUser.firstName}</li>
 										<li>Last Name: {currentUser.lastName}</li>
 										<li>E-mail: {currentUser.email}</li>
@@ -208,7 +208,7 @@ class PlayerAccountEditPage extends React.Component {
 									</div>
 								</Form> :
 								<div className="user-shipping">
-									<ul>
+									<ul className="no-bullets">
 										<li>Address: {currentUser.streetAddress}</li>
 										<li>Apt/Suite: {currentUser.aptSuite}</li>
 										<li>City: {currentUser.city}</li>

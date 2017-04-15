@@ -37,12 +37,15 @@ export default function(roleConfig) {
 		}
 
 		render() {
-			return (
-				<span className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
-					{ this.state.authorized && !this.props.publicOnly && this.props.children }
-					{ !this.state.authorized && this.props.publicOnly && this.props.children }
-				</span>
-			)
+			if (this.state.authorized && !this.props.publicOnly || !this.state.authorized && this.props.publicOnly) {
+				return (
+					<span className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
+						{this.props.children}
+					</span>
+				)
+			} else {
+				return null;
+			}
 		}
 	}
 

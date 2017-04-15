@@ -44,5 +44,10 @@ module.exports = [
 		'name': 'playerDashboard',
 		'path': '/players/dashboard**',
 		'accessControl': ['member']
+	},
+	{
+		'name': 'store',
+		'path': '/store',
+		'accessControl': ['subscriber']
 	}
 ];

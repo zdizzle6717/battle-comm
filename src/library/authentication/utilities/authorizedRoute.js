@@ -5,12 +5,12 @@ const authorizedRoute = (authorizedRoutesConfig, destination) => {
 
 	function findRoute(routesConfig) {
 		routesConfig.forEach((route) => {
-			// Check for exact match
+			// Check for parent match
 			if (destination.includes(route.path)) {
-				if (route.hasOwnProperty('children')) {
-					return findRoute(route.children);
-				} else if (destination === route.path) {
+				if (destination === route.path) {
 					return foundRoute = route;
+				} else if (route.hasOwnProperty('children')) {
+					return findRoute(route.children);
 				}
 				// Check for parent route
 			} else if (route.path.slice(-2) === '**' && destination.includes(route.path.substring(0, route.path.length - 2))) {

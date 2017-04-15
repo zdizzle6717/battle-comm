@@ -23,8 +23,8 @@ module.exports = [
           'email': Joi.string().email().required(),
           'password': Joi.string().min(8).required(),
           'role': Joi.string().required(),
-          'firstName': Joi.string().optional(),
-          'lastName': Joi.string().optional()
+          'firstName': Joi.string().required(),
+          'lastName': Joi.string().required()
         }
       }
     }
@@ -46,7 +46,6 @@ module.exports = [
           Joi.object({
             'username': Joi.string().min(4).max(50).required(),
             'password': Joi.string().min(8).required()
-
           }),
           Joi.object({
             'username': Joi.string().email().required(),
@@ -119,7 +118,6 @@ module.exports = [
           'id': Joi.optional(),
           'email': Joi.optional(),
           'rewardPoints': Joi.number(),
-          'icon': Joi.optional(),
           'firstName': Joi.optional(),
           'lastName': Joi.optional(),
           'bio': Joi.optional(),
@@ -161,7 +159,8 @@ module.exports = [
           'marketing': Joi.optional(),
           'sms': Joi.optional(),
           'allowPlay': Joi.optional(),
-          'accountActive': Joi.optional(),
+          'accountActivated': Joi.optional(),
+          'accountBlocked': Joi.optional(),
           'createdAt': Joi.optional(),
           'updatedAt': Joi.optional(),
           'UserId': Joi.optional(),

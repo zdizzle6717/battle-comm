@@ -24,6 +24,15 @@ a {
 		text-decoration: none;
 	}
 }
+ul {
+	&.no-bullets {
+		list-style: none;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+}
+
 
 
 p{

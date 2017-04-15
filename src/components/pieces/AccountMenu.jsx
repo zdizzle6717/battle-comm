@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import {UserActions} from '../../library/authentication';
+import {UserActions, AccessControl as createAccessControl} from '../../library/authentication';
+import roleConfig from '../../../roleConfig';
+const AccessControl = createAccessControl(roleConfig);
 
 const mapStateToProps = (state) => {
 	return {
@@ -49,12 +51,26 @@ class AccountMenu extends React.Component {
 							{this.props.user.username}
 						</h3>
 						<ul onClick={this.toggleMenu}>
-							<li><Link key="userDashboard" to="/players/dashboard"><span className="fa fa-dashboard"></span>My Dashboard</Link></li>
-							<li><Link key="userDashboard" to={`/players/profile/${this.props.user.username}`}><span className="fa fa-user"></span>My Public Profile</Link></li>
-							<li><Link to="/players"><span className="fa fa-search"></span>Search</Link></li>
-							<li><Link to="/players/dashboard/notifications"><span className="fa fa-envelope"></span>Notifications</Link></li>
-							<li><Link to="/admin"><span className="fa fa-indent"></span>Admin</Link></li>
-							<li onClick={this.props.logout}><a>Logout</a></li>
+							<li>
+								<Link key="userDashboard" to="/players/dashboard"><span className="fa fa-dashboard"></span>My Dashboard</Link>
+							</li>
+							<li>
+								<Link key="userDashboard" to={`/players/profile/${this.props.user.username}`}><span className="fa fa-user"></span>My Public Profile</Link>
+							</li>
+							<li>
+								<Link to="/players"><span className="fa fa-search"></span>Search</Link>
+							</li>
+							<li>
+								<Link to="/players/dashboard/notifications"><span className="fa fa-envelope"></span>Notifications</Link>
+							</li>
+							<AccessControl access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']}>
+								<li>
+									<Link to="/admin"><span className="fa fa-indent"></span>Admin</Link>
+								</li>
+							</AccessControl>
+							<li onClick={this.props.logout}>
+								<a>Logout</a>
+							</li>
 						</ul>
 					</div>
 				}

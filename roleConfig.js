@@ -11,31 +11,31 @@ module.exports = [
 		'name': 'member',
 		'bit': (1 << 0), // 1
 		'roleFlags': 1,
-		'homeState': '/profile',
+		'homeState': '/players/dashboard',
 	},
 	{
 		'name': 'subscriber',
 		'bit': (1 << 1), // 2
 		'roleFlags': 3, // subscriber, member
-		'homeState': '/profile',
+		'homeState': '/players/dashboard',
 	},
 	{
 		'name': 'tourneyAdmin',
 		'bit': (1 << 2), // 4
 		'roleFlags': 5, // member, tourneyAdmin
-		'homeState': '/profile',
+		'homeState': '/players/dashboard',
 	},
 	{
 		'name': 'eventAdmin',
 		'bit': (1 << 3), // 8
 		'roleFlags': 13, // member, tourneyAdmin, eventAdmin
-		'homeState': '/profile',
+		'homeState': '/players/dashboard',
 	},
 	{
 		'name': 'newsContributor',
 		'bit': (1 << 4), // 16
 		'roleFlags': 17, // member, newsContributor
-		'homeState': '/profile',
+		'homeState': '/players/dashboard',
 	},
 	{
 		'name': 'venueAdmin',

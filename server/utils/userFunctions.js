@@ -5,71 +5,76 @@ import bcrypt from 'bcrypt';
 import models from '../models';
 import roleConfig from '../../roleconfig';
 
-const verifyUniqueUser = (req, res) => {
+const verifyUniqueUser = (request, reply) => {
   models.User.find({
     'where': {
       '$or': [{
-        'email': req.payload.email
+        'email': request.payload.email
       }, {
-        'username': req.payload.username
+        'username': request.payload.username
       }]
     }
   }).then((user) => {
     if (user) {
-      if (user.username === req.payload.username) {
-        res(Boom.badRequest('Username taken'));
+      if (user.username === request.payload.username) {
+        reply(Boom.badRequest('Username taken'));
       }
-      if (user.email === req.payload.email) {
-        res(Boom.badRequest('Email taken'));
+      if (user.email === request.payload.email) {
+        reply(Boom.badRequest('Email taken'));
       }
     }
-    res(req.payload);
+    reply(request.payload);
   }).catch((response) => {
     console.log(response);
   });
 };
 
-const verifyCredentials = (req, res) => {
-  const password = req.payload.password;
+const verifyCredentials = (request, reply) => {
+  const password = request.payload.password;
 
   models.User.find({
     'where': {
       '$or': [{
-        'email': req.payload.username
+        'email': request.payload.username
       }, {
-        'username': req.payload.username
+        'username': request.payload.username
       }]
     },
 		'include': [{
 			'model': models.UserPhoto
 		}]
   }).then((user) => {
+		user = user.get({'plain': true});
     if (user) {
       bcrypt.compare(password, user.password, (err, isValid) => {
         if (isValid) {
-          res(user);
+					if (user.accountActivated) {
+						reply(user);
+					} else {
+						reply(Boom.badRequest('Account not activated.'));
+					}
         } else {
-          res(Boom.badRequest('Incorrect password!'));
+          reply(Boom.badRequest('Incorrect password!'));
         }
       });
     } else {
-      res(Boom.badRequest('Incorrect username or email!'));
+      reply(Boom.badRequest('Incorrect username or email!'));
     }
   }).catch((response) => {
     console.log(response);
   });
 };
 
-const verifyUserExists = (req, res) => {
+const verifyUserExists = (request, reply) => {
   models.User.find({
     'where': {
-      'email': req.payload.email
+      'email': request.payload.email
     }
   }).then((user) => {
     if (user) {
-      res(user);
+      reply(user);
     } else {
-      res(Boom.badRequest('User not found.'));
+      reply(Boom.badRequest('User not found.'));
     }
   }).catch((response) => {
     console.log(response);

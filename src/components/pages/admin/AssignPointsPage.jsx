@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers} from '../../../library/utilities';
-import {Form, Input, TextArea, Select, DatePicker} from '../../../library/validations';
+import {Form, getFormErrorCount, Input, TextArea, Select, DatePicker} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import GameSystemActions from '../../../actions/GameSystemActions';
 import GameSystemService from '../../../services/GameSystemService';
@@ -15,6 +15,7 @@ import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
 	return {
+		'forms': state.forms,
 		'gameSystems': state.gameSystems,
 		'user': state.user
 	}
@@ -33,13 +34,14 @@ class AssignPointsPage extends React.Component {
 
 		this.state = {
 			'factions': [[]],
+			'selectedGameSystems': [''],
 			'players': [{
-				'FactionId': '',
-				'GameSystemId': ''
+				'faction': '',
+				'gameSystem': ''
 			}],
 			'venueEvent': {
 				'eventDate': ''
-			}
+			},
 		}
 
 		this.addPlayer = this.addPlayer.bind(this);
@@ -61,15 +63,18 @@ class AssignPointsPage extends React.Component {
 	addPlayer() {
 		let players = this.state.players;
 		let factions = this.state.factions;
+		let selectedGameSystems = this.state.selectedGameSystems;
 		factions[players.length] = [];
+		selectedGameSystems[players.length] = '';
 		players[players.length] = {
-			'FactionId': '',
-			'GameSystemId': ''
+			'faction': '',
+			'gameSystem': ''
 		};
 
 		this.setState({
 			'factions': factions,
-			'players': players
+			'players': players,
+			'selectedGameSystems': selectedGameSystems
 		});
 	}
 
@@ -81,13 +86,17 @@ class AssignPointsPage extends React.Component {
 
 	handleGameSystemChange(index, e) {
 		let players = this.state.players;
-		players[index].GameSystemId = e.target.value;
-		players[index].FactionId = '';
+		players[index].faction = '';
+		let factions = this.state.factions;
+		let selectedGameSystems = this.state.selectedGameSystems;
+		selectedGameSystems[index] = e.target.value;
 		GameSystemService.get(e.target.value).then((gameSystem) => {
 			factions[index] = gameSystem.Factions;
+			players[index].gameSystem = gameSystem.name;
 			this.setState({
 				'players': players,
-				'factions': factions
+				'factions': factions,
+				'selectedGameSystems': selectedGameSystems
 			});
 		});
 	}
@@ -106,7 +115,7 @@ class AssignPointsPage extends React.Component {
 			'players': this.state.players
 		};
 		VenueService.submitPointAssignment(data).then(() => {
-			this.addAlert('pointsSubmitted');
+			this.showAlert('pointsSubmitted');
 			browserHistory.push('/admin');
 		});
 	}
@@ -115,11 +124,14 @@ class AssignPointsPage extends React.Component {
 		e.preventDefault();
 		let players = this.state.players;
 		let factions = this.state.factions;
+		let selectedGameSystems = this.state.selectedGameSystems;
 		players.splice(index, 1);
-		factions.splice(index, 1)
+		factions.splice(index, 1);
+		selectedGameSystems.splice(index, 1);
 		this.setState({
 			'players': players,
 			'factions': factions,
+			'selectedGameSystems': selectedGameSystems
 		});
 	}
 
@@ -139,6 +151,9 @@ class AssignPointsPage extends React.Component {
 	}
 
 	render() {
+		let venueEventFormIsValid = getFormErrorCount(this.props.forms, 'venueEventForm') < 1;
+		let venueEventPlayersFormIsValid = getFormErrorCount(this.props.forms, 'venueEventPlayersForm') < 1;
+
 		return (
 			<ViewWrapper>
 				<div className="small-12 columns">
@@ -168,17 +183,17 @@ class AssignPointsPage extends React.Component {
 							<div className="row">
 								<div className="form-group small-12 medium-6 columns">
 									<label className="required">Event Date</label>
-									<DatePicker name="venueAdmin" value={this.state.venueEvent.eventDate} handleInputChange={this.handleEventInputChange} required={true} />
+									<DatePicker name="eventDate" value={this.state.venueEvent.eventDate} handleInputChange={this.handleEventInputChange} required={true} />
 								</div>
 								<div className="form-group small-12 medium-6 columns">
 									<label className="required">Return Email</label>
-									<Input type="text" name="eventName" value={this.state.venueEvent.eventName} handleInputChange={this.handleEventInputChange} required={true} />
+									<Input type="text" name="returnEmail" value={this.state.venueEvent.returnEmail} handleInputChange={this.handleEventInputChange} validate="email" required={true} />
 								</div>
 							</div>
 						</Form>
 
 						<h2>Players</h2>
-						<Form name="venueEventForm" submitText="Submit Point Assignment" submitButton={false}>
+						<Form name="venueEventPlayersForm" submitText="Submit Point Assignment" submitButton={false}>
 							{
 								this.state.players.map((player, i) =>
 									<fieldset key={i}>
@@ -189,7 +204,7 @@ class AssignPointsPage extends React.Component {
 											</div>
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Email</label>
-												<Input type="text" name="email" value={this.state.players[i].email} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
+												<Input type="text" name="email" value={this.state.players[i].email} handleInputChange={this.handlePlayerInputChange.bind(this, i)} validate="email" required={true} />
 											</div>
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Points Earned</label>
@@ -199,7 +214,7 @@ class AssignPointsPage extends React.Component {
 										<div className="row">
 											<div className="form-group small-12 medium-6 columns">
 												<label className="required">Game System</label>
-												<Select name="GameSystemId" value={this.state.players[i].GameSystemId} handleInputChange={this.handleGameSystemChange.bind(this, i)} required={true}>
+												<Select name="selectedGameSystems" value={this.state.selectedGameSystems[i].gameSystem} handleInputChange={this.handleGameSystemChange.bind(this, i)} required={true}>
 													<option value="">--Select--</option>
 													{
 														this.props.gameSystems.map((gameSystem, i) =>
@@ -210,11 +225,11 @@ class AssignPointsPage extends React.Component {
 											</div>
 											<div className="form-group small-12 medium-6 columns">
 												<label className="required">Faction</label>
-												<Select name="FactionId" value={this.state.players[i].FactionId} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true}>
+												<Select name="faction" value={this.state.players[i].faction} handleInputChange={this.handlePlayerInputChange.bind(this, i)}>
 													<option value="">--Select--</option>
 													{
 														this.state.factions[i].map((faction, i) =>
-															<option key={i} value={faction.id}>{faction.name}</option>
+															<option key={i} value={faction.name}>{faction.name}</option>
 														)
 													}
 												</Select>
@@ -223,11 +238,11 @@ class AssignPointsPage extends React.Component {
 										<div className="row">
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Total Wins</label>
-												<Input type="text" name="totalWins" value={this.state.players[i].totalWins} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
+												<Input type="number" name="totalWins" value={this.state.players[i].totalWins} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
 											</div>
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Total Draws</label>
-												<Input type="text" name="totalDraws" value={this.state.players[i].totalDraws} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
+												<Input type="number" name="totalDraws" value={this.state.players[i].totalDraws} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
 											</div>
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Total Losses</label>
@@ -238,7 +253,6 @@ class AssignPointsPage extends React.Component {
 											i > 0 &&
 											<button className="button error" onClick={this.removePlayer.bind(this, i)}><span className="fa fa-minus"></span></button>
 										}
-
 									</fieldset>
 								)
 							}
@@ -248,7 +262,7 @@ class AssignPointsPage extends React.Component {
 						</div>
 
 						<div className="form-group text-right">
-							<button className="button" onClick={this.handleSubmit}>Submit Point Assignment</button>
+							<button className="button right" onClick={this.handleSubmit} disabled={!venueEventFormIsValid || !venueEventPlayersFormIsValid}>Submit Point Assignment</button>
 						</div>
 					</div>
 				</div>

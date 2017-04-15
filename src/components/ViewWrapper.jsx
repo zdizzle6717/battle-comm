@@ -20,7 +20,7 @@ export default class ViewWrapper extends React.Component {
 								<div className="box-bar-top"><div className="bar">
 									{
 										this.props.headerImage &&
-										<div className="title small"><img src={this.props.headerImage} alt={this.props.headerAlt} /></div>
+										<div className="title large"><img src={this.props.headerImage} alt={this.props.headerAlt} /></div>
 									}
 								</div></div>
 								<div className="box-corner-tr"></div>
@@ -52,5 +52,6 @@ ViewWrapper.propTypes = {
 }
 
 ViewWrapper.defaultProps = {
-	'container': 'default'
+	'container': 'default',
+	'headerAlt': 'Battle-Comm'
 }

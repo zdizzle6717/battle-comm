@@ -4,7 +4,7 @@ $space-between: 3;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	width: 90%;
+	width: 86%;
 
 	@for $i from 1 through 6 {
 		.box-#{$i * 2} {

@@ -67,7 +67,7 @@ class Form extends React.Component {
 							this.props.submitButton &&
 							<div className="row">
 								<div className="form-group small-12 columns text-right">
-									<button className="button info" onClick={this.handleSubmit} disabled={this.props.validity !== undefined ? !this.props.validity : !formIsValid}>{this.props.submitText}</button>
+									<button className="button right info" onClick={this.handleSubmit} disabled={this.props.validity !== undefined ? !this.props.validity : !formIsValid}>{this.props.submitText}</button>
 								</div>
 							</div>
 						}
@@ -78,7 +78,7 @@ class Form extends React.Component {
 							this.props.submitButton &&
 							<div className="row">
 								<div className="form-group small-12 columns text-right">
-									<button className="button info" onClick={this.handleSubmit} disabled={this.props.validity !== undefined ? !this.props.validity : !formIsValid}>{this.props.submitText}</button>
+									<button className="button right info" onClick={this.handleSubmit} disabled={this.props.validity !== undefined ? !this.props.validity : !formIsValid}>{this.props.submitText}</button>
 								</div>
 							</div>
 						}
