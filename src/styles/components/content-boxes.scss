@@ -12,7 +12,6 @@ $space-between: 3;
 			display: flex;
 			margin-bottom: 3.125rem;
 			float: left;
-			z-index: 10;
 			max-width: percentage(($i/6) - ($space-between * .01));
 			flex-direction: column;
 			box-sizing: border-box;

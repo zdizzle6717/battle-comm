@@ -76,7 +76,7 @@ class RegistrationPage extends React.Component {
 					'title': 'Registration Pending',
 					'message': 'Please check your e-mail for further instructions and account activation.',
 					'type': 'success',
-					'delay': 3000
+					'delay': 4000
 				});
 			},
 			'registrationSuccess': () => {
@@ -84,7 +84,7 @@ class RegistrationPage extends React.Component {
 					'title': 'Registration Success',
 					'message': 'You have successfully registered an account. Please login to continue.',
 					'type': 'success',
-					'delay': 3000
+					'delay': 4000
 				});
 			},
 			'invalidUsername': () => {

@@ -38,11 +38,31 @@ export default function(roleConfig) {
 
 		render() {
 			if (this.state.authorized && !this.props.publicOnly || !this.state.authorized && this.props.publicOnly) {
-				return (
-					<span className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
-						{this.props.children}
-					</span>
-				)
+				if (this.props.element === 'div') {
+					return (
+						<div className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
+							{this.props.children}
+						</div>
+					)
+				} else if (this.props.element === 'li') {
+					return (
+						<li className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
+							{this.props.children}
+						</li>
+					)
+				} else if (this.props.element === 'td') {
+					return (
+						<td className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
+							{this.props.children}
+						</td>
+					)
+				} else {
+					return (
+						<span className={this.props.customClasses ? `access-control ${this.props.customClasses}` : 'access-control'}>
+							{this.props.children}
+						</span>
+					)
+				}
 			} else {
 				return null;
 			}
@@ -52,6 +72,7 @@ export default function(roleConfig) {
 	AccessControl.propTypes = {
 		'access': PropTypes.array,
 		'customClasses': PropTypes.string,
+		'element': PropTypes.string,
 		'publicOnly': PropTypes.bool
 	}
 

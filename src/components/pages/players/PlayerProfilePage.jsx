@@ -5,6 +5,7 @@ import {browserHistory, Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
+import Modal from '../../../library/Modal';
 import ViewWrapper from '../../ViewWrapper';
 import PlayerService from '../../../services/PlayerService';
 import UserFriendService from '../../../services/UserFriendService';
@@ -66,8 +67,10 @@ class PlayerProfilePage extends React.Component {
 				let alreadyFriends = player.Friends.some((friend) => {
 					return friend.id === this.props.currentUser.id;
 				});
+				let photoStream = player.Files.filter((file) => file.identifier === 'photoStream');
 				this.setState({
 					'alreadyFriends': alreadyFriends,
+					'photoStream': photoStream,
 					'player': player
 				});
 			});
@@ -79,14 +82,22 @@ class PlayerProfilePage extends React.Component {
 		return userPhoto ? `/uploads/players/${player.id}/playerIcon/300-${player.UserPhoto.name}` : '/uploads/players/defaults/profile-icon-default.png';
 	}
 
-	getPlayerPhotoStream() {
-		let photos = [];
-		this.state.player.Files.forEach((file) => {
-			if (file.identifier === 'photoStream') {
-				photos.push(file);
-			}
+	pageModal(index, direction, e) {
+		e.preventDefault();
+		if (direction === 'forward') {
+			index++;
+		} else if (direction === 'backward') {
+			index--;
+		}
+		if (index < 0) {
+			index = this.state.photoStream.length - 1
+		}
+		if (index > this.state.photoStream.length - 1) {
+			index = 0;
+		}
+		this.setState({
+			'activeModal': `photoStream-${index}`
 		});
-		return photos;
 	}
 
 	removeFriend() {
@@ -142,7 +153,6 @@ class PlayerProfilePage extends React.Component {
     render() {
 		let player = this.state.player;
 		let isSamePlayer = this.state.player.id === this.props.currentUser;
-		this.getPlayerPhotoStream();
 
         return (
             <ViewWrapper>
@@ -289,14 +299,21 @@ class PlayerProfilePage extends React.Component {
 										this.state.photoStream.length > 0 ?
 										<div className="photo-stream">
 											{
-												this.getPlayerPhotoStream().map((photo, i) =>
-													<Modal key={i} name={`photoStream-${i}`} title={`${player.username}'s Photo Stream'`} modalIsOpen={this.state.activeModal === `photoStream-${i}`} handleClose={this.toggleModal.bind(this, `photoStream-${i}`)} showClose={true} showFooter={false}>
-														<img src={`/players/${player.id}/photoStream/${photo.name}`}/>
-													</Modal>
+												this.state.photoStream.map((photo, i) =>
+													<div key={i} className="photo-box">
+														<a onClick={this.toggleModal.bind(this, `photoStream-${i}`)}><img src={`/uploads/players/${player.id}/photoStream/${photo.name}`}/></a>
+															<Modal name={`photoStream-${i}`} title={`${player.username}'s Photo Stream`} modalIsOpen={this.state.activeModal === `photoStream-${i}`} handleClose={this.toggleModal.bind(this, `photoStream-${i}`)} showClose={true} showFooter={false}>
+																<img src={`/uploads/players/${player.id}/photoStream/${photo.name}`}/>
+																<div className="actions">
+																	<span className="fa fa-arrow-left" onClick={this.pageModal.bind(this, i, 'backward')}></span>
+																	<span className="fa fa-arrow-right" onClick={this.pageModal.bind(this, i, 'forward')}></span>
+																	</div>
+															</Modal>
+													</div>
 												)
 											}
 										</div> :
-										<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
+										<h5>This player has not yet uploaded photos to their profile.</h5>
 									}
 								</div>
 						</div>

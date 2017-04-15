@@ -53,7 +53,10 @@ module.exports = function(sequelize, DataTypes) {
     'state': DataTypes.STRING,
     'zip': DataTypes.STRING,
     'dob': DataTypes.DATE,
-    'bio': DataTypes.TEXT,
+    'bio': {
+			'type': DataTypes.TEXT,
+			'default': '...'
+		},
     'facebook': DataTypes.STRING,
     'twitter': DataTypes.STRING,
     'instagram': DataTypes.STRING,

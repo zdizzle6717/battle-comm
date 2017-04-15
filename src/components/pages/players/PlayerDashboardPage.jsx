@@ -205,6 +205,24 @@ class PlayerDashboardPage extends React.Component {
 		return;
 	}
 
+	pageModal(index, direction, e) {
+		e.preventDefault();
+		if (direction === 'forward') {
+			index++;
+		} else if (direction === 'backward') {
+			index--;
+		}
+		if (index < 0) {
+			index = this.state.photoStream.length - 1
+		}
+		if (index > this.state.photoStream.length - 1) {
+			index = 0;
+		}
+		this.setState({
+			'activeModal': `photoStream-${index}`
+		});
+	}
+
 	savePlayer() {
 		PlayerService.update(this.state.currentUser.id, this.state.currentUser).then((updatedUser) => {
 			let isEditing = this.state.isEditing;
@@ -491,8 +509,8 @@ class PlayerDashboardPage extends React.Component {
 														<Modal name={`photoStream-${i}`} title={`${this.state.currentUser.username}'s Photo Stream`} modalIsOpen={this.state.activeModal === `photoStream-${i}`} handleClose={this.toggleModal.bind(this, `photoStream-${i}`)} showClose={true} showCancel={false} confirmText="Delete?" handleSubmit={this.deletePhoto.bind(this, photo.id, i)}>
 															<img src={`/uploads/players/${this.state.currentUser.id}/photoStream/${photo.name}`}/>
 															<div className="actions">
-																<span className="fa fa-arrow-left" onClick={this.toggleModal.bind(this, `photoStream-${i - 1}`)}></span>
-																<span className="fa fa-arrow-right" onClick={this.toggleModal.bind(this, `photoStream-${i + 1}`)}></span>
+																<span className="fa fa-arrow-left" onClick={this.pageModal.bind(this, i, 'backward')}></span>
+																<span className="fa fa-arrow-right" onClick={this.pageModal.bind(this, i, 'forward')}></span>
 																</div>
 														</Modal>
 												</div>

@@ -93,7 +93,7 @@ class PlayerRankingSearchPage extends React.Component {
 			}).then((response) => {
 				this.setState({
 					'pagination': response.pagination,
-					'results': response.results
+					'results': response.results.filter((result) => result.GameSystemRanking.User)
 				});
 			});
 		} else {
@@ -103,7 +103,7 @@ class PlayerRankingSearchPage extends React.Component {
 			}).then((response) => {
 				this.setState({
 					'pagination': response.pagination,
-					'results': response.results
+					'results': response.results.filter((result) => result.User)
 				});
 			});
 		}
@@ -176,7 +176,7 @@ class PlayerRankingSearchPage extends React.Component {
 							</thead>
 							<tbody>
 								{
-									this.state.results.filter(result => result.User).map((ranking, i) =>
+									this.state.results.map((ranking, i) =>
 										<tr key={i}>
 											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>{this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}</Link></td>
 											<td>{ranking.totalWins}</td>

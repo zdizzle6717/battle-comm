@@ -21,7 +21,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'logout': UserActions.logout
+		'logout': UserActions.logout,
+		'setRedirect': UserActions.setRedirect
     }, dispatch);
 };
 
@@ -53,6 +54,8 @@ class TopNav extends React.Component {
 
 	logout() {
 		this.props.logout();
+		// TODO: Set redirect doesn't seem to be working.
+		this.props.setRedirect(false);
 		this.showAlert('logoutSuccess');
 		browserHistory.push('/');
 	}

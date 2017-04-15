@@ -63,10 +63,8 @@ class AccountMenu extends React.Component {
 							<li>
 								<Link to="/players/dashboard/notifications"><span className="fa fa-envelope"></span>Notifications</Link>
 							</li>
-							<AccessControl access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']}>
-								<li>
-									<Link to="/admin"><span className="fa fa-indent"></span>Admin</Link>
-								</li>
+							<AccessControl element="li" access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']}>
+								<Link to="/admin"><span className="fa fa-indent"></span>Admin</Link>
 							</AccessControl>
 							<li onClick={this.props.logout}>
 								<a>Logout</a>
