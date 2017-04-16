@@ -168,8 +168,8 @@ class PlayerRankingSearchPage extends React.Component {
 								<tr>
 									<th className="text-center">Username</th>
 									<th className="text-center">Total Wins</th>
-									<th className="text-center">Total Draws</th>
 									<th className="text-center">Total Losses</th>
+										<th className="text-center">Total Draws</th>
 									<th className="text-center">Point Value</th>
 									<th className="text-center">View Profile</th>
 								</tr>
@@ -180,8 +180,8 @@ class PlayerRankingSearchPage extends React.Component {
 										<tr key={i}>
 											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>{this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}</Link></td>
 											<td>{ranking.totalWins}</td>
-											<td>{ranking.totalDraws}</td>
 											<td>{ranking.totalLosses}</td>
+											<td>{ranking.totalDraws}</td>
 											<td>{ranking.pointValue}</td>
 											<td>
 												<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>

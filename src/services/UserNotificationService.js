@@ -3,6 +3,12 @@
 import axios from 'axios';
 
 export default {
+	getByUserId: (id) => {
+		return axios.get('/userNotifications/' + id)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	getAll: () => {
 		return axios.get('/userNotifications')
 			.then(function(response) {
@@ -10,7 +16,7 @@ export default {
 			});
 	},
 	search: (criteria) => {
-		return axios.post('/userNotifications/search', criteria)
+		return axios.post('/search/userNotifications', criteria)
 			.then(function(response) {
 				return response.data;
 			});

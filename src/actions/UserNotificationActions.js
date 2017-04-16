@@ -18,6 +18,15 @@ const _returnResponse = (type, data) => {
 };
 
 export default {
+	getByUserId: (id) => {
+		return (dispatch) => {
+			dispatch(_initiateRequest(UserNotificationConstants.INITIATE_USER_NOTIFICATION_REQUEST));
+			return UserNotificationService.getByUserId(criteria).then((response) => {
+				dispatch(_returnResponse(UserNotificationConstants.GET_USER_NOTIFICATIONS, response.results));
+				return response.pagination;
+			});
+		};
+	},
 	search: (criteria) => {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserNotificationConstants.INITIATE_USER_NOTIFICATION_REQUEST));

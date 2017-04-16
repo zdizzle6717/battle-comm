@@ -55,6 +55,10 @@ class PlayerProfilePage extends React.Component {
 			'fromName': currentUser.firstName && currentUser.lastName ? currentUser.firstName + ' ' + currentUser.lastName : 'anonymous'
 		}).then(() => {
 			this.showAlert('allyRequestSent');
+		}).catch((error) => {
+			if (error.message == 'Request already sent') {
+				this.showAlert('allyAlreadyRequestSent');
+			}
 		});
 	}
 
@@ -63,19 +67,23 @@ class PlayerProfilePage extends React.Component {
 		if (!this.props.params.playerHandle) {
 			browserHistory.push(`/players/dashboard`);
 		} else {
-			PlayerService.getByUsername(this.props.params.playerHandle).then((player) => {
-				let alreadyFriends = player.Friends.some((friend) => {
-					return friend.id === this.props.currentUser.id;
-				});
-				let photoStream = player.Files.filter((file) => file.identifier === 'photoStream');
-				this.setState({
-					'alreadyFriends': alreadyFriends,
-					'photoStream': photoStream,
-					'player': player
-				});
-			});
+			this.getCurrentPlayer();
 		}
     }
+
+	getCurrentPlayer() {
+		PlayerService.getByUsername(this.props.params.playerHandle).then((player) => {
+			let alreadyFriends = player.Friends.some((friend) => {
+				return friend.id === this.props.currentUser.id;
+			});
+			let photoStream = player.Files.filter((file) => file.identifier === 'photoStream');
+			this.setState({
+				'alreadyFriends': alreadyFriends,
+				'photoStream': photoStream,
+				'player': player
+			});
+		});
+	}
 
 	getPlayerIcon(player) {
 		let userPhoto = player.UserPhoto;
@@ -101,13 +109,11 @@ class PlayerProfilePage extends React.Component {
 	}
 
 	removeFriend() {
-		UserFriendService.remove({
-			'UserId': this.props.currentUser.id,
-			'InviteeId': this.state.player.id
-		}).then(() => {
+		UserFriendService.remove(this.props.currentUser.id, this.state.player.id).then(() => {
 			this.setState({
 				'alreadyFriends': false
 			})
+			this.getCurrentPlayer();
 			this.showAlert('allianceBroken');
 		});
 	}
@@ -127,6 +133,14 @@ class PlayerProfilePage extends React.Component {
 					'title': 'Ally Request Sent',
 					'message': `An ally request has been sent to ${this.state.player.username}.`,
 					'type': 'success',
+					'delay': 3000
+				});
+			},
+			'allyAlreadyRequestSent': () => {
+				this.props.addAlert({
+					'title': 'Request Already sent',
+					'message': `An ally request has already been sent.`,
+					'type': 'error',
 					'delay': 3000
 				});
 			},

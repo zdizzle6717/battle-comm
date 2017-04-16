@@ -98,34 +98,38 @@ class PlayerSearchPage extends React.Component {
 				</div>
 				<hr/>
 				<div className="small-12 columns">
-					<table className="stack hover text-center">
-						<thead>
-							<tr>
-								<th className="text-center">Handle</th>
-								<th className="text-center">Full Name</th>
-								<th className="text-center">Go To Profile</th>
-								<th className="text-center">Player Icon</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								this.props.players.map((user, i) =>
-									<tr key={i}>
-										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>{user.username}</Link></td>
-										<td>{user.firstName && user.lastName ? user.lastName + ', ' + user.firstName : 'anonymous'}
-										</td>
-										<td>
-											<Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>
-												<span className="mobile-text">View</span>
-											</Link>
-										</td>
-										<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={this.getPlayerIcon.call(this, user)} className="image-tiny"/></Link>
-										</td>
-									</tr>
-								)
-							}
-						</tbody>
-					</table>
+					{
+						this.props.players.length > 0 ?
+						<table className="stack hover text-center">
+							<thead>
+								<tr>
+									<th className="text-center">Handle</th>
+									<th className="text-center">Full Name</th>
+									<th className="text-center">Go To Profile</th>
+									<th className="text-center">Player Icon</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									this.props.players.map((user, i) =>
+										<tr key={i}>
+											<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>{user.username}</Link></td>
+											<td>{user.firstName && user.lastName ? user.lastName + ', ' + user.firstName : 'anonymous'}
+											</td>
+											<td>
+												<Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>
+													<span className="mobile-text">View</span>
+												</Link>
+											</td>
+											<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={this.getPlayerIcon.call(this, user)} className="image-tiny"/></Link>
+											</td>
+										</tr>
+									)
+								}
+							</tbody>
+						</table> :
+						<h3 className="text-center">No results found for the selected search</h3>
+					}
 					<hr/>
 					<div className="small-12 columns">
 						<PaginationControls pageNumber={this.state.pagination.pageNumber} pageSize={this.state.pagination.pageSize} totalPages={this.state.pagination.totalPages} totalResults={this.state.pagination.totalResults} handlePageChange={this.handlePageChange.bind(this)}></PaginationControls>

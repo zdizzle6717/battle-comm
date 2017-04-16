@@ -11,15 +11,17 @@ import UserNotificationActions from '../../../actions/UserNotificationActions';
 
 const mapStateToProps = (state) => {
 	return {
-		'currentUser': state.user
+		'currentUser': state.user,
+		'notifications': state.userNotifications
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'getNotifications': userNotifications.search,
-		'removeNotification': userNotifications.remove
+		'getNotifications': UserNotificationActions.search,
+		'sendNotification': UserNotificationActions.create,
+		'removeNotification': UserNotificationActions.remove
 	}, dispatch);
 }
 
@@ -30,44 +32,63 @@ class PlayerNotificationsPage extends React.Component {
         super();
 
 		this.state = {
-			'pagination': pagination
+			'pagination': {}
 		}
 
-		this.getNotifications = this.getNotifications.bind(this);
+		this.handleNotificationsPageChange = this.handleNotificationsPageChange.bind(this);
 		this.showAlert = this.showAlert.bind(this);
     }
 
     componentDidMount() {
         document.title = "Battle-Comm | Player Notifications";
-		this.getNotifications();
+		this.handleNotificationsPageChange(1);
     }
 
-	acceptAllyRequest(notificationId, fromId) {
-		this.props.removeNotification(notificationId);
+	acceptAllyRequest(notificationId, fromId, fromUsername) {
 		UserFriendService.create({
 			'UserId': this.props.currentUser.id,
 			'InviteeId': fromId
 		}).then((newFriend) => {
-			this.showAlert('newAlly', newFriend)
+			this.props.removeNotification(notificationId).then(() => {
+				this.handleNotificationsPageChange(1).then(() => {
+					this.props.sendNotification({
+						'UserId': fromId,
+						'type': 'allyRequestAccepted',
+						'fromId': this.props.currentUser.id,
+						'fromUsername': this.props.currentUser.username,
+						'fromName': this.props.currentUser.firstName + ' ' + this.props.currentUser.lastName
+					}).then(() => {
+						this.showAlert('newAlly', fromUsername);
+					});
+				});
+			})
 		});
 	}
 
-	ignoreAllyRequest(notificationId, fromUsername) {
-		this.props.removeNotification(notificationId).then(() => {
-			this.showAlert('allyRequestIgnored', fromUsername)
-		});
-	}
-
-	getNotifications() {
-		this.props.getNotifications({
+	handleNotificationsPageChange(pageNumber = 1) {
+		return this.props.getNotifications({
 			'UserId': this.props.currentUser.id,
-			'pageNumber': 1,
+			'pageNumber': pageNumber,
 			'pageSize': 10,
 			'orderBy': 'updatedAt'
 		}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
-			})
+			});
+		});
+	}
+
+	removeNotification(notificationId, fromUsername, alertName) {
+		this.props.removeNotification(notificationId).then(() => {
+			this.handleNotificationsPageChange(1).then(() => {
+				switch(alertName) {
+					case 'allyRequestIgnored':
+						this.showAlert('allyRequestIgnored', fromUsername);
+						break;
+					default:
+						return;
+				}
+			});
 		});
 	}
 
@@ -77,27 +98,28 @@ class PlayerNotificationsPage extends React.Component {
 				this.props.addAlert({
 					'title': 'Ally Request Ignore',
 					'message': `You have chosen to ignore an ally request from ${data}`,
-					'type': 'success',
+					'type': 'info',
 					'delay': 3000
 				});
 			},
-			'newAlly': (data) => {
+			'newAlly': (fromUsername) => {
 				this.props.addAlert({
 					'title': 'Ally Request Approved',
-					'message': `You have formed a new alliance with ${data.username}`,
+					'message': `You have formed a new alliance with ${fromUsername}`,
 					'type': 'success',
 					'delay': 3000
 				});
 			}
 		}
 
-		return alerts[selector]();
+		return alerts[selector](data);
 	}
 
     render() {
         return (
             <ViewWrapper>
-                <div className="row">
+			<div className="player-dashboard">
+				<div className="row">
 					<div className="small-12 columns">
 						<h1>Player Notifications</h1>
 					</div>
@@ -105,31 +127,47 @@ class PlayerNotificationsPage extends React.Component {
                 <div className="row">
 					<div className="small-12 medium-6 columns">
 						<h2>Notifications</h2>
-						{
-							this.props.notifications.filter((notificaiton) => notification.type === 'allyRequestReceived' || notification.type === 'allyRequestAccepted').map((notification, i) =>
-								<div key={i} className="notification">
-									<div className="panel">
-										<div className="panel-title primary">
-											New ally request from {notification.fromUsername}
+						<div className="notification">
+							{
+								this.props.notifications.filter((notification) => notification.type === 'allyRequestReceived').length > 0 ?
+								this.props.notifications.filter((notification) => notification.type === 'allyRequestReceived').map((notification, i) =>
+									<div key={i} className="container ice push-bottom">
+										<div className="">
+											New ally request from <strong>{notification.fromUsername}</strong>
 										</div>
-										<div className="panel-content">
-											More request details
+										<div className="text-right">
 											<br/>
-											<button className="button" onClick={this.acceptAllyRequest.bind(this, notification.id, notification.fromId)}>Accept?</button>
-											<button className="button" onClick={this.ignoreAllyRequest.bind(this, notificaiton.id, notification.fromUsername)}>Reject?</button>
+											<button className="button push-right" onClick={this.acceptAllyRequest.bind(this, notification.id, notification.fromId, notification.fromUsername)}>Accept?</button>
+											<button className="button" onClick={this.removeNotification.bind(this, notification.id, notification.fromUsername, 'allyRequestIgnored')}>Reject?</button>
 										</div>
 									</div>
-								</div>
-							)
-						}
+								) :
+								<div className=""><h3>There are currently no pending notifications</h3></div>
+							}
+						</div>
 					</div>
 					<div className="small-12 medium-6 columns">
 						<h2>Messages</h2>
+							<div className="notification">
+								{
+									this.props.notifications.filter((notification, i) => notification.type === 'allyRequestAccepted').length > 0 ?
+									this.props.notifications.filter((notification) => notification.type === 'allyRequestAccepted').map((notification, i) =>
+										<div key={i} className="container ice push-bottom">
+											<span className="fa fa-times" onClick={this.removeNotification.bind(this, notification.id, notification.fromUsername)}></span>
+											<div className="">
+												<strong>{notification.fromUsername}</strong> accepted your ally request
+											</div>
+										</div>
+									) :
+									<div className=""><h3>There are currently no pending messages</h3></div>
+								}
+							</div>
 					</div>
                 </div>
+			</div>
             </ViewWrapper>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerNotificationsPage);

@@ -19,8 +19,7 @@ const userNotifications = (state = [], action) => {
 			return [...action.data];
 		case UserNotificationConstants.CREATE_USER_NOTIFICATION:
 			return [
-				...state,
-				userNotification(undefined, action)
+				...state
 			];
 		case UserNotificationConstants.REMOVE_USER_NOTIFICATION:
 			let userNotificationArray = [...state];

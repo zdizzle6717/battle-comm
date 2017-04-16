@@ -15,7 +15,7 @@ function buildTemplate(data) {
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.pointsEarned}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.gameSystem}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.faction || 'N/A'}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.totalWins}/${player.totalDraws}/${player.totalLosses}</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.totalWins}/${player.totalLosses}/${player.totalDraws}</td>
 			</tr>
 			`
 		} else {
@@ -27,7 +27,7 @@ function buildTemplate(data) {
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.pointsEarned}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.gameSystem}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.faction || 'N/A'}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.totalWins}/${player.totalDraws}/${player.totalLosses}</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.totalWins}/${player.totalLosses}/${player.totalDraws}</td>
 			</tr>
 			`
 		}
@@ -53,7 +53,7 @@ function buildTemplate(data) {
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Points Earned</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Game System</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Faction</th>
-				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">W/D/L</th>
+				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">W/L/D</th>
 			  </tr>
 			  ${playerTable}
 			</table>

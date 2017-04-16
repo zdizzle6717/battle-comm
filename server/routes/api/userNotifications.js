@@ -6,6 +6,21 @@ import { userNotifications } from '../handlers';
 module.exports = [
 	// User Notifications
 	{
+    'method': 'GET',
+    'path': '/api/userNotifications/{id}',
+    'config': {
+      'tags': ['api'],
+      'description': 'Get user notifications by id',
+      'notes': 'Get user notifications by id',
+      'validate': {
+        'params': {
+          'id': Joi.number().required()
+        }
+      }
+    },
+    'handler': userNotifications.get
+  },
+	{
 		'method': 'POST',
 		'path': '/api/userNotifications',
 		'config': {
@@ -19,7 +34,7 @@ module.exports = [
 			'validate': {
 				'payload': {
 					'UserId': Joi.number().required(),
-					'type': Joi.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newMessage'),
+					'type': Joi.string().valid('allyRequestReceived', 'allyRequestAccepted', 'newMessage').required(),
 					'status': Joi.optional(),
 					'fromId': Joi.number().required(),
 					'fromUsername': Joi.string().required(),

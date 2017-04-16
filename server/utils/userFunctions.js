@@ -44,8 +44,8 @@ const verifyCredentials = (request, reply) => {
 			'model': models.UserPhoto
 		}]
   }).then((user) => {
-		user = user.get({'plain': true});
     if (user) {
+			user = user.get({'plain': true});
       bcrypt.compare(password, user.password, (err, isValid) => {
         if (isValid) {
 					if (user.accountActivated) {

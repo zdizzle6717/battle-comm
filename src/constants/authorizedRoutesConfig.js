@@ -48,6 +48,28 @@ module.exports = [
 	{
 		'name': 'store',
 		'path': '/store',
-		'accessControl': ['subscriber']
+		'accessControl': ['member'],
+		'children': [
+			{
+				'name': 'cart',
+				'path': '/store/cart',
+				'accessControl': ['subscriber']
+			},
+			{
+				'name': 'checkout',
+				'path': '/store/checkout',
+				'accessControl': ['subscriber']
+			},
+			{
+				'name': 'order-success',
+				'path': '/store/order-success',
+				'accessControl': ['subscriber']
+			},
+			{
+				'name': 'products',
+				'path': '/store/products/*',
+				'accessControl': ['member']
+			},
+		]
 	}
 ];

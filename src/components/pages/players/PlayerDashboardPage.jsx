@@ -398,11 +398,6 @@ class PlayerDashboardPage extends React.Component {
 									</div>
 								}
 							</div>
-							<div className="row push-top-2x">
-								<div className="small-12 columns">
-									<Link key="editAccountDetails" to="/players/dashboard/account-edit"><h3 className="button account-details text-center">Edit Account Details</h3></Link>
-								</div>
-							</div>
 						</div>
 						<div className="small-12 medium-6 columns text-center">
 							<h2 className="no_shadow">{ currentUser.firstName ? (currentUser.firstName + ' ' + currentUser.lastName) : 'Anonymous'} </h2>
@@ -421,6 +416,11 @@ class PlayerDashboardPage extends React.Component {
 							<div className="">
 								<p><Link to={`/players/dashboard/change-password`}>Change Password?</Link></p>
 							</div>
+							<div className="row push-top-2x">
+								<div className="small-12 columns text-center">
+									<Link key="editAccountDetails" to="/players/dashboard/account-edit"><h3 className="button account-details">Edit Account Details</h3></Link>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="row">
@@ -429,8 +429,8 @@ class PlayerDashboardPage extends React.Component {
 							<div className="friend-list">
 								{
 									currentUser.Friends.map((friend, i) =>
-									<span className="icon-box">
-										<Link key={i} to={`/players/profile/${friend.username}`} className="icon-box">
+									<span key={i} className="icon-box">
+										<Link to={`/players/profile/${friend.username}`} className="icon-box">
 											<img className="icon" src={this.getPlayerIcon.call(this, friend)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
 										</Link>

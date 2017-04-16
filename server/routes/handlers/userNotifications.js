@@ -5,6 +5,21 @@ import Boom from 'boom';
 
 // Product Route Configs
 let userNotifications = {
+	get: (request, reply) => {
+    models.UserNotification.find({
+        'where': {
+          'UserId': request.params.id
+        }
+      })
+      .then((response) => {
+        if (response) {
+          reply(response).code(200);
+        } else {
+          reply().code(404);
+        }
+
+      });
+  },
   create: (request, reply) => {
     models.UserNotification.findOrCreate({
         'where': {

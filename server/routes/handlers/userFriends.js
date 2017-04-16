@@ -34,13 +34,13 @@ let userFriends = {
   remove: (request, reply) => {
     models.User.find({
         'where': {
-          'id': request.payload.UserId
+          'id': request.params.UserId
         }
       })
       .then((user1) => {
         models.User.find({
             'where': {
-              'id': request.payload.InviteeId
+              'id': request.params.InviteeId
             }
           })
           .then((user2) => {

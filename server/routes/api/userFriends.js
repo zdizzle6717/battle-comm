@@ -27,7 +27,7 @@ module.exports = [
 	},
 	{
 		'method': 'DELETE',
-		'path': '/api/friends',
+		'path': '/api/friends/{UserId}/{InviteeId}',
 		'config': {
 			'handler': userFriends.remove,
 			'tags': ['api'],
@@ -38,7 +38,7 @@ module.exports = [
 				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			'validate': {
-				'payload': {
+				'params': {
 					'UserId': Joi.number().required(),
 					'InviteeId': Joi.number().required(),
 				}

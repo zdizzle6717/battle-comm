@@ -9,13 +9,21 @@ import PropTypes from 'prop-types';
 import {UserActions, AccessControl as createAccessControl} from '../../library/authentication';
 import roleConfig from '../../../roleConfig';
 const AccessControl = createAccessControl(roleConfig);
+import UserNotificationActions from '../../actions/UserNotificationActions';
 
 const mapStateToProps = (state) => {
 	return {
-		'user': state.user
+		'user': state.user,
+		'notifications': state.userNotifications
 	}
 
 	this.getPlayerIcon = this.getPlayerIcon.bind(this);
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'getNotifications': UserNotificationActions.search
+	}, dispatch);
 }
 
 class AccountMenu extends React.Component {
@@ -26,7 +34,21 @@ class AccountMenu extends React.Component {
 			'showMenu': false
 		}
 
+		this.getNotifications = this.getNotifications.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
+	}
+
+	componentDidMount() {
+		this.getNotifications();
+	}
+
+	getNotifications() {
+		this.props.getNotifications({
+			'UserId': this.props.user.id,
+			'pageNumber': 1,
+			'pageSize': 10,
+			'orderBy': 'updatedAt'
+		});
 	}
 
 	getPlayerIcon() {
@@ -43,6 +65,10 @@ class AccountMenu extends React.Component {
 	render() {
 		return (
 			<div className="account-menu pointer">
+				{
+					this.props.notifications.length > 0 &&
+					<span className="notification-count">{this.props.notifications.length}</span>
+				}
 				<img src={this.getPlayerIcon()} onClick={this.toggleMenu} />
 				{
 					this.state.showMenu &&
@@ -61,7 +87,10 @@ class AccountMenu extends React.Component {
 								<Link to="/players"><span className="fa fa-search"></span>Search</Link>
 							</li>
 							<li>
-								<Link to="/players/dashboard/notifications"><span className="fa fa-envelope"></span>Notifications</Link>
+								<Link to="/players/dashboard/notifications" className="notification-link"><span className="fa fa-envelope"></span>Notifications {
+									this.props.notifications.length > 0 &&
+									<span className="count">{this.props.notifications.length}</span>
+								}</Link>
 							</li>
 							<AccessControl element="li" access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']}>
 								<Link to="/admin"><span className="fa fa-indent"></span>Admin</Link>
@@ -85,4 +114,4 @@ AccountMenu.propTypes = {
 	'logout': PropTypes.func
 }
 
-export default connect(mapStateToProps, null)(AccountMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountMenu);

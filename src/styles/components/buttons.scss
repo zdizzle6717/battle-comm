@@ -11,7 +11,7 @@
 	padding: 0.35rem 1rem;
 	font-size: 1rem;
 	transition: background 250ms, color 250ms;
-	display: flex;
+	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	border: 2px solid $primary-600;
