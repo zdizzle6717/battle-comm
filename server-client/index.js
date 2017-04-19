@@ -84,7 +84,7 @@ for (let i in routeConfig) {
 				console.warn(err);
 				let markup = '';
 				const state = JSON.stringify({});
-				return res.render('notFound', {markup, state})
+				return res.render('pageNotFound', {markup, state})
 			});
         });
     });
@@ -130,12 +130,12 @@ app.get('*', (req, res) => {
 
 			const state = JSON.stringify(store.getState());
 
-			return res.render('notFound', {markup, state});
+			return res.render('pageNotFound', {markup, state});
 		}).catch((err) => {
 			console.warn(err);
 			let markup = '';
 			const state = JSON.stringify({});
-			return res.render('notFound', {markup, state})
+			return res.render('pageNotFound', {markup, state})
 		});
 	});
 });

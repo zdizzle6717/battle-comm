@@ -110,7 +110,7 @@ class RegistrationPage extends React.Component {
 
     render() {
         return (
-			<ViewWrapper headerImage="/images/Titles/Register.png" alt="Register">
+			<ViewWrapper headerImage="/images/Titles/Register_Large.png" alt="Register">
 				<div className="row">
 					<div className="small-12 columns">
 						<h2>Sign Up to Create a Player Profile</h2>
@@ -165,7 +165,7 @@ class RegistrationPage extends React.Component {
 							</Form>
 							<div className="row">
 								<div className="form-group small-12 columns">
-									Already have an account? <Link key="login" to="/login" activeClassName="active" onClick={this.closeMenu}>Go to Login</Link>
+									Already have an account? <Link key="login" to="/login">Go to Login</Link>
 								</div>
 							</div>
 							<div className="row">

@@ -38,7 +38,7 @@ class CartSummary extends React.Component {
 		if (this.props.cartItems.length < 1) {
 			let storedItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
 			storedItems.forEach((item) => {
-				this.props.addToCart(item.merchItem, item.cartQty);
+				this.props.addToCart(item.product, item.cartQty);
 			});
 			// TODO: Check if this needs a set timeout
 			setTimeout(() => {
@@ -48,7 +48,7 @@ class CartSummary extends React.Component {
 	}
 
 	removeItem(item, qty) {
-		this.props.removeFromCart(item.merchItem.id, qty);
+		this.props.removeFromCart(item.product.id, qty);
 		// TODO: Check if this needs a set timeout
 		setTimeout(() => {
 			this.props.updateOrderTotal(this.props.cartItems);
@@ -86,8 +86,8 @@ class CartSummary extends React.Component {
 										{
 											this.props.cartItems.map((item, i) =>
 												<tr key={i} className="item-row">
-													<td>{item.merchItem.title}</td>
-													<td>${item.merchItem.price}</td>
+													<td>{item.product.title}</td>
+													<td>${item.product.price}</td>
 													<td>({item.cartQty})</td>
 													<td className="pointer" onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-minus"></span></td>
 												</tr>

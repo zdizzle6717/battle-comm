@@ -94,9 +94,8 @@ class SearchManufacturersPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Manufacturer_Search.png" headerAlt="Manufacturer Search">
 				<div className="small-12 columns">
-					<h1>Search Manufacturers</h1>
 					<hr/>
 					<AdminMenu></AdminMenu>
 					<hr/>
@@ -140,8 +139,16 @@ class SearchManufacturersPage extends React.Component {
 							<div className="panel-title color-black">
 								Reset Search Filters
 							</div>
-							<div className="panel-content">
-								<button className="button black center" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+							<div className="panel-content text-center">
+								<button className="button black small-12" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+							</div>
+						</div>
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
+								Add Manufacturer
+							</div>
+							<div className="panel-content text-center">
+								<Link to="/admin/manufacturer/create" className="button black small-12"><span className="fa fa-plus"> </span> New Manufacturer</Link>
 							</div>
 						</div>
 					</div>

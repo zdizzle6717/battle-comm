@@ -128,7 +128,7 @@ class PlayerAccountEditPage extends React.Component {
 		let shippingFormIsValid = getFormErrorCount(this.props.forms, 'shippingForm') < 1;
 
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Account_Details.png" headerAlt="Account Details">
 				<div className="row">
 					<div className="small-12 medium-6 columns">
 						<h2 className="text-center">Contact Information</h2>

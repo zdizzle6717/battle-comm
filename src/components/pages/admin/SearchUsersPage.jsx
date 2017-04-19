@@ -93,9 +93,8 @@ class SearchUsersPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Player_Search.png" headerAlt="Player Search">
 				<div className="small-12 columns">
-					<h1>Search Users</h1>
 					<hr/>
 					<AdminMenu></AdminMenu>
 					<hr/>
@@ -140,8 +139,8 @@ class SearchUsersPage extends React.Component {
 							<div className="panel-title color-black">
 								Reset Search Filters
 							</div>
-							<div className="panel-content">
-								<button className="button black center" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+							<div className="panel-content text-center">
+								<button className="button black small-12" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
 							</div>
 						</div>
 					</div>

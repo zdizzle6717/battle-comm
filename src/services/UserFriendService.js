@@ -3,6 +3,12 @@
 import axios from 'axios';
 
 export default {
+	searchByUserId: (id) => {
+		return axios.post('/search/friends/' + id)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	create: (data) => {
 		return axios.post('/friends', data)
 			.then(function(response) {

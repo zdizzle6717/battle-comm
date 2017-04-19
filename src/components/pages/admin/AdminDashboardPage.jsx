@@ -16,10 +16,9 @@ export default class AdminDashboardPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Admin_Dashboard.png" headerAlt="Admin Dashboard">
                 <div className="row">
 					<div className="small-12 columns">
-						<h1>Admin Dashboard</h1>
 						<hr/>
 						<AdminMenu></AdminMenu>
 						<hr/>

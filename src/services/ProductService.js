@@ -16,7 +16,7 @@ export default {
 			});
 	},
 	search: (criteria) => {
-		return axios.post('/products/search', criteria)
+		return axios.post('/search/products', criteria)
 			.then(function(response) {
 				return response.data;
 			});

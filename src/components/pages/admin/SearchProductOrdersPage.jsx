@@ -94,9 +94,8 @@ class SearchProductOrdersPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Product_Order_Search.png" headerAlt="Product Order Search">
 				<div className="small-12 columns">
-					<h1>Search Product Orders</h1>
 					<hr/>
 					<AdminMenu></AdminMenu>
 					<hr/>
@@ -141,8 +140,8 @@ class SearchProductOrdersPage extends React.Component {
 							<div className="panel-title color-black">
 								Reset Search Filters
 							</div>
-							<div className="panel-content">
-								<button className="button black center" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
+							<div className="panel-content text-center">
+								<button className="button black small-12" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span>Reset</button>
 							</div>
 						</div>
 					</div>
@@ -163,7 +162,6 @@ class SearchProductOrdersPage extends React.Component {
 									this.props.productOrders.map((productOrder, i) =>
 										<tr key={i}>
 											<td>{productOrder.id}</td>
-											<td>{formatJSONDate(productOrder.updatedAt)}</td>
 											<td>{formatJSONDate(productOrder.createdAt)}</td>
 											<td>{productOrder.customerEmail}</td>
 											<td>{productOrder.customerPhone}</td>

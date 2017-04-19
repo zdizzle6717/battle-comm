@@ -64,8 +64,8 @@ export default class Footer extends React.Component {
 						</div>
 					</div>
 				</div>
-				<Modal name="privacyPolicyModal" title="Privacy Policy" modalIsOpen={this.state.showPrivacyModal} handleClose={this.toggleModal.bind(this, 'showPrivacyModal')} showClose={true} showFooter={false}>Content for Privacy Policy modal</Modal>
-				<Modal name="copyrightStatementModal" title="Copyright Statement" modalIsOpen={this.state.showCopyrightModal} handleClose={this.toggleModal.bind(this, 'showCopyrightModal')} showClose={true} showFooter={false}>Content for Copyright Statement modal</Modal>
+				<Modal name="privacyPolicyModal" title="Privacy Policy" modalIsOpen={this.state.showPrivacyModal} handleClose={this.toggleModal.bind(this, 'showPrivacyModal')} showClose={true} showFooter={false}>Content for Privacy Policy</Modal>
+				<Modal name="copyrightStatementModal" title="Copyright Statement" modalIsOpen={this.state.showCopyrightModal} handleClose={this.toggleModal.bind(this, 'showCopyrightModal')} showClose={true} showFooter={false}>All copyrights belong to their respective owners. Images and text owned by other copyright holders are used here under the guidelines of the Fair Use provisions of United States Copyright Law.</Modal>
     		</footer>
 	    );
 	}

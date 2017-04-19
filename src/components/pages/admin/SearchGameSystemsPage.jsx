@@ -94,9 +94,8 @@ class SearchGameSystemsPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Game_System_Search.png" headerAlt="Game System Search">
 				<div className="small-12 columns">
-					<h1>Search Game Systems</h1>
 					<hr/>
 					<AdminMenu></AdminMenu>
 					<hr/>
@@ -140,8 +139,16 @@ class SearchGameSystemsPage extends React.Component {
 							<div className="panel-title color-black">
 								Reset Search Filters
 							</div>
-							<div className="panel-content">
-								<button className="button black center" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span> Reset</button>
+							<div className="panel-content text-center">
+								<button className="button black small-12" onClick={this.handleFilterReset}><span className="fa fa-refresh"> </span> Reset</button>
+							</div>
+						</div>
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
+								Add Game System
+							</div>
+							<div className="panel-content text-center">
+								<Link to="/admin/game-systems/create" className="button black small-12"><span className="fa fa-plus"> </span> New Game System</Link>
 							</div>
 						</div>
 					</div>

@@ -69,7 +69,7 @@ let userPhotos = {
             }
           })
           .then((userPhoto) => {
-						// TODO: use imageConfig constant to clean this up and delete b
+						// TODO: use imageConfig constant to clean this up and delete
             if (userPhoto) {
 							fse.unlink(locationUrl, (err) => {
 								if (err) {

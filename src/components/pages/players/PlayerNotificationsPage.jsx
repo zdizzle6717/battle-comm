@@ -117,13 +117,8 @@ class PlayerNotificationsPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Notifications.png" headerAlt="Notifications">
 			<div className="player-dashboard">
-				<div className="row">
-					<div className="small-12 columns">
-						<h1>Player Notifications</h1>
-					</div>
-                </div>
                 <div className="row">
 					<div className="small-12 medium-6 columns">
 						<h2>Notifications</h2>

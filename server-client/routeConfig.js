@@ -30,6 +30,10 @@ export default [
 		'view': 'players'
 	},
 	{
+		'route': '/ranking/search/*',
+		'view': 'ranking'
+	},
+	{
 		'route': '/register',
 		'view': 'register'
 	},

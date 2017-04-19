@@ -8,7 +8,12 @@ let products = {
     models.Product.find({
         'where': {
           'id': request.params.id
-        }
+        },
+				'include': [
+					{
+						'model': models.File
+					}
+				]
       })
       .then((response) => {
         if (response) {
@@ -88,7 +93,7 @@ let products = {
   },
 	'search': (request, reply) => {
     let searchByConfig;
-    let pageSize = request.payload.pageSize || 20;
+    let pageSize = parseInt(request.payload.pageSize, 10) || 20;
     let searchQuery = request.payload.searchQuery || '';
     let offset = (request.payload.pageNumber - 1) * pageSize;
 		let orderBy = request.payload.orderBy ? (request.payload.orderBy === 'updatedAt' || request.payload.orderBy === 'createdAt' ? [request.payload.orderBy, 'DESC'] : [request.payload.orderBy, 'ASC']) : undefined;
@@ -117,7 +122,10 @@ let products = {
       'where': searchByConfig,
 			'order': orderBy ? [orderBy] : [],
       'offset': offset,
-      'limit': pageSize
+      'limit': pageSize,
+			'include': {
+				'model': models.File
+			}
     }).then((response) => {
       let count = response.count;
       let results = response.rows;

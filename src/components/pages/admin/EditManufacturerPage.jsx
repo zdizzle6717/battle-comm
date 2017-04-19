@@ -4,13 +4,19 @@ import React from 'react';
 import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';
-import {Form, Input, TextArea, Select, FileUpload} from '../../../library/validations';
+import {Form, Input, TextArea, Select, FileUpload, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import FileService from '../../../services/FileService';
 import ManufacturerService from '../../../services/ManufacturerService';
 import AdminMenu from '../../pieces/AdminMenu';
 
-export default class EditManufacturerPage extends React.Component {
+const mapStateToProps = (state) => {
+	return {
+		'forms': state.forms
+	}
+}
+
+class EditManufacturerPage extends React.Component {
 	constructor() {
 		super();
 
@@ -76,7 +82,8 @@ export default class EditManufacturerPage extends React.Component {
 		});
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault();
 		let method = this.props.params.manufacturerId ? 'update': 'create';
 		ManufacturerService[method]((method === 'update' ? this.state.manufacturer.id : this.state.manufacturer), (method === 'update' ? this.state.manufacturer : null)).then((manufacturer) => {
 			if (this.state.newFilesUploaded) {
@@ -148,46 +155,59 @@ export default class EditManufacturerPage extends React.Component {
 	}
 
 	render() {
-		<ViewWrapper>
-			<div className="small-12 columns">
-				<h1>Manufacturer Edit</h1>
-				<hr/>
-				<AdminMenu></AdminMenu>
-				<hr/>
-			</div>
-			<div className="row">
-				<div className="small-12 medium-8 large-9 columns">
-					<Form name="manufacturerForm" submitText={this.state.newGameSystem ? 'Create Manufacturer' : 'Update Manufacturer'} handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 medium-3 columns">
-								<label className="required">Manufacturer Name</label>
-								<Input type="text" name="name" value={this.state.manufacturer.name} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-3 columns">
-								<label className="required">Search Key</label>
-								<Input type="text" name="searchKey" value={this.state.manufacturer.searchKey} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-3 columns">
-								<label>Url to Related Webpage</label>
-								<Input type="text" name="url" value={this.state.manufacturer.url} handleInputChange={this.handleInputChange} />
-							</div>
-							<div className="form-group small-12 medium-3 columns">
-								<label>Related Photo</label>
-								<FileUpload name="gameSystemPhoto" value={this.state.manufacturer.File} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={1} />
+		let formIsValid = getFormErrorCount(this.props.forms, 'manufacturerForm');
+		return (
+			<ViewWrapper headerImage="/images/Titles/Manufacturer_Edit.png" headerAlt="Manufacturer Edit">
+				<div className="small-12 columns">
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
+				</div>
+				<div className="row">
+					<div className="small-12 columns">
+						<h2>{this.state.newManufacturer ? 'Create New Manufacturer' : `${this.state.manufacturer.name}`}</h2>
+					</div>
+					<div className="small-12 medium-8 large-9 columns">
+						<fieldset>
+							<Form name="manufacturerForm" submitButton={false} handleSubmit={this.handleSubmit}>
+								<div className="row">
+									<div className="form-group small-12 medium-3 columns">
+										<label className="required">Manufacturer Name</label>
+										<Input type="text" name="name" value={this.state.manufacturer.name} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-3 columns">
+										<label className="required">Search Key</label>
+										<Input type="text" name="searchKey" value={this.state.manufacturer.searchKey} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-3 columns">
+										<label>Url to Related Webpage</label>
+										<Input type="text" name="url" value={this.state.manufacturer.url} handleInputChange={this.handleInputChange} />
+									</div>
+									<div className="form-group small-12 medium-3 columns">
+										<label>Related Photo</label>
+										<FileUpload name="gameSystemPhoto" value={this.state.manufacturer.File} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={1} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-12 columns">
+										<label>Description</label>
+										<TextArea name="description" value={this.state.manufacturer.description} handleInputChange={this.handleInputChange} rows="3"/>
+									</div>
+								</div>
+							</Form>
+						</fieldset>
+					</div>
+					<div className="small-12 medium-8 large-9 columns">
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-content text-center">
+								<button onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newGameSystem ? 'Create Manufacturer' : 'Update Manufacturer'}</button>
 							</div>
 						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-12 columns">
-								<label>Description</label>
-								<TextArea name="description" value={this.state.manufacturer.description} handleInputChange={this.handleInputChange} rows="3"/>
-							</div>
-						</div>
-					</Form>
+					</div>
 				</div>
-				<div className="small-12 medium-8 large-9 columns">
-					Filters
-				</div>
-			</div>
-		</ViewWrapper>
+			</ViewWrapper>
+		)
 	}
 }
+
+export default connect(mapStateToProps, null)(EditManufacturerPage);

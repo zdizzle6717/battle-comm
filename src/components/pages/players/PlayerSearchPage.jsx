@@ -46,7 +46,7 @@ class PlayerSearchPage extends React.Component {
 		return userPhoto ? `/uploads/players/${player.id}/playerIcon/300-${player.UserPhoto.name}` : '/uploads/players/defaults/300-profile-icon-default.png';
 	}
 
-	handlePageChange(pageNumber, e) {
+	handlePageChange(pageNumber = 1, e) {
 		if (e && e.keyCode && e.keyCode !== 13) {
 			return;
 		}
@@ -58,24 +58,29 @@ class PlayerSearchPage extends React.Component {
     }
 
 	handleQueryChange(e) {
+		let searchQuery = e.target.value;
+		if (searchTimer) {
+			clearTimeout(searchTimer);
+		}
+		searchTimer = setTimeout(() => {
+			this.handlePageChange(1);
+		}, 500);
 		this.setState({
 			'searchQuery': e.target.value
-		})
+		});
 	}
 
 	handleSearchByChange(e) {
 		this.setState({
 			'searchBy': e.target.value
-		})
+		}, () => {
+			this.handlePageChange(1)
+		});
 	}
 
     render() {
         return (
-            <ViewWrapper>
-                <div className="small-12 columns">
-                    <h1>Player Search</h1>
-                </div>
-				<hr/>
+            <ViewWrapper headerImage="/images/Titles/Player_Search.png" headerAlt="Player Search">
 				<div className="row">
 					<div className="small-12 medium-6 large-8 columns">
 						<label>Search Query</label>

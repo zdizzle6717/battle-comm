@@ -166,20 +166,14 @@ class PlayerProfilePage extends React.Component {
 
     render() {
 		let player = this.state.player;
-		let isSamePlayer = this.state.player.id === this.props.currentUser;
+		let isSamePlayer = this.state.player.id === this.props.currentUser.id;
 
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Player_Profile.png" headerAlt="Player Profile">
 				<div className="player-profile">
 					<div className="row">
-						<div className="small-12 columns">
-							<h1>Player Profile</h1>
-							<hr />
-						</div>
-	                </div>
-					<div className="row">
 						<div className="small-12 medium-6 columns">
-							<h2>Player Info</h2>
+							<h2 className="text-center">Player Info</h2>
 							{
 								player.bio ?
 								<h3 className="user-bio push-bottom-2x">{player.bio}</h3> :

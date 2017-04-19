@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';
-import {Form, Input, TextArea, Select, CheckBox, FileUpload} from '../../../library/validations';
+import {Form, Input, TextArea, Select, CheckBox, FileUpload, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import FileService from '../../../services/FileService';
 import ManufacturerActions from '../../../actions/ManufacturerActions';
@@ -16,7 +16,8 @@ import AdminMenu from '../../pieces/AdminMenu';
 const mapStateToProps = (state) => {
 	return {
 		'manufacturers': state.manufacturers,
-		'user': state.user
+		'user': state.user,
+		'forms': state.forms
 	}
 }
 
@@ -120,7 +121,8 @@ class EditNewsPostPage extends React.Component {
 		});
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault();
 		let post = this.state.newsPost;
 		let method = this.props.params.newsPostId ? 'update' : 'create';
 		post.UserId = this.props.user.id;
@@ -190,88 +192,100 @@ class EditNewsPostPage extends React.Component {
 	}
 
 	render() {
-		<ViewWrapper>
-			<div className="small-12 columns">
-				<h1>News Post Edit</h1>
-				<hr/>
-				<AdminMenu></AdminMenu>
-				<hr/>
-			</div>
-			<div className="row">
-				<div className="small-12 medium-8 large-9 columns">
-					<Form name="newsPostForm" submitText={this.state.newNewsPost ? 'Create News Post' : 'Update News Post'} handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Title</label>
-								<Input type="text" name="title" value={this.state.newsPost.title} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="published" value={this.state.newsPost.published} handleInputChange={this.handleCheckBoxChange} label="Publish on News Page?"/>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="featured" value={this.state.newsPost.featured} handleInputChange={this.handleCheckBoxChange} label="Feature this post?"/>
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label>Manufacturer</label>
-								<Select name="ManufacturerId" value={this.state.newsPost.ManufacturerId} handleInputChange={this.handleManufacturerChange}>
-									<option value="">--Select--</option>
-									{
-										this.props.manufacturers.map((manufacturer, i) =>
-											<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
-										)
-									}
-								</Select>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label>Game System</label>
-								<Select name="GameSystemId" value={this.state.newsPost.GameSystemId} handleInputChange={this.handleInputChange}>
-									<option value="">--Select--</option>
-									{
-										this.state.gameSystems.map((gameSystems, i) =>
-											<option key={i} value={gameSystems.id}>{gameSystems.name}</option>
-										)
-									}
-								</Select>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label>Category</label>
-								<Select name="category" value={this.state.newsPost.category} handleInputChange={this.handleInputChange}>
-									<option value="bcNews">BC News</option>
-									<option value="events">Events/Tournaments</option>
-									<option value="announcements">Announcements</option>
-									<option value="miscellaneous">Miscellaneous</option>
-								</Select>
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Callout</label>
-								<TextArea type="text" name="callout" value={this.state.newsPost.callout} rows="4" handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Body</label>
-								<TextArea type="text" name="body" value={this.state.newsPost.body} rows="7" handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Tags</label>
-								<TextArea type="text" name="tags" value={this.state.newsPost.tags} rows="4" handleInputChange={this.handleInputChange} required={true} />
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">News Post Photos</label>
-								<FileUpload name="postPhotos" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={5} required={1}/>
-							</div>
-						</div>
-					</Form>
+		let formIsValid = getFormErrorCount(this.props.forms, 'newsPostForm');
+
+		return (
+			<ViewWrapper headerImage="/images/Titles/News_Post_Edit.png" headerAlt="News Post Edit">
+				<div className="small-12 columns">
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
 				</div>
-				<div className="small-12 medium-4 large-3 columns">
-					Filters
+				<div className="row">
+					<div className="small-12 columns">
+						<h2>{this.state.newNewsPost ? 'Create News Post' : `${this.state.newsPost.title}`}</h2>
+					</div>
+					<div className="small-12 medium-8 large-9 columns">
+						<fieldset>
+							<Form name="newsPostForm" submitButton={false} handleSubmit={this.handleSubmit}>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Title</label>
+										<Input type="text" name="title" value={this.state.newsPost.title} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<CheckBox name="published" value={this.state.newsPost.published} handleInputChange={this.handleCheckBoxChange} label="Publish on News Page?"/>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<CheckBox name="featured" value={this.state.newsPost.featured} handleInputChange={this.handleCheckBoxChange} label="Feature this post?"/>
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label>Manufacturer</label>
+										<Select name="ManufacturerId" value={this.state.newsPost.ManufacturerId} handleInputChange={this.handleManufacturerChange}>
+											<option value="">--Select--</option>
+											{
+												this.props.manufacturers.map((manufacturer, i) =>
+													<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
+												)
+											}
+										</Select>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label>Game System</label>
+										<Select name="GameSystemId" value={this.state.newsPost.GameSystemId} handleInputChange={this.handleInputChange}>
+											<option value="">--Select--</option>
+											{
+												this.state.gameSystems.map((gameSystems, i) =>
+													<option key={i} value={gameSystems.id}>{gameSystems.name}</option>
+												)
+											}
+										</Select>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label>Category</label>
+										<Select name="category" value={this.state.newsPost.category} handleInputChange={this.handleInputChange}>
+											<option value="bcNews">BC News</option>
+											<option value="events">Events/Tournaments</option>
+											<option value="announcements">Announcements</option>
+											<option value="miscellaneous">Miscellaneous</option>
+										</Select>
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Callout</label>
+										<TextArea type="text" name="callout" value={this.state.newsPost.callout} rows="4" handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Body</label>
+										<TextArea type="text" name="body" value={this.state.newsPost.body} rows="7" handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Tags</label>
+										<TextArea type="text" name="tags" value={this.state.newsPost.tags} rows="4" handleInputChange={this.handleInputChange} required={true} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">News Post Photos</label>
+										<FileUpload name="postPhotos" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={5} required={1}/>
+									</div>
+								</div>
+							</Form>
+						</fieldset>
+					</div>
+					<div className="small-12 medium-4 large-3 columns">
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-content text-center">
+								<button onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newNewsPost ? 'Create News Post' : 'Update News Post'}</button>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</ViewWrapper>
+			</ViewWrapper>
+		)
 	}
 }
 

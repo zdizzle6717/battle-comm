@@ -60,8 +60,6 @@ let files = {
     });
   },
   add: (request, reply) => {
-    let counter = 0;
-    let tick = 0;
     let data = request.payload;
     if (!data.path || !data.fileSize) {
       reply(Boom.badRequest(`A 'path' and 'fileSize' attribute must be appended to the FormData object`));
@@ -114,6 +112,7 @@ let files = {
           };
 
           if (resizeArray) {
+						let count = 0;
             resizeArray.forEach((resizeConfig) => {
               let read = fse.createReadStream(path);
               let resizePath = location + resizeConfig.name;
@@ -128,24 +127,15 @@ let files = {
                 // Set file folder permissions and owners/groups just for safe measure
                 fse.chownSync(location, env.serverUID, env.serverGID);
                 fse.chmodSync(location, '0775');
-                counter++;
+
+								// Wait for all files to upload before returning response
+								// TODO: Double check that this works
+                count++;
+								if (count >= resizeArray.length) {
+									reply(JSON.stringify(successResponse)).code(200);
+								}
               });
             });
-
-            // This continuously checks for all files to be created (since on 'end' happens async)
-            // TODO: Find a better way (RxJs???)
-            let waiter = setInterval(() => {
-              tick++;
-              if (counter >= resizeArray.length) {
-                clearInterval(waiter);
-                reply(JSON.stringify(successResponse)).code(200);
-              }
-              // Breakout if this takes more than 5 minutes
-              if (tick > 100 * 10 * 60 * 5) {
-                clearInterval(waiter);
-                reply(Boom.clientTimeout('Something when wrong while resizing and saving images'));
-              }
-            }, 100);
           } else {
             // Set file folder permissions and owners/groups just for safe measure
             fse.chown(location, env.serverUID, env.serverGID, (err) => {

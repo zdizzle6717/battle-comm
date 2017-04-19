@@ -4,7 +4,7 @@
 	.pages-info {
 		width: 100%;
 		text-align: center;
-		color: $primary-500;
+		color: $black;
 		font-weight: bold;
 		margin-top: 5px;
 	}
@@ -22,10 +22,10 @@
 			align-items: center;
 			transition: all 500ms;
 			outline: none;
-			margin: 0 3px;
+			margin: 0 .125rem;
 			cursor: pointer;
 			border: 3px solid $primary-500;
-			border-radius: 15px;
+			border-radius: 9px;
 			height: 30px;
 			width: 30px;
 			background: $primary-500;

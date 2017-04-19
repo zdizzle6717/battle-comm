@@ -18,12 +18,13 @@ import AssignPointsPage from './components/pages/admin/AssignPointsPage';
 import EditGameSystemPage from './components/pages/admin/EditGameSystemPage';
 import EditManufacturerPage from './components/pages/admin/EditManufacturerPage';
 import EditNewsPostPage from './components/pages/admin/EditNewsPostPage';
-import EditOrderPage from './components/pages/admin/EditOrderPage';
-import EditUserPage from './components/pages/admin/EditUserPage';
 import EditProductPage from './components/pages/admin/EditProductPage';
+import EditProductOrderPage from './components/pages/admin/EditProductOrderPage';
+import EditUserPage from './components/pages/admin/EditUserPage';
 import SearchGameSystemsPage from './components/pages/admin/SearchGameSystemsPage';
 import SearchManufacturersPage from './components/pages/admin/SearchManufacturersPage';
 import SearchNewsPostsPage from './components/pages/admin/SearchNewsPostsPage';
+import SearchProductsPage from './components/pages/admin/SearchProductsPage';
 import SearchProductOrdersPage from './components/pages/admin/SearchProductOrdersPage';
 import SearchUsersPage from './components/pages/admin/SearchUsersPage';
 
@@ -76,16 +77,16 @@ const routes = (
 		</Route>
 		<Route path="users">
 			<IndexRoute component={SearchUsersPage}/>
-			<Route path="create" component={EditUserPage}/>
 			<Route path="edit/:userId" component={EditUserPage}/>
 		</Route>
-		<Route path="store">
+		<Route path="product-orders">
 			<IndexRoute component={SearchProductOrdersPage}/>
-			<Route path="order/create" component={EditOrderPage}/>
-			<Route path="order/edit/:orderId" component={EditOrderPage}/>
-			<Route path="products" component={SearchProductOrdersPage}/>
-			<Route path="products/create" component={EditProductPage}/>
-			<Route path="products/edit/:productId" component={EditProductPage}/>
+			<Route path="edit/:orderId" component={EditProductOrderPage}/>
+		</Route>
+		<Route path="products">
+			<IndexRoute component={SearchProductsPage}/>
+			<Route path="create" component={EditProductPage}/>
+			<Route path="edit/:productId" component={EditProductPage}/>
 		</Route>
 		<Route path="venue">
 			<IndexRoute component={AssignPointsPage}/>

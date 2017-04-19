@@ -230,8 +230,9 @@ let users = {
         console.log(error);
         reply('Somthing went wrong');
       } else {
-        console.log(token);
-        reply(token).code(200);
+        reply({
+					'email': request.pre.user.email
+				}).code(200);
       }
     });
 

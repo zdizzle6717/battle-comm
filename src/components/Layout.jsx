@@ -105,7 +105,6 @@ class Layout extends React.Component {
 				this.props.hideLoader();
 			});
 		} else {
-			console.log('Hide loader')
 			this.props.hideLoader();
 		}
 		return;

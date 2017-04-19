@@ -126,11 +126,7 @@ class PlayerRankingSearchPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
-				<div className="small-12 columns">
-					<h1>Player Ranking Search</h1>
-				</div>
-				<hr/>
+            <ViewWrapper headerImage="/images/Titles/Player_Ranking_Search.png" headerAlt="Player Ranking Search">
 				<div className="row">
 					<div className="small-12 medium-6 columns">
 						<div className="form-group">

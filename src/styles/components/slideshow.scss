@@ -44,7 +44,10 @@
 
 		h2 {
 			color: #fff;
-			font-size: 66px;
+			font-size: 4rem;
+			line-height: 4rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			width: 50%;
 			top: 60px;
 			white-space: nowrap;

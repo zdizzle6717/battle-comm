@@ -302,13 +302,8 @@ class PlayerDashboardPage extends React.Component {
 		let linksFormIsValid = getFormErrorCount(this.props.forms, 'linksForm') < 1;
 
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Player_Dashboard.png" headerAlt="Player Dashboard">
 				<div className="player-dashboard">
-					<div className="row">
-						<div className="small-12 columns">
-							<h1>Player Dashboard</h1>
-						</div>
-	                </div>
 					<div className="row">
 						<div className="small-12 medium-6 columns">
 							<h2 className="no-shadow text-center">Player Bio</h2>

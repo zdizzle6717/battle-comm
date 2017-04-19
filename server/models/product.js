@@ -13,7 +13,6 @@ module.exports = function(sequelize, DataTypes) {
 			'type': DataTypes.STRING,
 			'defaultValue': 'showit'
 		},
-		'isInStock': DataTypes.BOOLEAN,
     'isDisplayed': DataTypes.BOOLEAN,
     'isFeatured': DataTypes.BOOLEAN,
     'isNew': DataTypes.BOOLEAN,
@@ -25,6 +24,11 @@ module.exports = function(sequelize, DataTypes) {
 				Product.belongsTo(models.Faction);
 				Product.belongsTo(models.GameSystem);
 				Product.belongsTo(models.Manufacturer);
+      }
+    },
+		'getterMethods': {
+      isInStock: function() {
+        return this.stockQty > 0;
       }
     }
   });

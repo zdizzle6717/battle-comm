@@ -44,5 +44,25 @@ module.exports = [
 				}
 			}
 		}
-	}
+	},
+	{
+    'method': 'POST',
+    'path': '/api/search/friends/{UserId}',
+    'config': {
+      'tags': ['api'],
+      'description': 'Return User/Player Ally search results',
+      'notes': 'Return User/Player Ally search results',
+      'validate': {
+				'payload': {
+          'maxResults': Joi.optional(),
+          'searchQuery': Joi.optional(),
+					'searchBy': Joi.optional(),
+					'orderBy': Joi.string().required(),
+					'pageNumber': Joi.number().required(),
+					'pageSize': Joi.optional()
+        }
+      }
+    },
+    'handler': userFriends.search
+  }
 ];

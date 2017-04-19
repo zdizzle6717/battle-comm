@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../../library/alerts';
 import {handlers, uploadFiles} from '../../../library/utilities';
-import {Form, Input, TextArea, Select, CheckBox, FileUpload} from '../../../library/validations';
+import {Form, Input, TextArea, Select, CheckBox, FileUpload, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import FileService from '../../../services/FileService';
 import GameSystemService from '../../../services/GameSystemService';
@@ -17,7 +17,8 @@ import AdminMenu from '../../pieces/AdminMenu';
 
 const mapStateToProps = (state) => {
 	return {
-		'manufacturers': state.manufacturers
+		'manufacturers': state.manufacturers,
+		'forms': state.forms
 	}
 }
 
@@ -39,13 +40,17 @@ class EditProductPage extends React.Component {
 			'newProduct': false,
 			'product': {
 				'Files': []
-			}
+			},
+			'productPhotoFront': [],
+			'productPhotoBack': [],
+			'skuIsDisabled': false
 		}
 
 		this.getDirectoryPath = this.getDirectoryPath.bind(this);
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleGameSystemChange = this.handleGameSystemChange.bind(this);
+		this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,9 +63,32 @@ class EditProductPage extends React.Component {
 		this.props.getManufacturers();
 		if (this.props.params.productId) {
 			ProductService.get(this.props.params.productId).then((product) => {
-				this.setState({
-					'product': product
+				let productPhotoFront = product.Files.filter((file) => {
+					return file.identifier === 'productPhotoFront'
 				});
+				let productPhotoBack = product.Files.filter((file) => {
+					return file.identifier === 'productPhotoBack'
+				});
+				this.setState({
+					'product': product,
+					'productPhotoFront': productPhotoFront,
+					'productPhotoBack': productPhotoBack,
+					'skuIsDisabled': true
+				});
+				if (product.ManufacturerId) {
+					ManufacturerService.get(product.ManufacturerId).then((manufacturer) => {
+						this.setState({
+							'gameSystems': manufacturer.GameSystems
+						});
+						if (product.GameSystemId) {
+							GameSystemService.get(product.GameSystemId).then((gameSystem) => {
+								this.setState({
+									'factions': gameSystem.Factions
+								});
+							});
+						}
+					});
+				}
 			});
 		} else {
 			this.setState({
@@ -72,16 +100,19 @@ class EditProductPage extends React.Component {
 	getDirectoryPath() {
 		let year = new Date();
 		year = year.getFullYear();
-		return `rpstore/${this.state.product.sku}/`;
+		return `rpstore/${this.state.product.SKU}/`;
 	}
 
-	handleDeleteFile(fileId) {
+	handleDeleteFile(fileId, e) {
+		if (e) {
+			e.preventDefault();
+		}
 		FileService.remove(fileId).then(() => {
 			this.showAlert('fileRemoved');
 		});
 	}
 
-	handleFileUpload(files) {
+	handleFileUpload(identifier, files) {
 		let product = this.state.product;
 		let newFiles = this.state.newFiles;
 		this.uploadFiles(files).then((responses) => {
@@ -89,7 +120,8 @@ class EditProductPage extends React.Component {
 				response = {
 					'name': response.data.file.name,
 					'size': response.data.file.size,
-					'type': response.data.file.type
+					'type': response.data.file.type,
+					'identifier': identifier
 				};
 				return response;
 			});
@@ -98,7 +130,8 @@ class EditProductPage extends React.Component {
 			newFiles = newFiles.concat(responses);
 			this.setState({
 				'product': product,
-				'newFiles': newFiles
+				'newFiles': newFiles,
+				'skuIsDisabled': true
 			});
 			this.showAlert('uploadSuccess');
 		});
@@ -113,6 +146,12 @@ class EditProductPage extends React.Component {
 				'product': product,
 				'factions': gameSystem.Factions
 			});
+		});
+	}
+
+	handleCheckBoxChange(e) {
+		this.setState({
+			'product': handlers.updateCheckBox(e, this.state.product)
 		});
 	}
 
@@ -135,7 +174,8 @@ class EditProductPage extends React.Component {
 		});
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault();
 		let post = this.state.product;
 		let method = this.props.params.productId ? 'update' : 'create';
 		post.UserId = this.props.playerId;
@@ -146,22 +186,22 @@ class EditProductPage extends React.Component {
 				newFiles.forEach((file, i) => {
 					FileService.create({
 						'ProductId': product.id,
-						'identifier': 'productPhoto',
-						'locationUrl': `/${directoryPath}/`,
-						'name': file[i].name,
-						'size': file[i].size,
-						'type': file[i].type
-					})
+						'identifier': file.identifier,
+						'locationUrl': `${directoryPath}`,
+						'name': file.name,
+						'size': file.size,
+						'type': file.type
+					});
 				});
 			}
 			this.setState({
 				'product': product
 			});
 			if (this.props.params.productId) {
-				this.addAlert('productUpdated');
-				browserHistory.push('/admin');
+				this.showAlert('productUpdated');
+				browserHistory.push('/admin/products');
 			} else {
-				this.addAlert('productCreated');
+				this.showAlert('productCreated');
 			}
 		});
 	}
@@ -191,7 +231,15 @@ class EditProductPage extends React.Component {
 					'type': 'info',
 					'delay': 3000
 				});
-			}
+			},
+			'uploadSuccess': () => {
+				this.props.addAlert({
+					'title': 'Upload Success',
+					'message': `Files were successfully uploaded.`,
+					'type': 'success',
+					'delay': 3000
+				});
+			},
 		}
 
 		return alerts[selector]();
@@ -205,128 +253,171 @@ class EditProductPage extends React.Component {
 	}
 
 	render() {
-		<ViewWrapper>
-			<div className="small-12 columns">
-				<h1>Product Edit</h1>
-				<hr/>
-				<AdminMenu></AdminMenu>
-				<hr/>
-			</div>
-			<div className="row">
-				<div className="small-12 medium-8 large-9 columns">
-					<Form name="productForm" submitText={this.state.newProduct ? 'Create News Post' : 'Update News Post'} handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Name</label>
-								<Input type="text" name="name" value={this.state.product.name} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Price</label>
-								<Input type="number" name="price" value={this.state.product.price} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">SKU</label>
-								<Input type="text" name="sku" value={this.state.product.sku} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label>Manufacturer</label>
-								<Select name="ManufacturerId" value={this.state.product.ManufacturerId} handleInputChange={this.handleManufacturerChange}>
-									<option value="">--Select--</option>
-									{
-										this.props.manufacturers.map((manufacturer, i) =>
-											<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
-										)
-									}
-								</Select>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label>Game System</label>
-								<Select name="GameSystemId" value={this.state.product.GameSystemId} handleInputChange={this.handleGameSystemChange}>
-									<option value="">--Select--</option>
-									{
-										this.state.gameSystems.map((gameSystems, i) =>
-											<option key={i} value={gameSystems.id}>{gameSystems.name}</option>
-										)
-									}
-								</Select>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label>Faction</label>
-								<Select name="FactionId" value={this.state.product.FactionId} handleInputChange={this.handleInputChange}>
-									<option value="">--Select--</option>
-									{
-										this.state.factions.map((factions, i) =>
-											<option key={i} value={factions.id}>{factions.name}</option>
-										)
-									}
-								</Select>
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Stock Qty</label>
-								<Input type="number" name="stockQty" value={this.state.product.stockQty} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Color</label>
-								<Input type="text" name="color" value={this.state.product.color} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Category</label>
-								<Input type="text" name="category" value={this.state.product.category} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="inStock" value={this.state.product.inStock} handleInputChange={this.handleCheckBoxChange} label="In Stock?"/>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="displayStatus" value={this.state.product.displayStatus} handleInputChange={this.handleCheckBoxChange} label="Display In Store?"/>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label>Display Value</label>
-								<Select name="filterVal" value={this.state.product.filterVal} handleInputChange={this.handleInputChange}>
-									<option value="showIt">Show It</option>
-									<option value="hideIt">Hide It</option>
-								</Select>
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="new" value={this.state.product.new} handleInputChange={this.handleCheckBoxChange} label="New Product?"/>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="featured" value={this.state.product.featured} handleInputChange={this.handleCheckBoxChange} label="Featured Product?"/>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<CheckBox name="onSale" value={this.state.product.onSale} handleInputChange={this.handleCheckBoxChange} label="On Sale?"/>
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-6 columns">
-								<label className="required">Description</label>
-								<TextArea type="text" name="description" value={this.state.product.description} rows="5" handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-6 columns">
-								<label className="required">Tags</label>
-								<TextArea type="text" name="tags" value={this.state.product.tags} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Product Images</label>
-								<FileUpload name="productPhoto" value={this.state.product.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={5} required={1} disabled={!this.state.product.sku}/>
-							</div>
-						</div>
-					</Form>
+		let formIsValid = getFormErrorCount(this.props.forms, 'productForm') < 1;
+
+		return (
+			<ViewWrapper headerImage="/images/Titles/Product_Edit.png" headerAlt="Product Edit">
+				<div className="small-12 columns">
+					<hr/>
+					<AdminMenu></AdminMenu>
+					<hr/>
 				</div>
-				<div className="small-12 medium-4 large-3 columns">
-					Filters
+				<div className="row">
+					<div className="small-12 columns">
+						<h2>{this.state.newProduct ? 'Create New Product' : `${this.state.product.name}`}</h2>
+					</div>
+					<div className="small-12 medium-8 large-9 columns">
+						<fieldset>
+							<Form name="productForm" submitButton={false}>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Name</label>
+										<Input type="text" name="name" value={this.state.product.name} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Price</label>
+										<Input type="number" name="price" value={this.state.product.price} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">SKU</label>
+										<Input type="text" name="SKU" value={this.state.product.SKU} handleInputChange={this.handleInputChange} disabled={this.state.skuIsDisabled} required={true} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label>Manufacturer</label>
+										<Select name="ManufacturerId" value={this.state.product.ManufacturerId} handleInputChange={this.handleManufacturerChange}>
+											<option value="">--Select--</option>
+											{
+												this.props.manufacturers.map((manufacturer, i) =>
+													<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
+												)
+											}
+										</Select>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label>Game System</label>
+										<Select name="GameSystemId" value={this.state.product.GameSystemId} handleInputChange={this.handleGameSystemChange}>
+											<option value="">--Select--</option>
+											{
+												this.state.gameSystems.map((gameSystems, i) =>
+													<option key={i} value={gameSystems.id}>{gameSystems.name}</option>
+												)
+											}
+										</Select>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label>Faction</label>
+										<Select name="FactionId" value={this.state.product.FactionId} handleInputChange={this.handleInputChange}>
+											<option value="">--Select--</option>
+											{
+												this.state.factions.map((factions, i) =>
+													<option key={i} value={factions.id}>{factions.name}</option>
+												)
+											}
+										</Select>
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Stock Qty</label>
+										<Input type="number" name="stockQty" value={this.state.product.stockQty} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label>Color</label>
+										<Input type="text" name="color" value={this.state.product.color} handleInputChange={this.handleInputChange} />
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Category</label>
+										<Input type="text" name="category" value={this.state.product.category} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-3 columns">
+										<CheckBox name="isDisplayed" value={this.state.product.isDisplayed} handleInputChange={this.handleCheckBoxChange} label="Display In Store?"/>
+									</div>
+									<div className="form-group small-12 medium-3 columns">
+										<CheckBox name="isNew" value={this.state.product.isNew} handleInputChange={this.handleCheckBoxChange} label="New Product?"/>
+									</div>
+									<div className="form-group small-12 medium-3 columns">
+										<CheckBox name="isFeatured" value={this.state.product.isFeatured} handleInputChange={this.handleCheckBoxChange} label="Featured Product?"/>
+									</div>
+									<div className="form-group small-12 medium-3 columns">
+										<CheckBox name="isOnSale" value={this.state.product.isOnSale} handleInputChange={this.handleCheckBoxChange} label="On Sale?"/>
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Description</label>
+										<TextArea type="text" name="description" value={this.state.product.description} rows="5" handleInputChange={this.handleInputChange} required={true} />
+									</div>
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Tags</label>
+										<TextArea type="text" name="tags" value={this.state.product.tags} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+								</div>
+								<fieldset>
+									<div className="row">
+										<div className="small-12 medium-4 columns">
+											<label className="required">Featured Image (front)</label>
+											{
+												this.state.productPhotoFront.length > 0 &&
+												<img src={`/uploads/${this.state.productPhotoFront[0].locationUrl}${this.state.productPhotoFront[0].name}`} />
+											}
+										</div>
+										<div className="small-12 medium-4 columns">
+											<label className="required">Image Name</label>
+											{
+												this.state.productPhotoFront.length > 0 &&
+												<h6>{this.state.productPhotoFront[0].name}</h6>
+											}
+											{
+												this.state.productPhotoFront.length > 0 && this.state.productPhotoFront[0].id &&
+												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.productPhotoFront[0].id)}>Delete File?</button>
+											}
+										</div>
+										<div className="form-group small-12 medium-4 columns">
+											<FileUpload name="productPhotoFront" value={this.state.productPhotoFront} handleFileUpload={this.handleFileUpload.bind(this, 'productPhotoFront')} handleDeleteFile={this.handleDeleteFile} maxFiles={1} required={1} hideFileList={true} disabled={!this.state.product.SKU || this.state.productPhotoFront.length > 0}/>
+										</div>
+									</div>
+									<hr />
+									<div className="row">
+										<div className="small-12 medium-4 columns">
+											<label className="required">Featured Image (back)</label>
+											{
+												this.state.productPhotoBack.length > 0 &&
+												<img src={`/uploads/${this.state.productPhotoBack[0].locationUrl}${this.state.productPhotoBack[0].name}`} />
+											}
+										</div>
+										<div className="small-12 medium-4 columns">
+											<label className="required">Image Name</label>
+											{
+												this.state.productPhotoBack.length > 0 &&
+												<h6>{this.state.productPhotoBack[0].name}</h6>
+											}
+											{
+												this.state.productPhotoBack.length > 0 && this.state.productPhotoBack[0].id &&
+												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.productPhotoBack[0].id)}>Delete File?</button>
+											}
+										</div>
+										<div className="form-group small-12 medium-4 columns">
+											<FileUpload name="productPhotoBack" value={this.state.productPhotoBack} handleFileUpload={this.handleFileUpload.bind(this, 'productPhotoBack')} handleDeleteFile={this.handleDeleteFile} maxFiles={1} required={1} hideFileList={true} disabled={!this.state.product.SKU || this.state.productPhotoBack.length > 0}/>
+										</div>
+									</div>
+								</fieldset>
+							</Form>
+						</fieldset>
+					</div>
+					<div className="small-12 medium-4 large-3 columns">
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-content text-center">
+								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newProduct ? 'Create Product' : 'Update Product'}</button>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</ViewWrapper>
+			</ViewWrapper>
+		)
 	}
 }
 

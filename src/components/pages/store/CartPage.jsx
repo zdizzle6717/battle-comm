@@ -33,7 +33,7 @@ class CartPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper headerImage="/images/title/Store.png" headerAlt="Store">
+            <ViewWrapper headerImage="/images/title/Cart.png" headerAlt="Cart">
 				<div className="row">
 					<div className="small-12 columns">
 						<h1>Shopping Cart</h1>

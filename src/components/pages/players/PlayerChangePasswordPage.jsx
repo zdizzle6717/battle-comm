@@ -15,12 +15,8 @@ export default class PlayerChangePasswordPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Change_Password.png" headerAlt="Change Password">
                 <div className="row">
-                    <h1>Player Password Change</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
                 </div>
             </ViewWrapper>
         );

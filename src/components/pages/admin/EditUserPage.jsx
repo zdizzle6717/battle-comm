@@ -7,11 +7,17 @@ import {browserHistory, Link} from 'react-router';
 import {UserService} from '../../../library/authentication';
 import {AlertActions} from '../../../library/alerts';
 import {handlers} from '../../../library/utilities';
-import {Form, Input, TextArea, Select, CheckBox} from '../../../library/validations';
+import {Form, Input, TextArea, Select, CheckBox, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
 
-export default class EditUserPage extends React.Component {
+const mapStateToProps = (state) => {
+	return {
+		'forms': state.forms
+	}
+}
+
+class EditUserPage extends React.Component {
     constructor() {
         super();
 
@@ -46,7 +52,8 @@ export default class EditUserPage extends React.Component {
 		});
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault();
 		let order = this.state.user;
 		let method = this.props.params.userId ? 'update' : 'create';
 		UserService[method]((method === 'update' ? order.id : order), (method === 'update' ? order : null)).then((user) => {
@@ -90,30 +97,42 @@ export default class EditUserPage extends React.Component {
 	}
 
     render() {
+		let formIsValid = getFormErrorCount(this.props.forms, 'userForm');
+
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Player_Edit.png" headerAlt="Player Edit">
                 <div className="small-12 columns">
-                    <h1>User Edit</h1>
 					<hr/>
 					<AdminMenu></AdminMenu>
 					<hr/>
                 </div>
 				<div className="row">
+					<div className="small-12 columns">
+						<h2>Edit user {this.state.user.username}</h2>
+					</div>
 					<div className="small-12 medium-8 large-9 columns">
-						<Form name="userForm" submitText={this.state.newUser ? 'Create User' : 'Update User'} handleSubmit={this.handleSubmit}>
-							<div className="row">
-								<div className="form-group small-12 medium-4 columns">
-									<label className="required">Title</label>
-									<Input type="text" name="id" value={this.state.user.id} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
+						<fieldset>
+							<Form name="userForm" submitButton={false} handleSubmit={this.handleSubmit}>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Title</label>
+										<Input type="text" name="id" value={this.state.user.id} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
+									</div>
 								</div>
-							</div>
-						</Form>
+							</Form>
+						</fieldset>
 					</div>
 					<div className="small-12 medium-4 large-3 columns">
-						Filters
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-content text-center">
+								<button onClick={this.handleSubmit} disabled={!formIsValid}>Update User</button>
+							</div>
+						</div>
 					</div>
 				</div>
             </ViewWrapper>
         );
     }
 }
+
+export default connect(mapStateToProps, null)(EditUserPage);

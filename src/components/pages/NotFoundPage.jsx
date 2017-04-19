@@ -15,7 +15,7 @@ export default class NotFoundPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper>
+            <ViewWrapper headerImage="/images/Titles/Page_Not_Found.png" headerAlt="Page Not Found">
                 <div className="not-found">
                     <h1>404</h1>
                     <h2>Page not found!</h2>

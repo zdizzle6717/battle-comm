@@ -28,6 +28,8 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
+// TODO: Check that new configuration works and validates
+
 class AssignPointsPage extends React.Component {
 	constructor() {
 		super();
@@ -45,6 +47,7 @@ class AssignPointsPage extends React.Component {
 		}
 
 		this.addPlayer = this.addPlayer.bind(this);
+		this.assignmentFormsAreInvalid = this.assignmentFormsAreInvalid.bind(this);
 		this.handleEventInputChange = this.handleEventInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.showAlert = this.showAlert.bind(this);
@@ -76,6 +79,14 @@ class AssignPointsPage extends React.Component {
 			'players': players,
 			'selectedGameSystems': selectedGameSystems
 		});
+	}
+
+	assignmentFormsAreInvalid() {
+		let venueEventFormIsInvalid = getFormErrorCount(this.props.forms, 'venueEventForm') > 0;
+		let playerFormsAreInvalid = this.state.players.some((player, i) => {
+			return getFormErrorCount(this.props.forms, `venueEventPlayersForm-${i}`) > 0;
+		})
+		return venueEventFormIsInvalid || playerFormsAreInvalid || this.state.players.length < 1;
 	}
 
 	handleEventInputChange(e) {
@@ -151,13 +162,9 @@ class AssignPointsPage extends React.Component {
 	}
 
 	render() {
-		let venueEventFormIsValid = getFormErrorCount(this.props.forms, 'venueEventForm') < 1;
-		let venueEventPlayersFormIsValid = getFormErrorCount(this.props.forms, 'venueEventPlayersForm') < 1;
-
 		return (
-			<ViewWrapper>
+			<ViewWrapper headerImage="/images/Titles/Reward_Point_Assignment.png" headerAlt="Reward Point Assignment">
 				<div className="small-12 columns">
-					<h1>Reward Point Assignment</h1>
 					<hr/>
 					<AdminMenu></AdminMenu>
 					<hr/>
@@ -193,10 +200,10 @@ class AssignPointsPage extends React.Component {
 						</Form>
 
 						<h2>Players</h2>
-						<Form name="venueEventPlayersForm" submitText="Submit Point Assignment" submitButton={false}>
-							{
-								this.state.players.map((player, i) =>
-									<fieldset key={i}>
+						{
+							this.state.players.map((player, i) =>
+								<Form key={i} name={`venueEventPlayersForm-${i}`} submitText="Submit Point Assignment" submitButton={false}>
+									<fieldset>
 										<div className="row">
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Full Name</label>
@@ -254,15 +261,15 @@ class AssignPointsPage extends React.Component {
 											<button className="button error" onClick={this.removePlayer.bind(this, i)}><span className="fa fa-minus"></span></button>
 										}
 									</fieldset>
-								)
-							}
-						</Form>
+								</Form>
+							)
+						}
 						<div className="form-group">
 							<button className="button" onClick={this.addPlayer}><span className="fa fa-plus"></span> Add Player</button>
 						</div>
 
 						<div className="form-group text-right">
-							<button className="button right" onClick={this.handleSubmit} disabled={!venueEventFormIsValid || !venueEventPlayersFormIsValid}>Submit Point Assignment</button>
+							<button className="button right" onClick={this.handleSubmit} disabled={this.assignmentFormsAreInvalid()}>Submit Point Assignment</button>
 						</div>
 					</div>
 				</div>

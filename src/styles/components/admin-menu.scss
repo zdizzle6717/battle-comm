@@ -19,6 +19,10 @@
 			.fa {
 				margin-right: .5rem;
 			}
+
+			&.active {
+				border: 1px solid $white;
+			}
 		}
 	}
 

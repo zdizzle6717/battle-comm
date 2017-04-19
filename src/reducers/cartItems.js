@@ -5,7 +5,7 @@ import CartItemConstants from '../constants/CartItemConstants';
 const calculateTotal = (cartItems) => {
 	let subTotal = 0;
 	cartItems.forEach((item) => {
-		subTotal += parseInt(item.cartQty, 10) * parseInt(item.merchItem.price, 10);
+		subTotal += parseInt(item.cartQty, 10) * parseInt(item.product.price, 10);
 	});
 	subTotal = subTotal.toFixed(2);
 	return subTotal;
