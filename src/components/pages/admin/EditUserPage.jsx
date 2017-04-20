@@ -10,6 +10,12 @@ import {handlers} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, CheckBox, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
+import roleConfig from '../../../../roleConfig';
+import GameSystemRankingForm from '../../pieces/forms/GameSystemRankingForm';
+import Modal from '../../../library/Modal';
+import PlayerService from '../../../services/PlayerService';
+
+// TODO: Show current ranking and add functionality to createOrUpdate ranking
 
 const mapStateToProps = (state) => {
 	return {
@@ -17,34 +23,77 @@ const mapStateToProps = (state) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'addAlert': AlertActions.addAlert
+	}, dispatch);
+}
+
 class EditUserPage extends React.Component {
     constructor() {
         super();
 
 		this.state = {
-			'user': {},
-			'newUser': false
+			'deleteModalIsActive': false,
+			'user': {
+				'GameSystemRankings': []
+			},
+			'newUser': false,
+			'isEditing': false
 		}
 
+		this.handleActivateAccount = this.handleActivateAccount.bind(this);
+		this.handleBlockUser = this.handleBlockUser.bind(this);
+		this.handleDeleteUser = this.handleDeleteUser.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleRoleChange = this.handleRoleChange.bind(this);
+		this.handleRankingSubmit = this.handleRankingSubmit.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.toggleDeleteUserModal = this.toggleDeleteUserModal.bind(this);
 		this.showAlert = this.showAlert.bind(this);
+		this.toggleEditing = this.toggleEditing.bind(this);
     }
 
     componentDidMount() {
         document.title = "Battle-Comm | User Edit";
-		if (this.props.params.orderId) {
-			UserService.get(this.props.params.orderId).then((user) => {
+		if (this.props.params.userId) {
+			PlayerService.getById(this.props.params.userId).then((user) => {
 				this.setState({
 					'user': user
 				});
 			});
 		} else {
-			this.setState({
-				'newUser': true
-			})
+			browserHistory.push('/admin/users')
 		}
     }
+
+	handleActivateAccount(e) {
+		e.preventDefault();
+		PlayerService.activateAccount(this.state.user.id).then((user) => {
+			this.setState({
+				'user': user
+			})
+		});
+	}
+
+	handleBlockUser(e) {
+		e.preventDefault();
+		PlayerService.blockUser(this.state.user.id, {
+			'accountBlocked': !this.state.user.accountBlocked
+		}).then((user) => {
+			this.setState({
+				'user': user
+			})
+		});
+	}
+
+	handleDeleteUser(e) {
+		e.preventDefault();
+		UserService.remove(this.state.user.id).then(() => {
+			this.showAlert('userDeleted');
+			browserHistory.push('/admin/users');
+		});
+	}
 
 	handleInputChange(e) {
 		this.setState({
@@ -52,33 +101,53 @@ class EditUserPage extends React.Component {
 		});
 	}
 
+	handleRoleChange(e) {
+		let role = e.target.value;
+		e.preventDefault();
+		PlayerService.updateRole(this.state.user.id, {
+			'role': role
+		}).then((user) => {
+			this.setState({
+				'userRole': role
+			});
+		});
+	}
+
+	handleRankingSubmit() {
+		browserHistory.push('/admin/users');
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 		let order = this.state.user;
 		let method = this.props.params.userId ? 'update' : 'create';
-		UserService[method]((method === 'update' ? order.id : order), (method === 'update' ? order : null)).then((user) => {
+		PlayerService.update(order.id, order).then((user) => {
 			this.setState({
 				'user': user
 			});
-			if (this.props.params.userId) {
-				this.addAlert('userUpdated');
-				browserHistory.push('/admin');
-			} else {
-				this.addAlert('userCreated');
-			}
+			this.showAlert('userUpdated');
+			this.setState({
+				'isEditing': false
+			})
 		});
 	}
 
+	toggleDeleteUserModal(e) {
+		e.preventDefault();
+		this.setState({
+			'deleteModalIsActive': !this.state.deleteModalIsActive
+		});
+	}
 
 	// TODO: Add server error alert
 	// Reward Point Email Failed.
 	// Account Activation Email Failed.
 	showAlert(selector) {
 		const alerts = {
-			'userCreated': () => {
+			'userDeleted': () => {
 				this.props.addAlert({
-					'title': 'User Created',
-					'message': `New user successfully created.`,
+					'title': 'User Deleted',
+					'message': `User, ${this.state.user.username}, was removed from the database.`,
 					'type': 'success',
 					'delay': 3000
 				});
@@ -86,7 +155,7 @@ class EditUserPage extends React.Component {
 			'userUpdated': () => {
 				this.props.addAlert({
 					'title': 'User Updated',
-					'message': `Order successfully updated.`,
+					'message': `User, ${this.state.user.username}, was successfully updated.`,
 					'type': 'success',
 					'delay': 3000
 				});
@@ -96,8 +165,15 @@ class EditUserPage extends React.Component {
 		return alerts[selector]();
 	}
 
+	toggleEditing(e) {
+		e.preventDefault();
+		this.setState({
+			'isEditing': !this.state.isEditing
+		})
+	}
+
     render() {
-		let formIsValid = getFormErrorCount(this.props.forms, 'userForm');
+		let formIsInvalid = getFormErrorCount(this.props.forms, 'userForm') > 0;
 
         return (
             <ViewWrapper headerImage="/images/Titles/Player_Edit.png" headerAlt="Player Edit">
@@ -111,28 +187,145 @@ class EditUserPage extends React.Component {
 						<h2>Edit user {this.state.user.username}</h2>
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
-						<fieldset>
-							<Form name="userForm" submitButton={false} handleSubmit={this.handleSubmit}>
+						<fieldset disabled={!this.state.isEditing}>
+							<Form name="userForm" submitButton={false} handleSubmit={this.handleSubmit} disabled={true}>
 								<div className="row">
 									<div className="form-group small-12 medium-4 columns">
-										<label className="required">Title</label>
-										<Input type="text" name="id" value={this.state.user.id} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
+										<label className="required">First Name</label>
+										<Input type="text" name="firstName" value={this.state.user.firstName} handleInputChange={this.handleInputChange} required={true}/>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Last Name</label>
+										<Input type="text" name="lastName" value={this.state.user.lastName} handleInputChange={this.handleInputChange} required={true}/>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">E-mail</label>
+										<Input type="text" name="email" value={this.state.user.email} handleInputChange={this.handleInputChange} required={true}/>
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Handle</label>
+										<Input type="text" name="username" value={this.state.user.username} handleInputChange={this.handleInputChange} required={true}/>
+									</div>
+									<div className="form-group small-12 medium-6 columns">
+										<label className="required">Reward Points</label>
+										<Input type="text" name="rewardPoints" value={this.state.user.rewardPoints} handleInputChange={this.handleInputChange} required={true}/>
+									</div>
+								</div>
+								<div className="row">
+									<div className="form-group small-12 columns">
+										<label className="required">Bio</label>
+										<TextArea type="text" name="bio" value={this.state.user.bio} handleInputChange={this.handleInputChange} required={true} rows="3"/>
 									</div>
 								</div>
 							</Form>
 						</fieldset>
+						<hr/>
+						<div className="row">
+							<div className="small-12 columns">
+								<h2>Player Ranking</h2>
+								<div className="small-12 columns">
+									{
+										this.state.user.GameSystemRankings.length < 1 &&
+										<h3 className="text-center">{this.state.user.username} has not submitted any game results to the BC leaderboards</h3>
+									}
+									{
+										this.state.user.GameSystemRankings.map((gameRanking, i) =>
+										<div key={i} className="row">
+											<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
+											<table className="search-results stack hover text-center">
+												<thead>
+													<tr>
+														<th className="text-center">Game System</th>
+														<th className="text-center">Faction</th>
+														<th className="text-center">Ranking W/L/D</th>
+														<th className="text-center">Point Value</th>
+													</tr>
+												</thead>
+												<tbody>
+													{
+														gameRanking.FactionRankings.map((factionRanking, j) =>
+															<tr key={j} className="item">
+																<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+																<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
+																<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
+																<td>{factionRanking.pointValue}</td>
+															</tr>
+														)
+													}
+												</tbody>
+											</table>
+											<hr />
+										</div>
+										)
+									}
+								</div>
+							</div>
+						</div>
+						<hr/>
+						<div className="row">
+							<div className="small-12 columns">
+								<GameSystemRankingForm playerId={this.state.user.id} username={this.state.user.username} handleSubmit={this.handleRankingSubmit}></GameSystemRankingForm>
+							</div>
+						</div>
 					</div>
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
+							{
+								this.state.isEditing ?
+								<div className="panel-content text-center">
+									<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>Save Changes</button>
+								</div> :
+								<div className="panel-content text-center">
+									<button className="button black small-12" onClick={this.toggleEditing}>Edit User?</button>
+								</div>
+							}
+						</div>
+						<div className="panel push-bottom-2x push-top">
+							{
+								this.state.user.accountActivated ?
+								<div className="panel-content text-center">
+									<span className="fa fa-check color-success"></span> <h5>Account Activated</h5>
+								</div> : <div className="panel-content text-center">
+									<button className="button info small-12 collapse" onClick={this.handleActivateAccount}>Activate Account?</button>
+								</div>
+							}
+						</div>
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-title color-black">
+								Update User Role
+							</div>
 							<div className="panel-content text-center">
-								<button onClick={this.handleSubmit} disabled={!formIsValid}>Update User</button>
+								<select type="text" name="userRole" value={this.state.userRole} onChange={this.handleRoleChange}>
+									{
+										roleConfig.filter(role => role.name !== 'public').map((role, i) =>
+											<option key={i} value={role.name}>{role.name}</option>
+										)
+									}
+								</select>
+							</div>
+						</div>
+						<div className="panel push-bottom-2x push-top">
+							{
+								this.state.user.accountBlocked &&
+								<div className="panel-title color-black">
+									User is currently blocked
+								</div>
+							}
+
+							<div className="panel-content text-center">
+								<button className="button alert small-12 collapse" onClick={this.handleBlockUser}>{this.state.user.accountBlocked ? 'Unblock User?' : 'Block User?'}</button>
 							</div>
 						</div>
 					</div>
 				</div>
+				<Modal name="deleteUserModal" title="Delete User" modalIsOpen={this.state.deleteModalIsActive} handleClose={this.toggleDeleteUserModal} showClose={true} handleSubmit={this.handleDeleteUser} confirmText="Delete Permanently">
+					Are you sure you want to delete the user account for, {this.state.user.username}?  This action cannot be undone. User data will be removed from the database, and corresponding ranking data will be nullified.
+				</Modal>
             </ViewWrapper>
         );
     }
 }
 
-export default connect(mapStateToProps, null)(EditUserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserPage);

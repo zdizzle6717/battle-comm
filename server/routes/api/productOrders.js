@@ -51,7 +51,7 @@ module.exports = [
       },
       'validate': {
         'payload': {
-          'status': Joi.string().required(),
+          'status': Joi.string().valid('processing', 'shipped', 'completed').required(),
           'orderDetails': Joi.string().required(),
           'orderTotal': Joi.number().required(),
           'UserId': Joi.number().required(),
@@ -85,7 +85,7 @@ module.exports = [
           'id': Joi.number().required()
         },
         'payload': {
-          'status': Joi.string().required(),
+          'status': Joi.string().valid('processing', 'shipped', 'completed').required(),
           'orderDetails': Joi.string().required(),
           'orderTotal': Joi.number().required(),
           'UserId': Joi.number().required(),

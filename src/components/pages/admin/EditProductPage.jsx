@@ -377,7 +377,7 @@ class EditProductPage extends React.Component {
 											}
 										</div>
 										<div className="form-group small-12 medium-4 columns">
-											<FileUpload name="productPhotoFront" value={this.state.productPhotoFront} handleFileUpload={this.handleFileUpload.bind(this, 'productPhotoFront')} handleDeleteFile={this.handleDeleteFile} maxFiles={1} required={1} hideFileList={true} disabled={!this.state.product.SKU || this.state.productPhotoFront.length > 0}/>
+											<FileUpload name="productPhotoFront" value={this.state.productPhotoFront} handleFileUpload={this.handleFileUpload.bind(this, 'productPhotoFront')} handleDeleteFile={this.handleDeleteFile} maxFiles={1} required={1} hideFileList={true} accept="image/*" disabled={!this.state.product.SKU || this.state.productPhotoFront.length > 0}/>
 										</div>
 									</div>
 									<hr />
@@ -401,7 +401,7 @@ class EditProductPage extends React.Component {
 											}
 										</div>
 										<div className="form-group small-12 medium-4 columns">
-											<FileUpload name="productPhotoBack" value={this.state.productPhotoBack} handleFileUpload={this.handleFileUpload.bind(this, 'productPhotoBack')} handleDeleteFile={this.handleDeleteFile} maxFiles={1} required={1} hideFileList={true} disabled={!this.state.product.SKU || this.state.productPhotoBack.length > 0}/>
+											<FileUpload name="productPhotoBack" value={this.state.productPhotoBack} handleFileUpload={this.handleFileUpload.bind(this, 'productPhotoBack')} handleDeleteFile={this.handleDeleteFile} maxFiles={1} required={1} hideFileList={true} accept="image/*" disabled={!this.state.product.SKU || this.state.productPhotoBack.length > 0}/>
 										</div>
 									</div>
 								</fieldset>

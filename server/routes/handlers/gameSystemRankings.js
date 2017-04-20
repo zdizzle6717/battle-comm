@@ -9,7 +9,7 @@ let gameSystemRankings = {
     models.GameSystemRanking.findOrCreate({
       'where': {
         '$and': [{
-            'GameSystemId': request.params.GameSystemId
+            'GameSystemId': request.payload.GameSystemId
           },
           {
             'UserId': request.payload.UserId

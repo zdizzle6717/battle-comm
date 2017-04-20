@@ -6,6 +6,47 @@ import { verifyUniqueUser, verifyCredentials, verifyUserExists } from '../../uti
 
 module.exports = [
   // User Logins
+	{
+    'method': 'PUT',
+    'path': '/api/users/{id}/activateAccount',
+    'config': {
+      'tags': ['api'],
+      'description': 'Activate user account',
+      'notes': 'Activate user account',
+      'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['systemAdmin']
+      },
+      'validate': {
+				'params': {
+					'id': Joi.number().required()
+				}
+      }
+    },
+    'handler': users.activateAccount
+  },
+	{
+    'method': 'PUT',
+    'path': '/api/users/{id}/blockUser',
+    'config': {
+      'tags': ['api'],
+      'description': 'Block or unblock a user',
+      'notes': 'Block or unblock a user',
+      'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['systemAdmin']
+      },
+      'validate': {
+				'params': {
+					'id': Joi.number().required()
+				},
+        'payload': {
+          'accountBlocked': Joi.boolean().required()
+        }
+      }
+    },
+    'handler': users.blockUser
+  },
   {
     'method': 'POST',
     'path': '/api/users',
@@ -174,6 +215,28 @@ module.exports = [
       }
     },
     'handler': users.updatePartial
+  },
+  {
+    'method': 'PUT',
+    'path': '/api/users/{id}/updateRole',
+    'config': {
+      'tags': ['api'],
+      'description': 'Update user role',
+      'notes': 'Update user role',
+      'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['systemAdmin']
+      },
+      'validate': {
+        'params': {
+          'id': Joi.number().required()
+        },
+				'payload': {
+					'role': Joi.string().required()
+				}
+      }
+    },
+    'handler': users.updateRole
   },
   {
     'method': 'PUT',

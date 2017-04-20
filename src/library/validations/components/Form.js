@@ -91,14 +91,14 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-	name: PropTypes.string.isRequired,
+	childForms: PropTypes.array,
+	customClass: PropTypes.string,
 	handleSubmit: PropTypes.func,
+	isParent: PropTypes.bool,
+	name: PropTypes.string.isRequired,
 	submitButton: PropTypes.bool,
 	submitText: PropTypes.string,
-	isParent: PropTypes.bool,
-	childForms: PropTypes.array,
-	validity: PropTypes.bool,
-	customClass: PropTypes.string
+	validity: PropTypes.bool
 }
 
 Form.defaultProps = {

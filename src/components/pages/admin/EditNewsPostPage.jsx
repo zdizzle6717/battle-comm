@@ -138,7 +138,7 @@ class EditNewsPostPage extends React.Component {
 						'name': file[i].name,
 						'size': file[i].size,
 						'type': file[i].type
-					})
+					});
 				});
 			}
 			this.setState({
@@ -268,18 +268,36 @@ class EditNewsPostPage extends React.Component {
 									</div>
 								</div>
 								<div className="row">
-									<div className="form-group small-12 medium-4 columns">
-										<label className="required">News Post Photos</label>
-										<FileUpload name="postPhotos" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={handleDeleteFile} maxFiles={5} required={1}/>
+									<div className="form-group small-12 columns">
+										<label>News Post Photos</label>
+										<FileUpload name="newsPostPhoto" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" maxFiles={5} />
 									</div>
 								</div>
+								{
+									this.state.newsPost.Files.map((file, i) =>
+									<div key={i} className="row">
+										<div className="small-12 medium-6 columns">
+											<label className="required">News Post Image</label>
+											<img src={`/uploads/${this.state.newsPost.Files[i].locationUrl}${this.state.newsPost.Files[i].name}`} />
+										</div>
+										<div className="small-12 medium-6 columns">
+											<label className="required">Image Name</label>
+											<h6>{this.state.newsPost.Files[i].name}</h6>
+											{
+												this.state.newsPost.Files[i].id &&
+												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.newsPost.Files[i].id)}>Delete File?</button>
+											}
+										</div>
+									</div>
+									)
+								}
 							</Form>
 						</fieldset>
 					</div>
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newNewsPost ? 'Create News Post' : 'Update News Post'}</button>
+								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newNewsPost ? 'Create News Post' : 'Update News Post'}</button>
 							</div>
 						</div>
 					</div>

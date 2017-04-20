@@ -22,12 +22,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'getGameSystems': GameSystemActions.get
+		'getGameSystems': GameSystemActions.getAll
 	}, dispatch);
 }
 
 class GameSystemRankingForm extends React.Component {
 	constructor() {
+		super();
+
 		this.state = {
 			'ranking': {},
 			'factions': []
@@ -66,10 +68,10 @@ class GameSystemRankingForm extends React.Component {
 		newRanking.UserId = this.props.playerId;
 		GameSystemRankingService.createOrUpdate(newRanking).then((ranking) => {
 			this.setState({
-				'ranking': ranking
+				'ranking': {}
 			});
-			this.addAlert('rankingUpdated');
-			browserHistory.push('/admin');
+			this.showAlert('rankingUpdated');
+			this.props.handleSubmit();
 		});
 	}
 
@@ -78,7 +80,7 @@ class GameSystemRankingForm extends React.Component {
 			'rankingUpdated': () => {
 				this.props.addAlert({
 					'title': 'Player Ranking Updated',
-					'message': `Ranking was successfully updated and incremented for ${this.props.playerName}`,
+					'message': `Ranking was successfully updated and incremented for user, ${this.props.username}`,
 					'type': 'success',
 					'delay': 3000
 				});
@@ -89,7 +91,7 @@ class GameSystemRankingForm extends React.Component {
 	}
 
 	render() {
-		<div>
+		return (
 			<Form name="rankingForm" submitText="Updated Player Ranking" handleSubmit={this.handleSubmit}>
 				<div className="row">
 					<div className="form-group small-12 medium-6 columns">
@@ -130,13 +132,14 @@ class GameSystemRankingForm extends React.Component {
 					</div>
 				</div>
 			</Form>
-		</div>
+		)
 	}
 }
 
 GameSystemRankingForm.propTypes = {
 	'playerId': PropTypes.number,
-	'playerName': PropTypes.string
+	'username': PropTypes.string,
+	'handleSubmit': PropTypes.func
 }
 
 GameSystemRankingForm.defaultProps = {

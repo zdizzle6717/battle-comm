@@ -11,7 +11,8 @@ import FormActions from '../actions/FormActions';
 import {addErrorMessage, removeErrorMessage, getInput, range} from '../utilities';
 
 // TODO: Drag & Drop functionality
-// TODO: Allow for single file as object, NOT array
+// TODO: Consider allowing for single file as object, NOT array
+// TODO: Consider adding alerts option to display alert for new errors
 
 const mapStateToProps = (state) => {
 	return {

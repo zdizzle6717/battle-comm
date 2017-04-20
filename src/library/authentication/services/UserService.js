@@ -24,6 +24,12 @@ export default {
 				return response.data;
 			});
 	},
+	remove: (id) => {
+		return axios.delete('/users/' + id)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	search: (criteria) => {
 		return axios.post('/search/users', criteria)
 			.then(function(response) {

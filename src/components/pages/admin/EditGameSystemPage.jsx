@@ -39,7 +39,7 @@ class EditGameSystemPage extends React.Component {
 				'Factions': [],
 				'File': {}
 			},
-			'gameSystemFiles': [],
+			'files': [],
 			'manufacturers': [],
 			'newFilesUploaded': false,
 			'newGameSystem': false
@@ -107,7 +107,7 @@ class EditGameSystemPage extends React.Component {
 			gameSystem.File = responses[0];
 			this.setState({
 				'gameSystem': gameSystem,
-				'gameSystemFiles': responses,
+				'files': responses,
 				'newFilesUploaded': true
 			});
 			this.showAlert('uploadSuccess');
@@ -238,7 +238,7 @@ class EditGameSystemPage extends React.Component {
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
 						<fieldset>
-							<Form name="gameSystemForm" submitButton={false}}>
+							<Form name="gameSystemForm" submitButton={false}>
 								<div className="row">
 									<div className="form-group small-12 medium-6 columns">
 										<label className="required">Game System Name</label>
@@ -274,24 +274,24 @@ class EditGameSystemPage extends React.Component {
 									<div className="small-12 medium-4 columns">
 										<label className="required">Featured Image (back)</label>
 										{
-											this.state.gameSystemFiles.length > 0 &&
-											<img src={`/uploads/${this.state.gameSystemFiles[0].locationUrl}${this.state.gameSystemFiles[0].name}`} />
+											this.state.files.length > 0 &&
+											<img src={`/uploads/${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
 										}
 									</div>
 									<div className="small-12 medium-4 columns">
 										<label className="required">Image Name</label>
 										{
-											this.state.gameSystemFiles.length > 0 &&
-											<h6>{this.state.gameSystemFiles[0].name}</h6>
+											this.state.files.length > 0 &&
+											<h6>{this.state.files[0].name}</h6>
 										}
 										{
-											this.state.gameSystemFiles.length > 0 && this.state.gameSystemFiles[0].id &&
-											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.gameSystemFiles[0].id)}>Delete File?</button>
+											this.state.files.length > 0 && this.state.files[0].id &&
+											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[0].id)}>Delete File?</button>
 										}
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label>Related Photo</label>
-										<FileUpload name="gameSystemPhoto" value={this.state.gameSystemFiles} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} maxFiles={1} />
+										<FileUpload name="gameSystemPhoto" value={this.state.files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" maxFiles={1} />
 									</div>
 								</div>
 							</Form>
@@ -324,7 +324,7 @@ class EditGameSystemPage extends React.Component {
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button onClick={this.handleSaveGameSystem} disabled={!gameSystemFormIsValid}>{this.state.newGameSystem ? 'Create Game System' : 'Update Game System'}</button>
+								<button className="button black small-12" onClick={this.handleSaveGameSystem} disabled={!gameSystemFormIsValid}>{this.state.newGameSystem ? 'Create Game System' : 'Update Game System'}</button>
 							</div>
 						</div>
 					</div>

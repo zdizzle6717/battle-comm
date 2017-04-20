@@ -26,7 +26,7 @@ class EditProductOrderPage extends React.Component {
 		}
 
 		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleSubmit e= this.handleSubmit.ebind(this);
+		this.handleSubmit = this.handleSubmit.ebind(this);
 		this.showAlert = this.showAlert.bind(this);
     }
 
@@ -120,7 +120,7 @@ class EditProductOrderPage extends React.Component {
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button onClick={this.handleSubmit} disabled={!formIsValid}>Update Product Order</button>
+								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>Update Product Order</button>
 							</div>
 						</div>
 					</div>

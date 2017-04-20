@@ -29,8 +29,91 @@ let transporter = nodemailer.createTransport(({
   }
 }));
 
+const getUserModel = (where) => {
+	return models.User.find({
+			'where': where,
+			'attributes': {
+				'exclude': ['password']
+			},
+			'include': [{
+					'model': models.UserNotification
+				},
+				{
+					'model': models.UserPhoto
+				},
+				{
+					'model': models.User,
+					'as': 'Friends',
+					'attributes': ['id', 'firstName', 'lastName', 'username']
+				},
+				{
+					'model': models.GameSystemRanking,
+					'include': [{
+							'model': models.GameSystem,
+							'attributes': ['name']
+						},
+						{
+							'model': models.FactionRanking,
+							'include': [{
+								'model': models.Faction,
+								'attributes': ['name']
+							}]
+						}
+					]
+				},
+				{
+					'model': models.File
+				}
+			],
+		});
+};
+
 // Product Route Configs
 let users = {
+	activateAccount: (request, reply) => {
+    models.User.find({
+        'where': {
+          'id': request.params.id
+        }
+      })
+      .then((user) => {
+        if (user) {
+          user.updateAttributes({
+						'accountActivated': true
+					}).then((user) => {
+						reply(user).code(200);
+					});
+        } else {
+          reply().code(404);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+  },
+	blockUser: (request, reply) => {
+    models.User.find({
+        'where': {
+          'id': request.params.id
+        }
+      })
+      .then((user) => {
+        if (user) {
+          user.updateAttributes({
+						'accountBlocked': request.payload.accountBlocked
+					}).then((user) => {
+						getUserModel({
+							'id': user.id
+						}).then((user) => {
+							reply(user).code(200);
+						});
+					});
+        } else {
+          reply().code(404);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+  },
   get: (request, reply) => {
 		let where = {};
 		if (request.params.id) {
@@ -42,42 +125,7 @@ let users = {
 				'username': request.params.username
 			};
 		}
-    models.User.find({
-        'where': where,
-        'attributes': {
-          'exclude': ['password']
-        },
-        'include': [{
-            'model': models.UserNotification
-          },
-          {
-            'model': models.UserPhoto
-          },
-          {
-            'model': models.User,
-            'as': 'Friends',
-            'attributes': ['id', 'firstName', 'lastName', 'username']
-          },
-          {
-            'model': models.GameSystemRanking,
-            'include': [{
-                'model': models.GameSystem,
-                'attributes': ['name']
-              },
-              {
-                'model': models.FactionRanking,
-                'include': [{
-                  'model': models.Faction,
-                  'attributes': ['name']
-                }]
-              }
-            ]
-          },
-					{
-						'model': models.File
-					}
-        ],
-      })
+    getUserModel(where)
       .then((response) => {
         if (response) {
           reply(response).code(200);
@@ -183,10 +231,8 @@ let users = {
     }).code(201);
   },
   changePassword: (request, reply) => {
-    models.User.find({
-      'where': {
-        'id': request.params.id
-      }
+    getUserModel({
+      'id': request.params.id
     }).then((user) => {
       // Send forgot password e-mail
       let passwordUpdatedConfig = {
@@ -271,7 +317,11 @@ let users = {
               user.updateAttributes({
                 'password': hash
               }).then((user) => {
-                reply(user).code(200);
+								getUserModel({
+									'id': user.id
+								}).then((user) => {
+									reply(user).code(200);
+								});
               });
             });
           }
@@ -376,8 +426,41 @@ let users = {
                 }
               });
             }
-						reply(user).code(200);
+						getUserModel({
+							'id': user.id
+						}).then((user) => {
+							reply(user).code(200);
+						});
           });
+        } else {
+          reply().code(404);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+  },
+  updateRole: (request, reply) => {
+		let userConfig = {};
+		roleConfig.forEach((role) => {
+			if (role.name !== 'public') {
+				userConfig[role.name] = false;
+			}
+		});
+		userConfig[request.payload.role] = true;
+    models.User.find({
+        'where': {
+          'id': request.params.id
+        }
+      })
+      .then((user) => {
+        if (user) {
+          user.updateAttributes(userConfig).then((user) => {
+						getUserModel({
+							'id': user.id
+						}).then((user) => {
+							reply(user).code(200);
+						});
+					});
         } else {
           reply().code(404);
         }
@@ -459,6 +542,5 @@ let users = {
     });
   }
 };
-
 
 export default users;

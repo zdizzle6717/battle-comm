@@ -8,12 +8,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     'classMethods': {
       associate: function(models) {
+				GameSystem.hasOne(models.File);
 				GameSystem.belongsTo(models.Manufacturer);
 				GameSystem.hasMany(models.Faction);
         GameSystem.hasMany(models.GameSystemRanking);
         GameSystem.hasMany(models.NewsPost);
         GameSystem.hasMany(models.Product);
-        GameSystem.hasOne(models.File);
       }
     }
   });

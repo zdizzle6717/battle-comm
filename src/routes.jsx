@@ -75,10 +75,6 @@ const routes = (
 			<Route path="create" component={EditNewsPostPage}/>
 			<Route path="edit/:postId" component={EditNewsPostPage}/>
 		</Route>
-		<Route path="users">
-			<IndexRoute component={SearchUsersPage}/>
-			<Route path="edit/:userId" component={EditUserPage}/>
-		</Route>
 		<Route path="product-orders">
 			<IndexRoute component={SearchProductOrdersPage}/>
 			<Route path="edit/:orderId" component={EditProductOrderPage}/>
@@ -91,6 +87,10 @@ const routes = (
 		<Route path="venue">
 			<IndexRoute component={AssignPointsPage}/>
 			<Route path="assign-points" component={AssignPointsPage}/>
+		</Route>
+		<Route path="users">
+			<IndexRoute component={SearchUsersPage}/>
+			<Route path="edit/:userId" component={EditUserPage}/>
 		</Route>
 	</Route>
 	<Route path="news">

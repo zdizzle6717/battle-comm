@@ -162,7 +162,7 @@ class SearchUsersPage extends React.Component {
 											<td>{user.lastName + ', ' + user.firstName}</td>
 											<td>{user.email}</td>
 											<td>
-												<Link className="action-item" key="editUser" to={`/admin/players/edit/${user.id}`}>
+												<Link className="action-item" key="editUser" to={`/admin/users/edit/${user.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>
