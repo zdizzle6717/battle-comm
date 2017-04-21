@@ -5,14 +5,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../library/alerts';
-import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
+import {Form, Input, Select, CheckBox, FileUpload} from '../../library/validations';
+import {handlers} from '../../library/utilities';
 import Modal from '../../library/modal';
 import GameSystemActions from '../../actions/GameSystemActions';
 
 // TODO: Verify authentication error catching
-// TODO: Add 'remember my login' checkboxes
-// TODO: Add 'log me in automatically' checkboxes
 
 const mapStateToProps = (state) => {
 	return {
@@ -26,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
 		'authenticate': UserActions.authenticate,
+		'authenticateFromToken': UserActions.authenticateFromToken,
 		'getGameSystems': GameSystemActions.getAll,
 		'setRedirect': UserActions.setRedirect
     }, dispatch);
@@ -40,6 +40,7 @@ class LoginPage extends React.Component {
 			'showGameList': false
         }
 
+		this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.showAlert = this.showAlert.bind(this);
@@ -48,19 +49,36 @@ class LoginPage extends React.Component {
     componentDidMount() {
         document.title = "Battle-Comm | Login";
 		this.props.getGameSystems();
+		let storedUser = JSON.parse(localStorage.getItem('bc_user'));
+		if (storedUser) {
+			let credentials = {
+				'username': storedUser.username,
+				'password': 'Password#',
+				'rememberMe': true
+			}
+			this.setState({
+				'credentials': credentials
+			})
+		}
     }
 
-	handleInputChange(e) {
-		let credentials = this.state.credentials;
-		credentials[e.target.name] = e.target.value;
+	handleCheckBoxChange(e) {
 		this.setState({
-			'credentials': credentials
-		})
+			'credentials': handlers.updateCheckBox(e, this.state.credentials)
+		});
+	}
+
+	handleInputChange(e) {
+		handlers.updateInput(e, this.state.credentials);
 	}
 
 	handleSubmit(e) {
 		// TODO: Fix redirect route or just double check that it works
-		this.props.authenticate(this.state.credentials).then(() => {
+		let storedUser = JSON.parse(localStorage.getItem('bc_user'));
+		this.props[storedUser ? 'authenticateFromToken': 'authenticate'](storedUser ? {
+			'id_token': storedUser.id_token,
+			'rememberMe': true
+		} : this.state.credentials).then(() => {
 			let homeState = this.props.user.roleConfig.homeState;
 			this.showAlert('loginSuccess');
 			if (this.props.redirectRoute) {
@@ -80,6 +98,14 @@ class LoginPage extends React.Component {
 			}
 			if (error.message === 'Incorrect username or email!') {
 				this.showAlert('incorrectUsername');
+			}
+			if (error.message === 'Token has expired.') {
+				this.setState({
+					'username': '',
+					'password': '',
+					'rememberMe': true
+				})
+				this.showAlert('rememberMeTokenExpired');
 			}
 		});
 	}
@@ -118,6 +144,14 @@ class LoginPage extends React.Component {
 					'delay': 3000
 				});
 			},
+			'rememberMeTokenExpired': () => {
+				this.props.addAlert({
+					'title': 'Token Expired',
+					'message': 'Token to remember your login has expired. Please re-enter login credentials.',
+					'type': 'error',
+					'delay': 3000
+				});
+			}
 		}
 
 		return alerts[selector]();
@@ -158,6 +192,11 @@ class LoginPage extends React.Component {
 										<div className="form-group small-12 columns">
 											<label className="required">Password</label>
 											<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="form-group small-12 columns">
+											<CheckBox name="rememberMe" value={this.state.newsPost.rememberMe} handleInputChange={this.handleCheckBoxChange} label="Remember my login?"/>
 										</div>
 									</div>
 								</Form>

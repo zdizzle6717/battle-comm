@@ -281,7 +281,6 @@ class PlayerDashboardPage extends React.Component {
 	}
 
 	toggleModal(name, e) {
-		// TODO: Arrow on first and last photo causes activeModal to set to nonexistant modal
 		if (e) { e.preventDefault() };
 		this.setState({
 			'activeModal': this.state.activeModal !== name ? name : 'none'

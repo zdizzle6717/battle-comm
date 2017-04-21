@@ -29,8 +29,6 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 };
 
-// TODO: Check that banner slide upload is properly configured
-
 class IndexPage extends React.Component {
     constructor() {
         super();
@@ -53,7 +51,6 @@ class IndexPage extends React.Component {
     }
 
 	componentDidMount() {
-		// TODO: Uncomment setState once real slides are added
 		document.title = "Battle-Comm";
 		this.props.getGameSystems();
 		this.props.getSlides().then((slides) => {
@@ -67,7 +64,7 @@ class IndexPage extends React.Component {
 				return a.priority - b.priority;
 			});
 			this.setState({
-				// 'bannerSlides': pageSlides
+				'bannerSlides': pageSlides
 			}, () => {
 				initSlider($);
 				// Initialize slideshow

@@ -90,6 +90,26 @@ let users = {
         console.log(err);
       });
   },
+	authenticate: (request, reply) => {
+    reply({
+			'username': request.pre.user.username,
+      'id_token': createUserToken(request.pre.user, request.payload.rememberMe),
+			'roleFlags': getUserRoleFlags(request.pre.user),
+      'id': request.pre.user.id,
+      'firstName': request.pre.user.firstName,
+      'lastName': request.pre.user.lastName,
+      'member': request.pre.user.member,
+      'subscriber': request.pre.user.subscriber,
+      'tourneyAdmin': request.pre.user.tourneyAdmin,
+      'eventAdmin': request.pre.user.eventAdmin,
+      'newsContributor': request.pre.user.newsContributor,
+      'venueAdmin': request.pre.user.venueAdmin,
+      'clubAdmin': request.pre.user.clubAdmin,
+      'systemAdmin': request.pre.user.systemAdmin,
+			'accountActivated': request.pre.user.accountActivated,
+			'UserPhoto': request.pre.user.UserPhoto
+    }).code(201);
+  },
 	blockUser: (request, reply) => {
     models.User.find({
         'where': {
@@ -209,26 +229,6 @@ let users = {
           throw Boom.badRequest(response);
         });
     });
-  },
-  authenticate: (request, reply) => {
-    reply({
-			'username': request.pre.user.username,
-      'id_token': createUserToken(request.pre.user),
-			'roleFlags': getUserRoleFlags(request.pre.user),
-      'id': request.pre.user.id,
-      'firstName': request.pre.user.firstName,
-      'lastName': request.pre.user.lastName,
-      'member': request.pre.user.member,
-      'subscriber': request.pre.user.subscriber,
-      'tourneyAdmin': request.pre.user.tourneyAdmin,
-      'eventAdmin': request.pre.user.eventAdmin,
-      'newsContributor': request.pre.user.newsContributor,
-      'venueAdmin': request.pre.user.venueAdmin,
-      'clubAdmin': request.pre.user.clubAdmin,
-      'systemAdmin': request.pre.user.systemAdmin,
-			'accountActivated': request.pre.user.accountActivated,
-			'UserPhoto': request.pre.user.UserPhoto
-    }).code(201);
   },
   changePassword: (request, reply) => {
     getUserModel({

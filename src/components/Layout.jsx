@@ -67,7 +67,7 @@ class Layout extends React.Component {
 		_viewListener();
 	}
 
-	// TODO: Consider adding a getMe route to API and calling (to account for authenticated routes that don't have an API endpoint that would return a 401)
+	// TODO: Consider calling getMe route (to account for authenticated routes that don't have an API endpoint that would return a 401), then redirect
 	onViewChange(location) {
 		let destination = location.pathname;
 		let restrictedRoute, accessGranted;

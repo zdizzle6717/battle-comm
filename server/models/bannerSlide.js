@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
       'classMethods': {
           associate: function(models) {
-              BannerSlide.hasMany(models.File);
+              BannerSlide.hasOne(models.File);
           }
       }
   });

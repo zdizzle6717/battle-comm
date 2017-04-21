@@ -11,8 +11,6 @@ import PlayerService from '../../../services/PlayerService';
 import UserFriendService from '../../../services/UserFriendService';
 import UserNotificationService from '../../../services/UserNotificationService';
 
-// TODO: Add function to check if players are already friends
-
 const mapStateToProps = (state) => {
 	return {
 		'currentUser': state.user

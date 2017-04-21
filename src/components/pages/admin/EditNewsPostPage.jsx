@@ -62,6 +62,13 @@ class EditNewsPostPage extends React.Component {
 				this.setState({
 					'newsPost': newsPost
 				});
+				if (newsPost.ManufacturerId) {
+					this.props.getManufacturer(newsPost.ManufacturerId).then((manufacturer) => {
+						this.setState({
+							'gameSystems': manufacturer.GameSystems
+						});
+					});
+				}
 			});
 		} else {
 			this.setState({
@@ -70,13 +77,25 @@ class EditNewsPostPage extends React.Component {
 		}
 	}
 
-	getDirectoryPath() {
-		let year = new Date();
-		year = year.getFullYear();
-		return `news/${year}/${this.state.newsPost.category}/`;
+	getImageUrl(file) {
+		if (file.id) {
+			return `/uploads/${file.locationUrl}${file.name}`;
+		} else {
+			return file.locationUrl + file.name;
+		}
 	}
 
-	handleDeleteFile(fileId) {
+	getDirectoryPath() {
+		let date = this.state.newsPost.createdAt ? new Date(this.state.newsPost.createdAt) : new Date();
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		return `news/${year}/${month}/`;
+	}
+
+	handleDeleteFile(fileId, e) {
+		if (e) {
+			e.preventDefault();
+		}
 		FileService.remove(fileId).then(() => {
 			this.showAlert('fileRemoved');
 		});
@@ -90,7 +109,8 @@ class EditNewsPostPage extends React.Component {
 				response = {
 					'name': response.data.file.name,
 					'size': response.data.file.size,
-					'type': response.data.file.type
+					'type': response.data.file.type,
+					'locationUrl': response.data.file.locationUrl
 				};
 				return response;
 			});
@@ -142,7 +162,7 @@ class EditNewsPostPage extends React.Component {
 					FileService.create({
 						'NewsPostId': newsPost.id,
 						'identifier': 'newsPostPhoto',
-						'locationUrl': `/${directoryPath}/`,
+						'locationUrl': `${directoryPath}`,
 						'name': file[i].name,
 						'size': file[i].size,
 						'type': file[i].type
@@ -300,7 +320,7 @@ class EditNewsPostPage extends React.Component {
 												<label>News Post Image</label>
 												{
 													this.state.newPost.Files.length > 0 &&
-													<img src={`/uploads/${this.state.newsPost.Files[i].locationUrl}${this.state.newsPost.Files[i].name}`} />
+													<img src={this.getImageUrl.call(this, file)} />
 												}
 											</div>
 											<div className="small-12 medium-6 columns">

@@ -20,7 +20,7 @@ const _returnResponse = (type, data) => {
     };
 };
 
-const _configureUser = (user) => {
+const _configureUser = (user, rememberMe) => {
 	if (user) {
 		roleConfig.forEach((role) => {
 			if (role.roleFlags === user.roleFlags) {
@@ -32,6 +32,14 @@ const _configureUser = (user) => {
 			throw new Error('Oops! Make sure that the roleConfig on the UI and API have matching values.');
 		}
 		sessionStorage.setItem('user', JSON.stringify(user));
+		if (rememberMe) {
+			localStorage.setItem('bcUser', JSON.stringify({
+				'id_token': user.id_token,
+				'username': user.username
+			}));
+		} else {
+			localStorage.removeItem('bcUser');
+		}
 		console.log('Auth credentials changed.');
 		return user;
 	}
@@ -69,7 +77,7 @@ export default {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST));
 			return UserService.create(data).then((user) => {
-				user = _configureUser(user);
+				user = _configureUser(user, data.rememberMe);
 				// dispatch(_returnResponse(UserConstants.CREATE_USER, user));
 				return user;
 			});
@@ -98,7 +106,24 @@ export default {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST, data));
 			return UserService.authenticate(data).then((user) => {
-				user = _configureUser(user);
+				user = _configureUser(user, data.rememberMe);
+				dispatch({
+					'type': UserConstants.UPDATE_USER,
+					'data': user
+				});
+				dispatch({
+					'type': AuthenticationConstants.SET_AUTHENTICATION,
+					'data': true
+				});
+				return user;
+			});
+		};
+  },
+  authenticateFromToken: (data) => {
+		return (dispatch) => {
+			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST, data));
+			return UserService.authenticateFromToken(data).then((user) => {
+				user = _configureUser(user, data.rememberMe);
 				dispatch({
 					'type': UserConstants.UPDATE_USER,
 					'data': user

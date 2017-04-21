@@ -2,7 +2,7 @@
 
 import Joi from 'joi';
 import { users } from '../handlers';
-import { verifyUniqueUser, verifyCredentials, verifyUserExists } from '../../utils/userFunctions';
+import { verifyUniqueUser, verifyCredentials, verifyUserToken, verifyUserExists } from '../../utils/userFunctions';
 
 module.exports = [
   // User Logins
@@ -24,6 +24,56 @@ module.exports = [
       }
     },
     'handler': users.activateAccount
+  },
+	{
+    'method': 'POST',
+    'path': '/api/users/authenticate',
+    'config': {
+      'pre': [{
+        'method': verifyCredentials,
+        'assign': 'user'
+      }],
+      'handler': users.authenticate,
+      'tags': ['api'],
+      'description': 'Authenticate an existing user',
+      'notes': 'Authenticate an existing user',
+      'validate': {
+        'payload': Joi.alternatives().try(
+          Joi.object({
+            'username': Joi.string().min(4).max(50).required(),
+            'password': Joi.string().min(8).required(),
+						'rememberMe': Joi.optional()
+          }),
+          Joi.object({
+            'username': Joi.string().email().required(),
+            'password': Joi.string().min(8).required(),
+						'rememberMe': Joi.optional()
+          })
+        )
+      }
+    }
+  },
+	{
+    'method': 'POST',
+    'path': '/api/users/getMe/{token}',
+    'config': {
+      'pre': [{
+        'method': verifyUserToken,
+        'assign': 'user'
+      }],
+      'handler': users.authenticate,
+      'tags': ['api'],
+      'description': 'Authenticate an existing user from a supplied jwt',
+      'notes': 'Authenticate an existing user from a supplied jwt',
+      'validate': {
+        'params': {
+					'token': Joi.string().required()
+				},
+				'payload': {
+					'rememberMe': Joi.boolean().required()
+				}
+      }
+    }
   },
 	{
     'method': 'PUT',
@@ -67,32 +117,6 @@ module.exports = [
           'firstName': Joi.string().required(),
           'lastName': Joi.string().required()
         }
-      }
-    }
-  },
-  {
-    'method': 'POST',
-    'path': '/api/users/authenticate',
-    'config': {
-      'pre': [{
-        'method': verifyCredentials,
-        'assign': 'user'
-      }],
-      'handler': users.authenticate,
-      'tags': ['api'],
-      'description': 'Authenticate an existing user',
-      'notes': 'Authenticate an existing user',
-      'validate': {
-        'payload': Joi.alternatives().try(
-          Joi.object({
-            'username': Joi.string().min(4).max(50).required(),
-            'password': Joi.string().min(8).required()
-          }),
-          Joi.object({
-            'username': Joi.string().email().required(),
-            'password': Joi.string().min(8).required()
-          })
-        )
       }
     }
   },

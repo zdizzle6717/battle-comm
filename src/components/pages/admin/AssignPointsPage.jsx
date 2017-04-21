@@ -28,8 +28,6 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
-// TODO: Check that new configuration works and validates
-
 class AssignPointsPage extends React.Component {
 	constructor() {
 		super();

@@ -1,7 +1,5 @@
 'use strict';
 
-// TODO: Improve accuracy of path comparison regex
-
 module.exports = [
 	{
 		'name': 'adminDashboard',

@@ -2,6 +2,8 @@
 
 import Boom from 'boom';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import env from '../../envVariables';
 import models from '../models';
 import roleConfig from '../../roleconfig';
 
@@ -27,6 +29,53 @@ const verifyUniqueUser = (request, reply) => {
   }).catch((response) => {
     console.log(response);
   });
+};
+
+const verifyUserToken = (request, reply) => {
+  let decoded;
+	let token = request.params.token;
+  try {
+    decoded = jwt.verify(token, env.secret);
+  } catch (error) {
+    // TODO: Check this response for correct message
+		reply(Boom.badRequest('Token has expired.'));
+  }
+  if (!decoded) {
+    return false;
+  } else {
+		// TODO: This needs to be tested for the 'remember me' login option
+    models.User.find({
+			'where': {
+				'$or': [{
+	        'email': decoded.username
+	      }, {
+	        'username': decoded.username
+	      }]
+			},
+			'include': [{
+				'model': models.UserPhoto
+			}]
+		}).then((user) => {
+			if (user) {
+				user = user.get({'plain': true});
+	      bcrypt.compare(decoded.password, user.password, (err, isValid) => {
+	        if (isValid) {
+						if (user.accountActivated) {
+							reply(user);
+						} else {
+							reply(Boom.badRequest('Account not activated.'));
+						}
+	        } else {
+	          reply(Boom.badRequest('Incorrect password!'));
+	        }
+	      });
+	    } else {
+	      reply(Boom.badRequest('Incorrect username or email!'));
+	    }
+		}).catch((response) => {
+	    console.log(response);
+	  });
+  }
 };
 
 const verifyCredentials = (request, reply) => {
@@ -103,6 +152,7 @@ const getUserRoleFlags = (user) => {
 export {
 	getUserRoleFlags,
   verifyUniqueUser,
+  verifyUserToken,
   verifyCredentials,
   verifyUserExists,
   hashPassword
