@@ -13,7 +13,7 @@ import isEmpty from '../../library/utilities/isEmpty';
 import Iframe from '../../library/iframe';
 import BannerSlideActions from '../../actions/BannerSlideActions';
 import GameSystemActions from '../../actions/GameSystemActions';
-import Modal from '../../library/Modal';
+import Modal from '../../library/modal';
 
 const mapStateToProps = (state) => {
     return {

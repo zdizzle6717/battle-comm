@@ -17,10 +17,7 @@ export default class OrderSuccessPage extends React.Component {
         return (
             <ViewWrapper headerImage="/images/title/Order_Success.png" headerAlt="Order Success">
                 <div className="row">
-                    <h1>Order Success</h1>
-                    <p>
-                        <Link to="/">Go back to the main page</Link>
-                    </p>
+					<h3 className="text-center"><strong>Order Success!</strong> Check your e-mail for more details and shipping information.</h3>
                 </div>
             </ViewWrapper>
         );

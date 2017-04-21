@@ -11,7 +11,9 @@ let manufacturers = {
         },
         'include': [{
           'model': models.GameSystem
-        }]
+        }, {
+					'model': models.File
+				}]
       })
       .then((response) => {
         if (response) {

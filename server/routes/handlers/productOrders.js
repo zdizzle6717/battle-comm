@@ -46,6 +46,7 @@ let productOrders = {
     models.ProductOrder.create({
         'status': request.payload.status,
         'orderDetails': request.payload.orderDetails,
+        'productDetails': request.payload.productDetails,
         'orderTotal': request.payload.orderTotal,
         'UserId': request.payload.UserId,
         'customerFullName': request.payload.customerFullName,

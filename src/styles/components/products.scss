@@ -7,5 +7,18 @@
 		width: 100%;
 		max-width: 33.1333%;
 		margin-right: 2%;
+
+		.flipper {
+			.front {
+
+				&:hover {
+					display: none;
+				}
+			}
+
+			.back {
+				display: none;
+			}
+		}
 	}
 }

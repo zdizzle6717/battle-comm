@@ -3,7 +3,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';
-import Modal from '../../library/Modal';
+import Modal from '../../library/modal';
 
 export default class Footer extends React.Component {
 	constructor() {

@@ -23,6 +23,8 @@ const mapDispatchToProps = (dispatch) => {
 
 // TODO: Add reward point price slider to filters
 
+let timer;
+
 class StorePage extends React.Component {
     constructor() {
         super();
@@ -45,6 +47,12 @@ class StorePage extends React.Component {
         document.title = "Battle-Comm | Store";
 		this.handlePageChange(1);
     }
+
+	componentWillUnmount() {
+		if (timer) {
+			clearTimeout(timer);
+		}
+	}
 
 	addToCart(product, index, e) {
 		let quantity = 1;

@@ -51,6 +51,7 @@ module.exports = [
       },
       'validate': {
         'payload': {
+					'File': Joi.optional(),
           'name': Joi.string().required(),
           'searchKey': Joi.optional(),
           'description': Joi.optional(),
@@ -76,6 +77,11 @@ module.exports = [
           'id': Joi.number().required()
         },
         'payload': {
+					'id': Joi.optional(),
+					'updatedAt': Joi.optional(),
+					'createdAt': Joi.optional(),
+					'GameSystems': Joi.optional(),
+					'File': Joi.optional(),
           'name': Joi.string().required(),
           'searchKey': Joi.optional(),
           'description': Joi.optional(),

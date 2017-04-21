@@ -45,6 +45,12 @@ class SearchManufacturersPage extends React.Component {
 		this.handlePageChange(1);
     }
 
+	componentWillUnmount() {
+		if (timer) {
+			clearTimeout(timer);
+		}
+	}
+
 	handleFilterReset() {
 		this.setState({
 			'pageSize': 20,
@@ -148,7 +154,7 @@ class SearchManufacturersPage extends React.Component {
 								Add Manufacturer
 							</div>
 							<div className="panel-content text-center">
-								<Link to="/admin/manufacturer/create" className="button black small-12"><span className="fa fa-plus"> </span> New Manufacturer</Link>
+								<Link to="/admin/manufacturers/create" className="button black small-12"><span className="fa fa-plus"> </span> New Manufacturer</Link>
 							</div>
 						</div>
 					</div>

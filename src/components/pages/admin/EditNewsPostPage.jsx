@@ -36,7 +36,8 @@ class EditNewsPostPage extends React.Component {
 		this.state = {
 			'gameSystems': [],
 			'newsPost': {
-				'Files': []
+				'Files': [],
+				'category': 'bcNews'
 			},
 			'newNewsPost': false,
 			'newFiles': []
@@ -46,6 +47,7 @@ class EditNewsPostPage extends React.Component {
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
 		this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.showAlert = this.showAlert.bind(this);
@@ -55,8 +57,8 @@ class EditNewsPostPage extends React.Component {
 	componentDidMount() {
 		document.title = "Battle-Comm | News Post Edit";
 		this.props.getManufacturers();
-		if (this.props.params.newsPostId) {
-			NewsPostService.get(this.props.params.newsPostId).then((newsPost) => {
+		if (this.props.params.postId) {
+			NewsPostService.get(this.props.params.postId).then((newsPost) => {
 				this.setState({
 					'newsPost': newsPost
 				});
@@ -103,6 +105,12 @@ class EditNewsPostPage extends React.Component {
 		});
 	}
 
+	handleCheckBoxChange(e) {
+		this.setState({
+			'newsPost': handlers.updateCheckBox(e, this.state.newsPost)
+		});
+	}
+
 	handleInputChange(e) {
 		this.setState({
 			'newsPost': handlers.updateInput(e, this.state.newsPost)
@@ -124,7 +132,7 @@ class EditNewsPostPage extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		let post = this.state.newsPost;
-		let method = this.props.params.newsPostId ? 'update' : 'create';
+		let method = this.props.params.postId ? 'update' : 'create';
 		post.UserId = this.props.user.id;
 		NewsPostService[method]((method === 'update' ? post.id : post), (method === 'update' ? post : null)).then((newsPost) => {
 			let directoryPath = this.getDirectoryPath();
@@ -144,7 +152,7 @@ class EditNewsPostPage extends React.Component {
 			this.setState({
 				'newsPost': newsPost
 			});
-			if (this.props.params.newsPostId) {
+			if (this.props.params.postId) {
 				this.addAlert('newsPostUpdated');
 				browserHistory.push('/admin');
 			} else {
@@ -171,6 +179,14 @@ class EditNewsPostPage extends React.Component {
 					'delay': 3000
 				});
 			},
+			'uploadSuccess': () => {
+				this.props.addAlert({
+					'title': 'Upload Success',
+					'message': `New file successfully uploaded.  Click 'update' to complete transaction.`,
+					'type': 'success',
+					'delay': 3000
+				});
+			},
 			'fileRemoved': () => {
 				this.props.addAlert({
 					'title': 'File Deleted',
@@ -192,7 +208,7 @@ class EditNewsPostPage extends React.Component {
 	}
 
 	render() {
-		let formIsValid = getFormErrorCount(this.props.forms, 'newsPostForm');
+		let formIsInvalid = getFormErrorCount(this.props.forms, 'newsPostForm') > 0;
 
 		return (
 			<ViewWrapper headerImage="/images/Titles/News_Post_Edit.png" headerAlt="News Post Edit">
@@ -254,17 +270,21 @@ class EditNewsPostPage extends React.Component {
 									</div>
 								</div>
 								<div className="row">
-									<div className="form-group small-12 medium-4 columns">
+									<div className="form-group small-12 columns">
 										<label className="required">Callout</label>
 										<TextArea type="text" name="callout" value={this.state.newsPost.callout} rows="4" handleInputChange={this.handleInputChange} required={true} />
 									</div>
-									<div className="form-group small-12 medium-4 columns">
+								</div>
+								<div className="row">
+									<div className="form-group small-12 columns">
 										<label className="required">Body</label>
 										<TextArea type="text" name="body" value={this.state.newsPost.body} rows="7" handleInputChange={this.handleInputChange} required={true} />
 									</div>
-									<div className="form-group small-12 medium-4 columns">
+								</div>
+								<div className="row">
+									<div className="form-group small-12 columns">
 										<label className="required">Tags</label>
-										<TextArea type="text" name="tags" value={this.state.newsPost.tags} rows="4" handleInputChange={this.handleInputChange} required={true} />
+										<TextArea type="text" name="tags" value={this.state.newsPost.tags} rows="3" handleInputChange={this.handleInputChange} required={true} />
 									</div>
 								</div>
 								<div className="row">
@@ -275,20 +295,23 @@ class EditNewsPostPage extends React.Component {
 								</div>
 								{
 									this.state.newsPost.Files.map((file, i) =>
-									<div key={i} className="row">
-										<div className="small-12 medium-6 columns">
-											<label className="required">News Post Image</label>
-											<img src={`/uploads/${this.state.newsPost.Files[i].locationUrl}${this.state.newsPost.Files[i].name}`} />
+										<div key={i} className="row">
+											<div className="small-12 medium-6 columns">
+												<label>News Post Image</label>
+												{
+													this.state.newPost.Files.length > 0 &&
+													<img src={`/uploads/${this.state.newsPost.Files[i].locationUrl}${this.state.newsPost.Files[i].name}`} />
+												}
+											</div>
+											<div className="small-12 medium-6 columns">
+												<label className="required">Image Name</label>
+												<h6>{this.state.newsPost.Files[i].name}</h6>
+												{
+													this.state.newsPost.Files[i].id &&
+													<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.newsPost.Files[i].id)}>Delete File?</button>
+												}
+											</div>
 										</div>
-										<div className="small-12 medium-6 columns">
-											<label className="required">Image Name</label>
-											<h6>{this.state.newsPost.Files[i].name}</h6>
-											{
-												this.state.newsPost.Files[i].id &&
-												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.newsPost.Files[i].id)}>Delete File?</button>
-											}
-										</div>
-									</div>
 									)
 								}
 							</Form>
@@ -297,7 +320,7 @@ class EditNewsPostPage extends React.Component {
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newNewsPost ? 'Create News Post' : 'Update News Post'}</button>
+								<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newNewsPost ? 'Create News Post' : 'Update News Post'}</button>
 							</div>
 						</div>
 					</div>

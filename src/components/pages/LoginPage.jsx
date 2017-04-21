@@ -7,7 +7,7 @@ import {browserHistory, Link} from 'react-router';
 import {AlertActions} from '../../library/alerts';
 import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
-import Modal from '../../library/Modal';
+import Modal from '../../library/modal';
 import GameSystemActions from '../../actions/GameSystemActions';
 
 // TODO: Verify authentication error catching

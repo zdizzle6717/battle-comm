@@ -74,6 +74,14 @@ module.exports = [
 					'id': Joi.number().required()
 				},
 				'payload': {
+					'id': Joi.optional(),
+					'createdAt': Joi.optional(),
+					'updatedAt': Joi.optional(),
+					'ManufacturerId': Joi.optional(),
+					'FactionId': Joi.optional(),
+					'GameSystemId': Joi.optional(),
+					'User': Joi.optional(),
+					'Files': Joi.optional(),
 					'UserId': Joi.number().required(),
 					'title': Joi.string().required(),
 					'callout': Joi.string().required(),

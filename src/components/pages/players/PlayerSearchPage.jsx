@@ -20,6 +20,8 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
+let timer;
+
 class PlayerSearchPage extends React.Component {
     constructor() {
         super();
@@ -41,6 +43,12 @@ class PlayerSearchPage extends React.Component {
 		this.handlePageChange(1);
     }
 
+	componentWillUnmount() {
+		if (timer) {
+			clearTimeout(timer);
+		}
+	}
+
 	getPlayerIcon(player) {
 		let userPhoto = player.UserPhoto;
 		return userPhoto ? `/uploads/players/${player.id}/playerIcon/300-${player.UserPhoto.name}` : '/uploads/players/defaults/300-profile-icon-default.png';
@@ -59,10 +67,10 @@ class PlayerSearchPage extends React.Component {
 
 	handleQueryChange(e) {
 		let searchQuery = e.target.value;
-		if (searchTimer) {
-			clearTimeout(searchTimer);
+		if (timer) {
+			clearTimeout(timer);
 		}
-		searchTimer = setTimeout(() => {
+		timer = setTimeout(() => {
 			this.handlePageChange(1);
 		}, 500);
 		this.setState({

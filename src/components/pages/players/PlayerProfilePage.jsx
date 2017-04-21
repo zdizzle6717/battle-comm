@@ -5,7 +5,7 @@ import {browserHistory, Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
-import Modal from '../../../library/Modal';
+import Modal from '../../../library/modal';
 import ViewWrapper from '../../ViewWrapper';
 import PlayerService from '../../../services/PlayerService';
 import UserFriendService from '../../../services/UserFriendService';

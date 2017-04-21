@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {AlertActions} from '../../../library/alerts';
-import Modal from '../../../library/Modal';
+import Modal from '../../../library/modal';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers, uploadFiles} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';

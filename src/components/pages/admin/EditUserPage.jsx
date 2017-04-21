@@ -12,10 +12,8 @@ import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
 import roleConfig from '../../../../roleConfig';
 import GameSystemRankingForm from '../../pieces/forms/GameSystemRankingForm';
-import Modal from '../../../library/Modal';
+import Modal from '../../../library/modal';
 import PlayerService from '../../../services/PlayerService';
-
-// TODO: Show current ranking and add functionality to createOrUpdate ranking
 
 const mapStateToProps = (state) => {
 	return {
@@ -188,7 +186,7 @@ class EditUserPage extends React.Component {
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
 						<fieldset disabled={!this.state.isEditing}>
-							<Form name="userForm" submitButton={false} handleSubmit={this.handleSubmit} disabled={true}>
+							<Form name="userForm" submitButton={false} handleSubmit={this.handleSubmit}>
 								<div className="row">
 									<div className="form-group small-12 medium-4 columns">
 										<label className="required">First Name</label>
@@ -266,6 +264,7 @@ class EditUserPage extends React.Component {
 						<hr/>
 						<div className="row">
 							<div className="small-12 columns">
+								<h2>Add/Update Player Ranking</h2>
 								<GameSystemRankingForm playerId={this.state.user.id} username={this.state.user.username} handleSubmit={this.handleRankingSubmit}></GameSystemRankingForm>
 							</div>
 						</div>

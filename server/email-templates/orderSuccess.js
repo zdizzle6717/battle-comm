@@ -1,42 +1,28 @@
 'use strict';
 
 function buildTemplate(data) {
-	let productList = data.orderDetails.split(' || ');
-	let productArray = [];
-
-	productList.forEach(function(product) {
-		let arr = product.split(', ');
-		let obj = {
-			id: arr[0].substring(3),
-			name: arr[1].substring(8),
-			price: arr[2].substring(3),
-			quantity: arr[3].substring(4)
-		}
-		productArray.push(obj);
-	});
-
 	let productTable = '';
-	productArray.forEach(function(product, index) {
+	data.productDetails.forEach(function(product, index) {
 		if (index === 0 || index % 2 === 0) {
 			productTable +=
 			`
 			<tr style="background-color: #e8e8e8;">
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.id}</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.SKU}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.name}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.price}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">(${product.quantity})</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${parseFloat(product.price) * parseFloat(product.quantity)} RP</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">(${product.qty})</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${parseFloat(product.price) * parseFloat(product.qty)} RP</td>
 			</tr>
 			`
 		} else {
 			productTable +=
 			`
 			<tr>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.id}</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.SKU}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.name}</td>
 			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${product.price}</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">(${product.quantity})</td>
-			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${parseFloat(product.price) * parseFloat(product.quantity)} RP</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">(${product.qty})</td>
+			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${parseFloat(product.price) * parseFloat(product.qty)} RP</td>
 			</tr>
 			`
 		}
@@ -58,9 +44,11 @@ function buildTemplate(data) {
 			<p>${data.shippingCity}, ${data.shippingState} ${data.shippingZip}</p>
 			<p>${data.shippingCountry}</p>
 
+			<p><strong>Order Details:</strong> ${data.orderDetails || 'N/A'}</p>
+
 			<table style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
 			  <tr>
-				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">ID</th>
+				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">SKU</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Product Name</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Reward Points</th>
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Quantity</th>

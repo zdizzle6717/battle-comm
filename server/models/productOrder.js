@@ -2,7 +2,8 @@
 module.exports = function(sequelize, DataTypes) {
   var ProductOrder = sequelize.define('ProductOrder', {
     'status': DataTypes.STRING,
-    'orderDetails': DataTypes.STRING,
+    'orderDetails': DataTypes.TEXT,
+    'productDetails': DataTypes.JSONB,
     'orderTotal': DataTypes.INTEGER,
     'customerFullName': DataTypes.STRING,
     'customerEmail': DataTypes.STRING,

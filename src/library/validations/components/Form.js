@@ -78,7 +78,7 @@ class Form extends React.Component {
 							this.props.submitButton &&
 							<div className="row">
 								<div className="form-group small-12 columns text-right">
-									<button className="button right info" onClick={this.handleSubmit} disabled={this.props.validity !== undefined ? !this.props.validity : !formIsValid}>{this.props.submitText}</button>
+									<button className="button right info" onClick={this.handleSubmit} disabled={this.props.validity !== undefined ? !this.props.validity && !this.props.disabled : !formIsValid && !this.props.disabled}>{this.props.submitText}</button>
 								</div>
 							</div>
 						}
@@ -91,20 +91,22 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-	childForms: PropTypes.array,
-	customClass: PropTypes.string,
-	handleSubmit: PropTypes.func,
-	isParent: PropTypes.bool,
-	name: PropTypes.string.isRequired,
-	submitButton: PropTypes.bool,
-	submitText: PropTypes.string,
-	validity: PropTypes.bool
+	'childForms': PropTypes.array,
+	'customClass': PropTypes.string,
+	'handleSubmit': PropTypes.func,
+	'isParent': PropTypes.bool,
+	'name': PropTypes.string.isRequired,
+	'submitButton': PropTypes.bool,
+	'submitText': PropTypes.string,
+	'validity': PropTypes.bool,
+	'disabled': PropTypes.bool
 }
 
 Form.defaultProps = {
-	submitButton: true,
-	submitText: 'Submit',
-	isParent: true
+	'submitButton': true,
+	'submitText': 'Submit',
+	'isParent': true,
+	'disabled': false
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

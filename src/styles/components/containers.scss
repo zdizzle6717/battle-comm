@@ -8,3 +8,17 @@
     border-radius: 5px;
 	}
 }
+
+.pill-group {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	.pill {
+		margin: 0.25rem 1rem;
+		background: white;
+		padding: .25rem .5rem;
+		border-radius: 1rem;
+	}
+}

@@ -248,12 +248,12 @@ class AssignPointsPage extends React.Component {
 												<Input type="number" name="totalWins" value={this.state.players[i].totalWins} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
 											</div>
 											<div className="form-group small-12 medium-4 columns">
-												<label className="required">Total Draws</label>
-												<Input type="number" name="totalDraws" value={this.state.players[i].totalDraws} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
-											</div>
-											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Total Losses</label>
 												<Input type="number" name="totalLosses" value={this.state.players[i].totalLosses} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
+											</div>
+											<div className="form-group small-12 medium-4 columns">
+												<label className="required">Total Draws</label>
+												<Input type="number" name="totalDraws" value={this.state.players[i].totalDraws} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
 											</div>
 										</div>
 										{

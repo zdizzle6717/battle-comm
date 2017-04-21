@@ -42,7 +42,22 @@ export default class ProductPage extends React.Component {
 						<p>{product.description}</p>
 					</div>
 					<div className="small-12 medium-4 large-3 columns">
-						User Actions
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-title color-black">
+								Item Actions
+							</div>
+							<div className="panel-content text-center">
+								<label>Quantity</label>
+								<select value={this.state.itemQty}>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<button className="button black small-12" onClick={this.addToCart}>Add to Cart</button>
+							</div>
+						</div>
 					</div>
 				</div>
             </ViewWrapper>

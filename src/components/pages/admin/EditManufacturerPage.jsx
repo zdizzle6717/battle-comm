@@ -18,6 +18,12 @@ const mapStateToProps = (state) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'addAlert': AlertActions.addAlert
+	}, dispatch);
+}
+
 class EditManufacturerPage extends React.Component {
 	constructor() {
 		super();
@@ -31,6 +37,7 @@ class EditManufacturerPage extends React.Component {
 			'newManufacturer': false
 		}
 
+		this.getManufacturer = this.getManufacturer.bind(this);
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,17 +48,21 @@ class EditManufacturerPage extends React.Component {
 	componentDidMount() {
 		document.title = "Battle-Comm | Manufacturer Edit";
 		if (this.props.params.manufacturerId) {
-			ManufacturerService.get(this.props.params.manufacturerId).then((manufacturer) => {
-				this.setState({
-					'files': [manufacturer.File],
-					'manufacturer': manufacturer
-				});
-			});
+			this.getManufacturer(this.props.params.manufacturerId);
 		} else {
 			this.setState({
 				'newManufacturer': true
 			})
 		}
+	}
+
+	getManufacturer(manufacturerId) {
+		ManufacturerService.get(manufacturerId).then((manufacturer) => {
+			this.setState({
+				'files': manufacturer.File ? [manufacturer.File] : [],
+				'manufacturer': manufacturer
+			});
+		});
 	}
 
 	handleDeleteFile(fileId) {
@@ -72,7 +83,7 @@ class EditManufacturerPage extends React.Component {
 				return file;
 			});
 			this.setState({
-				'files': files[0],
+				'files': files,
 				'newFilesUploaded': true
 			});
 			this.showAlert('uploadSuccess');
@@ -100,14 +111,14 @@ class EditManufacturerPage extends React.Component {
 				})
 			}
 			this.setState({
-				'files': [manufacturer.File],
 				'manufacturer': manufacturer
 			});
 			if (method === 'update') {
-				this.addAlert('manufacturerUpdated');
-				browserHistory.push('/admin');
+				this.showAlert('manufacturerUpdated');
+				browserHistory.push('/admin/manufacturers');
 			} else {
-				this.addAlert('manufacturerCreated');
+				this.getManufacturer(manufacturer.id);
+				this.showAlert('manufacturerCreated');
 			}
 		});
 	}
@@ -133,7 +144,7 @@ class EditManufacturerPage extends React.Component {
 			'uploadSuccess': () => {
 				this.props.addAlert({
 					'title': 'Upload Success',
-					'message': `New file successfully uploaded`,
+					'message': `New file successfully uploaded.  Click 'update' to complete transaction.`,
 					'type': 'success',
 					'delay': 3000
 				});
@@ -159,7 +170,7 @@ class EditManufacturerPage extends React.Component {
 	}
 
 	render() {
-		let formIsValid = getFormErrorCount(this.props.forms, 'manufacturerForm');
+		let formIsInvalid = getFormErrorCount(this.props.forms, 'manufacturerForm') > 0;
 		return (
 			<ViewWrapper headerImage="/images/Titles/Manufacturer_Edit.png" headerAlt="Manufacturer Edit">
 				<div className="small-12 columns">
@@ -190,14 +201,14 @@ class EditManufacturerPage extends React.Component {
 								</div>
 								<div className="row">
 									<div className="small-12 medium-4 columns">
-										<label className="required">Manufacturer Image</label>
+										<label>Manufacturer Image</label>
 										{
-											this.state.files.length > 0 &&
+											this.state.files.length > 0 && this.state.files[0].id &&
 											<img src={`/uploads/${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
 										}
 									</div>
 									<div className="small-12 medium-4 columns">
-										<label className="required">Image Name</label>
+										<label>Image Name</label>
 										{
 											this.state.files.length > 0 &&
 											<h6>{this.state.files[0].name}</h6>
@@ -215,10 +226,10 @@ class EditManufacturerPage extends React.Component {
 							</Form>
 						</fieldset>
 					</div>
-					<div className="small-12 medium-8 large-9 columns">
+					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newGameSystem ? 'Create Manufacturer' : 'Update Manufacturer'}</button>
+								<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newGameSystem ? 'Create Manufacturer' : 'Update Manufacturer'}</button>
 							</div>
 						</div>
 					</div>
@@ -228,4 +239,4 @@ class EditManufacturerPage extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, null)(EditManufacturerPage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditManufacturerPage);

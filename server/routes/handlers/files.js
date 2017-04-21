@@ -103,7 +103,8 @@ let files = {
             'file': {
               'name': filename,
               'size': data.fileSize,
-              'type': data.file.hapi.headers['content-type']
+              'type': data.file.hapi.headers['content-type'],
+							'locationUrl': env.uploadPath + data.path
             },
             'filename': data.file.hapi.filename,
             'headers': data.file.hapi.headers,

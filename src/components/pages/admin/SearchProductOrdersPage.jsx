@@ -45,6 +45,12 @@ class SearchProductOrdersPage extends React.Component {
 		this.handlePageChange(1);
     }
 
+	componentWillUnmount() {
+		if (timer) {
+			clearTimeout(timer);
+		}
+	}
+
 	handleFilterReset() {
 		this.setState({
 			'pageSize': 20,

@@ -12,7 +12,9 @@ let newsPosts = {
         'include': [{
           'model': models.User,
           'attributes': ['firstName', 'lastName']
-        }]
+        }, {
+					'model': models.File
+				}]
       })
       .then((response) => {
         if (response) {

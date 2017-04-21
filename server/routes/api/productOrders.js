@@ -52,7 +52,22 @@ module.exports = [
       'validate': {
         'payload': {
           'status': Joi.string().valid('processing', 'shipped', 'completed').required(),
-          'orderDetails': Joi.string().required(),
+          'orderDetails': Joi.string().optional(),
+          'productDetails': Joi.array(Joi.object().keys({
+						'qty': Joi.number().required(),
+						'SKU': Joi.string().required(),
+						'name': Joi.string().required(),
+						'price': Joi.number().required(),
+						'color': Joi.string().optional(),
+						'description': Joi.string().optional(),
+						'tags': Joi.string().optional(),
+						'category': Joi.string().optional(),
+						'stockQty': Joi.number().optional(),
+						'isDisplayed': Joi.boolean().optional(),
+						'isFeatured': Joi.boolean().optional(),
+						'isNew': Joi.boolean().optional(),
+						'isOnSale': Joi.boolean().optional()
+					})).required(),
           'orderTotal': Joi.number().required(),
           'UserId': Joi.number().required(),
           'customerFullName': Joi.string().required(),
