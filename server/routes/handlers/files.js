@@ -13,6 +13,7 @@ import im from 'imagemagick-stream';
 let files = {
   create: (request, reply) => {
     models.File.create({
+        'BannerSlideId': request.payload.BannerSlideId,
         'GameSystemId': request.payload.GameSystemId,
         'ManufacturerId': request.payload.ManufacturerId,
         'NewsPostId': request.payload.NewsPostId,
@@ -38,6 +39,7 @@ let files = {
     }).then((file) => {
       if (file) {
         file.updateAttributes({
+            'BannerSlideId': request.payload.BannerSlideId,
             'GameSystemId': request.payload.GameSystemId,
             'ManufacturerId': request.payload.ManufacturerId,
             'NewsPostId': request.payload.NewsPostId,

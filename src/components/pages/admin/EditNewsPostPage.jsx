@@ -34,10 +34,13 @@ class EditNewsPostPage extends React.Component {
 		super();
 
 		this.state = {
+			'files': [],
 			'gameSystems': [],
 			'newsPost': {
 				'Files': [],
-				'category': 'bcNews'
+				'category': 'bcNews',
+				'featured': false,
+				'published': false
 			},
 			'newNewsPost': false,
 			'newFiles': []
@@ -47,6 +50,7 @@ class EditNewsPostPage extends React.Component {
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleDeletePost = this.handleDeletePost.bind(this);
 		this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
 		this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,7 +64,8 @@ class EditNewsPostPage extends React.Component {
 		if (this.props.params.postId) {
 			NewsPostService.get(this.props.params.postId).then((newsPost) => {
 				this.setState({
-					'newsPost': newsPost
+					'newsPost': newsPost,
+					'files': newsPost.Files ? newsPost.Files : []
 				});
 				if (newsPost.ManufacturerId) {
 					this.props.getManufacturer(newsPost.ManufacturerId).then((manufacturer) => {
@@ -69,6 +74,9 @@ class EditNewsPostPage extends React.Component {
 						});
 					});
 				}
+			}).catch(() => {
+				this.showAlert('notFound');
+				browserHistory.push('/admin/news');
 			});
 		} else {
 			this.setState({
@@ -92,12 +100,24 @@ class EditNewsPostPage extends React.Component {
 		return `news/${year}/${month}/`;
 	}
 
-	handleDeleteFile(fileId, e) {
+	handleDeleteFile(fileId, index, e) {
 		if (e) {
 			e.preventDefault();
 		}
 		FileService.remove(fileId).then(() => {
+			let files = this.state.files;
+			files.splice(index, 1);
+			this.setState({
+				'files': files
+			});
 			this.showAlert('fileRemoved');
+		});
+	}
+
+	handleDeletePost() {
+		NewsPostService.remove(this.props.params.postId).then(() => {
+			this.showAlert('postDeleted');
+			browserHistory.push('/admin/news');
 		});
 	}
 
@@ -114,11 +134,10 @@ class EditNewsPostPage extends React.Component {
 				};
 				return response;
 			});
-			let newFileList = responses.concat(newsPost.Files);
-			newsPost.Files = newFileList;
+			let newFileList = responses.concat(this.state.files);
 			newFiles = newFiles.concat(responses);
 			this.setState({
-				'newsPost': newsPost,
+				'files': newFileList,
 				'newFiles': newFiles
 			});
 			this.showAlert('uploadSuccess');
@@ -154,18 +173,18 @@ class EditNewsPostPage extends React.Component {
 		let post = this.state.newsPost;
 		let method = this.props.params.postId ? 'update' : 'create';
 		post.UserId = this.props.user.id;
+		let directoryPath = this.getDirectoryPath();
+		let newFiles = this.state.newFiles;
 		NewsPostService[method]((method === 'update' ? post.id : post), (method === 'update' ? post : null)).then((newsPost) => {
-			let directoryPath = this.getDirectoryPath();
-			let newFiles = this.state.newFiles;
 			if (newFiles.length > 0) {
-				newFiles.forEach((file, i) => {
+				newFiles.forEach((file) => {
 					FileService.create({
 						'NewsPostId': newsPost.id,
 						'identifier': 'newsPostPhoto',
 						'locationUrl': `${directoryPath}`,
-						'name': file[i].name,
-						'size': file[i].size,
-						'type': file[i].type
+						'name': file.name,
+						'size': file.size,
+						'type': file.type
 					});
 				});
 			}
@@ -173,10 +192,11 @@ class EditNewsPostPage extends React.Component {
 				'newsPost': newsPost
 			});
 			if (this.props.params.postId) {
-				this.addAlert('newsPostUpdated');
-				browserHistory.push('/admin');
+				this.showAlert('newsPostUpdated');
+				browserHistory.push('/admin/news');
 			} else {
-				this.addAlert('newsPostCreated');
+				this.showAlert('newsPostCreated');
+					browserHistory.push(`/admin/news/edit/${newsPost.id}`);
 			}
 		});
 	}
@@ -195,6 +215,22 @@ class EditNewsPostPage extends React.Component {
 				this.props.addAlert({
 					'title': 'News Post Updated',
 					'message': `Post, ${this.state.newsPost.title}, was successfully updated.`,
+					'type': 'success',
+					'delay': 3000
+				});
+			},
+			'notFound': () => {
+				this.props.addAlert({
+					'title': 'Post Not Found',
+					'message': `No news post found with id, ${this.props.params.postId}`,
+					'type': 'error',
+					'delay': 3000
+				});
+			},
+			'postDeleted': () => {
+				this.props.addAlert({
+					'title': 'Post Deleted',
+					'message': 'News post was successfully deleted from database.',
 					'type': 'success',
 					'delay': 3000
 				});
@@ -259,7 +295,7 @@ class EditNewsPostPage extends React.Component {
 								<div className="row">
 									<div className="form-group small-12 medium-4 columns">
 										<label>Manufacturer</label>
-										<Select name="ManufacturerId" value={this.state.newsPost.ManufacturerId} handleInputChange={this.handleManufacturerChange}>
+										<Select name="ManufacturerId" value={this.state.newsPost.ManufacturerId || ''} handleInputChange={this.handleManufacturerChange}>
 											<option value="">--Select--</option>
 											{
 												this.props.manufacturers.map((manufacturer, i) =>
@@ -270,7 +306,7 @@ class EditNewsPostPage extends React.Component {
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label>Game System</label>
-										<Select name="GameSystemId" value={this.state.newsPost.GameSystemId} handleInputChange={this.handleInputChange}>
+										<Select name="GameSystemId" value={this.state.newsPost.GameSystemId || ''} handleInputChange={this.handleInputChange}>
 											<option value="">--Select--</option>
 											{
 												this.state.gameSystems.map((gameSystems, i) =>
@@ -281,7 +317,7 @@ class EditNewsPostPage extends React.Component {
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label>Category</label>
-										<Select name="category" value={this.state.newsPost.category} handleInputChange={this.handleInputChange}>
+										<Select name="category" value={this.state.newsPost.category || ''} handleInputChange={this.handleInputChange}>
 											<option value="bcNews">BC News</option>
 											<option value="events">Events/Tournaments</option>
 											<option value="announcements">Announcements</option>
@@ -310,25 +346,25 @@ class EditNewsPostPage extends React.Component {
 								<div className="row">
 									<div className="form-group small-12 columns">
 										<label>News Post Photos</label>
-										<FileUpload name="newsPostPhoto" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" maxFiles={5} />
+										<FileUpload name="newsPostPhoto" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" required={1} maxFiles={5} />
 									</div>
 								</div>
 								{
-									this.state.newsPost.Files.map((file, i) =>
+									this.state.files.map((file, i) =>
 										<div key={i} className="row">
 											<div className="small-12 medium-6 columns">
 												<label>News Post Image</label>
 												{
-													this.state.newPost.Files.length > 0 &&
+													this.state.files.length > 0 && file.id &&
 													<img src={this.getImageUrl.call(this, file)} />
 												}
 											</div>
 											<div className="small-12 medium-6 columns">
 												<label className="required">Image Name</label>
-												<h6>{this.state.newsPost.Files[i].name}</h6>
+												<h6>{file.name}</h6>
 												{
-													this.state.newsPost.Files[i].id &&
-													<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.newsPost.Files[i].id)}>Delete File?</button>
+													file.id &&
+													<button className="button alert" onClick={this.handleDeleteFile.bind(this, file.id, i)}>Delete File?</button>
 												}
 											</div>
 										</div>
@@ -343,6 +379,14 @@ class EditNewsPostPage extends React.Component {
 								<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newNewsPost ? 'Create News Post' : 'Update News Post'}</button>
 							</div>
 						</div>
+						{
+							this.props.params.postId &&
+							<div className="panel push-bottom-2x push-top">
+								<div className="panel-content text-center">
+									<button className="button alert small-12" onClick={this.handleDeletePost}>Delete Post?</button>
+								</div>
+							</div>
+						}
 					</div>
 				</div>
 			</ViewWrapper>

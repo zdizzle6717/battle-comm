@@ -264,6 +264,29 @@ module.exports = [
   },
   {
     'method': 'PUT',
+    'path': '/api/users/{id}/updateRP',
+    'config': {
+      'tags': ['api'],
+      'description': 'Update user reward points',
+      'notes': 'Update user reward points',
+      'auth': {
+        'strategy': 'jsonWebToken',
+        'scope': ['venueAdmin', 'systemAdmin']
+      },
+      'validate': {
+        'params': {
+          'id': Joi.number().required()
+        },
+				'payload': {
+					'direction': Joi.string().valid('increment', 'decrement').required(),
+					'rewardPoints': Joi.number().required()
+				}
+      }
+    },
+    'handler': users.updateRP
+  },
+  {
+    'method': 'PUT',
     'path': '/api/users/changePassword/{id}',
     'config': {
       'tags': ['api'],
@@ -361,5 +384,21 @@ module.exports = [
       }
     },
     'handler': users.search
-  }
+  },
+  {
+    'method': 'POST',
+    'path': '/api/search/users/suggestions',
+    'config': {
+      'tags': ['api'],
+      'description': 'Search for user suggestions based on criteria',
+      'notes': 'Search for user suggestions based on criteria',
+			'validate': {
+        'payload': {
+          'searchQuery': Joi.optional(),
+          'maxResults': Joi.number().required()
+        }
+      }
+    },
+    'handler': users.searchSuggestions
+  },
 ];

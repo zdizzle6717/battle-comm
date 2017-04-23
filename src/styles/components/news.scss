@@ -5,10 +5,12 @@
   border-radius: 7px;
   background: rgba(11,74,113,0.16);
   box-shadow: 0 1px 5px rgba(0,0,0,0.72);
+	min-width: unquote(calc(100% - 2rem));
 
 	img {
 		float: left;
-		margin: .625rem;
+		margin:  0 .625rem .625rem .625rem;
 		box-shadow: 0 1px 5px rgba(0,0,0,0.5) inset;
+		max-width: 250px;
 	}
 }

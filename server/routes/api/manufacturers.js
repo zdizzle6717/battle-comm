@@ -53,7 +53,6 @@ module.exports = [
         'payload': {
 					'File': Joi.optional(),
           'name': Joi.string().required(),
-          'searchKey': Joi.optional(),
           'description': Joi.optional(),
           'url': Joi.optional()
         }
@@ -83,7 +82,6 @@ module.exports = [
 					'GameSystems': Joi.optional(),
 					'File': Joi.optional(),
           'name': Joi.string().required(),
-          'searchKey': Joi.optional(),
           'description': Joi.optional(),
           'url': Joi.optional()
         }

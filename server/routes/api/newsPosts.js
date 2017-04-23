@@ -43,7 +43,11 @@ module.exports = [
 			},
 			'validate': {
 				'payload': {
+					'Files': Joi.optional(),
 					'UserId': Joi.number().required(),
+					'FactionId': Joi.optional(),
+					'GameSystemId': Joi.optional(),
+					'ManufacturerId': Joi.optional(),
 					'title': Joi.string().required(),
 					'callout': Joi.string().required(),
 					'body': Joi.string().required(),
@@ -111,7 +115,8 @@ module.exports = [
 					'orderBy': Joi.string().required(),
 					'searchBy': Joi.optional(),
 					'pageNumber': Joi.number().required(),
-					'pageSize': Joi.optional()
+					'pageSize': Joi.optional(),
+					'published': Joi.optional()
         }
       }
     },

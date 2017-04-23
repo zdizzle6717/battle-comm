@@ -34,9 +34,10 @@ let bannerSlides = {
   },
   create: (request, reply) => {
     models.BannerSlide.create({
+        'actionText': request.payload.actionText,
+        'pageName': request.payload.pageName,
         'title': request.payload.title,
         'text': request.payload.text,
-        'pageName': request.payload.pageName,
         'priority': request.payload.priority,
         'link': request.payload.link,
         'isActive': request.payload.isActive
@@ -54,9 +55,10 @@ let bannerSlides = {
       .then((bannerSlide) => {
         if (bannerSlide) {
           bannerSlide.updateAttributes({
+						'actionText': request.payload.actionText,
+						'pageName': request.payload.pageName,
 						'title': request.payload.title,
 		        'text': request.payload.text,
-		        'pageName': request.payload.pageName,
 		        'priority': request.payload.priority,
 		        'link': request.payload.link,
 		        'isActive': request.payload.isActive

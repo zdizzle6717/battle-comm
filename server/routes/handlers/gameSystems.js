@@ -51,7 +51,6 @@ let gameSystems = {
         'ManufacturerId': request.payload.ManufacturerId,
         'name': request.payload.name,
         'description': request.payload.description,
-        'searchKey': request.payload.searchKey,
         'url': request.payload.url
       })
       .then((response) => {
@@ -70,7 +69,6 @@ let gameSystems = {
             'ManufacturerId': request.payload.ManufacturerId,
             'name': request.payload.name,
             'description': request.payload.description,
-            'searchKey': request.payload.searchKey,
             'url': request.payload.url
           }).then((response) => {
             reply(response).code(200);

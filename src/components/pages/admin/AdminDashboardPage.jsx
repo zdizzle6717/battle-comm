@@ -5,7 +5,8 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
-import BannerSlideManager from '../../pieces/BannerSlideManager';
+import BannerSlideManagement from '../../pieces/BannerSlideManagement';
+import RPDistributionManagement from '../../pieces/RPDistributionManagement';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
 import roleConfig from '../../../../roleConfig';
@@ -44,10 +45,14 @@ class AdminDashboardPage extends React.Component {
 						<AdminMenu></AdminMenu>
 						<hr/>
 					</div>
-					<AccessControl access={["systemAdmin"]}>
-						<BannerSlideManager></BannerSlideManager>
-					</AccessControl>
-                </div>
+				</div>
+				<AccessControl access={['venueAdmin']} element="div" customClasses="row">
+					<RPDistributionManagement></RPDistributionManagement>
+				</AccessControl>
+				<hr/>
+				<AccessControl access={['systemAdmin']} element="div" customClasses="row">
+					<BannerSlideManagement></BannerSlideManagement>
+				</AccessControl>
             </ViewWrapper>
         );
     }

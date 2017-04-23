@@ -107,6 +107,7 @@ let users = {
       'clubAdmin': request.pre.user.clubAdmin,
       'systemAdmin': request.pre.user.systemAdmin,
 			'accountActivated': request.pre.user.accountActivated,
+			'rewardPoints': request.pre.user.rewardPoints,
 			'UserPhoto': request.pre.user.UserPhoto
     }).code(201);
   },
@@ -468,6 +469,55 @@ let users = {
         console.log(err);
       });
   },
+  updateRP: (request, reply) => {
+    models.User.find({
+        'where': {
+          'id': request.params.id
+        }
+      })
+      .then((user) => {
+        if (user) {
+          user[request.payload.direction]({
+						'rewardPoints': request.payload.rewardPoints
+					}).then((user) => {
+						getUserModel({
+							'id': user.id
+						}).then((user) => {
+							user = user.get({'plain': true});
+
+							let basicUser = {
+								'id': user.id,
+								'username': user.username,
+								'firstName': user.firstName,
+								'lastName': user.lastName,
+								'rewardPoints': user.rewardPoints
+							};
+
+							let rpMailConfig = {
+                'from': env.email.user,
+                'to': user.email,
+                'subject': `Reward Point Update: New Total of ${user.rewardPoints}`,
+                'html': buildRPUpdateEmail(user)
+              };
+
+              transporter.sendMail(rpMailConfig, (error, info) => {
+                if (error) {
+                  console.log(error);
+                  reply(Boom.badRequest('Reward Point Email Failed.'));
+                }
+
+								reply(basicUser).code(200);
+              });
+
+						});
+					});
+        } else {
+          reply().code(404);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+  },
   // delete: (request, reply) => {
   //     models.UserLogin.destroy({
   //             'where': {
@@ -536,6 +586,37 @@ let users = {
           'pageSize': pageSize,
           'totalPages': totalPages,
           'totalResults': count
+        },
+        'results': results
+      }).code(200);
+    });
+  },
+	'searchSuggestions': (request, reply) => {
+    models.User.findAll({
+      'where': {
+        '$or': [{
+            'firstName': {
+              '$iLike': '%' + request.payload.searchQuery + '%'
+            }
+          },
+          {
+            'lastName': {
+              '$iLike': '%' + request.payload.searchQuery + '%'
+            }
+          },
+          {
+            'username': {
+              '$iLike': '%' + request.payload.searchQuery + '%'
+            }
+          }
+        ]
+      },
+      'attributes': ['id', 'firstName', 'lastName', 'username', 'rewardPoints'],
+      'limit': request.payload.maxResults
+    }).then((results) => {
+      reply({
+        'config': {
+          'maxResults': request.payload.maxResults
         },
         'results': results
       }).code(200);

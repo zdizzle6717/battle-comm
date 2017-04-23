@@ -32,6 +32,12 @@ export default {
 				return response.data;
 			});
 	},
+	searchSuggestions: (criteria) => {
+		return axios.post('/search/users/suggestions', criteria)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	resetPassword: (data) => {
 		return axios.post('/users/resetPassword/', data)
 			.then((response) => {
@@ -45,7 +51,13 @@ export default {
 			});
 	},
 	updateRole: (id, data) => {
-		return axios.post('/users/' + id + '/updateRole', data)
+		return axios.put('/users/' + id + '/updateRole', data)
+			.then((response) => {
+				return response.data;
+			});
+	},
+	updateRP: (id, data) => {
+		return axios.put('/users/' + id + '/updateRP', data)
 			.then((response) => {
 				return response.data;
 			});

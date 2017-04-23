@@ -43,9 +43,11 @@ module.exports = [
 			},
 			'validate': {
 				'payload': {
+					'index': Joi.optional(),
+					'actionText': Joi.string().required(),
+					'pageName': Joi.string().required(),
 					'title': Joi.string().required(),
 					'text': Joi.string().required(),
-					'pageName': Joi.string().required(),
 					'priority': Joi.number().required(),
 					'link': Joi.optional(),
 					'isActive': Joi.optional()
@@ -70,9 +72,11 @@ module.exports = [
 					'id': Joi.number().required()
 				},
 				'payload': {
+					'index': Joi.optional(),
+					'actionText': Joi.string().required(),
+					'pageName': Joi.string().required(),
 					'title': Joi.string().required(),
 					'text': Joi.string().required(),
-					'pageName': Joi.string().required(),
 					'priority': Joi.number().required(),
 					'link': Joi.optional(),
 					'isActive': Joi.optional()

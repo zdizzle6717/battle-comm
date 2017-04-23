@@ -48,7 +48,10 @@ class EditManufacturerPage extends React.Component {
 	componentDidMount() {
 		document.title = "Battle-Comm | Manufacturer Edit";
 		if (this.props.params.manufacturerId) {
-			this.getManufacturer(this.props.params.manufacturerId);
+			this.getManufacturer(this.props.params.manufacturerId).catch(() => {
+				this.showAlert('notFound');
+				browserHistory.push('/admin/manufacturers');
+			});
 		} else {
 			this.setState({
 				'newManufacturer': true
@@ -57,7 +60,7 @@ class EditManufacturerPage extends React.Component {
 	}
 
 	getManufacturer(manufacturerId) {
-		ManufacturerService.get(manufacturerId).then((manufacturer) => {
+		return ManufacturerService.get(manufacturerId).then((manufacturer) => {
 			this.setState({
 				'files': manufacturer.File ? [manufacturer.File] : [],
 				'manufacturer': manufacturer
@@ -65,7 +68,10 @@ class EditManufacturerPage extends React.Component {
 		});
 	}
 
-	handleDeleteFile(fileId) {
+	handleDeleteFile(fileId, e) {
+		if (e) {
+			e.preventDefault();
+		}
 		FileService.remove(fileId).then(() => {
 			this.showAlert('fileRemoved');
 		});
@@ -117,7 +123,7 @@ class EditManufacturerPage extends React.Component {
 				this.showAlert('manufacturerUpdated');
 				browserHistory.push('/admin/manufacturers');
 			} else {
-				this.getManufacturer(manufacturer.id);
+				browserHistory.push(`/admin/manufacturers/edit/${manufacturer.id}`);
 				this.showAlert('manufacturerCreated');
 			}
 		});
@@ -138,6 +144,14 @@ class EditManufacturerPage extends React.Component {
 					'title': 'New Manufacturer Added',
 					'message': `Manufacturer, ${this.state.manufacturer.name}, successfully updated`,
 					'type': 'success',
+					'delay': 3000
+				});
+			},
+			'notFound': () => {
+				this.props.addAlert({
+					'title': 'Manufacturer Not Found',
+					'message': `No manufacturer found with id, ${this.props.params.manufacturerId}`,
+					'type': 'error',
 					'delay': 3000
 				});
 			},

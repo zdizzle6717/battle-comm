@@ -36,7 +36,11 @@ class LoginPage extends React.Component {
         super();
 
         this.state = {
-            'credentials': {},
+            'credentials': {
+				'username': '',
+				'password': '',
+				'rememberMe': false
+			},
 			'showGameList': false
         }
 
@@ -58,7 +62,7 @@ class LoginPage extends React.Component {
 			}
 			this.setState({
 				'credentials': credentials
-			})
+			});
 		}
     }
 
@@ -69,7 +73,9 @@ class LoginPage extends React.Component {
 	}
 
 	handleInputChange(e) {
-		handlers.updateInput(e, this.state.credentials);
+		this.setState({
+			'credentials': handlers.updateInput(e, this.state.credentials)
+		});
 	}
 
 	handleSubmit(e) {
@@ -185,23 +191,23 @@ class LoginPage extends React.Component {
 									<div className="row">
 										<div className="form-group small-12 columns">
 											<label className="required">Username/Email</label>
-											<Input type="text" name="username" value={this.state.credentials.username || ''} handleInputChange={this.handleInputChange} validate="username" required={true} />
+											<Input type="text" name="username" value={this.state.credentials.username} handleInputChange={this.handleInputChange} validate="username" required={true}></Input>
 										</div>
 									</div>
 									<div className="row">
 										<div className="form-group small-12 columns">
 											<label className="required">Password</label>
-											<Input type="password" name="password" value={this.state.credentials.password || ''} handleInputChange={this.handleInputChange} validate="password" required={true} />
+											<Input type="password" name="password" value={this.state.credentials.password} handleInputChange={this.handleInputChange} validate="password" required={true}></Input>
 										</div>
 									</div>
 									<div className="row">
 										<div className="form-group small-12 columns">
-											<CheckBox name="rememberMe" value={this.state.newsPost.rememberMe} handleInputChange={this.handleCheckBoxChange} label="Remember my login?"/>
+											<CheckBox name="rememberMe" value={this.state.credentials.rememberMe} handleInputChange={this.handleCheckBoxChange} label="Remember my login?"></CheckBox>
 										</div>
 									</div>
 								</Form>
 								<div className="form-group small-12 columns text-right push-top">
-									<Link key="forgotPassword" to="/forgot-password" activeClassName="active" onClick={this.closeMenu}>Forgot your password? </Link>
+									<Link key="forgotPassword" to="/forgot-password" activeClassName="active">Forgot your password? </Link>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>

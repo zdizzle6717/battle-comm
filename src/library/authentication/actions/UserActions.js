@@ -93,6 +93,12 @@ export default {
 			});
 		};
 	},
+	modify: (data) => {
+		// Fix this to acknowlege localStorage and update user
+		return (dispatch) => {
+			dispatch(_returnResponse(UserConstants.UPDATE_USER, data));
+		};
+	},
 	remove: (id) => {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST, id));

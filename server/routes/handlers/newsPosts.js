@@ -30,7 +30,9 @@ let newsPosts = {
         'include': [{
           'model': models.User,
           'attributes': ['firstName', 'lastName']
-        }]
+        }, {
+					'model': models.File
+				}]
       })
       .then((response) => {
         reply(response).code(200);
@@ -39,6 +41,9 @@ let newsPosts = {
   create: (request, reply) => {
     models.NewsPost.create({
         'UserId': request.payload.UserId,
+        'GameSystemId': request.payload.GameSystemId,
+        'ManufacturerId': request.payload.ManufacturerId,
+        'FactionId': request.payload.FactionId,
         'title': request.payload.title,
         'callout': request.payload.callout,
         'body': request.payload.body,
@@ -63,6 +68,9 @@ let newsPosts = {
         if (newsPost) {
           newsPost.updateAttributes({
             'UserId': request.payload.UserId,
+            'GameSystemId': request.payload.GameSystemId,
+            'ManufacturerId': request.payload.ManufacturerId,
+            'FactionId': request.payload.FactionId,
             'title': request.payload.title,
             'callout': request.payload.callout,
             'body': request.payload.body,
@@ -122,14 +130,19 @@ let newsPosts = {
     } else {
       searchByConfig = {};
     }
+		if (request.payload.published) {
+			searchByConfig.published = true;
+		}
     models.NewsPost.findAndCountAll({
       'where': searchByConfig,
 			'order': orderBy ? [orderBy] : [],
       'offset': offset,
       'limit': pageSize,
-			'include': {
+			'include': [{
 				'model': models.User
-			}
+			}, {
+				'model': models.File
+			}]
     }).then((response) => {
       let count = response.count;
       let results = response.rows;

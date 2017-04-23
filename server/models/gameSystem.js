@@ -3,7 +3,6 @@ module.exports = function(sequelize, DataTypes) {
   var GameSystem = sequelize.define('GameSystem', {
     'name': DataTypes.STRING,
     'description': DataTypes.TEXT,
-    'searchKey': DataTypes.STRING,
     'url': DataTypes.STRING
   }, {
     'classMethods': {

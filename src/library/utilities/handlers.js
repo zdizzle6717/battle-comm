@@ -25,7 +25,7 @@ const updateSearchSuggestion = (event, suggestionKey, stateObj) => {
 		stateObj[event.target.name] = event.target.value;
 	}
 	return stateObj;
-}
+};
 
 export {
 	updateCheckBox,

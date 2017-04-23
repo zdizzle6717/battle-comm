@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import ViewWrapper from '../../ViewWrapper';
 import NewsPostService from '../../../services/NewsPostService';
 import {formatJSONDate} from '../../../library/utilities';
@@ -12,7 +12,8 @@ export default class NewsPostPage extends React.Component {
 
 		this.state = {
 			'post': {
-				'User': {}
+				'User': {},
+				'Files': []
 			}
 		}
     }
@@ -20,9 +21,13 @@ export default class NewsPostPage extends React.Component {
     componentDidMount() {
         document.title = "Battle-Comm | News Post";
 		NewsPostService.get(this.props.params.postId).then((post) => {
-			this.setState({
-				'post': post
-			})
+			if (!post.published) {
+				browserHistory.push('/news');
+			} else {
+				this.setState({
+					'post': post
+				});
+			}
 		})
     }
 
@@ -35,15 +40,18 @@ export default class NewsPostPage extends React.Component {
 						<div className="news-post">
 							<div className="row">
 								<div className="small-6 medium-3 columns"><strong>Author:</strong> {post.User.firstName} {post.User.lastName}</div>
-								<div className="small-6 medium-3 columns"><strong>Date:</strong> {formatJSONDate(post.updated_at)}</div>
+								<div className="small-6 medium-3 columns"><strong>Date:</strong> {formatJSONDate(post.updatedAt)}</div>
 								<div className="small-6 medium-3 columns"><strong>Category:</strong> {post.category}</div>
 							</div>
 							<div className="summary push-top">
-								<img src="/uploads/news/missing.jpg" />
+								{
+									post.Files.length > 0 &&
+									<img src={`/uploads/${post.Files[0].locationUrl}${post.Files[0].name}`} />
+								}
 								{post.body}
 							</div>
 							<div className="row push-top">
-								<div className="small-12 columns"><strong>Tags:</strong> {post.tags}</div>
+								<div className="small-12 columns text-center"><strong>Tags:</strong> {post.tags}</div>
 							</div>
 							<div className="row">
 								<div className="small-12 columns text-right">

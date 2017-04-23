@@ -67,7 +67,10 @@ class EditGameSystemPage extends React.Component {
         document.title = "Battle-Comm | Game System Edit";
 		this.props.getManufacturers();
 		if (this.props.params.gameSystemId) {
-			this.getGameSystem(this.props.params.gameSystemId);
+			this.getGameSystem(this.props.params.gameSystemId).catch(() => {
+				browserHistory.push('/admin/game-systems');
+				this.showAlert('notFound');
+			});
 		} else {
 			this.setState({
 				'newGameSystem': true
@@ -76,7 +79,7 @@ class EditGameSystemPage extends React.Component {
     }
 
 	getGameSystem(gameSystemId) {
-		GameSystemService.get(gameSystemId).then((gameSystem) => {
+		return GameSystemService.get(gameSystemId).then((gameSystem) => {
 			this.setState({
 				'gameSystem': gameSystem,
 				'files': gameSystem.File ? [gameSystem.File] : []
@@ -160,7 +163,7 @@ class EditGameSystemPage extends React.Component {
 				this.showAlert('gameSystemUpdated');
 				browserHistory.push('/admin/game-systems');
 			} else {
-				this.getGameSystem(gameSystem.id);
+				browserHistory.push(`/admin/game-systems/edit/${gameSystem.id}`);
 				this.showAlert('gameSystemCreated');
 			}
 		});
@@ -222,6 +225,14 @@ class EditGameSystemPage extends React.Component {
 					'title': 'New Game System Added',
 					'message': `Game System, ${this.state.gameSystem.name}, successfully updated`,
 					'type': 'success',
+					'delay': 3000
+				});
+			},
+			'notFound': () => {
+				this.props.addAlert({
+					'title': 'System Not Found',
+					'message': `No game system found with id, ${this.props.params.gameSystemId}`,
+					'type': 'error',
 					'delay': 3000
 				});
 			},
@@ -296,15 +307,11 @@ class EditGameSystemPage extends React.Component {
 									</div>
 								</div>
 								<div className="row">
-									<div className="form-group small-12 medium-4 columns">
+									<div className="form-group small-12 medium-6 columns">
 										<label>Url to Related Webpage</label>
 										<Input type="text" name="url" value={this.state.gameSystem.url} handleInputChange={this.handleInputChange} />
 									</div>
-									<div className="form-group small-12 medium-4 columns">
-										<label className="required">Search Key</label>
-										<Input type="text" name="searchKey" value={this.state.gameSystem.searchKey} handleInputChange={this.handleInputChange} required={true} />
-									</div>
-									<div className="form-group small-12 medium-4 columns">
+									<div className="form-group small-12 medium-6 columns">
 										<label>Description</label>
 										<TextArea name="description" value={this.state.gameSystem.description} handleInputChange={this.handleInputChange} rows="3"/>
 									</div>

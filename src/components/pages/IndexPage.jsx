@@ -40,10 +40,10 @@ class IndexPage extends React.Component {
 					'text': 'Battle-Comm is your new source for connection with the table-top gaming community. Play table-top at participating game shops, compete in tournaments, earn Reward Points, and exchange them for new merch.',
 					'link': '/login',
 					'actionText': 'Sign Up',
-					'Files': [{
+					'File': {
 						'locationUrl': '/banner/',
 						'name': 'logo.png'
-					}]
+					}
 				}
 			],
 			'showGameList': false
@@ -71,9 +71,9 @@ class IndexPage extends React.Component {
 				$(function() {
 					$('#da-slider').cslider({
 						current: 0, // index of current slide
-					    bgincrement: 20, // increment the bg position (parallax effect) when sliding
-					    autoplay: true, // slideshow on / off
-					    interval: 4000 // time between transitions
+						bgincrement: 20, // increment the bg position (parallax effect) when sliding
+						autoplay: true, // slideshow on / off
+						interval: 4000 // time between transitions
 					});
 				});
 			});
@@ -114,8 +114,8 @@ class IndexPage extends React.Component {
 												<div key={i} className="da-slide">
 													<h2>{slide.title}</h2>
 													<p>{slide.text}</p>
-													<a href={slide.link} className="da-link">{slide.actionText}</a>
-													<div className="da-img"><img src={`/uploads${slide.Files[0].locationUrl}${slide.Files[0].name}`} alt="image01" /></div>
+													<Link to={slide.link} className="da-link">{slide.actionText}</Link>
+													<div className="da-img"><img src={`/uploads/${slide.File.locationUrl}${slide.File.name}`} alt="image01" /></div>
 												</div>
 											)
 										}

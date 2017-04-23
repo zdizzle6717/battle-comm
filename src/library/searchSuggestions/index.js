@@ -18,6 +18,7 @@ export default function(Service, method) {
 
 	let _skipSearch = false;
 	let _selectedSuggestion = null;
+	let _timer;
 
 	function configureSuggestion(displayKeys, suggestion) {
 		let formattedSuggestion = '';
@@ -58,6 +59,10 @@ export default function(Service, method) {
 			})
 		}
 
+		componentWillUnmount() {
+			clearTimeout(_timer);
+		}
+
 		handleClickAway() {
 			this.setState({
 				'inputString': this.state.storedInputString,
@@ -78,18 +83,23 @@ export default function(Service, method) {
 				if (!Service[method]) {
 					throw new Error('Library searchSuggestions: No service was found with the supplied method name');
 				}
-				Service[method]({"searchQuery": value, "maxResults": this.props.maxResults}).then((response) => {
-					let showSuggestions = false;
-					let suggestions = [];
-					if (response.results.length > 0 && value.length >= this.props.minCharacters) {
-						suggestions = response.results;
-						showSuggestions = true;
-					};
-					this.setState({
-						'showSuggestions': showSuggestions,
-						'suggestions': suggestions
-					})
-				});
+				if (_timer) {
+					clearTimeout(_timer);
+				}
+				_timer = setTimeout(() => {
+					Service[method]({"searchQuery": value, "maxResults": this.props.maxResults}).then((response) => {
+						let showSuggestions = false;
+						let suggestions = [];
+						if (response.results.length > 0 && value.length >= this.props.minCharacters) {
+							suggestions = response.results;
+							showSuggestions = true;
+						};
+						this.setState({
+							'showSuggestions': showSuggestions,
+							'suggestions': suggestions
+						});
+					});
+				}, this.state.timeoutBuffer);
 			} else {
 				_skipSearch = false;
 			}
@@ -243,14 +253,16 @@ export default function(Service, method) {
 		'name': PropTypes.string.isRequired,
 		'required': PropTypes.bool,
 		'rowCount': PropTypes.number,
+		'timeoutBuffer': PropTypes.number,
 		'validate': PropTypes.string
 	}
 
 	SearchSuggestions.defaultProps = {
-		'maxResults': 10,
+		'maxResults': 15,
 		'minCharacters': 3,
 		'required': false,
-		'rowCount': 4
+		'rowCount': 4,
+		'timeoutBuffer': 500
 	}
 
 	return SearchSuggestions;

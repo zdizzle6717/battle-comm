@@ -43,10 +43,11 @@ module.exports = [
       },
       'validate': {
         'payload': {
+					'Factions': Joi.optional(),
+					'File': Joi.optional(),
           'ManufacturerId': Joi.number().required(),
           'name': Joi.string().required(),
           'description': Joi.optional(),
-          'searchKey': Joi.string().required(),
           'url': Joi.optional()
         }
       }
@@ -78,7 +79,6 @@ module.exports = [
           'ManufacturerId': Joi.number().required(),
           'name': Joi.string().required(),
           'description': Joi.optional(),
-          'searchKey': Joi.string().required(),
           'url': Joi.optional()
         }
       }

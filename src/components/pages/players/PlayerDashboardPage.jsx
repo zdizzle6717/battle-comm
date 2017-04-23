@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {AlertActions} from '../../../library/alerts';
+import {UserActions} from '../../../library/authentication';
+import {FormActions} from '../../../library/validations';
 import Modal from '../../../library/modal';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers, uploadFiles} from '../../../library/utilities';
@@ -23,7 +25,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		'addAlert': AlertActions.addAlert
+		'addAlert': AlertActions.addAlert,
+		'modifyUser': UserActions.modify,
+		'resetForm': FormActions.resetForm
 	}, dispatch);
 }
 
@@ -102,11 +106,11 @@ class PlayerDashboardPage extends React.Component {
 			UserPhotoService[method]((iconFile ? iconFile.id : file), (iconFile ? file : null)).then((file) => {
 				console.log(file);
 				this.getCurrentPlayer().then(() => {
-					// TODO: Reset File Upload input so user isn't blocked from uploading new file
 					this.setState({
 						'fileUploadIcon': []
 					});
 					this.showAlert('uploadSuccess');
+					this.props.resetForm('playerIconForm');
 				});
 			});
 		});
@@ -127,6 +131,7 @@ class PlayerDashboardPage extends React.Component {
 			this.setState({
 				'currentUser': currentUser
 			});
+			this.props.modifyUser(currentUSer);
 		});
 	}
 
@@ -154,9 +159,7 @@ class PlayerDashboardPage extends React.Component {
 	}
 
 	handlePlayerIconUpload(files) {
-		// TODO: Make sure that only first file gets uploaded
-		// TODO: Added file size and image dimensions check to server, handle on UI
-		// TODO: Update user props so icon updates in header
+		// TODO: Add file size and image dimensions check to server, handle on UI
 		if (this.state.currentUser.UserPhoto) {
 			UserPhotoService.remove(this.state.currentUser.UserPhoto.id).then(() => {
 				this.createUserPhoto(files);
@@ -191,6 +194,7 @@ class PlayerDashboardPage extends React.Component {
 					'photoStream': photos
 				});
 				this.showAlert('uploadSuccess');
+				this.props.resetForm('photoStreamUploadForm');
 			});
 		});
 	}

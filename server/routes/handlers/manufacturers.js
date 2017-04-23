@@ -36,7 +36,6 @@ let manufacturers = {
   create: (request, reply) => {
     models.Manufacturer.create({
         'name': request.payload.name,
-        'searchKey': request.payload.searchKey,
         'description': request.payload.description,
         'photo': request.payload.photo,
         'url': request.payload.url
@@ -55,7 +54,6 @@ let manufacturers = {
         if (newsPost) {
           newsPost.updateAttributes({
             'name': request.payload.name,
-            'searchKey': request.payload.searchKey,
             'description': request.payload.description,
             'photo': request.payload.photo,
             'url': request.payload.url

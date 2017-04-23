@@ -7,7 +7,7 @@ function buildTemplate(data) {
 				<h1 style="font-size:40px; font-size:40px; padding-bottom:5px; margin-top:15px;  border-bottom:1px solid #cacaca;">Your Reward Points Have Changed!</h1>
 				<h2 style="font-size:28px">Either an admin has added points to your account, or you have made a recent purchase.</h2>
 
-				<h2 style="font-size:28px; text-align:center">Current Total: ${data.rewardPoints} Reward Points</h2>
+				<h2 style="font-size:28px; text-align:center">Remaining Total: ${data.rewardPoints} Reward Points</h2>
 			</div>
 
 			<div style="text-align:center; border-top:1px solid #cacaca; padding:20px 0 0;">
