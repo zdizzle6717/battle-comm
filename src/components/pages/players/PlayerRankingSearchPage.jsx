@@ -54,8 +54,6 @@ class PlayerRankingSearchPage extends React.Component {
 		this.props.getGameSystems();
 
 		if (this.props.params.gameSystemId === 'all') {
-			// TODO: Search all player ranking (might need a new endpoint)
-			// OR: Don't search, display select options for gameSystem/Faction
 		} else {
 			this.props.getGameSystem(this.props.params.gameSystemId).then((gameSystem) => {
 				this.setState({

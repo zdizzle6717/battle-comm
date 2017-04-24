@@ -28,8 +28,6 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
-// TODO: Properly reset form fields
-
 let timer;
 
 class RPDistributionManagement extends React.Component {

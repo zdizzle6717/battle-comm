@@ -131,7 +131,7 @@ class PlayerDashboardPage extends React.Component {
 			this.setState({
 				'currentUser': currentUser
 			});
-			this.props.modifyUser(currentUSer);
+			this.props.modifyUser(currentUser);
 		});
 	}
 
@@ -159,7 +159,6 @@ class PlayerDashboardPage extends React.Component {
 	}
 
 	handlePlayerIconUpload(files) {
-		// TODO: Add file size and image dimensions check to server, handle on UI
 		if (this.state.currentUser.UserPhoto) {
 			UserPhotoService.remove(this.state.currentUser.UserPhoto.id).then(() => {
 				this.createUserPhoto(files);

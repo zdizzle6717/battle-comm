@@ -1,9 +1,6 @@
 let imageConfig = {
 	'playerIcon': {
-		'size': {
-			'small': 100,
-			'medium': 300
-		}
+		'sizes': [100, 300]
 	}
 };
 

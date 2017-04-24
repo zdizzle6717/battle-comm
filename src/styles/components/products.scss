@@ -1,24 +1,90 @@
 .product-listing {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
 
 	.product-box {
 		float: left;
 		border: 2px solid $white;
+		background: white;
 		box-sizing: border-box;
 		width: 100%;
-		max-width: 33.1333%;
-		margin-right: 2%;
+		max-width: 33.2333%;
+		box-shadow: $shadow-1;
 
-		.flipper {
-			.front {
+		.flip-container {
+			width: 100%;
+			height: 415px;
 
-				&:hover {
-					display: none;
+			.flipper {
+				transition: .6s;
+				transform-style: preserve-3d;
+				position: relative;
+				display: block;
+
+				.front,
+				.back {
+					position: absolute;
+					top: 0;
+					left: 0;
+					backface-visibility: hidden;
+					transform-style: preserve-3d;
+					transition: .6s;
+					width: 100%;
 				}
+
+				.front {
+					z-index: 2;
+					transform: rotateY(0deg);
+				}
+
+				.back {
+					transform: rotateY(-180deg);
+				}
+			}
+		}
+
+		.actions {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			.button {
+				width: 49%;
+				font-size: .875rem;
+				white-space: nowrap;
+			}
+		}
+
+		&:hover {
+			.front {
+				transform: rotateY(180deg) !important;
+				z-index: 1;
 			}
 
 			.back {
-				display: none;
+				transform: rotateY(0deg) !important;
+				z-index: 2;
+				cursor: pointer;
 			}
+		}
+	}
+}
+
+@include breakpoint(medium down) {
+	.product-listing {
+		.product-box {
+			max-width: 48%;
+		}
+	}
+}
+
+@include breakpoint(small only) {
+	.product-listing {
+		.product-box {
+			max-width: 96%;
 		}
 	}
 }

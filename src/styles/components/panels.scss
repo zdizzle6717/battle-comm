@@ -1,7 +1,7 @@
 @mixin panel($base-color, $index: 0) {
 	@if ($index < 5) {
 		.panel {
-			@include box-shadow($index + 1);
+			box-shadow: $shadow-1;
 			border: none;
 			background: $base-color;
 			padding: 0;

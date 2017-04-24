@@ -14,8 +14,6 @@ import roleConfig from '../../../roleConfig';
 import createAccessControl from '../../library/authentication/components/AccessControl';
 const AccessControl = createAccessControl(roleConfig);
 
-// TODO: Find a way to correctly clear form
-
 const mapStateToProps = (state) => {
 	return {
 		'slides': state.bannerSlides

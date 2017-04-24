@@ -64,36 +64,36 @@ let userPhotos = {
       } else {
 				// Delete files
         models.UserPhoto.destroy({
-            'where': {
-              'id': request.params.id
-            }
-          })
-          .then((userPhoto) => {
-						// TODO: use imageConfig constant to clean this up and delete
-            if (userPhoto) {
-							fse.unlink(locationUrl, (err) => {
-								if (err) {
-									reply(Boom.badRequest('Error deleting user photo file.'));
-								} else {
-									fse.unlink(`${locationPath}/${imageConfig.playerIcon.size.small}-${fileName}`, (err) => {
-										if (err) {
-											reply(Boom.badRequest('Error deleting user photo file.'));
+          'where': {
+            'id': request.params.id
+          }
+        })
+        .then((file) => {
+          if (file) {
+						fse.unlink(locationUrl, (err) => {
+							if (err) {
+								reply(Boom.badRequest('Error deleting user photo file.'));
+							} else {
+								let count = 0;
+								imageConfig[userPhoto.identifier].sizes.forEach((size) => {
+									fse.unlink(`${locationPath}/${size}-${fileName}`, (error) => {
+										if (error) {
+											console.log(error);
+											reply(Boom.badRequest(error));
 										} else {
-											fse.unlink(`${locationPath}/${imageConfig.playerIcon.size.medium}-${fileName}`, (err) => {
-												if (err) {
-													reply(Boom.badRequest('Error deleting user photo file.'));
-													return;
-												}
+											count++;
+											if (count >= imageConfig[userPhoto.identifier].sizes.length) {
 												reply().code(200);
-											});
+											}
 										}
 									});
-								}
-							});
-            } else {
-              reply().code(404);
-            }
-          });
+								});
+							}
+						});
+          } else {
+            reply().code(404);
+          }
+        });
       }
     });
   }

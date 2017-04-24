@@ -32,7 +32,6 @@ const authorizedRoute = (authorizedRoutesConfig, destination) => {
 		destArray = replaceParams(destArray, routeParamIndexes, '*');
 		let routePath = routeArray.join('/');
 		destPath = destArray.join('/');
-		// TODO: Test that route with params and wild card works
 		if (routePath.slice(-2) === '**') {
 			if (destPath.includes(routePath.substring(0, routePath.length - 2))) {
 				foundRoute = route;

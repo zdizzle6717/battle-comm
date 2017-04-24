@@ -64,7 +64,6 @@ class CheckoutPage extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		// TODO: Configure product details array
 		ProductOrderService.create(this.state.productOrder).then((response) => {
 			console.log(response);
 			this.showAlert('orderSuccess');

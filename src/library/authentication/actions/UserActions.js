@@ -94,7 +94,12 @@ export default {
 		};
 	},
 	modify: (data) => {
-		// TODO: Fix this to acknowlege localStorage and update user
+		// TODO: Test that this works as expected
+		let currentUser = JSON.parse(localStorage.getItem('user'));
+		if (currentUser) {
+			Object.assign(currentUser, data);
+			sessionStorage.setItem('user', JSON.stringify(currentUser));
+		}
 		return (dispatch) => {
 			dispatch(_returnResponse(UserConstants.UPDATE_USER, data));
 		};

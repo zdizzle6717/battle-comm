@@ -20,9 +20,6 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch)
 }
 
-// TODO: Investigate clearing forms
-// Add a clear form method
-
 class Form extends React.Component {
 	constructor() {
         super();

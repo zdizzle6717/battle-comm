@@ -7,6 +7,7 @@ import imageConfig from '../../constants/imageConfig';
 import Boom from 'boom';
 import im from 'imagemagick-stream';
 
+// TODO: Switch to npm package 'gm' for image modification
 // TODO: Figure out why imagemagick-stream is not properly resizing images
 
 // File Upload Route Configs
@@ -66,18 +67,16 @@ let files = {
     if (!data.path || !data.fileSize) {
       reply(Boom.badRequest(`A 'path' and 'fileSize' attribute must be appended to the FormData object`));
     } else if (data.file) {
-      let resizeArray;
-			// TODO: Use imageConfig constant to set all image resizes
+
+			// Handle any image resizing and duplication here
+      let resizeArray = [];
       if (data.identifier === 'playerIcon') {
-        resizeArray = [].concat(
-          [{
-            'name': `${imageConfig.playerIcon.size.small}-${data.file.hapi.filename}`,
-            'resize': im().resize(`${imageConfig.playerIcon.size.small}x${imageConfig.playerIcon.size.small}`).quality(100)
-          }], [{
-            'name': `${imageConfig.playerIcon.size.medium}-${data.file.hapi.filename}`,
-            'resize': im().resize(`${imageConfig.playerIcon.size.medium}x${imageConfig.playerIcon.size.medium}`).quality(100)
-          }]
-        );
+				imageConfig[data.identifier].sizes.forEach((size) => {
+					resizeArray.push({
+						'name': `${size}-${data.file.hapi.filename}`,
+						'resize': im().resize(`${size}x${size}!`).quality(100)
+					});
+				});
       }
 
       let filename = data.file.hapi.filename;
@@ -114,7 +113,7 @@ let files = {
             'statusText': 'File uploaded successfully!'
           };
 
-          if (resizeArray) {
+          if (resizeArray.length > 0) {
 						let count = 0;
             resizeArray.forEach((resizeConfig) => {
               let read = fse.createReadStream(path);
@@ -188,23 +187,41 @@ let files = {
       } else {
 				let locationUrl = __dirname + '/../../..' + env.uploadPath + file.locationUrl + file.name;
         models.File.destroy({
-            'where': {
-              'id': request.params.id
-            }
-          })
-          .then((file) => {
-            if (file) {
-							fse.unlink(locationUrl, (err) => {
-								if (err) {
-									reply(Boom.badRequest('Error deleting  file.'));
-									return;
-								}
+          'where': {
+            'id': request.params.id
+          }
+        })
+        .then((fileDeleted) => {
+          if (fileDeleted) {
+						fse.unlink(locationUrl, (err) => {
+							if (err) {
+								reply(Boom.badRequest('Error deleting file.'));
+								return;
+							}
+
+							// TODO: Add any file that gets duplicated and resized along with resizeConfig
+							if (file.identifier === 'something') {
+								let count = 0;
+								imageConfig[file.identifier].sizes.forEach((size) => {
+									fse.unlink(`${locationPath}/${size}-${fileName}`, (error) => {
+										if (error) {
+											console.log(error);
+											reply(Boom.badRequest(error));
+										} else {
+											count++;
+											if (count >= imageConfig[file.identifier].sizes.length) {
+												reply().code(200);
+											}
+										}
+									});
+								});
+							} else {
 								reply().code(200);
-							});
-            } else {
-              reply().code(404);
-            }
-          });
+							}
+						});
+            reply().code(404);
+          }
+        });
       }
     });
   }
