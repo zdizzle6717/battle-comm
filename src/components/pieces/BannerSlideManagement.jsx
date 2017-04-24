@@ -44,59 +44,52 @@ class BannerSlideManagement extends React.Component {
 			},
 			'files': [],
 			'newFiles': [],
-			'slidePendingDeletion': undefined
+			'slidePendingDeletion': undefined,
+			'formIsActive': false
 		}
 
 		this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
+		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleDeleteSlide = this.handleDeleteSlide.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.clearSlideForm = this.clearSlideForm.bind(this);
-		this.nullifyCurrentSlide = this.nullifyCurrentSlide.bind(this);
+		this.resetForm = this.resetForm.bind(this);
 		this.showAlert = this.showAlert.bind(this);
 		this.toggleDeleteSlideModal = this.toggleDeleteSlideModal.bind(this);
 		this.uploadFiles = this.uploadFiles.bind(this);
     }
 
     componentDidMount() {
-		this.props.getSlides().then((slides) => {
-			let files = [];
-			slides.forEach((slide) => {
-				if (slide.File) {
-					files.push([slide.File]);
-				} else {
-					files.push([]);
-				}
-			});
-			this.setState({
-				'files': files
-			});
-		});
+		this.props.getSlides();
     }
-
-	clearSlideForm(e) {
-		e.preventDefault();
-		this.nullifyCurrentSlide();
-	}
 
 	editSlide(index) {
 		let slide = this.props.slides[index]
 		slide.index = index;
 		this.setState({
-			'currentSlide': slide
+			'formIsActive': true,
+			'currentSlide': slide,
+			'files': slide.File ? [slide.File] : []
 		});
+	}
+
+	handleDeleteFile(fileId, e) {
+		return;
 	}
 
 	handleDeleteSlide(e) {
 		e.preventDefault();
 		this.props.deleteSlide(this.state.slidePendingDeletion.id).then((slide) => {
-			if (this.state.slidePendingDeletion.id === this.state.currentSlide.id) {
-				this.nullifyCurrentSlide();
-			}
 			let files = this.state.files;
-			FileService.remove(file[index].id).then(() => {
+			FileService.remove(this.state.slidePendingDeletion.File.id).then(() => {
+				if (this.state.slidePendingDeletion.id === this.state.currentSlide.id) {
+					this.resetForm(false);
+				}
 				files.splice(this.state.slidePendingDeletion.index, 1);
+				this.setState({
+					'deleteSlideModalIsActive': false
+				});
 				this.showAlert('slideDeleted');
 			});
 		});
@@ -150,16 +143,6 @@ class BannerSlideManagement extends React.Component {
 					'name': newFiles[0].name,
 					'size': newFiles[0].size,
 					'type': newFiles[0].type
-				}).then((file) => {
-					let files = this.state.files;
-					if (files[this.state.currentSlide.index]) {
-						files[this.state.currentSlide.index] = file
-					} else {
-						files.push(file);
-					}
-					this.setState({
-						'files': files
-					})
 				});
 			}
 			this.setState({
@@ -170,16 +153,29 @@ class BannerSlideManagement extends React.Component {
 			} else {
 				this.showAlert('slideCreated');
 			}
-			this.nullifyCurrentSlide();
+			this.resetForm(false);
 		});
 	}
 
-	nullifyCurrentSlide() {
+	resetForm(showForm = false, e) {
+		if (e) {
+			e.preventDefault();
+		}
 		this.setState({
 			'currentSlide': {
 				'id': undefined,
-				'title': undefined,
-				'newSlides': []
+				'isActive': true,
+				'index': undefined
+			},
+			'files': [],
+			'formIsActive': false
+		}, () => {
+			if (showForm) {
+				setTimeout(() => {
+					this.setState({
+						'formIsActive': true
+					});
+				});
 			}
 		});
 	}
@@ -232,11 +228,13 @@ class BannerSlideManagement extends React.Component {
 	}
 
 	toggleDeleteSlideModal(slide, index) {
-		slide.index = index;
-		this.setState({
-			'slidePendingDeletion': slide,
-			'deleteSlideModalIsActive': !this.state.deleteSlideModalIsActive
-		});
+		if (slide && index) {
+			slide.index = index;
+			this.setState({
+				'slidePendingDeletion': slide,
+				'deleteSlideModalIsActive': !this.state.deleteSlideModalIsActive
+			});
+		}
 	}
 
 	uploadFiles(files) {
@@ -267,19 +265,22 @@ class BannerSlideManagement extends React.Component {
 										<td>{slide.priority}</td>
 										<td>{slide.title}</td>
 										<td>{formatJSONDate(slide.updatedAt)}</td>
-										<td>
+										<td className="action-items">
 											<div className="action-item">
 												<span className="action" onClick={this.editSlide.bind(this, i)}>
 													<i className="tip-icon fa fa-pencil"></i>
 												</span>
 												<span className="mobile-text">Edit</span>
 											</div>
-											<div className="action-item" >
-												<span className="action" onClick={this.toggleDeleteSlideModal.bind(this, slide, i)}>
-													<i className="tip-icon fa fa-times"></i>
-												</span>
-												<span className="mobile-text">Delete</span>
-											</div>
+											{
+												slide.File &&
+												<div className="action-item">
+													<span className="action" onClick={this.toggleDeleteSlideModal.bind(this, slide, i)}>
+														<i className="tip-icon fa fa-times"></i>
+													</span>
+													<span className="mobile-text">Delete</span>
+												</div>
+											}
 										</td>
 									</tr>
 								)
@@ -291,80 +292,76 @@ class BannerSlideManagement extends React.Component {
 				<hr/>
 				<h2>{this.state.currentSlide.id ? 'Edit Slide' : 'Add New Slide'}</h2>
 				<div className="small-12 columns">
-					<Form name="slideForm" submitText={this.state.currentSlide.id ? 'Update Slide' : 'Save New Slide'} handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 medium-3 columns">
-								<label className="required">Title</label>
-								<Input type="text" name="title" value={this.state.currentSlide.title} handleInputChange={this.handleInputChange} required={true} />
+					{
+						this.state.formIsActive &&
+						<Form name="slideForm" submitText={this.state.currentSlide.id ? 'Update Slide' : 'Save New Slide'} handleSubmit={this.handleSubmit}>
+							<div className="row">
+								<div className="form-group small-12 medium-3 columns">
+									<label className="required">Title</label>
+									<Input type="text" name="title" value={this.state.currentSlide.title} handleInputChange={this.handleInputChange} required={true} />
+								</div>
+								<div className="form-group small-12 medium-2 columns">
+									<label className="required">Priority (slide order)</label>
+									<Input type="number" name="priority" value={this.state.currentSlide.priority} handleInputChange={this.handleInputChange} required={true} />
+								</div>
+								<div className="form-group small-12 medium-3 columns">
+									<label className="required">Show in Slideshow?</label>
+									<Select type="text" name="isActive" value={this.state.currentSlide.isActive} handleInputChange={this.handleInputChange} required={true}>
+										<option value="true">Yes</option>
+										<option value="false">No</option>
+									</Select>
+								</div>
+								<div className="form-group small-12 medium-4 columns">
+									<label className="required">Link (External links must start with //)</label>
+									<Input type="text" name="link" value={this.state.currentSlide.link} handleInputChange={this.handleInputChange} required={true} />
+								</div>
 							</div>
-							<div className="form-group small-12 medium-2 columns">
-								<label className="required">Priority (slide order)</label>
-								<Input type="number" name="priority" value={this.state.currentSlide.priority} handleInputChange={this.handleInputChange} required={true} />
+							<div className="row">
+								<div className="form-group small-12 medium-4 columns">
+									<label className="required">Action Text</label>
+									<Input type="text" name="actionText" value={this.state.currentSlide.actionText} handleInputChange={this.handleInputChange} required={true} />
+								</div>
+								<div className="form-group small-12 medium-3 columns">
+									<label className="required">Slideshow Page Name</label>
+									<Input type="text" name="pageName" value={this.state.currentSlide.pageName || 'home'} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
+								</div>
+								<div className="form-group small-12 medium-5 columns">
+									<label className="required">Callout Text</label>
+									<TextArea type="text" name="text" value={this.state.currentSlide.text} handleInputChange={this.handleInputChange} rows="3" required={true}></TextArea>
+								</div>
 							</div>
-							<div className="form-group small-12 medium-3 columns">
-								<label className="required">Show in Slideshow?</label>
-								<Select type="text" name="isActive" value={this.state.currentSlide.isActive} handleInputChange={this.handleInputChange} required={true}>
-									<option value="true">Yes</option>
-									<option value="false">No</option>
-								</Select>
-							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Link</label>
-								<Input type="text" name="link" value={this.state.currentSlide.link} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-4 columns">
-								<label className="required">Action Text</label>
-								<Input type="text" name="actionText" value={this.state.currentSlide.actionText} handleInputChange={this.handleInputChange} required={true} />
-							</div>
-							<div className="form-group small-12 medium-3 columns">
-								<label className="required">Slideshow Page Name</label>
-								<Input type="text" name="pageName" value={this.state.currentSlide.pageName || 'home'} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
-							</div>
-							<div className="form-group small-12 medium-5 columns">
-								<label className="required">Callout Text</label>
-								<TextArea type="text" name="text" value={this.state.currentSlide.text} handleInputChange={this.handleInputChange} rows="3" required={true}></TextArea>
-							</div>
-						</div>
-						<div className="row">
-							<div className="small-12 medium-4 columns">
-								<label>Banner Image</label>
-								{
-									this.state.currentSlide.index &&
-									<div>
-										{
-											this.state.files[this.state.currentSlide.index].length > 0 && this.state.files[this.state.currentSlide.index][0].id &&
-											<img src={`/uploads/${this.state.files[this.state.currentSlide.index][0].locationUrl}${this.state.files[this.state.currentSlide.index][0].name}`} />
-										}
-									</div>
-								}
-							</div>
-							<div className="small-12 medium-4 columns">
-								<label>Image Name</label>
-								{
-									this.state.currentSlide.index &&
+							<div className="row">
+								<div className="small-12 medium-4 columns">
+									<label>Banner Image</label>
+									{
+										this.state.files[0] &&
+										<div>
+											{
+												this.state.files.length > 0 && this.state.files[0].id &&
+												<img src={`/uploads/${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
+											}
+										</div>
+									}
+								</div>
+								<div className="small-12 medium-4 columns">
+									<label>Image Name</label>
 									<div>
 										{
 											this.state.files.length > 0 &&
-											<h6>{this.state.files[this.state.currentSlide.index][0].name}</h6>
-										}
-										{
-											this.state.files[this.state.currentSlide.index].length > 0 && this.state.files[this.state.currentSlide.index][0].id &&
-											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[this.state.currentSlide.index][0].id)}>Delete File?</button>
+											<h6>{this.state.files[0].name}</h6>
 										}
 									</div>
-								}
+								</div>
+								<div className="form-group small-12 medium-4 columns">
+									<label>Upload File</label>
+									<FileUpload name="slidePhoto" value={this.state.files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" maxFiles={1} required={1}/>
+								</div>
 							</div>
-							<div className="form-group small-12 medium-4 columns">
-								<label>Upload File</label>
-								<FileUpload name="slidePhoto" value={this.state.files[this.state.currentSlide.index]} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" maxFiles={1} required={1}/>
-							</div>
-						</div>
-					</Form>
-					<button className="button info" onClick={this.clearSlideForm}><span className="fa fa-plus"></span> Add New Slide</button>
+						</Form>
+					}
+					<button className="button info" onClick={this.resetForm.bind(this, true)}><span className="fa fa-plus"></span> Add New Slide</button>
 				</div>
-				<Modal name="deleteSlideModalIsActive" title="Delete Slide" modalIsOpen={this.state.deleteSlideModalIsActive} handleClose={this.toggleDeleteSlideModal} showClose={true} handleSubmit={this.handleDeleteSlide} confirmText="Delete Permanently">
+				<Modal name="deleteSlideModalIsActive" title="Delete Slide" modalIsOpen={this.state.deleteSlideModalIsActive} handleClose={this.toggleDeleteSlideModal.bind(this)} showClose={true} handleSubmit={this.handleDeleteSlide} confirmText="Delete Permanently">
 					Are you sure you want to delete this slide?
 				</Modal>
 			</div>

@@ -42,8 +42,17 @@ let bannerSlides = {
         'link': request.payload.link,
         'isActive': request.payload.isActive
       })
-      .then((response) => {
-        reply(response).code(200);
+      .then((slide) => {
+				models.BannerSlide.find({
+					'where': {
+						'id': slide.id
+					},
+					'include': {
+						'model': models.File
+					}
+				}).then((slide) => {
+					reply(slide).code(200);
+				});
       });
   },
   update: (request, reply) => {
@@ -62,9 +71,18 @@ let bannerSlides = {
 		        'priority': request.payload.priority,
 		        'link': request.payload.link,
 		        'isActive': request.payload.isActive
-          }).then((response) => {
-            reply(response).code(200);
-          });
+          }).then((slide) => {
+						models.BannerSlide.find({
+							'where': {
+								'id': slide.id
+							},
+							'include': {
+								'model': models.File
+							}
+						}).then((slide) => {
+							reply(slide).code(200);
+						});
+		      });
         } else {
           reply().code(404);
         }

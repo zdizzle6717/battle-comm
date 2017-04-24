@@ -21232,16 +21232,7 @@ function(e, t, n) {
             _classCallCheck(this, IndexPage);
             var e = _possibleConstructorReturn(this, (IndexPage.__proto__ || Object.getPrototypeOf(IndexPage)).call(this));
             return e.state = {
-                bannerSlides: [ {
-                    title: "Play, Compete, Earn",
-                    text: "Battle-Comm is your new source for connection with the table-top gaming community. Play table-top at participating game shops, compete in tournaments, earn Reward Points, and exchange them for new merch.",
-                    link: "/login",
-                    actionText: "Sign Up",
-                    File: {
-                        locationUrl: "/banner/",
-                        name: "logo.png"
-                    }
-                } ],
+                bannerSlides: [],
                 showGameList: !1
             }, e;
         }
@@ -21308,9 +21299,12 @@ function(e, t, n) {
                     return o.default.createElement("div", {
                         key: t,
                         className: "da-slide"
-                    }, o.default.createElement("h2", null, e.title), o.default.createElement("p", null, e.text), o.default.createElement(s.Link, {
+                    }, o.default.createElement("h2", null, e.title), o.default.createElement("p", null, e.text), e.link.includes("//") || e.link.includes("http") ? o.default.createElement("a", {
+                        href: e.link,
+                        className: "da-link",
+                        target: "_blank"
+                    }, e.actionText) : o.default.createElement(s.Link, {
                         to: e.link,
-                        key: t,
                         className: "da-link"
                     }, e.actionText), o.default.createElement("div", {
                         className: "da-img"
@@ -30091,49 +30085,43 @@ function(e, t, n) {
                 },
                 files: [],
                 newFiles: [],
-                slidePendingDeletion: void 0
-            }, e.handleCheckBoxChange = e.handleCheckBoxChange.bind(e), e.handleDeleteSlide = e.handleDeleteSlide.bind(e), 
-            e.handleFileUpload = e.handleFileUpload.bind(e), e.handleInputChange = e.handleInputChange.bind(e), 
-            e.handleSubmit = e.handleSubmit.bind(e), e.clearSlideForm = e.clearSlideForm.bind(e), 
-            e.nullifyCurrentSlide = e.nullifyCurrentSlide.bind(e), e.showAlert = e.showAlert.bind(e), 
-            e.toggleDeleteSlideModal = e.toggleDeleteSlideModal.bind(e), e.uploadFiles = e.uploadFiles.bind(e), 
-            e;
+                slidePendingDeletion: void 0,
+                formIsActive: !1
+            }, e.handleCheckBoxChange = e.handleCheckBoxChange.bind(e), e.handleDeleteFile = e.handleDeleteFile.bind(e), 
+            e.handleDeleteSlide = e.handleDeleteSlide.bind(e), e.handleFileUpload = e.handleFileUpload.bind(e), 
+            e.handleInputChange = e.handleInputChange.bind(e), e.handleSubmit = e.handleSubmit.bind(e), 
+            e.resetForm = e.resetForm.bind(e), e.showAlert = e.showAlert.bind(e), e.toggleDeleteSlideModal = e.toggleDeleteSlideModal.bind(e), 
+            e.uploadFiles = e.uploadFiles.bind(e), e;
         }
         return _inherits(BannerSlideManagement, e), a(BannerSlideManagement, [ {
             key: "componentDidMount",
             value: function componentDidMount() {
-                var e = this;
-                this.props.getSlides().then(function(t) {
-                    var n = [];
-                    t.forEach(function(e) {
-                        e.File ? n.push([ e.File ]) : n.push([]);
-                    }), e.setState({
-                        files: n
-                    });
-                });
-            }
-        }, {
-            key: "clearSlideForm",
-            value: function clearSlideForm(e) {
-                e.preventDefault(), this.nullifyCurrentSlide();
+                this.props.getSlides();
             }
         }, {
             key: "editSlide",
             value: function editSlide(e) {
                 var t = this.props.slides[e];
                 t.index = e, this.setState({
-                    currentSlide: t
+                    formIsActive: !0,
+                    currentSlide: t,
+                    files: t.File ? [ t.File ] : []
                 });
             }
+        }, {
+            key: "handleDeleteFile",
+            value: function handleDeleteFile(e, t) {}
         }, {
             key: "handleDeleteSlide",
             value: function handleDeleteSlide(e) {
                 var t = this;
                 e.preventDefault(), this.props.deleteSlide(this.state.slidePendingDeletion.id).then(function(e) {
-                    t.state.slidePendingDeletion.id === t.state.currentSlide.id && t.nullifyCurrentSlide();
                     var n = t.state.files;
-                    m.default.remove(file[index].id).then(function() {
-                        n.splice(t.state.slidePendingDeletion.index, 1), t.showAlert("slideDeleted");
+                    m.default.remove(t.state.slidePendingDeletion.File.id).then(function() {
+                        t.state.slidePendingDeletion.id === t.state.currentSlide.id && t.resetForm(!1), 
+                        n.splice(t.state.slidePendingDeletion.index, 1), t.setState({
+                            deleteSlideModalIsActive: !1
+                        }), t.showAlert("slideDeleted");
                     });
                 });
             }
@@ -30185,26 +30173,30 @@ function(e, t, n) {
                         name: n[0].name,
                         size: n[0].size,
                         type: n[0].type
-                    }).then(function(e) {
-                        var n = t.state.files;
-                        n[t.state.currentSlide.index] ? n[t.state.currentSlide.index] = e : n.push(e), t.setState({
-                            files: n
-                        });
                     }), t.setState({
                         newFiles: []
                     }), t.state.currentSlide.id ? t.showAlert("slideUpdated") : t.showAlert("slideCreated"), 
-                    t.nullifyCurrentSlide();
+                    t.resetForm(!1);
                 });
             }
         }, {
-            key: "nullifyCurrentSlide",
-            value: function nullifyCurrentSlide() {
-                this.setState({
+            key: "resetForm",
+            value: function resetForm() {
+                var e = this, t = arguments.length > 0 && void 0 !== arguments[0] && arguments[0], n = arguments[1];
+                n && n.preventDefault(), this.setState({
                     currentSlide: {
                         id: void 0,
-                        title: void 0,
-                        newSlides: []
-                    }
+                        isActive: !0,
+                        index: void 0
+                    },
+                    files: [],
+                    formIsActive: !1
+                }, function() {
+                    t && setTimeout(function() {
+                        e.setState({
+                            formIsActive: !0
+                        });
+                    });
                 });
             }
         }, {
@@ -30257,10 +30249,10 @@ function(e, t, n) {
         }, {
             key: "toggleDeleteSlideModal",
             value: function toggleDeleteSlideModal(e, t) {
-                e.index = t, this.setState({
+                e && t && (e.index = t, this.setState({
                     slidePendingDeletion: e,
                     deleteSlideModalIsActive: !this.state.deleteSlideModalIsActive
-                });
+                }));
             }
         }, {
             key: "uploadFiles",
@@ -30289,7 +30281,9 @@ function(e, t, n) {
                     return o.default.createElement("tr", {
                         key: n
                     }, o.default.createElement("td", null, t.priority), o.default.createElement("td", null, t.title), o.default.createElement("td", null, (0, 
-                    d.formatJSONDate)(t.updatedAt)), o.default.createElement("td", null, o.default.createElement("div", {
+                    d.formatJSONDate)(t.updatedAt)), o.default.createElement("td", {
+                        className: "action-items"
+                    }, o.default.createElement("div", {
                         className: "action-item"
                     }, o.default.createElement("span", {
                         className: "action",
@@ -30298,7 +30292,7 @@ function(e, t, n) {
                         className: "tip-icon fa fa-pencil"
                     })), o.default.createElement("span", {
                         className: "mobile-text"
-                    }, "Edit")), o.default.createElement("div", {
+                    }, "Edit")), t.File && o.default.createElement("div", {
                         className: "action-item"
                     }, o.default.createElement("span", {
                         className: "action",
@@ -30312,7 +30306,7 @@ function(e, t, n) {
                     className: "text-center"
                 }, "Add some slides to update the display on the homepage"), o.default.createElement("hr", null), o.default.createElement("h2", null, this.state.currentSlide.id ? "Edit Slide" : "Add New Slide"), o.default.createElement("div", {
                     className: "small-12 columns"
-                }, o.default.createElement(p.Form, {
+                }, this.state.formIsActive && o.default.createElement(p.Form, {
                     name: "slideForm",
                     submitText: this.state.currentSlide.id ? "Update Slide" : "Save New Slide",
                     handleSubmit: this.handleSubmit
@@ -30356,7 +30350,7 @@ function(e, t, n) {
                     className: "form-group small-12 medium-4 columns"
                 }, o.default.createElement("label", {
                     className: "required"
-                }, "Link"), o.default.createElement(p.Input, {
+                }, "Link (External links must start with //)"), o.default.createElement(p.Input, {
                     type: "text",
                     name: "link",
                     value: this.state.currentSlide.link,
@@ -30400,18 +30394,15 @@ function(e, t, n) {
                     className: "row"
                 }, o.default.createElement("div", {
                     className: "small-12 medium-4 columns"
-                }, o.default.createElement("label", null, "Banner Image"), this.state.currentSlide.index && o.default.createElement("div", null, this.state.files[this.state.currentSlide.index].length > 0 && this.state.files[this.state.currentSlide.index][0].id && o.default.createElement("img", {
-                    src: "/uploads/" + this.state.files[this.state.currentSlide.index][0].locationUrl + this.state.files[this.state.currentSlide.index][0].name
+                }, o.default.createElement("label", null, "Banner Image"), this.state.files[0] && o.default.createElement("div", null, this.state.files.length > 0 && this.state.files[0].id && o.default.createElement("img", {
+                    src: "/uploads/" + this.state.files[0].locationUrl + this.state.files[0].name
                 }))), o.default.createElement("div", {
                     className: "small-12 medium-4 columns"
-                }, o.default.createElement("label", null, "Image Name"), this.state.currentSlide.index && o.default.createElement("div", null, this.state.files.length > 0 && o.default.createElement("h6", null, this.state.files[this.state.currentSlide.index][0].name), this.state.files[this.state.currentSlide.index].length > 0 && this.state.files[this.state.currentSlide.index][0].id && o.default.createElement("button", {
-                    className: "button alert",
-                    onClick: this.handleDeleteFile.bind(this, this.state.files[this.state.currentSlide.index][0].id)
-                }, "Delete File?"))), o.default.createElement("div", {
+                }, o.default.createElement("label", null, "Image Name"), o.default.createElement("div", null, this.state.files.length > 0 && o.default.createElement("h6", null, this.state.files[0].name))), o.default.createElement("div", {
                     className: "form-group small-12 medium-4 columns"
                 }, o.default.createElement("label", null, "Upload File"), o.default.createElement(p.FileUpload, {
                     name: "slidePhoto",
-                    value: this.state.files[this.state.currentSlide.index],
+                    value: this.state.files,
                     handleFileUpload: this.handleFileUpload,
                     handleDeleteFile: this.handleDeleteFile,
                     hideFileList: !0,
@@ -30420,14 +30411,14 @@ function(e, t, n) {
                     required: 1
                 })))), o.default.createElement("button", {
                     className: "button info",
-                    onClick: this.clearSlideForm
+                    onClick: this.resetForm.bind(this, !0)
                 }, o.default.createElement("span", {
                     className: "fa fa-plus"
                 }), " Add New Slide")), o.default.createElement(c.default, {
                     name: "deleteSlideModalIsActive",
                     title: "Delete Slide",
                     modalIsOpen: this.state.deleteSlideModalIsActive,
-                    handleClose: this.toggleDeleteSlideModal,
+                    handleClose: this.toggleDeleteSlideModal.bind(this),
                     showClose: !0,
                     handleSubmit: this.handleDeleteSlide,
                     confirmText: "Delete Permanently"
@@ -30778,11 +30769,12 @@ function(e, t, n) {
             _classCallCheck(this, RPDistributionManagement);
             var e = _possibleConstructorReturn(this, (RPDistributionManagement.__proto__ || Object.getPrototypeOf(RPDistributionManagement)).call(this));
             return e.state = {
+                formIsActive: !0,
                 rpForm: {},
                 validUser: !1
             }, e.handleInputChange = e.handleInputChange.bind(e), e.handleSubmit = e.handleSubmit.bind(e), 
-            e.handleSearchSuggestionChange = e.handleSearchSuggestionChange.bind(e), e.showAlert = e.showAlert.bind(e), 
-            e;
+            e.handleSearchSuggestionChange = e.handleSearchSuggestionChange.bind(e), e.resetForm = e.resetForm.bind(e), 
+            e.showAlert = e.showAlert.bind(e), e;
         }
         return _inherits(RPDistributionManagement, e), a(RPDistributionManagement, [ {
             key: "componentWillUnmount",
@@ -30810,9 +30802,9 @@ function(e, t, n) {
                         direction: "increment",
                         rewardPoints: t.state.rpForm.rpToTransfer
                     }).then(function() {
-                        t.showAlert("pointsSubmitted");
+                        t.resetForm(), t.showAlert("pointsSubmitted");
                     });
-                }, 500);
+                }, 300);
             }
         }, {
             key: "handleSearchSuggestionChange",
@@ -30820,6 +30812,21 @@ function(e, t, n) {
                 this.setState({
                     rpForm: d.handlers.updateSearchSuggestion(e, "id", this.state.rpForm),
                     validUser: !!e.target.suggestionObject
+                });
+            }
+        }, {
+            key: "resetForm",
+            value: function resetForm(e) {
+                var t = this;
+                e && e.preventDefault(), this.setState({
+                    rpForm: {},
+                    formIsActive: !1
+                }, function() {
+                    setTimeout(function() {
+                        t.setState({
+                            formIsActive: !0
+                        });
+                    });
                 });
             }
         }, {
@@ -30849,7 +30856,7 @@ function(e, t, n) {
                     className: "small-12 columns"
                 }, o.default.createElement("h3", {
                     className: "small-12 text-center"
-                }, "Your Current RP: ", o.default.createElement("strong", null, this.props.user.rewardPoints)), o.default.createElement(u.Form, {
+                }, "Your Current RP: ", o.default.createElement("strong", null, this.props.user.rewardPoints)), this.state.formIsActive && o.default.createElement(u.Form, {
                     name: "rewardPointForm",
                     submitButton: !1
                 }, o.default.createElement("div", {
@@ -30863,6 +30870,7 @@ function(e, t, n) {
                     maxResults: 20,
                     name: "receivingPlayerId",
                     displayKeys: [ "id", "lastName", "firstName", "username" ],
+                    placeholder: "Begin typing to search players...",
                     handleInputChange: this.handleSearchSuggestionChange,
                     required: !0
                 })), o.default.createElement("div", {
@@ -31720,6 +31728,7 @@ function(e, t, n) {
                     }, o.default.createElement(c.Input, {
                         type: "text",
                         name: this.props.name,
+                        placeholder: this.props.placeholder,
                         value: this.state.inputString,
                         handleInputChange: this.handleInputChange,
                         validate: this.props.validate,
@@ -31747,6 +31756,7 @@ function(e, t, n) {
             maxResults: f.default.number,
             minCharacters: f.default.number,
             name: f.default.string.isRequired,
+            placeholder: f.default.string,
             required: f.default.bool,
             rowCount: f.default.number,
             timeoutBuffer: f.default.number,
@@ -31754,6 +31764,7 @@ function(e, t, n) {
         }, p.defaultProps = {
             maxResults: 15,
             minCharacters: 3,
+            placeholder: "Begin typing to search...",
             required: !1,
             rowCount: 4,
             timeoutBuffer: 500

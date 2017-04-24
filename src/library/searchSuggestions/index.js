@@ -223,7 +223,7 @@ export default function(Service, method) {
 
 			return (
 				<div className={suggestionClasses} onKeyDown={this.onKeyDown}>
-					<Input type="text" name={this.props.name} value={this.state.inputString} handleInputChange={this.handleInputChange} validate={this.props.validate} autoComplete="off" required={this.props.required}/>
+					<Input type="text" name={this.props.name} placeholder={this.props.placeholder} value={this.state.inputString} handleInputChange={this.handleInputChange} validate={this.props.validate} autoComplete="off" required={this.props.required}/>
 					{
 						this.state.showSuggestions && this.state.suggestions.length > 0 &&
 						<div className="suggestions">
@@ -251,6 +251,7 @@ export default function(Service, method) {
 		'maxResults': PropTypes.number,
 		'minCharacters': PropTypes.number,
 		'name': PropTypes.string.isRequired,
+		'placeholder': PropTypes.string,
 		'required': PropTypes.bool,
 		'rowCount': PropTypes.number,
 		'timeoutBuffer': PropTypes.number,
@@ -260,6 +261,7 @@ export default function(Service, method) {
 	SearchSuggestions.defaultProps = {
 		'maxResults': 15,
 		'minCharacters': 3,
+		'placeholder': 'Begin typing to search...',
 		'required': false,
 		'rowCount': 4,
 		'timeoutBuffer': 500

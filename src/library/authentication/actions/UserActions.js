@@ -94,7 +94,7 @@ export default {
 		};
 	},
 	modify: (data) => {
-		// Fix this to acknowlege localStorage and update user
+		// TODO: Fix this to acknowlege localStorage and update user
 		return (dispatch) => {
 			dispatch(_returnResponse(UserConstants.UPDATE_USER, data));
 		};
@@ -159,7 +159,7 @@ export default {
 		};
   },
   logout: () => {
-		// TODO: This should make an api call that properly invalidates or deletes the existing token
+		// TODO: This should (maybe) make an api call that properly invalidates or deletes the existing token
   	return (dispatch) => {
 			sessionStorage.removeItem('user');
 			dispatch({

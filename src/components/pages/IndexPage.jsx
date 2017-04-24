@@ -34,18 +34,7 @@ class IndexPage extends React.Component {
         super();
 
         this.state = {
-			'bannerSlides': [
-				{
-					'title': 'Play, Compete, Earn',
-					'text': 'Battle-Comm is your new source for connection with the table-top gaming community. Play table-top at participating game shops, compete in tournaments, earn Reward Points, and exchange them for new merch.',
-					'link': '/login',
-					'actionText': 'Sign Up',
-					'File': {
-						'locationUrl': '/banner/',
-						'name': 'logo.png'
-					}
-				}
-			],
+			'bannerSlides': [],
 			'showGameList': false
 		}
     }
@@ -114,7 +103,11 @@ class IndexPage extends React.Component {
 												<div key={i} className="da-slide">
 													<h2>{slide.title}</h2>
 													<p>{slide.text}</p>
-													<Link to={slide.link} className="da-link">{slide.actionText}</Link>
+													{
+														slide.link.includes('//') || slide.link.includes('http') ?
+														<a href={slide.link} className="da-link" target="_blank">{slide.actionText}</a> :
+														<Link to={slide.link} className="da-link">{slide.actionText}</Link>
+													}
 													<div className="da-img"><img src={`/uploads/${slide.File.locationUrl}${slide.File.name}`} alt="image01" /></div>
 												</div>
 											)

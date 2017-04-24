@@ -72,6 +72,10 @@ module.exports = [
 					'id': Joi.number().required()
 				},
 				'payload': {
+					'id': Joi.optional(),
+					'createdAt': Joi.optional(),
+					'updatedAt': Joi.optional(),
+					'File': Joi.optional(),
 					'index': Joi.optional(),
 					'actionText': Joi.string().required(),
 					'pageName': Joi.string().required(),

@@ -37,6 +37,7 @@ class RPDistributionManagement extends React.Component {
 		super();
 
 		this.state = {
+			'formIsActive': true,
 			'rpForm': {},
 			'validUser': false
 		}
@@ -44,6 +45,7 @@ class RPDistributionManagement extends React.Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleSearchSuggestionChange = this.handleSearchSuggestionChange.bind(this);
+		this.resetForm = this.resetForm.bind(this);
 		this.showAlert = this.showAlert.bind(this);
 	}
 
@@ -76,15 +78,32 @@ class RPDistributionManagement extends React.Component {
 				'direction': 'increment',
 				'rewardPoints': this.state.rpForm.rpToTransfer
 			}).then(() => {
+				this.resetForm();
 				this.showAlert('pointsSubmitted');
 			});
-		}, 500);
+		}, 300);
 	}
 
 	handleSearchSuggestionChange(e) {
 		this.setState({
 			'rpForm': handlers.updateSearchSuggestion(e, 'id', this.state.rpForm),
 			'validUser': !!e.target.suggestionObject
+		});
+	}
+
+	resetForm(e) {
+		if (e) {
+			e.preventDefault();
+		}
+		this.setState({
+			'rpForm': {},
+			'formIsActive': false
+		}, () => {
+			setTimeout(() => {
+				this.setState({
+					'formIsActive': true
+				});
+			});
 		});
 	}
 
@@ -112,18 +131,21 @@ class RPDistributionManagement extends React.Component {
 				<div className="row">
 					<div className="small-12 columns">
 						<h3 className="small-12 text-center">Your Current RP: <strong>{this.props.user.rewardPoints}</strong></h3>
-						<Form name="rewardPointForm" submitButton={false}>
-							<div className="row">
-								<div className="form-group small-12 medium-4 medium-offset-2 columns">
-									<label className="required">Send to Player...</label>
-									<SearchSuggestions rowCount={7} maxResults={20} name="receivingPlayerId" displayKeys={['id', 'lastName', 'firstName', 'username']} handleInputChange={this.handleSearchSuggestionChange} required={true}/>
+						{
+							this.state.formIsActive &&
+							<Form name="rewardPointForm" submitButton={false}>
+								<div className="row">
+									<div className="form-group small-12 medium-4 medium-offset-2 columns">
+										<label className="required">Send to Player...</label>
+										<SearchSuggestions rowCount={7} maxResults={20} name="receivingPlayerId" displayKeys={['id', 'lastName', 'firstName', 'username']} placeholder="Begin typing to search players..." handleInputChange={this.handleSearchSuggestionChange} required={true}/>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Reward Points</label>
+										<Input type="number" name="rpToTransfer" value={this.state.rpForm.rpToTransfer} handleInputChange={this.handleInputChange} max={this.props.user.rewardPoints} required={true} />
+									</div>
 								</div>
-								<div className="form-group small-12 medium-4 columns">
-									<label className="required">Reward Points</label>
-									<Input type="number" name="rpToTransfer" value={this.state.rpForm.rpToTransfer} handleInputChange={this.handleInputChange} max={this.props.user.rewardPoints} required={true} />
-								</div>
-							</div>
-						</Form>
+							</Form>
+						}
 						<div className="form-group text-right">
 							<button className="button primary" onClick={this.handleSubmit} disabled={formIsInvalid}>Submit RP Assignment</button>
 						</div>
