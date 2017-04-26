@@ -88,7 +88,7 @@ class CheckoutPage extends React.Component {
 
     render() {
         return (
-            <ViewWrapper headerImage="/images/title/Checkout.png" headerAlt="Checkout">
+            <ViewWrapper headerImage="/images/Titles/Checkout.png" headerAlt="Checkout">
                 <div className="row">
 					<div className="small-12 columns">
 						<Form name="productOrderForm" handleSubmit={this.handleSubmit} submitText="Finalize Order" disable={this.state.pointsAfterPurchase < 0}>
@@ -139,8 +139,10 @@ class CheckoutPage extends React.Component {
 								</div>
 							</div>
 							<div className="row">
-								<label>Order Details (Add a note specific to your order)</label>
-								<TextArea value={this.state.productOrder.orderDetails} rows="4" handleInputChange={this.handleInputChange} maxLength="255"></TextArea>
+								<div className="small-12 columns">
+									<label>Order Details (Add a note specific to your order)</label>
+									<TextArea value={this.state.productOrder.orderDetails || ''} rows="4" handleInputChange={this.handleInputChange} maxLength="255"></TextArea>
+								</div>
 							</div>
 						</Form>
 						{

@@ -34,7 +34,7 @@
 	.cart-summary {
 		display: none;
     background: url('/images/Honeycomb_Default.png') repeat;
-    border-top: 2px solid $white;
+    border-top: 2px solid black;
     box-shadow: 0 2px 5px rgba(0,0,0,0.75);
 		position: fixed;
 		top: 57px;
@@ -74,10 +74,19 @@
 		.header {
 			position: relative;
 
+			h2 {
+				margin-top: 0;
+				border: none;
+				box-shadow: none;
+				background: transparent;
+				letter-spacing: .5rem;
+    		font-size: 1.5rem;
+			}
+
 			.fa {
 				position: absolute;
-		    top: 0px;
-		    right: 0px;
+				top: 0.25rem;
+				right: 0.5rem;
 		    font-size: 1.5rem;
 			}
 
@@ -85,6 +94,18 @@
 
 		.body {
 			flex: 1;
+
+			table {
+				thead {
+					tr {
+						&:first-child {
+							th {
+								background: transparent;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		table {

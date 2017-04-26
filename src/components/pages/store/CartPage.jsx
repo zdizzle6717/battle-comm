@@ -31,50 +31,51 @@ class CartPage extends React.Component {
         document.title = "Battle-Comm | Shopping Cart";
     }
 
+	removeItem(product, quantity) {
+		this.props.removeItem(product, quantity);
+	}
+
     render() {
         return (
-            <ViewWrapper headerImage="/images/title/Cart.png" headerAlt="Cart">
+            <ViewWrapper headerImage="/images/Titles/Cart.png" headerAlt="Cart">
 				<div className="row">
+					<hr />
 					<div className="small-12 columns">
-						<h1>Shopping Cart</h1>
+						<table className="text-center">
+							<thead>
+								<tr>
+									<th className="text-center">SKU</th>
+									<th className="text-center">Name</th>
+									<th className="text-center">Price</th>
+									<th className="text-center">Qty</th>
+									<th className="text-center">Subtotal</th>
+									<th className="text-center">Remove?</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									this.props.cartItems.map((item, i) =>
+										<tr key={i} className="item-row">
+											<td>{item.product.SKU}</td>
+											<td>{`${item.product.name.substring(0, 25)}...`}</td>
+											<td>${item.product.price}RP</td>
+											<td>({item.cartQty})</td>
+											<td>{(item.cartQty * item.product.price).toFixed(2)}</td>
+											<td onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-minus pointer"></span></td>
+										</tr>
+									)
+								}
+							</tbody>
+						</table>
 					</div>
 					<hr />
-					<div className="row">
-						<div className="small-12 columns">
-							<table>
-								<thead>
-									<tr>
-										<th>SKU</th>
-										<th>Name</th>
-										<th>Price</th>
-										<th>Qty</th>
-										<th>Subtotal</th>
-										<th>Remove?</th>
-									</tr>
-								</thead>
-								<tbody>
-									{
-										this.props.cartItems.map((item, i) =>
-											<tr key={i} className="item-row">
-												<td>{item.merchItem.sku}</td>
-												<td>{item.merchItem.title}</td>
-												<td>${item.merchItem.price}RP</td>
-												<td>({item.cartQty})</td>
-												<td>{(item.cartQty * item.merchItem.price).toFixed(2)}</td>
-												<td onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-minus"></span></td>
-											</tr>
-										)
-									}
-								</tbody>
-							</table>
-							<hr />
-							<div className="small-12 columns text-right">
-								Order Total: {this.props.cartTotal}
-							</div>
-							<Link to="store/checkout" className="button">
-								Go to Checkout
-							</Link>
-						</div>
+					<div className="small-12 columns text-right">
+						Order Total: {this.props.cartTotal}
+					</div>
+					<div className="small-12 columns">
+						<Link to="store/checkout" className="button">
+							Go to Checkout
+						</Link>
 					</div>
                 </div>
             </ViewWrapper>

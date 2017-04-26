@@ -7,7 +7,6 @@ const calculateTotal = (cartItems) => {
 	cartItems.forEach((item) => {
 		subTotal += parseInt(item.cartQty, 10) * parseInt(item.product.price, 10);
 	});
-	subTotal = subTotal.toFixed(2);
 	return subTotal;
 };
 
@@ -46,7 +45,7 @@ const cartItems = (state = [], action) => {
 	}
 };
 
-const cartTotal = (state = 0.00, action) => {
+const cartTotal = (state = 0, action) => {
 	switch (action.type) {
 		case CartItemConstants.UPDATE_CART_TOTAL:
 			let newSubTotal = calculateTotal(action.data);

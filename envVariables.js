@@ -1,9 +1,10 @@
 'use strict';
 
-// TODO: Generate a better secret
-// Set correct serverUID and serverGID
+// TODO: Set correct serverUID and serverGID
 
 module.exports = {
+	'version': '2.0.0',
+	
 	// Development
 	'name': 'development',
 	'baseApiRoute': 'http://localhost:9290/api/',
@@ -32,7 +33,7 @@ module.exports = {
 	'uploadPath': '/dist/uploads/',
 	'serverUID': 501,
 	'serverGID': 20,
-	'secret': 'BC_SECRETS_SECRETS_ARE_NO_FUN',
+	'secret': '1CE8D8BDCF2B4DD662C9E6AE31B2AFECA3806FDFA018297F8CCD3D2E5E1F633F',
 	'email': {
 		'user': 'BattleCommVault@gmail.com',
 		'pass': 'BryceMan43',

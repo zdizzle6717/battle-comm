@@ -6,7 +6,7 @@ export default {
 	add: (cartItem, qty) => {
 		let data = {
 			'product': cartItem,
-			'cartQty': qty
+			'cartQty': parseInt(qty, 10)
 		};
 		return (dispatch) => {
 			dispatch({
@@ -18,7 +18,7 @@ export default {
 	remove: (itemId, qty) => {
 		let data = {
 			'id': itemId,
-			'cartQty': qty
+			'cartQty': parseInt(qty, 10)
 		};
 		return (dispatch) => {
 			dispatch({

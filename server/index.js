@@ -73,14 +73,14 @@ server.register(require('./chat'), function(err) {
 
 
 // Documentation (Swagger) Config
-const options = {
+const documentationOptions = {
   'info': {
-    'title': 'Hapi Stack API Documentation',
-    'version': '1.0.0',
+    'title': 'Battle-Comm API Documentation',
+    'version': env.version,
   },
   'basePath': '/api/',
   'pathPrefixSize': 2,
-  'documentationPage': env.name === 'producttion' ? false : true
+  'documentationPage': env.name === 'production' ? false : true
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )
@@ -88,7 +88,7 @@ server.register([
     Inert,
     Vision, {
       'register': HapiSwagger,
-      'options': options
+      'options': documentationOptions
     }
   ], {
     'routes': {
@@ -124,7 +124,7 @@ for (let route in routes) {
   server.select('api').route(routes[route]);
 }
 
-if (false) {
+if (false /* cluster.isMaster */) {
   let numWorkers = os.cpus().length;
 
   console.log('Master cluster setting up ' + numWorkers + ' workers...');

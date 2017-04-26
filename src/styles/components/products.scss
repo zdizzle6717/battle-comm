@@ -1,73 +1,76 @@
 .product-listing {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	.products-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
 
-	.product-box {
-		float: left;
-		border: 2px solid $white;
-		background: white;
-		box-sizing: border-box;
-		width: 100%;
-		max-width: 33.2333%;
-		box-shadow: $shadow-1;
-
-		.flip-container {
+		.product-box {
+			float: left;
+			border: 2px solid $white;
+			background: white;
+			box-sizing: border-box;
 			width: 100%;
-			height: 415px;
+			max-width: 31%;
+			margin-bottom: 3%;
+			box-shadow: $shadow-1;
 
-			.flipper {
-				transition: .6s;
-				transform-style: preserve-3d;
-				position: relative;
-				display: block;
+			.flip-container {
+				width: 100%;
+				height: 415px;
 
-				.front,
-				.back {
-					position: absolute;
-					top: 0;
-					left: 0;
-					backface-visibility: hidden;
-					transform-style: preserve-3d;
+				.flipper {
 					transition: .6s;
-					width: 100%;
-				}
+					transform-style: preserve-3d;
+					position: relative;
+					display: block;
 
+					.front,
+					.back {
+						position: absolute;
+						top: 0;
+						left: 0;
+						backface-visibility: hidden;
+						transform-style: preserve-3d;
+						transition: .6s;
+						width: 100%;
+					}
+
+					.front {
+						z-index: 2;
+						transform: rotateY(0deg);
+					}
+
+					.back {
+						transform: rotateY(-180deg);
+					}
+				}
+			}
+
+			.actions {
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+
+				.button {
+					width: 49%;
+					font-size: .875rem;
+					white-space: nowrap;
+				}
+			}
+
+			&:hover {
 				.front {
-					z-index: 2;
-					transform: rotateY(0deg);
+					transform: rotateY(180deg) !important;
+					z-index: 1;
 				}
 
 				.back {
-					transform: rotateY(-180deg);
+					transform: rotateY(0deg) !important;
+					z-index: 2;
+					cursor: pointer;
 				}
-			}
-		}
-
-		.actions {
-			width: 100%;
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-
-			.button {
-				width: 49%;
-				font-size: .875rem;
-				white-space: nowrap;
-			}
-		}
-
-		&:hover {
-			.front {
-				transform: rotateY(180deg) !important;
-				z-index: 1;
-			}
-
-			.back {
-				transform: rotateY(0deg) !important;
-				z-index: 2;
-				cursor: pointer;
 			}
 		}
 	}
@@ -75,16 +78,20 @@
 
 @include breakpoint(medium down) {
 	.product-listing {
-		.product-box {
-			max-width: 48%;
+		.products-container {
+			.product-box {
+				max-width: 48%;
+			}
 		}
 	}
 }
 
 @include breakpoint(small only) {
 	.product-listing {
-		.product-box {
-			max-width: 96%;
+		.products-box {
+			.product-box {
+				max-width: 96%;
+			}
 		}
 	}
 }

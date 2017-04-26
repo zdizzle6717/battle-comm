@@ -62,6 +62,7 @@ class CartSummary extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.cartItems);
 		return (
 			<li className="mini-cart">
 				<a className="menu-link cart-button" onClick={this.toggleCart}><span className="fa fa-shopping-cart"></span></a>
@@ -73,21 +74,21 @@ class CartSummary extends React.Component {
 						<div className="body">
 							{
 								this.props.cartItems.length > 0 ?
-								<table>
+								<table className="text-center">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Price</th>
-											<th>Qty</th>
-											<th>Remove?</th>
+											<th className="text-center">Name</th>
+											<th className="text-center">Price</th>
+											<th className="text-center">Qty</th>
+											<th className="text-center">Remove?</th>
 										</tr>
 									</thead>
 									<tbody>
 										{
 											this.props.cartItems.map((item, i) =>
 												<tr key={i} className="item-row">
-													<td>{item.product.title}</td>
-													<td>${item.product.price}</td>
+													<td>{`${item.product.name.substring(0, 15)}...`}</td>
+													<td>{item.product.price}</td>
 													<td>({item.cartQty})</td>
 													<td className="pointer" onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-minus"></span></td>
 												</tr>
@@ -101,8 +102,8 @@ class CartSummary extends React.Component {
 						<div className="footer">
 							<h4>Order Total: ${this.props.cartTotal}</h4>
 							<div className="actions">
-								<Link to="store/cart" className="button">View Cart</Link>
-								<Link to="store/checkout" className="button">Checkout</Link>
+								<Link to="store/cart" className="button primary">View Cart</Link>
+								<Link to="store/checkout" className="button secondary">Checkout</Link>
 							</div>
 						</div>
 					</div>

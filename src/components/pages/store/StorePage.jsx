@@ -51,7 +51,7 @@ class StorePage extends React.Component {
 		this.handlePageChange(1);
 
 		priceSlider = document.getElementById('price-slider');
-		noUiSlider.create(slider, {
+		noUiSlider.create(priceSlider, {
 		  'start': [_sliderStart, _sliderEnd],
 		  'behaviour': 'tap-drag',
 		  'connect': [false, true, false],
@@ -61,8 +61,17 @@ class StorePage extends React.Component {
 		  }
 		});
 
-		priceSlider.noUiSlider.on('update', function( values, handle ) {
-			console.log(values, handle);
+		priceSlider.noUiSlider.on('update', (values, handle) => {
+			this.setState({
+				'sliderStart': values[0],
+				'sliderEnd': values[1]
+			});
+		});
+
+		priceSlider.noUiSlider.on('end', (values, handle) => {
+			// TODO: Add api search route to filter by price
+			console.log('TODO: search')
+			console.log(values[0], values[1]);
 		});
     }
 
@@ -161,6 +170,10 @@ class StorePage extends React.Component {
 							</div>
 							<div className="panel-content">
 								<div id="price-slider"></div>
+								<div className="price-labels">
+									<span>{this.state.sliderStart}</span>
+									<span>{this.state.sliderEnd}</span>
+								</div>
 							</div>
 						</div>
 						<div className="panel push-bottom-2x">
@@ -199,7 +212,7 @@ class StorePage extends React.Component {
 						</div>
 					</div>
 					<div className="small-12 medium-8 large-9 columns">
-						<div>
+						<div className="products-container">
 							{
 								this.props.products.map((product, i) =>
 								<div key={i} className="product-box">

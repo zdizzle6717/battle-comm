@@ -1,6 +1,6 @@
 // Third Party
 @import 'https://fonts.googleapis.com/css?family=PT+Sans';
-@import '../thirdParty/FontAwesome/font-awesome';
+@import './thirdParty/FontAwesome/font-awesome';
 @import '../../node_modules/foundation-sites/scss/foundation';
 @include foundation-everything;
 
@@ -31,6 +31,7 @@
 @import 'components/page-not-found';
 @import 'components/panels';
 @import 'components/player';
+@import 'components/price-slider';
 @import 'components/products';
 @import 'components/news';
 @import 'components/scroll-bars';
