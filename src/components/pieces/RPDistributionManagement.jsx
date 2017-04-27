@@ -8,7 +8,7 @@ import {AlertActions} from '../../library/alerts';
 import {FormActions} from '../../library/validations';
 import {UserActions} from '../../library/authentication';
 import {handlers} from '../../library/utilities';
-import searchSuggestions from '../../library/SearchSuggestions';
+import searchSuggestions from '../../library/searchSuggestions';
 import {Form, getFormErrorCount, Input, TextArea, Select} from '../../library/validations';
 import PlayerService from '../../services/PlayerService';
 let SearchSuggestions = searchSuggestions(PlayerService, 'searchSuggestions');
