@@ -43,7 +43,7 @@ babel_cache*
 .sass-cache
 
 # Database Connections and Credentials
-envConfig.js
+envVariables.js
 server/config*
 
 # SSL
