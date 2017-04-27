@@ -65,14 +65,9 @@ class PlayerDashboardPage extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Player Dashboard";
-		// TODO: Verify that this check is necessary
-		if (!this.props.user.id) {
-			browserHistory.push('/');
-		} else {
-			this.getCurrentPlayer().then(() => {
-				this.getPlayerPhotoStream();
-			});
-		}
+		this.getCurrentPlayer().then(() => {
+			this.getPlayerPhotoStream();
+		});
     }
 
 	cancelEdit() {

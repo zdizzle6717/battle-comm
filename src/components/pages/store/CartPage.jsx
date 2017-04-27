@@ -9,15 +9,14 @@ import CartActions from '../../../actions/CartActions';
 
 const mapStateToProps = (state) => {
 	return {
-		'cartTotal': state.cartTotal,
 		'cartItems': state.cartItems
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		'updateOrderTotal': CartActions.updateTotal,
 		'addItem': CartActions.add,
+		'update': CartActions.update,
 		'removeItem': CartActions.remove
 	}, dispatch);
 }
@@ -31,8 +30,26 @@ class CartPage extends React.Component {
         document.title = "Battle-Comm | Shopping Cart";
     }
 
-	removeItem(product, quantity) {
-		this.props.removeItem(product, quantity);
+	getOrderTotal(items) {
+		let total = 0;
+		items.forEach((item) => {
+			total += parseInt(item.product.price, 10) * parseInt(item.cartQty, 10);
+		});
+		return total;
+	}
+
+	removeItem(product) {
+		this.props.removeItem(product);
+	}
+
+	updateItemQty(item, increment) {
+		let newQty = item.cartQty;
+		if (increment === 'add') {
+			newQty++;
+		} else if (increment === 'subtract') {
+			newQty--;
+		}
+		this.props.update(item.product, newQty);
 	}
 
     render() {
@@ -41,7 +58,7 @@ class CartPage extends React.Component {
 				<div className="row">
 					<hr />
 					<div className="small-12 columns">
-						<table className="text-center">
+						<table className="stack hover text-center">
 							<thead>
 								<tr>
 									<th className="text-center">SKU</th>
@@ -58,10 +75,10 @@ class CartPage extends React.Component {
 										<tr key={i} className="item-row">
 											<td>{item.product.SKU}</td>
 											<td>{`${item.product.name.substring(0, 25)}...`}</td>
-											<td>${item.product.price}RP</td>
-											<td>({item.cartQty})</td>
+											<td>{item.product.price} RP</td>
+											<td><span className="fa fa-minus pointer" onClick={this.updateItemQty.bind(this, item, 'subtract')}></span> ({item.cartQty}) <span className="fa fa-plus pointer" onClick={this.updateItemQty.bind(this, item, 'add')}></span></td>
 											<td>{(item.cartQty * item.product.price).toFixed(2)}</td>
-											<td onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-minus pointer"></span></td>
+											<td onClick={this.removeItem.bind(this, item)}><span className="fa fa-times-circle-o pointer"></span></td>
 										</tr>
 									)
 								}
@@ -70,10 +87,10 @@ class CartPage extends React.Component {
 					</div>
 					<hr />
 					<div className="small-12 columns text-right">
-						Order Total: {this.props.cartTotal}
+						<h4>Order Total: <strong>{this.getOrderTotal.call(this, this.props.cartItems)} RP</strong></h4>
 					</div>
 					<div className="small-12 columns">
-						<Link to="store/checkout" className="button">
+						<Link to="/store/checkout" className="button text-center">
 							Go to Checkout
 						</Link>
 					</div>

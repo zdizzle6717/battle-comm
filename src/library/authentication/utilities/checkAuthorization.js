@@ -1,7 +1,5 @@
 'use strict';
 
-// TODO: This should check for any of the flags, not all
-
 const checkAuthorization = (accessControl, user, roleConfig) => {
 	let userFlags = user.roleFlags || 0;
 

@@ -6,7 +6,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from './reducers';
 
 const loggerMiddleware = createLogger();
-let storedUser, preLoadedState;
+let storedUser, storedCart, cartQuantities, preLoadedState;
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
@@ -14,15 +14,20 @@ const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_E
 
 // Grab the state from a global variable injected into the server-generated HTML
 function safelyParse(input) {
-  var doc = new DOMParser().parseFromString(input, "text/html");
+  var doc = new DOMParser().parseFromString(input, 'text/html');
   return JSON.parse(doc.documentElement.textContent);
 }
 
 // Get stored user details from session storage if they are already logged in
-if(typeof(Storage) !== "undefined" && typeof(window) !== 'undefined') {
+if(typeof(Storage) !== 'undefined' && typeof(window) !== 'undefined') {
 	storedUser = JSON.parse(sessionStorage.getItem('user'));
 	storedUser = storedUser ? storedUser : {};
-	preLoadedState = Object.assign(safelyParse(window.__PRELOADED_STATE__), {'user': storedUser, 'isAuthenticated': !!storedUser.roleConfig});
+	storedCart = JSON.parse(sessionStorage.getItem('cartItems'));
+	storedCart = storedCart ? storedCart : [];
+	cartQuantities = JSON.parse(sessionStorage.getItem('cartQuantities'));
+	cartQuantities = cartQuantities ? cartQuantities : {};
+	preLoadedState = safelyParse(window.__PRELOADED_STATE__);
+	Object.assign(preLoadedState, {'user': storedUser, 'isAuthenticated': !!storedUser.roleConfig, 'cartItems': storedCart, 'cartQtyPlaceholders': cartQuantities});
 }
 
 

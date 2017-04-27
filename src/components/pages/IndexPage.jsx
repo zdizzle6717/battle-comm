@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import Animation from 'react-addons-css-transition-group';
 import $ from 'jquery';
+// TODO: This twitter widget causes a memore leak if it doesn't get destroyed on componentWillUnmount
 import { Timeline } from 'react-twitter-widgets'
 import initSlider from '../../scripts/jquery.cslider.js';
 import {AlertActions} from '../../library/alerts';

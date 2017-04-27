@@ -118,6 +118,12 @@ let products = {
     } else {
       searchByConfig = {};
     }
+		if (request.payload.minPrice && request.payload.maxPrice) {
+			searchByConfig.price = {
+				'$gte': request.payload.minPrice,
+				'$lte': request.payload.maxPrice
+			};
+		}
     models.Product.findAndCountAll({
       'where': searchByConfig,
 			'order': orderBy ? [orderBy] : [],

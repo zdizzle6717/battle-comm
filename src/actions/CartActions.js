@@ -3,9 +3,9 @@
 import CartItemConstants from '../constants/CartItemConstants';
 
 export default {
-	add: (cartItem, qty) => {
+	add: (product, qty) => {
 		let data = {
-			'product': cartItem,
+			'product': product,
 			'cartQty': parseInt(qty, 10)
 		};
 		return (dispatch) => {
@@ -15,23 +15,31 @@ export default {
 			});
 		};
 	},
-	remove: (itemId, qty) => {
+	clearCart: () => {
+		return (dispatch) => {
+			dispatch({
+				'type': CartItemConstants.CLEAR_CART,
+				'data': true
+			});
+		};
+	},
+	update: (product, newCartQty) => {
 		let data = {
-			'id': itemId,
-			'cartQty': parseInt(qty, 10)
+			'product': product,
+			'cartQty': parseInt(newCartQty, 10)
 		};
 		return (dispatch) => {
 			dispatch({
-				'type': CartItemConstants.REMOVE_CART_ITEM,
+				'type': CartItemConstants.UPDATE_CART_ITEM,
 				'data': data
 			});
 		};
 	},
-	updateTotal: (currentCartItems) => {
+	remove: (itemId) => {
 		return (dispatch) => {
 			dispatch({
-				'type': CartItemConstants.UPDATE_CART_TOTAL,
-				'data': currentCartItems
+				'type': CartItemConstants.REMOVE_CART_ITEM,
+				'id': itemId
 			});
 		};
 	}

@@ -53,25 +53,26 @@ let productOrders = {
         'customerEmail': request.payload.customerEmail,
         'phone': request.payload.phone,
         'shippingStreet': request.payload.shippingStreet,
-        'shippingAppartment': request.payload.shippingAppartment,
+        'shippingApartment': request.payload.shippingApartment,
         'shippingCity': request.payload.shippingCity,
         'shippingState': request.payload.shippingState,
         'shippingZip': request.payload.shippingZip,
         'shippingCountry': request.payload.shippingCountry
       })
-      .then((response) => {
+      .then((order) => {
+				order = order.get({'plain': true});
         let customerMailConfig = {
           'from': env.email.user,
-          'to': response.customerEmail,
-          'subject': `Order Confirmation: Battle-Comm, Order #${response.id}`,
-          'html': buildOrderSuccessEmail(response) // You can choose to send an HTML body instead
+          'to': order.customerEmail,
+          'subject': `Order Confirmation: Battle-Comm, Order #${order.id}`,
+          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
         };
 
         let adminMailConfig = {
           'from': env.email.user,
           'to': env.email.user,
-          'subject': `New Order: #${response.id}, ${response.customerFullName}`,
-          'html': buildOrderSuccessEmail(response) // You can choose to send an HTML body instead
+          'subject': `New Order: #${order.id}, ${order.customerFullName}`,
+          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
         };
 
         transporter.sendMail(customerMailConfig, (error, info) => {
@@ -80,7 +81,7 @@ let productOrders = {
             reply('Somthing went wrong');
           } else {
             transporter.sendMail(adminMailConfig);
-            reply(response).code(200);
+            reply(order).code(200);
           }
         });
       });
@@ -102,7 +103,7 @@ let productOrders = {
             'customerEmail': request.payload.customerEmail,
             'phone': request.payload.phone,
             'shippingStreet': request.payload.shippingStreet,
-            'shippingAppartment': request.payload.shippingAppartment,
+            'shippingApartment': request.payload.shippingApartment,
             'shippingCity': request.payload.shippingCity,
             'shippingState': request.payload.shippingState,
             'shippingZip': request.payload.shippingZip,

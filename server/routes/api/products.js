@@ -130,7 +130,9 @@ module.exports = [
 					'searchBy': Joi.optional(),
 					'orderBy': Joi.string().required(),
 					'pageNumber': Joi.number().required(),
-					'pageSize': Joi.optional()
+					'pageSize': Joi.optional(),
+					'minPrice': Joi.optional(),
+					'maxPrice': Joi.optional()
         }
       }
     },

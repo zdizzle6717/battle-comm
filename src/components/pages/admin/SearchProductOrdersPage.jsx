@@ -170,7 +170,7 @@ class SearchProductOrdersPage extends React.Component {
 											<td>{productOrder.id}</td>
 											<td>{formatJSONDate(productOrder.createdAt)}</td>
 											<td>{productOrder.customerEmail}</td>
-											<td>{productOrder.customerPhone}</td>
+											<td>{productOrder.phone}</td>
 											<td>{productOrder.orderTotal}</td>
 											<td>
 												<Link className="action-item" key="editProductOrder" to={`/admin/product-orders/edit/${productOrder.id}`}>

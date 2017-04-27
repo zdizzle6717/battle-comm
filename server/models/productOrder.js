@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     'customerEmail': DataTypes.STRING,
     'phone': DataTypes.STRING,
     'shippingStreet': DataTypes.STRING,
-    'shippingAppartment': DataTypes.STRING,
+    'shippingApartment': DataTypes.STRING,
     'shippingCity': DataTypes.STRING,
     'shippingState': DataTypes.STRING,
     'shippingZip': DataTypes.STRING,

@@ -52,6 +52,11 @@
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
+				box-sizing: border-box;
+
+				&.in-cart {
+					border-bottom: 3px solid $secondary-200;
+				}
 
 				.button {
 					width: 49%;
@@ -72,6 +77,26 @@
 					cursor: pointer;
 				}
 			}
+		}
+	}
+}
+
+.product-details {
+	.actions {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		box-sizing: border-box;
+
+		&.in-cart {
+			border-bottom: 3px solid $secondary-200;
+		}
+
+		.button {
+			width: 49%;
+			font-size: .875rem;
+			white-space: nowrap;
 		}
 	}
 }

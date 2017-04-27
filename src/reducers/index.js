@@ -11,7 +11,7 @@ import {user, users, isAuthenticated, redirectRoute} from '../library/authentica
 
 // App
 import {bannerSlide, bannerSlides} from './bannerSlides';
-import {cartItems, cartTotal} from './cartItems';
+import {cartItems, cartQtyPlaceholders} from './cartItems';
 import {gameSystem, gameSystems} from './gameSystems';
 import {gameSystemRanking, gameSystemRankings} from './gameSystemRankings';
 import {faction, factions} from './factions';
@@ -42,7 +42,7 @@ export default combineReducers({
 	bannerSlide,
 	bannerSlides,
 	cartItems,
-	cartTotal,
+	cartQtyPlaceholders,
 	gameSystem,
 	gameSystems,
 	gameSystemRanking,

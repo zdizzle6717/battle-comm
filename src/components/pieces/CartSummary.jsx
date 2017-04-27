@@ -10,14 +10,12 @@ import CartActions from '../../actions/CartActions';
 
 const mapStateToProps = (state) => {
 	return {
-		'cartTotal': state.cartTotal,
 		'cartItems': state.cartItems
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		'updateOrderTotal': CartActions.updateTotal,
 		'addToCart': CartActions.add,
 		'removeFromCart': CartActions.remove
 	}, dispatch);
@@ -34,25 +32,18 @@ class CartSummary extends React.Component {
 		this.toggleCart = this.toggleCart.bind(this);
 	}
 
-	componentDidMount() {
-		if (this.props.cartItems.length < 1) {
-			let storedItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
-			storedItems.forEach((item) => {
-				this.props.addToCart(item.product, item.cartQty);
-			});
-			// TODO: Check if this needs a set timeout
-			setTimeout(() => {
-				this.props.updateOrderTotal(this.props.cartItems);
-			});
-		}
+	componentDidMount() {}
+
+	getOrderTotal(items) {
+		let total = 0;
+		items.forEach((item) => {
+			total += parseInt(item.product.price, 10) * parseInt(item.cartQty, 10);
+		});
+		return total;
 	}
 
 	removeItem(item, qty) {
-		this.props.removeFromCart(item.product.id, qty);
-		// TODO: Check if this needs a set timeout
-		setTimeout(() => {
-			this.props.updateOrderTotal(this.props.cartItems);
-		});
+		this.props.removeFromCart(item.product.id);
 	}
 
 	toggleCart() {
@@ -62,7 +53,6 @@ class CartSummary extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.cartItems);
 		return (
 			<li className="mini-cart">
 				<a className="menu-link cart-button" onClick={this.toggleCart}><span className="fa fa-shopping-cart"></span></a>
@@ -74,7 +64,7 @@ class CartSummary extends React.Component {
 						<div className="body">
 							{
 								this.props.cartItems.length > 0 ?
-								<table className="text-center">
+								<table className="stack hover text-center">
 									<thead>
 										<tr>
 											<th className="text-center">Name</th>
@@ -88,9 +78,9 @@ class CartSummary extends React.Component {
 											this.props.cartItems.map((item, i) =>
 												<tr key={i} className="item-row">
 													<td>{`${item.product.name.substring(0, 15)}...`}</td>
-													<td>{item.product.price}</td>
+													<td>{item.product.price} RP</td>
 													<td>({item.cartQty})</td>
-													<td className="pointer" onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-minus"></span></td>
+													<td className="pointer" onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-times-circle-o"></span></td>
 												</tr>
 											)
 										}
@@ -100,10 +90,10 @@ class CartSummary extends React.Component {
 							}
 						</div>
 						<div className="footer">
-							<h4>Order Total: ${this.props.cartTotal}</h4>
-							<div className="actions">
-								<Link to="store/cart" className="button primary">View Cart</Link>
-								<Link to="store/checkout" className="button secondary">Checkout</Link>
+							<h4>Order Total: <strong>{this.getOrderTotal.call(this, this.props.cartItems)} RP</strong></h4>
+							<div className="actions" onClick={this.toggleCart}>
+								<Link to="/store/cart" className="button primary">View Cart</Link>
+								<Link to="/store/checkout" className="button secondary">Checkout</Link>
 							</div>
 						</div>
 					</div>

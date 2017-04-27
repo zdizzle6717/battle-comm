@@ -1,16 +1,18 @@
 'use strict';
 
 import React from 'react';
+import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
 import noUiSlider from 'nouislider';
+import wNumb from 'wnumb';
 import ViewWrapper from '../../ViewWrapper';
 import CartActions from '../../../actions/CartActions';
 import ProductActions from '../../../actions/ProductActions';
 
 const mapStateToProps = (state) => {
     return {
+		'cartQtyPlaceholders': state.cartQtyPlaceholders,
 		'products': state.products
 	}
 };
@@ -18,6 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
 		'addToCart': CartActions.add,
+		'updateItemTotal': CartActions.update,
 		'searchProducts': ProductActions.search
 	}, dispatch);
 };
@@ -31,9 +34,10 @@ class StorePage extends React.Component {
         super();
 
 		this.state = {
+			'orderBy': 'updatedAt',
 			'pagination': {},
 			'pageSize': 20,
-			'orderBy': 'updatedAt',
+			'qtyPlaceholders': {},
 			'searchQuery': '',
 			'sliderStart': _sliderStart,
 			'sliderEnd': _sliderEnd
@@ -52,13 +56,17 @@ class StorePage extends React.Component {
 
 		priceSlider = document.getElementById('price-slider');
 		noUiSlider.create(priceSlider, {
-		  'start': [_sliderStart, _sliderEnd],
-		  'behaviour': 'tap-drag',
-		  'connect': [false, true, false],
-		  'range': {
-		    'min': _sliderStart,
-		    'max': _sliderEnd
-		  }
+			'start': [_sliderStart, _sliderEnd],
+			'behaviour': 'tap-drag',
+			'connect': [false, true, false],
+			'step': 1,
+			'range': {
+				'min': _sliderStart,
+				'max': _sliderEnd
+			},
+			'format': wNumb({
+				'decimals': 0
+			})
 		});
 
 		priceSlider.noUiSlider.on('update', (values, handle) => {
@@ -69,11 +77,17 @@ class StorePage extends React.Component {
 		});
 
 		priceSlider.noUiSlider.on('end', (values, handle) => {
-			// TODO: Add api search route to filter by price
-			console.log('TODO: search')
 			console.log(values[0], values[1]);
+			this.handlePageChange(1, values[0], values[1])
 		});
     }
+
+	componentWillReceiveProps(nextProps) {
+		// TODO: Improve logic so this doesn't get called too often
+		this.setState({
+			'qtyPlaceholders': Object.assign({}, nextProps.cartQtyPlaceholders)
+		});
+	}
 
 	componentWillUnmount() {
 		if (timer) {
@@ -82,13 +96,17 @@ class StorePage extends React.Component {
 		priceSlider.noUiSlider.off();
 	}
 
-	addToCart(product, index, e) {
-		let quantity = 1;
+	addToCart(product, e) {
 		if (e) {
 			e.preventDefault();
-			quantity = e.target.value ? parseInt(e.target.value, 10) : 1;
 		}
-		this.props.addToCart(product, quantity);
+		let quantity = 1;
+		if (this.state.qtyPlaceholders[product.id]) {
+			quantity = this.state.qtyPlaceholders[product.id] > 0 ? this.state.qtyPlaceholders[product.id] : 1;
+		}
+		if (this.state.qtyPlaceholders[product.id] !== '') {
+			this.props.addToCart(product, quantity);
+		}
 	}
 
 	getProductImage(side, product) {
@@ -122,8 +140,8 @@ class StorePage extends React.Component {
 		});
 	}
 
-	handlePageChange(pageNumber = 1) {
-        this.props.searchProducts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize}).then((pagination) => {
+	handlePageChange(pageNumber = 1, minPrice = _sliderStart, maxPrice = _sliderEnd) {
+        this.props.searchProducts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize, 'minPrice': minPrice, 'maxPrice': maxPrice}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});
@@ -138,6 +156,18 @@ class StorePage extends React.Component {
 		});
 	}
 
+	handleQuantityChange(productId, e) {
+		e.preventDefault();
+		let value = e.target.value;
+		if (value === '' || (!isNaN(value) && value % 1 === 0)) {
+			let qtyPlaceholders = this.state.qtyPlaceholders;
+			qtyPlaceholders[productId] = value;
+			this.setState({
+				'qtyPlaceholders': qtyPlaceholders
+			});
+		}
+	}
+
 	handleQueryChange(e) {
 		if (timer) {
 			clearTimeout(timer);
@@ -149,6 +179,19 @@ class StorePage extends React.Component {
 				this.handlePageChange(1);
 			}, 500);
 		});
+	}
+
+	updateItemTotal(product, e) {
+		if (e) {
+			e.preventDefault();
+		}
+		let quantity = 0;
+		if (this.state.qtyPlaceholders[product.id]) {
+			quantity = this.state.qtyPlaceholders[product.id];
+		}
+		if (this.state.qtyPlaceholders[product.id] !== '') {
+			this.props.updateItemTotal(product, quantity);
+		}
 	}
 
     render() {
@@ -171,8 +214,8 @@ class StorePage extends React.Component {
 							<div className="panel-content">
 								<div id="price-slider"></div>
 								<div className="price-labels">
-									<span>{this.state.sliderStart}</span>
-									<span>{this.state.sliderEnd}</span>
+									<span>{this.state.sliderStart} RP</span>
+									<span>{this.state.sliderEnd} RP</span>
 								</div>
 							</div>
 						</div>
@@ -233,17 +276,29 @@ class StorePage extends React.Component {
 										<strong>{product.price} RP</strong>
 									</div>
 									<div className="small-12 columns select-qty">
-										<select onChange={this.addToCart.bind(this, product, i)}>
-											<option value={1}>1</option>
-											<option value={2}>2</option>
-											<option value={3}>3</option>
-											<option value={4}>4</option>
-											<option value={5}>5</option>
-										</select>
+										{
+											(this.state.qtyPlaceholders[product.id] === undefined || (this.state.qtyPlaceholders[product.id] < 5 && this.state.qtyPlaceholders[product.id] !== '')) &&
+											<select value={this.state.qtyPlaceholders[product.id]} onChange={this.handleQuantityChange.bind(this, product.id)}>
+												<option value={0}>0</option>
+												<option value={1}>1</option>
+												<option value={2}>2</option>
+												<option value={3}>3</option>
+												<option value={4}>4</option>
+												<option value={5}>More...</option>
+											</select>
+										}
+										{
+											(this.state.qtyPlaceholders[product.id] >= 5 || this.state.qtyPlaceholders[product.id] === '') &&
+											<input type="number" value={this.state.qtyPlaceholders[product.id]} onChange={this.handleQuantityChange.bind(this, product.id)} step="1"/>
+										}
 									</div>
-									<div className="small-12 columns actions text-center">
-										<button className="button primary" onClick={this.addToCart.bind(this, product, i)}>Add To Cart</button>
-										<Link className="button secondary" to={`store/products/${product.id}`}>More Details</Link>
+									<div className={this.props.cartQtyPlaceholders[product.id] >= 1 ? 'small-12 columns actions text-center in-cart' : 'small-12 columns actions text-center'}>
+										{
+											(this.props.cartQtyPlaceholders[product.id] >= 1 || this.props.cartQtyPlaceholders[product.id] === '') ?
+											<button className="button secondary" onClick={this.updateItemTotal.bind(this, product)}>Update Total</button> :
+											<button className="button primary" onClick={this.addToCart.bind(this, product)}>Add To Cart</button>
+										}
+										<Link className="button black" to={`/store/products/${product.id}`}>More Details</Link>
 									</div>
 								</div>
 								)

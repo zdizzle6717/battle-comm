@@ -9,6 +9,7 @@ import {handlers, uploadFiles} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, CheckBox, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
+import ProductOrderService from '../../../services/ProductOrderService';
 
 const mapStateToProps = (state) => {
 	return {
@@ -26,7 +27,7 @@ class EditProductOrderPage extends React.Component {
 		}
 
 		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleSubmit = this.handleSubmit.ebind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 		this.showAlert = this.showAlert.bind(this);
     }
 
@@ -92,7 +93,7 @@ class EditProductOrderPage extends React.Component {
 	}
 
     render() {
-		let formIsValid = getFormErrorCount(this.props.forms, 'productOrderForm');
+		let formIsInvalid = getFormErrorCount(this.props.forms, 'productOrderForm') > 0;
 
         return (
             <ViewWrapper headerImage="/images/Titles/Product_Edit.png" headerAlt="Product Edit">
@@ -114,13 +115,19 @@ class EditProductOrderPage extends React.Component {
 										<Input type="text" name="customerFullName" value={this.state.productOrder.customerFullName} handleInputChange={this.handleInputChange} required={true} />
 									</div>
 								</div>
+								<div className="row">
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">Customer Email</label>
+										<Input type="text" name="customerEmail" value={this.state.productOrder.customerEmail} handleInputChange={this.handleInputChange} required={true} />
+									</div>
+								</div>
 							</Form>
 						</fieldset>
 					</div>
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>Update Product Order</button>
+								<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>Update Product Order</button>
 							</div>
 						</div>
 					</div>

@@ -9,18 +9,21 @@ import {UserActions} from '../../../library/authentication';
 import {handlers} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, CheckBox, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
+import CartActions from '../../../actions/CartActions';
 import ProductOrderService from '../../../services/ProductOrderService';
 
 const mapStateToProps = (state) => {
 	return {
 		'forms': state.forms,
-		'user': state.user
+		'user': state.user,
+		'cartItems': state.cartItems
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		'addAlert': AlertActions.addAlert
+		'addAlert': AlertActions.addAlert,
+		'clearCart': CartActions.clearCart
 	}, dispatch);
 }
 
@@ -42,32 +45,49 @@ class CheckoutPage extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Checkout";
-		this.setState({
-			'pointsAfterPurchase': parseInt(this.props.user.rewardPoints, 10) - parseInt(this.props.cartTotal, 10)
-		});
 		let productOrder = {
 			'status': 'processing',
-			'UserId': this.props.user.id,
 			'customerFullName': this.props.user.firstName + ' ' + this.props.user.lastName,
-			'email': this.props.user.email
+			'customerEmail': this.props.user.email
 		}
 		this.setState({
 			'productOrder': productOrder
-		})
+		});
     }
 
+	getOrderTotal(items) {
+		let total = 0;
+		items.forEach((item) => {
+			total += parseInt(item.product.price, 10) * parseInt(item.cartQty, 10);
+		});
+		return total;
+	}
+
 	handleInputChange(e) {
+		e.preventDefault();
 		this.setState({
-			'user': handlers.updateInput(e, this.state.user)
+			'productOrder': handlers.updateInput(e, this.state.productOrder)
 		});
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-		ProductOrderService.create(this.state.productOrder).then((response) => {
+		// TODO: First update product stockQty
+		let order = Object.assign({
+			'UserId': this.props.user.id,
+			'orderTotal': this.getOrderTotal.call(this, this.props.cartItems)
+		}, this.state.productOrder);
+		let items = [...this.props.cartItems];
+		order.productDetails = items.map((item) => {
+			let product = item.product;
+			product.qty = item.cartQty;
+			return product;
+		})
+		ProductOrderService.create(order).then((response) => {
 			console.log(response);
 			this.showAlert('orderSuccess');
-			browserHistory.push('/store');
+			this.props.clearCart();
+			browserHistory.push('/store/order-success');
 		})
 	}
 
@@ -91,19 +111,19 @@ class CheckoutPage extends React.Component {
             <ViewWrapper headerImage="/images/Titles/Checkout.png" headerAlt="Checkout">
                 <div className="row">
 					<div className="small-12 columns">
-						<Form name="productOrderForm" handleSubmit={this.handleSubmit} submitText="Finalize Order" disable={this.state.pointsAfterPurchase < 0}>
+						<Form name="productOrderForm" handleSubmit={this.handleSubmit} submitText="Finalize Order" customClass="push-bottom-2x" disable={this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems) < 0}>
 							<div className="row">
 								<div className="form-group small-12 medium-4 columns">
-									<label className="required">First Name</label>
-									<Input type="text" name="fullName" value={this.state.productOrder.fullName} handleInputChange={this.handleInputChange} required={true}/>
+									<label className="required">Full Name</label>
+									<Input type="text" name="customerFullName" value={this.state.productOrder.customerFullName} handleInputChange={this.handleInputChange} required={true}/>
 								</div>
 								<div className="form-group small-12 medium-4 columns">
 									<label className="required">E-mail</label>
-									<Input type="text" name="email" value={this.state.productOrder.email} handleInputChange={this.handleInputChange} required={true}/>
+									<Input type="text" name="customerEmail" value={this.state.productOrder.customerEmail} handleInputChange={this.handleInputChange} required={true}/>
 								</div>
 								<div className="form-group small-12 medium-4 columns">
-									<label className="required">Phone</label>
-									<Input type="text" name="phone" value={this.state.productOrder.phone} handleInputChange={this.handleInputChange} validate="domesticPhone" required={true}/>
+									<label>Phone</label>
+									<Input type="text" name="phone" value={this.state.productOrder.phone} handleInputChange={this.handleInputChange} validate="domesticPhone"/>
 								</div>
 							</div>
 							<h3>Shipping Address</h3>
@@ -114,25 +134,25 @@ class CheckoutPage extends React.Component {
 								</div>
 								<div className="form-group small-2 columns">
 									<label>Apt/Suite</label>
-									<Input type="text" name="shippingAppartment" value={this.state.productOrder.shippingAppartment} handleInputChange={this.handleInputChange}/>
+									<Input type="text" name="shippingApartment" value={this.state.productOrder.shippingApartment} handleInputChange={this.handleInputChange}/>
 								</div>
 							</div>
 							<div className="row">
 								<div className="form-group small-12 medium-3 columns">
 									<label className="required">City</label>
-									<Input type="text" name="firstName" value={this.state.productOrder.firstName} handleInputChange={this.handleInputChange} required={true}/>
+									<Input type="text" name="shippingCity" value={this.state.productOrder.shippingCity} handleInputChange={this.handleInputChange} required={true}/>
 								</div>
 								<div className="form-group small-12 medium-3 columns">
 									<label className="required">State</label>
-									<Input type="text" name="lastName" value={this.state.productOrder.lastName} handleInputChange={this.handleInputChange} required={true}/>
+									<Input type="text" name="shippingState" value={this.state.productOrder.shippingState} handleInputChange={this.handleInputChange} required={true}/>
 								</div>
 								<div className="form-group small-12 medium-3 columns">
 									<label className="required">Zipcode</label>
-									<Input type="text" name="firstName" value={this.state.productOrder.firstName} handleInputChange={this.handleInputChange} validate="zipcode" required={true}/>
+									<Input type="text" name="shippingZip" value={this.state.productOrder.shippingZip} handleInputChange={this.handleInputChange} validate="zipcode" required={true}/>
 								</div>
 								<div className="form-group small-12 medium-3 columns">
 									<label className="required">Country</label>
-									<Select type="text" name="country" value={this.state.productOrder.country} handleInputChange={this.handleInputChange} required={true}>
+									<Select type="text" name="shippingCountry" value={this.state.productOrder.shippingCountry} handleInputChange={this.handleInputChange} required={true}>
 										<option value="">--Select--</option>
 										<option value="US">United States</option>
 									</Select>
@@ -141,12 +161,12 @@ class CheckoutPage extends React.Component {
 							<div className="row">
 								<div className="small-12 columns">
 									<label>Order Details (Add a note specific to your order)</label>
-									<TextArea value={this.state.productOrder.orderDetails || ''} rows="4" handleInputChange={this.handleInputChange} maxLength="255"></TextArea>
+									<TextArea name="orderDetails" value={this.state.productOrder.orderDetails || ''} rows="4" handleInputChange={this.handleInputChange}></TextArea>
 								</div>
 							</div>
 						</Form>
 						{
-							this.state.pointsAfterPurchase < 0 &&
+							this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems) < 0 &&
 							<div className="small-12 columns text-center">
 								<h3 className="color-alert">You do not have enough Reward Points for this purchase.</h3>
 								<Link to="/store/cart">Return to cart?</Link>
@@ -154,8 +174,8 @@ class CheckoutPage extends React.Component {
 						}
 						<div className="small-12 columns text-right">
 							<h5>Current Reward Points: {this.props.user.rewardPoints}</h5>
-							<h5>Order Total: {this.props.cartTotal}</h5>
-							<h5>RP After Purchase: {this.state.pointsAfterPurchase}</h5>
+							<h5>Order Total: {this.getOrderTotal.call(this, this.props.cartItems)}</h5>
+							<h5>RP After Purchase: {this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems)}</h5>
 						</div>
 					</div>
                 </div>

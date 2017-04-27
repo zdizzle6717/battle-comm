@@ -250,18 +250,16 @@ class FileUpload extends React.Component {
 	}
 
 	updateErrorMessages(input, condition, key, text) {
-		let newErrorMessages = [], validity = true;
+		let newErrorMessages = [];
 		if (!condition) {
 			let errorText = text || defaultValidations[this.props.validate].message;
 			newErrorMessages = addErrorMessage(this.state.errors, key, errorText);
 		} else {
 			newErrorMessages = removeErrorMessage(this.state.errors, key);
 		}
-		newErrorMessages.forEach((error) => {
-			if (error.key === 'filesRequired') {
-				validity = false;
-			}
-		})
+		let validity = !newErrorMessages.some((error) => {
+			return error.key === 'filesRequired';
+		});
 		input.errors = newErrorMessages;
 		input.valid = validity;
 		input = Object.assign({}, this.state, input);
