@@ -143,10 +143,10 @@ class Layout extends React.Component {
 				<div className="site-background"></div>
 				<div className="logo-banner row center">
 			        <div className="logo">
-						<Link key="home" to="/" className=""><img src="/images/BC_Web_Logo.png" alt="BattleComm" /></Link>
+						<Link to="/" className=""><img src="/images/BC_Web_Logo.png" alt="BattleComm" /></Link>
 					</div>
 			        <div className="mobile-logo">
-						<Link key="home" to="/" className=""><img src="/images/BC_Web_Logo_mobile.png" alt="BattleComm" /></Link>
+						<Link to="/" className=""><img src="/images/BC_Web_Logo_mobile.png" alt="BattleComm" /></Link>
 			        </div>
 			    </div>
 				{

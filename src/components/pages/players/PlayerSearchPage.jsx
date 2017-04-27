@@ -125,16 +125,16 @@ class PlayerSearchPage extends React.Component {
 							<tbody>
 								{
 									this.props.players.map((user, i) =>
-										<tr key={i}>
-											<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>{user.username}</Link></td>
+										<tr key={user.id}>
+											<td><Link className="action-item" to={`/players/profile/${user.username}`}>{user.username}</Link></td>
 											<td>{user.firstName && user.lastName ? user.lastName + ', ' + user.firstName : 'anonymous'}
 											</td>
 											<td>
-												<Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}>
+												<Link className="action-item" to={`/players/profile/${user.username}`}>
 													<span className="mobile-text">View</span>
 												</Link>
 											</td>
-											<td><Link className="action-item" key="playerProfile" to={`/players/profile/${user.username}`}><img src={this.getPlayerIcon.call(this, user)} className="image-tiny"/></Link>
+											<td><Link className="action-item" to={`/players/profile/${user.username}`}><img src={this.getPlayerIcon.call(this, user)} className="image-tiny"/></Link>
 											</td>
 										</tr>
 									)

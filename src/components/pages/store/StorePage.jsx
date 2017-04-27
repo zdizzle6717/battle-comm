@@ -77,7 +77,6 @@ class StorePage extends React.Component {
 		});
 
 		priceSlider.noUiSlider.on('end', (values, handle) => {
-			console.log(values[0], values[1]);
 			this.handlePageChange(1, values[0], values[1])
 		});
     }
@@ -258,7 +257,7 @@ class StorePage extends React.Component {
 						<div className="products-container">
 							{
 								this.props.products.map((product, i) =>
-								<div key={i} className="product-box">
+								<div key={product.id} className="product-box">
 									<div className="flip-container">
 										<Link to={`/store/products/${product.id}`} className="flipper">
 											<div className="front">

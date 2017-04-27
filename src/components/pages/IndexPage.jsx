@@ -101,7 +101,7 @@ class IndexPage extends React.Component {
 									<div id="da-slider" className="da-slider">
 										{
 											this.state.bannerSlides.map((slide, i) =>
-												<div key={i} className="da-slide">
+												<div key={slide.id} className="da-slide">
 													<h2>{slide.title}</h2>
 													<p>{slide.text}</p>
 													{
@@ -280,7 +280,7 @@ class IndexPage extends React.Component {
 					<ul>
 						{
 							this.props.gameSystems.map((gameSystem, i) =>
-								<li key={i}>{gameSystem.name}</li>
+								<li key={gameSystem.id}>{gameSystem.name}</li>
 							)
 						}
 					</ul>

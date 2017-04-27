@@ -148,9 +148,13 @@ class RadioGroup extends React.Component {
 		return (
 			<div className={validationClasses}>
 				<label>{this.props.label}</label>
-				{this.props.options.map((option) => <div key={option} className="radio-group">
-					<input name={this.props.name} id={option} value={option} type="radio" checked={this.state.value === option} onChange={this.validateInputChange.bind(this, option)}/> <label htmlFor={option} onMouseDown={this.handleMouseDown}>{option}</label>
-				</div>)}
+				{
+					this.props.options.map((option) => 
+						<div key={option} className="radio-group">
+							<input name={this.props.name} id={option} value={option} type="radio" checked={this.state.value === option} onChange={this.validateInputChange.bind(this, option)}/> <label htmlFor={option} onMouseDown={this.handleMouseDown}>{option}</label>
+						</div>
+					)
+				}
 			</div>
 		)
 	}

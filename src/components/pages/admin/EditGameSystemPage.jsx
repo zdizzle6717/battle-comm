@@ -300,7 +300,7 @@ class EditGameSystemPage extends React.Component {
 											<option value="">--Select--</option>
 											{
 												this.props.manufacturers.map((manufacturer, i) =>
-													<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
+													<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
 												)
 											}
 										</Select>
@@ -349,7 +349,7 @@ class EditGameSystemPage extends React.Component {
 								<div className="pill-group">
 									{
 										this.state.gameSystem.Factions.map((faction, i) =>
-											<div key={i} className="pill">{faction.name} <span className="fa fa-times pointer" onClick={this.toggleDeleteFactionModal.bind(this, faction.id, faction.name, i)}></span>
+											<div key={faction.id} className="pill">{faction.name} <span className="fa fa-times pointer" onClick={this.toggleDeleteFactionModal.bind(this, faction.id, faction.name, i)}></span>
 											</div>
 										)
 									}

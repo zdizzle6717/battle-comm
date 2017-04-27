@@ -163,12 +163,12 @@ class SearchUsersPage extends React.Component {
 							<tbody>
 								{
 									this.props.users.map((user, i) =>
-										<tr key={i}>
+										<tr key={user.id}>
 											<td>{user.username}</td>
 											<td>{user.lastName + ', ' + user.firstName}</td>
 											<td>{user.email}</td>
 											<td>
-												<Link className="action-item" key="editUser" to={`/admin/users/edit/${user.id}`}>
+												<Link className="action-item" to={`/admin/users/edit/${user.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>

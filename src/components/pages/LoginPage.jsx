@@ -207,7 +207,7 @@ class LoginPage extends React.Component {
 									</div>
 								</Form>
 								<div className="form-group small-12 columns text-right push-top">
-									<Link key="forgotPassword" to="/forgot-password" activeClassName="active">Forgot your password? </Link>
+									<Link to="/forgot-password" activeClassName="active">Forgot your password? </Link>
 								</div>
                             </div>
                             <div className="box-bar-right"></div>
@@ -248,7 +248,7 @@ class LoginPage extends React.Component {
 					<ul>
 						{
 							this.props.gameSystems.map((gameSystem, i) =>
-								<li key={i}>{gameSystem.name}</li>
+								<li key={gameSystem.id}>{gameSystem.name}</li>
 							)
 						}
 					</ul>

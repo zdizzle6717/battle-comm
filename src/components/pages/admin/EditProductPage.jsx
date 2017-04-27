@@ -290,7 +290,7 @@ class EditProductPage extends React.Component {
 											<option value="">--Select--</option>
 											{
 												this.props.manufacturers.map((manufacturer, i) =>
-													<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
+													<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
 												)
 											}
 										</Select>
@@ -300,8 +300,8 @@ class EditProductPage extends React.Component {
 										<Select name="GameSystemId" value={this.state.product.GameSystemId} handleInputChange={this.handleGameSystemChange}>
 											<option value="">--Select--</option>
 											{
-												this.state.gameSystems.map((gameSystems, i) =>
-													<option key={i} value={gameSystems.id}>{gameSystems.name}</option>
+												this.state.gameSystems.map((gameSystem, i) =>
+													<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
 												)
 											}
 										</Select>
@@ -311,8 +311,8 @@ class EditProductPage extends React.Component {
 										<Select name="FactionId" value={this.state.product.FactionId} handleInputChange={this.handleInputChange}>
 											<option value="">--Select--</option>
 											{
-												this.state.factions.map((factions, i) =>
-													<option key={i} value={factions.id}>{factions.name}</option>
+												this.state.factions.map((faction, i) =>
+													<option key={faction.id} value={faction.id}>{faction.name}</option>
 												)
 											}
 										</Select>

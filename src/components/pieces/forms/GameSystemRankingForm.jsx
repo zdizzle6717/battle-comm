@@ -100,7 +100,7 @@ class GameSystemRankingForm extends React.Component {
 							<option value="">--Select--</option>
 							{
 								this.props.gameSystems.map((gameSystem, i) =>
-									<option key={i} value={gameSystem.id}>{gameSystem.name}</option>
+									<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
 								)
 							}
 						</Select>
@@ -111,7 +111,7 @@ class GameSystemRankingForm extends React.Component {
 							<option value="">--Select--</option>
 							{
 								this.state.factions.map((faction, i) =>
-									<option key={i} value={faction.id}>{faction.name}</option>
+									<option key={faction.id} value={faction.id}>{faction.name}</option>
 								)
 							}
 						</Select>

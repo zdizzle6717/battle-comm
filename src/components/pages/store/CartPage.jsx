@@ -89,8 +89,8 @@ class CartPage extends React.Component {
 					<div className="small-12 columns text-right">
 						<h4>Order Total: <strong>{this.getOrderTotal.call(this, this.props.cartItems)} RP</strong></h4>
 					</div>
-					<div className="small-12 columns">
-						<Link to="/store/checkout" className="button text-center">
+					<div className="small-12 columns text-center">
+						<Link to="/store/checkout" className="button">
 							Go to Checkout
 						</Link>
 					</div>

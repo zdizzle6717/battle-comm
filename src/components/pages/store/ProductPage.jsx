@@ -51,7 +51,6 @@ class ProductPage extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		// TODO: Improve logic so this doesn't get called too often
-		console.log(nextProps.cartQtyPlaceholders);
 		this.setState({
 			'qtyPlaceholders': Object.assign({}, nextProps.cartQtyPlaceholders)
 		});

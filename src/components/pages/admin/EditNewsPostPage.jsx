@@ -299,7 +299,7 @@ class EditNewsPostPage extends React.Component {
 											<option value="">--Select--</option>
 											{
 												this.props.manufacturers.map((manufacturer, i) =>
-													<option key={i} value={manufacturer.id}>{manufacturer.name}</option>
+													<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
 												)
 											}
 										</Select>
@@ -310,7 +310,7 @@ class EditNewsPostPage extends React.Component {
 											<option value="">--Select--</option>
 											{
 												this.state.gameSystems.map((gameSystems, i) =>
-													<option key={i} value={gameSystems.id}>{gameSystems.name}</option>
+													<option key={gameSystems.id} value={gameSystems.id}>{gameSystems.name}</option>
 												)
 											}
 										</Select>
@@ -351,7 +351,7 @@ class EditNewsPostPage extends React.Component {
 								</div>
 								{
 									this.state.files.map((file, i) =>
-										<div key={i} className="row">
+										<div key={file.id} className="row">
 											<div className="small-12 medium-6 columns">
 												<label>News Post Image</label>
 												{

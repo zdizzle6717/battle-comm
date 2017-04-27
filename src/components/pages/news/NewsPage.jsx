@@ -56,7 +56,7 @@ class NewsPage extends React.Component {
 					<div className="small-12 columns">
 						{
 							this.props.posts.map((post, i) =>
-								<div key={i} className="news-post">
+								<div key={post.id} className="news-post">
 									<h3><Link to={`/news/post/${post.id}`} className="underline">{post.title}</Link></h3>
 									<div className="row">
 										<div className="small-6 medium-3 columns"><strong>Author:</strong> {post.User.firstName} {post.User.lastName}</div>
