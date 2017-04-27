@@ -99,7 +99,6 @@ class PlayerDashboardPage extends React.Component {
 			});
 			let method = iconFile ? 'update': 'create';
 			UserPhotoService[method]((iconFile ? iconFile.id : file), (iconFile ? file : null)).then((file) => {
-				console.log(file);
 				this.getCurrentPlayer().then(() => {
 					this.setState({
 						'fileUploadIcon': []
@@ -404,24 +403,24 @@ class PlayerDashboardPage extends React.Component {
 									</div>
 								</div>
 							</div>
-							<h1 className="push-top"><Link key="userProfile" to={`/players/profile/${currentUser.username}`} className="username">{currentUser.username}</Link></h1>
+							<h1 className="push-top"><Link to={`/players/profile/${currentUser.username}`} className="username">{currentUser.username}</Link></h1>
 							<div className="">
 								<p><Link to={`/players/dashboard/change-password`}>Change Password?</Link></p>
 							</div>
 							<div className="row push-top-2x">
 								<div className="small-12 columns text-center">
-									<Link key="editAccountDetails" to="/players/dashboard/account-edit"><h3 className="button account-details">Edit Account Details</h3></Link>
+									<Link to="/players/dashboard/account-edit"><h3 className="button account-details">Edit Account Details</h3></Link>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Allies <Link key="allyList" to={`/players/profile/${currentUser.username}/ally-search`} className="right">View All</Link></h2>
+							<h2>Allies <Link to={`/players/profile/${currentUser.username}/ally-search`} className="right">View All</Link></h2>
 							<div className="friend-list">
 								{
 									currentUser.Friends.map((friend, i) =>
-									<span key={i} className="icon-box">
+									<span key={friend.id} className="icon-box">
 										<Link to={`/players/profile/${friend.username}`} className="icon-box">
 											<img className="icon" src={this.getPlayerIcon.call(this, friend)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
@@ -444,7 +443,7 @@ class PlayerDashboardPage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Player Ranking <Link key="playerRanking" to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<h2>Player Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							<div className="small-12 columns">
 								{
 									currentUser.GameSystemRankings.length < 1 &&
@@ -452,8 +451,8 @@ class PlayerDashboardPage extends React.Component {
 								}
 								{
 									currentUser.GameSystemRankings.map((gameRanking, i) =>
-									<div key={i} className="row">
-										<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
+									<div key={gameRanking.id} className="row">
+										<h4><Link to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
 										<table className="search-results">
 											<thead>
 												<tr>
@@ -466,9 +465,9 @@ class PlayerDashboardPage extends React.Component {
 											<tbody>
 												{
 													gameRanking.FactionRankings.map((factionRanking, j) =>
-														<tr key={j} className="item">
-															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
-															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
+														<tr key={factionRanking.id} className="item">
+															<td><Link to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+															<td><Link to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
 															<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
 															<td>{factionRanking.pointValue}</td>
 														</tr>
@@ -496,7 +495,7 @@ class PlayerDashboardPage extends React.Component {
 									<div className="photo-stream">
 										{
 											this.state.photoStream.map((photo, i) =>
-												<div key={i} className="photo-box">
+												<div key={photo.id} className="photo-box">
 													<a onClick={this.toggleModal.bind(this, `photoStream-${i}`)}><img src={`/uploads/players/${this.state.currentUser.id}/photoStream/${photo.name}`}/></a>
 														<Modal name={`photoStream-${i}`} title={`${this.state.currentUser.username}'s Photo Stream`} modalIsOpen={this.state.activeModal === `photoStream-${i}`} handleClose={this.toggleModal.bind(this, `photoStream-${i}`)} showClose={true} showCancel={false} confirmText="Delete?" handleSubmit={this.deletePhoto.bind(this, photo.id, i)}>
 															<img src={`/uploads/players/${this.state.currentUser.id}/photoStream/${photo.name}`}/>

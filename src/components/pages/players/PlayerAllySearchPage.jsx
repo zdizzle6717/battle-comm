@@ -129,13 +129,13 @@ class PlayerAllySearchPage extends React.Component {
 								<tbody>
 									{
 										this.state.friends.map((friend, i) =>
-											<tr key={i}>
-												<td><Link className="action-item" key="playerProfile" to={`/players/profile/${friend.username}`}><img src={this.getPlayerIcon.call(this, friend)} /></Link>
+											<tr key={friend.id}>
+												<td><Link className="action-item" to={`/players/profile/${friend.username}`}><img src={this.getPlayerIcon.call(this, friend)} /></Link>
 												</td>
 												<td>{friend.username}</td>
 												<td>{friend.lastName}, {friend.firstName}</td>
 												<td>
-													<Link className="action-item" key="playerProfile" to={`/players/profile/${friend.username}`}>
+													<Link className="action-item" to={`/players/profile/${friend.username}`}>
 														<span className="action">
 															<i className="tip-icon fa fa-eye"></i>
 														</span>

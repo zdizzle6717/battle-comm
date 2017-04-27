@@ -165,7 +165,7 @@ class RegistrationPage extends React.Component {
 							</Form>
 							<div className="row">
 								<div className="form-group small-12 columns">
-									Already have an account? <Link key="login" to="/login">Go to Login</Link>
+									Already have an account? <Link to="/login">Go to Login</Link>
 								</div>
 							</div>
 							<div className="row">

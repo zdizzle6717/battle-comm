@@ -63,7 +63,9 @@ class BannerSlideManagement extends React.Component {
     }
 
 	editSlide(index) {
-		let slide = this.props.slides[index]
+		// TODO: Investigate - This change may have been the reason form reset didn't work
+		// immutable props was not previously enforced
+		let slide = Object.assign({}, this.props.slides[index]);
 		slide.index = index;
 		this.setState({
 			'formIsActive': true,
@@ -259,7 +261,7 @@ class BannerSlideManagement extends React.Component {
 						<tbody>
 							{
 								this.props.slides.map((slide, i) =>
-									<tr key={i}>
+									<tr key={slide.id}>
 										<td>{slide.priority}</td>
 										<td>{slide.title}</td>
 										<td>{formatJSONDate(slide.updatedAt)}</td>

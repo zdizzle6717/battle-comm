@@ -133,7 +133,7 @@ class PlayerRankingSearchPage extends React.Component {
 								<option value="">--Select--</option>
 								{
 									this.props.gameSystems.map((gameSystem, i) =>
-										<option key={i} value={gameSystem.id}>{gameSystem.name}</option>
+										<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
 									)
 								}
 							</select>
@@ -146,7 +146,7 @@ class PlayerRankingSearchPage extends React.Component {
 								<option value="">All Factions</option>
 								{
 									this.state.selectedGameSystem.Factions.map((faction, i) =>
-										<option key={i} value={faction.id}>{faction.name}</option>
+										<option key={faction.id} value={faction.id}>{faction.name}</option>
 									)
 								}
 							</select>
@@ -171,14 +171,14 @@ class PlayerRankingSearchPage extends React.Component {
 							<tbody>
 								{
 									this.state.results.map((ranking, i) =>
-										<tr key={i}>
-											<td><Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>{this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}</Link></td>
+										<tr key={ranking.id}>
+											<td><Link className="action-item" to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>{this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}</Link></td>
 											<td>{ranking.totalWins}</td>
 											<td>{ranking.totalLosses}</td>
 											<td>{ranking.totalDraws}</td>
 											<td>{ranking.pointValue}</td>
 											<td>
-												<Link className="action-item" key={i} to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>
+												<Link className="action-item" to={`/players/profile/${this.props.params.factionId ? ranking.GameSystemRanking.User.username : ranking.User.username}`}>
 													<span className="mobile-text">View</span>
 												</Link>
 											</td>

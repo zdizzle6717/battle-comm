@@ -171,12 +171,12 @@ class SearchManufacturersPage extends React.Component {
 							<tbody>
 								{
 									this.props.manufacturers.map((manufacturer, i) =>
-										<tr key={i}>
+										<tr key={manufacturer.id}>
 											<td>{manufacturer.name}</td>
 											<td>{manufacturer.searchKey}</td>
 											<td>{formatJSONDate(manufacturer.updatedAt)}</td>
 											<td>
-												<Link className="action-item" key="editManufacturer" to={`/admin/manufacturers/edit/${manufacturer.id}`}>
+												<Link className="action-item" to={`/admin/manufacturers/edit/${manufacturer.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>

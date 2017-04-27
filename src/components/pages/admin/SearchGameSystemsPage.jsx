@@ -171,12 +171,12 @@ class SearchGameSystemsPage extends React.Component {
 							<tbody>
 								{
 									this.props.gameSystems.map((gameSystem, i) =>
-										<tr key={i}>
+										<tr key={gameSystem.id}>
 											<td>{gameSystem.name}</td>
 											<td>{formatJSONDate(gameSystem.createdAt)}</td>
 											<td>{formatJSONDate(gameSystem.updatedAt)}</td>
 											<td>
-												<Link className="action-item" key="editGameSystem" to={`/admin/game-systems/edit/${gameSystem.id}`}>
+												<Link className="action-item" to={`/admin/game-systems/edit/${gameSystem.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>

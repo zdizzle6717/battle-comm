@@ -118,7 +118,7 @@ export default class PasswordResetPage extends React.Component {
                 </div>
 				<div className="row push-top">
 					<div className="form-group small-12 columns">
-						Return to login page? <Link key="login" to="/login">Go to Login</Link>
+						Return to login page? <Link to="/login">Go to Login</Link>
 					</div>
 				</div>
 				<div className="row">

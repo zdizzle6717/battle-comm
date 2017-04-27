@@ -200,7 +200,7 @@ class AssignPointsPage extends React.Component {
 						<h2>Players</h2>
 						{
 							this.state.players.map((player, i) =>
-								<Form key={i} name={`venueEventPlayersForm-${i}`} submitText="Submit Point Assignment" submitButton={false}>
+								<Form key={player.id} name={`venueEventPlayersForm-${i}`} submitText="Submit Point Assignment" submitButton={false}>
 									<fieldset>
 										<div className="row">
 											<div className="form-group small-12 medium-4 columns">
@@ -223,7 +223,7 @@ class AssignPointsPage extends React.Component {
 													<option value="">--Select--</option>
 													{
 														this.props.gameSystems.map((gameSystem, i) =>
-															<option key={i} value={gameSystem.id}>{gameSystem.name}</option>
+															<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
 														)
 													}
 												</Select>
@@ -234,7 +234,7 @@ class AssignPointsPage extends React.Component {
 													<option value="">--Select--</option>
 													{
 														this.state.factions[i].map((faction, i) =>
-															<option key={i} value={faction.name}>{faction.name}</option>
+															<option key={faction.id} value={faction.name}>{faction.name}</option>
 														)
 													}
 												</Select>

@@ -231,11 +231,11 @@ class PlayerProfilePage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Allies <Link key="allyList" to={`/players/profile/${player.username}/ally-search`} className="right">View All</Link></h2>
+							<h2>Allies <Link to={`/players/profile/${player.username}/ally-search`} className="right">View All</Link></h2>
 							<div className="friend-list">
 								{
 									player.Friends.map((friend, i) =>
-										<Link key={i} to={`/players/profile/${friend.username}`} className="icon-box">
+										<Link key={friend.id} to={`/players/profile/${friend.username}`} className="icon-box">
 											<img className="icon" src={this.getPlayerIcon.call(this, player)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
 										</Link>
@@ -258,7 +258,7 @@ class PlayerProfilePage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Player Ranking <Link key="playerRanking" to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<h2>Player Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							<div className="small-12 columns">
 								{
 									player.GameSystemRankings.length < 1 &&
@@ -266,8 +266,8 @@ class PlayerProfilePage extends React.Component {
 								}
 								{
 									player.GameSystemRankings.map((gameRanking, i) =>
-									<div key={i} className="row">
-										<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
+									<div key={gameRanking.id} className="row">
+										<h4><Link to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
 										<table className="search-results stack hover text-center">
 											<thead>
 												<tr>
@@ -280,9 +280,9 @@ class PlayerProfilePage extends React.Component {
 											<tbody>
 												{
 													gameRanking.FactionRankings.map((factionRanking, j) =>
-														<tr key={j} className="item">
-															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
-															<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
+														<tr key={factionRanking.id} className="item">
+															<td><Link to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+															<td><Link to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
 															<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
 															<td>{factionRanking.pointValue}</td>
 														</tr>

@@ -84,7 +84,6 @@ class CheckoutPage extends React.Component {
 			return product;
 		})
 		ProductOrderService.create(order).then((response) => {
-			console.log(response);
 			this.showAlert('orderSuccess');
 			this.props.clearCart();
 			browserHistory.push('/store/order-success');

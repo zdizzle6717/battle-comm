@@ -227,8 +227,8 @@ class EditUserPage extends React.Component {
 									}
 									{
 										this.state.user.GameSystemRankings.map((gameRanking, i) =>
-										<div key={i} className="row">
-											<h4><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
+										<div key={gameRanking.id} className="row">
+											<h4><Link to={`/ranking/search/${gameRanking.GameSystemId}`}>{gameRanking.GameSystem.name}</Link>: {gameRanking.totalWins}/{gameRanking.totalLosses}/{gameRanking.totalDraws}</h4>
 											<table className="search-results stack hover text-center">
 												<thead>
 													<tr>
@@ -241,9 +241,9 @@ class EditUserPage extends React.Component {
 												<tbody>
 													{
 														gameRanking.FactionRankings.map((factionRanking, j) =>
-															<tr key={j} className="item">
-																<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
-																<td><Link key={`gameSystemRanking-${i}`} to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
+															<tr key={factionRanking.id} className="item">
+																<td><Link to={`/ranking/search/${gameRanking.GameSystemId}`} className="color-black">{gameRanking.GameSystem.name}</Link></td>
+																<td><Link to={`/ranking/search/${gameRanking.GameSystemId}/${factionRanking.FactionId}`} className="color-black">{factionRanking.Faction.name}</Link></td>
 																<td>{factionRanking.totalWins}/{factionRanking.totalLosses}/{factionRanking.totalDraws}</td>
 																<td>{factionRanking.pointValue}</td>
 															</tr>

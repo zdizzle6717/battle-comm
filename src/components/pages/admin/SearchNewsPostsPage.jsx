@@ -172,12 +172,12 @@ class SearchNewsPostsPage extends React.Component {
 							<tbody>
 								{
 									this.props.newsPosts.map((newsPost, i) =>
-										<tr key={i}>
+										<tr key={newsPost.id}>
 											<td>{newsPost.title}</td>
 											<td>{newsPost.User.lastName + ', ' + newsPost.User.firstName}</td>
 											<td>{formatJSONDate(newsPost.updatedAt)}</td>
 											<td>
-												<Link className="action-item" key="editNewsPost" to={`/admin/news/edit/${newsPost.id}`}>
+												<Link className="action-item" to={`/admin/news/edit/${newsPost.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>

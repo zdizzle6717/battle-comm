@@ -65,9 +65,11 @@ export default class PaginationControls extends React.Component {
 						<div className="controls-list">
 							<div className="page-button" onClick={this.handlePageChange.bind(this, (1))}><span className="fa fa-angle-double-left"></span></div>
 							<div className="page-button" onClick={this.handlePageChange.bind(this, (this.state.currentPage > 1 ? this.state.currentPage - 1 : 1))}><span className="fa fa-angle-left"></span></div>
-
-							{this.state.pages.map((button, i) => <div key={i} className={button.pageNumber === this.state.currentPage ? 'page-button active' : 'page-button'} onClick={this.handlePageChange.bind(this, button.pageNumber)}>{button.pageNumber}</div>)}
-
+							{
+								this.state.pages.map((button, i) => 
+									<div key={i} className={button.pageNumber === this.state.currentPage ? 'page-button active' : 'page-button'} onClick={this.handlePageChange.bind(this, button.pageNumber)}>{button.pageNumber}</div>
+								)
+							}
 							<div className="page-button" onClick={this.handlePageChange.bind(this, (this.state.currentPage < this.props.totalPages ? this.state.currentPage + 1 : this.props.totalPages))}><span className="fa fa-angle-right"></span></div>
 							<div className="page-button" onClick={this.handlePageChange.bind(this, (this.props.totalPages))}><span className="fa fa-angle-double-right"></span></div>
 						</div>

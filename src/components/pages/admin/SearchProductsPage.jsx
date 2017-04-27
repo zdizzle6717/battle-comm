@@ -173,13 +173,13 @@ class SearchProductsPage extends React.Component {
 							<tbody>
 								{
 									this.props.products.map((product, i) =>
-										<tr key={i}>
+										<tr key={product.id}>
 											<td>{product.id}</td>
 											<td>{product.name}</td>
 											<td>{product.price}</td>
 											<td>{formatJSONDate(product.updatedAt)}</td>
 											<td>
-												<Link className="action-item" key="editProduct" to={`/admin/products/edit/${product.id}`}>
+												<Link className="action-item" to={`/admin/products/edit/${product.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>

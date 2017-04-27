@@ -78,10 +78,10 @@ class AccountMenu extends React.Component {
 						</h3>
 						<ul onClick={this.toggleMenu}>
 							<li>
-								<Link key="userDashboard" to="/players/dashboard"><span className="fa fa-dashboard"></span>My Dashboard</Link>
+								<Link to="/players/dashboard"><span className="fa fa-dashboard"></span>My Dashboard</Link>
 							</li>
 							<li>
-								<Link key="userDashboard" to={`/players/profile/${this.props.user.username}`}><span className="fa fa-user"></span>My Public Profile</Link>
+								<Link to={`/players/profile/${this.props.user.username}`}><span className="fa fa-user"></span>My Public Profile</Link>
 							</li>
 							<li>
 								<Link to="/players"><span className="fa fa-search"></span>Search</Link>

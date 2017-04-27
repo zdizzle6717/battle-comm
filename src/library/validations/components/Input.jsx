@@ -200,9 +200,7 @@ class Input extends React.Component {
 				<input className={validationClasses} type={this.props.type} name={this.props.name} value={this.props.value} placeholder={this.props.placeholder} min={this.props.min} max={this.props.max} minLength={this.props.minlength} maxLength={this.props.maxlength} onChange={this.validateInput} onMouseDown={this.handleMouseDown} onFocus={this.handleFocus} onBlur={this.handleBlur} autoComplete={this.props.autoComplete} disabled={this.props.disabled}/>
 				<div className="validate-errors">
 					{
-						this.state.errors.map((error, i) =>
-							<div key={i} className="validate-error">{error.message}</div>
-						)
+						this.state.errors.map((error, i) => <div key={i} className="validate-error">{error.message}</div>)
 					}
 				</div>
 			</div>

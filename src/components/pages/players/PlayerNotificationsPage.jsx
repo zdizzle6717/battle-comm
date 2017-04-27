@@ -126,7 +126,7 @@ class PlayerNotificationsPage extends React.Component {
 							{
 								this.props.notifications.filter((notification) => notification.type === 'allyRequestReceived').length > 0 ?
 								this.props.notifications.filter((notification) => notification.type === 'allyRequestReceived').map((notification, i) =>
-									<div key={i} className="container ice push-bottom">
+									<div key={notification.id} className="container ice push-bottom">
 										<div className="">
 											New ally request from <strong>{notification.fromUsername}</strong>
 										</div>
@@ -147,7 +147,7 @@ class PlayerNotificationsPage extends React.Component {
 								{
 									this.props.notifications.filter((notification, i) => notification.type === 'allyRequestAccepted').length > 0 ?
 									this.props.notifications.filter((notification) => notification.type === 'allyRequestAccepted').map((notification, i) =>
-										<div key={i} className="container ice push-bottom">
+										<div key={notification.id} className="container ice push-bottom">
 											<span className="fa fa-times" onClick={this.removeNotification.bind(this, notification.id, notification.fromUsername)}></span>
 											<div className="">
 												<strong>{notification.fromUsername}</strong> accepted your ally request

@@ -166,14 +166,14 @@ class SearchProductOrdersPage extends React.Component {
 							<tbody>
 								{
 									this.props.productOrders.map((productOrder, i) =>
-										<tr key={i}>
+										<tr key={productOrder.id}>
 											<td>{productOrder.id}</td>
 											<td>{formatJSONDate(productOrder.createdAt)}</td>
 											<td>{productOrder.customerEmail}</td>
 											<td>{productOrder.phone}</td>
 											<td>{productOrder.orderTotal}</td>
 											<td>
-												<Link className="action-item" key="editProductOrder" to={`/admin/product-orders/edit/${productOrder.id}`}>
+												<Link className="action-item" to={`/admin/product-orders/edit/${productOrder.id}`}>
 													<span className="action">
 														<i className="tip-icon fa fa-pencil"></i>
 													</span>
