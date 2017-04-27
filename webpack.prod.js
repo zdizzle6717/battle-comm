@@ -31,11 +31,7 @@ module.exports = {
       output: {
         comments: false
       },
-      mangle: {
-        screw_ie8: true
-      },
       compress: {
-        screw_ie8: true,
         warnings: false,
         conditionals: true,
         unused: true,

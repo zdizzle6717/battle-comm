@@ -4,14 +4,25 @@
 
 module.exports = {
 	'version': '2.0.0',
-	
+
 	// Development
+	// 'name': 'development',
+	// 'baseApiRoute': 'http://localhost:9290/api/',
+	// 'baseUrl': 'http://localhost',
+	// 'clientPort': 9200,
+	// 'apiPort': 9290,
+	// 'chatPort': 9291,
+	// 'cors': {
+	// 	'origin': ['*']
+	// },
+
+	// Staging
 	'name': 'development',
-	'baseApiRoute': 'http://localhost:9290/api/',
-	'baseUrl': 'http://localhost',
-	'clientPort': 9200,
-	'apiPort': 9290,
-	'chatPort': 9291,
+	'baseApiRoute': 'http://staging.battle-comm.net:3030/api/',
+	'baseUrl': 'http://staging.battle-comm.net',
+	'clientPort': 3000,
+	'apiPort': 3030,
+	'chatPort': 3031,
 	'cors': {
 		'origin': ['*']
 	},

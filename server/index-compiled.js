@@ -102,20 +102,20 @@ server.register(require('./chat'), function (err) {
 });
 
 // Documentation (Swagger) Config
-var options = {
+var documentationOptions = {
   'info': {
-    'title': 'Hapi Stack API Documentation',
-    'version': '1.0.0'
+    'title': 'Battle-Comm API Documentation',
+    'version': _envVariables2.default.version
   },
   'basePath': '/api/',
   'pathPrefixSize': 2,
-  'documentationPage': _envVariables2.default.name === 'producttion' ? false : true
+  'documentationPage': _envVariables2.default.name === 'production' ? false : true
 };
 
 // Register Swagger Plugin ( Use for documentation and testing purpose )
 server.register([_inert2.default, _vision2.default, {
   'register': _hapiSwagger2.default,
-  'options': options
+  'options': documentationOptions
 }], {
   'routes': {
     'prefix': '/api'
@@ -148,25 +148,25 @@ for (var route in routes) {
   server.select('api').route(routes[route]);
 }
 
-if (false) {
-  var numWorkers = _os2.default.cpus().length;
+if (false /* cluster.isMaster */) {
+    var numWorkers = _os2.default.cpus().length;
 
-  console.log('Master cluster setting up ' + numWorkers + ' workers...');
+    console.log('Master cluster setting up ' + numWorkers + ' workers...');
 
-  for (var i = 0; i < numWorkers; i++) {
-    _cluster2.default.fork();
-  }
+    for (var i = 0; i < numWorkers; i++) {
+      _cluster2.default.fork();
+    }
 
-  _cluster2.default.on('online', function (worker) {
-    console.log('Worker ' + worker.process.pid + ' is online');
-  });
+    _cluster2.default.on('online', function (worker) {
+      console.log('Worker ' + worker.process.pid + ' is online');
+    });
 
-  _cluster2.default.on('exit', function (worker, code, signal) {
-    console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
-    console.log('Starting a new worker');
-    _cluster2.default.fork();
-  });
-} else {
+    _cluster2.default.on('exit', function (worker, code, signal) {
+      console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+      console.log('Starting a new worker');
+      _cluster2.default.fork();
+    });
+  } else {
   _models2.default.sequelize.sync().then(function () {
     server.start(function (err) {
       if (err) {

@@ -87,6 +87,13 @@ let productOrders = {
       });
   },
   update: (request, reply) => {
+		let transporter = nodemailer.createTransport(({
+      'service': 'Gmail',
+      'auth': {
+        'xoauth2': generator
+      }
+    }));
+
     models.ProductOrder.find({
         'where': {
           'id': request.params.id
@@ -108,8 +115,33 @@ let productOrders = {
             'shippingState': request.payload.shippingState,
             'shippingZip': request.payload.shippingZip,
             'shippingCountry': request.payload.shippingCountry
-          }).then((response) => {
-            reply(response).code(200);
+          }).then((order) => {
+						order = order.get({'plain': true});
+		        let customerMailConfig = {
+		          'from': env.email.user,
+		          'to': order.customerEmail,
+		          'subject': `Order Confirmation: Battle-Comm, Order #${order.id}`,
+		          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+		        };
+
+		        let adminMailConfig = {
+		          'from': env.email.user,
+		          'to': env.email.user,
+		          'subject': `Order Updated: #${order.id}, ${order.customerFullName}`,
+		          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+		        };
+
+		        transporter.sendMail(adminMailConfig, (error, info) => {
+		          if (error) {
+		            console.log(error);
+		            reply('Somthing went wrong');
+		          } else {
+								if (order.status === 'shipped') {
+									transporter.sendMail(customerMailConfig);
+								}
+		            reply(order).code(200);
+		          }
+		        });
           });
         } else {
           reply().code(404);

@@ -112,7 +112,11 @@ module.exports = [
 				'payload': {
 					'status': Joi.string().valid('processing', 'shipped', 'completed').required(),
 					'orderDetails': Joi.string().required(),
+					'productDetails': Joi.optional(),
 					'orderTotal': Joi.number().required(),
+					'id': Joi.optional(),
+					'createdAt': Joi.optional(),
+					'updatedAt': Joi.optional(),
 					'UserId': Joi.number().required(),
 					'customerFullName': Joi.string().required(),
 					'customerEmail': Joi.string().email().required(),
