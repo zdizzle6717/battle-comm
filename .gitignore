@@ -42,9 +42,13 @@ babel_cache*
 # SCSS
 .sass-cache
 
+# uploads
+dist/uploads*
+
 # Database Connections and Credentials
 envVariables.js
-server/config*
+server/databaseConfig.js
+compiled-server/databaseConfig.js
 
 # SSL
 server/ssl*

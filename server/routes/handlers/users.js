@@ -275,7 +275,7 @@ let users = {
     transporter.sendMail(forgotPasswordConfig, (error, info) => {
       if (error) {
         console.log(error);
-        reply('Somthing went wrong');
+        reply('Something went wrong');
       } else {
         reply({
 					'email': request.pre.user.email
