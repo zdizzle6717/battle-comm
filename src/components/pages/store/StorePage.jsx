@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
+import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
 import CartActions from '../../../actions/CartActions';
 import ProductActions from '../../../actions/ProductActions';
@@ -313,8 +314,8 @@ class StorePage extends React.Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="small-12 columns text-center">
-						Pagination
+					<div className="small-12 columns">
+						<PaginationControls pageNumber={this.state.pagination.pageNumber} pageSize={this.state.pagination.pageSize} totalPages={this.state.pagination.totalPages} totalResults={this.state.pagination.totalResults} handlePageChange={this.handlePageChange.bind(this)}></PaginationControls>
 					</div>
 				</div>
             </ViewWrapper>

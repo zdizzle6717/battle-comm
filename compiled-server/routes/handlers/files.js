@@ -221,7 +221,7 @@ var files = {
                   _fsExtra2.default.unlink(locationPath + '/' + size + '-' + fileName, function (error) {
                     if (error) {
                       console.log(error);
-                      reply(_boom2.default.badRequest(error));
+                      reply(_boom2.default.badRequest('Error deleting file.'));
                     } else {
                       count++;
                       if (count >= _imageConfig2.default[file.identifier].sizes.length) {
@@ -234,7 +234,7 @@ var files = {
                 reply().code(200);
               }
             });
-            reply().code(404);
+            reply(_boom2.default.notFound('File missing, cannot delete.'));
           }
         });
       }

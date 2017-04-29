@@ -156,6 +156,9 @@ class PlayerDashboardPage extends React.Component {
 		if (this.state.currentUser.UserPhoto) {
 			UserPhotoService.remove(this.state.currentUser.UserPhoto.id).then(() => {
 				this.createUserPhoto(files);
+			}).catch((error) => {
+				console.log(error);
+				this.createUserPhoto(files);
 			});
 		} else {
 			this.createUserPhoto(files);
@@ -443,7 +446,7 @@ class PlayerDashboardPage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Player Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<h2>Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							<div className="small-12 columns">
 								{
 									currentUser.GameSystemRankings.length < 1 &&

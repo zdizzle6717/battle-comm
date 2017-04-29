@@ -206,7 +206,7 @@ let files = {
 									fse.unlink(`${locationPath}/${size}-${fileName}`, (error) => {
 										if (error) {
 											console.log(error);
-											reply(Boom.badRequest(error));
+											reply(Boom.badRequest('Error deleting file.'));
 										} else {
 											count++;
 											if (count >= imageConfig[file.identifier].sizes.length) {
@@ -219,7 +219,7 @@ let files = {
 								reply().code(200);
 							}
 						});
-            reply().code(404);
+            reply(Boom.notFound('File missing, cannot delete.'));
           }
         });
       }

@@ -88,8 +88,8 @@ $space-between: 3;
 								max-width: 50%;
     						margin-left: 3%;
 
-								@include breakpoint(small only) {
-									max-width: 90%;
+								img {
+									max-height: 85px;
 								}
 							}
 						}
@@ -237,6 +237,19 @@ $space-between: 3;
 							height: .75rem;
 							top: 0;
 							background-size: .65%;
+
+							.title {
+								&.small {
+								}
+
+								&.large {
+									max-width: 90%;
+
+									img {
+										max-height: 75px;
+									}
+								}
+							}
 						}
 					}
 				}

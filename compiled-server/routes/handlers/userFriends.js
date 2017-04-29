@@ -10,8 +10,6 @@ var _models2 = _interopRequireDefault(_models);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 // Product Route Configs
 var userFriends = {
   create: function create(request, reply) {
@@ -61,61 +59,32 @@ var userFriends = {
     });
   },
   'search': function search(request, reply) {
-    var searchByConfig = void 0;
     var pageSize = parseInt(request.payload.pageSize, 10) || 20;
-    var searchQuery = request.payload.searchQuery || '';
     var offset = (request.payload.pageNumber - 1) * pageSize;
-    var orderBy = request.payload.orderBy ? request.payload.orderBy === 'updatedAt' || request.payload.orderBy === 'createdAt' ? [request.payload.orderBy, 'DESC'] : [request.payload.orderBy, 'ASC'] : undefined;
-    if (searchQuery) {
-      searchByConfig = request.payload.searchBy ? _defineProperty({
-        'UserId': request.params.UserId
-      }, request.payload.searchBy, {
-        '$iLike': '%' + searchQuery + '%'
-      }) : {
-        'UserId': request.params.UserId,
-        '$or': [{
-          'username': {
-            '$iLike': '%' + searchQuery + '%'
-          }
-        }, {
-          'email': {
-            '$iLike': '%' + searchQuery + '%'
-          }
-        }, {
-          'firstName': {
-            '$iLike': '%' + searchQuery + '%'
-          }
-        }, {
-          'lastName': {
-            '$iLike': '%' + searchQuery + '%'
-          }
-        }]
-      };
-    } else {
-      searchByConfig = {};
-    }
-    // TODO: Make sure this search actually works and searches the join table "userHasFriends"
-    _models2.default.Friend.findAndCountAll({
-      'where': searchByConfig,
-      'order': orderBy ? [orderBy] : [],
-      'offset': offset,
-      'limit': request.payload.pageSize,
-      'include': [{
-        'model': _models2.default.UserPhoto
-      }]
-    }).then(function (response) {
-      var count = response.count;
-      var results = response.rows;
-      var totalPages = Math.ceil(count === 0 ? 1 : count / pageSize);
 
+    _models2.default.User.find({
+      'where': {
+        'username': request.payload.username
+      },
+      'include': [{
+        'model': _models2.default.User,
+        'as': 'Friends',
+        'attributes': ['id', 'firstName', 'lastName', 'username']
+      }]
+    }).then(function (user) {
+      user = user.get({
+        'plain': true
+      });
+      var results = user.Friends;
+      var totalPages = Math.ceil(results.length === 0 ? 1 : results.length / pageSize);
       reply({
         'pagination': {
           'pageNumber': request.payload.pageNumber,
           'pageSize': pageSize,
           'totalPages': totalPages,
-          'totalResults': count
+          'totalResults': results.length
         },
-        'results': results
+        'results': user.Friends.splice(offset, offset + pageSize)
       }).code(200);
     });
   }

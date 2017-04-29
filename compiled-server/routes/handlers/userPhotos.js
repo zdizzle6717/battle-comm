@@ -96,7 +96,7 @@ var userPhotos = {
                   _fsExtra2.default.unlink(locationPath + '/' + size + '-' + fileName, function (error) {
                     if (error) {
                       console.log(error);
-                      reply(_boom2.default.badRequest(error));
+                      reply(_boom2.default.badRequest('Error deleting user photo file.'));
                     } else {
                       count++;
                       if (count >= _imageConfig2.default[userPhoto.identifier].sizes.length) {
@@ -108,7 +108,7 @@ var userPhotos = {
               }
             });
           } else {
-            reply().code(404);
+            reply(_boom2.default.notFound('File missing, cannot delete.'));
           }
         });
       }

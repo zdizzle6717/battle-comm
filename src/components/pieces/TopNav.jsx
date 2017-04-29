@@ -79,12 +79,15 @@ class TopNav extends React.Component {
 		let backdropClasses = classNames({
 			'menu-backdrop': true,
 			'show': this.state.showMobileMenu
-		})
+		});
+		let toggleClasses = classNames({
+			'on': this.state.showMobileMenu
+		});
 
 	    return (
 			<div className="nav">
 				<div className="menu-toggle" onClick={this.toggleMenu}>
-					<i className="fa fa-bars"></i>
+					<i id="toggle" className={toggleClasses}><span></span></i>
 				</div>
 				<div className="login-menu-mobile">
 					{

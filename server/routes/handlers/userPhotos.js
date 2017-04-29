@@ -79,7 +79,7 @@ let userPhotos = {
 									fse.unlink(`${locationPath}/${size}-${fileName}`, (error) => {
 										if (error) {
 											console.log(error);
-											reply(Boom.badRequest(error));
+											reply(Boom.badRequest('Error deleting user photo file.'));
 										} else {
 											count++;
 											if (count >= imageConfig[userPhoto.identifier].sizes.length) {
@@ -91,7 +91,7 @@ let userPhotos = {
 							}
 						});
           } else {
-            reply().code(404);
+            reply(Boom.notFound('File missing, cannot delete.'));
           }
         });
       }

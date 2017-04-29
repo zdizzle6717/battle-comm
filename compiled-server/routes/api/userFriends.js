@@ -50,17 +50,15 @@ module.exports = [
 	}
 }, {
 	'method': 'POST',
-	'path': '/api/search/friends/{UserId}',
+	'path': '/api/search/friends',
 	'config': {
 		'tags': ['api'],
 		'description': 'Return User/Player Ally search results',
 		'notes': 'Return User/Player Ally search results',
 		'validate': {
 			'payload': {
+				'username': _joi2.default.string().required(),
 				'maxResults': _joi2.default.optional(),
-				'searchQuery': _joi2.default.optional(),
-				'searchBy': _joi2.default.optional(),
-				'orderBy': _joi2.default.string().required(),
 				'pageNumber': _joi2.default.number().required(),
 				'pageSize': _joi2.default.optional()
 			}

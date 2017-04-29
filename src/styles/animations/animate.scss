@@ -3,7 +3,7 @@ $animations: 'fade', 'slide-top', 'slide-bottom', 'slide-left', 'slide-right', '
 @each $animation in $animations {
 	.#{$animation}-enter,
 	.#{$animation}-appear {
-	    animation: #{$animation}-in 250ms;
+	    animation: #{$animation}-in 250ms cubic-bezier(0.485, 0.155, 0.24, 1.245);
 		position: absolute;
 
 		&.#{$animation}-enter-active,
@@ -14,7 +14,7 @@ $animations: 'fade', 'slide-top', 'slide-bottom', 'slide-left', 'slide-right', '
 	}
 
 	.#{$animation}-leave {
-	    animation: #{$animation}-out 250ms;
+	    animation: #{$animation}-out 250ms cubic-bezier(0.485, 0.155, 0.24, 1.245);
 		position: absolute;
 
 		&.#{$animation}-leave-active {

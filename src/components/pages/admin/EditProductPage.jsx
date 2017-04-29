@@ -109,6 +109,8 @@ class EditProductPage extends React.Component {
 		}
 		FileService.remove(fileId).then(() => {
 			this.showAlert('fileRemoved');
+		}).catch((error) => {
+			console.log(error);
 		});
 	}
 

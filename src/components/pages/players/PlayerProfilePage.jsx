@@ -236,7 +236,7 @@ class PlayerProfilePage extends React.Component {
 								{
 									player.Friends.map((friend, i) =>
 										<Link key={friend.id} to={`/players/profile/${friend.username}`} className="icon-box">
-											<img className="icon" src={this.getPlayerIcon.call(this, player)} />
+											<img className="icon" src={this.getPlayerIcon.call(this, friend)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
 										</Link>
 									)
@@ -258,7 +258,7 @@ class PlayerProfilePage extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Player Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<h2>Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							<div className="small-12 columns">
 								{
 									player.GameSystemRankings.length < 1 &&

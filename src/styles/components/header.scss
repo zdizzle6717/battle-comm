@@ -60,16 +60,82 @@ header {
 			a,
 			i {
 				color: $white;
-				padding: 1rem;
-				height: 100%;
-				line-height: 1;
-				display: flex;
-				align-items: center;
-				transition: background 300ms;
 				z-index: 100;
+				display: block;
+		    width: 28px;
+		    height: 100%;
+		    margin: 0 auto 10px 18px;
+		    padding-top: 23px;
+
+				&.on {
+					span {
+						background-color: transparent;
+    				box-shadow: none;
+
+						&::before {
+							transform: rotate(45deg) translate(5px, 5px);
+						}
+						&::after {
+							transform: rotate(-45deg) translate(7px, -8px);
+						}
+					}
+
+					&:hover {
+						cursor: pointer;
+
+						span {
+							box-shadow: none;
+						}
+					}
+				}
+
+				span {
+					position: relative;
+					float: left;
+				  width: 100%;
+				  height: 5px;
+				  background-color: white;
+				  -webkit-transition: all 0.3s;
+				  transition: all 0.3s;
+				  -webkit-backface-visibility: hidden;
+				  border-radius: 2px;
+				  box-shadow: 0 0 3px 1px #F9E778;
+
+					&::after,
+					&::before {
+						float: left;
+					  width: 100%;
+					  height: 5px;
+					  background-color: white;
+					  -webkit-transition: all 0.3s;
+					  transition: all 0.3s;
+					  -webkit-backface-visibility: hidden;
+					  border-radius: 2px;
+					  box-shadow: 0 0 3px 1px #F9E778;
+						content: "";
+						position: absolute;
+						left: 0;
+						top: 9px;
+					}
+
+					&::before {
+						top: -9px;
+					}
+
+					&::after {
+						top: 9px;
+					}
+
+				}
 
 				&:hover {
-					background: $primary-700;
+					cursor: pointer;
+
+					span,
+					span::before,
+					span::after {
+						box-shadow: 0 0 3px 1px transparentize(#F9E778, .2);
+					}
 				}
 			}
 		}
@@ -289,10 +355,11 @@ header {
 
 				.mobile-menu-group {
 					display: block;
+					height: 100%;
 					width: 100%;
 					position: fixed;
-					top: 52px;
-					background: $primary-500;
+					top: 59px;
+					background: url('/images/Honeycomb_Default.png') repeat;
 					box-shadow: $shadow-3;
 
 					.login-menu {
@@ -313,6 +380,44 @@ header {
 							a {
 								color: $white;
 								box-shadow: none;
+								width: 100%;
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								height: 3rem;
+								font-size: 1.4rem;
+								letter-spacing: .3rem;
+								text-shadow: $shadow-3;
+								position: relative;
+
+								&:hover{
+									&::before {
+										content: '\f197';
+										font-family: 'FontAwesome';
+										position: absolute;
+								    left: 1%;
+								    font-size: 1.4rem;
+										transition: left 200ms cubic-bezier(0.485, 0.155, 0.24, 1.245);
+									}
+									&:active {
+										&::before {
+									    left: unquote(calc(100% - 2.8rem));
+										}
+									}
+								}
+
+								&.active,
+								&:active {
+									background: transparentize(black, .5);
+								}
+							}
+
+							&:first-child {
+								a {
+									&.active {
+										background: transparent;
+									}
+								}
 							}
 						}
 					}
