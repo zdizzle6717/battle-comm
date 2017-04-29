@@ -78,7 +78,13 @@ class StorePage extends React.Component {
 		});
 
 		priceSlider.noUiSlider.on('end', (values, handle) => {
-			this.handlePageChange(1, values[0], values[1])
+			let bottom = values[0];
+			let top = values[1];
+			bottom = bottom.replace(/\,/g, '');
+			bottom = parseInt(bottom, 10);
+			top = top.replace(/\,/g, '');
+			top = parseInt(top, 10);
+			this.handlePageChange(1, bottom, top);
 		});
     }
 
