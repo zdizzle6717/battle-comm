@@ -118,7 +118,7 @@ let products = {
     } else {
       searchByConfig = {};
     }
-		if (request.payload.minPrice && request.payload.maxPrice) {
+		if (request.payload.minPrice >= 0 && request.payload.maxPrice) {
 			searchByConfig.price = {
 				'$between': [request.payload.minPrice, request.payload.maxPrice]
 			};
