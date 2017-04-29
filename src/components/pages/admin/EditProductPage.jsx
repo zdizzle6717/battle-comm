@@ -121,6 +121,7 @@ class EditProductPage extends React.Component {
 					'name': response.data.file.name,
 					'size': response.data.file.size,
 					'type': response.data.file.type,
+					'locationUrl': this.getDirectoryPath(),
 					'identifier': identifier
 				};
 				return response;
@@ -128,10 +129,14 @@ class EditProductPage extends React.Component {
 			let newFileList = responses.concat(product.Files);
 			product.Files = newFileList;
 			newFiles = newFiles.concat(responses);
+			let productPhotoFront = identifier === 'productPhotoFront' ? responses : this.state.productPhotoFront;
+			let productPhotoBack = identifier === 'productPhotoBack' ? responses : this.state.productPhotoBack;
 			this.setState({
 				'product': product,
 				'newFiles': newFiles,
-				'skuIsDisabled': true
+				'skuIsDisabled': true,
+				'productPhotoFront': productPhotoFront,
+				'productPhotoBack': productPhotoBack
 			});
 			this.showAlert('uploadSuccess');
 		});

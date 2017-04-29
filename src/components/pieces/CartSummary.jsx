@@ -10,7 +10,8 @@ import CartActions from '../../actions/CartActions';
 
 const mapStateToProps = (state) => {
 	return {
-		'cartItems': state.cartItems
+		'cartItems': state.cartItems,
+		'user': state.user
 	}
 }
 
@@ -42,8 +43,8 @@ class CartSummary extends React.Component {
 		return total;
 	}
 
-	removeItem(item, qty) {
-		this.props.removeFromCart(item.product.id);
+	removeItem(productId) {
+		this.props.removeFromCart(productId);
 	}
 
 	toggleCart() {
@@ -80,7 +81,7 @@ class CartSummary extends React.Component {
 													<td>{`${item.product.name.substring(0, 15)}...`}</td>
 													<td>{item.product.price} RP</td>
 													<td>({item.cartQty})</td>
-													<td className="pointer" onClick={this.removeItem.bind(this, item, item.cartQty)}><span className="fa fa-times-circle-o"></span></td>
+													<td className="pointer" onClick={this.removeItem.bind(this, item.product.id)}><span className="fa fa-times-circle-o"></span></td>
 												</tr>
 											)
 										}
@@ -90,6 +91,7 @@ class CartSummary extends React.Component {
 							}
 						</div>
 						<div className="footer">
+							<h5>Current Reward Points: <strong>{this.props.user.rewardPoints} RP</strong></h5>
 							<h4>Order Total: <strong>{this.getOrderTotal.call(this, this.props.cartItems)} RP</strong></h4>
 							<div className="actions" onClick={this.toggleCart}>
 								<Link to="/store/cart" className="button primary">View Cart</Link>

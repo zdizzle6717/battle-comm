@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
 
 let timer, priceSlider;
 let _sliderStart = 0;
-let _sliderEnd = 1000;
+let _sliderEnd = 10000;
 
 class StorePage extends React.Component {
     constructor() {
@@ -65,7 +65,8 @@ class StorePage extends React.Component {
 				'max': _sliderEnd
 			},
 			'format': wNumb({
-				'decimals': 0
+				'decimals': 0,
+				'thousand': ','
 			})
 		});
 

@@ -345,7 +345,7 @@ class EditNewsPostPage extends React.Component {
 								</div>
 								<div className="row">
 									<div className="form-group small-12 columns">
-										<label>News Post Photos</label>
+										<label className="required">News Post Photos</label>
 										<FileUpload name="newsPostPhoto" value={this.state.newsPost.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" required={1} maxFiles={5} />
 									</div>
 								</div>

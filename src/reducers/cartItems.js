@@ -74,7 +74,7 @@ const cartQtyPlaceholders = (state = {}, action) => {
 			return placeholders;
 		case CartItemConstants.REMOVE_CART_ITEM:
 			placeholders = Object.assign({}, state);
-			productId = action.data.product.id;
+			productId = action.id;
 			placeholders[productId] = 0;
 			updateSessionPlaceholders(placeholders);
 			return placeholders;

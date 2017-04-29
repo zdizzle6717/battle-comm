@@ -12,6 +12,8 @@ import ViewWrapper from '../../ViewWrapper';
 import CartActions from '../../../actions/CartActions';
 import ProductOrderService from '../../../services/ProductOrderService';
 
+let _redirected = false;
+
 const mapStateToProps = (state) => {
 	return {
 		'forms': state.forms,
@@ -45,6 +47,10 @@ class CheckoutPage extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Checkout";
+		if (this.getOrderTotal.call(this, this.props.cartItems) <= 0) {
+			this.showAlert('cartEmpty');
+			browserHistory.push('/store');
+		}
 		let productOrder = {
 			'status': 'processing',
 			'customerFullName': this.props.user.firstName + ' ' + this.props.user.lastName,
@@ -54,6 +60,16 @@ class CheckoutPage extends React.Component {
 			'productOrder': productOrder
 		});
     }
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.cartItems.length !== this.props.cartItems.length) {
+			if (!_redirected && this.getOrderTotal.call(this, nextProps.cartItems) <= 0) {
+				_redirected = true;
+				this.showAlert('cartEmpty');
+				browserHistory.push('/store');
+			}
+		}
+	}
 
 	getOrderTotal(items) {
 		let total = 0;
@@ -99,6 +115,14 @@ class CheckoutPage extends React.Component {
 					'type': 'success',
 					'delay': 3000
 				});
+			},
+			'cartEmpty': () => {
+				this.props.addAlert({
+					'title': 'Cart Is Empty',
+					'message': 'Add some items to your cart to continue to checkout page.',
+					'type': 'info',
+					'delay': 3000
+				});
 			}
 		}
 
@@ -110,6 +134,13 @@ class CheckoutPage extends React.Component {
             <ViewWrapper headerImage="/images/Titles/Checkout.png" headerAlt="Checkout">
                 <div className="row">
 					<div className="small-12 columns">
+						{
+							this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems) < 0 &&
+							<div className="small-12 columns text-center">
+								<h3 className="color-alert">You do not have enough Reward Points for this purchase.</h3>
+								<Link to="/store/cart">Return to cart?</Link>
+							</div>
+						}
 						<Form name="productOrderForm" handleSubmit={this.handleSubmit} submitText="Finalize Order" customClass="push-bottom-2x" disable={this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems) < 0}>
 							<div className="row">
 								<div className="form-group small-12 medium-4 columns">
@@ -127,11 +158,11 @@ class CheckoutPage extends React.Component {
 							</div>
 							<h3>Shipping Address</h3>
 							<div className="row">
-								<div className="form-group small-10 columns">
+								<div className="form-group small-12 medium-10 columns">
 									<label className="required">Street</label>
 									<Input type="text" name="shippingStreet" value={this.state.productOrder.shippingStreet} handleInputChange={this.handleInputChange} required={true}/>
 								</div>
-								<div className="form-group small-2 columns">
+								<div className="form-group small-12 medium-2 columns">
 									<label>Apt/Suite</label>
 									<Input type="text" name="shippingApartment" value={this.state.productOrder.shippingApartment} handleInputChange={this.handleInputChange}/>
 								</div>
@@ -164,18 +195,16 @@ class CheckoutPage extends React.Component {
 								</div>
 							</div>
 						</Form>
-						{
-							this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems) < 0 &&
-							<div className="small-12 columns text-center">
-								<h3 className="color-alert">You do not have enough Reward Points for this purchase.</h3>
-								<Link to="/store/cart">Return to cart?</Link>
-							</div>
-						}
 						<div className="small-12 columns text-right">
 							<h5>Current Reward Points: {this.props.user.rewardPoints}</h5>
 							<h5>Order Total: {this.getOrderTotal.call(this, this.props.cartItems)}</h5>
 							<h5>RP After Purchase: {this.props.user.rewardPoints - this.getOrderTotal.call(this, this.props.cartItems)}</h5>
 						</div>
+					</div>
+					<div className="small-12 columns text-center">
+						<Link to="/store/cart" className="button">
+							Back to Cart
+						</Link>
 					</div>
                 </div>
             </ViewWrapper>

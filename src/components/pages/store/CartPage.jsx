@@ -9,7 +9,8 @@ import CartActions from '../../../actions/CartActions';
 
 const mapStateToProps = (state) => {
 	return {
-		'cartItems': state.cartItems
+		'cartItems': state.cartItems,
+		'user': state.user
 	}
 }
 
@@ -87,10 +88,14 @@ class CartPage extends React.Component {
 					</div>
 					<hr />
 					<div className="small-12 columns text-right">
+						<h5>Current Reward Points: {this.props.user.rewardPoints} RP</h5>
 						<h4>Order Total: <strong>{this.getOrderTotal.call(this, this.props.cartItems)} RP</strong></h4>
 					</div>
 					<div className="small-12 columns text-center">
-						<Link to="/store/checkout" className="button">
+						<Link to="/store" className="button primary push-right push-left">
+							Back to Store
+						</Link>
+						<Link to="/store/checkout" className="button secondary push-right push-left">
 							Go to Checkout
 						</Link>
 					</div>
