@@ -38,10 +38,11 @@ export default class NewsPostPage extends React.Component {
 				<div className="row">
 					<div className="small-12 columns">
 						<div className="news-post">
+							<h2>{post.title}</h2>
 							<div className="row">
 								<div className="small-6 medium-3 columns"><strong>Author:</strong> {post.User.firstName} {post.User.lastName}</div>
 								<div className="small-6 medium-3 columns"><strong>Date:</strong> {formatJSONDate(post.updatedAt)}</div>
-								<div className="small-6 medium-3 columns"><strong>Category:</strong> {post.category}</div>
+								<div className="small-12 medium-3 columns"><strong>Category:</strong> {post.category}</div>
 							</div>
 							<div className="summary push-top">
 								{
@@ -54,7 +55,7 @@ export default class NewsPostPage extends React.Component {
 								<div className="small-12 columns text-center"><strong>Tags:</strong> {post.tags}</div>
 							</div>
 							<div className="row">
-								<div className="small-12 columns text-right">
+								<div className="small-12 columns text-right push-bottom">
 									<Link to={`/news`} className="button small medium white right collapse">Back to News List</Link>
 								</div>
 							</div>

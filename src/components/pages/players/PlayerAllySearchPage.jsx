@@ -67,6 +67,7 @@ class PlayerAllySearchPage extends React.Component {
         return (
             <ViewWrapper headerImage="/images/Titles/Player_Ally_Search.png" headerAlt="Player Ally Search">
 				<div className="small-12 columns">
+					<h2>{`${this.props.params.playerHandle}'s`} allies</h2>
 					{
 						this.state.friends.length > 0 ?
 						<table className="stack hover text-center">

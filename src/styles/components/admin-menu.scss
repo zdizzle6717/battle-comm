@@ -27,3 +27,23 @@
 	}
 
 }
+
+@include breakpoint(medium down) {
+	.admin-menu {
+
+		.menu-item {
+			width: 31.333333%;
+			margin: 0 1%;
+		}
+	}
+}
+
+@include breakpoint(small only) {
+	.admin-menu {
+
+		.menu-item {
+			width: 98%;
+			margin: 0 1%;
+		}
+	}
+}

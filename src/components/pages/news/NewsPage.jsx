@@ -57,11 +57,11 @@ class NewsPage extends React.Component {
 						{
 							this.props.posts.map((post, i) =>
 								<div key={post.id} className="news-post">
-									<h3><Link to={`/news/post/${post.id}`} className="underline">{post.title}</Link></h3>
+									<h2>{post.title}</h2>
 									<div className="row">
 										<div className="small-6 medium-3 columns"><strong>Author:</strong> {post.User.firstName} {post.User.lastName}</div>
 										<div className="small-6 medium-3 columns"><strong>Date:</strong> {formatJSONDate(post.updatedAt)}</div>
-										<div className="small-6 medium-3 columns"><strong>Category:</strong> {post.category}</div>
+										<div className="small-12 medium-3 columns"><strong>Category:</strong> {post.category}</div>
 									</div>
 									<div className="summary push-top">
 										<img src={`/uploads/${post.Files[0].locationUrl}${post.Files[0].name}`} />
@@ -70,7 +70,7 @@ class NewsPage extends React.Component {
 									<div className="row push-top text-center">
 										<div className="small-12 columns"><strong>Tags:</strong> {post.tags}</div>
 									</div>
-									<div className="row">
+									<div className="row push-top">
 										<div className="small-12 columns text-right">
 											<Link to={`/news/post/${post.id}`} className="button small white right collapse">Read More</Link>
 										</div>

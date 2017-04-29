@@ -23,6 +23,10 @@ table {
 		td {
 			padding: inherit;
 
+			strong {
+				display: none;
+			}
+
 			&.action-items {
 				display: flex;
 				flex-direction: row;
@@ -97,6 +101,39 @@ table {
 					th {
 						border-bottom: none;
 					}
+				}
+			}
+		}
+
+		tbody {
+			td {
+				strong {
+					display: inline;
+				}
+			}
+		}
+	}
+}
+
+@include breakpoint (small only) {
+	table {
+
+		thead, tbody {
+		}
+
+		thead {
+			tr {
+				&:first-child {
+					th {
+					}
+				}
+			}
+		}
+
+		tbody {
+			td {
+				strong {
+					display: inline;
 				}
 			}
 		}

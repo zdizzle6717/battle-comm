@@ -424,7 +424,7 @@ class PlayerDashboardPage extends React.Component {
 								{
 									currentUser.Friends.map((friend, i) =>
 									<span key={friend.id} className="icon-box">
-										<Link to={`/players/profile/${friend.username}`} className="icon-box">
+										<Link to={`/players/profile/${friend.username}`}>
 											<img className="icon" src={this.getPlayerIcon.call(this, friend)} />
 											<span className="name-label">{friend.firstName} {friend.lastName}</span>
 										</Link>

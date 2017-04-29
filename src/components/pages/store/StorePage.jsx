@@ -276,36 +276,38 @@ class StorePage extends React.Component {
 											</div>
 										</Link>
 									</div>
-									<div className="product-name text-center">
-										<Link to={`/store/products/${product.id}`}>{product.name}</Link>
-									</div>
-									<div className="price text-center">
-										<strong>{product.price} RP</strong>
-									</div>
-									<div className="small-12 columns select-qty">
-										{
-											(this.state.qtyPlaceholders[product.id] === undefined || (this.state.qtyPlaceholders[product.id] < 5 && this.state.qtyPlaceholders[product.id] !== '')) &&
-											<select value={this.state.qtyPlaceholders[product.id]} onChange={this.handleQuantityChange.bind(this, product.id)}>
-												<option value={0}>0</option>
-												<option value={1}>1</option>
-												<option value={2}>2</option>
-												<option value={3}>3</option>
-												<option value={4}>4</option>
-												<option value={5}>More...</option>
-											</select>
-										}
-										{
-											(this.state.qtyPlaceholders[product.id] >= 5 || this.state.qtyPlaceholders[product.id] === '') &&
-											<input type="number" value={this.state.qtyPlaceholders[product.id]} onChange={this.handleQuantityChange.bind(this, product.id)} step="1"/>
-										}
-									</div>
-									<div className={this.props.cartQtyPlaceholders[product.id] >= 1 ? 'small-12 columns actions text-center in-cart' : 'small-12 columns actions text-center'}>
-										{
-											(this.props.cartQtyPlaceholders[product.id] >= 1 || this.props.cartQtyPlaceholders[product.id] === '') ?
-											<button className="button secondary" onClick={this.updateItemTotal.bind(this, product)}>Update Total</button> :
-											<button className="button primary" onClick={this.addToCart.bind(this, product)}>Add To Cart</button>
-										}
-										<Link className="button black" to={`/store/products/${product.id}`}>More Details</Link>
+									<div className="product-details">
+										<div className="product-name text-center">
+											<Link to={`/store/products/${product.id}`}>{product.name}</Link>
+										</div>
+										<div className="price text-center">
+											<strong>{product.price} RP</strong>
+										</div>
+										<div className="small-12 columns select-qty">
+											{
+												(this.state.qtyPlaceholders[product.id] === undefined || (this.state.qtyPlaceholders[product.id] < 5 && this.state.qtyPlaceholders[product.id] !== '')) &&
+												<select value={this.state.qtyPlaceholders[product.id]} onChange={this.handleQuantityChange.bind(this, product.id)}>
+													<option value={0}>0</option>
+													<option value={1}>1</option>
+													<option value={2}>2</option>
+													<option value={3}>3</option>
+													<option value={4}>4</option>
+													<option value={5}>More...</option>
+												</select>
+											}
+											{
+												(this.state.qtyPlaceholders[product.id] >= 5 || this.state.qtyPlaceholders[product.id] === '') &&
+												<input type="number" value={this.state.qtyPlaceholders[product.id]} onChange={this.handleQuantityChange.bind(this, product.id)} step="1"/>
+											}
+										</div>
+										<div className={this.props.cartQtyPlaceholders[product.id] >= 1 ? 'small-12 columns actions text-center in-cart' : 'small-12 columns actions text-center'}>
+											{
+												(this.props.cartQtyPlaceholders[product.id] >= 1 || this.props.cartQtyPlaceholders[product.id] === '') ?
+												<button className="button secondary" onClick={this.updateItemTotal.bind(this, product)}>Update Total</button> :
+												<button className="button primary" onClick={this.addToCart.bind(this, product)}>Add To Cart</button>
+											}
+											<Link className="button black" to={`/store/products/${product.id}`}>More Details</Link>
+										</div>
 									</div>
 								</div>
 								)
