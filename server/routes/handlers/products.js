@@ -120,8 +120,7 @@ let products = {
     }
 		if (request.payload.minPrice && request.payload.maxPrice) {
 			searchByConfig.price = {
-				'$gte': request.payload.minPrice,
-				'$lte': request.payload.maxPrice
+				'$between': [request.payload.minPrice, request.payload.maxPrice]
 			};
 		}
     models.Product.findAndCountAll({
