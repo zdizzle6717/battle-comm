@@ -93,6 +93,7 @@ let users = {
 	authenticate: (request, reply) => {
     reply({
 			'username': request.pre.user.username,
+			'email': request.pre.user.email,
       'id_token': createUserToken(request.pre.user, request.payload.rememberMe),
 			'roleFlags': getUserRoleFlags(request.pre.user),
       'id': request.pre.user.id,

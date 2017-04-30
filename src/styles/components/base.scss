@@ -89,6 +89,14 @@ a {
   background: url(../images/BC_Web_BG.png) no-repeat scroll center top/105% auto transparent;
   position: fixed;
   top: 58px;
+
+	@include breakpoint(medium down) {
+		top: 128px;
+	}
+
+	@include breakpoint(small only) {
+		top: 148px;
+	}
 }
 
 .content-container {

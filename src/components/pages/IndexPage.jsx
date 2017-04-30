@@ -16,6 +16,8 @@ import BannerSlideActions from '../../actions/BannerSlideActions';
 import GameSystemActions from '../../actions/GameSystemActions';
 import Modal from '../../library/modal';
 
+// TODO: Add React.createElement to only add jQuery to this page for th banner slides
+
 const mapStateToProps = (state) => {
     return {
 		'bannerSlides': state.bannerSlides,

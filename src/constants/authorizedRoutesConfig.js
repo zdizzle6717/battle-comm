@@ -22,6 +22,11 @@ module.exports = [
 				'accessControl': ['newsContributor']
 			},
 			{
+				'name': 'RewardPointPurchase',
+				'path': '/admin/purchase-reward-points',
+				'accessControl': ['eventAdmin']
+			},
+			{
 				'name': 'users',
 				'path': '/admin/users**',
 				'accessControl': ['systemAdmin']

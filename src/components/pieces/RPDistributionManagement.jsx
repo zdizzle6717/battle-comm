@@ -13,20 +13,14 @@ import {Form, getFormErrorCount, Input, TextArea, Select} from '../../library/va
 import PlayerService from '../../services/PlayerService';
 let SearchSuggestions = searchSuggestions(PlayerService, 'searchSuggestions');
 
-const mapStateToProps = (state) => {
-	return {
-		'forms': state.forms,
-		'user': state.user
-	}
-}
-
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'modifyUser': UserActions.modify,
-		'resetForm': FormActions.resetForm
+		'modifyUser': UserActions.modify
 	}, dispatch);
 }
+
+// TODO: add proptypes config
 
 let timer;
 
@@ -128,7 +122,7 @@ class RPDistributionManagement extends React.Component {
 				<h2>Distribute Reward Points</h2>
 				<div className="row">
 					<div className="small-12 columns">
-						<h3 className="small-12 text-center">Your Current RP: <strong>{this.props.user.rewardPoints}</strong></h3>
+						<h3 className="small-12 text-center">Your Current RP: <strong className="gold">{this.props.user.rewardPoints}</strong></h3>
 						{
 							this.state.formIsActive &&
 							<Form name="rewardPointForm" submitButton={false}>
@@ -154,4 +148,4 @@ class RPDistributionManagement extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RPDistributionManagement);
+export default connect(null, mapDispatchToProps)(RPDistributionManagement);

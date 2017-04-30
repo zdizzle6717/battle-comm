@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
 import BannerSlideManagement from '../../pieces/BannerSlideManagement';
+import RewardPointPurchase from '../../pieces/RewardPointPurchase';
 import RPDistributionManagement from '../../pieces/RPDistributionManagement';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
@@ -15,7 +16,8 @@ const AccessControl = createAccessControl(roleConfig);
 
 const mapStateToProps = (state) => {
 	return {
-		'currentUser': state.user
+		'currentUser': state.user,
+		'forms': state.forms
 	}
 }
 
@@ -46,8 +48,12 @@ class AdminDashboardPage extends React.Component {
 						<hr/>
 					</div>
 				</div>
-				<AccessControl access={['venueAdmin']} element="div" customClasses="row">
-					<RPDistributionManagement></RPDistributionManagement>
+				<AccessControl access={['eventAdmin']} element="div" customClass="row">
+					<RewardPointPurchase user={this.props.currentUser} forms={this.props.forms}></RewardPointPurchase>
+				</AccessControl>
+				<hr/>
+				<AccessControl access={['eventAdmin']} element="div" customClasses="row">
+					<RPDistributionManagement user={this.props.currentUser} forms={this.props.forms}></RPDistributionManagement>
 				</AccessControl>
 				<hr/>
 				<AccessControl access={['systemAdmin']} element="div" customClasses="row">

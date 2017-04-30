@@ -396,7 +396,7 @@ class PlayerDashboardPage extends React.Component {
 						<div className="small-12 medium-6 columns text-center">
 							<h2 className="no_shadow">{ currentUser.firstName ? (currentUser.firstName + ' ' + currentUser.lastName) : 'Anonymous'} </h2>
 							<div className="text-center">
-								<h3 className="gold-label">RP Stash: <span><strong>{currentUser.rewardPoints || 0}</strong> Points</span></h3>
+								<h3 className="gold-label">RP Stash: <span><strong className="gold">{currentUser.rewardPoints || 0}</strong> Points</span></h3>
 								<div className="flex-row-center push-top">
 									<div className="profile-picture">
 										<img src={this.getPlayerIcon.call(this, currentUser)} alt={currentUser.username} className="shadow"/>

@@ -7,6 +7,7 @@ module.exports = []
 .concat(require('./api/gameSystems'))
 .concat(require('./api/manufacturers'))
 .concat(require('./api/newsPosts'))
+.concat(require('./api/payments'))
 .concat(require('./api/productOrders'))
 .concat(require('./api/products'))
 .concat(require('./api/rankings'))

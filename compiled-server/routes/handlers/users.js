@@ -131,6 +131,7 @@ var users = {
   authenticate: function authenticate(request, reply) {
     reply({
       'username': request.pre.user.username,
+      'email': request.pre.user.email,
       'id_token': (0, _createUserToken2.default)(request.pre.user, request.payload.rememberMe),
       'roleFlags': (0, _userFunctions.getUserRoleFlags)(request.pre.user),
       'id': request.pre.user.id,

@@ -47,7 +47,6 @@ import CartPage from './components/pages/store/CartPage';
 import CheckoutPage from './components/pages/store/CheckoutPage';
 import OrderSuccessPage from './components/pages/store/OrderSuccessPage';
 import ProductPage from './components/pages/store/ProductPage';
-import RewardPointPurchasePage from './components/pages/store/RewardPointPurchasePage';
 import StorePage from './components/pages/store/StorePage';
 
 

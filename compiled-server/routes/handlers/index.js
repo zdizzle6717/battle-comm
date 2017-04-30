@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.venues = exports.users = exports.userPhotos = exports.userNotifications = exports.userFriends = exports.products = exports.productOrders = exports.newsPosts = exports.manufacturers = exports.gameSystems = exports.gameSystemRankings = exports.files = exports.factions = exports.factionRankings = exports.bannerSlides = undefined;
+exports.venues = exports.users = exports.userPhotos = exports.userNotifications = exports.userFriends = exports.products = exports.productOrders = exports.payments = exports.newsPosts = exports.manufacturers = exports.gameSystems = exports.gameSystemRankings = exports.files = exports.factions = exports.factionRankings = exports.bannerSlides = undefined;
 
 var _bannerSlides = require('./bannerSlides');
 
@@ -36,6 +36,10 @@ var _manufacturers2 = _interopRequireDefault(_manufacturers);
 var _newsPosts = require('./newsPosts');
 
 var _newsPosts2 = _interopRequireDefault(_newsPosts);
+
+var _payments = require('./payments');
+
+var _payments2 = _interopRequireDefault(_payments);
 
 var _productOrders = require('./productOrders');
 
@@ -75,6 +79,7 @@ exports.gameSystemRankings = _gameSystemRankings2.default;
 exports.gameSystems = _gameSystems2.default;
 exports.manufacturers = _manufacturers2.default;
 exports.newsPosts = _newsPosts2.default;
+exports.payments = _payments2.default;
 exports.productOrders = _productOrders2.default;
 exports.products = _products2.default;
 exports.userFriends = _userFriends2.default;
