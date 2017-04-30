@@ -10,7 +10,7 @@ import env from '../../../envVariables';
 import {handlers} from '../../library/utilities';
 import {Form, Input, TextArea, Select, getFormErrorCount} from '../../library/validations';
 import PaymentService from '../../services/PaymentService';
-import PlayerService from '../../services/PlayerService';
+import pointPriceConfig from '../../../pointPriceConfig';
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
@@ -32,24 +32,13 @@ class RewardPointPurchasePage extends React.Component {
 			'rpPurchaseForm': {
 				'email': '',
 				'rewardPoints': ''
-			},
-			'priceConfig': [
-				{
-					'display': '1000RP - $9.99',
-					'value': 999,
-					'rp': 1000
-				},
-				{
-					'display': '5000RP - $19.99',
-					'value': 1999,
-					'rp': 5000
-				},
-			]
+			}
         };
 
 		this.loadStripe = this.loadStripe.bind(this);
 		this.openStripeModal = this.openStripeModal.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.showAlert = this.showAlert.bind(this);
     }
 
 	componentWillMount() {}
@@ -68,42 +57,37 @@ class RewardPointPurchasePage extends React.Component {
 				this.setState({
 					'loading': true
 				});
-				let amount = parseInt(this.state.rpPurchaseForm.rewardPoints, 10);
-				PaymentService.oneTimeCharge({
+				PaymentService.purchaseRP(this.props.user.id, {
 					'token': JSON.stringify(token),
 					'details': {
-						'amount': amount,
+						'email': this.state.rpPurchaseForm.email,
 						'description': 'Reward Point Purchase',
-						'email': this.state.rpPurchaseForm.email
+						'priceIndex': this.state.rpPurchaseForm.priceIndex
 					}
 				}).then((response) => {
-					if (response.status === 'succeeded') {
-						let selection = this.state.priceConfig.find((config) => {
-							return config.value === amount;
+					if (response.charge.status === 'succeeded') {
+						this.props.modifyUser({
+							'rewardPoints': response.user.rewardPoints
 						});
-						PlayerService.updateRP(this.props.user.id, {
-							'direction': 'increment',
-							'rewardPoints': selection.rp
-						}).then((user) => {
-							this.props.modifyUser({
-								'rewardPoints': user.rewardPoints
-							});
-							this.showAlert('orderSuccess');
-							this.setState({
-								'rpPurchaseForm': {
-									'rewardPoints': ''
-								},
-								'formIsActive': false
-							}, () => {
-								setTimeout(() => {
-									this.setState({
-										'formIsActive': true
-									});
+						this.showAlert('orderSuccess');
+						this.setState({
+							'rpPurchaseForm': {
+								'priceIndex': ''
+							},
+							'formIsActive': false
+						}, () => {
+							setTimeout(() => {
+								this.setState({
+									'formIsActive': true
 								});
 							});
 						});
 					} else {
 						this.showAlert('orderFailed');
+					}
+				}).catch((error) => {
+					if (error.message === `Don't fuck with the machine!`) {
+						this.showAlert('fuckOffHackers');
 					}
 				})
 			};
@@ -141,11 +125,10 @@ class RewardPointPurchasePage extends React.Component {
     }
 
 	openStripeModal(e) {
-		let amount = parseInt(this.state.rpPurchaseForm.rewardPoints, 10);
         this.stripehandler.open({
 			'name': 'Battle-Comm',
             'description': 'Reward Point Purchase',
-			'amount': amount,
+			'amount': pointPriceConfig[this.state.rpPurchaseForm.priceIndex].value,
 			'email': this.state.rpPurchaseForm.email,
             'panelLabel': 'Complete Order',
 			'zipCode': true
@@ -156,24 +139,30 @@ class RewardPointPurchasePage extends React.Component {
 	showAlert(selector) {
 		const alerts = {
 			'orderSuccess': () => {
-				let selection = this.state.priceConfig.find((config) => {
-					return config.value === parseInt(this.state.rpPurchaseForm.rewardPoints, 10);
-				});
+				let rp = pointPriceConfig[this.state.rpPurchaseForm.priceIndex].rp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				this.props.addAlert({
 					'title': 'Order Success',
-					'message': `Your RP pool has been updated and ${selection.rp}RP were added to your account.`,
+					'message': `Your RP pool has been updated and ${rp}RP were added to your account.`,
 					'type': 'success',
 					'delay': 4000
 				});
 			},
-			'userUpdated': () => {
+			'orderFailed': () => {
 				this.props.addAlert({
 					'title': 'Payment Declined',
 					'message': 'An error occured, and your card was NOT charged. Please try again or contact a site administrator for additional support.',
 					'type': 'error',
 					'delay': 4000
 				});
-			}
+			},
+			'fuckOffHackers': () => {
+				this.props.addAlert({
+					'title': 'Fuck Off!',
+					'message': `Hey hackers, don't fuck with the machine!`,
+					'type': 'error',
+					'delay': 10000
+				});
+			},
 		}
 
 		return alerts[selector]();
@@ -200,11 +189,11 @@ class RewardPointPurchasePage extends React.Component {
 							</div>
 							<div className="form-group small-12 medium-4 columns">
 								<label>Reward Points</label>
-								<Select name="rewardPoints" value={this.state.rpPurchaseForm.rewardPoints} handleInputChange={this.handleInputChange} required={true}>
+								<Select name="priceIndex" value={this.state.rpPurchaseForm.priceIndex} handleInputChange={this.handleInputChange} required={true}>
 									<option value="">--Select--</option>
 									{
-										this.state.priceConfig.map((option, i) =>
-											<option key={i} value={option.value}>{option.display}</option>
+										pointPriceConfig.map((option, i) =>
+											<option key={i} value={i}>{option.display}</option>
 										)
 									}
 								</Select>

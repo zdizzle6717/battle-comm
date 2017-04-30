@@ -3,8 +3,8 @@
 import axios from 'axios';
 
 export default {
-	oneTimeCharge: (data) => {
-		return axios.post('/payments/oneTimeCharge', data)
+	purchaseRP: (id, data) => {
+		return axios.post('/payments/purchaseRP/' + id, data)
 			.then(function(response) {
 				return response.data;
 			});

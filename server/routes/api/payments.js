@@ -7,7 +7,7 @@ module.exports = [
 	// Payments
 	{
 		'method': 'POST',
-		'path': '/api/payments/oneTimeCharge',
+		'path': '/api/payments/purchaseRP/{id}',
 		'config': {
 			'tags': ['api'],
 			'description': 'Request new purchase',
@@ -17,16 +17,19 @@ module.exports = [
 				'scope': ['eventAdmin', 'venueAdmin', 'systemAdmin']
 			},
 			'validate': {
+				'params': {
+					'id': Joi.number().required()
+				},
 				'payload': {
 					'token': Joi.string().required(),
 					'details': Joi.object().keys({
-						'amount': Joi.number().required(),
+						'email': Joi.string().required(),
 						'description': Joi.string().required(),
-						'email': Joi.string().required()
+						'priceIndex': Joi.number().required()
 					})
 				}
 			}
 		},
-		'handler': payments.oneTimeCharge
+		'handler': payments.purchaseRP
 	}
 ];
