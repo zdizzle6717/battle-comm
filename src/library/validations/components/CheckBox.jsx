@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -173,4 +174,4 @@ CheckBox.defaultProps = {
 	'preserveState': false
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckBox);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CheckBox));

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -60,4 +61,4 @@ Loader.defaultProps = {
 	'type': 'bars'
 }
 
-export default connect(mapStateToProps)(Loader);
+export default withRouter(connect(mapStateToProps)(Loader));

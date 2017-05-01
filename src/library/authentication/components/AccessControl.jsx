@@ -3,6 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import checkAuthorization from '../utilities/checkAuthorization';
 
@@ -81,5 +82,5 @@ export default function(roleConfig) {
 		'publicOnly': false
 	}
 
-	return connect(mapStateToProps)(AccessControl);
+	return withRouter(connect(mapStateToProps)(AccessControl));
 }

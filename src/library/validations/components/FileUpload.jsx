@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import accepts from 'attr-accept';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -250,16 +251,18 @@ class FileUpload extends React.Component {
 	}
 
 	updateErrorMessages(input, condition, key, text) {
-		let newErrorMessages = [];
+		let newErrorMessages = [], validity = true;
 		if (!condition) {
 			let errorText = text || defaultValidations[this.props.validate].message;
 			newErrorMessages = addErrorMessage(this.state.errors, key, errorText);
 		} else {
 			newErrorMessages = removeErrorMessage(this.state.errors, key);
 		}
-		let validity = !newErrorMessages.some((error) => {
-			return error.key === 'filesRequired';
-		});
+		newErrorMessages.forEach((error) => {
+			if (error.key === 'filesRequired') {
+				validity = false;
+			}
+		})
 		input.errors = newErrorMessages;
 		input.valid = validity;
 		input = Object.assign({}, this.state, input);
@@ -354,28 +357,20 @@ class FileUpload extends React.Component {
 			 								</tr>
 			 							</thead>
 										<tbody>
-											{
-												this.state.files.map((file, i) =>
-													<tr key={i} name="file.name">
-														<td>{file.name}</td>
-														<td>{file.type}</td>
-														<td>{(file.size / Math.pow(1024, 2)).toFixed(2)}MB</td>
-														<td className="remove-file"><span className="fa fa-minus" onClick={this.handleRemoveFile.bind(this, i)}></span></td>
-														{
-															file.id && this.props.handleDeleteFile &&
-															<td className="delete-file"><span className="fa fa-times" onClick={this.handleDeleteFile.bind(this, file, i)}></span></td>
-														}
-													</tr>
-												)
-											}
+											{this.state.files.map((file, i) => <tr key={i} name="file.name">
+												<td>{file.name}</td>
+												<td>{file.type}</td>
+												<td>{(file.size / Math.pow(1024, 2)).toFixed(2)}MB</td>
+												<td className="remove-file"><span className="fa fa-minus" onClick={this.handleRemoveFile.bind(this, i)}></span></td>
+												{
+													file.id && this.props.handleDeleteFile &&
+													<td className="delete-file"><span className="fa fa-times" onClick={this.handleDeleteFile.bind(this, file, i)}></span></td>
+												}
+											</tr>)}
 										</tbody>
 			 						</table>
 									<div className={errorClasses}>
-										{
-											this.state.errors.map((error, i) =>
-												<div key={i}>{error.message}</div>
-											)
-										}
+										{this.state.errors.map((error, i) => <div key={i}>{error.message}</div>)}
 									</div>
 								</div>
 							}
@@ -383,9 +378,7 @@ class FileUpload extends React.Component {
 					</div>
 				}
 				<div className={errorClasses}>
-					{
-						this.state.errors.map((error, i) => <div key={i}>{error.message}</div>)
-					}
+					{this.state.errors.map((error, i) => <div key={i}>{error.message}</div>)}
 				</div>
 			</div>
 		)
@@ -418,4 +411,4 @@ FileUpload.defaultProps = {
 	'typeOfModel': 'array'
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileUpload);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FileUpload));

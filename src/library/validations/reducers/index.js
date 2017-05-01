@@ -31,14 +31,20 @@ const _removeInput = (state, input) => {
 };
 
 const _validateForm = (forms, formName) => {
-	if (!forms[formName]) {
-		throw new Error('Validation Form Reducer: Form to validate was not found in array of forms.');
-	}
-  forms[formName].isValid = !forms[formName].inputs.some((input) => {
-		return input.valid === false;
-	});
+  forms[formName].isValid = true;
+  forms[formName].inputs.forEach((input, i) => {
+      if (input.valid === false) {
+          forms[formName].isValid = false;
+          return forms;
+      }
+  });
 
-	return forms;
+  if (forms[formName]) {
+    return forms;
+  } else {
+		// TODO: Find out why this 'if' statement was implemented
+		console.log('Validation Library Reducer: What is this?')
+	}
 };
 
 const _removeForm = (state, formName) => {

@@ -3,6 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';
 import AlertBox from './AlertBox'
@@ -46,4 +47,4 @@ class Alerts extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Alerts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Alerts));

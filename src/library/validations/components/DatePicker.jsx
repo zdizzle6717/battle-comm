@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import defaultValidations from '../constants/defaultValidations';
@@ -286,4 +287,4 @@ DatePicker.defaultProps = {
 	'dateAsIso': true
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DatePicker);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DatePicker));

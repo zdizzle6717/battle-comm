@@ -230,7 +230,7 @@ export default function(Service, method) {
 							<ul>
 								{
 									this.state.suggestions.map((suggestion, i) =>
-										<li key={suggestion.id || i} data-index={i} className={i === this.state.selectedIndex ? 'selected' : ''} onClick={this.handleClickSelect}>{configureSuggestion(this.props.displayKeys, suggestion)}</li>
+										<li key={i} data-index={i} className={i === this.state.selectedIndex ? 'selected' : ''} onClick={this.handleClickSelect}>{configureSuggestion(this.props.displayKeys, suggestion)}</li>
 									)
 								}
 							</ul>

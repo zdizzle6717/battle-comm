@@ -95,7 +95,7 @@ export default {
 	},
 	modify: (data) => {
 		// TODO: Test that this works as expected
-		let currentUser = JSON.parse(sessionStorage.getItem('user'));
+		let currentUser = JSON.parse(localStorage.getItem('user'));
 		if (currentUser) {
 			Object.assign(currentUser, data);
 			sessionStorage.setItem('user', JSON.stringify(currentUser));

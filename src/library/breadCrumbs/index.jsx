@@ -49,7 +49,7 @@ export default class BreadCrumbs extends React.Component {
 			<ul className="breadCrumbs">
 				{
 					this.state.breadCrumbs.length > 1 && this.state.breadCrumbs.map((crumb) =>
-						<li><Link className="crumb" key={crumb.key} to={crumb.pathname} activeClassName="active">{crumb.key}</Link></li>
+						<li><Link className="crumb" key={crumb.key} to={crumb.pathname}>{crumb.key}</Link></li>
 					)
 				}
 			</ul>

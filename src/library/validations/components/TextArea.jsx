@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import defaultValidations from '../constants/defaultValidations';
@@ -171,4 +172,4 @@ TextArea.defaultProps = {
 	'preserveState': false
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextArea);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TextArea));
