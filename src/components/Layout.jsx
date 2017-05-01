@@ -1,145 +1,100 @@
-'use strict';
-
-import React from 'react';
-import {Link, browserHistory} from 'react-router';
+import React from 'react'
+import { Route, Switch, Redirect, Link, withRouter } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Animation from 'react-addons-css-transition-group';
-import {syncHistoryWithStore} from 'react-router-redux';
+import {configureAuthRoute} from '../library/authentication';
+import {RedirectWithStatus} from '../library/routing';
 import {Alerts} from '../library/alerts'
 import {Loader} from '../library/loader';
-import {AlertActions} from '../library/alerts';
-import {LoaderActions} from '../library/loader';
-import {UserActions, checkAuthorization, authorizedRoute} from '../library/authentication';
-import initInterceptors from '../interceptors';
-import authorizedRoutesConfig from '../constants/authorizedRoutesConfig';
-import {baseApiRoute} from '../../envVariables';
-import roleConfig from '../../roleConfig';
-import store from '../store';
+import {scrollTo} from '../library/utilities';
+import {UserActions} from '../library/authentication';
 import TopNav from './pieces/TopNav';
 import Footer from './pieces/Footer';
-import ViewWrapper from './ViewWrapper';
+import initInterceptors from '../interceptors';
+import roleConfig from '../../roleConfig';
+import {googleAnalyticsKey, baseApiRoute} from '../../envVariables';
+import ReactGA from 'react-ga';
+const AuthRoute = configureAuthRoute(roleConfig);
 
-// Initialize global interceptors such as 401, 403
-initInterceptors(baseApiRoute, 300);
+// Routes
+import Home from './pages/Home';
+import AdminDashboard from './pages/admin/AdminDashboard';
+	import SearchGameSystems from './pages/admin/SearchGameSystems';
+		import EditGameSystem from './pages/admin/EditGameSystem';
+	import SearchManufacturers from './pages/admin/SearchManufacturers';
+		import EditManufacturer from './pages/admin/EditManufacturer';
+	import SearchNewsPosts from './pages/admin/SearchNewsPosts';
+		import EditNewsPost from './pages/admin/EditNewsPost';
+	import SearchProductOrders from './pages/admin/SearchProductOrders';
+		import EditProductOrder from './pages/admin/EditProductOrder';
+	import SearchProducts from './pages/admin/SearchProducts';
+		import EditProduct from './pages/admin/EditProduct';
+	import AssignPoints from './pages/admin/AssignPoints';
+	import SearchUsers from './pages/admin/SearchUsers';
+		import EditUser from './pages/admin/EditUser';
+import ForgotPassword from './pages/ForgotPassword';
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import News from './pages/news/News';
+	import NewsPost from './pages/news/NewsPost';
+import PlayerSearch from './pages/players/PlayerSearch';
+	import PlayerProfile from './pages/players/PlayerProfile';
+		import PlayerAllySearch from './pages/players/PlayerAllySearch';
+	import PlayerDashboard from './pages/players/PlayerDashboard';
+		import PlayerChangePassword from './pages/players/PlayerChangePassword';
+		import PlayerAccountEdit from './pages/players/PlayerAccountEdit';
+		import PlayerNotifications from './pages/players/PlayerNotifications';
+import Register from './pages/Register';
+import ResetPassword from './pages/ResetPassword';
+import Subscribe from './pages/Subscribe';
+import Store from './pages/store/Store';
+	import Cart from './pages/store/Cart';
+	import Checkout from './pages/store/Checkout';
+	import OrderSuccess from './pages/store/OrderSuccess';
+	import Product from './pages/store/Product';
 
 
 let _viewListener;
 
-const mapStateToProps = (state) => {
-	return {
-		'currentUser': state.user,
-		'isAuthenticated': state.isAuthenticated
-	}
-}
+// TODO: Animation between view change is not working when wrapped around a Switch
+
+// TODO: Check if this should be initialized in index with history passed as argument
+// Initialize global interceptors such as 401, 403
+initInterceptors(baseApiRoute, 300);
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-		'addAlert': AlertActions.addAlert,
-		'showLoader': LoaderActions.showLoader,
-		'hideLoader': LoaderActions.hideLoader,
-		'setRedirect': UserActions.setRedirect,
+	return bindActionCreators({
 		'setUser': UserActions.setUser
-    }, dispatch);
-};
+	}, dispatch);
+}
 
 class Layout extends React.Component {
 	constructor() {
         super();
 
-		this.state = {
-			'waitingForInitialAuthCheck': true
-		}
-
 		this.onViewChange = this.onViewChange.bind(this);
-		this.showAlert = this.showAlert.bind(this);
     }
 
-	componentDidMount() {
-		// Create an enhanced  that syncs navigation events with the store
-		const history = syncHistoryWithStore(browserHistory, store);
-		_viewListener = history.listen((location) => {
+	componentWillMount() {
+		ReactGA.initialize(googleAnalyticsKey);
+		_viewListener = this.props.history.listen((location, action) => {
 			this.onViewChange(location);
 		});
 	}
 
-	componentWillUnmount() {
-		_viewListener();
-	}
-
 	onViewChange(location) {
-		let destination = location.pathname;
-		let restrictedRoute, accessGranted;
-		if (this.state.waitingForInitialAuthCheck) {
-			this.props.showLoader();
-		}
-		if (!this.props.isAuthenticated) {
-			// Check for restriction on destination route
-			restrictedRoute = authorizedRoute(authorizedRoutesConfig, destination);
-			if (restrictedRoute) {
-				this.showAlert('notAuthenticated');
-				this.props.setRedirect(location.pathname);
-				browserHistory.push('/login');
-			} else {
-				accessGranted = true;
-			}
-		} else {
-			let homeState = this.props.currentUser.roleConfig ? this.props.currentUser.roleConfig.homeState : '/';
-			this.props.setRedirect(homeState);
-			restrictedRoute = authorizedRoute(authorizedRoutesConfig, destination);
-			if (restrictedRoute) {
-				accessGranted = checkAuthorization(restrictedRoute.accessControl, this.props.currentUser, roleConfig);
-				if (!accessGranted) {
-					this.showAlert('notAuthorized');
-					browserHistory.push('/players/dashboard');
-				}
-			} else {
-				accessGranted = true;
-			}
-		}
-		if (this.state.waitingForInitialAuthCheck && accessGranted) {
-			this.setState({
-				'waitingForInitialAuthCheck': false
-			}, () => {
-				this.props.hideLoader();
-			});
-		} else {
-			this.props.hideLoader();
-		}
-		return;
-	}
-
-	showAlert(selector) {
-		const alerts = {
-			'notAuthenticated': () => {
-				this.props.addAlert({
-					'title': 'Not Authenticated',
-					'message': 'Please login or register to continue.',
-					'type': 'error',
-					'delay': 3000
-				});
-			},
-			'notAuthorized': () => {
-				this.props.addAlert({
-					'title': 'Not Authorized',
-					'message': 'Redirected: You do not have authorization to view this content.',
-					'type': 'error',
-					'delay': 3000
-				});
-			},
-		}
-
-		return alerts[selector]();
+		scrollTo(0, 100);
+		ReactGA.set({ 'page': window.location.pathname });
+		ReactGA.pageview(window.location.pathname);
 	}
 
     render() {
-		let path = this.props.location.pathname;
-
-	    return (
-	      <div>
-	        <header>
-	            <TopNav></TopNav>
-	        </header>
+		return (
+			<div>
+				<header>
+					<TopNav/>
+				</header>
 				<div className="site-background"></div>
 				<div className="logo-banner row center">
 			        <div className="logo">
@@ -149,19 +104,64 @@ class Layout extends React.Component {
 						<Link to="/" className=""><img src="/images/BC_Web_Logo_mobile.png" alt="BattleComm" /></Link>
 			        </div>
 			    </div>
-				{
-					!this.state.waitingForInitialAuthCheck ?
-					<Animation transitionName="view" transitionAppear={true} transitionAppearTimeout={250} transitionEnter={true} transitionEnterTimeout={250} transitionLeave={true} transitionLeaveTimeout={250} component='div' className='content-container'>
-						{React.cloneElement(this.props.children, { key: path })}
-					</Animation> :
-					<div className="content-container"></div>
-				}
+
+				<Animation transitionName="view" transitionAppear={true} transitionAppearTimeout={250} transitionEnter={true} transitionEnterTimeout={250} transitionLeave={true} transitionLeaveTimeout={250} component='div' className='content-container'>
+					<Switch>
+						<Route location={this.props.location} path="/" exact component={Home}/>
+						<AuthRoute access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']} location={this.props.location} path="/admin" exact component={AdminDashboard}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems" strict component={SearchGameSystems}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems/create" component={EditGameSystem}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems/edit/:gameSystemId" component={EditGameSystem}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers" strict component={SearchManufacturers}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers/create" component={EditManufacturer}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers/edit/:manufacturerId" component={EditManufacturer}/>
+							<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news" strict component={SearchNewsPosts}/>
+								<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news/create" component={EditNewsPost}/>
+								<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news/edit/:postId" component={EditNewsPost}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/product-orders" strict component={SearchProductOrders}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/product-orders/edit/:orderId" strict component={EditProductOrder}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products" strict component={SearchSearchProducts}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products/create" strict component={EditProduct}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products/edit/:productId" strict component={EditProduct}/>
+							<AuthRoute access={['venueAdmin']} location={this.props.location} path="/admin/venue" strict component={AssignPoints}/>
+								<AuthRoute access={['venueAdmin']} location={this.props.location} path="/admin/venue/assign-points" component={AssignPoints}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/users" strict component={SearchUsers}/>
+								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/users/edit/:userId" strict component={EditUser}/>
+						<Route location={this.props.location} path="/forgot-password" exact component={ForgotPassword}/>
+						<Route location={this.props.location} path="/login" exact component={Login}/>
+						<Route location={this.props.location} path="/news" exact component={News}/>
+							<Route location={this.props.location} path="/news/post/:postId" component={News}/>
+						<RedirectWithStatus location={this.props.location} status={301} from="/redirect" to="/"/>
+						<Route location={this.props.location} path="/register" exact component={Register}/>
+						<Route location={this.props.location} path="/players" exact component={PlayerSearch}/>
+							<Route location={this.props.location} strict path="/players/profile/:playerHandle" component={PlayerProfile}/>
+								<Route location={this.props.location} path="/players/profile/:playerHandle/ally-search" component={PlayerAllySearch}/>
+							<AuthRoute access={['member']} location={this.props.location} strict path="/players/dashboard" component={PlayerDashboard}/>
+								<AuthRoute access={['member']} location={this.props.location} path="/players/dashboard/change-password" component={PlayerChangePassword}/>
+								<AuthRoute access={['member']} location={this.props.location} path="/players/dashboard/account-edit" component={PlayerAccountEdit}/>
+								<AuthRoute access={['member']} location={this.props.location} path="/players/dashboard/notifications" component={PlayerNotifications}/>
+						<Route location={this.props.location} path="/reset-password" exact component={ResetPassword}/>
+						<Route location={this.props.location} path="/store" exact component={Store}/>
+							<AuthRoute access={['member']} location={this.props.location} path="/store/cart" component={Cart}/>
+							<AuthRoute access={['member']} location={this.props.location} path="/store/checkout" component={Checkout}/>
+							<AuthRoute access={['member']} location={this.props.location} path="/store/order-success" component={OrderSuccess}/>
+							<Route location={this.props.location} path="/store/products/:productId" component={Product}/>
+						<Route location={this.props.location} path="/subscribe" exact component={Subscribe}/>
+						<Route location={this.props.location} component={NotFound}/>
+					</Switch>
+				</Animation>
+
 				<Alerts></Alerts>
 				<Loader></Loader>
-	        <Footer></Footer>
-	      </div>
-	    );
-    }
+
+				<Footer></Footer>
+			</div>
+		)
+	}
+
+	componentWillUnmount() {
+		_viewListener();
+	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default withRouter(connect(null, mapDispatchToProps)(Layout));

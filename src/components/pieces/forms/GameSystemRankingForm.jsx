@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {browserHistory} from 'react-router';
+import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -145,4 +145,4 @@ GameSystemRankingForm.propTypes = {
 GameSystemRankingForm.defaultProps = {
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameSystemRankingForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GameSystemRankingForm));

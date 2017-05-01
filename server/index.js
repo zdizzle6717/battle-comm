@@ -148,8 +148,8 @@ if (false /* cluster.isMaster */) {
       if (err) {
         throw err;
       }
-      console.log('API server running at:', server.select('api').info.uri, 'with process id', process.pid);
-      console.log('Chat server running at:', server.select('chat').info.uri, 'with process id', process.pid);
+      console.log(`API server running at: ${server.select('api').info.uri}, with process id ${process.pid}`);
+      console.log(`Chat server running at: ${server.select('chat').info.uri}, with process id ${process.pid}`);
     });
   });
 }

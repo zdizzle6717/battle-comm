@@ -3,7 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {browserHistory, Link} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import {AlertActions} from '../../library/alerts';
 import {FormActions} from '../../library/validations';
 import {UserActions} from '../../library/authentication';
@@ -148,4 +148,4 @@ class RPDistributionManagement extends React.Component {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(RPDistributionManagement);
+export default withRouter(connect(null, mapDispatchToProps)(RPDistributionManagement));

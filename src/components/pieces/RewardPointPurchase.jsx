@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {browserHistory, Link} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {UserActions} from '../../library/authentication';
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
 // TODO: add proptypes config
 // TODO: Add security, lock down price config so user can't alter values in developer tools
 
-class RewardPointPurchasePage extends React.Component {
+class RewardPointPurchase extends React.Component {
     constructor() {
         super();
 
@@ -222,4 +222,4 @@ class RewardPointPurchasePage extends React.Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(RewardPointPurchasePage);
+export default withRouter(connect(null, mapDispatchToProps)(RewardPointPurchase));

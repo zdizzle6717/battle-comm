@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {bindActionCreators} from 'redux';
-import {browserHistory, Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import Animation from 'react-addons-css-transition-group';
@@ -57,7 +57,7 @@ class TopNav extends React.Component {
 		// TODO: Set redirect doesn't seem to be working.
 		this.props.setRedirect(false);
 		this.showAlert('logoutSuccess');
-		browserHistory.push('/');
+		this.props.history.push('/');
 	}
 
 	showAlert(selector) {
@@ -98,7 +98,7 @@ class TopNav extends React.Component {
 						this.props.isAuthenticated ?
 						<AccountMenu logout={this.logout}></AccountMenu> :
 						<div className="login-link">
-							<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
+							<Link key="login" to="/login" className="menu-link">Login</Link>
 						</div>
 					}
 				</div>
@@ -106,19 +106,19 @@ class TopNav extends React.Component {
 					<div className="menu-group" key="menu" onClick={this.closeMenu}>
 						<ul className="main-menu">
 							<li className="home">
-								<Link key="home" to="/" className="menu-link" activeClassName="active">Home</Link>
+								<Link key="home" to="/" className="menu-link">Home</Link>
 							</li>
 							<li className="news">
-								<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
+								<Link key="news" to="/news" className="menu-link">News</Link>
 							</li>
 							<li className="ranking">
-								<Link key="ranking" to="/ranking/search/all" className="menu-link" activeClassName="active">Ranking</Link>
+								<Link key="ranking" to="/ranking/search/all" className="menu-link">Ranking</Link>
 							</li>
 							<li className="players">
-								<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>
+								<Link key="players" to="/players" className="menu-link">Players</Link>
 							</li>
 							<li className="store">
-								<Link key="store" to="/store" className="menu-link" activeClassName="active">Store</Link>
+								<Link key="store" to="/store" className="menu-link">Store</Link>
 							</li>
 						</ul>
 						<ul className="login-menu">
@@ -130,7 +130,7 @@ class TopNav extends React.Component {
 								this.props.isAuthenticated ?
 								<AccountMenu logout={this.logout}></AccountMenu> :
 								<li className="login-link">
-									<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
+									<Link key="login" to="/login" className="menu-link">Login</Link>
 								</li>
 							}
 						</ul>
@@ -140,19 +140,19 @@ class TopNav extends React.Component {
 						<div className="mobile-menu-group" key="mobile-menu" onClick={this.closeMenu}>
 							<ul className="main-menu">
 								<li className="">
-									<Link key="home" to="/" className="menu-link" activeClassName="active">Home</Link>
+									<Link key="home" to="/" className="menu-link">Home</Link>
 								</li>
 								<li className="">
-									<Link key="news" to="/news" className="menu-link" activeClassName="active">News</Link>
+									<Link key="news" to="/news" className="menu-link">News</Link>
 								</li>
 								<li className="">
-									<Link key="ranking" to="/ranking/search/all" className="menu-link" activeClassName="active">Ranking</Link>
+									<Link key="ranking" to="/ranking/search/all" className="menu-link">Ranking</Link>
 								</li>
 								<li className="">
-									<Link key="players" to="/players" className="menu-link" activeClassName="active">Players</Link>
+									<Link key="players" to="/players" className="menu-link">Players</Link>
 								</li>
 								<li className="">
-									<Link key="store" to="/store" className="menu-link" activeClassName="active">Store</Link>
+									<Link key="store" to="/store" className="menu-link">Store</Link>
 								</li>
 							</ul>
 							<ul className="login-menu">
@@ -164,7 +164,7 @@ class TopNav extends React.Component {
 									this.props.isAuthenticated ?
 									<AccountMenu logout={this.logout}></AccountMenu> :
 									<li className="login-link">
-										<Link key="login" to="/login" className="menu-link" activeClassName="active">Login</Link>
+										<Link key="login" to="/login" className="menu-link">Login</Link>
 									</li>
 								}
 							</ul>
@@ -177,4 +177,4 @@ class TopNav extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopNav);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopNav));

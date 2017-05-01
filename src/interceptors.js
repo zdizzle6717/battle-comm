@@ -1,6 +1,6 @@
 'use strict';
 
-import {browserHistory} from 'react-router';
+import {history} from 'history';
 import axios from 'axios';
 import {AlertActions} from './library/alerts';
 import {LoaderActions} from './library/loader';
@@ -55,7 +55,7 @@ const initInterceptors = (baseUrl = 'http://localhost:8000/api/', timeout = _tim
 					type: 'error',
 					delay: 3000
 				});
-				browserHistory.push('/login');
+				history.push('/login');
 			}
 		}
 
