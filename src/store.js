@@ -14,8 +14,13 @@ const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_E
 
 // Grab the state from a global variable injected into the server-generated HTML
 function safelyParse(input) {
-  var doc = new DOMParser().parseFromString(input, 'text/html');
-  return JSON.parse(doc.documentElement.textContent);
+	if (input) {
+		var doc = new DOMParser().parseFromString(input, 'text/html');
+	  return JSON.parse(doc.documentElement.textContent);
+	} else {
+		console.log('Warning: __PRELOADED_STATE__ is not defined on the respective view');
+		return {};
+	}
 }
 
 // Get stored user details from session storage if they are already logged in
