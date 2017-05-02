@@ -38,6 +38,7 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import News from './pages/news/News';
 	import NewsPost from './pages/news/NewsPost';
+import PlayerRankingSearch from './pages/players/PlayerRankingSearch';
 import PlayerSearch from './pages/players/PlayerSearch';
 	import PlayerProfile from './pages/players/PlayerProfile';
 		import PlayerAllySearch from './pages/players/PlayerAllySearch';
@@ -59,10 +60,6 @@ let _viewListener;
 
 // TODO: Animation between view change is not working when wrapped around a Switch
 
-// TODO: Check if this should be initialized in index with history passed as argument
-// Initialize global interceptors such as 401, 403
-initInterceptors(baseApiRoute, 300);
-
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'setUser': UserActions.setUser
@@ -77,16 +74,24 @@ class Layout extends React.Component {
     }
 
 	componentWillMount() {
-		ReactGA.initialize(googleAnalyticsKey);
+		// TODO: Check if this should be initialized in index with history passed as argument
+		// Initialize global interceptors such as 401, 403
+		initInterceptors(this.props.history, baseApiRoute, 300, );
 		_viewListener = this.props.history.listen((location, action) => {
 			this.onViewChange(location);
 		});
 	}
 
+	componentDidMount() {
+		ReactGA.initialize(googleAnalyticsKey);
+	}
+
 	onViewChange(location) {
-		scrollTo(0, 100);
-		ReactGA.set({ 'page': window.location.pathname });
-		ReactGA.pageview(window.location.pathname);
+		scrollTo(0, 250);
+		if (typeof(window) !== 'undefined') {
+			ReactGA.set({ 'page': window.location.pathname });
+			ReactGA.pageview(window.location.pathname);
+		}
 	}
 
     render() {
@@ -109,29 +114,31 @@ class Layout extends React.Component {
 					<Switch>
 						<Route location={this.props.location} path="/" exact component={Home}/>
 						<AuthRoute access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']} location={this.props.location} path="/admin" exact component={AdminDashboard}/>
-							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems" strict component={SearchGameSystems}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems" exact component={SearchGameSystems}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems/create" component={EditGameSystem}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/game-systems/edit/:gameSystemId" component={EditGameSystem}/>
-							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers" strict component={SearchManufacturers}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers" exact component={SearchManufacturers}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers/create" component={EditManufacturer}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/manufacturers/edit/:manufacturerId" component={EditManufacturer}/>
-							<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news" strict component={SearchNewsPosts}/>
+							<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news" exact component={SearchNewsPosts}/>
 								<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news/create" component={EditNewsPost}/>
 								<AuthRoute access={['newsContributor']} location={this.props.location} path="/admin/news/edit/:postId" component={EditNewsPost}/>
-							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/product-orders" strict component={SearchProductOrders}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/product-orders" exact component={SearchProductOrders}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/product-orders/edit/:orderId" strict component={EditProductOrder}/>
-							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products" strict component={SearchSearchProducts}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products" exact component={SearchProducts}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products/create" strict component={EditProduct}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/products/edit/:productId" strict component={EditProduct}/>
-							<AuthRoute access={['venueAdmin']} location={this.props.location} path="/admin/venue" strict component={AssignPoints}/>
+							<AuthRoute access={['venueAdmin']} location={this.props.location} path="/admin/venue" exact component={AssignPoints}/>
 								<AuthRoute access={['venueAdmin']} location={this.props.location} path="/admin/venue/assign-points" component={AssignPoints}/>
-							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/users" strict component={SearchUsers}/>
+							<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/users" exact component={SearchUsers}/>
 								<AuthRoute access={['systemAdmin']} location={this.props.location} path="/admin/users/edit/:userId" strict component={EditUser}/>
 						<Route location={this.props.location} path="/forgot-password" exact component={ForgotPassword}/>
 						<Route location={this.props.location} path="/login" exact component={Login}/>
 						<Route location={this.props.location} path="/news" exact component={News}/>
 							<Route location={this.props.location} path="/news/post/:postId" component={News}/>
 						<RedirectWithStatus location={this.props.location} status={301} from="/redirect" to="/"/>
+						<Route location={this.props.location} strict exact path="/ranking/search/:gameSystemId" component={PlayerRankingSearch}/>
+						<Route location={this.props.location} strict exact path="/ranking/search/:gameSystemId/:factionId" component={PlayerRankingSearch}/>
 						<Route location={this.props.location} path="/register" exact component={Register}/>
 						<Route location={this.props.location} path="/players" exact component={PlayerSearch}/>
 							<Route location={this.props.location} strict path="/players/profile/:playerHandle" component={PlayerProfile}/>

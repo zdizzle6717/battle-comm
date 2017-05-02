@@ -44,7 +44,10 @@ const getUserModel = (where) => {
 				{
 					'model': models.User,
 					'as': 'Friends',
-					'attributes': ['id', 'firstName', 'lastName', 'username']
+					'attributes': ['id', 'firstName', 'lastName', 'username'],
+					'include': [{
+						'model': models.UserPhoto
+					}]
 				},
 				{
 					'model': models.GameSystemRanking,

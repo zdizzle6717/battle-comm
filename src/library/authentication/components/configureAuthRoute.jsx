@@ -36,7 +36,7 @@ function configureAuthRoute(roleConfig) {
 			this.showAlert = this.showAlert.bind(this);
 		}
 
-		// Set timeouts to prevent setState call during rending
+		// Setting timeouts prevents setState call during rendering
 		checkAccess(accessLevels) {
 			if (!this.props.isAuthenticated) {
 				setTimeout(() => {

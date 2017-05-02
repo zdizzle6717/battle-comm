@@ -69,8 +69,14 @@ class PlayerProfile extends React.Component {
 		}
     }
 
-	getCurrentPlayer() {
-		PlayerService.getByUsername(this.props.match.params.playerHandle).then((player) => {
+	componentWillReceiveProps(nextProps) {
+		if (this.props.match.params.playerHandle !== nextProps.match.params.playerHandle) {
+			this.getCurrentPlayer(nextProps.match.params.playerHandle);
+		}
+	}
+
+	getCurrentPlayer(playerHandle = this.props.match.params.playerHandle) {
+		PlayerService.getByUsername(playerHandle).then((player) => {
 			let alreadyFriends = player.Friends.some((friend) => {
 				return friend.id === this.props.currentUser.id;
 			});

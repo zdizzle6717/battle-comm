@@ -46,28 +46,49 @@ class PlayerRankingSearch extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Player Ranking Search";
+		// TODO: Move this logic to willReceiveProps
 		if (!this.props.match.params.gameSystemId) {
 			this.showAlert('gameSystemNotFound');
-			// TODO: Return to previous page (Build a library for storing this?)
-			this.props.history.push('/');
+			this.props.history.goBack();
 		}
 		this.props.getGameSystems();
 
 		if (this.props.match.params.gameSystemId === 'all') {
+			return;
 		} else {
 			this.props.getGameSystem(this.props.match.params.gameSystemId).then((gameSystem) => {
 				this.setState({
 					'selectedGameSystem': gameSystem
 				});
 			});
-			this.handlePageChange(1);
+			this.handlePageChange(1, this.props.match.params);
 		}
     }
+
+	componentWillReceiveProps(nextProps) {
+		let {match} = this.props;
+		if (match.params.gameSystemId !== nextProps.match.params.gameSystemId || match.params.factionId !== nextProps.match.params.factionId) {
+			if (nextProps.match.params.gameSystemId === 'all') {
+				return;
+			} else {
+				this.props.getGameSystem(nextProps.match.params.gameSystemId).then((gameSystem) => {
+					this.setState({
+						'selectedGameSystem': gameSystem
+					});
+				});
+				this.handlePageChange(1, nextProps.match.params);
+			}
+		}
+	}
 
 	handleFactionChange(e) {
 		e.preventDefault();
 		let factionId = e.target.value;
-		this.props.history.push(`/ranking/search/${this.props.match.params.gameSystemId}/${factionId}`);
+		if (factionId) {
+			this.props.history.push(`/ranking/search/${this.props.match.params.gameSystemId}/${factionId}`);
+		} else {
+			this.props.history.push(`/ranking/search/${this.props.match.params.gameSystemId}`);
+		}
 	}
 
 	handleGameSystemChange(e) {
@@ -83,9 +104,10 @@ class PlayerRankingSearch extends React.Component {
 		})
 	}
 
-	handlePageChange(pageNumber) {
-		if (this.props.match.params.factionId) {
-			RankingService.searchByFaction(this.props.match.params.factionId, {
+	handlePageChange(pageNumber, params) {
+		console.log(params);
+		if (params.factionId) {
+			RankingService.searchByFaction(params.factionId, {
 				'pageNumber': pageNumber,
 				'pageSize': 20
 			}).then((response) => {
@@ -95,7 +117,7 @@ class PlayerRankingSearch extends React.Component {
 				});
 			});
 		} else {
-			RankingService.searchByGameSystem(this.props.match.params.gameSystemId, {
+			RankingService.searchByGameSystem(params.gameSystemId, {
 				'pageNumber': pageNumber,
 				'pageSize': 20
 			}).then((response) => {
@@ -191,7 +213,7 @@ class PlayerRankingSearch extends React.Component {
 					}
 					<hr/>
 					<div className="small-12 columns">
-						<PaginationControls pageNumber={this.state.pagination.pageNumber} pageSize={this.state.pagination.pageSize} totalPages={this.state.pagination.totalPages} totalResults={this.state.pagination.totalResults} handlePageChange={this.handlePageChange.bind(this)}></PaginationControls>
+						<PaginationControls pageNumber={this.state.pagination.pageNumber} pageSize={this.state.pagination.pageSize} totalPages={this.state.pagination.totalPages} totalResults={this.state.pagination.totalResults} handlePageChange={this.handlePageChange.bind(this, this.props.match.params)}></PaginationControls>
 					</div>
 				</div>
             </ViewWrapper>

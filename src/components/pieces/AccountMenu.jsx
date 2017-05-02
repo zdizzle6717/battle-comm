@@ -3,7 +3,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import {UserActions, AccessControl as createAccessControl} from '../../library/authentication';

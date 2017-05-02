@@ -229,7 +229,7 @@ class AssignPoints extends React.Component {
 												</Select>
 											</div>
 											<div className="form-group small-12 medium-6 columns">
-												<label className="required">Faction</label>
+												<label>Faction</label>
 												<Select name="faction" value={this.state.players[i].faction} handleInputChange={this.handlePlayerInputChange.bind(this, i)}>
 													<option value="">--Select--</option>
 													{

@@ -117,12 +117,13 @@ server.register(HapiAuthJwt, (err) => {
     },
     'validateFunc': validateUser
   });
+
+	// Api Routes
+	for (let route in routes) {
+	  server.select('api').route(routes[route]);
+	}
 });
 
-// Api Routes
-for (let route in routes) {
-  server.select('api').route(routes[route]);
-}
 
 if (false /* cluster.isMaster */) {
   let numWorkers = os.cpus().length;

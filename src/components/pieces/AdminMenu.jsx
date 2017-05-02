@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import roleConfig from '../../../roleConfig';
 import createAccessControl from '../../library/authentication/components/AccessControl';
 const AccessControl = createAccessControl(roleConfig);

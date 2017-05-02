@@ -48,8 +48,9 @@ for (let i in routeConfig) {
 			</Provider>
 		)
 
-		// TODO: Create a solution to get intial state
-		const state = JSON.stringify({});
+		// TODO: Create a solution to get intial state (props, isAuthenticated, currentUser)
+		// TODO: Store user token in database after login? ...then check if token has not expired on page refresh???
+		const state = JSON.stringify(store.getState());
 
 		if (context.url) {
 		  // Somewhere a `<Redirect>` was rendered

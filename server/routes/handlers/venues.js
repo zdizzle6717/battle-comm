@@ -4,6 +4,8 @@ import env from '../../../envVariables';
 import nodemailer from 'nodemailer';
 import formatJSONDate from '../../utils/formatJSONDate';
 import buildPointAssignmentEmail from '../../email-templates/pointAssignment';
+
+// TODO: IMPORTANT - xoauth2 and nodemailer packages were updated, check API and documentation
 import xoauth2 from 'xoauth2';
 let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
 
@@ -32,7 +34,7 @@ let venues = {
     transporter.sendMail(adminMailConfig, (error, info) => {
       if (error) {
         console.log(error);
-        reply('Somthing went wrong');
+        reply('E-mail failed to send. Check server configuration.').code(400);
       } else {
 				// Forward mail to venueAdmin
 				adminMailConfig.to = request.payload.venueEvent.returnEmail;

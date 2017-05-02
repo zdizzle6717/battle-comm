@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Link, withRouter} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import CartActions from '../../../actions/CartActions';
