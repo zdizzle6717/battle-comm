@@ -7,8 +7,8 @@ const autoPrefix = require('postcss')([autoPrefixer]);
 
 // Compile SCSS
 sass.render({
-    file: 'src/styles/app.scss',
-    outputStyle: 'compressed'
+    'file': 'src/styles/app.scss',
+    'outputStyle': 'compressed'
 }, (err, result) => {
     if (err) {
         console.log(err);

@@ -105,7 +105,6 @@ class PlayerRankingSearch extends React.Component {
 	}
 
 	handlePageChange(pageNumber, params) {
-		console.log(params);
 		if (params.factionId) {
 			RankingService.searchByFaction(params.factionId, {
 				'pageNumber': pageNumber,

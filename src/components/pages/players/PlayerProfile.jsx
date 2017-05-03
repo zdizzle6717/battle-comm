@@ -264,7 +264,7 @@ class PlayerProfile extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<h2>Ranking <Link to="/ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							<div className="small-12 columns">
 								{
 									player.GameSystemRankings.length < 1 &&

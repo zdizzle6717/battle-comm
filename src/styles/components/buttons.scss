@@ -44,37 +44,38 @@
 	}
 
 	@each $name, $color in $foundation-palette {
-		&.#{$name} {
-			// TODO: Figure out why the fuck this isn't working
-			// background: $color;
-			// color: $white;
-			// border: 2px solid darken($color, 3%);
-			//
-			// &.small {
-			// 	max-width: 7rem;
-			// }
-			// &.medium {
-			// 	max-width: 14rem;
-			// }
-			// &.large {
-			// 	max-width: 20rem;
-			// }
-			//
-			// &:hover {
-			// 	background: transparentize(lighten($color, 3%), .1);
-			// 	color: $white;
-			// }
-			//
-			// &:active,
-			// &:focus {
-			// 	background: transparentize(lighten($color, 1%), .1);
-			// }
-			//
-			// &.disabled,
-			// &:disabled {
-			// 	background: transparentize($color, 0.01);
-			// 	cursor: disabled;
-			// }
+		@if (type-of($color) == 'color') {
+			&.#{$name} {
+				background: $color;
+				color: $white;
+				border: 2px solid darken($color, 3%);
+
+				&.small {
+					max-width: 7rem;
+				}
+				&.medium {
+					max-width: 14rem;
+				}
+				&.large {
+					max-width: 20rem;
+				}
+
+				&:hover {
+					background: transparentize(lighten($color, 3%), .1);
+					color: $white;
+				}
+
+				&:active,
+				&:focus {
+					background: transparentize(lighten($color, 1%), .1);
+				}
+
+				&.disabled,
+				&:disabled {
+					background: transparentize($color, 0.01);
+					cursor: disabled;
+				}
+			}
 		}
 	}
 

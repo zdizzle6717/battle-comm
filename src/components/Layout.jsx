@@ -10,6 +10,7 @@ import {Loader} from '../library/loader';
 import {scrollTo} from '../library/utilities';
 import {UserActions} from '../library/authentication';
 import TopNav from './pieces/TopNav';
+import ViewWrapper from './ViewWrapper';
 import Footer from './pieces/Footer';
 import initInterceptors from '../interceptors';
 import roleConfig from '../../roleConfig';
@@ -68,7 +69,7 @@ class Layout extends React.Component {
 				<header>
 					<TopNav/>
 				</header>
-				
+
 				<div className="site-background"></div>
 				<div className="logo-banner row center">
 			        <div className="logo">
@@ -79,7 +80,7 @@ class Layout extends React.Component {
 			        </div>
 			    </div>
 				{
-					this.state.clientHasLoaded &&
+					this.state.clientHasLoaded ?
 					<Animation transitionName="view" transitionAppear={true} transitionAppearTimeout={250} transitionEnter={true} transitionEnterTimeout={250} transitionLeave={true} transitionLeaveTimeout={250} component='div' className='content-container'>
 						<Switch>
 							{routes.map((route, i) => {
@@ -95,7 +96,8 @@ class Layout extends React.Component {
 							})}
 							<RedirectWithStatus location={this.props.location} from="/redirect" to="/" />
 						</Switch>
-					</Animation>
+					</Animation> :
+					<div style={{height: 40 + 'vh'}}></div>
 				}
 				<Alerts></Alerts>
 				<Loader></Loader>

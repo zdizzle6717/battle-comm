@@ -67,15 +67,17 @@ class ForgotPassword extends React.Component {
         return (
             <ViewWrapper headerImage="/images/Titles/Forgot_Password.png" headerAlt="Forgot Password">
                 <div className="row">
-					<h3>Enter your e-mail address and click submit to change your password.</h3>
-					<Form name="forgotPasswordForm" submitText="Submit" handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 medium-6 medium-offset-3 columns">
-								<label className="required">Email</label>
-								<Input type="text" name="email" value={this.state.email} handleInputChange={this.handleEmailInputChange} validate="email" required={true} />
+					<div className="small-12 columns">
+						<h3>Enter your e-mail address and click submit to change your password.</h3>
+						<Form name="forgotPasswordForm" submitText="Submit" handleSubmit={this.handleSubmit}>
+							<div className="row">
+								<div className="form-group small-12 medium-6 medium-offset-3 columns">
+									<label className="required">Email</label>
+									<Input type="text" name="email" value={this.state.email} handleInputChange={this.handleEmailInputChange} validate="email" required={true} />
+								</div>
 							</div>
-						</div>
-					</Form>
+						</Form>
+					</div>
                 </div>
 				<div className="row push-top">
 					<div className="form-group small-12 columns">

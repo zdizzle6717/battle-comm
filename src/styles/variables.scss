@@ -70,7 +70,7 @@ $success-800: darken($success-500, 9%);
 $success-900: darken($success-500, 12%);
 
 // Warn
-$warn-500: yellow;
+$warn-500: #ffec4d;
 $warn-100: lighten($warn-500, 12%);
 $warn-200: lighten($warn-500, 9%);
 $warn-300: lighten($warn-500, 6%);
@@ -91,6 +91,17 @@ $alert-700: darken($alert-500, 6%);
 $alert-800: darken($alert-500, 9%);
 $alert-900: darken($alert-500, 12%);
 
+// Error
+$error-500: #9d0c0c;
+$error-100: lighten($error-500, 12%);
+$error-200: lighten($error-500, 9%);
+$error-300: lighten($error-500, 6%);
+$error-400: lighten($error-500, 3%);
+$error-600: darken($error-500, 3%);
+$error-700: darken($error-500, 6%);
+$error-800: darken($error-500, 9%);
+$error-900: darken($error-500, 12%);
+
 // Info
 $info-500: #124476;
 $info-100: lighten($info-500, 12%);
@@ -109,10 +120,8 @@ $foundation-palette: (
 	success: $success-500,
 	info: $info-500,
 	alert: $alert-500,
-	error: $alert-500,
-	warn: $warn-500,
-	black: $black-500,
-	white: $white-500
+	error: $error-500,
+	warn: $warn-500
 );
 
 // Shadows

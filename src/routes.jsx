@@ -38,7 +38,8 @@ import Store from './components/pages/store/Store';
 	import OrderSuccess from './components/pages/store/OrderSuccess';
 	import Product from './components/pages/store/Product';
 
-import {UserActions} from './library/authentication'
+// Actions
+
 
 let routes = [
 	// Index/Home
@@ -214,6 +215,7 @@ let routes = [
 	{
 		'path': '/players/dashboard',
 		'component': PlayerDashboard,
+		'exact': true,
 		'strict': true,
 		'access': ['member']
 	},
@@ -235,7 +237,8 @@ let routes = [
 	{
 		'path': '/players/profile/:playerHandle',
 		'component': PlayerProfile,
-		'strict': true
+		'strict': true,
+		'exact': true
 	},
 	{
 		'path': '/players/profile/:playerHandle/ally-search',
