@@ -4,7 +4,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Animation from 'react-addons-css-transition-group';
+import {CSSTransitionGroup as Animation} from 'react-transition-group';
 import $ from 'jquery';
 // TODO: This twitter widget causes a memore leak if it doesn't get destroyed on componentWillUnmount
 import { Timeline } from 'react-twitter-widgets'

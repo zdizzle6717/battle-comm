@@ -2,7 +2,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import Animation from 'react-addons-css-transition-group';
+import {CSSTransitionGroup as Animation} from 'react-transition-group';
 import Modal from '../../library/modal';
 
 export default class Footer extends React.Component {
