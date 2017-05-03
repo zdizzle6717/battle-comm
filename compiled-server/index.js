@@ -141,12 +141,12 @@ server.register(_hapiAuthJwt2.default, function (err) {
     },
     'validateFunc': validateUser
   });
-});
 
-// Api Routes
-for (var route in routes) {
-  server.select('api').route(routes[route]);
-}
+  // Api Routes
+  for (var route in routes) {
+    server.select('api').route(routes[route]);
+  }
+});
 
 if (false /* cluster.isMaster */) {
     var numWorkers = _os2.default.cpus().length;

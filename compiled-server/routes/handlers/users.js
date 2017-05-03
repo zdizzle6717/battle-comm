@@ -88,7 +88,10 @@ var getUserModel = function getUserModel(where) {
     }, {
       'model': _models2.default.User,
       'as': 'Friends',
-      'attributes': ['id', 'firstName', 'lastName', 'username']
+      'attributes': ['id', 'firstName', 'lastName', 'username'],
+      'include': [{
+        'model': _models2.default.UserPhoto
+      }]
     }, {
       'model': _models2.default.GameSystemRanking,
       'include': [{

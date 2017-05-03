@@ -30,6 +30,9 @@ var generator = _xoauth2.default.createXOAuth2Generator(_envVariables2.default.e
 
 // listen for token updates
 // you probably want to store these to a db
+
+
+// TODO: IMPORTANT - xoauth2 and nodemailer packages were updated, check API and documentation
 generator.on('token', function (token) {});
 
 // Product Route Configs
@@ -53,7 +56,7 @@ var venues = {
     transporter.sendMail(adminMailConfig, function (error, info) {
       if (error) {
         console.log(error);
-        reply('Somthing went wrong');
+        reply('E-mail failed to send. Check server configuration.').code(400);
       } else {
         // Forward mail to venueAdmin
         adminMailConfig.to = request.payload.venueEvent.returnEmail;

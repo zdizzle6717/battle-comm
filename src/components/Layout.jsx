@@ -94,7 +94,7 @@ class Layout extends React.Component {
 									)
 								}
 							})}
-							<RedirectWithStatus location={this.props.location} from="/redirect" to="/" />
+							<RedirectWithStatus location={this.props.location} status={307} from="/redirect" to="/" />
 						</Switch>
 					</Animation> :
 					<div style={{height: 40 + 'vh'}}></div>
