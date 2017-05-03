@@ -16,8 +16,8 @@ fs.readdirSync('node_modules')
 module.exports = {
   'entry': path.join(__dirname, 'server-client', 'index.jsx'),
   'output': {
-    'path': path.join(__dirname, 'compiled-client'),
-    'filename': 'index.js'
+    'path': path.join(__dirname, 'server-client'),
+    'filename': 'compiled.js'
   },
 	'node': {
 		'__dirname': true,
