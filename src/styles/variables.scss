@@ -81,7 +81,7 @@ $warn-800: darken($warn-500, 9%);
 $warn-900: darken($warn-500, 12%);
 
 // Alert
-$alert-500: #720505;
+$alert-500: #9d0c0c;
 $alert-100: lighten($alert-500, 12%);
 $alert-200: lighten($alert-500, 9%);
 $alert-300: lighten($alert-500, 6%);
@@ -92,7 +92,7 @@ $alert-800: darken($alert-500, 9%);
 $alert-900: darken($alert-500, 12%);
 
 // Error
-$error-500: #9d0c0c;
+$error-500: #720505;
 $error-100: lighten($error-500, 12%);
 $error-200: lighten($error-500, 9%);
 $error-300: lighten($error-500, 6%);

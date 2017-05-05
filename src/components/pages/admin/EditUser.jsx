@@ -56,8 +56,16 @@ class EditUser extends React.Component {
         document.title = "Battle-Comm | User Edit";
 		if (this.props.match.params.userId) {
 			PlayerService.getById(this.props.match.params.userId).then((user) => {
+				let userRole;
+				roleConfig.some((role) => {
+				  if (user[role.name]) {
+					userRole = role.name;
+					return true;
+				  }
+				});
 				this.setState({
-					'user': user
+					'user': user,
+					'userRole': userRole
 				});
 			});
 		} else {
@@ -108,6 +116,7 @@ class EditUser extends React.Component {
 			this.setState({
 				'userRole': role
 			});
+			this.showAlert('roleUpdated');
 		});
 	}
 
@@ -139,6 +148,14 @@ class EditUser extends React.Component {
 
 	showAlert(selector) {
 		const alerts = {
+			'roleUpdated': () => {
+				this.props.addAlert({
+					'title': 'User Role Updated',
+					'message': `User, ${this.state.user.username}'s, role was successfully updated `,
+					'type': 'success',
+					'delay': 3000
+				});
+			},
 			'userDeleted': () => {
 				this.props.addAlert({
 					'title': 'User Deleted',
@@ -195,7 +212,7 @@ class EditUser extends React.Component {
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label className="required">E-mail</label>
-										<Input type="text" name="email" value={this.state.user.email} handleInputChange={this.handleInputChange} required={true}/>
+										<Input type="text" name="email" value={this.state.user.email} handleInputChange={this.handleInputChange} validate="email" required={true}/>
 									</div>
 								</div>
 								<div className="row">

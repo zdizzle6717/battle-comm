@@ -7,6 +7,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {AlertActions} from '../../library/alerts';
 import {Form, Input, Select, FileUpload} from '../../library/validations'
 import {UserActions} from '../../library/authentication';
+import {handlers} from '../../library/utilities';
 import ViewWrapper from '../ViewWrapper';
 
 const mapDispatchToProps = (dispatch) => {
@@ -42,11 +43,9 @@ class Register extends React.Component {
 	}
 
 	handleInputChange(e) {
-		let credentials = this.state.credentials;
-		credentials[e.target.name] = e.target.value;
 		this.setState({
-			'credentials': credentials
-		})
+			'credentials': handlers.updateInput(e, this.state.credentials)
+		});
 	}
 
 	handleSubmit(e) {

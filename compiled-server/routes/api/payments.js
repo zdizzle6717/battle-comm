@@ -12,6 +12,41 @@ module.exports = [
 // Payments
 {
 	'method': 'POST',
+	'path': '/api/payments/subscriptions',
+	'config': {
+		'tags': ['api'],
+		'description': 'Create a new subscription',
+		'notes': 'Create a new subscription',
+		'auth': {
+			'strategy': 'jsonWebToken',
+			'scope': ['member']
+		},
+		'validate': {
+			'payload': {
+				'UserId': _joi2.default.number().required(),
+				'token': _joi2.default.optional(),
+				'plan': _joi2.default.string().required(),
+				'email': _joi2.default.string().required(),
+				'description': _joi2.default.string().required()
+			}
+		}
+	},
+	'handler': _handlers.payments.createSubscription
+}, {
+	'method': 'GET',
+	'path': '/api/payments/subscriptions',
+	'config': {
+		'tags': ['api'],
+		'description': 'Get all available subscriptions',
+		'notes': 'Get all available subscriptions',
+		'auth': {
+			'strategy': 'jsonWebToken',
+			'scope': ['member']
+		}
+	},
+	'handler': _handlers.payments.getSubscriptionPlans
+}, {
+	'method': 'POST',
 	'path': '/api/payments/purchaseRP/{id}',
 	'config': {
 		'tags': ['api'],

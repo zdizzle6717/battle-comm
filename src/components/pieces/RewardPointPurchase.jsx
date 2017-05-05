@@ -54,12 +54,10 @@ class RewardPointPurchase extends React.Component {
         this.loadStripe(() => {
 			// Handler for acknowledging card token response
 			let handleSubmit = (token) => {
-				this.setState({
-					'loading': true
-				});
-				PaymentService.purchaseRP(this.props.user.id, {
+				PaymentService.purchaseRP({
 					'token': JSON.stringify(token),
 					'details': {
+						'UserId': this.props.user.id,
 						'email': this.state.rpPurchaseForm.email,
 						'description': 'Reward Point Purchase',
 						'priceIndex': this.state.rpPurchaseForm.priceIndex
@@ -204,9 +202,10 @@ class RewardPointPurchase extends React.Component {
                 <div className="row">
 					<div className="small-12 columns text-center">
 						<div>
-			                {(this.state.stripeLoading)
-			                    ? <p>loading..</p>
-			                    : <button className="button secondary" onClick={this.openStripeModal} disabled={formIsInvalid}>Checkout</button>
+			                {
+								this.state.stripeLoading ?
+								<p>loading..</p> :
+								<button className="button secondary" onClick={this.openStripeModal} disabled={formIsInvalid}>Checkout</button>
 			                }
 			            </div>
 					</div>

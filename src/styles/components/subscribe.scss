@@ -1,0 +1,33 @@
+.subscribe {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	.plaque {
+		order: 1;
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+	}
+	.subscribe-form {
+		flex: 1;
+		order: 2;
+		padding: 0 1.25rem;
+	}
+}
+
+@include breakpoint(medium down) {
+	.subscribe {
+		display: flex;
+		flex-direction: row;
+
+		.plaque {
+			width: 100%;
+			order: 2;
+		}
+		.subscribe-form {
+			width: 100%;
+			order: 1;
+		}
+	}
+}

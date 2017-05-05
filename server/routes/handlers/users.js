@@ -100,6 +100,7 @@ let users = {
       'id_token': createUserToken(request.pre.user, request.payload.rememberMe),
 			'roleFlags': getUserRoleFlags(request.pre.user),
       'id': request.pre.user.id,
+      'customerId': request.pre.user.customerId,
       'firstName': request.pre.user.firstName,
       'lastName': request.pre.user.lastName,
       'member': request.pre.user.member,

@@ -14,7 +14,21 @@
 			}
 		}
 	}
+}
 
+.color-black {
+	color: $black-500 !important;
+}
+
+a {
+	&.color-black {
+		color: $black-500 !important;
+
+		&:hover {
+			color: $black-500 !important;
+			text-decoration: underline;
+		}
+	}
 }
 
 .gold {

@@ -176,6 +176,7 @@ module.exports = [
       },
       'payload': {
         'id': _joi2.default.optional(),
+        'customerId': _joi2.default.optional(),
         'email': _joi2.default.optional(),
         'rewardPoints': _joi2.default.number(),
         'firstName': _joi2.default.optional(),

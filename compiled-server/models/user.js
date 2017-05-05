@@ -6,6 +6,10 @@ module.exports = function (sequelize, DataTypes) {
       'type': DataTypes.STRING,
       'unique': true
     },
+    'customerId': {
+      'type': DataTypes.STRING,
+      'unique': true
+    },
     'password': DataTypes.STRING,
     'firstName': DataTypes.STRING,
     'lastName': DataTypes.STRING,

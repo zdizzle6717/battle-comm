@@ -181,6 +181,7 @@ module.exports = [
         },
         'payload': {
           'id': Joi.optional(),
+          'customerId': Joi.optional(),
           'email': Joi.optional(),
           'rewardPoints': Joi.number(),
           'firstName': Joi.optional(),

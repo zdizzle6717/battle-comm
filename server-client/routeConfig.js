@@ -40,5 +40,13 @@ export default [
 	{
 		'route': '/store*',
 		'view': 'store'
+	},
+	{
+		'route': '/subscribe',
+		'view': 'subscribe'
+	},
+	{
+		'route': '*',
+		'view': 'notFound'
 	}
 ];

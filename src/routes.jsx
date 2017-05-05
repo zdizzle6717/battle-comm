@@ -277,12 +277,11 @@ let routes = [
 		'path': '/store/products/:productId',
 		'component': Product
 	},
-
-	// Public cont...
 	{
 		'path': '/subscribe',
 		'component': Subscribe,
-		'exact': true
+		'exact': true,
+		'access': ['member']
 	},
 
 	// If no route matches, return NotFound component

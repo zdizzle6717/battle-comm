@@ -16,6 +16,10 @@ var _boom = require('boom');
 
 var _boom2 = _interopRequireDefault(_boom);
 
+var _roleConfig = require('../../../roleConfig');
+
+var _roleConfig2 = _interopRequireDefault(_roleConfig);
+
 var _pointPriceConfig = require('../../../pointPriceConfig');
 
 var _pointPriceConfig2 = _interopRequireDefault(_pointPriceConfig);
@@ -44,7 +48,7 @@ var stripeService = (0, _stripe2.default)(_envVariables2.default.stripe.testSecr
 var generator = _xoauth2.default.createXOAuth2Generator(_envVariables2.default.email.XOAuth2);
 
 // listen for token updates
-// consider storying these to a db
+// consider storing these to a db
 generator.on('token', function (token) {});
 
 var transporter = _nodemailer2.default.createTransport({
@@ -56,11 +60,93 @@ var transporter = _nodemailer2.default.createTransport({
 
 // Product Route Configs
 var payments = {
+	createSubscription: function createSubscription(request, reply) {
+		var plan = JSON.parse(request.payload.plan);
+		var token = request.payload.token ? JSON.parse(request.payload.token) : undefined;
+		_models2.default.User.find({
+			'where': {
+				'email': request.payload.email
+			}
+		}).then(function (user) {
+			if (user) {
+				if (user.customerId) {
+					stripeService.subscriptions.create({
+						'customer': user.customerId,
+						'plan': plan.id
+					}, function (error, subscription) {
+						if (error) {
+							reply(_boom2.default.badRequest(error));
+						}
+						var userConfig = {};
+						_roleConfig2.default.forEach(function (role) {
+							if (role.name !== 'public') {
+								userConfig[role.name] = false;
+							}
+						});
+						userConfig.subscriber = true;
+						user.updateAttributes(userConfig).then(function () {
+							reply(subscription).code(200);
+						});
+					});
+				} else {
+					// Create the user in stripe
+					if (!token.id) {
+						reply(_boom2.default.badRequest('Checkout token is required for new customers'));
+						return;
+					}
+					stripeService.customers.create({
+						'email': request.payload.email,
+						'source': token.id
+					}, function (error, customer) {
+						if (error) {
+							reply(_boom2.default.badRequest(error));
+							return;
+						}
+						// Set user's customerId
+						user.updateAttributes({
+							'customerId': customer.id
+						}).then(function (user) {
+							stripeService.subscriptions.create({
+								'customer': customer.id,
+								'plan': plan.id
+							}, function (error, subscription) {
+								if (error) {
+									reply(_boom2.default.badRequest(error));
+									return;
+								}
+								var userConfig = {};
+								_roleConfig2.default.forEach(function (role) {
+									if (role.name !== 'public') {
+										userConfig[role.name] = false;
+									}
+								});
+								userConfig.subscriber = true;
+								user.updateAttributes(userConfig).then(function () {
+									reply(subscription).code(200);
+								});
+							});
+						});
+					});
+				}
+			} else {
+				reply(_boom2.default.notFound('No user found with the supplied e-mail'));
+			}
+		});
+	},
+	getSubscriptionPlans: function getSubscriptionPlans(request, reply) {
+		stripeService.plans.list({ limit: 100 }, function (error, plans) {
+			if (error) {
+				reply(_boom2.default.badRequest(error));
+				return;
+			}
+			reply(plans).code(200);
+		});
+	},
 	purchaseRP: function purchaseRP(request, reply) {
 		var token = JSON.parse(request.payload.token);
 		var priceIndex = request.payload.details.priceIndex;
 		var details = request.payload.details;
-		// TODO: Extra security check
+		// TODO: Add extra security check
 		var secure = true;
 		if (secure) {
 			stripeService.charges.create({
