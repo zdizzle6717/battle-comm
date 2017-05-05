@@ -83,9 +83,10 @@ class Subscribe extends React.Component {
 						this.props.modifyUser({
 							'rewardPoints': response.user.rewardPoints
 						});
-						this.showAlert('orderSuccess');
-						console.log(response);
-						this.props.logout();
+						this.showAlert('subscriptionSuccess');
+						setTimeout(() => {
+							this.props.logout();
+						})
 						this.props.history.push('/login');
 					} else {
 						this.showAlert('orderFailed');
