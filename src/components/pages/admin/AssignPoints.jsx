@@ -200,7 +200,7 @@ class AssignPoints extends React.Component {
 						<h2>Players</h2>
 						{
 							this.state.players.map((player, i) =>
-								<Form key={player.id} name={`venueEventPlayersForm-${i}`} submitText="Submit Point Assignment" submitButton={false}>
+								<Form key={i} name={`venueEventPlayersForm-${i}`} submitText="Submit Point Assignment" submitButton={false}>
 									<fieldset>
 										<div className="row">
 											<div className="form-group small-12 medium-4 columns">

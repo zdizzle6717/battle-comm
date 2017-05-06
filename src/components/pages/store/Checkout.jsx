@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'clearCart': CartActions.clearCart
+		'clearCart': CartActions.clearCart,
+		'modifyUser': UserActions.modifyUser
 	}, dispatch);
 }
 
@@ -102,6 +103,9 @@ class Checkout extends React.Component {
 		ProductOrderService.create(order).then((response) => {
 			this.showAlert('orderSuccess');
 			this.props.clearCart();
+			this.props.modifyUser({
+				'rewardPoints': this.props.user.rewardPoints - this.getOrderTotal(this.props.cartItems)
+			});
 			this.props.history.push('/store/order-success');
 		})
 	}

@@ -43,48 +43,62 @@ let productOrders = {
       }
     }));
 
-    models.ProductOrder.create({
-        'status': request.payload.status,
-        'orderDetails': request.payload.orderDetails,
-        'productDetails': request.payload.productDetails,
-        'orderTotal': request.payload.orderTotal,
-        'UserId': request.payload.UserId,
-        'customerFullName': request.payload.customerFullName,
-        'customerEmail': request.payload.customerEmail,
-        'phone': request.payload.phone,
-        'shippingStreet': request.payload.shippingStreet,
-        'shippingApartment': request.payload.shippingApartment,
-        'shippingCity': request.payload.shippingCity,
-        'shippingState': request.payload.shippingState,
-        'shippingZip': request.payload.shippingZip,
-        'shippingCountry': request.payload.shippingCountry
-      })
-      .then((order) => {
-				order = order.get({'plain': true});
-        let customerMailConfig = {
-          'from': env.email.user,
-          'to': order.customerEmail,
-          'subject': `Order Confirmation: Battle-Comm, Order #${order.id}`,
-          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
-        };
+		models.User.find({
+      'where': {
+        'id': request.payload.UserId
+      }
+    }).then((user) => {
+      if (user) {
+        user.decrement({
+					'rewardPoints': request.payload.orderTotal
+				}).then((user) => {
+					models.ProductOrder.create({
+			        'status': request.payload.status,
+			        'orderDetails': request.payload.orderDetails,
+			        'productDetails': request.payload.productDetails,
+			        'orderTotal': request.payload.orderTotal,
+			        'UserId': request.payload.UserId,
+			        'customerFullName': request.payload.customerFullName,
+			        'customerEmail': request.payload.customerEmail,
+			        'phone': request.payload.phone,
+			        'shippingStreet': request.payload.shippingStreet,
+			        'shippingApartment': request.payload.shippingApartment,
+			        'shippingCity': request.payload.shippingCity,
+			        'shippingState': request.payload.shippingState,
+			        'shippingZip': request.payload.shippingZip,
+			        'shippingCountry': request.payload.shippingCountry
+			      })
+			      .then((order) => {
+							order = order.get({'plain': true});
+			        let customerMailConfig = {
+			          'from': env.email.user,
+			          'to': order.customerEmail,
+			          'subject': `Order Confirmation: Battle-Comm, Order #${order.id}`,
+			          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+			        };
 
-        let adminMailConfig = {
-          'from': env.email.user,
-          'to': env.email.user,
-          'subject': `New Order: #${order.id}, ${order.customerFullName}`,
-          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
-        };
+			        let adminMailConfig = {
+			          'from': env.email.user,
+			          'to': env.email.user,
+			          'subject': `New Order: #${order.id}, ${order.customerFullName}`,
+			          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+			        };
 
-        transporter.sendMail(customerMailConfig, (error, info) => {
-          if (error) {
-            console.log(error);
-            reply('Somthing went wrong');
-          } else {
-            transporter.sendMail(adminMailConfig);
-            reply(order).code(200);
-          }
-        });
-      });
+			        transporter.sendMail(customerMailConfig, (error, info) => {
+			          if (error) {
+			            console.log(error);
+			            reply('Somthing went wrong');
+			          } else {
+			            transporter.sendMail(adminMailConfig);
+			            reply(order).code(200);
+			          }
+			        });
+			      });
+				})
+			} else {
+				reply(Boom.notFound('User not found'));
+			}
+		});
   },
   update: (request, reply) => {
 		let transporter = nodemailer.createTransport(({

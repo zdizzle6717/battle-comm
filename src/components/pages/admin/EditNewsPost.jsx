@@ -309,8 +309,8 @@ class EditNewsPost extends React.Component {
 										<Select name="GameSystemId" value={this.state.newsPost.GameSystemId || ''} handleInputChange={this.handleInputChange}>
 											<option value="">--Select--</option>
 											{
-												this.state.gameSystems.map((gameSystems, i) =>
-													<option key={gameSystems.id} value={gameSystems.id}>{gameSystems.name}</option>
+												this.state.gameSystems.map((gameSystem, i) =>
+													<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
 												)
 											}
 										</Select>
@@ -351,7 +351,7 @@ class EditNewsPost extends React.Component {
 								</div>
 								{
 									this.state.files.map((file, i) =>
-										<div key={file.id} className="row">
+										<div key={i} className="row">
 											<div className="small-12 medium-6 columns">
 												<label>News Post Image</label>
 												{

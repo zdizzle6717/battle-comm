@@ -62,46 +62,60 @@ var productOrders = {
       }
     });
 
-    _models2.default.ProductOrder.create({
-      'status': request.payload.status,
-      'orderDetails': request.payload.orderDetails,
-      'productDetails': request.payload.productDetails,
-      'orderTotal': request.payload.orderTotal,
-      'UserId': request.payload.UserId,
-      'customerFullName': request.payload.customerFullName,
-      'customerEmail': request.payload.customerEmail,
-      'phone': request.payload.phone,
-      'shippingStreet': request.payload.shippingStreet,
-      'shippingApartment': request.payload.shippingApartment,
-      'shippingCity': request.payload.shippingCity,
-      'shippingState': request.payload.shippingState,
-      'shippingZip': request.payload.shippingZip,
-      'shippingCountry': request.payload.shippingCountry
-    }).then(function (order) {
-      order = order.get({ 'plain': true });
-      var customerMailConfig = {
-        'from': _envVariables2.default.email.user,
-        'to': order.customerEmail,
-        'subject': 'Order Confirmation: Battle-Comm, Order #' + order.id,
-        'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
-      };
+    _models2.default.User.find({
+      'where': {
+        'id': request.payload.UserId
+      }
+    }).then(function (user) {
+      if (user) {
+        user.decrement({
+          'rewardPoints': request.payload.orderTotal
+        }).then(function (user) {
+          _models2.default.ProductOrder.create({
+            'status': request.payload.status,
+            'orderDetails': request.payload.orderDetails,
+            'productDetails': request.payload.productDetails,
+            'orderTotal': request.payload.orderTotal,
+            'UserId': request.payload.UserId,
+            'customerFullName': request.payload.customerFullName,
+            'customerEmail': request.payload.customerEmail,
+            'phone': request.payload.phone,
+            'shippingStreet': request.payload.shippingStreet,
+            'shippingApartment': request.payload.shippingApartment,
+            'shippingCity': request.payload.shippingCity,
+            'shippingState': request.payload.shippingState,
+            'shippingZip': request.payload.shippingZip,
+            'shippingCountry': request.payload.shippingCountry
+          }).then(function (order) {
+            order = order.get({ 'plain': true });
+            var customerMailConfig = {
+              'from': _envVariables2.default.email.user,
+              'to': order.customerEmail,
+              'subject': 'Order Confirmation: Battle-Comm, Order #' + order.id,
+              'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
+            };
 
-      var adminMailConfig = {
-        'from': _envVariables2.default.email.user,
-        'to': _envVariables2.default.email.user,
-        'subject': 'New Order: #' + order.id + ', ' + order.customerFullName,
-        'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
-      };
+            var adminMailConfig = {
+              'from': _envVariables2.default.email.user,
+              'to': _envVariables2.default.email.user,
+              'subject': 'New Order: #' + order.id + ', ' + order.customerFullName,
+              'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
+            };
 
-      transporter.sendMail(customerMailConfig, function (error, info) {
-        if (error) {
-          console.log(error);
-          reply('Somthing went wrong');
-        } else {
-          transporter.sendMail(adminMailConfig);
-          reply(order).code(200);
-        }
-      });
+            transporter.sendMail(customerMailConfig, function (error, info) {
+              if (error) {
+                console.log(error);
+                reply('Somthing went wrong');
+              } else {
+                transporter.sendMail(adminMailConfig);
+                reply(order).code(200);
+              }
+            });
+          });
+        });
+      } else {
+        reply(Boom.notFound('User not found'));
+      }
     });
   },
   update: function update(request, reply) {

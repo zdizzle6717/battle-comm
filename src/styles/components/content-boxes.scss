@@ -1,9 +1,9 @@
 $space-between: 3;
 
 .content-box-container {
-	display: flex;
+	display: inline-flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	width: 86%;
 
 	@for $i from 1 through 6 {
@@ -167,6 +167,7 @@ $space-between: 3;
 @include breakpoint(medium down) {
 	.content-box-container {
 		width: 97.5%;
+		flex-wrap: wrap;
 
 		@for $i from 1 through 6 {
 			@if $i == 2 {
