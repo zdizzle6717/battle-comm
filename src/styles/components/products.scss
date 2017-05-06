@@ -14,6 +14,7 @@
 			max-width: 31%;
 			margin-bottom: 3%;
 			box-shadow: $shadow-1;
+			flex: 1 1 31%;
 
 			.flip-container {
 				width: 100%;
@@ -122,6 +123,7 @@
 		.products-container {
 			.product-box {
 				max-width: 48%;
+				flex: 1 1 48%;
 			}
 		}
 	}
@@ -132,6 +134,7 @@
 		.products-container {
 			.product-box {
 				max-width: 48%;
+				flex: 1 1 48%;
 			}
 		}
 	}
@@ -142,6 +145,7 @@
 		.products-container {
 			.product-box {
 				max-width: 100%;
+				flex: 1 1 100%;
 
 				.flip-container {
 					height: 700px;
@@ -156,6 +160,7 @@
 		.products-container {
 			.product-box {
 				max-width: 100%;
+				flex: 1 1 100%;
 
 				.flip-container {
 					height: 500px;
@@ -170,6 +175,7 @@
 		.products-container {
 			.product-box {
 				max-width: 100%;
+				flex: 1 1 100%;
 
 				.flip-container {
 					height: 360px;

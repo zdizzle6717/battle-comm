@@ -29,6 +29,7 @@ header {
 			margin: 0;
 			flex-direction: row;
   	  margin: 0 7px;
+			z-index: 91;
 
 			.login-link {
 				a {
@@ -183,6 +184,7 @@ header {
 					margin: 0;
 					flex-direction: row;
 					align-items: center;
+					z-index: 91;
 				}
 
 				.main-menu {
