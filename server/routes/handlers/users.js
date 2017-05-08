@@ -4,7 +4,6 @@ import env from '../../../envVariables';
 import models from '../../models';
 import Boom from 'boom';
 import nodemailer from 'nodemailer';
-import xoauth2 from 'xoauth2';
 import buildRPUpdateEmail from '../../email-templates/rpUpdate';
 import buildRegistrationEmail from '../../email-templates/buildRegistrationEmail';
 import buildForgotPasswordEmail from '../../email-templates/forgotPassword';
@@ -16,17 +15,14 @@ import verifyResetToken from '../../utils/verifyResetToken';
 import {hashPassword, getUserRoleFlags} from '../../utils/userFunctions';
 import roleConfig from '../../../roleConfig';
 
-let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
-
-// listen for token updates
-// consider storying these to a db
-generator.on('token', (token) => {});
 
 let transporter = nodemailer.createTransport(({
-  'service': 'Gmail',
-  'auth': {
-    'xoauth2': generator
-  }
+	'service': 'Gmail',
+	'auth': {
+		'type': 'OAuth2',
+		'clientId': env.email.OAuth2.clientId,
+		'clientSecret': env.email.OAuth2.clientSecret
+	}
 }));
 
 const getUserModel = (where) => {
@@ -194,7 +190,12 @@ let users = {
             'from': env.email.user,
             'to': user.email,
             'subject': `Welcome to Battle-Comm!`,
-            'html': buildRegistrationEmail(request.payload.role, user)
+            'html': buildRegistrationEmail(request.payload.role, user),
+						'service': 'Gmail',
+						'auth': {
+							'user': env.email.user,
+							'refreshToken': env.email.OAuth2.refreshToken
+						}
           };
 
           transporter.sendMail(customerMailConfig, (error, info) => {
@@ -245,7 +246,12 @@ let users = {
         'from': env.email.user,
         'to': request.payload.username,
         'subject': `Battle-Comm: Password Updated`,
-        'html': buildPasswordUpdatedEmail()
+        'html': buildPasswordUpdatedEmail(),
+				'service': 'Gmail',
+				'auth': {
+					'user': env.email.user,
+					'refreshToken': env.email.OAuth2.refreshToken
+				}
       };
 
       transporter.sendMail(passwordUpdatedConfig, (error, info) => {
@@ -274,7 +280,12 @@ let users = {
       'subject': `Battle-Comm: Reset Password`,
       'html': buildForgotPasswordEmail({
         token
-      })
+      }),
+			'service': 'Gmail',
+			'auth': {
+				'user': env.email.user,
+				'refreshToken': env.email.OAuth2.refreshToken
+			}
     };
 
     transporter.sendMail(forgotPasswordConfig, (error, info) => {
@@ -311,7 +322,12 @@ let users = {
           'from': env.email.user,
           'to': request.payload.email,
           'subject': `Battle-Comm: Password Updated`,
-          'html': buildPasswordUpdatedEmail()
+          'html': buildPasswordUpdatedEmail(),
+					'service': 'Gmail',
+					'auth': {
+						'user': env.email.user,
+						'refreshToken': env.email.OAuth2.refreshToken
+					}
         };
 
         transporter.sendMail(passwordUpdatedConfig, (error, info) => {
@@ -407,7 +423,12 @@ let users = {
                 'from': env.email.user,
                 'to': user.email,
                 'subject': `Reward Point Update: New Total of ${user.rewardPoints}`,
-                'html': buildRPUpdateEmail(user)
+                'html': buildRPUpdateEmail(user),
+								'service': 'Gmail',
+								'auth': {
+									'user': env.email.user,
+									'refreshToken': env.email.OAuth2.refreshToken
+								}
               };
 
               transporter.sendMail(rpMailConfig, (error, info) => {
@@ -422,7 +443,12 @@ let users = {
                 'from': env.email.user,
                 'to': user.email,
                 'subject': `Battle-Comm: Account Activated`,
-                'html': buildAccountActivatedEmail(user)
+                'html': buildAccountActivatedEmail(user),
+								'service': 'Gmail',
+								'auth': {
+									'user': env.email.user,
+									'refreshToken': env.email.OAuth2.refreshToken
+								}
               };
 
               transporter.sendMail(activationMailConfig, (error, info) => {
@@ -502,7 +528,12 @@ let users = {
                 'from': env.email.user,
                 'to': user.email,
                 'subject': `Reward Point Update: New Total of ${user.rewardPoints}`,
-                'html': buildRPUpdateEmail(user)
+                'html': buildRPUpdateEmail(user),
+								'service': 'Gmail',
+								'auth': {
+									'user': env.email.user,
+									'refreshToken': env.email.OAuth2.refreshToken
+								}
               };
 
               transporter.sendMail(rpMailConfig, (error, info) => {

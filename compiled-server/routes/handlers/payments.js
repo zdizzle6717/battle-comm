@@ -36,25 +36,17 @@ var _nodemailer = require('nodemailer');
 
 var _nodemailer2 = _interopRequireDefault(_nodemailer);
 
-var _xoauth = require('xoauth2');
-
-var _xoauth2 = _interopRequireDefault(_xoauth);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var stripeService = (0, _stripe2.default)(_envVariables2.default.stripe.testSecret);
 
 
-var generator = _xoauth2.default.createXOAuth2Generator(_envVariables2.default.email.XOAuth2);
-
-// listen for token updates
-// consider storing these to a db
-generator.on('token', function (token) {});
-
 var transporter = _nodemailer2.default.createTransport({
 	'service': 'Gmail',
 	'auth': {
-		'xoauth2': generator
+		'type': 'OAuth2',
+		'clientId': _envVariables2.default.email.OAuth2.clientId,
+		'clientSecret': _envVariables2.default.email.OAuth2.clientSecret
 	}
 });
 
@@ -176,14 +168,24 @@ var payments = {
 									'username': user.username,
 									'firstName': user.firstName,
 									'lastName': user.lastName,
-									'rewardPoints': user.rewardPoints
+									'rewardPoints': user.rewardPoints,
+									'service': 'Gmail',
+									'auth': {
+										'user': _envVariables2.default.email.user,
+										'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+									}
 								};
 
 								var rpMailConfig = {
 									'from': _envVariables2.default.email.user,
 									'to': user.email,
 									'subject': 'Reward Point Update: New Total of ' + basicUser.rewardPoints,
-									'html': (0, _rpUpdate2.default)(basicUser)
+									'html': (0, _rpUpdate2.default)(basicUser),
+									'service': 'Gmail',
+									'auth': {
+										'user': _envVariables2.default.email.user,
+										'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+									}
 								};
 
 								transporter.sendMail(rpMailConfig, function (error, info) {

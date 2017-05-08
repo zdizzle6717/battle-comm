@@ -4,13 +4,15 @@ import env from '../../../envVariables';
 import models from '../../models';
 import nodemailer from 'nodemailer';
 import buildOrderSuccessEmail from '../../email-templates/orderSuccess';
-import xoauth2 from 'xoauth2';
 
-let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
-
-// listen for token updates
-// you probably want to store these to a db
-generator.on('token', (token) => {});
+let transporter = nodemailer.createTransport(({
+	'service': 'Gmail',
+	'auth': {
+		'type': 'OAuth2',
+		'clientId': env.email.OAuth2.clientId,
+		'clientSecret': env.email.OAuth2.clientSecret
+	}
+}));
 
 // Product Route Configs
 let productOrders = {
@@ -36,13 +38,6 @@ let productOrders = {
       });
   },
   create: (request, reply) => {
-    let transporter = nodemailer.createTransport(({
-      'service': 'Gmail',
-      'auth': {
-        'xoauth2': generator
-      }
-    }));
-
 		models.User.find({
       'where': {
         'id': request.payload.UserId
@@ -74,14 +69,24 @@ let productOrders = {
 			          'from': env.email.user,
 			          'to': order.customerEmail,
 			          'subject': `Order Confirmation: Battle-Comm, Order #${order.id}`,
-			          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+			          'html': buildOrderSuccessEmail(order),
+								'service': 'Gmail',
+								'auth': {
+									'user': env.email.user,
+									'refreshToken': env.email.OAuth2.refreshToken
+								}
 			        };
 
 			        let adminMailConfig = {
 			          'from': env.email.user,
 			          'to': env.email.user,
 			          'subject': `New Order: #${order.id}, ${order.customerFullName}`,
-			          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+			          'html': buildOrderSuccessEmail(order),
+								'service': 'Gmail',
+								'auth': {
+									'user': env.email.user,
+									'refreshToken': env.email.OAuth2.refreshToken
+								}
 			        };
 
 			        transporter.sendMail(customerMailConfig, (error, info) => {
@@ -101,13 +106,6 @@ let productOrders = {
 		});
   },
   update: (request, reply) => {
-		let transporter = nodemailer.createTransport(({
-      'service': 'Gmail',
-      'auth': {
-        'xoauth2': generator
-      }
-    }));
-
     models.ProductOrder.find({
         'where': {
           'id': request.params.id
@@ -135,14 +133,24 @@ let productOrders = {
 		          'from': env.email.user,
 		          'to': order.customerEmail,
 		          'subject': `Order Confirmation: Battle-Comm, Order #${order.id}`,
-		          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+		          'html': buildOrderSuccessEmail(order),
+							'service': 'Gmail',
+							'auth': {
+								'user': env.email.user,
+								'refreshToken': env.email.OAuth2.refreshToken
+							}
 		        };
 
 		        let adminMailConfig = {
 		          'from': env.email.user,
 		          'to': env.email.user,
 		          'subject': `Order Updated: #${order.id}, ${order.customerFullName}`,
-		          'html': buildOrderSuccessEmail(order) // You can choose to send an HTML body instead
+		          'html': buildOrderSuccessEmail(order),
+							'service': 'Gmail',
+							'auth': {
+								'user': env.email.user,
+								'refreshToken': env.email.OAuth2.refreshToken
+							}
 		        };
 
 		        transporter.sendMail(adminMailConfig, (error, info) => {

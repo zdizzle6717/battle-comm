@@ -9,19 +9,14 @@ import stripe from 'stripe';
 let stripeService = stripe(env.stripe.testSecret);
 import buildRPUpdateEmail from '../../email-templates/rpUpdate';
 import nodemailer from 'nodemailer';
-import xoauth2 from 'xoauth2';
-
-let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
-
-// listen for token updates
-// consider storing these to a db
-generator.on('token', (token) => {});
 
 let transporter = nodemailer.createTransport(({
-  'service': 'Gmail',
-  'auth': {
-    'xoauth2': generator
-  }
+	'service': 'Gmail',
+	'auth': {
+		'type': 'OAuth2',
+		'clientId': env.email.OAuth2.clientId,
+		'clientSecret': env.email.OAuth2.clientSecret
+	}
 }));
 
 // Product Route Configs
@@ -146,14 +141,24 @@ let payments = {
 										'username': user.username,
 										'firstName': user.firstName,
 										'lastName': user.lastName,
-										'rewardPoints': user.rewardPoints
+										'rewardPoints': user.rewardPoints,
+										'service': 'Gmail',
+										'auth': {
+											'user': env.email.user,
+											'refreshToken': env.email.OAuth2.refreshToken
+										}
 									};
 
 									let rpMailConfig = {
 										'from': env.email.user,
 										'to': user.email,
 										'subject': `Reward Point Update: New Total of ${basicUser.rewardPoints}`,
-										'html': buildRPUpdateEmail(basicUser)
+										'html': buildRPUpdateEmail(basicUser),
+										'service': 'Gmail',
+										'auth': {
+											'user': env.email.user,
+											'refreshToken': env.email.OAuth2.refreshToken
+										}
 									};
 
 									transporter.sendMail(rpMailConfig, (error, info) => {

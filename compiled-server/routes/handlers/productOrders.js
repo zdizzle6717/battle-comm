@@ -20,19 +20,18 @@ var _orderSuccess = require('../../email-templates/orderSuccess');
 
 var _orderSuccess2 = _interopRequireDefault(_orderSuccess);
 
-var _xoauth = require('xoauth2');
-
-var _xoauth2 = _interopRequireDefault(_xoauth);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var generator = _xoauth2.default.createXOAuth2Generator(_envVariables2.default.email.XOAuth2);
-
-// listen for token updates
-// you probably want to store these to a db
-generator.on('token', function (token) {});
+var transporter = _nodemailer2.default.createTransport({
+  'service': 'Gmail',
+  'auth': {
+    'type': 'OAuth2',
+    'clientId': _envVariables2.default.email.OAuth2.clientId,
+    'clientSecret': _envVariables2.default.email.OAuth2.clientSecret
+  }
+});
 
 // Product Route Configs
 var productOrders = {
@@ -55,13 +54,6 @@ var productOrders = {
     });
   },
   create: function create(request, reply) {
-    var transporter = _nodemailer2.default.createTransport({
-      'service': 'Gmail',
-      'auth': {
-        'xoauth2': generator
-      }
-    });
-
     _models2.default.User.find({
       'where': {
         'id': request.payload.UserId
@@ -92,14 +84,24 @@ var productOrders = {
               'from': _envVariables2.default.email.user,
               'to': order.customerEmail,
               'subject': 'Order Confirmation: Battle-Comm, Order #' + order.id,
-              'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
+              'html': (0, _orderSuccess2.default)(order),
+              'service': 'Gmail',
+              'auth': {
+                'user': _envVariables2.default.email.user,
+                'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+              }
             };
 
             var adminMailConfig = {
               'from': _envVariables2.default.email.user,
               'to': _envVariables2.default.email.user,
               'subject': 'New Order: #' + order.id + ', ' + order.customerFullName,
-              'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
+              'html': (0, _orderSuccess2.default)(order),
+              'service': 'Gmail',
+              'auth': {
+                'user': _envVariables2.default.email.user,
+                'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+              }
             };
 
             transporter.sendMail(customerMailConfig, function (error, info) {
@@ -119,13 +121,6 @@ var productOrders = {
     });
   },
   update: function update(request, reply) {
-    var transporter = _nodemailer2.default.createTransport({
-      'service': 'Gmail',
-      'auth': {
-        'xoauth2': generator
-      }
-    });
-
     _models2.default.ProductOrder.find({
       'where': {
         'id': request.params.id
@@ -152,14 +147,24 @@ var productOrders = {
             'from': _envVariables2.default.email.user,
             'to': order.customerEmail,
             'subject': 'Order Confirmation: Battle-Comm, Order #' + order.id,
-            'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
+            'html': (0, _orderSuccess2.default)(order),
+            'service': 'Gmail',
+            'auth': {
+              'user': _envVariables2.default.email.user,
+              'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+            }
           };
 
           var adminMailConfig = {
             'from': _envVariables2.default.email.user,
             'to': _envVariables2.default.email.user,
             'subject': 'Order Updated: #' + order.id + ', ' + order.customerFullName,
-            'html': (0, _orderSuccess2.default)(order) // You can choose to send an HTML body instead
+            'html': (0, _orderSuccess2.default)(order),
+            'service': 'Gmail',
+            'auth': {
+              'user': _envVariables2.default.email.user,
+              'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+            }
           };
 
           transporter.sendMail(adminMailConfig, function (error, info) {

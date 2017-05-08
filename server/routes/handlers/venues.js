@@ -5,30 +5,30 @@ import nodemailer from 'nodemailer';
 import formatJSONDate from '../../utils/formatJSONDate';
 import buildPointAssignmentEmail from '../../email-templates/pointAssignment';
 
-// TODO: IMPORTANT - xoauth2 and nodemailer packages were updated, check API and documentation
-import xoauth2 from 'xoauth2';
-let generator = xoauth2.createXOAuth2Generator(env.email.XOAuth2);
-
-// listen for token updates
-// you probably want to store these to a db
-generator.on('token', (token) => {});
+let transporter = nodemailer.createTransport(({
+	'service': 'Gmail',
+	'auth': {
+		'type': 'OAuth2',
+		'clientId': env.email.OAuth2.clientId,
+		'clientSecret': env.email.OAuth2.clientSecret
+	}
+}));
 
 // Product Route Configs
 let venues = {
   create: (request, reply) => {
 		request.payload.venueEvent.eventDate = formatJSONDate(request.payload.venueEvent.eventDate);
-    let transporter = nodemailer.createTransport(({
-      'service': 'Gmail',
-      'auth': {
-        'xoauth2': generator
-      }
-    }));
 
     let adminMailConfig = {
       'from': env.email.user,
       'to': env.email.user,
       'subject': `Venue RP Assignment: ${request.payload.venueEvent.venueName}, ${request.payload.venueEvent.eventDate}`,
-      'html': buildPointAssignmentEmail(request.payload)
+      'html': buildPointAssignmentEmail(request.payload),
+			'service': 'Gmail',
+			'auth': {
+				'user': env.email.user,
+				'refreshToken': env.email.OAuth2.refreshToken
+			}
     };
 
     transporter.sendMail(adminMailConfig, (error, info) => {
