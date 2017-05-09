@@ -175,13 +175,13 @@ class PlayerProfile extends React.Component {
         return (
             <ViewWrapper headerImage="/images/Titles/Player_Profile.png" headerAlt="Player Profile">
 				<div className="player-profile">
-					<div className="row">
+					<div className="row wrap-reverse">
 						<div className="small-12 medium-6 columns">
 							<h2 className="text-center">Player Info</h2>
 							{
 								player.bio ?
-								<h3 className="user-bio push-bottom-2x">{player.bio}</h3> :
-								<h3 className="user-bio push-bottom-2x">This player has not yet updaed their bio.</h3>
+								<h3 className="user-bio push-bottom-2x text-center">{player.bio}</h3> :
+								<h3 className="user-bio push-bottom-2x text-center">This player has not yet updaed their bio.</h3>
 							}
 							<div className="social-links push-bottom text-center">
 								{

@@ -135,8 +135,8 @@ class EditProductOrder extends React.Component {
 										<Input type="text" name="customerEmail" value={this.state.productOrder.customerEmail} handleInputChange={this.handleInputChange} required={true} />
 									</div>
 									<div className="form-group small-12 medium-4 columns">
-										<label className="required">Phone</label>
-										<Input type="text" name="phone" value={this.state.productOrder.phone} handleInputChange={this.handleInputChange} required={true} />
+										<label>Phone</label>
+										<Input type="text" name="phone" value={this.state.productOrder.phone} handleInputChange={this.handleInputChange} />
 									</div>
 								</div>
 								<h3>Shipping Address</h3>

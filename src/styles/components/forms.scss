@@ -41,5 +41,13 @@ textarea {
 		:last-child {
 			margin-right: 0;
 		}
+
+		label {
+			min-width: 5rem;
+		}
+
+		.validate-error-element {
+			flex: 1;
+		}
 	}
 }

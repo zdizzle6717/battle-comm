@@ -54,8 +54,13 @@ class Checkout extends React.Component {
 		}
 		let productOrder = {
 			'status': 'processing',
-			'customerFullName': this.props.user.firstName + ' ' + this.props.user.lastName,
-			'customerEmail': this.props.user.email
+			'customerFullName': (this.props.user.firstName && this.props.user.lastName) ? this.props.user.firstName + ' ' + this.props.user.lastName : '',
+			'customerEmail': this.props.user.email || '',
+			'shippingStreet': this.props.user.streetAddress || '',
+			'shippingApartment': this.props.user.aptSuite || '',
+			'shippingCity': this.props.user.city || '',
+			'shippingState': this.props.user.state || '',
+			'shippingZip': this.props.user.zip || ''
 		}
 		this.setState({
 			'productOrder': productOrder

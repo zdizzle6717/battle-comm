@@ -78,6 +78,13 @@ p{
 .pointer {
 	cursor: pointer;
 }
+.wrap-reverse {
+	@include breakpoint(small only) {
+		display: flex;
+		flex-direction: row;
+	  flex-wrap: wrap-reverse;
+	}
+}
 
 // Foundation overrides
 .column:last-child:not(:first-child),

@@ -303,7 +303,7 @@ class PlayerDashboard extends React.Component {
         return (
             <ViewWrapper headerImage="/images/Titles/Player_Dashboard.png" headerAlt="Player Dashboard">
 				<div className="player-dashboard">
-					<div className="row">
+					<div className="row wrap-reverse">
 						<div className="small-12 medium-6 columns">
 							<h2 className="no-shadow text-center">Player Bio</h2>
 							<div className={isEditing.bio ? 'editable active': 'editable'}>
@@ -446,7 +446,7 @@ class PlayerDashboard extends React.Component {
 					</div>
 					<div className="row">
 						<div className="small-12 columns">
-							<h2>Ranking <Link to="ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
+							<h2>Ranking <Link to="/ranking/search/all" className="right"><span className="fa fa-list-ol"></span> Leaderboards</Link></h2>
 							<div className="small-12 columns">
 								{
 									currentUser.GameSystemRankings.length < 1 &&

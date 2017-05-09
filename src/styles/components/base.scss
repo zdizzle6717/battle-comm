@@ -91,10 +91,12 @@ a {
   top: 58px;
 
 	@include breakpoint(medium down) {
+		position: absolute;
 		top: 128px;
 	}
 
 	@include breakpoint(small only) {
+		position: absolute;
 		top: 148px;
 	}
 }

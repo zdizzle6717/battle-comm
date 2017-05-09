@@ -5,6 +5,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
+import {UserActions} from '../../../library/authentication';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
@@ -19,7 +20,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		'addAlert': AlertActions.addAlert
+		'addAlert': AlertActions.addAlert,
+		'modifyUser': UserActions.modify,
 	}, dispatch);
 }
 
@@ -89,6 +91,7 @@ class PlayerAccountEdit extends React.Component {
 			this.setState({
 				'isEditing': isEditing
 			});
+			this.props.modifyUser(updatedUser);
 			this.getCurrentPlayer();
 			this.showAlert('playerUpdated');
 		});
@@ -150,7 +153,7 @@ class PlayerAccountEdit extends React.Component {
 									</div>
 									<div className="form-group inline">
 										<label className="title bold">Phone:</label>
-										<Input name="mainPhone" type="text" id="mainPhone" value={currentUser.mainPhone} handleInputChange={this.handleInputChange} validate={'foreignPhone'} />
+										<Input name="mainPhone" type="text" id="mainPhone" value={currentUser.mainPhone} handleInputChange={this.handleInputChange} validate="domesticPhone" />
 									</div>
 								</Form> :
 								<div className="user-contact">
