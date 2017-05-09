@@ -52,7 +52,7 @@ class AdminDashboard extends React.Component {
 					<RewardPointPurchase user={this.props.currentUser} forms={this.props.forms}></RewardPointPurchase>
 				</AccessControl>
 				<hr/>
-				<AccessControl access={['eventAdmin']} element="div" customClasses="row">
+				<AccessControl access={['systemAdmin']} element="div" customClasses="row">
 					<RPDistributionManagement user={this.props.currentUser} forms={this.props.forms}></RPDistributionManagement>
 				</AccessControl>
 				<hr/>
