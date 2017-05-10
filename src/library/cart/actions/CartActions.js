@@ -23,6 +23,14 @@ export default {
 			});
 		};
 	},
+	toggle: (showHide) => {
+		return (dispatch) => {
+			dispatch({
+				'type': CartItemConstants.TOGGLE,
+				'data': showHide
+			});
+		};
+	},
 	update: (product, newCartQty) => {
 		let data = {
 			'product': product,

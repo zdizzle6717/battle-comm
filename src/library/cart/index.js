@@ -1,10 +1,11 @@
 'use strict';
 
 import CartActions from './actions/CartActions';
-import {cartItems, cartQtyPlaceholders} from './reducers/cartItems';
+import {cartIsActive, cartItems, cartQtyPlaceholders} from './reducers/cartItems';
 
 export {
 	CartActions,
+	cartIsActive,
 	cartItems,
 	cartQtyPlaceholders
 };

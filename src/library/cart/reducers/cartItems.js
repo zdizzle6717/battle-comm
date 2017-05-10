@@ -10,6 +10,15 @@ const updateSessionPlaceholders = (placeholders) => {
 	sessionStorage.setItem('cartQuantities', JSON.stringify(placeholders));
 };
 
+const cartIsActive = (state = 'hide', action) => {
+	switch (action.type) {
+		case CartItemConstants.TOGGLE:
+			return action.data;
+		default:
+			return state;
+	}
+};
+
 const cartItems = (state = [], action) => {
 	let cartItems, newItem, index;
 	switch (action.type) {
@@ -85,5 +94,6 @@ const cartQtyPlaceholders = (state = {}, action) => {
 
 export {
 	cartItems,
-	cartQtyPlaceholders
+	cartQtyPlaceholders,
+	cartIsActive
 };
