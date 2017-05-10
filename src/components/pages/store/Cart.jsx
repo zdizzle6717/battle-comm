@@ -5,7 +5,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import ViewWrapper from '../../ViewWrapper';
-import CartActions from '../../../actions/CartActions';
+import {CartActions} from '../../../library/cart';
 
 const mapStateToProps = (state) => {
 	return {

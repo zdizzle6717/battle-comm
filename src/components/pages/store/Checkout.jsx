@@ -9,7 +9,7 @@ import {UserActions} from '../../../library/authentication';
 import {handlers} from '../../../library/utilities';
 import {Form, Input, TextArea, Select, CheckBox, getFormErrorCount} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
-import CartActions from '../../../actions/CartActions';
+import {CartActions} from '../../../library/cart';
 import ProductOrderService from '../../../services/ProductOrderService';
 
 let _redirected = false;

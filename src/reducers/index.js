@@ -5,13 +5,13 @@ import {routerReducer as routing} from 'react-router-redux';
 
 // Library
 import {alerts} from '../library/alerts';
+import {cartItems, cartQtyPlaceholders} from '../library/cart';
 import {forms} from '../library/validations';
 import {loader} from '../library/loader';
 import {user, users, isAuthenticated, redirectRoute} from '../library/authentication';
 
 // App
 import {bannerSlide, bannerSlides} from './bannerSlides';
-import {cartItems, cartQtyPlaceholders} from './cartItems';
 import {gameSystem, gameSystems} from './gameSystems';
 import {gameSystemRanking, gameSystemRankings} from './gameSystemRankings';
 import {faction, factions} from './factions';

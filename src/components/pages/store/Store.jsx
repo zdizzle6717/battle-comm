@@ -8,7 +8,7 @@ import noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
-import CartActions from '../../../actions/CartActions';
+import {CartActions} from '../../../library/cart';
 import ProductActions from '../../../actions/ProductActions';
 
 const mapStateToProps = (state) => {

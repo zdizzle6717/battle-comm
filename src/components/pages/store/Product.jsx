@@ -4,7 +4,7 @@ import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import CartActions from '../../../actions/CartActions';
+import {CartActions} from '../../../library/cart';
 import ViewWrapper from '../../ViewWrapper';
 import ProductService from '../../../services/ProductService';
 

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {CSSTransitionGroup as Animation} from 'react-transition-group';
 import PropTypes from 'prop-types';
-import CartActions from '../../actions/CartActions';
+import {CartActions} from '../../library/cart';
 
 const mapStateToProps = (state) => {
 	return {
