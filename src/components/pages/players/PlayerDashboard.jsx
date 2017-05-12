@@ -38,6 +38,7 @@ class PlayerDashboard extends React.Component {
 		this.state = {
 			'activeModal': 'none',
 			'currentUser': {
+				'Achievements': [],
 				'Files': [],
 				'Friends': [],
 				'GameSystemRankings': []
@@ -414,6 +415,9 @@ class PlayerDashboard extends React.Component {
 								<div className="small-12 columns text-center">
 									<Link to="/players/dashboard/account-edit"><h3 className="button account-details">Edit Account Details</h3></Link>
 								</div>
+								<div className="small-12 columns text-center">
+									<Link to="/subscribe"><h3 className="button secondary push-top">Become a BC Subscriber?</h3></Link>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -441,7 +445,17 @@ class PlayerDashboard extends React.Component {
 					<div className="row">
 						<div className="small-12 columns">
 							<h2>Achievements</h2>
-							<h3 className="text-center">Achievements have not yet been awarded.</h3>
+							{
+								currentUser.Achievements.length > 0 ?
+								<div>
+									{
+										currentUser.Achievements.map((achievement) =>
+											<div key={achievement.id}>{achievement.title}</div>
+										)
+									}
+								</div> :
+								<h4 className="text-center">You have not yet been awarded any achievements.</h4>
+							}
 						</div>
 					</div>
 					<div className="row">
@@ -450,7 +464,7 @@ class PlayerDashboard extends React.Component {
 							<div className="small-12 columns">
 								{
 									currentUser.GameSystemRankings.length < 1 &&
-									<h3 className="text-center">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h3>
+									<h4 className="text-center">Submit game results to a Battle-Comm participating event/venue administrator to have your ranking submitted to the BC leaderboards.</h4>
 								}
 								{
 									currentUser.GameSystemRankings.map((gameRanking, i) =>
@@ -511,7 +525,7 @@ class PlayerDashboard extends React.Component {
 											)
 										}
 									</div> :
-									<h5>Upload photos from you dashboard to share your table-top experience with friends.</h5>
+									<h4>Upload photos from you dashboard to share your table-top experience with friends.</h4>
 								}
 							</div>
 						</div>

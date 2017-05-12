@@ -79,6 +79,38 @@
 		}
 	}
 
+	&.black {
+		background: $black;
+		color: $white;
+		border: 2px solid darken($black, 3%);
+
+		&.small {
+			max-width: 7rem;
+		}
+		&.medium {
+			max-width: 14rem;
+		}
+		&.large {
+			max-width: 20rem;
+		}
+
+		&:hover {
+			background: transparentize(lighten($black, 3%), .1);
+			color: $white;
+		}
+
+		&:active,
+		&:focus {
+			background: transparentize(lighten($black, 1%), .1);
+		}
+
+		&.disabled,
+		&:disabled {
+			background: transparentize($black, 0.01);
+			cursor: disabled;
+		}
+	}
+
 	&.white {
 		color: $primary-500;
 		border: 2px solid $primary-600;

@@ -85,10 +85,10 @@ class Login extends React.Component {
 			'id_token': storedUser.id_token,
 			'rememberMe': true
 		} : this.state.credentials).then(() => {
-			let homeState = this.props.user.roleConfig.homeState;
+			let homeState = (!this.props.user.hasAuthenticatedOnce && this.props.user.roleConfig.name === 'member') ? '/subscribe' : this.props.user.roleConfig.homeState;
 			this.showAlert('loginSuccess');
 			if (this.props.redirectRoute) {
-				let redirectPath = this.props.redirectRoute;
+				let redirectPath = homeState === '/subscribe' ? homeState : this.props.redirectRoute;
 				this.props.setRedirect(false);
 				this.props.history.push(redirectPath);
 			} else {

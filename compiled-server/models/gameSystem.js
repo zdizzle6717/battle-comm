@@ -10,6 +10,7 @@ module.exports = function (sequelize, DataTypes) {
       associate: function associate(models) {
         GameSystem.hasOne(models.File);
         GameSystem.belongsTo(models.Manufacturer);
+        GameSystem.hasMany(models.Achievement);
         GameSystem.hasMany(models.Faction);
         GameSystem.hasMany(models.GameSystemRanking);
         GameSystem.hasMany(models.NewsPost);

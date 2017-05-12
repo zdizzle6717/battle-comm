@@ -286,8 +286,8 @@ class EditProduct extends React.Component {
 										<Input type="number" name="price" value={this.state.product.price} handleInputChange={this.handleInputChange} required={true} />
 									</div>
 									<div className="form-group small-12 medium-4 columns">
-										<label className="required">SKU</label>
-										<Input type="text" name="SKU" value={this.state.product.SKU} handleInputChange={this.handleInputChange} disabled={this.state.skuIsDisabled} required={true} />
+										<label className="required">Shipping Cost</label>
+										<Input type="number" name="shippingCost" value={this.state.product.shippingCost} handleInputChange={this.handleInputChange} step="0.01" required={true} />
 									</div>
 								</div>
 								<div className="row">
@@ -326,15 +326,19 @@ class EditProduct extends React.Component {
 									</div>
 								</div>
 								<div className="row">
-									<div className="form-group small-12 medium-4 columns">
+									<div className="form-group small-12 medium-3 columns">
+										<label className="required">SKU</label>
+										<Input type="text" name="SKU" value={this.state.product.SKU} handleInputChange={this.handleInputChange} disabled={this.state.skuIsDisabled} required={true} />
+									</div>
+									<div className="form-group small-12 medium-3 columns">
 										<label className="required">Stock Qty</label>
 										<Input type="number" name="stockQty" value={this.state.product.stockQty} handleInputChange={this.handleInputChange} required={true} />
 									</div>
-									<div className="form-group small-12 medium-4 columns">
+									<div className="form-group small-12 medium-3 columns">
 										<label>Color</label>
 										<Input type="text" name="color" value={this.state.product.color} handleInputChange={this.handleInputChange} />
 									</div>
-									<div className="form-group small-12 medium-4 columns">
+									<div className="form-group small-12 medium-3 columns">
 										<label className="required">Category</label>
 										<Input type="text" name="category" value={this.state.product.category} handleInputChange={this.handleInputChange} required={true} />
 									</div>

@@ -134,6 +134,30 @@ var payments = {
 			reply(plans).code(200);
 		});
 	},
+	payShippingCost: function payShippingCost(request, reply) {
+		var token = JSON.parse(request.payload.token);
+		var shippingCost = request.payload.details.shippingCost;
+		var details = request.payload.details;
+		// TODO: Add extra security check
+		var secure = true;
+		if (secure) {
+			stripeService.charges.create({
+				'amount': shippingCost,
+				'currency': 'usd',
+				'description': details.description,
+				'receipt_email': details.email,
+				'source': token.id
+			}, function (err, charge) {
+				if (err) {
+					reply(_boom2.default.badRequest(err));
+				} else {
+					reply(charge).code(200);
+				}
+			});
+		} else {
+			reply(_boom2.default.badRequest('Don\'t fuck with the machine!'));
+		}
+	},
 	purchaseRP: function purchaseRP(request, reply) {
 		var token = JSON.parse(request.payload.token);
 		var priceIndex = request.payload.details.priceIndex;

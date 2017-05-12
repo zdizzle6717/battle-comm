@@ -275,7 +275,8 @@ let routes = [
 	},
 	{
 		'path': '/store/products/:productId',
-		'component': Product
+		'component': Product,
+		'access': ['member']
 	},
 	{
 		'path': '/subscribe',

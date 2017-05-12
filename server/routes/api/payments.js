@@ -44,6 +44,33 @@ module.exports = [
 	},
 	{
 		'method': 'POST',
+		'path': '/api/payments/payShippingCost/{id}',
+		'config': {
+			'tags': ['api'],
+			'description': 'Request new purchase',
+			'notes': 'Request new purchase',
+			'auth': {
+				'strategy': 'jsonWebToken',
+				'scope': ['member', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			},
+			'validate': {
+				'params': {
+					'id': Joi.number().required()
+				},
+				'payload': {
+					'token': Joi.string().required(),
+					'details': Joi.object().keys({
+						'email': Joi.string().required(),
+						'description': Joi.string().required(),
+						'shippingCost': Joi.number().precision(2).required()
+					})
+				}
+			}
+		},
+		'handler': payments.payShippingCost
+	},
+	{
+		'method': 'POST',
 		'path': '/api/payments/purchaseRP/{id}',
 		'config': {
 			'tags': ['api'],

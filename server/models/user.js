@@ -91,6 +91,10 @@ module.exports = function(sequelize, DataTypes) {
     'accountBlocked': {
 			'type': DataTypes.BOOLEAN,
 			'defaultValue': false
+		},
+		'hasAuthenticatedOnce': {
+			'type': DataTypes.BOOLEAN,
+			'defaultValue': false
 		}
   }, {
     'classMethods': {
@@ -108,7 +112,7 @@ module.exports = function(sequelize, DataTypes) {
         });
         User.hasMany(models.UserNotification);
         User.hasMany(models.UserMessage);
-        User.hasMany(models.UserAchievement);
+        User.hasMany(models.Achievement);
         User.hasOne(models.UserPhoto);
       }
     }

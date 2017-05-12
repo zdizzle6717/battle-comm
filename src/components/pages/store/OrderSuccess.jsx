@@ -17,7 +17,7 @@ class OrderSuccess extends React.Component {
         return (
             <ViewWrapper headerImage="/images/Titles/Order_Success.png" headerAlt="Order Success">
                 <div className="row">
-					<h3 className="text-center"><strong>Order Success!</strong> Check your e-mail for more details and shipping information.</h3>
+					<h3 className="text-center"><strong>Order Success!</strong> Check your e-mail for more details and shipping information. Thanks for being part of Battle-Comm!</h3>
                 </div>
             </ViewWrapper>
         );

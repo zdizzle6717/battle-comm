@@ -11,6 +11,7 @@ import {Form, Input, TextArea, Select, FileUpload, getFormErrorCount} from '../.
 import {handlers} from '../../library/utilities';
 import ViewWrapper from '../ViewWrapper';
 import PaymentService from '../../services/PaymentService';
+import PlayerService from '../../services/PlayerService';
 
 const mapStateToProps = (state) => {
 	return {
@@ -61,7 +62,12 @@ class Subscribe extends React.Component {
 				'username': user.username,
 				'email': user.email
 			}
-		})
+		});
+		if (!this.props.user.hasAuthenticatedOnce) {
+			PlayerService.update(this.props.user.id, {
+				'hasAuthenticatedOnce': true
+			});
+		}
 		PaymentService.getSubscriptionPlans().then((plans) => {
 			this.setState({
 				'plans': plans.data
@@ -183,7 +189,7 @@ class Subscribe extends React.Component {
 			'subscriptionSuccess': () => {
 				this.props.addAlert({
 					'title': 'Subscription Submitted',
-					'message': 'You subscription has been submitted.  Please check your e-mail to complete your account activation.',
+					'message': 'You subscription has been submitted. Please check your e-mail to complete your account activation.',
 					'type': 'success',
 					'delay': 4000
 				});
@@ -226,7 +232,7 @@ class Subscribe extends React.Component {
                     <div className="plaque">
 						<img src="/images/branding/plaque-logo.png" alt="Battle-Comm Plaque"/>
                     </div>
-					<div className="subscribe-form">
+					<div className="subscribe-form push-bottom-2x">
 						<div className="container ice">
 							<h2 className="text-center">Player Details</h2>
 							<Form name="subscribeForm" submitButton={false}>

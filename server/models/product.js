@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     'color': DataTypes.STRING,
     'tags': DataTypes.STRING,
     'category': DataTypes.STRING,
+    'shippingCost': DataTypes.FLOAT,
     'stockQty': DataTypes.INTEGER,
     'isDisplayed': DataTypes.BOOLEAN,
     'isFeatured': DataTypes.BOOLEAN,

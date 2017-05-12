@@ -33,6 +33,12 @@ export default {
 				return response.data;
 			});
 	},
+	updateStock: (data) => {
+		return axios.put('/products/stockQty/update', data)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	remove: (id) => {
 		return axios.delete('/products/' + id)
 			.then(function(response) {

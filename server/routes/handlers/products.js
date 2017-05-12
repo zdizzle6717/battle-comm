@@ -1,6 +1,7 @@
 'use strict';
 
 import models from '../../models';
+import Boom from 'boom';
 
 // Product Route Configs
 let products = {
@@ -31,29 +32,30 @@ let products = {
   },
   create: (request, reply) => {
     models.Product.create({
-        'FactionId': request.payload.FactionId,
-        'GameSystemId': request.payload.GameSystemId,
-        'ManufacturerId': request.payload.ManufacturerId,
-        'SKU': request.payload.SKU,
-        'name': request.payload.name,
-        'price': request.payload.price,
-        'description': request.payload.description,
-        'manufacturerId': request.payload.manufacturerId,
-        'gameSystem': request.payload.gameSystem,
-        'color': request.payload.color,
-        'tags': request.payload.tags,
-        'category': request.payload.category,
-        'stockQty': request.payload.stockQty,
-        'isInStock': request.payload.isInStock,
-        'filterVal': request.payload.filterVal,
-        'isDisplayed': request.payload.isDisplayed,
-        'isFeatured': request.payload.isFeatured,
-        'isNew': request.payload.isNew,
-        'isOnSale': request.payload.isOnSale
-      })
-      .then((response) => {
-        reply(response).code(200);
-      });
+      'FactionId': request.payload.FactionId,
+      'GameSystemId': request.payload.GameSystemId,
+      'ManufacturerId': request.payload.ManufacturerId,
+      'SKU': request.payload.SKU,
+      'name': request.payload.name,
+      'price': request.payload.price,
+      'shippingCost': request.payload.shippingCost,
+      'description': request.payload.description,
+      'manufacturerId': request.payload.manufacturerId,
+      'gameSystem': request.payload.gameSystem,
+      'color': request.payload.color,
+      'tags': request.payload.tags,
+      'category': request.payload.category,
+      'stockQty': request.payload.stockQty,
+      'isInStock': request.payload.isInStock,
+      'filterVal': request.payload.filterVal,
+      'isDisplayed': request.payload.isDisplayed,
+      'isFeatured': request.payload.isFeatured,
+      'isNew': request.payload.isNew,
+      'isOnSale': request.payload.isOnSale
+    })
+    .then((response) => {
+      reply(response).code(200);
+    });
   },
   update: (request, reply) => {
     models.Product.find({
@@ -70,6 +72,7 @@ let products = {
             'SKU': request.payload.SKU,
             'name': request.payload.name,
             'price': request.payload.price,
+            'shippingCost': request.payload.shippingCost,
             'description': request.payload.description,
             'manufacturerId': request.payload.manufacturerId,
             'gameSystem': request.payload.gameSystem,
@@ -91,7 +94,53 @@ let products = {
         }
       });
   },
-	'search': (request, reply) => {
+	updateStock: (request, reply) => {
+		let products = request.payload.products;
+		let findConfig = { '$or': [] };
+		products.forEach((product) => {
+			findConfig['$or'].push({'id': product.id});
+		});
+		let promises = [];
+		models.Product.findAll({
+			'where': findConfig
+		}).then((matchingProducts) => {
+			if (request.payload.direction === 'increment') {
+				matchingProducts.forEach((matchingProduct) => {
+					let qtyValue = products.find((product) => matchingProduct.id === product.id).qty;
+					promises.push(matchingProduct.increment({ 'stockQty': qtyValue }));
+				});
+				Promise.all(promises).then((updatedProducts) => {
+					reply(updatedProducts).code(200);
+				});
+			} else {
+				let failResponse = [];
+				let outOfStockCount = 0;
+				matchingProducts.forEach((matchingProduct) => {
+					let outOfStock = matchingProduct.stockQty - products.find((product) => matchingProduct.id === product.id).qty < 0;
+					outOfStockCount += outOfStock ? 1 : 0;
+					failResponse.push({ 'id': matchingProduct.id, 'outOfStock': outOfStock });
+				});
+				if (outOfStockCount === 0) {
+					matchingProducts.forEach((matchingProduct) => {
+						let qtyValue = products.find((product) => matchingProduct.id === product.id).qty;
+						promises.push(matchingProduct.decrement({ 'stockQty': qtyValue }));
+					});
+					Promise.all(promises).then((updatedProducts) => {
+						reply({
+							'success': true,
+							'products': updatedProducts
+						}).code(200);
+					})
+				} else {
+					reply({
+						'success': false,
+						'products': failResponse
+					});
+				}
+			}
+		});
+	},
+	search: (request, reply) => {
     let searchByConfig;
     let pageSize = parseInt(request.payload.pageSize, 10) || 20;
     let searchQuery = request.payload.searchQuery || '';

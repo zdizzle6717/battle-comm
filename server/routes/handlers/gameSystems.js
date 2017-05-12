@@ -2,7 +2,7 @@
 
 import models from '../../models';
 
-// Product Route Configs
+// Game System Route Configs
 let gameSystems = {
   get: (request, reply) => {
     models.GameSystem.find({

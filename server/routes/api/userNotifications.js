@@ -34,7 +34,7 @@ module.exports = [
 			'validate': {
 				'payload': {
 					'UserId': Joi.number().required(),
-					'type': Joi.string().valid('allyRequestReceived', 'allyRequestAccepted', 'newMessage').required(),
+					'type': Joi.string().valid('allyRequestReceived', 'allyRequestAccepted', 'newAchievement', 'newMessage').required(),
 					'status': Joi.optional(),
 					'fromId': Joi.number().required(),
 					'fromUsername': Joi.string().required(),
@@ -61,7 +61,7 @@ module.exports = [
 				},
 				'payload': {
 					'UserId': Joi.number().required(),
-					'type': Joi.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newMessage'),
+					'type': Joi.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newAchievement', 'newMessage'),
 					'status': Joi.string().required(),
 					'fromId': Joi.number().required(),
 					'fromName': Joi.string().required()

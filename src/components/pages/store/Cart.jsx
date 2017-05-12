@@ -65,6 +65,7 @@ class Cart extends React.Component {
 									<th className="text-center">SKU</th>
 									<th className="text-center">Name</th>
 									<th className="text-center">Price</th>
+									<th className="text-center">In Stock</th>
 									<th className="text-center">Qty</th>
 									<th className="text-center">Subtotal</th>
 									<th className="text-center">Remove?</th>
@@ -77,6 +78,13 @@ class Cart extends React.Component {
 											<td>{item.product.SKU}</td>
 											<td>{`${item.product.name.substring(0, 25)}...`}</td>
 											<td>{item.product.price} RP</td>
+											<td>
+												{
+													item.product.outOfStock ?
+													<span className="color-alert">Out of Stock!</span> :
+													item.product.stockQty
+												}
+											</td>
 											<td><span className="fa fa-minus pointer" onClick={this.updateItemQty.bind(this, item, 'subtract')}></span> ({item.cartQty}) <span className="fa fa-plus pointer" onClick={this.updateItemQty.bind(this, item, 'add')}></span></td>
 											<td>{(item.cartQty * item.product.price).toFixed(2)}</td>
 											<td onClick={this.removeItem.bind(this, item)}><span className="fa fa-times-circle-o pointer"></span></td>

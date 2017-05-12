@@ -47,6 +47,32 @@ module.exports = [
 	'handler': _handlers.payments.getSubscriptionPlans
 }, {
 	'method': 'POST',
+	'path': '/api/payments/payShippingCost/{id}',
+	'config': {
+		'tags': ['api'],
+		'description': 'Request new purchase',
+		'notes': 'Request new purchase',
+		'auth': {
+			'strategy': 'jsonWebToken',
+			'scope': ['member', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+		},
+		'validate': {
+			'params': {
+				'id': _joi2.default.number().required()
+			},
+			'payload': {
+				'token': _joi2.default.string().required(),
+				'details': _joi2.default.object().keys({
+					'email': _joi2.default.string().required(),
+					'description': _joi2.default.string().required(),
+					'shippingCost': _joi2.default.number().precision(2).required()
+				})
+			}
+		}
+	},
+	'handler': _handlers.payments.payShippingCost
+}, {
+	'method': 'POST',
 	'path': '/api/payments/purchaseRP/{id}',
 	'config': {
 		'tags': ['api'],

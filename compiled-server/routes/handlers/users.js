@@ -76,6 +76,11 @@ var getUserModel = function getUserModel(where) {
     'include': [{
       'model': _models2.default.UserNotification
     }, {
+      'model': _models2.default.Achievement,
+      'includes': [{
+        'model': _models2.default.File
+      }]
+    }, {
       'model': _models2.default.UserPhoto
     }, {
       'model': _models2.default.User,
@@ -137,6 +142,7 @@ var users = {
       'city': request.pre.user.city,
       'state': request.pre.user.state,
       'zip': request.pre.user.zip,
+      'hasAuthenticatedOnce': request.pre.user.hasAuthenticatedOnce,
       'member': request.pre.user.member,
       'subscriber': request.pre.user.subscriber,
       'tourneyAdmin': request.pre.user.tourneyAdmin,
@@ -439,6 +445,7 @@ var users = {
           'newsletter': request.payload.newsletter,
           'marketing': request.payload.marketing,
           'sms': request.payload.sms,
+          'hasAuthenticatedOnce': request.payload.hasAuthenticatedOnce,
           'allowPlay': request.payload.allowPlay,
           'totalWins': request.payload.totalWins,
           'totalLoss': request.payload.totalLoss,
@@ -604,9 +611,15 @@ var users = {
     var offset = (request.payload.pageNumber - 1) * pageSize;
     var orderBy = request.payload.orderBy ? request.payload.orderBy === 'updatedAt' || request.payload.orderBy === 'createdAt' ? [request.payload.orderBy, 'DESC'] : [request.payload.orderBy, 'ASC'] : undefined;
     if (searchQuery) {
-      searchByConfig = request.payload.searchBy ? _defineProperty({}, request.payload.searchBy, {
-        '$iLike': '%' + searchQuery + '%'
-      }) : {
+      searchByConfig = request.payload.searchBy ? {
+        '$and': [_defineProperty({}, request.payload.searchBy, {
+          '$iLike': '%' + searchQuery + '%'
+        }), {
+          'username': {
+            '$not': 'systemAdmin'
+          }
+        }]
+      } : {
         '$or': [{
           'username': {
             '$iLike': '%' + searchQuery + '%'
@@ -619,10 +632,17 @@ var users = {
           'lastName': {
             '$iLike': '%' + searchQuery + '%'
           }
-        }]
+        }],
+        'username': {
+          '$not': 'systemAdmin'
+        }
       };
     } else {
-      searchByConfig = {};
+      searchByConfig = {
+        'username': {
+          '$not': 'systemAdmin'
+        }
+      };
     }
     _models2.default.User.findAndCountAll({
       'where': searchByConfig,

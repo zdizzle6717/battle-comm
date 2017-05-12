@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.venues = exports.users = exports.userPhotos = exports.userNotifications = exports.userFriends = exports.products = exports.productOrders = exports.payments = exports.newsPosts = exports.manufacturers = exports.gameSystems = exports.gameSystemRankings = exports.files = exports.factions = exports.factionRankings = exports.bannerSlides = undefined;
+exports.venues = exports.users = exports.userPhotos = exports.userNotifications = exports.userAchievements = exports.userFriends = exports.products = exports.productOrders = exports.payments = exports.newsPosts = exports.manufacturers = exports.gameSystems = exports.gameSystemRankings = exports.files = exports.factions = exports.factionRankings = exports.bannerSlides = exports.achievements = undefined;
+
+var _achievements = require('./achievements');
+
+var _achievements2 = _interopRequireDefault(_achievements);
 
 var _bannerSlides = require('./bannerSlides');
 
@@ -53,6 +57,10 @@ var _userFriends = require('./userFriends');
 
 var _userFriends2 = _interopRequireDefault(_userFriends);
 
+var _userAchievements = require('./userAchievements');
+
+var _userAchievements2 = _interopRequireDefault(_userAchievements);
+
 var _userNotifications = require('./userNotifications');
 
 var _userNotifications2 = _interopRequireDefault(_userNotifications);
@@ -71,6 +79,7 @@ var _venues2 = _interopRequireDefault(_venues);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+exports.achievements = _achievements2.default;
 exports.bannerSlides = _bannerSlides2.default;
 exports.factionRankings = _factionRankings2.default;
 exports.factions = _factions2.default;
@@ -83,6 +92,7 @@ exports.payments = _payments2.default;
 exports.productOrders = _productOrders2.default;
 exports.products = _products2.default;
 exports.userFriends = _userFriends2.default;
+exports.userAchievements = _userAchievements2.default;
 exports.userNotifications = _userNotifications2.default;
 exports.userPhotos = _userPhotos2.default;
 exports.users = _users2.default;

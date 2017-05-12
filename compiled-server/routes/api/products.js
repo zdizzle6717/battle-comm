@@ -60,7 +60,8 @@ module.exports = [
 				'Files': _joi2.default.optional(),
 				'SKU': _joi2.default.string().required(),
 				'name': _joi2.default.string().required(),
-				'price': _joi2.default.number().required(),
+				'price': _joi2.default.number().integer().required(),
+				'shippingCost': _joi2.default.number().precision(2).required(),
 				'description': _joi2.default.string().required(),
 				'color': _joi2.default.optional(),
 				'tags': _joi2.default.string(),
@@ -85,7 +86,7 @@ module.exports = [
 		'notes': 'Update a product by id',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			'scope': ['systemAdmin']
 		},
 		'validate': {
 			'params': {
@@ -101,7 +102,8 @@ module.exports = [
 				'createdAt': _joi2.default.optional(),
 				'SKU': _joi2.default.string().required(),
 				'name': _joi2.default.string().required(),
-				'price': _joi2.default.number().required(),
+				'price': _joi2.default.number().integer().required(),
+				'shippingCost': _joi2.default.number().precision(2).required(),
 				'description': _joi2.default.string().required(),
 				'color': _joi2.default.optional(),
 				'tags': _joi2.default.string().required(),
@@ -117,6 +119,28 @@ module.exports = [
 		}
 	},
 	'handler': _handlers.products.update
+}, {
+	'method': 'PUT',
+	'path': '/api/products/stockQty/update',
+	'config': {
+		'tags': ['api'],
+		'description': 'Update a product stock by id',
+		'notes': 'Update a product stock by id',
+		'auth': {
+			'strategy': 'jsonWebToken',
+			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+		},
+		'validate': {
+			'payload': {
+				'direction': _joi2.default.string().valid('increment', 'decrement').required(),
+				'products': _joi2.default.array().items(_joi2.default.object().keys({
+					'id': _joi2.default.number().required(),
+					'qty': _joi2.default.number().required()
+				}))
+			}
+		}
+	},
+	'handler': _handlers.products.updateStock
 }, {
 	'method': 'POST',
 	'path': '/api/search/products',

@@ -8,6 +8,10 @@ var _models = require('../../models');
 
 var _models2 = _interopRequireDefault(_models);
 
+var _boom = require('boom');
+
+var _boom2 = _interopRequireDefault(_boom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -43,6 +47,7 @@ var products = {
       'SKU': request.payload.SKU,
       'name': request.payload.name,
       'price': request.payload.price,
+      'shippingCost': request.payload.shippingCost,
       'description': request.payload.description,
       'manufacturerId': request.payload.manufacturerId,
       'gameSystem': request.payload.gameSystem,
@@ -74,6 +79,7 @@ var products = {
           'SKU': request.payload.SKU,
           'name': request.payload.name,
           'price': request.payload.price,
+          'shippingCost': request.payload.shippingCost,
           'description': request.payload.description,
           'manufacturerId': request.payload.manufacturerId,
           'gameSystem': request.payload.gameSystem,
@@ -95,7 +101,59 @@ var products = {
       }
     });
   },
-  'search': function search(request, reply) {
+  updateStock: function updateStock(request, reply) {
+    var products = request.payload.products;
+    var findConfig = { '$or': [] };
+    products.forEach(function (product) {
+      findConfig['$or'].push({ 'id': product.id });
+    });
+    var promises = [];
+    _models2.default.Product.findAll({
+      'where': findConfig
+    }).then(function (matchingProducts) {
+      if (request.payload.direction === 'increment') {
+        matchingProducts.forEach(function (matchingProduct) {
+          var qtyValue = products.find(function (product) {
+            return matchingProduct.id === product.id;
+          }).qty;
+          promises.push(matchingProduct.increment({ 'stockQty': qtyValue }));
+        });
+        Promise.all(promises).then(function (updatedProducts) {
+          reply(updatedProducts).code(200);
+        });
+      } else {
+        var failResponse = [];
+        var outOfStockCount = 0;
+        matchingProducts.forEach(function (matchingProduct) {
+          var outOfStock = matchingProduct.stockQty - products.find(function (product) {
+            return matchingProduct.id === product.id;
+          }).qty < 0;
+          outOfStockCount += outOfStock ? 1 : 0;
+          failResponse.push({ 'id': matchingProduct.id, 'outOfStock': outOfStock });
+        });
+        if (outOfStockCount === 0) {
+          matchingProducts.forEach(function (matchingProduct) {
+            var qtyValue = products.find(function (product) {
+              return matchingProduct.id === product.id;
+            }).qty;
+            promises.push(matchingProduct.decrement({ 'stockQty': qtyValue }));
+          });
+          Promise.all(promises).then(function (updatedProducts) {
+            reply({
+              'success': true,
+              'products': updatedProducts
+            }).code(200);
+          });
+        } else {
+          reply({
+            'success': false,
+            'products': failResponse
+          });
+        }
+      }
+    });
+  },
+  search: function search(request, reply) {
     var searchByConfig = void 0;
     var pageSize = parseInt(request.payload.pageSize, 10) || 20;
     var searchQuery = request.payload.searchQuery || '';

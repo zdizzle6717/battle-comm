@@ -57,7 +57,8 @@ module.exports = [
 					'Files': Joi.optional(),
 					'SKU': Joi.string().required(),
 					'name': Joi.string().required(),
-					'price': Joi.number().required(),
+					'price': Joi.number().integer().required(),
+					'shippingCost': Joi.number().precision(2).required(),
 					'description': Joi.string().required(),
 					'color': Joi.optional(),
 					'tags': Joi.string(),
@@ -83,7 +84,7 @@ module.exports = [
 			'notes': 'Update a product by id',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['systemAdmin']
 			},
 			'validate': {
 				'params': {
@@ -99,7 +100,8 @@ module.exports = [
 					'createdAt': Joi.optional(),
 					'SKU': Joi.string().required(),
 					'name': Joi.string().required(),
-					'price': Joi.number().required(),
+					'price': Joi.number().integer().required(),
+					'shippingCost': Joi.number().precision(2).required(),
 					'description': Joi.string().required(),
 					'color': Joi.optional(),
 					'tags': Joi.string().required(),
@@ -115,6 +117,29 @@ module.exports = [
 			}
 		},
 		'handler': products.update
+	},
+	{
+		'method': 'PUT',
+		'path': '/api/products/stockQty/update',
+		'config': {
+			'tags': ['api'],
+			'description': 'Update a product stock by id',
+			'notes': 'Update a product stock by id',
+			'auth': {
+				'strategy': 'jsonWebToken',
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			},
+			'validate': {
+				'payload': {
+					'direction': Joi.string().valid('increment', 'decrement').required(),
+					'products': Joi.array().items(Joi.object().keys({
+						'id': Joi.number().required(),
+						'qty': Joi.number().required()
+					}))
+				}
+			}
+		},
+		'handler': products.updateStock
 	},
 	{
     'method': 'POST',

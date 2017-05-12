@@ -312,7 +312,7 @@ class EditUser extends React.Component {
 							<div className="panel-content text-center">
 								<select type="text" name="userRole" value={this.state.userRole} onChange={this.handleRoleChange}>
 									{
-										roleConfig.filter(role => role.name !== 'public').map((role, i) =>
+										roleConfig.filter(role => role.name !== 'public' && role.name !== 'systemAdmin').map((role, i) =>
 											<option key={i} value={role.name}>{role.name}</option>
 										)
 									}

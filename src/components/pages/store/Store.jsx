@@ -264,7 +264,7 @@ class Store extends React.Component {
 					<div className="small-12 medium-8 large-9 columns">
 						<div className="products-container">
 							{
-								this.props.products.map((product, i) =>
+								this.props.products.filter((product) => product.stockQty > 0).map((product, i) =>
 								<div key={product.id} className="product-box">
 									<div className="flip-container">
 										<Link to={`/store/products/${product.id}`} className="flipper">

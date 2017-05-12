@@ -38,7 +38,7 @@ module.exports = [
 		'validate': {
 			'payload': {
 				'UserId': _joi2.default.number().required(),
-				'type': _joi2.default.string().valid('allyRequestReceived', 'allyRequestAccepted', 'newMessage').required(),
+				'type': _joi2.default.string().valid('allyRequestReceived', 'allyRequestAccepted', 'newAchievement', 'newMessage').required(),
 				'status': _joi2.default.optional(),
 				'fromId': _joi2.default.number().required(),
 				'fromUsername': _joi2.default.string().required(),
@@ -64,7 +64,7 @@ module.exports = [
 			},
 			'payload': {
 				'UserId': _joi2.default.number().required(),
-				'type': _joi2.default.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newMessage'),
+				'type': _joi2.default.string().valid().required('allyRequestReceived', 'allyRequestAccepted', 'newAchievement', 'newMessage'),
 				'status': _joi2.default.string().required(),
 				'fromId': _joi2.default.number().required(),
 				'fromName': _joi2.default.string().required()

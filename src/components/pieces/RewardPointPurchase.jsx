@@ -54,10 +54,9 @@ class RewardPointPurchase extends React.Component {
         this.loadStripe(() => {
 			// Handler for acknowledging card token response
 			let handleSubmit = (token) => {
-				PaymentService.purchaseRP({
+				PaymentService.purchaseRP(this.props.user.id, {
 					'token': JSON.stringify(token),
 					'details': {
-						'UserId': this.props.user.id,
 						'email': this.state.rpPurchaseForm.email,
 						'description': 'Reward Point Purchase',
 						'priceIndex': this.state.rpPurchaseForm.priceIndex
@@ -160,7 +159,7 @@ class RewardPointPurchase extends React.Component {
 					'type': 'error',
 					'delay': 10000
 				});
-			},
+			}
 		}
 
 		return alerts[selector]();

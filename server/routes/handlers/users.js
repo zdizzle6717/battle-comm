@@ -35,6 +35,12 @@ const getUserModel = (where) => {
 					'model': models.UserNotification
 				},
 				{
+					'model': models.Achievement,
+					'includes': [{
+						'model': models.File
+					}]
+				},
+				{
 					'model': models.UserPhoto
 				},
 				{
@@ -103,6 +109,7 @@ let users = {
       'city': request.pre.user.city,
       'state': request.pre.user.state,
       'zip': request.pre.user.zip,
+      'hasAuthenticatedOnce': request.pre.user.hasAuthenticatedOnce,
       'member': request.pre.user.member,
       'subscriber': request.pre.user.subscriber,
       'tourneyAdmin': request.pre.user.tourneyAdmin,
@@ -412,6 +419,7 @@ let users = {
             'newsletter': request.payload.newsletter,
             'marketing': request.payload.marketing,
             'sms': request.payload.sms,
+						'hasAuthenticatedOnce': request.payload.hasAuthenticatedOnce,
             'allowPlay': request.payload.allowPlay,
             'totalWins': request.payload.totalWins,
             'totalLoss': request.payload.totalLoss,
@@ -581,9 +589,18 @@ let users = {
 		let orderBy = request.payload.orderBy ? (request.payload.orderBy === 'updatedAt' || request.payload.orderBy === 'createdAt' ? [request.payload.orderBy, 'DESC'] : [request.payload.orderBy, 'ASC']) : undefined;
     if (searchQuery) {
       searchByConfig = request.payload.searchBy ? {
-        [request.payload.searchBy]: {
-          '$iLike': '%' + searchQuery + '%'
-        }
+				'$and': [
+					{
+						[request.payload.searchBy]: {
+		          '$iLike': '%' + searchQuery + '%'
+		        }
+					},
+					{
+						'username': {
+							'$not': 'systemAdmin'
+						}
+					}
+				]
       } : {
         '$or': [{
             'username': {
@@ -600,10 +617,17 @@ let users = {
               '$iLike': '%' + searchQuery + '%'
             }
           }
-        ]
+        ],
+				'username': {
+					'$not': 'systemAdmin'
+				}
       };
     } else {
-      searchByConfig = {};
+      searchByConfig = {
+				'username': {
+					'$not': 'systemAdmin'
+				}
+			};
     }
     models.User.findAndCountAll({
       'where': searchByConfig,

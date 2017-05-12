@@ -73,6 +73,7 @@ module.exports = [
 					'tags': _joi2.default.optional(),
 					'category': _joi2.default.optional(),
 					'stockQty': _joi2.default.optional(),
+					'shippingCost': _joi2.default.optional(),
 					'isDisplayed': _joi2.default.optional(),
 					'isFeatured': _joi2.default.optional(),
 					'isNew': _joi2.default.optional(),

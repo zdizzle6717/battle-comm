@@ -20,7 +20,6 @@ import {newsPost, newsPosts} from './newsPosts';
 import {manufacturer, manufacturers} from './manufacturers';
 import {product, products} from './products';
 import {productOrder, productOrders} from './productOrders';
-import {userAchievement, userAchievements} from './userAchievements';
 import {userMessage, userMessages} from './userMessages';
 import {userNotification, userNotifications} from './userNotifications';
 import {userPhoto, userPhotos} from './userPhotos';
@@ -59,8 +58,6 @@ export default combineReducers({
 	products,
 	productOrder,
 	productOrders,
-	userAchievement,
-	userAchievements,
 	userMessage,
 	userMessages,
 	userNotification,

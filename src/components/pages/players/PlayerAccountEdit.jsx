@@ -207,7 +207,7 @@ class PlayerAccountEdit extends React.Component {
 									</div>
 									<div className="form-group inline">
 										<label className="title bold">Zip:</label>
-										<Input name="zip" type="text" id="zip" value={currentUser.zip} minlength="5" maxlength="12" handleInputChange={this.handleInputChange}/>
+										<Input name="zip" type="text" id="zip" value={currentUser.zip} minlength={5} maxlength={12} handleInputChange={this.handleInputChange}/>
 									</div>
 								</Form> :
 								<div className="user-shipping">
@@ -238,6 +238,10 @@ class PlayerAccountEdit extends React.Component {
 							}
 						</div>
 					</div>
+				</div>
+				<div className="row push-top-2x text-center">
+					<h4>Battle-Comm subscribers earn extra rewards, free shipping on all purchases, and first-hand access to extended features. <Link to="/subscribe"><strong>Become a BC Subscriber?</strong></Link></h4>
+
 				</div>
             </ViewWrapper>
         );

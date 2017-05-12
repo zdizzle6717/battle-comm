@@ -217,6 +217,7 @@ module.exports = [
           'club': Joi.optional(),
           'dob': Joi.optional(),
           'youtube': Joi.optional(),
+          'hasAuthenticatedOnce': Joi.optional(),
           'visibility': Joi.optional(),
           'shareContact': Joi.optional(),
           'shareName': Joi.optional(),
@@ -235,7 +236,8 @@ module.exports = [
           'Friends': Joi.optional(),
           'GameSystemRankings': Joi.optional(),
 					'Files': Joi.optional(),
-					'UserPhoto': Joi.optional()
+					'UserPhoto': Joi.optional(),
+					'Achievements': Joi.optional()
         }
       }
     },

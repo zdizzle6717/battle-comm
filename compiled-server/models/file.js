@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
         File.belongsTo(models.NewsPost);
         File.belongsTo(models.Product);
         File.belongsTo(models.User);
-        File.belongsTo(models.UserAchievement);
+        File.belongsTo(models.Achievement);
       }
     }
   });

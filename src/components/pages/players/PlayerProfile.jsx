@@ -32,6 +32,7 @@ class PlayerProfile extends React.Component {
 			'alreadyFriends': false,
 			'photoStream': [],
 			'player': {
+				'Achievements': [],
 				'Friends': [],
 				'GameSystemRankings': [],
 				'Files': []
@@ -42,6 +43,21 @@ class PlayerProfile extends React.Component {
 		this.removeFriend = this.removeFriend.bind(this);
 		this.showAlert = this.showAlert.bind(this);
     }
+
+    componentDidMount() {
+        document.title = "Battle-Comm | Player Profile";
+		if (!this.props.match.params.playerHandle || this.props.match.params.playerHandle === 'systemAdmin') {
+			this.props.history.push(`/players/dashboard`);
+		} else {
+			this.getCurrentPlayer();
+		}
+    }
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.match.params.playerHandle !== nextProps.match.params.playerHandle) {
+			this.getCurrentPlayer(nextProps.match.params.playerHandle);
+		}
+	}
 
 	addFriend() {
 		let currentUser = this.props.currentUser;
@@ -58,21 +74,6 @@ class PlayerProfile extends React.Component {
 				this.showAlert('allyAlreadyRequestSent');
 			}
 		});
-	}
-
-    componentDidMount() {
-        document.title = "Battle-Comm | Player Profile";
-		if (!this.props.match.params.playerHandle) {
-			this.props.history.push(`/players/dashboard`);
-		} else {
-			this.getCurrentPlayer();
-		}
-    }
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.match.params.playerHandle !== nextProps.match.params.playerHandle) {
-			this.getCurrentPlayer(nextProps.match.params.playerHandle);
-		}
 	}
 
 	getCurrentPlayer(playerHandle = this.props.match.params.playerHandle) {
@@ -180,8 +181,8 @@ class PlayerProfile extends React.Component {
 							<h2 className="text-center">Player Info</h2>
 							{
 								player.bio ?
-								<h3 className="user-bio push-bottom-2x text-center">{player.bio}</h3> :
-								<h3 className="user-bio push-bottom-2x text-center">This player has not yet updaed their bio.</h3>
+								<h4 className="user-bio push-bottom-2x text-center">{player.bio}</h4> :
+								<h4 className="user-bio push-bottom-2x text-center">This player has not yet updaed their bio.</h4>
 							}
 							<div className="social-links push-bottom text-center">
 								{
@@ -259,7 +260,17 @@ class PlayerProfile extends React.Component {
 					<div className="row">
 						<div className="small-12 columns">
 							<h2>Achievements</h2>
-							<h3 className="text-center">This player has not yet been awarded any achievements.</h3>
+							{
+								player.Achievements.length > 0 ?
+								<div>
+									{
+										player.Achievements.map((achievement) =>
+											<div key={achievement.id}>{achievement.title}</div>
+										)
+									}
+								</div> :
+								<h4 className="text-center">This player has not yet been awarded any achievements.</h4>
+							}
 						</div>
 					</div>
 					<div className="row">
@@ -268,7 +279,7 @@ class PlayerProfile extends React.Component {
 							<div className="small-12 columns">
 								{
 									player.GameSystemRankings.length < 1 &&
-									<h3 className="text-center">{player.username} has not submitted any game results to the BC leaderboards</h3>
+									<h4 className="text-center">{player.username} has not submitted any game results to the BC leaderboards</h4>
 								}
 								{
 									player.GameSystemRankings.map((gameRanking, i) =>
@@ -325,7 +336,7 @@ class PlayerProfile extends React.Component {
 												)
 											}
 										</div> :
-										<h5>This player has not yet uploaded photos to their profile.</h5>
+										<h4>This player has not yet uploaded photos to their profile.</h4>
 									}
 								</div>
 						</div>

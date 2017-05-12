@@ -212,6 +212,7 @@ module.exports = [
         'club': _joi2.default.optional(),
         'dob': _joi2.default.optional(),
         'youtube': _joi2.default.optional(),
+        'hasAuthenticatedOnce': _joi2.default.optional(),
         'visibility': _joi2.default.optional(),
         'shareContact': _joi2.default.optional(),
         'shareName': _joi2.default.optional(),
@@ -230,7 +231,8 @@ module.exports = [
         'Friends': _joi2.default.optional(),
         'GameSystemRankings': _joi2.default.optional(),
         'Files': _joi2.default.optional(),
-        'UserPhoto': _joi2.default.optional()
+        'UserPhoto': _joi2.default.optional(),
+        'Achievements': _joi2.default.optional()
       }
     }
   },

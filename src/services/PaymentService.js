@@ -15,6 +15,12 @@ export default {
 				return response.data;
 			});
 	},
+	payShippingCost: (id, data) => {
+		return axios.post('/payments/payShippingCost/' + id, data)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	purchaseRP: (id, data) => {
 		return axios.post('/payments/purchaseRP/' + id, data)
 			.then(function(response) {
