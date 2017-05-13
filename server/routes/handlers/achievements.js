@@ -11,6 +11,10 @@ let achievements = {
         },
         'include': [{
 						'model': models.File
+					},
+					{
+						'model': models.User,
+						'attributes': ['id', 'username']
 					}
         ]
       })
@@ -42,7 +46,8 @@ let achievements = {
         'title': request.payload.title,
         'category': request.payload.category,
         'description': request.payload.description,
-        'priority': request.payload.priority
+        'priority': request.payload.priority || 100,
+        'rpValue': request.payload.rpValue || 0
       })
       .then((response) => {
         reply(response).code(200);
@@ -60,7 +65,8 @@ let achievements = {
 						'title': request.payload.title,
 		        'category': request.payload.category,
 		        'description': request.payload.description,
-		        'priority': request.payload.priority
+		        'priority': request.payload.priority,
+		        'rpValue': request.payload.rpValue
           }).then((response) => {
             reply(response).code(200);
           });

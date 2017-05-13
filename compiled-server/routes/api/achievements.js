@@ -49,7 +49,8 @@ module.exports = [
         'title': _joi2.default.string().required(),
         'category': _joi2.default.string().required(),
         'description': _joi2.default.string().required(),
-        'priority': _joi2.default.optional()
+        'priority': _joi2.default.optional(),
+        'rpValue': _joi2.default.optional()
       }
     }
   },
@@ -75,9 +76,10 @@ module.exports = [
         'updatedAt': _joi2.default.optional(),
         'File': _joi2.default.optional(),
         'title': _joi2.default.number().required(),
-        'priority': _joi2.default.optional(),
+        'priority': _joi2.default.number().required(),
         'category': _joi2.default.string().required(),
-        'description': _joi2.default.optional()
+        'description': _joi2.default.optional(),
+        'rpValue': _joi2.default.number().required()
       }
     }
   },

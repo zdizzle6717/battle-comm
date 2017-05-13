@@ -32,8 +32,8 @@ var userAchievements = {
 				}
 			}).then(function (achievement) {
 				if (achievement) {
-					user.addAchievement(achievement).then(function (user) {
-						reply(user).code(200);
+					user.addUserAchievement(achievement).then(function (userHasAchievements) {
+						reply(userHasAchievements).code(200);
 					});
 				} else {
 					reply(_boom2.default.notFound('No achievement found with the supplied id or title'));
@@ -49,15 +49,11 @@ var userAchievements = {
 		}).then(function (user) {
 			_models2.default.Achievement.find({
 				'where': {
-					'$or': [{
-						'id': request.payload.AchievementId
-					}, {
-						'title': request.payload.AchievementTitle
-					}]
+					'id': request.params.AchievementId
 				}
 			}).then(function (achievement) {
 				if (achievement) {
-					user.removeAchievement(achievement).then(function (user) {
+					user.removeUserAchievement(achievement).then(function (user) {
 						reply(user).code(200);
 					});
 				} else {

@@ -47,6 +47,7 @@ module.exports = [
           'category': Joi.string().required(),
           'description': Joi.string().required(),
           'priority': Joi.optional(),
+          'rpValue': Joi.optional()
         }
       }
     },
@@ -73,9 +74,10 @@ module.exports = [
 					'updatedAt': Joi.optional(),
 					'File': Joi.optional(),
 					'title': Joi.number().required(),
-					'priority': Joi.optional(),
+					'priority': Joi.number().required(),
           'category': Joi.string().required(),
-          'description': Joi.optional()
+          'description': Joi.optional(),
+          'rpValue': Joi.number().required()
         }
       }
     },

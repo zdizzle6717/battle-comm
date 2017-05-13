@@ -32,7 +32,7 @@ class PlayerProfile extends React.Component {
 			'alreadyFriends': false,
 			'photoStream': [],
 			'player': {
-				'Achievements': [],
+				'UserAchievements': [],
 				'Friends': [],
 				'GameSystemRankings': [],
 				'Files': []
@@ -252,7 +252,7 @@ class PlayerProfile extends React.Component {
 							{
 								player.Friends.length < 1 &&
 								<div className="text-center">
-									<h6>Send an ally request to welcome this player to Battle-Comm!</h6>
+									<h4>Send an ally request to welcome this player to Battle-Comm!</h4>
 								</div>
 							}
 						</div>
@@ -261,11 +261,11 @@ class PlayerProfile extends React.Component {
 						<div className="small-12 columns">
 							<h2>Achievements</h2>
 							{
-								player.Achievements.length > 0 ?
-								<div>
+								player.UserAchievements.length > 0 ?
+								<div className="text-center achievements">
 									{
-										player.Achievements.map((achievement) =>
-											<div key={achievement.id}>{achievement.title}</div>
+										player.UserAchievements.map((achievement) =>
+											<span key={achievement.id} className=" achievement"><i className="fa fa-connectdevelop"></i> {achievement.title}</span>
 										)
 									}
 								</div> :

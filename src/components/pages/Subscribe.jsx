@@ -12,6 +12,7 @@ import {handlers} from '../../library/utilities';
 import ViewWrapper from '../ViewWrapper';
 import PaymentService from '../../services/PaymentService';
 import PlayerService from '../../services/PlayerService';
+import UserAchievementService from '../../services/UserAchievementService';
 
 const mapStateToProps = (state) => {
 	return {
@@ -144,10 +145,15 @@ class Subscribe extends React.Component {
 			'description': 'Battle-Comm Subscription'
 		}).then((response) => {
 			this.showAlert('subscriptionSuccess');
-			setTimeout(() => {
-				this.props.logout();
-			})
-			this.props.history.push('/login');
+			UserAchievementService.create({
+				'UserId': this.props.user.id,
+				'AchievementTitle': 'Subscriber'
+			}).then(() => {
+				setTimeout(() => {
+					this.props.logout();
+				})
+				this.props.history.push('/login');
+			});
 		});
 	}
 

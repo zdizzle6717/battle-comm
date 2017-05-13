@@ -8,7 +8,8 @@ module.exports = function (sequelize, DataTypes) {
     },
     'category': DataTypes.STRING,
     'description': DataTypes.TEXT,
-    'priority': DataTypes.INTEGER
+    'priority': DataTypes.INTEGER,
+    'rpValue': DataTypes.INTEGER
   }, {
     'classMethods': {
       associate: function associate(models) {

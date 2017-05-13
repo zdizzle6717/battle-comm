@@ -237,7 +237,7 @@ module.exports = [
           'GameSystemRankings': Joi.optional(),
 					'Files': Joi.optional(),
 					'UserPhoto': Joi.optional(),
-					'Achievements': Joi.optional()
+					'UserAchievements': Joi.optional()
         }
       }
     },

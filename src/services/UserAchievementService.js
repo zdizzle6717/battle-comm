@@ -15,8 +15,8 @@ export default {
 				return response.data;
 			});
 	},
-	remove: (UserId, AchievementIdentifier) => {
-		return axios.delete('/userAchievements/' + UserId + '/' + AchievementIdentifier)
+	remove: (UserId, AchievementId) => {
+		return axios.delete('/userAchievements/' + UserId + '/' + AchievementId)
 			.then(function(response) {
 				return response.data;
 			});

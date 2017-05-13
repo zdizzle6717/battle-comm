@@ -38,7 +38,7 @@ class PlayerDashboard extends React.Component {
 		this.state = {
 			'activeModal': 'none',
 			'currentUser': {
-				'Achievements': [],
+				'UserAchievements': [],
 				'Files': [],
 				'Friends': [],
 				'GameSystemRankings': []
@@ -446,11 +446,11 @@ class PlayerDashboard extends React.Component {
 						<div className="small-12 columns">
 							<h2>Achievements</h2>
 							{
-								currentUser.Achievements.length > 0 ?
-								<div>
+								currentUser.UserAchievements.length > 0 ?
+								<div className="text-center achievements">
 									{
-										currentUser.Achievements.map((achievement) =>
-											<div key={achievement.id}>{achievement.title}</div>
+										currentUser.UserAchievements.map((achievement) =>
+											<span key={achievement.id} className=" achievement"><i className="fa fa-connectdevelop"></i> {achievement.title}</span>
 										)
 									}
 								</div> :

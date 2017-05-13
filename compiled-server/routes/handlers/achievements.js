@@ -21,6 +21,9 @@ var achievements = {
       },
       'include': [{
         'model': _models2.default.File
+      }, {
+        'model': _models2.default.User,
+        'attributes': ['id', 'username']
       }]
     }).then(function (response) {
       if (response) {
@@ -45,7 +48,8 @@ var achievements = {
       'title': request.payload.title,
       'category': request.payload.category,
       'description': request.payload.description,
-      'priority': request.payload.priority
+      'priority': request.payload.priority || 100,
+      'rpValue': request.payload.rpValue || 0
     }).then(function (response) {
       reply(response).code(200);
     });
@@ -61,7 +65,8 @@ var achievements = {
           'title': request.payload.title,
           'category': request.payload.category,
           'description': request.payload.description,
-          'priority': request.payload.priority
+          'priority': request.payload.priority,
+          'rpValue': request.payload.rpValue
         }).then(function (response) {
           reply(response).code(200);
         });

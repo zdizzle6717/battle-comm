@@ -26,8 +26,8 @@ let userAchievements = {
 				})
 				.then((achievement) => {
 					if (achievement) {
-						user.addAchievement(achievement).then((user) => {
-							reply(user).code(200);
+						user.addUserAchievement(achievement).then((userHasAchievements) => {
+							reply(userHasAchievements).code(200);
 						});
 					} else {
 						reply(Boom.notFound('No achievement found with the supplied id or title'));
@@ -44,19 +44,12 @@ let userAchievements = {
       .then((user) => {
 				models.Achievement.find({
 					'where': {
-						'$or': [
-							{
-								'id': request.payload.AchievementId
-							},
-							{
-								'title': request.payload.AchievementTitle
-							},
-						]
-					}
+						'id': request.params.AchievementId
+					},
 				})
 				.then((achievement) => {
 					if (achievement) {
-						user.removeAchievement(achievement).then((user) => {
+						user.removeUserAchievement(achievement).then((user) => {
 							reply(user).code(200);
 						});
 					} else {

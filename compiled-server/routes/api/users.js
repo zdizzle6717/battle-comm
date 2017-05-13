@@ -232,7 +232,7 @@ module.exports = [
         'GameSystemRankings': _joi2.default.optional(),
         'Files': _joi2.default.optional(),
         'UserPhoto': _joi2.default.optional(),
-        'Achievements': _joi2.default.optional()
+        'UserAchievements': _joi2.default.optional()
       }
     }
   },

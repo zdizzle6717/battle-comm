@@ -110,9 +110,12 @@ module.exports = function(sequelize, DataTypes) {
           'as': 'Friends',
           'through': 'userHasFriends'
         });
+        User.belongsToMany(models.Achievement, {
+					'as': 'UserAchievements',
+          'through': 'userHasAchievements'
+        });
         User.hasMany(models.UserNotification);
         User.hasMany(models.UserMessage);
-        User.hasMany(models.Achievement);
         User.hasOne(models.UserPhoto);
       }
     }

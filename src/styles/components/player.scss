@@ -50,6 +50,18 @@
 		}
 	}
 
+	.achievements {
+		padding: .5rem;
+
+		.achievement {
+			border: 2px solid $black;
+	    background: $white;
+	    padding: .375rem .5rem;
+	    border-radius: 1rem;
+			margin: 0 .5rem
+		}
+	}
+
 	.photo-stream {
 		display: flex;
     flex-wrap: wrap;

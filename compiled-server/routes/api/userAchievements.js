@@ -34,7 +34,7 @@ module.exports = [
 	}
 }, {
 	'method': 'DELETE',
-	'path': '/api/userAchievements/{UserId}/{AchievementIdentifier}',
+	'path': '/api/userAchievements/{UserId}/{AchievementId}',
 	'config': {
 		'handler': _handlers.userAchievements.remove,
 		'tags': ['api'],
@@ -47,7 +47,7 @@ module.exports = [
 		'validate': {
 			'params': {
 				'UserId': _joi2.default.number().required(),
-				'AchievementIdentifier': _joi2.default.required()
+				'AchievementId': _joi2.default.number().required()
 			}
 		}
 	}

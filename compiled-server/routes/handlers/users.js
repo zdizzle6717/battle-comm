@@ -77,6 +77,7 @@ var getUserModel = function getUserModel(where) {
       'model': _models2.default.UserNotification
     }, {
       'model': _models2.default.Achievement,
+      'as': 'UserAchievements',
       'includes': [{
         'model': _models2.default.File
       }]

@@ -36,6 +36,7 @@ const getUserModel = (where) => {
 				},
 				{
 					'model': models.Achievement,
+					'as': 'UserAchievements',
 					'includes': [{
 						'model': models.File
 					}]

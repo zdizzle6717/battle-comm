@@ -5,8 +5,7 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index.jsx'),
   output: {
     path: path.join(__dirname, 'dist', 'js'),
-    filename: 'app.js',
-    sourceMapFilename: 'app.map'
+    filename: 'app.js'
   },
 	module: {
     rules: [{
