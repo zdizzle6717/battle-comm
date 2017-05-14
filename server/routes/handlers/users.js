@@ -253,33 +253,33 @@ let users = {
     getUserModel({
       'id': request.params.id
     }).then((user) => {
-      // Send forgot password e-mail
-      let passwordUpdatedConfig = {
-        'from': env.email.user,
-        'to': request.payload.username,
-        'subject': `Battle-Comm: Password Updated`,
-        'html': buildPasswordUpdatedEmail(),
-				'service': 'Gmail',
-				'auth': {
-					'user': env.email.user,
-					'refreshToken': env.email.OAuth2.refreshToken
-				}
-      };
+			hashPassword(request.payload.newPassword, (err, hash) => {
+				user.updateAttributes({
+					'password': hash
+				}).then((user) => {
+					let passwordUpdatedConfig = {
+		        'from': env.email.user,
+		        'to': user.email,
+		        'subject': `Battle-Comm: Password Updated`,
+		        'html': buildPasswordUpdatedEmail(),
+						'service': 'Gmail',
+						'auth': {
+							'user': env.email.user,
+							'refreshToken': env.email.OAuth2.refreshToken
+						}
+		      };
 
-      transporter.sendMail(passwordUpdatedConfig, (error, info) => {
-        if (error) {
-          console.log(error);
-          reply('Somthing went wrong');
-        } else {
-          hashPassword(request.payload.newPassword, (err, hash) => {
-            user.updateAttributes({
-              'password': hash
-            }).then((user) => {
-              reply(user).code(200);
-            });
-          });
-        }
-      });
+		      transporter.sendMail(passwordUpdatedConfig, (error, info) => {
+		        if (error) {
+		          console.log(error);
+		          reply('Somthing went wrong');
+		        } else {
+							reply(user).code(200);
+		        }
+		      });
+				});
+			});
+      
     });
   },
   resetPassword: (request, reply) => {

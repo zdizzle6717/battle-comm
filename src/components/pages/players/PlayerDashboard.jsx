@@ -269,7 +269,10 @@ class PlayerDashboard extends React.Component {
 		return alerts[selector]();
 	}
 
-	toggleEdit(identifier) {
+	toggleEdit(identifier, e) {
+		if (e) {
+			e.preventDefault();
+		}
 		let isEditing = this.state.isEditing;
 		for (let prop in isEditing) {
 			isEditing[prop] = false;
@@ -416,7 +419,7 @@ class PlayerDashboard extends React.Component {
 									<Link to="/players/dashboard/account-edit"><h3 className="button account-details">Edit Account Details</h3></Link>
 								</div>
 								<div className="small-12 columns text-center">
-									<Link to="/subscribe"><h3 className="button secondary push-top">Become a BC Subscriber?</h3></Link>
+									<Link to="/subscribe"><h3 className="button secondary push-top">Become a BC Subscriber</h3></Link>
 								</div>
 							</div>
 						</div>

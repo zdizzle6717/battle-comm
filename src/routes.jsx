@@ -3,6 +3,8 @@
 // Routes
 import Home from './components/pages/Home';
 import AdminDashboard from './components/pages/admin/AdminDashboard';
+	import SearchAchievements from './components/pages/admin/SearchAchievements';
+		import EditAchievement from './components/pages/admin/EditAchievement';
 	import SearchGameSystems from './components/pages/admin/SearchGameSystems';
 		import EditGameSystem from './components/pages/admin/EditGameSystem';
 	import SearchManufacturers from './components/pages/admin/SearchManufacturers';
@@ -55,6 +57,24 @@ let routes = [
 		'component': AdminDashboard,
 		'exact': true,
 		'access': ['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']
+	},
+	{
+		'path': '/admin/achievements',
+		'component': SearchAchievements,
+		'exact': true,
+		'access': ['systemAdmin']
+	},
+	{
+		'path': '/admin/achievements/create',
+		'component': EditAchievement,
+		'strict': true,
+		'access': ['systemAdmin']
+	},
+	{
+		'path': '/admin/achievements/edit/:achievementId',
+		'component': EditAchievement,
+		'strict': true,
+		'access': ['systemAdmin']
 	},
 	{
 		'path': '/admin/game-systems',
@@ -247,7 +267,7 @@ let routes = [
 
 	// Public cont...
 	{
-		'path': '/reset-password',
+		'path': '/reset-password/:resetToken',
 		'component': ResetPassword,
 		'exact': true
 	},

@@ -240,7 +240,7 @@ class PlayerAccountEdit extends React.Component {
 					</div>
 				</div>
 				<div className="row push-top-2x text-center">
-					<h4>Battle-Comm subscribers earn extra rewards, free shipping on all purchases, and first-hand access to extended features. <Link to="/subscribe"><strong>Become a BC Subscriber?</strong></Link></h4>
+					<h4>Battle-Comm subscribers earn extra rewards, free shipping on all purchases, and first-hand access to extended features. <Link to="/subscribe"><strong>Become a BC Subscriber</strong></Link></h4>
 
 				</div>
             </ViewWrapper>

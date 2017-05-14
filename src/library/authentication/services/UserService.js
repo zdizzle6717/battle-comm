@@ -10,7 +10,8 @@ export default {
 	},
 	authenticateFromToken: (data) => {
 		return axios.post('/users/getMe/' + data.id_token, {
-			'rememberMe': data.rememberMe
+			'rememberMe': data.rememberMe,
+			'password': data.password
 		})
 			.then(function(response) {
 				return response.data;

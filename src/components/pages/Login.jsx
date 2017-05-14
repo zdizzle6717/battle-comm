@@ -53,11 +53,11 @@ class Login extends React.Component {
     componentDidMount() {
         document.title = "Battle-Comm | Login";
 		this.props.getGameSystems();
-		let storedUser = JSON.parse(localStorage.getItem('bc_user'));
+		let storedUser = JSON.parse(localStorage.getItem('bcUser'));
 		if (storedUser) {
 			let credentials = {
 				'username': storedUser.username,
-				'password': 'Password#',
+				'password': storedUser.password,
 				'rememberMe': true
 			}
 			this.setState({
@@ -79,10 +79,10 @@ class Login extends React.Component {
 	}
 
 	handleSubmit(e) {
-		// TODO: Fix redirect route or just double check that it works
-		let storedUser = JSON.parse(localStorage.getItem('bc_user'));
-		this.props[storedUser ? 'authenticateFromToken': 'authenticate'](storedUser ? {
+		let storedUser = JSON.parse(localStorage.getItem('bcUser'));
+		this.props[(storedUser && this.state.credentials.rememberMe) ? 'authenticateFromToken': 'authenticate']((storedUser && this.state.credentials.rememberMe) ? {
 			'id_token': storedUser.id_token,
+			'password': storedUser.password,
 			'rememberMe': true
 		} : this.state.credentials).then(() => {
 			let homeState = (!this.props.user.hasAuthenticatedOnce && this.props.user.roleConfig.name === 'member') ? '/subscribe' : this.props.user.roleConfig.homeState;

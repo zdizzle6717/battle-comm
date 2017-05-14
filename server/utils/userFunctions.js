@@ -43,7 +43,7 @@ const verifyUserToken = (request, reply) => {
   if (!decoded) {
     return false;
   } else {
-		// TODO: This needs to be tested for the 'remember me' login option
+		console.log(decoded);
     models.User.find({
 			'where': {
 				'$or': [{
@@ -58,7 +58,7 @@ const verifyUserToken = (request, reply) => {
 		}).then((user) => {
 			if (user) {
 				user = user.get({'plain': true});
-	      bcrypt.compare(decoded.password, user.password, (err, isValid) => {
+	      bcrypt.compare(request.payload.password, user.password, (err, isValid) => {
 	        if (isValid) {
 						if (user.accountActivated) {
 							reply(user);

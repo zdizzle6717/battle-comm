@@ -30,6 +30,7 @@ module.exports = {
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
+			'sourceMap': true,
 			'beautify': true,
 			'dead_code': true,
 			'compress': {
@@ -38,8 +39,7 @@ module.exports = {
 			},
 			'mangle': {
 				'keep_fnames': true
-			},
-			'sourceMap': true
+			}
 		})
 	]
 };

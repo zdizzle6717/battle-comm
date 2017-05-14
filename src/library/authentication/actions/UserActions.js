@@ -35,7 +35,8 @@ const _configureUser = (user, rememberMe) => {
 		if (rememberMe) {
 			localStorage.setItem('bcUser', JSON.stringify({
 				'id_token': user.id_token,
-				'username': user.username
+				'username': user.username,
+				'password': user.password
 			}));
 		} else {
 			localStorage.removeItem('bcUser');
@@ -117,6 +118,7 @@ export default {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST, data));
 			return UserService.authenticate(data).then((user) => {
+				user.password = data.password;
 				user = _configureUser(user, data.rememberMe);
 				dispatch({
 					'type': UserConstants.UPDATE_USER,
@@ -134,6 +136,7 @@ export default {
 		return (dispatch) => {
 			dispatch(_initiateRequest(UserConstants.INITIATE_USER_REQUEST, data));
 			return UserService.authenticateFromToken(data).then((user) => {
+				user.password = data.password;
 				user = _configureUser(user, data.rememberMe);
 				dispatch({
 					'type': UserConstants.UPDATE_USER,

@@ -86,10 +86,6 @@ class Subscribe extends React.Component {
 					'description': 'Battle-Comm Subscription'
 				}).then((response) => {
 					if (response.charge.status === 'succeeded') {
-						// TODO: If package includes rewardPoints, add to account
-						this.props.modifyUser({
-							'rewardPoints': response.user.rewardPoints
-						});
 						this.showAlert('subscriptionSuccess');
 						setTimeout(() => {
 							this.props.logout();
@@ -143,12 +139,17 @@ class Subscribe extends React.Component {
 			'email': this.props.user.email,
 			'plan': JSON.stringify(this.state.selectedPlan),
 			'description': 'Battle-Comm Subscription'
-		}).then((response) => {
+		}).then((subscription) => {
 			this.showAlert('subscriptionSuccess');
 			UserAchievementService.create({
 				'UserId': this.props.user.id,
-				'AchievementTitle': 'Subscriber'
+				'AchievementTitle': subscription.plan.metadata.achievement
 			}).then(() => {
+				setTimeout(() => {
+					this.props.logout();
+				})
+				this.props.history.push('/login');
+			}).catch(() => {
 				setTimeout(() => {
 					this.props.logout();
 				})

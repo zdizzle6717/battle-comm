@@ -26,7 +26,14 @@ let payments = {
 		let token = request.payload.token ? JSON.parse(request.payload.token) : undefined;
 		models.User.find({
 			'where': {
-				'email': request.payload.email
+				'$or': [
+					{
+						'email': request.payload.email
+					},
+					{
+						'id': request.payload.UserId
+					}
+				]
 			}
 		}).then((user) => {
 			if (user) {
@@ -45,8 +52,17 @@ let payments = {
 							}
 						});
 						userConfig.subscriber = true;
+						let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
+						userConfig.rewardPoints = user.rewardPoints + rpPool;
 						user.updateAttributes(userConfig).then(() => {
-							reply(subscription).code(200);
+							models.UserNotification.create({
+								'UserId': request.payload.UserId,
+			          'type': 'newAchievement',
+			          'fromUsername': 'systemAdmin',
+								'details': subscription.plan.metadata.achievement
+							}).then(() => {
+								reply(subscription).code(200);
+							});
 						});
 					});
 				} else {
@@ -82,8 +98,17 @@ let payments = {
 									}
 								});
 								userConfig.subscriber = true;
+								let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
+								userConfig.rewardPoints = user.rewardPoints + rpPool;
 								user.updateAttributes(userConfig).then(() => {
-									reply(subscription).code(200);
+									models.UserNotification.create({
+										'UserId': request.payload.UserId,
+					          'type': 'newAchievement',
+					          'fromUsername': 'systemAdmin',
+										'details': subscription.plan.metadata.achievement
+									}).then(() => {
+										reply(subscription).code(200);
+									});
 								});
 							});
 						});

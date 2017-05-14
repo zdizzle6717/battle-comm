@@ -11,6 +11,7 @@ import {loader} from '../library/loader';
 import {user, users, isAuthenticated, redirectRoute} from '../library/authentication';
 
 // App
+import {achievement, achievements} from './achievements';
 import {bannerSlide, bannerSlides} from './bannerSlides';
 import {gameSystem, gameSystems} from './gameSystems';
 import {gameSystemRanking, gameSystemRankings} from './gameSystemRankings';
@@ -38,6 +39,8 @@ export default combineReducers({
 	users,
 
 	// App
+	achievement,
+	achievements,
 	bannerSlide,
 	bannerSlides,
 	cartItems,

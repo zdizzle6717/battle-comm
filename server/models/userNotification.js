@@ -16,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     'fromUsername': {
       'type': DataTypes.STRING
-    }
+    },
+		'details': DataTypes.STRING
   }, {
     'classMethods': {
       associate: function(models) {

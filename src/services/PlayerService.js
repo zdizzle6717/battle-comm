@@ -26,6 +26,12 @@ export default {
 				return response.data;
 			});
 	},
+	changePassword: (id, data) => {
+		return axios.put('/users/changePassword/' + id, data)
+			.then((response) => {
+				return response.data;
+			});
+	},
 	setNewPassword: (token, data) => {
 		return axios.post('/users/setNewPassword/' + token, data)
 			.then((response) => {

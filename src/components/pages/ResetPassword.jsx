@@ -10,6 +10,17 @@ import {Form, Input} from '../../library/validations';
 import ViewWrapper from '../ViewWrapper';
 import PlayerService from '../../services/PlayerService';
 
+const mapStateToProps = (state) => {
+	return {
+		'user': state.user
+	};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		'addAlert': AlertActions.addAlert
+	}, dispatch);
+}
 
 class ResetPassword extends React.Component {
     constructor() {
@@ -95,27 +106,29 @@ class ResetPassword extends React.Component {
         return (
             <ViewWrapper headerImage="/images/Titles/Password_Reset.png" headerAlt="Password Reset">
 				<div className="row">
-					<h3>Enter your e-mail address and click submit to change your password.</h3>
-					<Form name="resetPasswordForm" submitText="Submit" handleSubmit={this.handleSubmit}>
-						<div className="row">
-							<div className="form-group small-12 medium-6 medium-offset-3 columns">
-								<label className="required">E-mail</label>
-								<Input type="text" name="email" value={this.state.user.email} handleInputChange={this.handleInputChange} validate="email" required={true}/>
+					<div className="small-12 columns">
+						<h3 className="text-center">Enter your e-mail address and click submit to change your password.</h3>
+						<Form name="resetPasswordForm" submitText="Submit" handleSubmit={this.handleSubmit}>
+							<div className="row">
+								<div className="form-group small-12 medium-4 medium-offset-4 columns">
+									<label className="required">E-mail</label>
+									<Input type="text" name="email" value={this.state.user.email} handleInputChange={this.handleInputChange} validate="email" required={true}/>
+								</div>
 							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-6 medium-offset-3 columns">
-								<label className="required">New Password</label>
-								<Input type="text" name="password" value={this.state.user.password} handleInputChange={this.handleInputChange} validate="password" required={true} inputMatch={this.state.passwordRepeat}/>
+							<div className="row">
+								<div className="form-group small-12 medium-4 medium-offset-4 columns">
+									<label className="required">New Password</label>
+									<Input type="password" name="password" value={this.state.user.password} handleInputChange={this.handleInputChange} validate="password" required={true} inputMatch={this.state.passwordRepeat}/>
+								</div>
 							</div>
-						</div>
-						<div className="row">
-							<div className="form-group small-12 medium-6 medium-offset-3 columns">
-								<label className="required">Repeat Password</label>
-								<Input type="text" name="passwordRepeat" value={this.state.passwordRepeat} handleInputChange={this.handleInputMatch} validate="password" required={true} />
+							<div className="row">
+								<div className="form-group small-12 medium-4 medium-offset-4 columns">
+									<label className="required">Repeat Password</label>
+									<Input type="password" name="passwordRepeat" value={this.state.passwordRepeat} handleInputChange={this.handleInputMatch} inputMatch={this.state.user.password} validate="password" required={true} />
+								</div>
 							</div>
-						</div>
-					</Form>
+						</Form>
+					</div>
                 </div>
 				<div className="row push-top">
 					<div className="form-group small-12 columns">
@@ -139,4 +152,4 @@ class ResetPassword extends React.Component {
     }
 }
 
-export default withRouter(ResetPassword);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ResetPassword));

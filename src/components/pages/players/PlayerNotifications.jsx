@@ -124,17 +124,31 @@ class PlayerNotifications extends React.Component {
 						<h2>Notifications</h2>
 						<div className="notification">
 							{
-								this.props.notifications.filter((notification) => notification.type === 'allyRequestReceived').length > 0 ?
-								this.props.notifications.filter((notification) => notification.type === 'allyRequestReceived').map((notification, i) =>
+								this.props.notifications.filter((notification) => notification.type !== 'allyRequestAccepted').length > 0 ?
+								this.props.notifications.filter((notification) => notification.type !== 'allyRequestAccepted').map((notification, i) =>
 									<div key={notification.id} className="container ice push-bottom">
-										<div className="">
-											New ally request from <strong>{notification.fromUsername}</strong>
-										</div>
-										<div className="text-right">
-											<br/>
-											<button className="button push-right" onClick={this.acceptAllyRequest.bind(this, notification.id, notification.fromId, notification.fromUsername)}>Accept?</button>
-											<button className="button" onClick={this.removeNotification.bind(this, notification.id, notification.fromUsername, 'allyRequestIgnored')}>Reject?</button>
-										</div>
+										{
+											notification.type === 'allyRequestReceived' &&
+											<div>
+												<div className="">
+													New ally request from <strong>{notification.fromUsername}</strong>
+												</div>
+												<div className="text-right">
+													<br/>
+													<button className="button push-right" onClick={this.acceptAllyRequest.bind(this, notification.id, notification.fromId, notification.fromUsername)}>Accept?</button>
+													<button className="button" onClick={this.removeNotification.bind(this, notification.id, notification.fromUsername, 'allyRequestIgnored')}>Reject?</button>
+												</div>
+											</div>
+										}
+										{
+											notification.type === 'newAchievement' &&
+											<div>
+												<span className="fa fa-times" onClick={this.removeNotification.bind(this, notification.id, notification.fromUsername)}></span>
+												<div className="">
+													Congratulations, you have earned the achievement, {notification.details}!
+												</div>
+											</div>
+										}
 									</div>
 								) :
 								<div className=""><h3>There are currently no pending notifications</h3></div>

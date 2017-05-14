@@ -64,7 +64,7 @@ class TextArea extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		if (nextProps.value !== this.props.value || nextState.value !== this.state.value) {
+		if (nextProps.value !== this.props.value || nextState.value !== this.state.value || nextProps.disabled !== this.props.disabled) {
 			return true;
 		}
 		for (let prop in nextState) {

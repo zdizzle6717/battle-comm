@@ -70,6 +70,7 @@ module.exports = [
 					'token': Joi.string().required()
 				},
 				'payload': {
+					'password': Joi.string().required(),
 					'rememberMe': Joi.boolean().required()
 				}
       }
