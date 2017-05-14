@@ -196,7 +196,7 @@ class Subscribe extends React.Component {
 			'subscriptionSuccess': () => {
 				this.props.addAlert({
 					'title': 'Subscription Submitted',
-					'message': 'You subscription has been submitted. Please check your e-mail to complete your account activation.',
+					'message': 'Your subscription has been submitted. Please check your e-mail to complete your account activation.',
 					'type': 'success',
 					'delay': 4000
 				});

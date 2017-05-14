@@ -73,6 +73,8 @@ module.exports = [
 					'createdAt': Joi.optional(),
 					'updatedAt': Joi.optional(),
 					'File': Joi.optional(),
+					'GameSystemId': Joi.optional(),
+					'Users': Joi.optional(),
 					'title': Joi.string().required(),
 					'priority': Joi.number().required(),
           'category': Joi.string().required(),

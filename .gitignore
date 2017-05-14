@@ -42,6 +42,9 @@ jspm_packages
 # Babel
 babel_cache*
 
+# Yarn
+yarn.lock
+
 # SCSS
 .sass-cache
 
