@@ -67,7 +67,7 @@ var verifyUserToken = function verifyUserToken(request, reply) {
   if (!decoded) {
     return false;
   } else {
-    // TODO: This needs to be tested for the 'remember me' login option
+    console.log(decoded);
     _models2.default.User.find({
       'where': {
         '$or': [{
@@ -82,7 +82,7 @@ var verifyUserToken = function verifyUserToken(request, reply) {
     }).then(function (user) {
       if (user) {
         user = user.get({ 'plain': true });
-        _bcrypt2.default.compare(decoded.password, user.password, function (err, isValid) {
+        _bcrypt2.default.compare(request.payload.password, user.password, function (err, isValid) {
           if (isValid) {
             if (user.accountActivated) {
               reply(user);

@@ -6,7 +6,7 @@ import Boom from 'boom';
 import roleConfig from '../../../roleConfig';
 import pointPriceConfig from '../../../pointPriceConfig';
 import stripe from 'stripe';
-let stripeService = stripe(env.stripe.testSecret);
+let stripeService = stripe(env.stripe.secret);
 import buildRPUpdateEmail from '../../email-templates/rpUpdate';
 import nodemailer from 'nodemailer';
 
@@ -130,6 +130,24 @@ let payments = {
 		    reply(plans).code(200);
 		  }
 		);
+	},
+	getCustomer: (request, reply) => {
+		models.User.find({
+			'where': {
+				'id': request.params.id
+			}
+		}).then((user) => {
+			stripeService.customers.retrieve(
+			  user.customerId,
+			  function(error, customer) {
+			    if (error) {
+						reply(Boom.badRequest(error));
+					} else {
+						reply(customer).code(200);
+					}
+			  }
+			);
+		})
 	},
 	payShippingCost: (request, reply) => {
 		let token = JSON.parse(request.payload.token);

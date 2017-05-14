@@ -43,6 +43,25 @@ module.exports = [
 		'handler': payments.getSubscriptionPlans
 	},
 	{
+		'method': 'GET',
+		'path': '/api/payments/getCustomer/{id}',
+		'config': {
+			'tags': ['api'],
+			'description': 'Get customer by Id',
+			'notes': 'Get customer by Id',
+			'auth': {
+				'strategy': 'jsonWebToken',
+				'scope': ['member', 'subscriber']
+			},
+			'validate': {
+				'params': {
+					'id': Joi.number().required()
+				}
+			}
+		},
+		'handler': payments.getCustomer
+	},
+	{
 		'method': 'POST',
 		'path': '/api/payments/payShippingCost/{id}',
 		'config': {

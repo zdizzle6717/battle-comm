@@ -71,6 +71,7 @@ module.exports = [
         'token': _joi2.default.string().required()
       },
       'payload': {
+        'password': _joi2.default.string().required(),
         'rememberMe': _joi2.default.boolean().required()
       }
     }

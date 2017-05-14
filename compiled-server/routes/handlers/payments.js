@@ -38,7 +38,7 @@ var _nodemailer2 = _interopRequireDefault(_nodemailer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var stripeService = (0, _stripe2.default)(_envVariables2.default.stripe.testSecret);
+var stripeService = (0, _stripe2.default)(_envVariables2.default.stripe.secret);
 
 
 var transporter = _nodemailer2.default.createTransport({
@@ -57,7 +57,11 @@ var payments = {
 		var token = request.payload.token ? JSON.parse(request.payload.token) : undefined;
 		_models2.default.User.find({
 			'where': {
-				'email': request.payload.email
+				'$or': [{
+					'email': request.payload.email
+				}, {
+					'id': request.payload.UserId
+				}]
 			}
 		}).then(function (user) {
 			if (user) {
@@ -76,8 +80,17 @@ var payments = {
 							}
 						});
 						userConfig.subscriber = true;
+						var rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
+						userConfig.rewardPoints = user.rewardPoints + rpPool;
 						user.updateAttributes(userConfig).then(function () {
-							reply(subscription).code(200);
+							_models2.default.UserNotification.create({
+								'UserId': request.payload.UserId,
+								'type': 'newAchievement',
+								'fromUsername': 'systemAdmin',
+								'details': subscription.plan.metadata.achievement
+							}).then(function () {
+								reply(subscription).code(200);
+							});
 						});
 					});
 				} else {
@@ -113,8 +126,17 @@ var payments = {
 									}
 								});
 								userConfig.subscriber = true;
+								var rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
+								userConfig.rewardPoints = user.rewardPoints + rpPool;
 								user.updateAttributes(userConfig).then(function () {
-									reply(subscription).code(200);
+									_models2.default.UserNotification.create({
+										'UserId': request.payload.UserId,
+										'type': 'newAchievement',
+										'fromUsername': 'systemAdmin',
+										'details': subscription.plan.metadata.achievement
+									}).then(function () {
+										reply(subscription).code(200);
+									});
 								});
 							});
 						});
@@ -132,6 +154,21 @@ var payments = {
 				return;
 			}
 			reply(plans).code(200);
+		});
+	},
+	getCustomer: function getCustomer(request, reply) {
+		_models2.default.User.find({
+			'where': {
+				'id': request.params.id
+			}
+		}).then(function (user) {
+			stripeService.customers.retrieve(user.customerId, function (error, customer) {
+				if (error) {
+					reply(_boom2.default.badRequest(error));
+				} else {
+					reply(customer).code(200);
+				}
+			});
 		});
 	},
 	payShippingCost: function payShippingCost(request, reply) {

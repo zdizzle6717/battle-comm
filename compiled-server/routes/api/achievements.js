@@ -75,7 +75,7 @@ module.exports = [
         'createdAt': _joi2.default.optional(),
         'updatedAt': _joi2.default.optional(),
         'File': _joi2.default.optional(),
-        'title': _joi2.default.number().required(),
+        'title': _joi2.default.string().required(),
         'priority': _joi2.default.number().required(),
         'category': _joi2.default.string().required(),
         'description': _joi2.default.optional(),

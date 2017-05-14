@@ -73,7 +73,7 @@ module.exports = [
 					'createdAt': Joi.optional(),
 					'updatedAt': Joi.optional(),
 					'File': Joi.optional(),
-					'title': Joi.number().required(),
+					'title': Joi.string().required(),
 					'priority': Joi.number().required(),
           'category': Joi.string().required(),
           'description': Joi.optional(),

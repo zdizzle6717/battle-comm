@@ -281,32 +281,31 @@ var users = {
     getUserModel({
       'id': request.params.id
     }).then(function (user) {
-      // Send forgot password e-mail
-      var passwordUpdatedConfig = {
-        'from': _envVariables2.default.email.user,
-        'to': request.payload.username,
-        'subject': 'Battle-Comm: Password Updated',
-        'html': (0, _passwordUpdated2.default)(),
-        'service': 'Gmail',
-        'auth': {
-          'user': _envVariables2.default.email.user,
-          'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
-        }
-      };
+      (0, _userFunctions.hashPassword)(request.payload.newPassword, function (err, hash) {
+        user.updateAttributes({
+          'password': hash
+        }).then(function (user) {
+          var passwordUpdatedConfig = {
+            'from': _envVariables2.default.email.user,
+            'to': user.email,
+            'subject': 'Battle-Comm: Password Updated',
+            'html': (0, _passwordUpdated2.default)(),
+            'service': 'Gmail',
+            'auth': {
+              'user': _envVariables2.default.email.user,
+              'refreshToken': _envVariables2.default.email.OAuth2.refreshToken
+            }
+          };
 
-      transporter.sendMail(passwordUpdatedConfig, function (error, info) {
-        if (error) {
-          console.log(error);
-          reply('Somthing went wrong');
-        } else {
-          (0, _userFunctions.hashPassword)(request.payload.newPassword, function (err, hash) {
-            user.updateAttributes({
-              'password': hash
-            }).then(function (user) {
+          transporter.sendMail(passwordUpdatedConfig, function (error, info) {
+            if (error) {
+              console.log(error);
+              reply('Somthing went wrong');
+            } else {
               reply(user).code(200);
-            });
+            }
           });
-        }
+        });
       });
     });
   },

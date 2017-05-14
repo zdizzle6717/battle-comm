@@ -15,6 +15,12 @@ export default {
 				return response.data;
 			});
 	},
+	getCustomer: (id) => {
+		return axios.get('/payments/getCustomer/' + id)
+			.then(function(response) {
+				return response.data;
+			});
+	},
 	payShippingCost: (id, data) => {
 		return axios.post('/payments/payShippingCost/' + id, data)
 			.then(function(response) {

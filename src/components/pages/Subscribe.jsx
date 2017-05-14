@@ -102,7 +102,7 @@ class Subscribe extends React.Component {
 			};
 
             this.stripehandler = window.StripeCheckout.configure({
-                'key': env.stripe.testPublishable,
+                'key': env.stripe.publishable,
                 'image': '/images/branding/128-logo.jpg',
                 'locale': 'auto',
                 'token': handleSubmit

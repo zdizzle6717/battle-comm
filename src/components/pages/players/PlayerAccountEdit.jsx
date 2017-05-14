@@ -5,11 +5,15 @@ import {Link, withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
-import {UserActions} from '../../../library/authentication';
+import {formatJSONDate} from '../../../library/utilities';
+import {checkAuthorization, UserActions} from '../../../library/authentication';
 import {getFormErrorCount, Form, Input, Select, TextArea, CheckBox, RadioGroup, FileUpload} from '../../../library/validations';
 import {handlers} from '../../../library/utilities';
 import ViewWrapper from '../../ViewWrapper';
+import PaymentService from '../../../services/PaymentService';
 import PlayerService from '../../../services/PlayerService';
+import roleConfig from '../../../../roleConfig';
+import env from '../../../../envVariables';
 
 const mapStateToProps = (state) => {
 	return {
@@ -32,10 +36,12 @@ class PlayerAccountEdit extends React.Component {
 		this.state = {
 			'currentUser': {
 			},
+			'customerDetails': {},
 			'isEditing': {
 				'contacts': false,
 				'shipping': false
-			}
+			},
+			'userIsSubscriber': false
 		};
 
 		this.cancelEdit = this.cancelEdit.bind(this);
@@ -46,10 +52,21 @@ class PlayerAccountEdit extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Player Account";
+		let userIsSubscriber = checkAuthorization(['subscriber'], this.props.user, roleConfig);
 		if (!this.props.user.id) {
 			this.props.history.push('/');
 		} else {
 			this.getCurrentPlayer();
+			if (userIsSubscriber) {
+				PaymentService.getCustomer(this.props.user.id).then((customer) => {
+					let subscription = customer.subscriptions.data.find(subscription => subscription.status === 'active');
+					this.setState({
+						'customerDetails': customer,
+						'subscription': subscription,
+						'userIsSubscriber': true
+					});
+				});
+			}
 		}
     }
 
@@ -240,8 +257,30 @@ class PlayerAccountEdit extends React.Component {
 					</div>
 				</div>
 				<div className="row push-top-2x text-center">
-					<h4>Battle-Comm subscribers earn extra rewards, free shipping on all purchases, and first-hand access to extended features. <Link to="/subscribe"><strong>Become a BC Subscriber</strong></Link></h4>
-
+					<div className="small-12 columns">
+						<h2>Subscription Details</h2>
+						{
+							this.state.userIsSubscriber ?
+							<div>
+								<div className="small-12 medium-4 columns">
+									<h5>Customer E-mail</h5>
+									<h5><strong>{this.state.customerDetails.email}</strong></h5>
+									<hr/>
+								</div>
+								<div className="small-12 medium-4 columns">
+									<h5>Subscription Type</h5>
+									<h5><strong>{this.state.subscription.plan.name}</strong></h5>
+									<hr/>
+								</div>
+								<div className="small-12 medium-4 columns">
+									<h5>End Date</h5>
+									<h5><strong>{formatJSONDate(this.state.subscription.current_period_end)}</strong></h5>
+									<hr/>
+								</div>
+							</div> :
+							<h4>Battle-Comm subscribers earn extra rewards, free shipping on all purchases, and first-hand access to extended features. <Link to="/subscribe"><strong>Become a BC Subscriber</strong></Link></h4>
+						}
+					</div>
 				</div>
             </ViewWrapper>
         );

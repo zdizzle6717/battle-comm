@@ -37,10 +37,7 @@ class EditAchievement extends React.Component {
 			'files': [],
 			'gameSystems': [],
 			'achievement': {
-				'Files': [],
-				'category': 'bcNews',
-				'featured': false,
-				'published': false
+				'priority': 100
 			},
 			'newAchievement': false,
 			'newFiles': []
@@ -50,7 +47,7 @@ class EditAchievement extends React.Component {
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleDeletePost = this.handleDeletePost.bind(this);
+		this.handleDeleteAchievement = this.handleDeleteAchievement.bind(this);
 		this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
 		this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,22 +58,14 @@ class EditAchievement extends React.Component {
 	componentDidMount() {
 		document.title = "Battle-Comm | Achievement Edit";
 		this.props.getManufacturers();
-		if (this.props.match.params.postId) {
-			AchievementService.get(this.props.match.params.postId).then((achievement) => {
+		if (this.props.match.params.achievementId) {
+			AchievementService.get(this.props.match.params.achievementId).then((achievement) => {
 				this.setState({
-					'achievement': achievement,
-					'files': achievement.Files ? achievement.Files : []
+					'achievement': achievement
 				});
-				if (achievement.ManufacturerId) {
-					this.props.getManufacturer(achievement.ManufacturerId).then((manufacturer) => {
-						this.setState({
-							'gameSystems': manufacturer.GameSystems
-						});
-					});
-				}
 			}).catch(() => {
 				this.showAlert('notFound');
-				this.props.history.push('/admin/news');
+				this.props.history.push('/admin/achievements');
 			});
 		} else {
 			this.setState({
@@ -97,7 +86,7 @@ class EditAchievement extends React.Component {
 		let date = this.state.achievement.createdAt ? new Date(this.state.achievement.createdAt) : new Date();
 		let year = date.getFullYear();
 		let month = date.getMonth() + 1;
-		return `news/${year}/${month}/`;
+		return `achievements/`;
 	}
 
 	handleDeleteFile(fileId, index, e) {
@@ -114,10 +103,10 @@ class EditAchievement extends React.Component {
 		});
 	}
 
-	handleDeletePost() {
-		AchievementService.remove(this.props.match.params.postId).then(() => {
-			this.showAlert('postDeleted');
-			this.props.history.push('/admin/news');
+	handleDeleteAchievement() {
+		AchievementService.remove(this.props.match.params.achievementId).then(() => {
+			this.showAlert('achievementDeleted');
+			this.props.history.push('/admin/achievements');
 		});
 	}
 
@@ -171,27 +160,26 @@ class EditAchievement extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		let post = this.state.achievement;
-		let method = this.props.match.params.postId ? 'update' : 'create';
-		post.UserId = this.props.user.id;
-		let directoryPath = this.getDirectoryPath();
-		let newFiles = this.state.newFiles;
+		let method = this.props.match.params.achievementId ? 'update' : 'create';
+		// let directoryPath = this.getDirectoryPath();
+		// let newFiles = this.state.newFiles;
 		AchievementService[method]((method === 'update' ? post.id : post), (method === 'update' ? post : null)).then((achievement) => {
-			if (newFiles.length > 0) {
-				newFiles.forEach((file) => {
-					FileService.create({
-						'AchievementId': achievement.id,
-						'identifier': 'achievementPhoto',
-						'locationUrl': `${directoryPath}`,
-						'name': file.name,
-						'size': file.size,
-						'type': file.type
-					});
-				});
-			}
+			// if (newFiles.length > 0) {
+			// 	newFiles.forEach((file) => {
+			// 		FileService.create({
+			// 			'AchievementId': achievement.id,
+			// 			'identifier': 'achievementPhoto',
+			// 			'locationUrl': `${directoryPath}`,
+			// 			'name': file.name,
+			// 			'size': file.size,
+			// 			'type': file.type
+			// 		});
+			// 	});
+			// }
 			this.setState({
 				'achievement': achievement
 			});
-			if (this.props.match.params.postId) {
+			if (this.props.match.params.achievementId) {
 				this.showAlert('achievementUpdated');
 				this.props.history.push('/admin/achievements');
 			} else {
@@ -206,7 +194,7 @@ class EditAchievement extends React.Component {
 			'achievementCreated': () => {
 				this.props.addAlert({
 					'title': 'Achievement Created',
-					'message': `New post, ${this.state.achievement.title}, successfully created.`,
+					'message': `New achievement, ${this.state.achievement.title}, successfully created.`,
 					'type': 'success',
 					'delay': 3000
 				});
@@ -214,23 +202,23 @@ class EditAchievement extends React.Component {
 			'achievementUpdated': () => {
 				this.props.addAlert({
 					'title': 'Achievement Updated',
-					'message': `Post, ${this.state.achievement.title}, was successfully updated.`,
+					'message': `Achievement, ${this.state.achievement.title}, was successfully updated.`,
 					'type': 'success',
 					'delay': 3000
 				});
 			},
 			'notFound': () => {
 				this.props.addAlert({
-					'title': 'Post Not Found',
-					'message': `No achievement found with id, ${this.props.match.params.postId}`,
+					'title': 'Achievement Not Found',
+					'message': `No achievement found with id, ${this.props.match.params.achievementId}`,
 					'type': 'error',
 					'delay': 3000
 				});
 			},
-			'postDeleted': () => {
+			'achievementDeleted': () => {
 				this.props.addAlert({
-					'title': 'Post Deleted',
-					'message': 'News post was successfully deleted from database.',
+					'title': 'Achievement Deleted',
+					'message': 'Achievement was successfully deleted from database.',
 					'type': 'success',
 					'delay': 3000
 				});
@@ -286,90 +274,20 @@ class EditAchievement extends React.Component {
 										<Input type="text" name="title" value={this.state.achievement.title} handleInputChange={this.handleInputChange} required={true} />
 									</div>
 									<div className="form-group small-12 medium-4 columns">
-										<CheckBox name="published" value={this.state.achievement.published} handleInputChange={this.handleCheckBoxChange} label="Publish on News Page?"/>
+										<label className="required">Category</label>
+										<Input type="text" name="category" value={this.state.achievement.category} handleInputChange={this.handleInputChange} required={true} />
 									</div>
 									<div className="form-group small-12 medium-4 columns">
-										<CheckBox name="featured" value={this.state.achievement.featured} handleInputChange={this.handleCheckBoxChange} label="Feature this post?"/>
-									</div>
-								</div>
-								<div className="row">
-									<div className="form-group small-12 medium-4 columns">
-										<label>Manufacturer</label>
-										<Select name="ManufacturerId" value={this.state.achievement.ManufacturerId || ''} handleInputChange={this.handleManufacturerChange}>
-											<option value="">--Select--</option>
-											{
-												this.props.manufacturers.map((manufacturer, i) =>
-													<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
-												)
-											}
-										</Select>
-									</div>
-									<div className="form-group small-12 medium-4 columns">
-										<label>Game System</label>
-										<Select name="GameSystemId" value={this.state.achievement.GameSystemId || ''} handleInputChange={this.handleInputChange}>
-											<option value="">--Select--</option>
-											{
-												this.state.gameSystems.map((gameSystem, i) =>
-													<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
-												)
-											}
-										</Select>
-									</div>
-									<div className="form-group small-12 medium-4 columns">
-										<label>Category</label>
-										<Select name="category" value={this.state.achievement.category || ''} handleInputChange={this.handleInputChange}>
-											<option value="bcNews">BC News</option>
-											<option value="events">Events/Tournaments</option>
-											<option value="announcements">Announcements</option>
-											<option value="miscellaneous">Miscellaneous</option>
-										</Select>
+										<label className="required">Priority</label>
+										<Input type="number" name="priority" value={this.state.achievement.priority} handleInputChange={this.handleInputChange} step={1} required={true} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="form-group small-12 columns">
-										<label className="required">Callout</label>
-										<TextArea type="text" name="callout" value={this.state.achievement.callout} rows="4" handleInputChange={this.handleInputChange} required={true} />
+										<label className="required">Description</label>
+										<TextArea type="text" name="description" value={this.state.achievement.description} rows="4" handleInputChange={this.handleInputChange} required={true} />
 									</div>
 								</div>
-								<div className="row">
-									<div className="form-group small-12 columns">
-										<label className="required">Body</label>
-										<TextArea type="text" name="body" value={this.state.achievement.body} rows="7" handleInputChange={this.handleInputChange} required={true} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="form-group small-12 columns">
-										<label className="required">Tags</label>
-										<TextArea type="text" name="tags" value={this.state.achievement.tags} rows="3" handleInputChange={this.handleInputChange} required={true} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="form-group small-12 columns">
-										<label className="required">Achievement Photos</label>
-										<FileUpload name="achievementPhoto" value={this.state.achievement.Files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" required={1} maxFiles={5} />
-									</div>
-								</div>
-								{
-									this.state.files.map((file, i) =>
-										<div key={i} className="row">
-											<div className="small-12 medium-6 columns">
-												<label>Achievement Image</label>
-												{
-													this.state.files.length > 0 && file.id &&
-													<img src={this.getImageUrl.call(this, file)} />
-												}
-											</div>
-											<div className="small-12 medium-6 columns">
-												<label className="required">Image Name</label>
-												<h6>{file.name}</h6>
-												{
-													file.id &&
-													<button className="button alert" onClick={this.handleDeleteFile.bind(this, file.id, i)}>Delete File?</button>
-												}
-											</div>
-										</div>
-									)
-								}
 							</Form>
 						</fieldset>
 					</div>
@@ -380,10 +298,10 @@ class EditAchievement extends React.Component {
 							</div>
 						</div>
 						{
-							this.props.match.params.postId &&
+							this.props.match.params.achievementId &&
 							<div className="panel push-bottom-2x push-top">
 								<div className="panel-content text-center">
-									<button className="button alert small-12" onClick={this.handleDeletePost}>Delete Post?</button>
+									<button className="button alert small-12" onClick={this.handleDeleteAchievement}>Delete Achievement?</button>
 								</div>
 							</div>
 						}
