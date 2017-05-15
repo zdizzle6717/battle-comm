@@ -53,8 +53,6 @@ dist/uploads*
 
 # Database Connections and Credentials
 envVariables.js
-server/databaseConfig.js
-compiled-server/databaseConfig.js
 
 # SSL
 compiled-server/ssl*
