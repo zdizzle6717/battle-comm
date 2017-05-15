@@ -29,7 +29,7 @@ let apiConfig = {
 if (env.name === 'production') {
   apiConfig.tls = {
     'key': fs.readFileSync(__dirname + '/ssl/www.battle-comm.net.key'),
-    'cert': fs.readFileSync(__dirname + '/ssl/www.battle-comm.net.chained.crt')
+    'cert': fs.readFileSync(__dirname + '/ssl/ssl-bundle.crt')
   };
 }
 server.connection(apiConfig);
@@ -45,7 +45,7 @@ let chatConfig = {
 if (env.name === 'production') {
   chatConfig.tls = {
     'key': fs.readFileSync(__dirname + '/ssl/www.battle-comm.net.key'),
-    'cert': fs.readFileSync(__dirname + '/ssl/www.battle-comm.net.chained.crt')
+    'cert': fs.readFileSync(__dirname + '/ssl/ssl-bundle.crt')
   };
 }
 server.connection(chatConfig);

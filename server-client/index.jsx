@@ -23,7 +23,7 @@ let credentials, server;
 if (env.name === 'production') {
   credentials = {
     'key': fs.readFileSync(__dirname + '/../server/ssl/www.battle-comm.net.key'),
-    'cert': fs.readFileSync(__dirname + '/../server/ssl/www.battle-comm.net.chained.crt')
+    'cert': fs.readFileSync(__dirname + '/../server/ssl/ssl-bundle.crt')
   };
 }
 
