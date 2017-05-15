@@ -188,11 +188,11 @@ class Checkout extends React.Component {
 			});
 			ProductOrderService.create(order).then((response) => {
 				this.showAlert('orderSuccess');
+				this.props.modifyUser({
+					'rewardPoints': this.props.user.rewardPoints - this.getOrderTotal(this.props.cartItems)
+				});
 				setTimeout(() => {
 					this.props.clearCart();
-					this.props.modifyUser({
-						'rewardPoints': this.props.user.rewardPoints - this.getOrderTotal(this.props.cartItems)
-					});
 				});
 				this.props.history.push('/store/order-success');
 			});
