@@ -1,7 +1,9 @@
 'use strict';
 
 import path from 'path';
-import { Server } from 'http';
+import http from 'http';
+import https from 'https';
+import fs from 'fs';
 import Express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -14,10 +16,23 @@ import rootReducer from '../src/reducers';
 import envVariables from '../envVariables';
 import Layout from '../src/components/Layout';
 import routes from '../src/routes';
+import env from '../envVariables';
 
 // Initialize the server and configure support for handlebars templates
+let credentials, server;
+if (env.name === 'production') {
+  credentials = {
+    'key': fs.readFileSync(__dirname + '/../server/ssl/www.battle-comm.net.key'),
+    'cert': fs.readFileSync(__dirname + '/../server/ssl/www.battle-comm.net.chained.crt')
+  };
+}
+
 const app = new Express();
-const server = new Server(app);
+if (env.name === 'production') {
+	server = https.createServer(credentials, app);
+} else {
+	server = http.createServer(app);
+}
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
