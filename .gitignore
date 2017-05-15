@@ -57,4 +57,5 @@ server/databaseConfig.js
 compiled-server/databaseConfig.js
 
 # SSL
+compiled-server/ssl*
 server/ssl*

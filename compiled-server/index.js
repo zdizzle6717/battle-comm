@@ -59,8 +59,8 @@ var apiConfig = {
 };
 if (_envVariables2.default.name === 'production') {
   apiConfig.tls = {
-    'key': _fs2.default.readFileSync('ssl/www.battle-comm.net.key'),
-    'cert': _fs2.default.readFileSync('ssl/www.battle-comm.net.chained.crt')
+    'key': _fs2.default.readFileSync(__dirname + '/ssl/www.battle-comm.net.key'),
+    'cert': _fs2.default.readFileSync(__dirname + '/ssl/ssl-bundle.crt')
   };
 }
 server.connection(apiConfig);
@@ -75,8 +75,8 @@ var chatConfig = {
 };
 if (_envVariables2.default.name === 'production') {
   chatConfig.tls = {
-    'key': _fs2.default.readFileSync('ssl/www.battle-comm.net.key'),
-    'cert': _fs2.default.readFileSync('ssl/www.battle-comm.net.chained.crt')
+    'key': _fs2.default.readFileSync(__dirname + '/ssl/www.battle-comm.net.key'),
+    'cert': _fs2.default.readFileSync(__dirname + '/ssl/ssl-bundle.crt')
   };
 }
 server.connection(chatConfig);
