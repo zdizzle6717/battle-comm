@@ -47,6 +47,7 @@ class Subscribe extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.loadStripe = this.loadStripe.bind(this);
 		this.openStripeModal = this.openStripeModal.bind(this);
+		this.showAlert = this.showAlert.bind(this);
     }
 
     componentDidMount() {
@@ -84,20 +85,23 @@ class Subscribe extends React.Component {
 					'plan': JSON.stringify(this.state.selectedPlan),
 					'email': this.props.user.email,
 					'description': 'Battle-Comm Subscription'
-				}).then((response) => {
-					if (response.charge.status === 'succeeded') {
-						this.showAlert('subscriptionSuccess');
+				}).then((subscription) => {
+					this.showAlert('subscriptionSuccess');
+					UserAchievementService.create({
+						'UserId': this.props.user.id,
+						'AchievementTitle': subscription.plan.metadata.achievement
+					}).then(() => {
 						setTimeout(() => {
 							this.props.logout();
 						})
 						this.props.history.push('/login');
-					} else {
-						this.showAlert('orderFailed');
-					}
+					});
 				}).catch((error) => {
 					if (error.message === `Don't fuck with the machine!`) {
 						this.showAlert('fuckOffHackers');
 					}
+					this.showAlert('orderFailed');
+					this.props.history.push('/dashboard');
 				})
 			};
 
@@ -149,12 +153,15 @@ class Subscribe extends React.Component {
 					this.props.logout();
 				})
 				this.props.history.push('/login');
-			}).catch(() => {
+			}).catch((error) => {
 				setTimeout(() => {
 					this.props.logout();
 				})
 				this.props.history.push('/login');
 			});
+		}).catch(() => {
+			this.showAlert('orderFailed');
+			this.props.history.push('/dashboard');
 		});
 	}
 
@@ -255,12 +262,12 @@ class Subscribe extends React.Component {
 								</div>
 								<div className="row">
 									<div className="form-group small-12 medium-6 columns">
-										<label className="required">First Name</label>
-										<Input type="text" name="firstName" value={this.state.subscriptionInfo.firstName} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
+										<label>First Name</label>
+										<Input type="text" name="firstName" value={this.state.subscriptionInfo.firstName} handleInputChange={this.handleInputChange} disabled={true}/>
 									</div>
 									<div className="form-group small-12 medium-6 columns">
-										<label className="required">Last Name</label>
-										<Input type="text" name="lastName" value={this.state.subscriptionInfo.lastName} handleInputChange={this.handleInputChange} required={true} disabled={true}/>
+										<label>Last Name</label>
+										<Input type="text" name="lastName" value={this.state.subscriptionInfo.lastName} handleInputChange={this.handleInputChange} disabled={true}/>
 									</div>
 								</div>
 								<div className="row">

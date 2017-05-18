@@ -53,7 +53,9 @@ let payments = {
 						});
 						userConfig.subscriber = true;
 						let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
-						userConfig.rewardPoints = user.rewardPoints + rpPool;
+						userConfig.rewardPoints = user.get({
+							'plain': true
+						}).rewardPoints + rpPool;
 						user.updateAttributes(userConfig).then(() => {
 							models.UserNotification.create({
 								'UserId': request.payload.UserId,
@@ -79,36 +81,36 @@ let payments = {
 							reply(Boom.badRequest(error));
 							return;
 						}
-						// Set user's customerId
-						user.updateAttributes({
-							'customerId': customer.id
-						}).then((user) => {
-							stripeService.subscriptions.create({
-							  'customer': customer.id,
-							  'plan': plan.id
-							}, function(error, subscription) {
-								if (error) {
-									reply(Boom.badRequest(error));
-									return;
+						stripeService.subscriptions.create({
+						  'customer': customer.id,
+						  'plan': plan.id
+						}, function(error, subscription) {
+							if (error) {
+								reply(Boom.badRequest(error));
+								return;
+							}
+							let userConfig = {};
+							roleConfig.forEach((role) => {
+								if (role.name !== 'public') {
+									userConfig[role.name] = false;
 								}
-								let userConfig = {};
-								roleConfig.forEach((role) => {
-									if (role.name !== 'public') {
-										userConfig[role.name] = false;
-									}
-								});
-								userConfig.subscriber = true;
-								let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
-								userConfig.rewardPoints = user.rewardPoints + rpPool;
-								user.updateAttributes(userConfig).then(() => {
-									models.UserNotification.create({
-										'UserId': request.payload.UserId,
-					          'type': 'newAchievement',
-					          'fromUsername': 'systemAdmin',
-										'details': subscription.plan.metadata.achievement
-									}).then(() => {
-										reply(subscription).code(200);
-									});
+							});
+							userConfig.subscriber = true;
+							userConfig.customerId = customer.id;
+							let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
+							userConfig.rewardPoints = user.get({
+								'plain': true
+							}).rewardPoints + rpPool;
+							user.updateAttributes(userConfig).then(() => {
+								models.UserNotification.create({
+									'UserId': request.payload.UserId,
+				          'type': 'newAchievement',
+				          'fromUsername': 'systemAdmin',
+									'details': subscription.plan.metadata.achievement
+								}).then(() => {
+									reply(subscription).code(200);
+								}).catch((error) => {
+									console.log(error);
 								});
 							});
 						});

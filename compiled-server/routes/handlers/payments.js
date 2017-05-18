@@ -81,7 +81,9 @@ var payments = {
 						});
 						userConfig.subscriber = true;
 						var rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
-						userConfig.rewardPoints = user.rewardPoints + rpPool;
+						userConfig.rewardPoints = user.get({
+							'plain': true
+						}).rewardPoints + rpPool;
 						user.updateAttributes(userConfig).then(function () {
 							_models2.default.UserNotification.create({
 								'UserId': request.payload.UserId,
@@ -107,36 +109,36 @@ var payments = {
 							reply(_boom2.default.badRequest(error));
 							return;
 						}
-						// Set user's customerId
-						user.updateAttributes({
-							'customerId': customer.id
-						}).then(function (user) {
-							stripeService.subscriptions.create({
-								'customer': customer.id,
-								'plan': plan.id
-							}, function (error, subscription) {
-								if (error) {
-									reply(_boom2.default.badRequest(error));
-									return;
+						stripeService.subscriptions.create({
+							'customer': customer.id,
+							'plan': plan.id
+						}, function (error, subscription) {
+							if (error) {
+								reply(_boom2.default.badRequest(error));
+								return;
+							}
+							var userConfig = {};
+							_roleConfig2.default.forEach(function (role) {
+								if (role.name !== 'public') {
+									userConfig[role.name] = false;
 								}
-								var userConfig = {};
-								_roleConfig2.default.forEach(function (role) {
-									if (role.name !== 'public') {
-										userConfig[role.name] = false;
-									}
-								});
-								userConfig.subscriber = true;
-								var rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
-								userConfig.rewardPoints = user.rewardPoints + rpPool;
-								user.updateAttributes(userConfig).then(function () {
-									_models2.default.UserNotification.create({
-										'UserId': request.payload.UserId,
-										'type': 'newAchievement',
-										'fromUsername': 'systemAdmin',
-										'details': subscription.plan.metadata.achievement
-									}).then(function () {
-										reply(subscription).code(200);
-									});
+							});
+							userConfig.subscriber = true;
+							userConfig.customerId = customer.id;
+							var rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
+							userConfig.rewardPoints = user.get({
+								'plain': true
+							}).rewardPoints + rpPool;
+							user.updateAttributes(userConfig).then(function () {
+								_models2.default.UserNotification.create({
+									'UserId': request.payload.UserId,
+									'type': 'newAchievement',
+									'fromUsername': 'systemAdmin',
+									'details': subscription.plan.metadata.achievement
+								}).then(function () {
+									reply(subscription).code(200);
+								}).catch(function (error) {
+									console.log(error);
 								});
 							});
 						});
