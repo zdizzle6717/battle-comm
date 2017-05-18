@@ -157,7 +157,10 @@ module.exports = [
 				'pageNumber': _joi2.default.number().required(),
 				'pageSize': _joi2.default.optional(),
 				'minPrice': _joi2.default.optional(),
-				'maxPrice': _joi2.default.optional()
+				'maxPrice': _joi2.default.optional(),
+				'manufacturerId': _joi2.default.optional(),
+				'gameSystemId': _joi2.default.optional(),
+				'storeView': _joi2.default.boolean().required()
 			}
 		}
 	},

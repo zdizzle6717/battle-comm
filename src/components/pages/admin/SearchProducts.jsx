@@ -70,7 +70,7 @@ class SearchProducts extends React.Component {
 	}
 
 	handlePageChange(pageNumber = 1) {
-        this.props.searchProducts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize}).then((pagination) => {
+        this.props.searchProducts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize, 'storeView': false}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});

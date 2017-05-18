@@ -172,7 +172,23 @@ let products = {
 				'$between': [request.payload.minPrice, request.payload.maxPrice]
 			};
 		}
-    models.Product.findAndCountAll({
+		if (request.payload.manufacturerId) {
+			searchByConfig.ManufacturerId = request.payload.manufacturerId;
+		}
+		if (request.payload.gameSystemId) {
+			searchByConfig.GameSystemId = request.payload.gameSystemId;
+		}
+		if (request.payload.storeView) {
+			searchByConfig['$and'] = [{
+				'stockQty': {
+					'$gt': 0
+				}
+			}, {
+				'isDisplayed': true
+			}]
+		}
+		console.log(searchByConfig);
+    models.Product.findAll({
       'where': searchByConfig,
 			'order': orderBy ? [orderBy] : [],
       'offset': offset,
@@ -181,19 +197,25 @@ let products = {
 				'model': models.File
 			}
     }).then((response) => {
-      let count = response.count;
-      let results = response.rows;
-      let totalPages = Math.ceil(count === 0 ? 1 : (count / pageSize));
+      let results = response;
 
-      reply({
-        'pagination': {
-          'pageNumber': request.payload.pageNumber,
-          'pageSize': pageSize,
-          'totalPages': totalPages,
-          'totalResults': count
-        },
-        'results': results
-      }).code(200);
+			models.Product.findAll({
+				'where': searchByConfig
+			}).then((products) => {
+				let count = products.length;
+				let totalPages = Math.ceil(count === 0 ? 1 : (count / pageSize));
+
+				reply({
+	        'pagination': {
+	          'pageNumber': request.payload.pageNumber,
+	          'pageSize': pageSize,
+	          'totalPages': totalPages,
+	          'totalResults': count
+	        },
+	        'results': results
+	      }).code(200);
+			});
+
     });
   },
   delete: (request, reply) => {

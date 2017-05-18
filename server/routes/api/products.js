@@ -157,7 +157,10 @@ module.exports = [
 					'pageNumber': Joi.number().required(),
 					'pageSize': Joi.optional(),
 					'minPrice': Joi.optional(),
-					'maxPrice': Joi.optional()
+					'maxPrice': Joi.optional(),
+					'manufacturerId': Joi.optional(),
+					'gameSystemId': Joi.optional(),
+					'storeView': Joi.boolean().required()
         }
       }
     },

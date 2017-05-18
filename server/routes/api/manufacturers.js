@@ -30,11 +30,7 @@ module.exports = [
     'config': {
       'tags': ['api'],
       'description': 'Get all manufacturers',
-      'notes': 'Get all manufacturers',
-      'auth': {
-        'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
-      },
+      'notes': 'Get all manufacturers'
     },
     'handler': manufacturers.getAll
   },

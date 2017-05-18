@@ -10,6 +10,7 @@ import {PaginationControls} from '../../../library/pagination';
 import ViewWrapper from '../../ViewWrapper';
 import {CartActions} from '../../../library/cart';
 import ProductActions from '../../../actions/ProductActions';
+import ManufacturerService from '../../../services/ManufacturerService';
 
 const mapStateToProps = (state) => {
     return {
@@ -37,14 +38,18 @@ class Store extends React.Component {
 		this.state = {
 			'orderBy': 'updatedAt',
 			'pagination': {},
-			'pageSize': 20,
+			'pageSize': 15,
 			'qtyPlaceholders': {},
 			'searchQuery': '',
 			'sliderStart': _sliderStart,
-			'sliderEnd': _sliderEnd
+			'sliderEnd': _sliderEnd,
+			'selectedManufacturer': '',
+			'manufacturers': []
 		}
 
 		this.handleFilterReset = this.handleFilterReset.bind(this);
+		this.handleGameSystemChange = this.handleGameSystemChange.bind(this);
+		this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
 		this.handleOrderChange = this.handleOrderChange.bind(this);
 		this.handlePageChange = this.handlePageChange.bind(this);
 		this.handlePageSizeChange = this.handlePageSizeChange.bind(this);
@@ -53,6 +58,11 @@ class Store extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Store";
+		ManufacturerService.getAll().then((manufacturers) => {
+			this.setState({
+				'manufacturers': manufacturers
+			})
+		});
 		this.handlePageChange(1);
 
 		priceSlider = document.getElementById('price-slider');
@@ -60,6 +70,7 @@ class Store extends React.Component {
 			'start': [_sliderStart, _sliderEnd],
 			'behaviour': 'tap-drag',
 			'connect': [false, true, false],
+			'gameSystems': [],
 			'step': 1,
 			'range': {
 				'min': _sliderStart,
@@ -139,6 +150,31 @@ class Store extends React.Component {
 		});
 	}
 
+	handleGameSystemChange(e) {
+		let id = e.target.value;
+		this.setState({
+			'selectedGameSystem': id ? id : ''
+		}, () => {
+			this.handlePageChange(1);
+		});
+	}
+
+	handleManufacturerChange(e) {
+		let id = e.target.value;
+		let gameSystems = [];
+		if (id) {
+			let manufacturer = this.state.manufacturers.find((manufacturer) => manufacturer.id == id);
+			gameSystems = manufacturer.GameSystems;
+		}
+		this.setState({
+			'selectedManufacturer': id ? id : '',
+			'gameSystems': gameSystems,
+			'selectedGameSystem': ''
+		}, () => {
+			this.handlePageChange(1);
+		});
+	}
+
 	handleOrderChange(e) {
 		this.setState({
 			'orderBy': e.target.value
@@ -148,7 +184,7 @@ class Store extends React.Component {
 	}
 
 	handlePageChange(pageNumber = 1, minPrice = _sliderStart, maxPrice = _sliderEnd) {
-        this.props.searchProducts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize, 'minPrice': minPrice, 'maxPrice': maxPrice}).then((pagination) => {
+        this.props.searchProducts({'pageNumber': pageNumber, 'searchQuery': this.state.searchQuery, 'orderBy': this.state.orderBy, 'pageSize': this.state.pageSize, 'minPrice': minPrice, 'maxPrice': maxPrice, 'manufacturerId': this.state.selectedManufacturer, 'gameSystemId': this.state.selectedGameSystem, 'storeView': true}).then((pagination) => {
 			this.setState({
 				'pagination': pagination
 			});
@@ -216,6 +252,39 @@ class Store extends React.Component {
 						</div>
 						<div className="panel push-bottom-2x">
 							<div className="panel-title color-black">
+								Manufacturer
+							</div>
+							<div className="panel-content">
+								<select name="selectedManufacturer" onChange={this.handleManufacturerChange} value={this.state.selectedManufacturer}>
+									<option value="">All Manufacturers</option>
+									{
+										this.state.manufacturers.map((manufacturer) =>
+											<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
+										)
+									}
+								</select>
+							</div>
+						</div>
+						{
+							this.state.selectedManufacturer &&
+							<div className="panel push-bottom-2x">
+								<div className="panel-title color-black">
+									Game System
+								</div>
+								<div className="panel-content">
+									<select name="selectedManufacturer" onChange={this.handleGameSystemChange} value={this.state.selectedGameSystem}>
+										<option value="">All Systems</option>
+										{
+											this.state.gameSystems.map((gameSystem) =>
+												<option key={gameSystem.id} value={gameSystem.id}>{gameSystem.name}</option>
+											)
+										}
+									</select>
+								</div>
+							</div>
+						}
+						<div className="panel push-bottom-2x">
+							<div className="panel-title color-black">
 								Price Filter
 							</div>
 							<div className="panel-content">
@@ -264,7 +333,7 @@ class Store extends React.Component {
 					<div className="small-12 medium-8 large-9 columns">
 						<div className="products-container">
 							{
-								this.props.products.filter((product) => product.stockQty > 0).map((product, i) =>
+								this.props.products.map((product, i) =>
 								<div key={product.id} className="product-box">
 									<div className="flip-container">
 										<Link to={`/store/products/${product.id}`} className="flipper">

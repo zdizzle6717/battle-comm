@@ -181,7 +181,23 @@ var products = {
         '$between': [request.payload.minPrice, request.payload.maxPrice]
       };
     }
-    _models2.default.Product.findAndCountAll({
+    if (request.payload.manufacturerId) {
+      searchByConfig.ManufacturerId = request.payload.manufacturerId;
+    }
+    if (request.payload.gameSystemId) {
+      searchByConfig.GameSystemId = request.payload.gameSystemId;
+    }
+    if (request.payload.storeView) {
+      searchByConfig['$and'] = [{
+        'stockQty': {
+          '$gt': 0
+        }
+      }, {
+        'isDisplayed': true
+      }];
+    }
+    console.log(searchByConfig);
+    _models2.default.Product.findAll({
       'where': searchByConfig,
       'order': orderBy ? [orderBy] : [],
       'offset': offset,
@@ -190,19 +206,24 @@ var products = {
         'model': _models2.default.File
       }
     }).then(function (response) {
-      var count = response.count;
-      var results = response.rows;
-      var totalPages = Math.ceil(count === 0 ? 1 : count / pageSize);
+      var results = response;
 
-      reply({
-        'pagination': {
-          'pageNumber': request.payload.pageNumber,
-          'pageSize': pageSize,
-          'totalPages': totalPages,
-          'totalResults': count
-        },
-        'results': results
-      }).code(200);
+      _models2.default.Product.findAll({
+        'where': searchByConfig
+      }).then(function (products) {
+        var count = products.length;
+        var totalPages = Math.ceil(count === 0 ? 1 : count / pageSize);
+
+        reply({
+          'pagination': {
+            'pageNumber': request.payload.pageNumber,
+            'pageSize': pageSize,
+            'totalPages': totalPages,
+            'totalResults': count
+          },
+          'results': results
+        }).code(200);
+      });
     });
   },
   delete: function _delete(request, reply) {
