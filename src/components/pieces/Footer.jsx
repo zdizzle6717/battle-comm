@@ -32,10 +32,9 @@ export default class Footer extends React.Component {
 					<div className="small-12 large-4 columns">
 						<img src="/images/Titles/Contact_Us.png" alt="" />
 						<div className="contact-info">
-							<h4 className="left">By Phone: (909) 343-5454</h4>
-						    <h4 className="left">By E-mail: Contact@Battle-Comm.com</h4>
-						    <h4 className="left">Address: 555 Boutel Dr.</h4>
-						    <h4 className="indent left">Sacramento, CA</h4>
+						    <h4 className="left">By E-mail: support@Battle-Comm.net</h4>
+						    <h4 className="left">Address: 1250 Howe Ave. #3A</h4>
+						    <h4 className="indent left">Sacramento, CA 95825</h4>
 						</div>
 					</div>
 					<div className="small-12 large-4 columns">
