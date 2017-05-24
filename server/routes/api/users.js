@@ -185,6 +185,7 @@ module.exports = [
           'customerId': Joi.optional(),
           'email': Joi.optional(),
           'rewardPoints': Joi.number(),
+          'rpPool': Joi.optional(),
           'firstName': Joi.optional(),
           'lastName': Joi.optional(),
           'bio': Joi.optional(),

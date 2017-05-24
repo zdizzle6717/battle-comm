@@ -63,9 +63,6 @@ class RewardPointPurchase extends React.Component {
 					}
 				}).then((response) => {
 					if (response.charge.status === 'succeeded') {
-						this.props.modifyUser({
-							'rewardPoints': response.user.rewardPoints
-						});
 						this.showAlert('orderSuccess');
 						this.setState({
 							'rpPurchaseForm': {

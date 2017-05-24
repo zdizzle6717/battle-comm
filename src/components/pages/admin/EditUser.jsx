@@ -216,13 +216,17 @@ class EditUser extends React.Component {
 									</div>
 								</div>
 								<div className="row">
-									<div className="form-group small-12 medium-6 columns">
+									<div className="form-group small-12 medium-4 columns">
 										<label className="required">Handle</label>
 										<Input type="text" name="username" value={this.state.user.username} handleInputChange={this.handleInputChange} required={true}/>
 									</div>
-									<div className="form-group small-12 medium-6 columns">
+									<div className="form-group small-12 medium-4 columns">
 										<label className="required">Reward Points</label>
 										<Input type="text" name="rewardPoints" value={this.state.user.rewardPoints} handleInputChange={this.handleInputChange} required={true}/>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label className="required">RP Pool</label>
+										<Input type="text" name="rpPool" value={this.state.user.rpPool} handleInputChange={this.handleInputChange} required={true}/>
 									</div>
 								</div>
 								<div className="row">

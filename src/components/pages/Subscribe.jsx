@@ -101,7 +101,7 @@ class Subscribe extends React.Component {
 						this.showAlert('fuckOffHackers');
 					}
 					this.showAlert('orderFailed');
-					this.props.history.push('/dashboard');
+					this.props.history.push('/players/dashboard');
 				})
 			};
 
@@ -161,7 +161,7 @@ class Subscribe extends React.Component {
 			});
 		}).catch(() => {
 			this.showAlert('orderFailed');
-			this.props.history.push('/dashboard');
+			this.props.history.push('/players/dashboard');
 		});
 	}
 

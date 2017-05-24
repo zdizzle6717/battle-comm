@@ -19,11 +19,12 @@ module.exports = [
     'notes': 'Add new points assignment by e-mail',
     'auth': {
       'strategy': 'jsonWebToken',
-      'scope': ['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+      'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
     },
     'validate': {
       'payload': {
         'venueEvent': {
+          'adminUsername': _joi2.default.string().required(),
           'venueName': _joi2.default.string().required(),
           'eventName': _joi2.default.string().required(),
           'venueAdmin': _joi2.default.string().required(),

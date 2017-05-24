@@ -15,9 +15,9 @@ export default class AdminMenu extends React.Component {
 	render() {
 		return (
 			<div className="admin-menu">
-				<div className="menu-item">
+				<AccessControl customClasses="menu-item" access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']}>
 					<Link to="/admin" className="button"> <span className="fa fa-indent"> </span> Admin Dashboard</Link>
-				</div>
+				</AccessControl>
 				<AccessControl customClasses="menu-item" access={['systemAdmin']}>
 					<Link to="/admin/achievements" className="button"> <span className="fa fa-trophy"> </span> Achievements</Link>
 				</AccessControl>

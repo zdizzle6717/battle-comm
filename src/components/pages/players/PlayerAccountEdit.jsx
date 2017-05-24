@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'modifyUser': UserActions.modify,
+		'modifyUser': UserActions.modify
 	}, dispatch);
 }
 

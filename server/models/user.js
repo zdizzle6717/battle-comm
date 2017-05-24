@@ -72,6 +72,10 @@ module.exports = function(sequelize, DataTypes) {
 			'type': DataTypes.INTEGER,
 			'default': 0
 		},
+    'rpPool': {
+			'type': DataTypes.INTEGER,
+			'default': 0
+		},
     'visibility': DataTypes.STRING,
     'shareContact': DataTypes.STRING,
     'shareName': DataTypes.STRING,

@@ -154,6 +154,7 @@ var users = {
       'systemAdmin': request.pre.user.systemAdmin,
       'accountActivated': request.pre.user.accountActivated,
       'rewardPoints': request.pre.user.rewardPoints,
+      'rpPool': request.pre.user.rpPool,
       'UserPhoto': request.pre.user.UserPhoto
     }).code(201);
   },
@@ -438,6 +439,7 @@ var users = {
           'twitch': request.payload.twitch,
           'website': request.payload.website,
           'rewardPoints': request.payload.rewardPoints,
+          'rpPool': request.payload.rpPool,
           'visibility': request.payload.visibility,
           'shareContact': request.payload.shareContact,
           'shareName': request.payload.shareName,

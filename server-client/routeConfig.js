@@ -10,6 +10,10 @@ export default [
 		'view': 'admin'
 	},
 	{
+		'route': '/assign-points*',
+		'view': 'assignPoints'
+	},
+	{
 		'route': '/forgot-password',
 		'view': 'forgotPassword'
 	},

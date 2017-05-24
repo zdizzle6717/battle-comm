@@ -97,7 +97,7 @@ module.exports = [
 			'notes': 'Request new purchase',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['eventAdmin', 'venueAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			'validate': {
 				'params': {

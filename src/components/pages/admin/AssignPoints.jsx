@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import {AlertActions} from '../../../library/alerts';
 import {handlers} from '../../../library/utilities';
+import {UserActions} from '../../../library/authentication';
 import {Form, getFormErrorCount, Input, TextArea, Select, DatePicker} from '../../../library/validations';
 import ViewWrapper from '../../ViewWrapper';
 import GameSystemActions from '../../../actions/GameSystemActions';
@@ -24,7 +25,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		'addAlert': AlertActions.addAlert,
-		'getGameSystems': GameSystemActions.getAll
+		'getGameSystems': GameSystemActions.getAll,
+		'modifyUser': UserActions.modify,
 	}, dispatch);
 }
 
@@ -53,6 +55,10 @@ class AssignPoints extends React.Component {
 
 	componentDidMount() {
 		document.title = "Battle-Comm | RP Assignment";
+		if (this.props.user.rpPool <= 0) {
+			this.showAlert('notEnoughRp')
+			this.props.history.push('/players/dashboard');
+		}
 		this.props.getGameSystems();
 		this.setState({
 			'venueEvent': {
@@ -84,7 +90,12 @@ class AssignPoints extends React.Component {
 		let playerFormsAreInvalid = this.state.players.some((player, i) => {
 			return getFormErrorCount(this.props.forms, `venueEventPlayersForm-${i}`) > 0;
 		})
-		return venueEventFormIsInvalid || playerFormsAreInvalid || this.state.players.length < 1;
+		let totalPoints = 0;
+		this.state.players.forEach((player) => {
+			totalPoints += player.pointsEarned;
+		});
+		let notEnoughPoints = totalPoints > this.props.user.rpPool;
+		return venueEventFormIsInvalid || playerFormsAreInvalid || this.state.players.length < 1 || notEnoughPoints;
 	}
 
 	handleEventInputChange(e) {
@@ -123,9 +134,13 @@ class AssignPoints extends React.Component {
 			'venueEvent': this.state.venueEvent,
 			'players': this.state.players
 		};
-		VenueService.submitPointAssignment(data).then(() => {
+		data.venueEvent.adminUsername = this.props.user.username;
+		VenueService.submitPointAssignment(data).then((response) => {
+			this.props.modifyUser({
+				'rpPool': response.rpPool
+			});
 			this.showAlert('pointsSubmitted');
-			this.props.history.push('/admin');
+			this.props.history.push('/players/dashboard');
 		});
 	}
 
@@ -153,6 +168,14 @@ class AssignPoints extends React.Component {
 					'type': 'success',
 					'delay': 3000
 				});
+			},
+			'notEnoughRp': () => {
+				this.props.addAlert({
+					'title': 'RP Pool is Empty',
+					'message': `Your RP pool is currently empty. E-mail us at support@Battle-Comm.net and ask about purchasing RP for an event or being sponsored by Battle-Comm.`,
+					'type': 'info',
+					'delay': 5000
+				});
 			}
 		}
 
@@ -164,7 +187,7 @@ class AssignPoints extends React.Component {
 			<ViewWrapper headerImage="/images/Titles/Reward_Point_Assignment.png" headerAlt="Reward Point Assignment">
 				<div className="small-12 columns">
 					<hr/>
-					<AdminMenu></AdminMenu>
+					<h3 className="text-center">You currently have {this.props.user.rpPool} Reward Points for distribution</h3>
 					<hr/>
 				</div>
 				<div className="row">

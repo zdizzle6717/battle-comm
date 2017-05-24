@@ -28,9 +28,9 @@ var _stripe = require('stripe');
 
 var _stripe2 = _interopRequireDefault(_stripe);
 
-var _rpUpdate = require('../../email-templates/rpUpdate');
+var _rpPoolUpdate = require('../../email-templates/rpPoolUpdate');
 
-var _rpUpdate2 = _interopRequireDefault(_rpUpdate);
+var _rpPoolUpdate2 = _interopRequireDefault(_rpPoolUpdate);
 
 var _nodemailer = require('nodemailer');
 
@@ -222,7 +222,7 @@ var payments = {
 					}).then(function (user) {
 						if (user) {
 							user.increment({
-								'rewardPoints': _pointPriceConfig2.default[priceIndex].rp
+								'rpPool': _pointPriceConfig2.default[priceIndex].rp
 							}).then(function (user) {
 								user = user.get({ 'plain': true });
 
@@ -232,6 +232,7 @@ var payments = {
 									'firstName': user.firstName,
 									'lastName': user.lastName,
 									'rewardPoints': user.rewardPoints,
+									'rpPool': user.rpPool,
 									'service': 'Gmail',
 									'auth': {
 										'user': _envVariables2.default.email.user,
@@ -242,8 +243,8 @@ var payments = {
 								var rpMailConfig = {
 									'from': _envVariables2.default.email.user,
 									'to': user.email,
-									'subject': 'Reward Point Update: New Total of ' + basicUser.rewardPoints,
-									'html': (0, _rpUpdate2.default)(basicUser),
+									'subject': 'RP Pool Updated: Receipt for ' + _pointPriceConfig2.default[priceIndex].rp + ' RP',
+									'html': (0, _rpPoolUpdate2.default)(basicUser),
 									'service': 'Gmail',
 									'auth': {
 										'user': _envVariables2.default.email.user,

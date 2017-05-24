@@ -7,7 +7,7 @@ import roleConfig from '../../../roleConfig';
 import pointPriceConfig from '../../../pointPriceConfig';
 import stripe from 'stripe';
 let stripeService = stripe(env.stripe.secret);
-import buildRPUpdateEmail from '../../email-templates/rpUpdate';
+import buildRPPoolUpdateEmail from '../../email-templates/rpPoolUpdate';
 import nodemailer from 'nodemailer';
 
 let transporter = nodemailer.createTransport(({
@@ -201,7 +201,7 @@ let payments = {
 			      .then((user) => {
 			        if (user) {
 			          user.increment({
-									'rewardPoints': pointPriceConfig[priceIndex].rp
+									'rpPool': pointPriceConfig[priceIndex].rp
 								}).then((user) => {
 									user = user.get({'plain': true});
 
@@ -211,6 +211,7 @@ let payments = {
 										'firstName': user.firstName,
 										'lastName': user.lastName,
 										'rewardPoints': user.rewardPoints,
+										'rpPool': user.rpPool,
 										'service': 'Gmail',
 										'auth': {
 											'user': env.email.user,
@@ -221,8 +222,8 @@ let payments = {
 									let rpMailConfig = {
 										'from': env.email.user,
 										'to': user.email,
-										'subject': `Reward Point Update: New Total of ${basicUser.rewardPoints}`,
-										'html': buildRPUpdateEmail(basicUser),
+										'subject': `RP Pool Updated: Receipt for ${pointPriceConfig[priceIndex].rp} RP`,
+										'html': buildRPPoolUpdateEmail(basicUser),
 										'service': 'Gmail',
 										'auth': {
 											'user': env.email.user,

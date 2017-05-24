@@ -180,6 +180,7 @@ module.exports = [
         'customerId': _joi2.default.optional(),
         'email': _joi2.default.optional(),
         'rewardPoints': _joi2.default.number(),
+        'rpPool': _joi2.default.optional(),
         'firstName': _joi2.default.optional(),
         'lastName': _joi2.default.optional(),
         'bio': _joi2.default.optional(),
