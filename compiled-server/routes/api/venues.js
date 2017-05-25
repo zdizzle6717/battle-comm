@@ -19,7 +19,7 @@ module.exports = [
     'notes': 'Add new points assignment by e-mail',
     'auth': {
       'strategy': 'jsonWebToken',
-      'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+      'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
     },
     'validate': {
       'payload': {

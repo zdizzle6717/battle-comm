@@ -20,7 +20,7 @@ module.exports = [
 		'notes': 'Create a new user achievement',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 		},
 		'validate': {
 			'payload': _joi2.default.alternatives().try(_joi2.default.object({
@@ -42,7 +42,7 @@ module.exports = [
 		'notes': 'Remove a user achievement association',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 		},
 		'validate': {
 			'params': {

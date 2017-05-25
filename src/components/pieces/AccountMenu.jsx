@@ -92,9 +92,6 @@ class AccountMenu extends React.Component {
 									<span className="count">{this.props.notifications.length}</span>
 								}</Link>
 							</li>
-							<li>
-								<Link to="/assign-points"><span className="fa fa-users"></span>Point Assignment</Link>
-							</li>
 							<AccessControl element="li" access={['tourneyAdmin', 'eventAdmin', 'venueAdmin', 'newsContributor']}>
 								<Link to="/admin"><span className="fa fa-indent"></span>Admin</Link>
 							</AccessControl>

@@ -51,7 +51,11 @@ let payments = {
 								userConfig[role.name] = false;
 							}
 						});
-						userConfig.subscriber = true;
+						if (user.eventAdmin) {
+							userConfig.eventAdminSubscriber = true;
+						} else if (user.member) {
+							userConfig.subscriber = true;
+						}
 						let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
 						userConfig.rewardPoints = user.get({
 							'plain': true
@@ -95,7 +99,11 @@ let payments = {
 									userConfig[role.name] = false;
 								}
 							});
-							userConfig.subscriber = true;
+							if (user.eventAdmin) {
+								userConfig.eventAdminSubscriber = true;
+							} else if (user.member) {
+								userConfig.subscriber = true;
+							}
 							userConfig.customerId = customer.id;
 							let rpPool = subscription.plan.metadata.rewardPoints ? parseInt(subscription.plan.metadata.rewardPoints, 10) : 0;
 							userConfig.rewardPoints = user.get({

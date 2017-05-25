@@ -19,7 +19,7 @@ module.exports = [
 		'notes': 'Create a new subscription',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member']
+			'scope': ['member', 'eventAdmin']
 		},
 		'validate': {
 			'payload': {
@@ -41,7 +41,7 @@ module.exports = [
 		'notes': 'Get all available subscriptions',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member']
+			'scope': ['member', 'eventAdmin']
 		}
 	},
 	'handler': _handlers.payments.getSubscriptionPlans
@@ -54,7 +54,7 @@ module.exports = [
 		'notes': 'Get customer by Id',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member', 'subscriber']
+			'scope': ['member', 'subscriber', 'eventAdminSubscriber']
 		},
 		'validate': {
 			'params': {
@@ -72,7 +72,7 @@ module.exports = [
 		'notes': 'Request new purchase',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			'scope': ['member', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 		},
 		'validate': {
 			'params': {
@@ -98,7 +98,7 @@ module.exports = [
 		'notes': 'Request new purchase',
 		'auth': {
 			'strategy': 'jsonWebToken',
-			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+			'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 		},
 		'validate': {
 			'params': {

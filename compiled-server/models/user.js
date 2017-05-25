@@ -29,6 +29,10 @@ module.exports = function (sequelize, DataTypes) {
       'type': DataTypes.BOOLEAN,
       'defaultValue': false
     },
+    'eventAdminSubscriber': {
+      'type': DataTypes.BOOLEAN,
+      'defaultValue': false
+    },
     'newsContributor': {
       'type': DataTypes.BOOLEAN,
       'defaultValue': false

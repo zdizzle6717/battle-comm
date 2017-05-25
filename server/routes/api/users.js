@@ -160,7 +160,7 @@ module.exports = [
       'notes': 'Get all players',
 			'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
     },
     'handler': users.getAll
@@ -174,7 +174,7 @@ module.exports = [
       'notes': 'Patch a User Login by id',
       'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
       'validate': {
         'params': {
@@ -193,6 +193,7 @@ module.exports = [
           'subscriber': Joi.optional(),
           'tourneyAdmin': Joi.optional(),
           'eventAdmin': Joi.optional(),
+          'eventAdminSubscriber': Joi.optional(),
           'newsContributor': Joi.optional(),
           'venueAdmin': Joi.optional(),
           'clubAdmin': Joi.optional(),
@@ -299,7 +300,7 @@ module.exports = [
       'notes': 'Update User Password from Account Dashboard',
       'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
       'validate': {
         'params': {

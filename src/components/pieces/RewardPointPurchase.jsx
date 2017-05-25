@@ -63,6 +63,9 @@ class RewardPointPurchase extends React.Component {
 					}
 				}).then((response) => {
 					if (response.charge.status === 'succeeded') {
+						this.props.modifyUser({
+							'rpPool': this.props.user.rpPool + pointPriceConfig[this.state.rpPurchaseForm.priceIndex].rp
+						});
 						this.showAlert('orderSuccess');
 						this.setState({
 							'rpPurchaseForm': {
@@ -170,7 +173,7 @@ class RewardPointPurchase extends React.Component {
 				<h2>Purchase Reward Points</h2>
 				<div className="row">
 					<div className="small-12 columns text-center">
-						<h6>Add reward points to your store or venue pool for player distribution at tournaments or other qualifying events.</h6>
+						<h6>Add reward points to your local event, store, or venue pool for player distribution at tournaments or other qualifying events. Then use the point assignment tool to submit event details, player RP rewards, and game results.</h6>
 					</div>
 				</div>
 				{

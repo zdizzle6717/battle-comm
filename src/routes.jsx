@@ -164,13 +164,19 @@ let routes = [
 		'path': '/admin/venue',
 		'component': AssignPoints,
 		'exact': true,
-		'access': ['venueAdmin']
+		'access': ['eventAdmin']
 	},
 	{
-		'path': '/assign-points',
+		'path': '/admin/event',
 		'component': AssignPoints,
 		'exact': true,
-		'access': ['member']
+		'access': ['eventAdmin']
+	},
+	{
+		'path': '/admin/event/assign-points',
+		'component': AssignPoints,
+		'exact': true,
+		'access': ['eventAdmin']
 	},
 	{
 		'path': '/admin/users',

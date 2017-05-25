@@ -50,8 +50,16 @@ const initInterceptors = (history, baseUrl = 'http://localhost:8000/api/', timeo
 				store.dispatch(UserActions.setRedirect(window.location.pathname));
 				store.dispatch(UserActions.logout());
 				store.dispatch(AlertActions.addAlert({
+					'title': 'Not Authenticated',
+					'message': 'Redirected: You are not authenticated or your session has expired. Please login to continue.',
+					'type': 'error',
+					'delay': 4000
+				}));
+				history.push('/login');
+			} else if (error.response.status == 403 || error.response.data.statusCode === 403) {
+				store.dispatch(AlertActions.addAlert({
 					'title': 'Not Authorized',
-					'message': 'Redirected: You do not have authorization to view this content or your session has expired. Please login to continue.',
+					'message': 'Redirected: You do not have authorization to view or edit this content. Please login as a user with correct permissions to continue.',
 					'type': 'error',
 					'delay': 4000
 				}));

@@ -57,7 +57,8 @@ class PlayerAccountEdit extends React.Component {
 			this.props.history.push('/');
 		} else {
 			this.getCurrentPlayer();
-			if (userIsSubscriber) {
+			// TODO: This should actually just check for an existing customerId
+			if (userIsSubscriber && !this.props.user.systemAdmin) {
 				PaymentService.getCustomer(this.props.user.id).then((customer) => {
 					let subscription = customer.subscriptions.data.find(subscription => subscription.status === 'active');
 					this.setState({

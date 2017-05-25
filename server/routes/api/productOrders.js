@@ -16,7 +16,7 @@ module.exports = [
 			'notes': 'Get one productOrder by id',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			'validate': {
 				'params': {
@@ -35,7 +35,7 @@ module.exports = [
 			'notes': 'Get all productOrders',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 		},
 		'handler': productOrders.getAll
@@ -49,7 +49,7 @@ module.exports = [
 			'notes': 'Add a new productOrder',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			'validate': {
 				'payload': {

@@ -53,7 +53,7 @@ class Subscribe extends React.Component {
     componentDidMount() {
         document.title = "Battle-Comm | Subscribe";
 		let {user} = this.props;
-		if (this.props.user.roleConfig.name !== 'member') {
+		if (user.roleConfig.name !== 'member' && user.roleConfig.name !== 'eventAdmin') {
 			this.showAlert('membersOnly');
 			this.props.history.push('/players/dashboard');
 		}
@@ -195,7 +195,7 @@ class Subscribe extends React.Component {
 			'membersOnly': () => {
 				this.props.addAlert({
 					'title': 'Member\'s Only',
-					'message': 'Only members can subscribe. Either you are already subscribed or you do not have access to this feature.',
+					'message': 'Only members or event admins can subscribe. Either you are already subscribed or you do not have access to this feature.',
 					'type': 'info',
 					'delay': 4000
 				});

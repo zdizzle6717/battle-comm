@@ -151,6 +151,7 @@ class Register extends React.Component {
 										<Select name="role" value={this.state.credentials.role} handleInputChange={this.handleInputChange} required={true}>
 											<option value="">--Select--</option>
 											<option value="member">Member</option>
+											<option value="eventAdmin">Event Admin</option>
 										</Select>
 									</div>
 								</div>

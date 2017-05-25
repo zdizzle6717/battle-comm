@@ -26,7 +26,7 @@ module.exports = [
       },
 			'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
       'cors': {
         'origin': ['*']
@@ -75,7 +75,7 @@ module.exports = [
       },
 			'auth': {
         'strategy': 'jsonWebToken',
-        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+        'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
       },
       'cors': {
         'origin': ['*']

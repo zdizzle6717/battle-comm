@@ -29,30 +29,36 @@ module.exports = [
 		'name': 'eventAdmin',
 		'baseBit': (1 << 3), // 8
 		'roleFlags': 13, // member, tourneyAdmin, eventAdmin
-		'homeState': '/players/dashboard',
+		'homeState': '/admin',
+	},
+	{
+		'name': 'eventAdminSubscriber',
+		'baseBit': (1 << 4), // 16
+		'roleFlags': 31, // member, subscriber, tourneyAdmin, eventAdmin
+		'homeState': '/admin',
 	},
 	{
 		'name': 'newsContributor',
-		'baseBit': (1 << 4), // 16
-		'roleFlags': 17, // member, newsContributor
+		'baseBit': (1 << 5), // 32
+		'roleFlags': 33, // member, newsContributor
 		'homeState': '/players/dashboard',
 	},
 	{
 		'name': 'venueAdmin',
-		'baseBit': (1 << 5), // 32
-		'roleFlags': 45, // member, tourneyAdmin, eventAdmin, venueAdmin
+		'baseBit': (1 << 6), // 64
+		'roleFlags': 77, // member, tourneyAdmin, eventAdmin, venueAdmin
 		'homeState': '/admin',
 	},
 	{
 		'name': 'clubAdmin',
-		'baseBit': (1 << 6), // 64
-		'roleFlags': 65, // member, clubAdmin
+		'baseBit': (1 << 7), // 128
+		'roleFlags': 257, // member, clubAdmin
 		'homeState': '/admin',
 	},
 	{
 		'name': 'systemAdmin',
-		'baseBit': (1 << 7), // 128
-		'roleFlags': 255, // member, subscriber, tourneyAdmin, eventAdmin, newsContributor, venueAdmin, clubAdmin, systemAdmin
+		'baseBit': (1 << 8), // 256
+		'roleFlags': 495, // member, subscriber, tourneyAdmin, eventAdmin, newsContributor, venueAdmin, clubAdmin, systemAdmin
 		'homeState': '/admin',
 	},
 ];

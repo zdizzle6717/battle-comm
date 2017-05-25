@@ -39,8 +39,8 @@ export default class AdminMenu extends React.Component {
 				<AccessControl customClasses="menu-item" access={['systemAdmin']}>
 					<Link to="/admin/product-orders" className="button"> <span className="fa fa-shopping-cart"> </span> Orders</Link>
 				</AccessControl>
-				<AccessControl customClasses="menu-item" access={['venueAdmin']}>
-					<Link to="/admin/venue" className="button"> <span className="fa fa-street-view"> </span> Venue</Link>
+				<AccessControl customClasses="menu-item" access={['eventAdmin']}>
+					<Link to="/admin/venue" className="button"> <span className="fa fa-street-view"> </span> Events</Link>
 				</AccessControl>
 			</div>
 		)

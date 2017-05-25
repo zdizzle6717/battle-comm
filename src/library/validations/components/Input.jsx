@@ -56,7 +56,7 @@ class Input extends React.Component {
 	// Accounts for initial data returned from a service after componentDidMount and
 	// re-validates when conditionally required inputs change
 	componentWillReceiveProps(nextProps) {
-		if (this.props.required !== nextProps.required || this.state.initial && this.state.pristine && nextProps.value) {
+		if (this.props.required !== nextProps.required || this.state.initial && this.state.pristine && nextProps.value !== undefined && nextProps.value !== '') {
 			setTimeout(() => {
 				this.validateInit(nextProps, true);
 			});
@@ -99,7 +99,7 @@ class Input extends React.Component {
 			return;
 		}
 		let value = props.value;
-		let empty = props.required ? (value ? false : true) : false;
+		let empty = props.required ? ((value === undefined || value === '') ? true : false) : false;
 		let input = {
 			'name': props.name,
 			'value': value,

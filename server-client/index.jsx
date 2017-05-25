@@ -13,7 +13,6 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import routeConfig from './routeConfig';
 import rootReducer from '../src/reducers';
-import envVariables from '../envVariables';
 import Layout from '../src/components/Layout';
 import routes from '../src/routes';
 import env from '../envVariables';
@@ -96,10 +95,10 @@ for (let i in routeConfig) {
 }
 
 // Start the server
-const port = envVariables.clientPort;
+const port = env.clientPort;
 server.listen(port, err => {
     if (err) {
         return console.error(err);
     }
-    console.info(`Server running at: ${envVariables.baseUrl}:${port}, with process id ${process.pid}`);
+    console.info(`Server running at: ${env.baseUrl}:${port}, with process id ${process.pid}`);
 });

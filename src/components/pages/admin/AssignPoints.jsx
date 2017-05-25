@@ -185,14 +185,18 @@ class AssignPoints extends React.Component {
 	render() {
 		return (
 			<ViewWrapper headerImage="/images/Titles/Reward_Point_Assignment.png" headerAlt="Reward Point Assignment">
-				<div className="small-12 columns">
-					<hr/>
-					<h3 className="text-center">You currently have {this.props.user.rpPool} Reward Points for distribution</h3>
-					<hr/>
+				<div className="row">
+					<div className="small-12 columns">
+						<hr/>
+						<AdminMenu></AdminMenu>
+						<hr/>
+					</div>
 				</div>
 				<div className="row">
 					<div className="small-12 columns">
 						<h2>Venue / Event</h2>
+						<h3 className="text-center">You currently have {this.props.user.rpPool} Reward Points for distribution</h3>
+						<hr/>
 						<Form name="venueEventForm" submitText="Submit Point Assignment" submitButton={false}>
 							<div className="row">
 								<div className="form-group small-12 medium-4 columns">

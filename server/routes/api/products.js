@@ -14,7 +14,7 @@ module.exports = [
 			'notes': 'Get one product by id',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			'validate': {
 				'params': {
@@ -33,7 +33,7 @@ module.exports = [
 			'notes': 'Get all products',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 		},
 		'handler': products.getAll
@@ -127,7 +127,7 @@ module.exports = [
 			'notes': 'Update a product stock by id',
 			'auth': {
 				'strategy': 'jsonWebToken',
-				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'venueAdmin', 'clubAdmin', 'systemAdmin']
+				'scope': ['member', 'subscriber', 'tourneyAdmin', 'eventAdmin', 'eventAdminSubscriber', 'venueAdmin', 'clubAdmin', 'systemAdmin']
 			},
 			'validate': {
 				'payload': {
