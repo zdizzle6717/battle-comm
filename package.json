@@ -1,7 +1,7 @@
 {
   "name": "battle-comm",
   "version": "2.0.0",
-  "description": "This is a universal javascript app built with react on the server side and client site demonstrated with simple movie data",
+  "description": "This is the source code for Battle-Comm.net",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -59,9 +59,9 @@ let achievements = {
           'id': request.params.id
         }
       })
-      .then((newsPost) => {
-        if (newsPost) {
-          newsPost.updateAttributes({
+      .then((achievement) => {
+        if (achievement) {
+          achievement.updateAttributes({
 						'title': request.payload.title,
 		        'category': request.payload.category,
 		        'description': request.payload.description,

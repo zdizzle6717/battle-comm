@@ -21,11 +21,13 @@ module.exports = [
 				'payload': Joi.alternatives().try(
 					Joi.object({
 						'UserId': Joi.number().required(),
-						'AchievementId': Joi.number().required()
+						'AchievementId': Joi.number().required(),
+						'notify': Joi.optional()
 					}),
 					Joi.object({
 						'UserId': Joi.number().required(),
-						'AchievementTitle': Joi.string().required()
+						'AchievementTitle': Joi.string().required(),
+						'notify': Joi.optional()
 					})
 				)
 			}

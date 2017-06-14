@@ -59,9 +59,9 @@ var achievements = {
       'where': {
         'id': request.params.id
       }
-    }).then(function (newsPost) {
-      if (newsPost) {
-        newsPost.updateAttributes({
+    }).then(function (achievement) {
+      if (achievement) {
+        achievement.updateAttributes({
           'title': request.payload.title,
           'category': request.payload.category,
           'description': request.payload.description,

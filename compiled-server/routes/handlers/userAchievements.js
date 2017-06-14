@@ -33,6 +33,42 @@ var userAchievements = {
 			}).then(function (achievement) {
 				if (achievement) {
 					user.addUserAchievement(achievement).then(function (userHasAchievements) {
+						if (request.payload.notify) {
+							_models2.default.UserNotification.create({
+								'UserId': request.payload.UserId,
+								'type': 'newAchievement',
+								'fromUsername': 'systemAdmin',
+								'details': request.payload.AchievementTitle
+							}).then(function () {
+								reply(userHasAchievements).code(200);
+							});
+						} else {
+							reply(userHasAchievements).code(200);
+						}
+					});
+				} else {
+					reply(_boom2.default.notFound('No achievement found with the supplied id or title'));
+				}
+			});
+		});
+	},
+	createAndNotify: function createAndNotify(request, reply) {
+		_models2.default.User.find({
+			'where': {
+				'id': request.payload.UserId
+			}
+		}).then(function (user) {
+			_models2.default.Achievement.find({
+				'where': {
+					'$or': [{
+						'id': request.payload.AchievementId
+					}, {
+						'title': request.payload.AchievementTitle
+					}]
+				}
+			}).then(function (achievement) {
+				if (achievement) {
+					user.addUserAchievement(achievement).then(function (userHasAchievements) {
 						reply(userHasAchievements).code(200);
 					});
 				} else {

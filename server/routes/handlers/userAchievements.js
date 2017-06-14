@@ -27,6 +27,47 @@ let userAchievements = {
 				.then((achievement) => {
 					if (achievement) {
 						user.addUserAchievement(achievement).then((userHasAchievements) => {
+							if (request.payload.notify) {
+								models.UserNotification.create({
+									'UserId': request.payload.UserId,
+				          'type': 'newAchievement',
+				          'fromUsername': 'systemAdmin',
+									'details': request.payload.AchievementTitle
+								}).then(() => {
+									reply(userHasAchievements).code(200);
+								});
+							} else {
+								reply(userHasAchievements).code(200);
+							}
+						});
+					} else {
+						reply(Boom.notFound('No achievement found with the supplied id or title'));
+					}
+				});
+      });
+  },
+  createAndNotify: (request, reply) => {
+    models.User.find({
+        'where': {
+          'id': request.payload.UserId
+        }
+      })
+      .then((user) => {
+				models.Achievement.find({
+					'where': {
+						'$or': [
+							{
+								'id': request.payload.AchievementId
+							},
+							{
+								'title': request.payload.AchievementTitle
+							},
+						]
+					}
+				})
+				.then((achievement) => {
+					if (achievement) {
+						user.addUserAchievement(achievement).then((userHasAchievements) => {
 							reply(userHasAchievements).code(200);
 						});
 					} else {

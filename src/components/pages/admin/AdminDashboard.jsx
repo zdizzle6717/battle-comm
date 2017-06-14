@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {AlertActions} from '../../../library/alerts';
 import BannerSlideManagement from '../../pieces/BannerSlideManagement';
 import RewardPointPurchase from '../../pieces/RewardPointPurchase';
+import AchievementDistribution from '../../pieces/AchievementDistribution';
 import RPDistributionManagement from '../../pieces/RPDistributionManagement';
 import ViewWrapper from '../../ViewWrapper';
 import AdminMenu from '../../pieces/AdminMenu';
@@ -52,6 +53,9 @@ class AdminDashboard extends React.Component {
 					<RewardPointPurchase user={this.props.currentUser} forms={this.props.forms}></RewardPointPurchase>
 				</AccessControl>
 				<hr/>
+				<AccessControl access={['systemAdmin']} element="div" customClasses="row">
+					<AchievementDistribution user={this.props.currentUser} forms={this.props.forms}></AchievementDistribution>
+				</AccessControl>
 				<AccessControl access={['systemAdmin']} element="div" customClasses="row">
 					<RPDistributionManagement user={this.props.currentUser} forms={this.props.forms}></RPDistributionManagement>
 				</AccessControl>

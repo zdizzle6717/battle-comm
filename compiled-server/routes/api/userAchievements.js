@@ -25,10 +25,12 @@ module.exports = [
 		'validate': {
 			'payload': _joi2.default.alternatives().try(_joi2.default.object({
 				'UserId': _joi2.default.number().required(),
-				'AchievementId': _joi2.default.number().required()
+				'AchievementId': _joi2.default.number().required(),
+				'notify': _joi2.default.optional()
 			}), _joi2.default.object({
 				'UserId': _joi2.default.number().required(),
-				'AchievementTitle': _joi2.default.string().required()
+				'AchievementTitle': _joi2.default.string().required(),
+				'notify': _joi2.default.optional()
 			}))
 		}
 	}
