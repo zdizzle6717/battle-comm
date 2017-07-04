@@ -90,7 +90,7 @@ class PlayerDashboard extends React.Component {
 				'type': responses[0].data.file.type,
 				'UserId': this.state.currentUser.id,
 				'identifier': 'playerIcon',
-				'locationUrl': `/players/${this.state.currentUser.id}/playerIcon/`
+				'locationUrl': responses[0].data.file.locationUrl
 			};
 			let fileName, iconFile;
 			this.state.currentUser.Files.forEach((file) => {
@@ -108,10 +108,15 @@ class PlayerDashboard extends React.Component {
 					this.props.resetForm('playerIconForm');
 				});
 			});
+		}).catch((err) => {
+			console.log(err);
 		});
 	}
 
-	deletePhoto(id, index) {
+	deletePhoto(id, index, e) {
+		if (e) {
+			e.preventDefault();
+		}
 		this.handleDeleteFile(id).then(() => {
 			let photos = this.state.photoStream;
 			photos.splice(index, 1);
@@ -136,12 +141,7 @@ class PlayerDashboard extends React.Component {
 	}
 
 	getPlayerPhotoStream() {
-		let photos = [];
-		this.state.currentUser.Files.forEach((file) => {
-			if (file.identifier === 'photoStream') {
-				photos.push(file);
-			}
-		});
+		let photos = this.state.currentUser.Files.filter((file) => file.identifier === 'photoStream');
 		this.setState({
 			'photoStream': photos
 		});
@@ -176,7 +176,7 @@ class PlayerDashboard extends React.Component {
 					'type': response.data.file.type,
 					'identifier': 'photoStream',
 					'UserId': this.state.currentUser.id,
-					'locationUrl': `/players/${this.state.currentUser.id}/photoStream/`
+					'locationUrl': response.data.file.locationUrl
 				};
 				promises.push(FileService.create(file));
 			});

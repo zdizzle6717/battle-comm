@@ -42,7 +42,7 @@ class EditGameSystem extends React.Component {
 			},
 			'files': [],
 			'manufacturers': [],
-			'newFilesUploaded': false,
+			'newFiles': [],
 			'newGameSystem': false,
 			'selectedFaction': {
 				'index': null,
@@ -65,17 +65,17 @@ class EditGameSystem extends React.Component {
 
     componentDidMount() {
         document.title = "Battle-Comm | Game System Edit";
-		this.props.getManufacturers();
-		if (this.props.match.params.gameSystemId) {
-			this.getGameSystem(this.props.match.params.gameSystemId).catch(() => {
-				this.props.history.push('/admin/game-systems');
-				this.showAlert('notFound');
-			});
-		} else {
-			this.setState({
-				'newGameSystem': true
-			})
-		}
+				this.props.getManufacturers();
+				if (this.props.match.params.gameSystemId) {
+					this.getGameSystem(this.props.match.params.gameSystemId).catch(() => {
+						this.props.history.push('/admin/game-systems');
+						this.showAlert('notFound');
+					});
+				} else {
+					this.setState({
+						'newGameSystem': true
+					})
+				}
     }
 
 	getGameSystem(gameSystemId) {
@@ -87,14 +87,16 @@ class EditGameSystem extends React.Component {
 		});
 	}
 
-	handleDeleteFile(fileId, e) {
+	handleDeleteFile(fileId, index, e) {
 		if (e) {
 			e.preventDefault();
 		}
 		FileService.remove(fileId).then(() => {
+			let files = this.state.files;
+			files.splice(index, 1);
 			this.setState({
-				'files': []
-			})
+				'files': files
+			});
 			this.showAlert('fileRemoved');
 		});
 	}
@@ -119,20 +121,22 @@ class EditGameSystem extends React.Component {
 
 	handleFileUpload(files) {
 		let gameSystem = this.state.gameSystem;
+		let newFiles = this.state.newFiles;
 		this.uploadFiles(files).then((responses) => {
 			responses = responses.map((response, i) => {
 				response = {
 					'name': response.data.file.name,
 					'size': response.data.file.size,
-					'type': response.data.file.type
+					'type': response.data.file.type,
+					'locationUrl': response.data.file.locationUrl
 				};
 				return response;
 			});
-			gameSystem.File = responses[0];
+			let files = responses.concat(this.state.files);
+			newFiles = newFiles.concat(responses);
 			this.setState({
-				'gameSystem': gameSystem,
-				'files': responses,
-				'newFilesUploaded': true
+				'files': files,
+				'newFiles': newFiles
 			});
 			this.showAlert('uploadSuccess');
 		});
@@ -148,15 +152,18 @@ class EditGameSystem extends React.Component {
 		e.preventDefault();
 		let system = this.state.gameSystem;
 		let method = this.props.match.params.gameSystemId ? 'update' : 'create';
+		let newFiles = this.state.newFiles;
 		GameSystemService[method]((method === 'update' ? system.id : system), (method === 'update' ? system : null)).then((gameSystem) => {
-			if (this.state.newFilesUploaded) {
-				FileService.create({
-					'GameSystemId': gameSystem.id,
-					'identifier': 'gameSystemPhoto',
-					'locationUrl': 'gameSystems/',
-					'name': this.state.gameSystem.File.name,
-					'size': this.state.gameSystem.File.size,
-					'type': this.state.gameSystem.File.type
+			if (newFiles.length > 0) {
+				newFiles.forEach((file) => {
+					FileService.create({
+						'GameSystemId': gameSystem.id,
+						'identifier': 'gameSystemPhoto',
+						'locationUrl': file.locationUrl,
+						'name': file.name,
+						'size': file.size,
+						'type': file.type
+					});
 				});
 			}
 			if (method === 'update') {
@@ -320,8 +327,8 @@ class EditGameSystem extends React.Component {
 									<div className="small-12 medium-4 columns">
 										<label>Featured Image (back)</label>
 										{
-											this.state.files.length > 0 && this.state.files[0].id &&
-											<img src={`/uploads/${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
+											this.state.files.length > 0 &&
+											<img src={`${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
 										}
 									</div>
 									<div className="small-12 medium-4 columns">
@@ -332,7 +339,7 @@ class EditGameSystem extends React.Component {
 										}
 										{
 											this.state.files.length > 0 && this.state.files[0].id &&
-											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[0].id)}>Delete File?</button>
+											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[0].id, 0)}>Delete File?</button>
 										}
 									</div>
 									<div className="form-group small-12 medium-4 columns">
@@ -371,7 +378,7 @@ class EditGameSystem extends React.Component {
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSaveGameSystem} disabled={gameSystemFormIsInvalid}>{this.state.newGameSystem ? 'Create Game System' : 'Update Game System'}</button>
+								<button className="button collapse black small-12" onClick={this.handleSaveGameSystem} disabled={gameSystemFormIsInvalid}>{this.state.newGameSystem ? 'Create Game System' : 'Update Game System'}</button>
 							</div>
 						</div>
 					</div>

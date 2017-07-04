@@ -87,7 +87,7 @@ class EditNewsPost extends React.Component {
 
 	getImageUrl(file) {
 		if (file.id) {
-			return `/uploads/${file.locationUrl}${file.name}`;
+			return `${file.locationUrl}${file.name}`;
 		} else {
 			return file.locationUrl + file.name;
 		}
@@ -134,10 +134,10 @@ class EditNewsPost extends React.Component {
 				};
 				return response;
 			});
-			let newFileList = responses.concat(this.state.files);
+			let files = responses.concat(this.state.files);
 			newFiles = newFiles.concat(responses);
 			this.setState({
-				'files': newFileList,
+				'files': files,
 				'newFiles': newFiles
 			});
 			this.showAlert('uploadSuccess');
@@ -173,7 +173,6 @@ class EditNewsPost extends React.Component {
 		let post = this.state.newsPost;
 		let method = this.props.match.params.postId ? 'update' : 'create';
 		post.UserId = this.props.user.id;
-		let directoryPath = this.getDirectoryPath();
 		let newFiles = this.state.newFiles;
 		NewsPostService[method]((method === 'update' ? post.id : post), (method === 'update' ? post : null)).then((newsPost) => {
 			if (newFiles.length > 0) {
@@ -181,7 +180,7 @@ class EditNewsPost extends React.Component {
 					FileService.create({
 						'NewsPostId': newsPost.id,
 						'identifier': 'newsPostPhoto',
-						'locationUrl': `${directoryPath}`,
+						'locationUrl': file.locationUrl,
 						'name': file.name,
 						'size': file.size,
 						'type': file.type
@@ -355,8 +354,8 @@ class EditNewsPost extends React.Component {
 											<div className="small-12 medium-6 columns">
 												<label>News Post Image</label>
 												{
-													this.state.files.length > 0 && file.id &&
-													<img src={this.getImageUrl.call(this, file)} />
+													this.state.files.length > 0 &&
+													<img src={`${file.locationUrl}${file.name}`} />
 												}
 											</div>
 											<div className="small-12 medium-6 columns">

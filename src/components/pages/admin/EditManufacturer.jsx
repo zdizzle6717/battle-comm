@@ -33,8 +33,8 @@ class EditManufacturer extends React.Component {
 			'manufacturer': {
 				'File': {}
 			},
-			'newFilesUploaded': false,
-			'newManufacturer': false
+			'newManufacturer': false,
+			'newFiles': []
 		}
 
 		this.getManufacturer = this.getManufacturer.bind(this);
@@ -68,29 +68,38 @@ class EditManufacturer extends React.Component {
 		});
 	}
 
-	handleDeleteFile(fileId, e) {
+	handleDeleteFile(fileId, index, e) {
 		if (e) {
 			e.preventDefault();
 		}
 		FileService.remove(fileId).then(() => {
+			let files = this.state.files;
+			files.splice(index, 1);
+			this.setState({
+				'files': files
+			});
 			this.showAlert('fileRemoved');
 		});
 	}
 
 	handleFileUpload(files) {
 		let manufacturer = this.state.manufacturer;
-		this.uploadFiles(files).then((files) => {
-			files = files.map((file, i) => {
-				file = {
-					'name': file.data.file.name,
-					'size': file.data.file.size,
-					'type': file.data.file.type
+		let newFiles = this.state.newFiles;
+		this.uploadFiles(files).then((responses) => {
+			responses = responses.map((response, i) => {
+				response = {
+					'name': response.data.file.name,
+					'size': response.data.file.size,
+					'type': response.data.file.type,
+					'locationUrl': response.data.file.locationUrl
 				};
-				return file;
+				return response;
 			});
+			let files = responses.concat(this.state.files);
+			newFiles = newFiles.concat(responses);
 			this.setState({
 				'files': files,
-				'newFilesUploaded': true
+				'newFiles': newFiles
 			});
 			this.showAlert('uploadSuccess');
 		});
@@ -105,16 +114,19 @@ class EditManufacturer extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		let method = this.props.match.params.manufacturerId ? 'update': 'create';
+		let newFiles = this.state.newFiles;
 		ManufacturerService[method]((method === 'update' ? this.state.manufacturer.id : this.state.manufacturer), (method === 'update' ? this.state.manufacturer : null)).then((manufacturer) => {
-			if (this.state.newFilesUploaded) {
-				FileService.create({
-					'ManufacturerId': manufacturer.id,
-					'identifier': 'manufacturerPhoto',
-					'locationUrl': `manufacturers/`,
-					'name': this.state.files[0].name,
-					'size': this.state.files[0].size,
-					'type': this.state.files[0].type
-				})
+			if (newFiles.length > 0) {
+				newFiles.forEach((file) => {
+					FileService.create({
+						'ManufacturerId': manufacturer.id,
+						'identifier': 'manufacturerPhoto',
+						'locationUrl': file.locationUrl,
+						'name': file.name,
+						'size': file.size,
+						'type': file.type
+					});
+				});
 			}
 			this.setState({
 				'manufacturer': manufacturer
@@ -217,8 +229,8 @@ class EditManufacturer extends React.Component {
 									<div className="small-12 medium-4 columns">
 										<label>Manufacturer Image</label>
 										{
-											this.state.files.length > 0 && this.state.files[0].id &&
-											<img src={`/uploads/${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
+											this.state.files.length > 0 &&
+											<img src={`${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
 										}
 									</div>
 									<div className="small-12 medium-4 columns">
@@ -229,7 +241,7 @@ class EditManufacturer extends React.Component {
 										}
 										{
 											this.state.files.length > 0 && this.state.files[0].id &&
-											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[0].id)}>Delete File?</button>
+											<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[0].id, 0)}>Delete File?</button>
 										}
 									</div>
 									<div className="form-group small-12 medium-4 columns">
@@ -243,7 +255,7 @@ class EditManufacturer extends React.Component {
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newGameSystem ? 'Create Manufacturer' : 'Update Manufacturer'}</button>
+								<button className="button collapse black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newGameSystem ? 'Create Manufacturer' : 'Update Manufacturer'}</button>
 							</div>
 						</div>
 					</div>

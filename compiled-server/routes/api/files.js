@@ -20,6 +20,7 @@ module.exports = [
     'notes': 'Add file details',
     'validate': {
       'payload': {
+        'AchievementId': _joi2.default.optional(),
         'BannerSlideId': _joi2.default.optional(),
         'GameSystemId': _joi2.default.optional(),
         'ManufacturerId': _joi2.default.optional(),
@@ -56,6 +57,7 @@ module.exports = [
         'id': _joi2.default.number().required()
       },
       'payload': {
+        'AchievementId': _joi2.default.optional(),
         'BannerSlideId': _joi2.default.optional(),
         'GameSystemId': _joi2.default.optional(),
         'ManufacturerId': _joi2.default.optional(),

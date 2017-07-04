@@ -37,13 +37,13 @@ class EditAchievement extends React.Component {
 			'files': [],
 			'gameSystems': [],
 			'achievement': {
-				'priority': 100
+				'priority': 100,
+				'File': {}
 			},
 			'newAchievement': false,
 			'newFiles': []
 		}
 
-		this.getDirectoryPath = this.getDirectoryPath.bind(this);
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -61,7 +61,8 @@ class EditAchievement extends React.Component {
 		if (this.props.match.params.achievementId) {
 			AchievementService.get(this.props.match.params.achievementId).then((achievement) => {
 				this.setState({
-					'achievement': achievement
+					'achievement': achievement,
+					'files': achievement.File ? [achievement.File] : []
 				});
 			}).catch(() => {
 				this.showAlert('notFound');
@@ -72,21 +73,6 @@ class EditAchievement extends React.Component {
 				'newAchievement': true
 			})
 		}
-	}
-
-	getImageUrl(file) {
-		if (file.id) {
-			return `/uploads/${file.locationUrl}${file.name}`;
-		} else {
-			return file.locationUrl + file.name;
-		}
-	}
-
-	getDirectoryPath() {
-		let date = this.state.achievement.createdAt ? new Date(this.state.achievement.createdAt) : new Date();
-		let year = date.getFullYear();
-		let month = date.getMonth() + 1;
-		return `achievements/`;
 	}
 
 	handleDeleteFile(fileId, index, e) {
@@ -123,10 +109,10 @@ class EditAchievement extends React.Component {
 				};
 				return response;
 			});
-			let newFileList = responses.concat(this.state.files);
+			let files = responses.concat(this.state.files);
 			newFiles = newFiles.concat(responses);
 			this.setState({
-				'files': newFileList,
+				'files': files,
 				'newFiles': newFiles
 			});
 			this.showAlert('uploadSuccess');
@@ -161,21 +147,20 @@ class EditAchievement extends React.Component {
 		e.preventDefault();
 		let post = this.state.achievement;
 		let method = this.props.match.params.achievementId ? 'update' : 'create';
-		// let directoryPath = this.getDirectoryPath();
-		// let newFiles = this.state.newFiles;
+		let newFiles = this.state.newFiles;
 		AchievementService[method]((method === 'update' ? post.id : post), (method === 'update' ? post : null)).then((achievement) => {
-			// if (newFiles.length > 0) {
-			// 	newFiles.forEach((file) => {
-			// 		FileService.create({
-			// 			'AchievementId': achievement.id,
-			// 			'identifier': 'achievementPhoto',
-			// 			'locationUrl': `${directoryPath}`,
-			// 			'name': file.name,
-			// 			'size': file.size,
-			// 			'type': file.type
-			// 		});
-			// 	});
-			// }
+			if (newFiles.length > 0) {
+				newFiles.forEach((file) => {
+					FileService.create({
+						'AchievementId': achievement.id,
+						'identifier': 'achievement',
+						'locationUrl': file.locationUrl,
+						'name': file.name,
+						'size': file.size,
+						'type': file.type
+					});
+				});
+			}
 			this.setState({
 				'achievement': achievement
 			});
@@ -245,9 +230,9 @@ class EditAchievement extends React.Component {
 	}
 
 	uploadFiles(files) {
-		let directoryPath = this.getDirectoryPath();
+		let directoryPath = `achievements/`;
 		return uploadFiles(files, '/files/add', directoryPath, {
-			'identifier': 'achievementPhoto'
+			'identifier': 'achievement'
 		});
 	}
 
@@ -279,7 +264,7 @@ class EditAchievement extends React.Component {
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label className="required">Priority</label>
-										<Input type="number" name="priority" value={this.state.achievement.priority} handleInputChange={this.handleInputChange} step={1} required={true} />
+										<Input type="number" name="priority" value={this.state.achievement.priority} handleInputChange={this.handleInputChange} step="1" required={true} />
 									</div>
 								</div>
 								<div className="row">
@@ -288,20 +273,51 @@ class EditAchievement extends React.Component {
 										<TextArea type="text" name="description" value={this.state.achievement.description} rows="4" handleInputChange={this.handleInputChange} required={true} />
 									</div>
 								</div>
+								<div className="row">
+									<div className="small-12 medium-4 columns">
+										<label>Achievement Icon</label>
+										{
+											this.state.files[0] &&
+											<div>
+												{
+													this.state.files.length > 0 &&
+													<img src={`${this.state.files[0].locationUrl}${this.state.files[0].name}`} />
+												}
+											</div>
+										}
+									</div>
+									<div className="small-12 medium-4 columns">
+										<label>Image Name</label>
+										<div>
+											{
+												this.state.files.length > 0 &&
+												<h6>{this.state.files[0].name}</h6>
+											}
+											{
+												this.state.files.length > 0 && this.state.files[0].id &&
+												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.files[0].id, 0)}>Delete File?</button>
+											}
+										</div>
+									</div>
+									<div className="form-group small-12 medium-4 columns">
+										<label>Upload File</label>
+										<FileUpload name="achievement" value={this.state.files} handleFileUpload={this.handleFileUpload} handleDeleteFile={this.handleDeleteFile} hideFileList={true} accept="image/*" maxFiles={1}/>
+									</div>
+								</div>
 							</Form>
 						</fieldset>
 					</div>
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newAchievement ? 'Create Achievement' : 'Update Achievement'}</button>
+								<button className="button collapse black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newAchievement ? 'Create Achievement' : 'Update Achievement'}</button>
 							</div>
 						</div>
 						{
 							this.props.match.params.achievementId &&
 							<div className="panel push-bottom-2x push-top">
 								<div className="panel-content text-center">
-									<button className="button alert small-12" onClick={this.handleDeleteAchievement}>Delete Achievement?</button>
+									<button className="button collapse alert small-12" onClick={this.handleDeleteAchievement}>Delete Achievement?</button>
 								</div>
 							</div>
 						}

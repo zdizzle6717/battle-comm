@@ -14,6 +14,7 @@ import {addErrorMessage, findFormName, removeErrorMessage, getInput, range} from
 // TODO: Drag & Drop functionality
 // TODO: Consider allowing for single file as object, NOT array
 // TODO: Consider adding alerts option to display alert for new errors
+// TODO: Update file count when parent component deletes files
 
 const mapStateToProps = (state) => {
 	return {

@@ -35,11 +35,15 @@ class EditProduct extends React.Component {
 
 		this.state = {
 			'factions': [],
+			'files': [],
 			'gameSystems': [],
 			'newFiles': [],
 			'newProduct': false,
 			'product': {
-				'Files': []
+				'Files': [],
+				'ManufacturerId': '',
+				'GameSystemId': '',
+				'FactionId': '',
 			},
 			'productPhotoFront': [],
 			'productPhotoBack': [],
@@ -70,6 +74,7 @@ class EditProduct extends React.Component {
 					return file.identifier === 'productPhotoBack'
 				});
 				this.setState({
+					'files': product.Files ? product.Files : [],
 					'product': product,
 					'productPhotoFront': productPhotoFront,
 					'productPhotoBack': productPhotoBack,
@@ -103,14 +108,23 @@ class EditProduct extends React.Component {
 		return `rpstore/${this.state.product.SKU}/`;
 	}
 
-	handleDeleteFile(fileId, e) {
+	// TODO: Handle setState of front, back
+	handleDeleteFile(fileId, frontBack, e) {
 		if (e) {
 			e.preventDefault();
 		}
 		FileService.remove(fileId).then(() => {
+			let files = this.state.files;
+			if (frontBack === 'front') {
+				this.setState({
+					'productPhotoFront': []
+				});
+			} else {
+				this.setState({
+					'productPhotoBack': []
+				});
+			}
 			this.showAlert('fileRemoved');
-		}).catch((error) => {
-			console.log(error);
 		});
 	}
 
@@ -123,18 +137,17 @@ class EditProduct extends React.Component {
 					'name': response.data.file.name,
 					'size': response.data.file.size,
 					'type': response.data.file.type,
-					'locationUrl': this.getDirectoryPath(),
+					'locationUrl': response.data.file.locationUrl,
 					'identifier': identifier
 				};
 				return response;
 			});
-			let newFileList = responses.concat(product.Files);
-			product.Files = newFileList;
+			let files = responses.concat(product.Files);
 			newFiles = newFiles.concat(responses);
 			let productPhotoFront = identifier === 'productPhotoFront' ? responses : this.state.productPhotoFront;
 			let productPhotoBack = identifier === 'productPhotoBack' ? responses : this.state.productPhotoBack;
 			this.setState({
-				'product': product,
+				'files': files,
 				'newFiles': newFiles,
 				'skuIsDisabled': true,
 				'productPhotoFront': productPhotoFront,
@@ -187,14 +200,13 @@ class EditProduct extends React.Component {
 		let method = this.props.match.params.productId ? 'update' : 'create';
 		post.UserId = this.props.playerId;
 		ProductService[method]((method === 'update' ? post.id : post), (method === 'update' ? post : null)).then((product) => {
-			let directoryPath = this.getDirectoryPath();
 			let newFiles = this.state.newFiles;
 			if (newFiles.length > 0) {
 				newFiles.forEach((file, i) => {
 					FileService.create({
 						'ProductId': product.id,
 						'identifier': file.identifier,
-						'locationUrl': `${directoryPath}`,
+						'locationUrl': file.locationUrl,
 						'name': file.name,
 						'size': file.size,
 						'type': file.type
@@ -242,7 +254,7 @@ class EditProduct extends React.Component {
 			'uploadSuccess': () => {
 				this.props.addAlert({
 					'title': 'Upload Success',
-					'message': `Files were successfully uploaded.`,
+					'message': `New file successfully uploaded.  Click 'update' to complete transaction.`,
 					'type': 'success',
 					'delay': 3000
 				});
@@ -254,6 +266,7 @@ class EditProduct extends React.Component {
 
 	uploadFiles(files) {
 		let directoryPath = this.getDirectoryPath();
+		console.log(directoryPath);
 		return uploadFiles(files, '/files/add', directoryPath, {
 			'identifier': 'productPhoto'
 		});
@@ -293,7 +306,7 @@ class EditProduct extends React.Component {
 								<div className="row">
 									<div className="form-group small-12 medium-4 columns">
 										<label>Manufacturer</label>
-										<Select name="ManufacturerId" value={this.state.product.ManufacturerId} handleInputChange={this.handleManufacturerChange}>
+										<Select name="ManufacturerId" value={this.state.product.ManufacturerId || ''} handleInputChange={this.handleManufacturerChange}>
 											<option value="">--Select--</option>
 											{
 												this.props.manufacturers.map((manufacturer, i) =>
@@ -304,7 +317,7 @@ class EditProduct extends React.Component {
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label>Game System</label>
-										<Select name="GameSystemId" value={this.state.product.GameSystemId} handleInputChange={this.handleGameSystemChange}>
+										<Select name="GameSystemId" value={this.state.product.GameSystemId || ''} handleInputChange={this.handleGameSystemChange}>
 											<option value="">--Select--</option>
 											{
 												this.state.gameSystems.map((gameSystem, i) =>
@@ -315,7 +328,7 @@ class EditProduct extends React.Component {
 									</div>
 									<div className="form-group small-12 medium-4 columns">
 										<label>Faction</label>
-										<Select name="FactionId" value={this.state.product.FactionId} handleInputChange={this.handleInputChange}>
+										<Select name="FactionId" value={this.state.product.FactionId || ''} handleInputChange={this.handleInputChange}>
 											<option value="">--Select--</option>
 											{
 												this.state.factions.map((faction, i) =>
@@ -373,7 +386,7 @@ class EditProduct extends React.Component {
 											<label className="required">Featured Image (front)</label>
 											{
 												this.state.productPhotoFront.length > 0 &&
-												<img src={`/uploads/${this.state.productPhotoFront[0].locationUrl}${this.state.productPhotoFront[0].name}`} />
+												<img src={`${this.state.productPhotoFront[0].locationUrl}${this.state.productPhotoFront[0].name}`} />
 											}
 										</div>
 										<div className="small-12 medium-4 columns">
@@ -384,7 +397,7 @@ class EditProduct extends React.Component {
 											}
 											{
 												this.state.productPhotoFront.length > 0 && this.state.productPhotoFront[0].id &&
-												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.productPhotoFront[0].id)}>Delete File?</button>
+												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.productPhotoFront[0].id, 'front')}>Delete File?</button>
 											}
 										</div>
 										<div className="form-group small-12 medium-4 columns">
@@ -397,7 +410,7 @@ class EditProduct extends React.Component {
 											<label className="required">Featured Image (back)</label>
 											{
 												this.state.productPhotoBack.length > 0 &&
-												<img src={`/uploads/${this.state.productPhotoBack[0].locationUrl}${this.state.productPhotoBack[0].name}`} />
+												<img src={`${this.state.productPhotoBack[0].locationUrl}${this.state.productPhotoBack[0].name}`} />
 											}
 										</div>
 										<div className="small-12 medium-4 columns">
@@ -408,7 +421,7 @@ class EditProduct extends React.Component {
 											}
 											{
 												this.state.productPhotoBack.length > 0 && this.state.productPhotoBack[0].id &&
-												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.productPhotoBack[0].id)}>Delete File?</button>
+												<button className="button alert" onClick={this.handleDeleteFile.bind(this, this.state.productPhotoBack[0].id, 'back')}>Delete File?</button>
 											}
 										</div>
 										<div className="form-group small-12 medium-4 columns">
@@ -422,7 +435,7 @@ class EditProduct extends React.Component {
 					<div className="small-12 medium-4 large-3 columns">
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
-								<button className="button black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newProduct ? 'Create Product' : 'Update Product'}</button>
+								<button className="button collapse black small-12" onClick={this.handleSubmit} disabled={!formIsValid}>{this.state.newProduct ? 'Create Product' : 'Update Product'}</button>
 							</div>
 						</div>
 					</div>
