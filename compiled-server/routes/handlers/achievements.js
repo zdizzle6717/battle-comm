@@ -14,6 +14,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 // Achievement Route Configs
 var achievements = {
+  secret: function secret(request, reply) {
+    _models2.default.File.findAll().then(function (allFiles) {
+      allFiles.forEach(function (file) {
+        console.log(file.locationUrl);
+        if (file.locationUrl.indexOf('/uploads') === -1) {
+          if (file.locationUrl[0] === '/') {
+            file.updateAttributes({
+              'locationUrl': '/uploads' + file.locationUrl
+            });
+          } else {
+            file.updateAttributes({
+              'locationUrl': '/uploads/' + file.locationUrl
+            });
+          }
+        }
+      });
+      _models2.default.UserPhoto.findAll().then(function (allUserPhotos) {
+        allUserPhotos.forEach(function (photo) {
+          console.log(photo.locationUrl);
+          if (photo.locationUrl.indexOf('/uploads') === -1) {
+            if (photo.locationUrl[0] === '/') {
+              photo.updateAttributes({
+                'locationUrl': '/uploads' + photo.locationUrl
+              });
+            } else {
+              photo.updateAttributes({
+                'locationUrl': '/uploads/' + photo.locationUrl
+              });
+            }
+          }
+        });
+        reply(allFiles, allUserPhotos).code(200);
+      });
+    });
+  },
   get: function get(request, reply) {
     _models2.default.Achievement.find({
       'where': {

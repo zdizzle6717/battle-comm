@@ -11,6 +11,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = [
 // Achievements
 {
+  'method': 'POST',
+  'path': '/api/secret/secret',
+  'config': {
+    'tags': ['api'],
+    'description': 'Add a new secret',
+    'notes': 'Add a new secret',
+    'auth': {
+      'strategy': 'jsonWebToken',
+      'scope': ['systemAdmin']
+    },
+    'validate': {
+      'payload': {
+        'secret': _joi2.default.string().required()
+      }
+    }
+  },
+  'handler': _handlers.achievements.secret
+}, {
   'method': 'GET',
   'path': '/api/achievements/{id}',
   'config': {

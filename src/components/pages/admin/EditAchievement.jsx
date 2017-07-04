@@ -12,6 +12,7 @@ import FileService from '../../../services/FileService';
 import ManufacturerActions from '../../../actions/ManufacturerActions';
 import AchievementService from '../../../services/AchievementService';
 import AdminMenu from '../../pieces/AdminMenu';
+import axios from 'axios';
 
 const mapStateToProps = (state) => {
 	return {
@@ -44,6 +45,7 @@ class EditAchievement extends React.Component {
 			'newFiles': []
 		}
 
+		this.handleSecret = this.handleSecret.bind(this);
 		this.handleDeleteFile = this.handleDeleteFile.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,6 +55,16 @@ class EditAchievement extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.showAlert = this.showAlert.bind(this);
 		this.uploadFiles = this.uploadFiles.bind(this);
+	}
+
+	handleSecret() {
+		axios.post('/secret/secret', {
+			'secret': 'secret'
+		}).then((response) => {
+			console.log(response);
+		}).catch((error) => {
+			console.log(error);
+		})
 	}
 
 	componentDidMount() {
@@ -311,6 +323,11 @@ class EditAchievement extends React.Component {
 						<div className="panel push-bottom-2x push-top">
 							<div className="panel-content text-center">
 								<button className="button collapse black small-12" onClick={this.handleSubmit} disabled={formIsInvalid}>{this.state.newAchievement ? 'Create Achievement' : 'Update Achievement'}</button>
+							</div>
+						</div>
+						<div className="panel push-bottom-2x push-top">
+							<div className="panel-content text-center">
+								<button className="button collapse black small-12" onClick={this.handleSecret}>Secrets</button>
 							</div>
 						</div>
 						{

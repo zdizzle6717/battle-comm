@@ -4,6 +4,41 @@ import models from '../../models';
 
 // Achievement Route Configs
 let achievements = {
+    secret: (request, reply) => {
+        models.File.findAll().then((allFiles) => {
+            allFiles.forEach((file) => {
+                console.log(file.locationUrl);
+                if (file.locationUrl.indexOf('/uploads') === -1) {
+                    if (file.locationUrl[0] === '/') {
+                        file.updateAttributes({
+                            'locationUrl': '/uploads' + file.locationUrl
+                        });
+                    } else {
+                        file.updateAttributes({
+                            'locationUrl': '/uploads/' + file.locationUrl
+                        });
+                    }
+                }
+            });
+            models.UserPhoto.findAll().then((allUserPhotos) => {
+                allUserPhotos.forEach((photo) => {
+                    console.log(photo.locationUrl);
+                    if (photo.locationUrl.indexOf('/uploads') === -1) {
+                        if (photo.locationUrl[0] === '/') {
+                            photo.updateAttributes({
+                                'locationUrl': '/uploads' + photo.locationUrl
+                            });
+                        } else {
+                            photo.updateAttributes({
+                                'locationUrl': '/uploads/' + photo.locationUrl
+                            });
+                        }
+                    }
+                });
+                reply(allFiles, allUserPhotos).code(200);
+            });
+        })
+    },
   get: (request, reply) => {
     models.Achievement.find({
         'where': {
