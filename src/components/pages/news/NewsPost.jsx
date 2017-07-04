@@ -49,7 +49,7 @@ class NewsPost extends React.Component {
 							<div className="summary push-top">
 								{
 									post.Files.length > 0 &&
-									<img src={`/uploads/${post.Files[0].locationUrl}${post.Files[0].name}`} />
+									<img src={`${post.Files[0].locationUrl}${post.Files[0].name}`} />
 								}
 								{post.body}
 							</div>
@@ -58,7 +58,7 @@ class NewsPost extends React.Component {
 							</div>
 							<div className="row">
 								<div className="small-12 columns text-right push-bottom">
-									<Link to={`/news`} className="button small medium white right collapse">Back to News List</Link>
+									<Link to={`/news`} className="button small medium color-white right collapse">Back to News List</Link>
 								</div>
 							</div>
 						</div>

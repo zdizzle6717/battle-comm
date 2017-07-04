@@ -6,26 +6,6 @@ import { achievements } from '../handlers';
 module.exports = [
   // Achievements
   {
-    'method': 'POST',
-    'path': '/api/secret/secret',
-    'config': {
-      'tags': ['api'],
-      'description': 'Add a new secret',
-      'notes': 'Add a new secret',
-      'auth': {
-        'strategy': 'jsonWebToken',
-        'scope': ['systemAdmin']
-      },
-      'validate': {
-        'payload': {
-          'secret': Joi.string().required()
-        }
-      }
-    },
-    'handler': achievements.secret
-  },
-
-  {
     'method': 'GET',
     'path': '/api/achievements/{id}',
     'config': {

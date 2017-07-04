@@ -134,7 +134,7 @@ class Store extends React.Component {
 		} else if (side === 'back') {
 			image = product.Files.filter(file => file.identifier === 'productPhotoBack');
 		}
-		return '/uploads/' + image[0].locationUrl + image[0].name;
+		return image[0].locationUrl + image[0].name;
 	}
 
 	handleFilterReset() {

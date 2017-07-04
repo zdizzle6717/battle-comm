@@ -64,7 +64,7 @@ class News extends React.Component {
 										<div className="small-12 medium-3 columns"><strong>Category:</strong> {post.category}</div>
 									</div>
 									<div className="summary push-top">
-										<img src={`/uploads/${post.Files[0].locationUrl}${post.Files[0].name}`} />
+										<img src={`${post.Files[0].locationUrl}${post.Files[0].name}`} />
 										{post.callout} <Link to={`/news/post/${post.id}`}>...</Link>
 									</div>
 									<div className="row push-top text-center">
@@ -72,7 +72,7 @@ class News extends React.Component {
 									</div>
 									<div className="row push-top">
 										<div className="small-12 columns text-right">
-											<Link to={`/news/post/${post.id}`} className="button small white right collapse">Read More</Link>
+											<Link to={`/news/post/${post.id}`} className="button small color-white right collapse">Read More</Link>
 										</div>
 									</div>
 								</div>

@@ -75,7 +75,7 @@ class Product extends React.Component {
 		});
 
 		if (file) {
-			return `/uploads/${file.locationUrl}${file.name}`;
+			return `${file.locationUrl}${file.name}`;
 		} else {
 			return false;
 		}

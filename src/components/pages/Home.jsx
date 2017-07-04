@@ -111,7 +111,7 @@ class Home extends React.Component {
 														<a href={slide.link} className="da-link" target="_blank">{slide.actionText}</a> :
 														<Link to={slide.link} className="da-link">{slide.actionText}</Link>
 													}
-													<div className="da-img"><img src={`/uploads/${slide.File.locationUrl}${slide.File.name}`} alt="image01" /></div>
+													<div className="da-img"><img src={`${slide.File.locationUrl}${slide.File.name}`} alt="image01" /></div>
 												</div>
 											)
 										}
