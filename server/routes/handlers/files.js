@@ -72,7 +72,7 @@ let files = {
 
             // Handle any image resizing and duplication here
             let resizeArray = [];
-            if (data.identifier === 'playerIcon') {
+            if (data.identifier === 'playerIcon' || data.identifier === 'achievement') {
                 imageConfig[data.identifier].sizes.forEach((size) => {
                     resizeArray.push({
                         'name': `${size}-${data.file.hapi.filename}`,
@@ -199,18 +199,17 @@ let files = {
                             fse.unlink(locationUrl, (err) => {
                                 if (err) {
                                     console.log(err);
-                                    reply(Boom.badRequest('Error deleting file.'));
+                                    reply('Error deleting file. File not found.').code(200);
                                     return;
                                 }
 
                                 // TODO: Add any file that gets duplicated and resized along with resizeConfig
-                                if (file.identifier === 'something') {
+                                if (file.identifier === 'achievement') {
                                     let count = 0;
                                     imageConfig[file.identifier].sizes.forEach((size) => {
                                         fse.unlink(`${locationPath}/${size}-${fileName}`, (error) => {
                                             if (error) {
                                                 console.log(error);
-                                                reply(Boom.badRequest('Error deleting file.'));
                                             } else {
                                                 count++;
                                                 if (count >= imageConfig[file.identifier].sizes.length) {

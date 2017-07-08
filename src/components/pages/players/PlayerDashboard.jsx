@@ -452,8 +452,16 @@ class PlayerDashboard extends React.Component {
 								currentUser.UserAchievements.length > 0 ?
 								<div className="text-center achievements">
 									{
-										currentUser.UserAchievements.map((achievement) =>
-											<span key={achievement.id} className=" achievement"><i className="fa fa-connectdevelop"></i> {achievement.title}</span>
+										currentUser.UserAchievements.slice(0, 10).map((achievement, i) =>
+											<span key={achievement.id} className="achievement">
+												<div className="achievement-title">{achievement.title}</div>
+												<div><img src={achievement.File ? `${achievement.File.locationUrl}100-${achievement.File.name}` : '/uploads/achievements/100-defaultAchievement.png'} alt={achievement.name} /></div>
+												{
+													<div className="achievement-description">
+														<i className="fa fa-connectdevelop"></i> {achievement.description}
+													</div>
+												}
+											</span>
 										)
 									}
 								</div> :

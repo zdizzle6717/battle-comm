@@ -51,14 +51,46 @@
 	}
 
 	.achievements {
-		padding: .5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: .5rem;
 
 		.achievement {
-			border: 2px solid $black;
-	    background: $white;
+      width: 150px;
+      min-height: 136px;
 	    padding: .375rem .5rem;
 	    border-radius: 1rem;
-			margin: 0 .5rem
+			margin: 0 .5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .achievement-title {
+        font-weight: bold;
+      }
+
+      .achievement-description {
+        display: none;
+        z-index: 10;
+        position: absolute;
+        top: 40px;
+        min-width: 200px;
+        border: 2px solid $black;
+        background: $white;
+        box-shadow: $shadow-2;
+        text-align: center;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        .achievement-description {
+          display: block;
+        }
+      }
 		}
 	}
 

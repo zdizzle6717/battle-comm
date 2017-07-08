@@ -129,6 +129,9 @@ class Store extends React.Component {
 
 	getProductImage(side, product) {
 		let image;
+        if (!product.Files || product.Files.length < 1) {
+            return '/uploads/rpStore/defaultImage.jpg';
+        }
 		if (side === 'front') {
 			image = product.Files.filter(file => file.identifier === 'productPhotoFront');
 		} else if (side === 'back') {

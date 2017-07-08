@@ -89,7 +89,7 @@ var files = {
 
             // Handle any image resizing and duplication here
             var resizeArray = [];
-            if (data.identifier === 'playerIcon') {
+            if (data.identifier === 'playerIcon' || data.identifier === 'achievement') {
                 _imageConfig2.default[data.identifier].sizes.forEach(function (size) {
                     resizeArray.push({
                         'name': size + '-' + data.file.hapi.filename,
@@ -214,18 +214,17 @@ var files = {
                         _fsExtra2.default.unlink(locationUrl, function (err) {
                             if (err) {
                                 console.log(err);
-                                reply(_boom2.default.badRequest('Error deleting file.'));
+                                reply('Error deleting file. File not found.').code(200);
                                 return;
                             }
 
                             // TODO: Add any file that gets duplicated and resized along with resizeConfig
-                            if (file.identifier === 'something') {
+                            if (file.identifier === 'achievement') {
                                 var count = 0;
                                 _imageConfig2.default[file.identifier].sizes.forEach(function (size) {
                                     _fsExtra2.default.unlink(locationPath + '/' + size + '-' + fileName, function (error) {
                                         if (error) {
                                             console.log(error);
-                                            reply(_boom2.default.badRequest('Error deleting file.'));
                                         } else {
                                             count++;
                                             if (count >= _imageConfig2.default[file.identifier].sizes.length) {
