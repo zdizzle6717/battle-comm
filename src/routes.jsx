@@ -2,6 +2,7 @@
 
 // Routes
 import Home from './components/pages/Home';
+import Achievements from './components/pages/Achievements';
 import AdminDashboard from './components/pages/admin/AdminDashboard';
 	import SearchAchievements from './components/pages/admin/SearchAchievements';
 		import EditAchievement from './components/pages/admin/EditAchievement';
@@ -49,6 +50,10 @@ let routes = [
 		'path': '/',
 		'component': Home,
 		'exact': true
+	},
+	{
+		'path': '/achievements/:achievementId?',
+		'component': Achievements
 	},
 
 	// Admin

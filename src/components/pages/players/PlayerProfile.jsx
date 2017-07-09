@@ -265,7 +265,7 @@ class PlayerProfile extends React.Component {
 								<div className="text-center achievements">
 									{
 										player.UserAchievements.slice(0, 10).map((achievement, i) =>
-											<span key={achievement.id} className="achievement">
+											<Link to={`/achievements/${achievement.id}`} key={achievement.id} className="achievement">
 												<div className="achievement-title">{achievement.title}</div>
 												<div><img src={achievement.File ? `${achievement.File.locationUrl}100-${achievement.File.name}` : '/uploads/achievements/100-defaultAchievement.png'} alt={achievement.name} /></div>
 												{
@@ -273,7 +273,7 @@ class PlayerProfile extends React.Component {
 														<i className="fa fa-connectdevelop"></i> {achievement.description}
 													</div>
 												}
-											</span>
+											</Link>
 										)
 									}
 								</div> :

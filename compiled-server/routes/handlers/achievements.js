@@ -102,7 +102,10 @@ var achievements = {
             'where': searchByConfig,
             'order': orderBy ? [orderBy] : [],
             'offset': offset,
-            'limit': pageSize
+            'limit': pageSize,
+            'include': [{
+                'model': _models2.default.File
+            }]
         }).then(function (response) {
             var count = response.count;
             var results = response.rows;

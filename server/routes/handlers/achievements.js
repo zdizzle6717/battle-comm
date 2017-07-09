@@ -105,7 +105,10 @@ let achievements = {
             'where': searchByConfig,
             'order': orderBy ? [orderBy] : [],
             'offset': offset,
-            'limit': pageSize
+            'limit': pageSize,
+            'include': [{
+                'model': models.File
+            }]
         }).then((response) => {
             let count = response.count;
             let results = response.rows;

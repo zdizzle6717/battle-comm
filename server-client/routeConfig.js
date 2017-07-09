@@ -10,6 +10,10 @@ export default [
 		'view': 'admin'
 	},
 	{
+		'route': '/achievments*',
+		'view': 'achievments'
+	},
+	{
 		'route': '/assign-points*',
 		'view': 'assignPoints'
 	},
