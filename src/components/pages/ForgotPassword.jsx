@@ -45,6 +45,11 @@ class ForgotPassword extends React.Component {
 		}).then((user) => {
 			this.showAlert('emailSent');
 			this.props.history.push('/login');
+		}).catch((response) => {
+			console.log(response.message);
+			if (response.message === 'User not found.') {
+				this.showAlert('userNotFound');
+			}
 		});
 	}
 
@@ -55,6 +60,14 @@ class ForgotPassword extends React.Component {
 					'title': 'E-mail Sent',
 					'message': 'Check your e-mail for a link and instructions to reset your password.',
 					'type': 'success',
+					'delay': 5000
+				});
+			},
+			'userNotFound': () => {
+				this.props.addAlert({
+					'title': 'User Not Found',
+					'message': 'No user was found with the supplied e-mail. Please try another e-mail address.',
+					'type': 'error',
 					'delay': 5000
 				});
 			}

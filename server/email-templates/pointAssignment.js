@@ -3,6 +3,7 @@
 function buildTemplate(data, rpPool) {
 	let playerList = data.players;
 	let playerTable = '';
+	let playerAchievementsTable = '';
 	let totalEventRP = 0;
 
 	playerList.forEach(function(player, index) {
@@ -35,6 +36,28 @@ function buildTemplate(data, rpPool) {
 		totalEventRP += player.pointsEarned;
 	});
 
+	playerList.forEach(function(player, index) {
+        if (player.achievementsList) {
+            if (index === 0 || index % 2 === 0) {
+    			playerAchievementsTable +=
+    			`
+    			<tr style="background-color: #e8e8e8;">
+    			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.fullName}</td>
+    			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.achievementsList}</td>
+    			</tr>
+    			`
+    		} else {
+    			playerAchievementsTable +=
+    			`
+    			<tr>
+    			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.fullName}</td>
+    			  <td style="border:1px solid #dddddd; text-align:left; padding:8px;">${player.achievementsList}</td>
+    			</tr>
+    			`
+    		}
+        }
+	});
+
 	return `
 		<div style="max-width:800px;position:relative;margin:20px auto;padding:15px;border:2px solid black;box-shadow:0 0 5px 2px lightgray;letter-spacing:1px;background-color:aliceblue;box-shadow: 0 0 2px 1px rgba(31, 31, 33, 0.47);">
 			<div style="text-align:center;">
@@ -44,7 +67,7 @@ function buildTemplate(data, rpPool) {
 				<b>The return address for ${data.venueEvent.venueAdmin} is ${data.venueEvent.returnEmail}</b>
 			</div>
 
-			<h3 style="font-size="24px">${data.venueEvent.venueName}</h3>
+			<h3 style="font-size="24px">Venue: ${data.venueEvent.venueName}</h3>
 
 			<table style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
 			  <tr>
@@ -56,6 +79,16 @@ function buildTemplate(data, rpPool) {
 				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">W/L/D</th>
 			  </tr>
 			  ${playerTable}
+			</table>
+
+			<h3 style="font-size="24px">Achievements Awarded</h3>
+
+			<table style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+			  <tr>
+				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Player Name</th>
+				<th style="border:1px solid #dddddd; text-align:left; padding:8px;">Achievements</th>
+			  </tr>
+			  ${playerAchievementsTable}
 			</table>
 
 			<h2 style="font-size:28px;text-align:center;">Total Event RP: ${totalEventRP} Reward Points</h2>

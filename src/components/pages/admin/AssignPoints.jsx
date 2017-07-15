@@ -55,10 +55,6 @@ class AssignPoints extends React.Component {
 
 	componentDidMount() {
 		document.title = "Battle-Comm | RP Assignment";
-		if (this.props.user.rpPool <= 0) {
-			this.showAlert('notEnoughRp')
-			this.props.history.push('/players/dashboard');
-		}
 		this.props.getGameSystems();
 		this.setState({
 			'venueEvent': {
@@ -279,6 +275,12 @@ class AssignPoints extends React.Component {
 											<div className="form-group small-12 medium-4 columns">
 												<label className="required">Total Draws</label>
 												<Input type="number" name="totalDraws" value={this.state.players[i].totalDraws} handleInputChange={this.handlePlayerInputChange.bind(this, i)} required={true} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="form-group small-12 columns">
+												<label className="required">List of Achievements Earned</label>
+												<TextArea type="text" name="achievementsList" value={this.state.players[i].achievementsList} rows="1" handleInputChange={this.handlePlayerInputChange.bind(this, i)} />
 											</div>
 										</div>
 										{

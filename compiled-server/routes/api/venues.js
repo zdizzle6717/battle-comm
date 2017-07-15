@@ -39,7 +39,8 @@ module.exports = [
           'faction': _joi2.default.optional(),
           'totalWins': _joi2.default.number().optional(),
           'totalDraws': _joi2.default.number().optional(),
-          'totalLosses': _joi2.default.number().optional()
+          'totalLosses': _joi2.default.number().optional(),
+          'achievementsList': _joi2.default.optional()
         }))
       }
     }

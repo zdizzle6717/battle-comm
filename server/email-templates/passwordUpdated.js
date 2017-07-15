@@ -11,7 +11,7 @@ function buildTemplate(data) {
 			<h4 style="font-size="18px"></h4>
 
 			<div style="text-align:center;">
-				<b>The password for an account connected to this e-mail has recently been updated. If you were not aware of this change, please contact us immediately to resolve the issue.</b>
+				<b>The password for an account connected to this e-mail has recently been updated. If you were not aware of this change, please contact us immediately at <a href="mailto:support@battle-comm.net">support@Battle-Comm.net</a> to resolve the issue.</b>
 			</div>
 
 			<div style="text-align:center; border-top:1px solid #cacaca; padding:20px 0 0 0; margin: 20px 0 0 0;">

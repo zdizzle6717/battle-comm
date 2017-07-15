@@ -19,7 +19,7 @@ module.exports = [
       'validate': {
         'payload': {
           'venueEvent': {
-						'adminUsername': Joi.string().required(),
+			'adminUsername': Joi.string().required(),
             'venueName': Joi.string().required(),
             'eventName': Joi.string().required(),
             'venueAdmin': Joi.string().required(),
@@ -35,6 +35,7 @@ module.exports = [
             'totalWins': Joi.number().optional(),
             'totalDraws': Joi.number().optional(),
             'totalLosses': Joi.number().optional(),
+            'achievementsList': Joi.optional(),
           }))
         }
       }

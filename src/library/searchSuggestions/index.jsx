@@ -111,6 +111,8 @@ export default function(Service, method) {
 		handleClickSelect(e) {
 			let suggestion = this.state.suggestions[e.target.getAttribute('data-index')];
 			_selectedSuggestion = suggestion;
+			e.target.suggestionObject = _selectedSuggestion;
+			e.target.name = this.props.name;
 			let value = configureSuggestion(this.props.displayKeys, suggestion);
 			_skipSearch = true;
 			let event = new Event('input', { bubbles: true });
@@ -125,6 +127,7 @@ export default function(Service, method) {
 				'storedInputString': configureSuggestion(this.props.displayKeys, suggestion),
 				'suggestions': []
 			});
+			this.props.handleInputChange(e);
 		}
 
 		onKeyDown(e) {
@@ -151,6 +154,8 @@ export default function(Service, method) {
 				} else {
 					_selectedSuggestion = null;
 				}
+				e.target.suggestionObject = _selectedSuggestion;
+				e.target.name = this.props.name;
 				_skipSearch = true;
 				let event = new Event('input', { bubbles: true });
 				let elem = ReactDOM.findDOMNode(this);
@@ -160,6 +165,7 @@ export default function(Service, method) {
 				selectedIndex = -1;
 				showSuggestions = false;
 				suggestions = [];
+				this.props.handleInputChange(e);
 			}
 			if (key === 'escape') {
 				inputString = storedInputString;
