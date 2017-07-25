@@ -50,7 +50,8 @@ module.exports = [
         'category': _joi2.default.string().required(),
         'description': _joi2.default.string().required(),
         'priority': _joi2.default.optional(),
-        'rpValue': _joi2.default.optional()
+        'rpValue': _joi2.default.optional(),
+        'File': _joi2.default.optional()
       }
     }
   },
