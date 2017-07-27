@@ -61,7 +61,7 @@ class PlayerRankingSearch extends React.Component {
 					'selectedGameSystem': gameSystem
 				});
 			});
-			this.handlePageChange(1, this.props.match.params);
+			this.handlePageChange(this.props.match.params, 1);
 		}
     }
 
@@ -76,7 +76,7 @@ class PlayerRankingSearch extends React.Component {
 						'selectedGameSystem': gameSystem
 					});
 				});
-				this.handlePageChange(1, nextProps.match.params);
+				this.handlePageChange(nextProps.match.params, 1);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ class PlayerRankingSearch extends React.Component {
 		})
 	}
 
-	handlePageChange(pageNumber, params) {
+	handlePageChange(params, pageNumber) {
 		if (params.factionId) {
 			RankingService.searchByFaction(params.factionId, {
 				'pageNumber': pageNumber,
@@ -122,7 +122,7 @@ class PlayerRankingSearch extends React.Component {
 			}).then((response) => {
 				this.setState({
 					'pagination': response.pagination,
-					'results': response.results.filter((result) => result.User)
+					'results': response.results
 				});
 			});
 		}
